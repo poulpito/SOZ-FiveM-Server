@@ -8,6 +8,7 @@ function BarberShop:new(...)
     return shop
 end
 
+
 --- Camera
 function BarberShop:getShopProducts()
     return Config.Products["barber"]
@@ -74,6 +75,21 @@ function BarberShop:GenerateMenu()
 
     self:deleteCam()
     self:setupCam()
+
+    shopMenu:AddCheckbox({
+        label = "Libérer la caméra",
+        value = cam,
+        change = function(_, value)
+            if value then
+                self:deleteCam()
+                self:playIdleAnimation()
+                FreezeEntityPosition(ped, true)
+            else
+                self:clearAllAnimations()
+                self:setupCam()
+            end
+        end,
+    })
 
     for index, content in pairs(self:getShopProducts()[PlayerData.skin.Model.Hash]) do
         shopMenu:AddTitle({label = content.label})
@@ -182,7 +198,6 @@ function BarberShop:GenerateMenu()
 
     shopMenu:On("close", function()
         TriggerEvent("soz-character:Client:ApplyCurrentSkin")
-        self:clearAllAnimations()
         self:deleteCam()
     end)
 
@@ -191,3 +206,5 @@ end
 
 --- Exports shop
 ShopContext["barber"] = BarberShop:new("Coiffeur", "barber", {sprite = 71, color = 0}, "s_f_m_fembarber")
+
+

@@ -11,12 +11,13 @@ Config.Locations["tattoo"] = {
 
 Config.TattooLocationsInShop = {
     ["tattooshop"] = vector4(324.69, 180.53, 103.59, 134.05),
-    ["tattooshop2"] = vector4(1864.91, 3746.62, 33.03, 28.24),
+    ["tattooshop2"] = vector4(1864.46, 3747.41, 33.03, 15.11),
     ["tattooshop3"] = vector4(-294.79, 6200.76, 31.49, 212.67),
     ["tattooshop4"] = vector4(-1155.23, -1427.59, 4.95, 6.04),
-    ["tattooshop5"] = vector4(1321.72, -1654.25, 52.28, 9.94),
+    ["tattooshop5"] = vector4(1321.80, -1653.20, 52.28, 349.29),
     ["tattooshop6"] = vector4(-3169.81, 1077.92, 20.83, 220.92),
 }
+
 
 Config.TattooCategories = {
     ["ZONE_HEAD"] = {
@@ -24,7 +25,9 @@ Config.TattooCategories = {
         cam = {vec(0.0, 0.7, 0.7), vec(0.7, 0.0, 0.7), vec(0.0, -0.7, 0.7), vec(-0.7, 0.0, 0.7)},
         player = vec(0.0, 0.0, 0.5),
     },
-    ["ZONE_TORSO"] = {label = "Torse", cam = {vec(0.0, 0.7, 0.2), vec(0.0, -0.7, 0.2)}, player = vec(0.0, 0.0, 0.2)},
+    ["ZONE_TORSO_FRONT"] = {label = "Torse", cam = {vec(0.0, 0.7, 0.2), vec(-0.5, 0.7, 0.2), vec(0.5, 0.7, 0.2)}, player = vec(0.0, 0.0, 0.2)},
+    ["ZONE_TORSO_BACK"] = {label = "Dos", cam = {vec(0.0, -0.7, 0.2), vec(-0.5, -0.7, 0.2), vec(0.5, -0.7, 0.2)}, player = vec(0.0, 0.0, 0.2)},
+
     ["ZONE_LEFT_ARM"] = {
         label = "Bras gauche",
         cam = {vec(-0.4, 0.5, 0.2), vec(-0.7, 0.0, 0.2), vec(-0.4, -0.5, 0.2)},

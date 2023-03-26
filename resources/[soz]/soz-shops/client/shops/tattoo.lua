@@ -1,6 +1,6 @@
 --- @class TattooShop
 TattooShop = {}
-local cam, camVariationList, camVariationId, camVariationCoord = nil, {}, 1, nil
+local cam, camVariationList, camVariationId, camVariationCoord, ShopOpen = nil, {}, 1, nil, false
 
 function TattooShop:new(...)
     local shop = setmetatable(ShopShell:new(...), {__index = TattooShop})
@@ -49,6 +49,29 @@ function TattooShop:SetupScaleform(scaleformType)
     return scaleform
 end
 
+--- Idle animation
+function TattooShop:playIdleAnimation()
+    local animDict = "anim@heists@heist_corona@team_idles@male_c"
+
+    while not HasAnimDictLoaded(animDict) do
+        RequestAnimDict(animDict)
+        Wait(100)
+    end
+
+    local playerPed = PlayerPedId()
+    ClearPedTasksImmediately(playerPed)
+    TaskPlayAnim(playerPed, animDict, "idle", 1.0, 1.0, -1, 1, 1, 0, 0, 0)
+end
+
+function TattooShop:clearAllAnimations()
+    ClearPedTasksImmediately(PlayerPedId())
+
+    if HasAnimDictLoaded("anim@heists@heist_corona@team_idles@male_c") then
+        RemoveAnimDict("anim@heists@heist_corona@team_idles@male_c")
+    end
+end
+
+
 function TattooShop:GenerateMenu(skipIntro)
     shopMenu.Texture = "menu_shop_tattoo"
     shopMenu:ClearItems()
@@ -67,6 +90,23 @@ function TattooShop:GenerateMenu(skipIntro)
             local validation = exports["soz-hud"]:Input("Voulez-vous vraiment ce tatouage ? [oui/non]", 3)
             if validation == "oui" then
                 TriggerServerEvent("shops:server:resetTattoos")
+            end
+        end,
+    })
+
+
+    shopMenu:AddCheckbox({
+        label = "Libérer la caméra",
+        value = cam,
+        change = function(_, value)
+            if value then
+                self:DeleteCam()
+                self:playIdleAnimation()
+                FreezeEntityPosition(ped, true)
+            else
+                self:clearAllAnimations()
+                self:CreateCam()
+                self:UpdateCam()
             end
         end,
     })
@@ -101,7 +141,7 @@ function TattooShop:GenerateMenu(skipIntro)
     TriggerScreenblurFadeIn(50)
     for _, tattoo in pairs(self:getShopProducts()) do
         local overlayField = gender == 0 and "HashNameMale" or "HashNameFemale"
-
+        
         if tattoo[overlayField] ~= "" then
             local label = GetLabelText(tattoo["Name"])
             if label == "NULL" or tattoo["LocalizedName"] ~= nil then
@@ -112,6 +152,7 @@ function TattooShop:GenerateMenu(skipIntro)
             else
                 Config.TattooCategories[tattoo["Zone"]].menu:AddButton({
                     label = label,
+                    description = "Appuyez sur Shift pour changer la caméra d'angle",
                     value = {collection = tattoo["Collection"], overlay = tattoo[overlayField]},
                     rightLabel = "$" .. QBCore.Shared.GroupDigits(tattoo["Price"]),
                     select = function(item)
@@ -149,17 +190,11 @@ function TattooShop:PreGenerateMenu(skipIntro)
 
     self:DeleteCam()
     self:CreateCam()
+    ShopOpen = true
 
     CreateThread(function()
         local sc = self:SetupScaleform("instructional_buttons")
-        while shopMenu.IsOpen do
-            DisableControlAction(0, 32, true) -- W
-            DisableControlAction(0, 34, true) -- A
-            DisableControlAction(0, 31, true) -- S
-            DisableControlAction(0, 30, true) -- D
-            DisableControlAction(0, 22, true) -- Jump
-            DisableControlAction(0, 44, true) -- Cover
-
+        while ShopOpen do
             if IsControlJustPressed(0, 21) then
                 if camVariationId == #camVariationList then
                     camVariationId = 1
@@ -179,6 +214,8 @@ end
 
 function TattooShop:OnMenuClose()
     self:DeleteCam()
+    self:clearAllAnimations()
+    ShopOpen = false
 
     -- Unset naked
     TriggerEvent("soz-character:Client:ApplyCurrentClothConfig")
@@ -195,7 +232,6 @@ function TattooShop:MenuEntryAction(item)
         Collection = GetHashKey(item.Value.collection),
         Overlay = GetHashKey(item.Value.overlay),
     })
-
     TriggerEvent("soz-character:Client:ApplyTemporarySkin", skin)
 end
 
@@ -205,6 +241,8 @@ function TattooShop:CreateCam()
         SetCamActive(cam, true)
         RenderScriptCams(true, false, 0, true, true)
         StopCamShaking(cam, true)
+        self:playIdleAnimation()
+        FreezeEntityPosition(ped, true)
     end
 end
 
@@ -221,6 +259,8 @@ function TattooShop:DeleteCam()
         SetCamActive(cam, false)
         RenderScriptCams(false, false, 0, 1, 0)
         DestroyCam(cam, false)
+        FreezeEntityPosition(ped, false)
+        self:clearAllAnimations()
     end
     camVariationList, camVariationId, camVariationCoord = {}, 1, nil
 end
