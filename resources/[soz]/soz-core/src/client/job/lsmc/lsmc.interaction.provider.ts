@@ -81,6 +81,7 @@ export class LSMCInteractionProvider {
                 canInteract: entity => {
                     const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
                     return (
+                        this.playerService.getPlayer().job.onduty &&
                         hopital.isPointInside(GetEntityCoords(PlayerPedId()) as Vector3) &&
                         !Player(target).state.isWearingPatientOutfit
                     );
@@ -101,6 +102,7 @@ export class LSMCInteractionProvider {
                 canInteract: entity => {
                     const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
                     return (
+                        this.playerService.getPlayer().job.onduty &&
                         hopital.isPointInside(GetEntityCoords(PlayerPedId()) as Vector3) &&
                         Player(target).state.isWearingPatientOutfit
                     );

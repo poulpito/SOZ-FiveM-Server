@@ -17,7 +17,7 @@ CreateThread(function()
                         disableCarMovement = true,
                         disableMouse = false,
                         disableCombat = true,
-                    }, {task = "CODE_HUMAN_MEDIC_TEND_TO_DEAD"}, {}, {}, function()
+                    }, {task = "CODE_HUMAN_MEDIC_KNEEL"}, {}, {}, function()
                         TriggerServerEvent("lsmc:server:remove", "firstaid")
                         TriggerServerEvent("monitor:server:event", "job_lsmc_heal", {}, {
                             amount = 25,
@@ -27,6 +27,11 @@ CreateThread(function()
                             position = GetEntityCoords(entity),
                         }, true)
                         TriggerServerEvent("lsmc:server:heal", GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity)))
+                        if (GetEntityHealth(entity) == GetEntityMaxHealth(entity)) then
+                            exports["soz-hud"]:DrawNotification("La personne a l'air de sentir mieux", "sucess")
+                        else
+                            exports["soz-hud"]:DrawNotification("La personne n'a pas l'air complètement soignée ...", "info")
+                        end
                     end)
                 end,
                 item = "firstaid",
