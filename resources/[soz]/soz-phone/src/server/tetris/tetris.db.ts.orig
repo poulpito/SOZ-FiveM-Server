@@ -1,5 +1,4 @@
-import { TetrisScore } from '../../../typings/app/tetris';
-import { LeaderboardInterface } from '../../../typings/common';
+import { TetrisLeaderboard, TetrisScore } from '../../../typings/app/tetris';
 
 export class _TetrisDB {
     async addScore(identifier: string, score: TetrisScore): Promise<number> {

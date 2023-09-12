@@ -1,6 +1,6 @@
-import { LeaderboardInterface } from '@typings/common';
+import { TetrisLeaderboard } from '@typings/app/tetris';
 
-export const MockTetrisLeaderboard: LeaderboardInterface[] = [
+export const MockTetrisLeaderboard: TetrisLeaderboard[] = [
     {
         citizenid: '1',
         avatar: 'https://cfx-nui-soz-core/public/images/default/cat.webp',
