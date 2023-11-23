@@ -8,6 +8,7 @@ export type WorldObject = {
     placeOnGround?: boolean;
     matrix?: Float32Array;
     noCollision?: boolean;
+    invisible?: boolean;
 };
 
 export type WorldPlacedProp = {

@@ -52,7 +52,7 @@ function InventoryDatastore:SaveInventory(id, owner, inventory)
     --- Keep the inventory in the memory, it's only used by the InventoryContainer class
 end
 
-function InventoryDatastore:SyncInventory(id, items)
+function InventoryDatastore:SyncInventory(inv)
     --- Keep this function empty, it's only used by the InventoryContainer class
 end
 

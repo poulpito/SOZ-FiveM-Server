@@ -3,6 +3,7 @@ import { VanillaComponentDrawableIndexMaxValue, VanillaPropDrawableIndexMaxValue
 import { joaat } from '../joaat';
 import { JobType } from '../job';
 import { PlayerLicenceType } from '../player';
+import { Vector4 } from '../polyzone/vector';
 
 export const DUTY_OUTFIT_NAME = 'Tenue de service';
 
@@ -1401,6 +1402,19 @@ export type PoliceJobLicencesMenuData = {
     job: JobType;
     playerServerId: number;
     playerLicences: Partial<Record<PlayerLicenceType, number>>;
+};
+
+export type PoliceClue = {
+    id: string;
+    model: number;
+    position: Vector4;
+    noCollision: boolean;
+    invisible: boolean;
+    matrix?: Float32Array;
+    placeOnGround: boolean;
+    type: 'evidence_bullet' | 'evidence_blood' | 'evidence_glass';
+    information: string;
+    outline: boolean;
 };
 
 export type PoliceJobMoneycheckerMenuData = {

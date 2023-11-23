@@ -262,6 +262,7 @@ export type PlayerMetadata = PlayerHealthBook & {
     thirst: number;
     alcohol: number;
     drug: number;
+    last_drug_eaten?: string;
     fiber: number;
     lipid: number;
     sugar: number;
@@ -298,6 +299,8 @@ export type PlayerMetadata = PlayerHealthBook & {
     inside: PlayerInsideState;
     injuries_count: number;
     injuries_date: number;
+    last_identified_shot: number | undefined;
+    last_weapon_used: string | undefined;
     itt: boolean;
     hazmat: boolean;
     mood?: string | null;

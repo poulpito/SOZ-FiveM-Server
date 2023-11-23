@@ -1,3 +1,7 @@
+import { PoliceClueDBProvider } from '@private/server/police/police.cluedb.provider';
+import { emitClientRpc } from '@public/core/rpc';
+import { uuidv4 } from '@public/core/utils';
+import { joaat } from '@public/shared/joaat';
 import { FDO_NO_FBI } from '@public/shared/job';
 
 import { OnEvent } from '../../core/decorators/event';
@@ -8,7 +12,7 @@ import { Rpc } from '../../core/decorators/rpc';
 import { Tick, TickInterval } from '../../core/decorators/tick';
 import { ServerEvent } from '../../shared/event';
 import { toVector3Object, Vector4 } from '../../shared/polyzone/vector';
-import { RpcServerEvent } from '../../shared/rpc';
+import { RpcClientEvent, RpcServerEvent } from '../../shared/rpc';
 import { PlayerVehicleState } from '../../shared/vehicle/player.vehicle';
 import { VehicleCondition, VehicleLocation, VehicleSeat, VehicleVolatileState } from '../../shared/vehicle/vehicle';
 import { PrismaService } from '../database/prisma.service';
@@ -29,6 +33,9 @@ export class VehicleStateProvider {
 
     @Inject(PlayerService)
     private playerService: PlayerService;
+
+    @Inject(PoliceClueDBProvider)
+    private policeClueDBProvider: PoliceClueDBProvider;
 
     @Tick(TickInterval.EVERY_SECOND, 'vehicle:state:check')
     public async checkVehicleState() {
@@ -150,8 +157,23 @@ export class VehicleStateProvider {
 
     @OnEvent(ServerEvent.BASE_ENTERED_VEHICLE)
     @OnEvent(ServerEvent.BASE_CHANGE_VEHICLE_SEAT)
-    public onPlayerEnteredVehicle(source: number, vehicleNetworkId: number, seat: VehicleSeat): void {
+    public async onPlayerEnteredVehicle(source: number, vehicleNetworkId: number, seat: VehicleSeat): Promise<void> {
         this.vehicleStateService.setVehicleSeat(vehicleNetworkId, source, seat);
+        const state = this.vehicleStateService.getVehicleState(vehicleNetworkId);
+        if (!state.owner) {
+            return;
+        }
+        if (seat !== VehicleSeat.Driver) {
+            return;
+        }
+        const player = this.playerService.getPlayer(source);
+        if (!player) {
+            return;
+        }
+        const isWearingGloves = await emitClientRpc<boolean>(RpcClientEvent.CHECK_WEARING_GLOVES, source);
+        this.vehicleStateService.updateVehicleVolatileState(vehicleNetworkId, {
+            fingerprint: isWearingGloves ? null : player.charinfo.firstname + ' ' + player.charinfo.lastname,
+        });
     }
 
     @OnEvent(ServerEvent.BASE_LEFT_VEHICLE)
@@ -185,11 +207,52 @@ export class VehicleStateProvider {
     }
 
     @OnEvent(ServerEvent.VEHICLE_UPDATE_CONDITION_FROM_OWNER)
-    public updateVehicleConditionFromOwner(
+    public async updateVehicleConditionFromOwner(
         source: number,
         vehicleNetworkId: number,
         condition: Partial<VehicleCondition>
-    ): void {
+    ): Promise<void> {
+        if (condition.windowStatus && Object.values(condition.windowStatus).filter(w => w).length > 0) {
+            const entityId = NetworkGetEntityFromNetworkId(vehicleNetworkId);
+            const position = GetEntityCoords(entityId) as Vector4;
+            position[2] -= 0.5;
+            const vehicleName = await emitClientRpc<string>(
+                RpcClientEvent.VEHICLE_GET_NAME,
+                source,
+                GetEntityModel(entityId)
+            );
+            this.policeClueDBProvider.addClues([
+                {
+                    id: uuidv4(),
+                    model: joaat('soz_props_glassplash'),
+                    position: position,
+                    noCollision: true,
+                    invisible: true,
+                    placeOnGround: true,
+                    type: 'evidence_glass',
+                    information: `Verre d'une vitre de ${vehicleName}`,
+                    matrix: {
+                        '0': 0.6429659724235535,
+                        '1': 0,
+                        '2': 0,
+                        '3': 0,
+                        '4': 0,
+                        '5': 0.8088713884353638,
+                        '6': 0,
+                        '7': 0,
+                        '8': 0,
+                        '9': 0,
+                        '10': 1.1352461576461792,
+                        '11': 0,
+                        '12': position[0],
+                        '13': position[1],
+                        '14': position[2],
+                        '15': 1,
+                    } as any,
+                    outline: true,
+                },
+            ]);
+        }
         this.vehicleStateService.updateVehicleConditionState(vehicleNetworkId, condition);
     }
 

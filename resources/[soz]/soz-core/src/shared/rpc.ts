@@ -128,11 +128,13 @@ export enum RpcServerEvent {
     HELICO_INIT_LIGHT = 'soz-core:server:helico:init-spotlight',
 
     POLICE_ALCOOLLEVEL = 'soz-core:server:police:alcool-level',
-    POLICE_DRUGLEVEL = 'soz-core:server:police:drug-level',
+    POLICE_DRUGLEVEL_AND_TYPE = 'soz-core:server:police:drug-level',
     POLICE_GET_WANTED_PLAYERS = 'soz-core:server:police:get-wanted-players',
     POLICE_DELETE_WANTED_PLAYER = 'soz-core:server:police:delete-wanted-player',
     POLICE_GET_VEHICLE_OWNER = 'soz-core:server:police:get-vehicule-owner',
     POLICE_GET_MARKED_MONEY = 'soz-core:server:police:get-marked-money',
+    POLICE_GET_CLUES_IN_AREA = 'soz-core:server:police:get-clues-in-area',
+    POLICE_GET_ALL_IDENTIFIED_CLUES = 'soz-core:server:police:get-all-identified-clues',
     HUB_EXIT_TIME = 'soz-core:server:hub:exit-time',
     HUB_ENTRY_FETCH_ALL = 'soz-core:server:hub:fetch-all',
     HUB_ENTRY_FETCH_ACTIVE = 'soz-core:server:hub:fetch-active',
@@ -193,6 +195,7 @@ export enum RpcServerEvent {
 
 export enum RpcClientEvent {
     VEHICLE_GET_TYPE = 'soz-core:rpc:client:vehicle:get-type',
+    VEHICLE_GET_NAME = 'soz-core:rpc:client:vehicle:get-name',
     VEHICLE_SPAWN = 'soz-core:rpc:client:vehicle:spawn',
     GET_LAST_VEHICLE_SPAWN = 'soz-core:rpc:client:vehicle:get-last-spawn',
     DELETE_LAST_VEHICLE_SPAWN = 'soz-core:rpc:client:vehicle:delete-last-spawn',
@@ -201,4 +204,5 @@ export enum RpcClientEvent {
     MONITOR_GET_TRACES = 'soz-core:rpc:client:monitor:get-traces',
     DRUG_CHECK_ZONE = 'soz-core:rpc:client:drug:check-zone',
     FDF_CHECK_ZONE = 'soz-core:rpc:client:fdf:check-zone',
+    CHECK_WEARING_GLOVES = 'soz-core:rpc:client:check-wearing-gloves',
 }

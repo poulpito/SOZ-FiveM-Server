@@ -58,7 +58,10 @@ export enum ClientEvent {
     ITEM_BOOK_USE = 'soz-core:client:item:book:use',
     ITEM_CAMERA_TOGGLE = 'soz-core:client:item:camera:toggle',
     ITEM_MICROPHONE_TOGGLE = 'soz-core:client:item:microphone:toggle',
+    ITEM_SCIENTIST_CAMERA_TOGGLE = 'soz-core:client:item:scientist-camera:toggle',
+    ITEM_SCIENTIST_PHOTO_TOGGLE = 'soz-core:client:item:scientist-photo:toggle',
     ITEM_SCUBA_TOOGLE = 'soz-core:client:item:scuba:toggle',
+    ITEM_DETECTIVE_BOARD_TOGGLE = 'soz-core:client:item:detective-board:toggle',
 
     HELICO_UPDATE_LIGHT = 'soz-core:client:police:update-light',
 
@@ -235,6 +238,11 @@ export enum ClientEvent {
     POLICE_REQUEST_ADD_SPIKE = 'soz-core:client:police:request-add-spike',
     POLICE_SYNC_SPIKE = 'soz-core:client:police:sync-spikes',
     POLICE_OPEN_STASH_CLOAKROOM = 'police:cloakroom:openStash',
+    POLICE_IDENTIFIED_CLUE = 'soz-core:client:police:identified-clue',
+    POLICE_ANALYZE_EVIDENCE = 'soz-core:client:police:analyze-evidence',
+    POLICE_GATHERED_CLUE = 'soz-core:client:police:cleaned-clue',
+    POLICE_DESTROYED_CLUE = 'soz-core:client:police:destroyed-clue',
+    POLICE_DRUG_IN_TRUNK = 'soz-core:client:police:drug-in-trunk',
 
     SET_ESCORTING = 'soz-core:client:police:set-escorting',
     GET_ESCORTED = 'soz-core:client:police:get-escorted',

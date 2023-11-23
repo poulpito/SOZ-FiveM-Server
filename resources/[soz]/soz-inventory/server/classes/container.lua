@@ -92,9 +92,9 @@ function InventoryContainer:SaveInventory(id, owner, inventory)
     return affectedRows >= 1
 end
 
-function InventoryContainer:SyncInventory(id, items)
+function InventoryContainer:SyncInventory(inv)
     if self.syncCallback then
-        self.syncCallback(id, items)
+        self.syncCallback(inv.id, inv.items)
     end
 end
 

@@ -1,6 +1,7 @@
 import { drugLocation } from '@private/nui/drug/DrugLocation';
 import { Models } from '@rematch/core';
 
+import { api } from './api';
 import { hud } from './hud';
 import { item } from './item';
 import { outside } from './outside';
@@ -18,6 +19,7 @@ export interface RootModel extends Models<RootModel> {
     vehicle: typeof vehicle;
     vehicleSpeed: typeof vehicleSpeed;
     drugLocation: typeof drugLocation;
+    api: typeof api;
 }
 
 export const models: RootModel = {
@@ -30,4 +32,5 @@ export const models: RootModel = {
     vehicle,
     vehicleSpeed,
     drugLocation,
+    api,
 };

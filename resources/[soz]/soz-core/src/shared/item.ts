@@ -196,10 +196,20 @@ export type MealMetadata = {
     label: string;
 };
 
+export type EvidenceMetadata = {
+    type: string;
+    generalInfo: string;
+    zone?: string;
+    support?: string;
+    isAnalyzed?: boolean;
+    dateAnalyzed?: string;
+};
+
 export type InventoryItemMetadata = {
     label?: string;
     type?: string;
     expiration?: string;
+    creation?: string;
     player?: number;
     // Weapom
     serial?: string;
@@ -226,6 +236,11 @@ export type InventoryItemMetadata = {
     fakeIdData?: FakeId;
     // Weapon certificate (DMC)
     craftCertificate?: string;
+    serializedDetectiveBoard?: any;
+    originalDetectiveBoard?: boolean;
+    photosInDetectiveBoard?: string[];
+    photoUrl?: string;
+    evidenceInfos?: EvidenceMetadata;
 };
 
 export type InventoryItem = {

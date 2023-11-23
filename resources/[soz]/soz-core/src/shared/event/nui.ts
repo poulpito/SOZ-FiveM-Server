@@ -92,6 +92,9 @@ export enum NuiEvent {
     AdminMenuCharacterCreateNew = 'soz-core:client:admin:character:create-new',
     AdminMenuCharacterSwitch = 'soz-core:client:admin:character:switch',
 
+    GetAPIConfig = 'soz-core:nui:get-api-config',
+    GetJWTToken = 'soz-core:nui:get-jwt-token',
+
     BaunDisplayBlip = 'soz-core:client:job:baun:display-blip',
     CraftingDoCraft = 'soz-core:nui:crafting:do-craft',
     CraftingDoSalvage = 'soz-core:nui:crafting:do-salvage',
@@ -255,6 +258,7 @@ export enum NuiEvent {
     PoliceGetWantedPlayers = 'soz-core:client:police:get-wantedPlayers',
     PoliceDeleteWantedPlayer = 'soz-core:client:police:delete-wantedPlayer',
     PoliceGatherMoneyMarked = 'soz-core:client:police:gather-money-marked',
+    PoliceSaveDetectiveBoard = 'soz-core:client:police:save-detective-board',
 
     IllegalShopBuyItem = 'soz-core:client:hubshop:buy',
 
@@ -349,4 +353,6 @@ export enum NuiEvent {
     HubEntryShow = 'soz-core:client:hub:entry-show',
     HubEntryUpdate = 'soz-core:client:hub:entry-update',
     HubEntryAdminMenuOpen = 'soz-core:client:hub:entry-open-menu',
+
+    PoliceUploadScientistPhoto = 'soz-core:client:job:police:upload-photo',
 }

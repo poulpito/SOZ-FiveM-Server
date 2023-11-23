@@ -432,7 +432,7 @@ function QBCore.Player.CreatePlayer(PlayerData)
         self.PlayerData.items = items
         self.Functions.UpdatePlayerData(dontUpdateChat)
 
-        exports['soz-core']:Log('DEBUG', 'Inventory movement - Set ! items set: ' .. json.encode(items), { player = self.PlayerData })
+        exports['soz-core']:Log('DEBUG', 'Inventory movement - Set ! items set: ' .. json.encode(items))
     end
 
     self.Functions.SetSkin = function(skin, skipApply)

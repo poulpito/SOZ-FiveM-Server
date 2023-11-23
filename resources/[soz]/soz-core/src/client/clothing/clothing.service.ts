@@ -102,4 +102,49 @@ export class ClothingService {
 
         return maxOptions;
     }
+
+    public async checkWearingGloves(): Promise<boolean> {
+        const ped = PlayerPedId();
+        const armIndex = GetPedDrawableVariation(ped, 3);
+        const model = GetEntityModel(ped);
+        if (model == GetHashKey('mp_m_freemode_01')) {
+            if (
+                armIndex < 16 ||
+                armIndex == 97 ||
+                armIndex == 98 ||
+                armIndex == 113 ||
+                armIndex == 114 ||
+                armIndex == 164 ||
+                armIndex == 169 ||
+                armIndex == 184 ||
+                armIndex == 196 ||
+                armIndex == 197 ||
+                armIndex == 198
+            ) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if (
+                armIndex < 16 ||
+                armIndex == 112 ||
+                armIndex == 113 ||
+                armIndex == 129 ||
+                armIndex == 130 ||
+                armIndex == 131 ||
+                armIndex == 153 ||
+                armIndex == 161 ||
+                armIndex == 205 ||
+                armIndex == 210 ||
+                armIndex == 229 ||
+                armIndex == 241 ||
+                armIndex == 242
+            ) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
 }

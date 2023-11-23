@@ -16,7 +16,7 @@ RegisterCommand("inventory", function()
                 return
             end
 
-            inventory = Handle.Functions.handleFish(inventory)
+            inventory = HydrateInventory(inventory)
 
             SendNUIMessage({
                 action = "openPlayerInventory",
@@ -139,7 +139,7 @@ AddEventHandler("player/setCurrentResellZone", function(newValue)
 end)
 
 RegisterNUICallback("player/giveItemToTarget", function(data, cb)
-    local hit, _, _, entityHit, entityType, _ = ScreenToWorld()
+    local hit, endCoords, _, entityHit, entityType, _ = ScreenToWorld()
     SetNuiFocus(false, false)
 
     if hit == 1 and entityType == 1 then
@@ -168,9 +168,31 @@ RegisterNUICallback("player/giveItemToTarget", function(data, cb)
             end
         end
     else
+        local printers = {
+            [GetHashKey("prop_printer_01")] = true,
+            [GetHashKey("prop_printer_02")] = true,
+            [GetHashKey("v_res_printer")] = true,
+            [GetHashKey("v_med_cor_photocopy")] = true,
+            [GetHashKey("prop_copier_01")] = true,
+        }
+        if printers[GetEntityModel(entityHit)] then
+            TriggerServerEvent("soz-core:server:police:make-copy-detective-board", data)
+            cb(true)
+            return
+        end
+        if data.type == "evidence" and data.name ~= "scientist_photo" then
+            TriggerEvent("soz-core:client:police:analyze-evidence", data, {endCoords.x, endCoords.y, endCoords.z})
+            cb(true)
+            return
+        end
         exports["soz-core"]:DrawNotification("Personne n'est à portée de vous", "error")
     end
 
+    cb(true)
+end)
+
+RegisterNUICallback("player/addPhotoDetectiveBoard", function(data, cb)
+    TriggerServerEvent("soz-core:server:police:add-photo-detective-board", data.detectiveBoard, data.photo)
     cb(true)
 end)
 
@@ -233,4 +255,11 @@ exports("hasPhone", function()
     end
 
     return true;
+end)
+
+RegisterNUICallback("player/openItemStorage", function(data, cb)
+    cb(true)
+    SetNuiFocus(false, false)
+
+    TriggerServerEvent("inventory:server:openItemStorage", data.slot)
 end)

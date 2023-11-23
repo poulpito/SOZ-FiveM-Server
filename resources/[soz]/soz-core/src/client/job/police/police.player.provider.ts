@@ -7,6 +7,7 @@ import { PhoneService } from '@public/client/phone/phone.service';
 import { PlayerListStateService } from '@public/client/player/player.list.state.service';
 import { PlayerService } from '@public/client/player/player.service';
 import { PlayerStateProvider } from '@public/client/player/player.state.provider';
+import { ProgressService } from '@public/client/progress.service';
 import { TargetFactory } from '@public/client/target/target.factory';
 import { Once, OnceStep, OnEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
@@ -18,6 +19,7 @@ import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
 import { MenuType } from '@public/shared/nui/menu';
 import { PlayerLicenceType } from '@public/shared/player';
+import { Vector4 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 import { inject } from 'inversify';
 
@@ -25,10 +27,10 @@ import { JobInteractionService } from '../job.interaction.service';
 import { StonkCloakRoomProvider } from '../stonk/stonk.cloakroom.provider';
 import { PoliceAnimationProvider } from './police.animation.provider';
 
-const jobsCanFine = [JobType.LSPD, JobType.BCSO, JobType.SASP];
+const jobsCanFine = [JobType.LSPD, JobType.BCSO, JobType.SASP, JobType.FBI];
 const jobsCanFouille = [JobType.LSPD, JobType.BCSO, JobType.CashTransfer, JobType.SASP];
 const jobsCanEscort = [JobType.LSPD, JobType.BCSO, JobType.CashTransfer, JobType.SASP, JobType.LSMC, JobType.FBI];
-const jobsCanBreathAnalyze = [JobType.LSPD, JobType.BCSO, JobType.LSMC, JobType.SASP];
+const jobsCanBreathAnalyze = [JobType.LSPD, JobType.BCSO, JobType.LSMC, JobType.SASP, JobType.FBI];
 
 @Provider()
 export class PolicePlayerProvider {
@@ -67,6 +69,9 @@ export class PolicePlayerProvider {
 
     @Inject(PlayerStateProvider)
     private playerStateProvider: PlayerStateProvider;
+
+    @Inject(ProgressService)
+    private progressService: ProgressService;
 
     private escortingAnimation: null | { animation: AnimationRunner | null; target: number; crimi: boolean } = null;
     private escortedAnimation: null | { animation: AnimationRunner | null; target: number; crimi: boolean } = null;
@@ -197,6 +202,77 @@ export class PolicePlayerProvider {
                         }
                     },
                 },
+                {
+                    label: "Récolte d'empreinte",
+                    color: job,
+                    icon: 'c:police/fouiller.png',
+                    job: job,
+                    item: 'fingerprint_collector',
+                    canInteract: () => {
+                        return this.playerService.isOnDuty();
+                    },
+                    action: async entity => {
+                        const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                        const { completed } = await this.progressService.progress(
+                            'police_gather_drug_person',
+                            'Récupération des empreintes digitales',
+                            3000,
+                            {
+                                name: 'player_search',
+                                dictionary: 'anim@gangops@morgue@table@',
+                                options: {
+                                    freezeLastFrame: true,
+                                },
+                            },
+                            {
+                                disableMovement: true,
+                                disableMouse: true,
+                            }
+                        );
+                        if (!completed) {
+                            return;
+                        }
+                        const playerCoords = GetEntityCoords(PlayerPedId()) as Vector4;
+                        const zoneID = GetNameOfZone(playerCoords[0], playerCoords[1], playerCoords[2]);
+                        const zone = GetLabelText(zoneID);
+                        TriggerServerEvent(ServerEvent.POLICE_GATHER_FINGERPRINT_ON_PERSON, target, zone);
+                    },
+                },
+                {
+                    label: 'Rechercher des traces de poudre',
+                    color: job,
+                    icon: 'c:police/fouiller.png',
+                    job: job,
+                    canInteract: () => {
+                        return this.playerService.isOnDuty();
+                    },
+                    action: async entity => {
+                        const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                        const { completed } = await this.progressService.progress(
+                            'police_gather_drug_person',
+                            'Recherche de traces de poudre',
+                            3000,
+                            {
+                                name: 'player_search',
+                                dictionary: 'anim@gangops@morgue@table@',
+                                options: {
+                                    freezeLastFrame: true,
+                                },
+                            },
+                            {
+                                disableMovement: true,
+                                disableMouse: true,
+                            }
+                        );
+                        if (!completed) {
+                            return;
+                        }
+                        const playerCoords = GetEntityCoords(PlayerPedId()) as Vector4;
+                        const zoneID = GetNameOfZone(playerCoords[0], playerCoords[1], playerCoords[2]);
+                        const zone = GetLabelText(zoneID);
+                        TriggerServerEvent(ServerEvent.POLICE_GATHER_POWDER_ON_PERSON, target, zone);
+                    },
+                },
             ]);
         }
         for (const job of jobsCanFouille) {
@@ -293,8 +369,41 @@ export class PolicePlayerProvider {
                         action: async entity => {
                             const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
 
-                            const drugLevel = await emitRpc<number>(RpcServerEvent.POLICE_DRUGLEVEL, target);
-                            this.dispatcher.dispatch('police', 'OpenScreeningTest', drugLevel > 0);
+                            const drugInfo = await emitRpc<{ level: number; type: string }>(
+                                RpcServerEvent.POLICE_DRUGLEVEL_AND_TYPE,
+                                target
+                            );
+                            this.dispatcher.dispatch('police', 'OpenScreeningTest', drugInfo.level > 0);
+                            if (drugInfo.level > 0) {
+                                const { completed } = await this.progressService.progress(
+                                    'police_gather_drug_person',
+                                    "Récupération d'un échantillon de trace de drogue",
+                                    3000,
+                                    {
+                                        name: 'player_search',
+                                        dictionary: 'anim@gangops@morgue@table@',
+                                        options: {
+                                            freezeLastFrame: true,
+                                        },
+                                    },
+                                    {
+                                        disableMovement: true,
+                                        disableMouse: true,
+                                    }
+                                );
+                                if (!completed) {
+                                    return;
+                                }
+                                const playerCoords = GetEntityCoords(PlayerPedId()) as Vector4;
+                                const zoneID = GetNameOfZone(playerCoords[0], playerCoords[1], playerCoords[2]);
+                                const zone = GetLabelText(zoneID);
+                                TriggerServerEvent(
+                                    ServerEvent.POLICE_GATHER_DRUG_ON_PERSON,
+                                    target,
+                                    drugInfo.type,
+                                    zone
+                                );
+                            }
                         },
                     },
                 ],

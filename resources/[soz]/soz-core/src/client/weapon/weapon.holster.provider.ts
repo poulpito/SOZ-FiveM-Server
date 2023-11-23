@@ -67,7 +67,10 @@ export class WeaponHolsterProvider {
                 await this.resourceLoader.loadAnimationDictionary('rcmjosh4');
                 await this.resourceLoader.loadAnimationDictionary('weapons@pistol@');
 
-                if (this.currWeapon != GetHashKey('WEAPON_UNARMED')) {
+                if (
+                    this.currWeapon != GetHashKey('WEAPON_UNARMED') &&
+                    this.currWeapon != GetHashKey('WEAPON_UVFLASHLIGHT')
+                ) {
                     if (
                         this.isWeaponHolsterable(this.currWeapon) &&
                         ((AllowedJob.includes(player.job.id) && player.cloth_config.JobClothSet) ||
@@ -78,9 +81,11 @@ export class WeaponHolsterProvider {
                         await this.putWeaponBehind(ped, pos, rot);
                     }
                     SetCurrentPedWeapon(ped, GetHashKey('WEAPON_UNARMED'), true);
+                } else if (this.currWeapon == GetHashKey('WEAPON_UVFLASHLIGHT')) {
+                    SetCurrentPedWeapon(ped, GetHashKey('WEAPON_UNARMED'), true);
                 }
 
-                if (newWeap != GetHashKey('WEAPON_UNARMED')) {
+                if (newWeap != GetHashKey('WEAPON_UNARMED') && newWeap != GetHashKey('WEAPON_UVFLASHLIGHT')) {
                     if (
                         this.isWeaponHolsterable(newWeap) &&
                         ((AllowedJob.includes(player.job.id) && player.cloth_config.JobClothSet) ||
@@ -90,6 +95,8 @@ export class WeaponHolsterProvider {
                     } else {
                         await this.drawWeaponFromBehind(ped, pos, rot, newWeap);
                     }
+                } else if (newWeap == GetHashKey('WEAPON_UVFLASHLIGHT')) {
+                    SetCurrentPedWeapon(ped, newWeap, true);
                 }
 
                 ClearPedTasks(ped);

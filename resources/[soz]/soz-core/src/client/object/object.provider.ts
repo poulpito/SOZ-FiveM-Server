@@ -51,6 +51,16 @@ export class ObjectProvider {
         return Object.keys(this.loadedObjects).length;
     }
 
+    public getObject(id: string): WorldObject | null {
+        const object = this.loadedObjects[id];
+
+        if (object) {
+            return object.object;
+        }
+
+        return null;
+    }
+
     public getObjects(filter?: (object: WorldObject) => boolean): WorldObject[] {
         const objects = [];
 
@@ -245,10 +255,6 @@ export class ObjectProvider {
 
         SetEntityHeading(entity, object.position[3]);
 
-        if (object.matrix) {
-            this.applyEntityMatrix(entity, object.matrix);
-        }
-
         if (!OBJECT_MODELS_NO_FREEZE.includes(model)) {
             FreezeEntityPosition(entity, true);
         }
@@ -257,8 +263,16 @@ export class ObjectProvider {
             PlaceObjectOnGroundProperly_2(entity);
         }
 
+        if (object.matrix) {
+            this.applyEntityMatrix(entity, object.matrix);
+        }
+
         if (object.rotation) {
             SetEntityRotation(entity, object.rotation[0], object.rotation[1], object.rotation[2], 0, false);
+        }
+
+        if (object.invisible) {
+            SetEntityVisible(entity, false, false);
         }
 
         SetEntityCollision(entity, !object.noCollision, false);

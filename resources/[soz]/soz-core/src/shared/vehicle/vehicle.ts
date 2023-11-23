@@ -167,6 +167,9 @@ export type VehicleVolatileState = {
     locatorEndJam: number;
     label: string;
     neonLightsStatus: boolean | null;
+    fingerprint: string | null;
+    lastDrugTrace: string | null;
+    isAnalyzed: boolean;
 };
 
 export enum VehicleClass {
@@ -249,6 +252,9 @@ export const getDefaultVehicleVolatileState = (): VehicleVolatileState => ({
     locatorEndJam: 0,
     label: null,
     neonLightsStatus: true,
+    fingerprint: null,
+    lastDrugTrace: null,
+    isAnalyzed: false,
 });
 
 export type VehicleMenuData = {

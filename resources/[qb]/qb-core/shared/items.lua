@@ -4052,6 +4052,135 @@ QBShared.Items = {
         ['description'] = '',
         ['illustrator'] = '.LuckyG'
     },
+    ['evidence_blood'] = {
+        ['name'] = 'evidence_blood',
+        ['durability'] = 30,
+        ['label'] = 'Échantillon sanguin non-identifié',
+        ['weight'] = 100,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = '',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['evidence_bullet'] = {
+        ['name'] = 'evidence_bullet',
+        ['durability'] = 30,
+        ['label'] = 'Échantillon balistique non-identifié',
+        ['weight'] = 100,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = '',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['evidence_glass'] = {
+        ['name'] = 'evidence_glass',
+        ['durability'] = 30,
+        ['label'] = 'Échantillon de verre non-identifié',
+        ['weight'] = 100,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = '',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['evidence_fingerprint'] = {
+        ['name'] = 'evidence_fingerprint',
+        ['durability'] = 30,
+        ['label'] = 'Empreinte non-identifiée',
+        ['weight'] = 100,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = '',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['evidence_drug'] = {
+        ['name'] = 'evidence_drug',
+        ['durability'] = 30,
+        ['label'] = 'Échantillon de traces de drogue non-identifiée',
+        ['weight'] = 100,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = '',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['evidence_powder'] = {
+        ['name'] = 'evidence_powder',
+        ['durability'] = 30,
+        ['label'] = 'Échantillon de traces de poudre non-identifiée',
+        ['weight'] = 100,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = '',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['fingerprint_collector'] = {
+        ['name'] = 'fingerprint_collector',
+        ['label'] = 'Collecteur d\'empreintes',
+        ['weight'] = 1000,
+        ['type'] = 'item',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'Sert à collecter des empreintes.',
+        ['illustrator'] = '.Sniteur',
+    },
+    ['scientist_camera'] = {
+        ['name'] = 'scientist_camera',
+        ['label'] = 'Appareil photo scientifique',
+        ['weight'] = 2000,
+        ['type'] = 'item',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Immortalisez vos découvertes.',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['scientist_photo'] = {
+        ['name'] = 'scientist_photo',
+        ['durability'] = 30,
+        ['label'] = 'Photo scientifique',
+        ['weight'] = 200,
+        ['type'] = 'evidence',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Photo prise avec un appareil photo scientifique.',
+        ['illustrator'] = '.Sniteur'
+    },
+    ['detective_board'] = {
+        ['name'] = 'detective_board',
+        ['label'] = 'Dossier d\'enquête scientifique',
+        ['weight'] = 1000,
+        ['type'] = 'item',
+        ['storageItemType'] = 'evidence',
+        ['openStorageLabel'] = 'Stockage des preuves',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Votre antre mental regorge d\'idées. Lorsque vous ouvrez ce dossier, un tableau imaginaire sert à structurer vos pensées.',
+        ['illustrator'] = '.Sniteur'
+    },
     ['n_camera'] = {
         ['name'] = 'n_camera',
         ['label'] = 'Caméra épaule',
@@ -13739,8 +13868,8 @@ QBShared.Items = {
         ['sozedex_id'] = 190,
         ['price'] = 75,
      },
-    
-    
+
+
     --- Halloween
 
     ['halloween_horrostine'] = {

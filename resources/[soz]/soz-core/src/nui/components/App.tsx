@@ -7,6 +7,9 @@ import { DrugTransformApp } from '@private/nui/drug/DrugTransformApp';
 import { FishingApp } from '@private/nui/fishing/FishingApp';
 import { HoodApp } from '@private/nui/hood/HoodApp';
 import { MissiveApp } from '@private/nui/missive/MissiveApp';
+import { DetectiveBoard } from '@private/nui/Police/DetectiveBoard';
+import { ScientistCamera } from '@private/nui/Police/ScientistCamera';
+import { ScientistPhoto } from '@private/nui/Police/ScientistPhoto';
 import { SozedexApp } from '@private/nui/sozedex/SozedexApp';
 import { StatePrivateApp } from '@private/nui/StatePrivateApp';
 import { TalentApp } from '@private/nui/Talent/TalentApp';
@@ -59,6 +62,7 @@ export const App: FunctionComponent = () => {
         const interval = setInterval(() => {
             fetchNui(NuiEvent.Ping);
         }, 1000);
+        store.dispatch.api.loadApi();
 
         return () => clearInterval(interval);
     }, []);
@@ -86,6 +90,9 @@ export const App: FunctionComponent = () => {
                 <RadioVehicleApp />
                 <BreathAnalyzerApp />
                 <DrugScreeningApp />
+                <DetectiveBoard />
+                <ScientistCamera />
+                <ScientistPhoto />
                 <HoodApp />
                 <TaxiHorodateurApp />
                 <TalentApp />

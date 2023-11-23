@@ -21,6 +21,7 @@ import {
     GunShotMessage,
     WeaponName,
 } from '../../shared/weapons/weapon';
+import { ClothingService } from '../clothing/clothing.service';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { PhoneService } from '../phone/phone.service';
 import { PlayerService } from '../player/player.service';
@@ -68,6 +69,9 @@ export class WeaponProvider {
 
     @Inject(PlayerService)
     private playerService: PlayerService;
+
+    @Inject(ClothingService)
+    private clothingService: ClothingService;
 
     @Inject(FuelStationRepository)
     private fuelStationRepository: FuelStationRepository;
@@ -227,7 +231,14 @@ export class WeaponProvider {
         }
 
         const weaponGroup = GetWeapontypeGroup(weapon.name);
-        emitNet(ServerEvent.WEAPON_SHOOTING, weapon.slot, weaponGroup, GetAmmoInClip(player, weapon.name)[1]);
+        const isWearingGloves = await this.clothingService.checkWearingGloves();
+        emitNet(
+            ServerEvent.WEAPON_SHOOTING,
+            weapon.slot,
+            weaponGroup,
+            GetAmmoInClip(player, weapon.name)[1],
+            isWearingGloves
+        );
 
         if (
             !messageExclude.includes(GetHashKey(weapon.name)) &&
