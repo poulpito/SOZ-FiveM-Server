@@ -79,6 +79,17 @@ QBShared.Items = {
         ['description'] = 'Pour voir dans le noir !',
         ['illustrator'] = '.MimiBloops',
     },
+    ['weapon_greenflashlight'] = {
+            ['name'] = 'weapon_greenflashlight',
+            ['label'] = 'Lampe UV Scientifique',
+            ['weight'] = 500,
+            ['type'] = 'weapon',
+            ['ammotype'] = nil,
+            ['unique'] = true,
+            ['useable'] = false,
+            ['description'] = 'Idéale pour se croire dans un film.',
+            ['illustrator'] = '.Rigonkmalk',
+        },
     ['weapon_golfclub'] = {
         ['name'] = 'weapon_golfclub',
         ['label'] = 'Club de golf',
