@@ -12,7 +12,6 @@ client_script {
     "@PolyZone/ComboZone.lua",
     "@menuv/menuv.lua",
     "client/*.lua",
-    "client/utils/*.lua",
     "client/jobs/**/*.lua",
 }
 
@@ -21,7 +20,6 @@ server_script {
     "server/main.lua",
     "server/grade.lua",
     "server/functions.lua",
-    "server/objects.lua",
     "server/classes/*.lua",
     "server/jobs/**/*.lua",
 }
