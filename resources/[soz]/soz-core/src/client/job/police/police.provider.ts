@@ -98,6 +98,13 @@ export class PoliceProvider {
             invincible: true,
             blockevents: true,
         });
+
+        this.blipFactory.create('fbi', {
+            name: 'FBI',
+            position: [112.25, -749.32, 46.05],
+            sprite: 421,
+            scale: 0.9,
+        });
     }
 
     @OnEvent(ClientEvent.POLICE_OPEN_STASH_CLOAKROOM, false)
