@@ -9,20 +9,24 @@ BaunJob.Harvest = {}
 BaunJob.CraftZones = {}
 
 AddEventHandler("onClientResourceStart", function(resourceName)
-    for _, config in pairs(BaunConfig.Blips) do
-        QBCore.Functions.CreateBlip(config.Id, {
-            name = config.Name,
-            coords = config.Coords,
-            sprite = config.Icon,
-            scale = config.Scale,
-        })
-    end
+    if (GetCurrentResourceName() == resourceName) then
+        for _, config in pairs(BaunConfig.Blips) do
+            QBCore.Functions.CreateBlip(config.Id, {
+                name = config.Name,
+                coords = config.Coords,
+                sprite = config.Icon,
+                scale = config.Scale,
+            })
+        end
 
-    BaunJob.Functions.InitHarvestingZones()
+        BaunJob.Functions.InitHarvestingZones()
+    end
 end)
 
 AddEventHandler("onClientResourceStop", function(resourceName)
-    BaunJob.Functions.DestroyHarvestingZones()
+    if (GetCurrentResourceName() == resourceName) then
+        BaunJob.Functions.DestroyHarvestingZones()
+    end
 end)
 
 RegisterNetEvent("soz-jobs:client:baun:createCocktailBox", function()
