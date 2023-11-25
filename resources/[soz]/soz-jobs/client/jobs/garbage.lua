@@ -5,15 +5,6 @@ local function isPlayingGarbageAnim(ped)
     return IsEntityPlayingAnim(ped, "missfbi4prepp1", "_bag_pickup_garbage_man", 3) or IsEntityPlayingAnim(ped, "missfbi4prepp1", "_bag_throw_garbage_man", 3)
 end
 
-HasExpiredItems = function()
-    for _, item in pairs(PlayerData.items or {}) do
-        if exports["soz-core"]:ItemIsExpired(item) then
-            return true
-        end
-    end
-    return false
-end
-
 local attachBag = function()
     if garbageBagProp == nil then
         local player = PlayerPedId()
@@ -36,12 +27,6 @@ end
 
 --- Threads
 CreateThread(function()
-    QBCore.Functions.CreateBlip("jobs:garbage", {
-        name = "BlueBird",
-        coords = vector3(-621.98, -1640.79, 25.97),
-        sprite = 318,
-        scale = 1.0,
-    })
 
     while true do
         local ped = PlayerPedId()

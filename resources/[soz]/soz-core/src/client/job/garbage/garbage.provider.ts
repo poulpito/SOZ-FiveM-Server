@@ -57,6 +57,13 @@ export class GarbageProvider {
                 this.blipFactory.remove(bin.id);
             }
         }
+
+        this.blipFactory.create('jobs:garbage:truck', {
+            name: 'BlueBird',
+            position: [-621.98, -1640.79, 25.97],
+            sprite: 318,
+            color: 0.9,
+        });
     }
 
     @OnEvent(ClientEvent.JOBS_GARBAGE_OPEN_SOCIETY_MENU)
