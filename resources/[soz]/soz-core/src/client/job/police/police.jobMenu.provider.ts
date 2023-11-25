@@ -8,6 +8,8 @@ import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
+import { Ok } from '../../../shared/result';
+
 @Provider()
 export class PoliceJobMenuProvider {
     @Inject(AnimationService)
@@ -15,6 +17,13 @@ export class PoliceJobMenuProvider {
 
     @Inject(Notifier)
     private notifier: Notifier;
+
+    @OnNuiEvent(NuiEvent.PolicePlaceSpike)
+    public async onPlaceSpike() {
+        TriggerServerEvent(ServerEvent.POLICE_PLACE_SPIKE, 'spike');
+
+        return Ok(true);
+    }
 
     @OnNuiEvent(NuiEvent.RedCall)
     public redCall(): Promise<void> {

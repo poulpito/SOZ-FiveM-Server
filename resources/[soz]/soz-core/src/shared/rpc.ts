@@ -214,4 +214,5 @@ export enum RpcClientEvent {
     DRUG_CHECK_ZONE = 'soz-core:rpc:client:drug:check-zone',
     FDF_CHECK_ZONE = 'soz-core:rpc:client:fdf:check-zone',
     CHECK_WEARING_GLOVES = 'soz-core:rpc:client:check-wearing-gloves',
+    OBJECT_GET_GROUND_POSITION = 'soz-core:rpc:client:object:get-ground-position',
 }

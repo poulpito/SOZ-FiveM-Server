@@ -156,8 +156,8 @@ export enum ServerEvent {
     NEWS_ADD_FLASH = 'soz-core:server:news:add-flash',
     NEWS_NEWSPAPER_SOLD = 'soz-core:server:job:news:newspaper-sold',
     NEWS_NEWSPAPER_FARM = 'soz-core:server:job:news:newspaper-farm',
-    NEWS_PLACE_OBJECT = 'soz-core:server:job:news:place-object',
 
+    OBJECT_PLACE = 'soz-core:server:object:place',
     OBJECT_COLLECT = 'soz-core:server:object:collect',
     OBJECT_ATTACHED_REGISTER = 'soz-core:client:object:attached:register',
     OBJECT_ATTACHED_UNREGISTER = 'soz-core:client:object:attached:unregister',

@@ -3,18 +3,20 @@ import { Exportable } from '@core/decorators/exports';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { Rpc } from '@core/decorators/rpc';
+import { emitClientRpc } from '@core/rpc';
 import { uuidv4 } from '@core/utils';
 import { InventoryManager } from '@public/server/inventory/inventory.manager';
 import { Notifier } from '@public/server/notifier';
 import { ProgressService } from '@public/server/player/progress.service';
 import { joaat } from '@public/shared/joaat';
+import { Vector4 } from '@public/shared/polyzone/vector';
 
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { WorldObject } from '../../shared/object';
-import { RpcServerEvent } from '../../shared/rpc';
+import { RpcClientEvent, RpcServerEvent } from '../../shared/rpc';
 import { ItemService } from '../item/item.service';
 
-const OBJETS_COLLECT_TO_ITEM_ID: Record<number, string> = {
+const OBJETS_COLLECT_TO_ITEM_ID: Record<number, string | null> = {
     [joaat('prop_ld_greenscreen_01')]: 'n_fix_greenscreen',
     [joaat('prop_tv_cam_02')]: 'n_fix_camera',
     [joaat('prop_kino_light_01')]: 'n_fix_light',
@@ -45,6 +47,62 @@ export class ObjectProvider {
         TriggerLatentClientEvent(ClientEvent.OBJECT_CREATE, -1, 16 * 1024, objects);
     }
 
+    public async getGroundPositionForObject(
+        source: number,
+        object: string,
+        rotation: number,
+        offset = 0
+    ): Promise<Vector4> {
+        return await emitClientRpc<Vector4>(
+            RpcClientEvent.OBJECT_GET_GROUND_POSITION,
+            source,
+            object,
+            offset,
+            rotation
+        );
+    }
+
+    @OnEvent(ServerEvent.OBJECT_PLACE)
+    public async onPlaceObject(source: number, item: string, object: string, position: Vector4) {
+        if (!this.inventoryManager.removeItemFromInventory(source, item)) {
+            this.notifier.error(source, 'Vous ne possédez pas cet objet.');
+
+            return;
+        }
+
+        const { completed } = await this.progressService.progress(
+            source,
+            'spawn_object',
+            'Disposition en cours',
+            2500,
+            {
+                dictionary: 'anim@narcotics@trash',
+                name: 'drop_front',
+                options: {
+                    onlyUpperBody: true,
+                },
+            },
+            {
+                disableMouse: false,
+                disableMovement: true,
+                disableCombat: true,
+                disableCarMovement: true,
+            }
+        );
+
+        if (!completed) {
+            this.inventoryManager.addItemToInventory(source, item);
+
+            return;
+        }
+
+        this.createObject({
+            id: uuidv4(),
+            model: GetHashKey(object),
+            position,
+        });
+    }
+
     @OnEvent(ServerEvent.OBJECT_COLLECT)
     public async onObjectCollect(source: number, id: string) {
         const { completed } = await this.progressService.progress(
@@ -73,14 +131,14 @@ export class ObjectProvider {
 
         const item = OBJETS_COLLECT_TO_ITEM_ID[object.model];
 
-        if (!item) {
-            return;
-        }
-
-        if (!this.inventoryManager.canCarryItem(source, item, 1)) {
+        if (item && !this.inventoryManager.canCarryItem(source, item, 1)) {
             this.notifier.error(source, 'Vous ne pouvez pas récupérer cet objet');
 
             return;
+        }
+
+        if (item) {
+            this.inventoryManager.addItemToInventory(source, item, 1);
         }
 
         this.deleteObject(id);

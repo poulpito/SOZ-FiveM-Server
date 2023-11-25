@@ -97,7 +97,13 @@ export const PoliceJobMenu: FunctionComponent<PoliceJobStateProps> = ({ data }) 
                     <MenuItemSelect
                         title="🚧 Poser un objet"
                         onConfirm={async selectedIndex => {
-                            await fetchNui(NuiEvent.JobPlaceProps, propsList[selectedIndex]);
+                            const item = propsList[selectedIndex];
+
+                            if (item.item == 'spike') {
+                                await fetchNui(NuiEvent.PolicePlaceSpike, item);
+                            } else {
+                                await fetchNui(NuiEvent.ObjectPlace, item);
+                            }
                         }}
                     >
                         {propsList.map(prop => (
