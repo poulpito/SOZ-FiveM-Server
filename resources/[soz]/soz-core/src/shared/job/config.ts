@@ -1,3 +1,5 @@
+import { ClientEvent } from '@public/shared/event/client';
+
 import { Job, JobPermission, JobPermissionData, JobType } from '../job';
 import { BoxZone } from '../polyzone/box.zone';
 
@@ -321,7 +323,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.CashTransfer]: {
         label: 'STONK Security',
         platePrefix: 'STNK',
-        menuCallback: 'stonk:client:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_STONK_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
