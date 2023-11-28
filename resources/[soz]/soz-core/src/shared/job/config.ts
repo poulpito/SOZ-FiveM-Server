@@ -208,8 +208,8 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         canInvoice: true,
         permissions: {
             ...BasePermissions,
-            [JobPermission.Food_Harvest]: { label: 'Récolter des ingrédients' },
-            [JobPermission.Food_Craft]: { label: 'Cuisiner' },
+            [JobPermission.FoodHarvest]: { label: 'Récolter des ingrédients' },
+            [JobPermission.FoodCraft]: { label: 'Cuisiner' },
         },
         resell: {
             coords: [-57.01, -2448.4, 7.24, 145.77],

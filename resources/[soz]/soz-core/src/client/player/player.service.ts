@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@core/decorators/injectable';
+import { DrugSkill } from '@private/shared/drugs';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 
 import { Outfit } from '../../shared/cloth';
@@ -55,6 +56,16 @@ export class PlayerService {
 
     public getPlayer(): PlayerData | null {
         return this.player;
+    }
+
+    public hasDrugSkill(skill: DrugSkill): boolean {
+        const player = this.getPlayer();
+
+        if (!player) {
+            return false;
+        }
+
+        return player.metadata.drugs_skills.includes(skill);
     }
 
     public getState(): PlayerClientState {

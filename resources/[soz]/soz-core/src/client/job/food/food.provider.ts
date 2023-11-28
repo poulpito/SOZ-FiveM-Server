@@ -11,19 +11,11 @@ import { MenuType } from '@public/shared/nui/menu';
 import { RpcServerEvent } from '@public/shared/rpc';
 
 import { BlipFactory } from '../../blip';
-import { InventoryManager } from '../../inventory/inventory.manager';
-import { ItemService } from '../../item/item.service';
 import { NuiMenu } from '../../nui/nui.menu';
 import { PlayerService } from '../../player/player.service';
 
 @Provider()
 export class FoodProvider {
-    @Inject(InventoryManager)
-    private inventoryManager: InventoryManager;
-
-    @Inject(ItemService)
-    private itemService: ItemService;
-
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
 
@@ -54,6 +46,13 @@ export class FoodProvider {
             name: 'Point de récolte du lait',
             coords: { x: 2416.01, y: 4993.49, z: 46.22 },
             sprite: 176,
+            scale: 0.9,
+        });
+
+        this.blipFactory.create('food', {
+            name: 'Château Marius',
+            sprite: 176,
+            position: [-1889.54, 2045.27, 0],
             scale: 0.9,
         });
 
