@@ -4,8 +4,8 @@
   <Data />
   <Infos>
     <Item type="CWeaponComponentFlashLightInfo">
-      <Name>COMPONENT_GREENFLASHLIGHT_LIGHT</Name>
-      <Model>w_me_greenflashlight_flash</Model>
+      <Name>COMPONENT_UVFLASHLIGHT_LIGHT</Name>
+      <Model>w_me_uvflashlight_flash</Model>
       <LocName>WCT_FLASH</LocName>
       <LocDesc>WCD_FLASH</LocDesc>
       <AttachBone>AAPFlsh</AttachBone>
@@ -50,5 +50,5 @@
       <ToggleWhenAiming value="true" />
     </Item>
   </Infos>
-  <InfoBlobName>DLC - Green Flashlight</InfoBlobName>
+  <InfoBlobName>DLC - UV Flashlight</InfoBlobName>
 </CWeaponComponentInfoBlob>

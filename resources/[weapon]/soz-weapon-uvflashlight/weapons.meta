@@ -6,7 +6,7 @@
       <WeaponSlots>
         <Item>
           <OrderNumber value="86" />
-          <Entry>SLOT_GREENFLASHLIGHT</Entry>
+          <Entry>SLOT_UVFLASHLIGHT</Entry>
         </Item>
       </WeaponSlots>
     </Item>
@@ -14,7 +14,7 @@
       <WeaponSlots>
         <Item>
           <OrderNumber value="86" />
-          <Entry>SLOT_GREENFLASHLIGHT</Entry>
+          <Entry>SLOT_UVFLASHLIGHT</Entry>
         </Item>
       </WeaponSlots>
     </Item>
@@ -23,7 +23,7 @@
     <WeaponSlots>
       <Item>
         <OrderNumber value="335" />
-        <Entry>SLOT_GREENFLASHLIGHT</Entry>
+        <Entry>SLOT_UVFLASHLIGHT</Entry>
       </Item>
     </WeaponSlots>
   </SlotBestOrder>
@@ -45,10 +45,10 @@
     <Item>
       <Infos>
         <Item type="CWeaponInfo">
-          <Name>WEAPON_GREENFLASHLIGHT</Name>
-          <Model>w_me_flashlight</Model>
+          <Name>WEAPON_UVFLASHLIGHT</Name>
+          <Model>w_me_uvflashlight</Model>
           <Audio />
-          <Slot>SLOT_GREENFLASHLIGHT</Slot>
+          <Slot>SLOT_UVFLASHLIGHT</Slot>
           <DamageType>MELEE</DamageType>
           <Explosion>
             <Default>DONTCARE</Default>
@@ -283,7 +283,7 @@
           <ReticuleScale value="1.000000" />
           <ReticuleStyleHash />
           <FirstPersonReticuleStyleHash />
-          <PickupHash>PICKUP_WEAPON_GREENFLASHLIGHT</PickupHash>
+          <PickupHash>PICKUP_WEAPON_UVFLASHLIGHT</PickupHash>
           <MPPickupHash />
           <HumanNameHash>WT_FLASHLIGHT</HumanNameHash>
           <MovementModeConditionalIdle />
@@ -296,7 +296,7 @@
               <AttachBone>WAPFlsh</AttachBone>
               <Components>
                 <Item>
-                  <Name>COMPONENT_GREENFLASHLIGHT_LIGHT</Name>
+                  <Name>COMPONENT_UVFLASHLIGHT_LIGHT</Name>
                   <Default value="true" />
                 </Item>
               </Components>
@@ -340,5 +340,5 @@
     </Item>
   </Infos>
   <VehicleWeaponInfos />
-  <Name>DLC - Green Flashlight</Name>
+  <Name>DLC - UV Flashlight</Name>
 </CWeaponInfoBlob>

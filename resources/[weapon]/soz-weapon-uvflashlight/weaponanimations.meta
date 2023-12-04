@@ -3,7 +3,7 @@
   <WeaponAnimationsSets>
     <Item key="Default">
       <WeaponAnimations>
-        <Item key="WEAPON_GREENFLASHLIGHT">
+        <Item key="WEAPON_UVFLASHLIGHT">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -50,7 +50,7 @@
     <Item key="FirstPerson">
       <Fallback>Default</Fallback>
       <WeaponAnimations>
-        <Item key="WEAPON_GREENFLASHLIGHT">
+        <Item key="WEAPON_UVFLASHLIGHT">
           <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />

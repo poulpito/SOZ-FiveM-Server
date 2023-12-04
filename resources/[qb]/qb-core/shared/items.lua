@@ -79,8 +79,8 @@ QBShared.Items = {
         ['description'] = 'Pour voir dans le noir !',
         ['illustrator'] = '.MimiBloops',
     },
-    ['weapon_greenflashlight'] = {
-            ['name'] = 'weapon_greenflashlight',
+    ['weapon_uvflashlight'] = {
+            ['name'] = 'weapon_uvflashlight',
             ['label'] = 'Lampe UV Scientifique',
             ['weight'] = 500,
             ['type'] = 'weapon',
