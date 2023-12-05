@@ -8389,7 +8389,7 @@ QBShared.Items = {
         ['drug_pot'] = {
             ['target'] = 'toxic_flesh_pot',
             ['ingredient'] = 'toxic_flesh',
-            ['nbIngredient'] = 20,
+            ['nbIngredient'] = 18,
         }
     },
     ['toxic_flesh_pot'] = {
@@ -8487,7 +8487,7 @@ QBShared.Items = {
         ['drug_pot'] = {
             ['target'] = 'ciguatoxine_tank',
             ['ingredient'] = 'ciguatoxine',
-            ['nbIngredient'] = 20,
+            ['nbIngredient'] = 10,
         }
     },
     ['ciguatoxine_tank'] = {
