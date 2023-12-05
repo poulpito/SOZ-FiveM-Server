@@ -105,6 +105,34 @@ export class DispenserProvider {
                         this.buy('Achat de plusieurs sandwichs ...', 'sandwich', dispenser_eat_price, quantity);
                     },
                 },
+                {
+                    label: 'Chips barbecue ($' + eatPrice + ')',
+                    icon: 'c:food/chips.png',
+                    action: () => {
+                        this.buy('Achète à manger...', 'bbq_chips', dispenser_eat_price);
+                    },
+                },
+                {
+                    label: 'Chips oignon ($' + eatPrice + ')',
+                    icon: 'c:food/chips.png',
+                    action: () => {
+                        this.buy('Achète à manger...', 'onion_chips', dispenser_eat_price);
+                    },
+                },
+                {
+                    label: 'Chips salé ($' + eatPrice + ')',
+                    icon: 'c:food/chips.png',
+                    action: () => {
+                        this.buy('Achète à manger...', 'water_chips', dispenser_eat_price);
+                    },
+                },
+                {
+                    label: 'Zwix ($' + eatPrice + ')',
+                    icon: 'c:food/zwix_candy.png',
+                    action: () => {
+                        this.buy('Achète à manger...', 'zwix_candy', dispenser_eat_price);
+                    },
+                },
             ],
             1
         );
@@ -116,7 +144,7 @@ export class DispenserProvider {
                     label: `Café ($${cafePrice})`,
                     icon: 'c:food/cafe.png',
                     action: () => {
-                        this.buy('Achète un Café ...', 'coffee', dispenser_cafe_price);
+                        this.buy('Achète un Café...', 'coffee', dispenser_cafe_price);
                     },
                 },
                 {
@@ -136,6 +164,63 @@ export class DispenserProvider {
                         }
 
                         this.buy('Achat de plusieurs Cafés ...', 'coffee', dispenser_cafe_price, quantity);
+                    },
+                },
+                {
+                    label: 'Chocolat chaud ($' + cafePrice + ')',
+                    icon: 'c:food/chocolate.png',
+                    action: () => {
+                        this.buy('Achète un Chocolat...', 'chocolate', dispenser_cafe_price);
+                    },
+                },
+                {
+                    label: `Lot de Chocolats chauds</br>($${cafePrice} unité)`,
+                    icon: 'c:food/chocolates.png',
+                    action: async () => {
+                        const quantity = await this.inputService.askInput(
+                            {
+                                title: `Choisir la quantité`,
+                                maxCharacters: 4,
+                            },
+                            PositiveNumberValidator
+                        );
+
+                        if (!quantity) {
+                            return;
+                        }
+
+                        this.buy(
+                            'Achat de plusieurs Chocolats chauds ...',
+                            'chocolate',
+                            dispenser_cafe_price,
+                            quantity
+                        );
+                    },
+                },
+                {
+                    label: 'Thé ($' + cafePrice + ')',
+                    icon: 'c:food/tea.png',
+                    action: () => {
+                        this.buy('Achète un Thé...', 'tea', dispenser_cafe_price);
+                    },
+                },
+                {
+                    label: `Lot de Thés</br>($${cafePrice} unité)`,
+                    icon: 'c:food/teas.png',
+                    action: async () => {
+                        const quantity = await this.inputService.askInput(
+                            {
+                                title: `Choisir la quantité`,
+                                maxCharacters: 4,
+                            },
+                            PositiveNumberValidator
+                        );
+
+                        if (!quantity) {
+                            return;
+                        }
+
+                        this.buy('Achat de plusieurs Thés ...', 'tea', dispenser_cafe_price, quantity);
                     },
                 },
             ],
