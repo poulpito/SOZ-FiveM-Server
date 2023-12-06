@@ -32,7 +32,8 @@ export class TaxiMissionService {
     private state: TaxiStatus = {
         horodateurDisplayed: false,
         horodateurStarted: false,
-        missionInprogress: false,
+        taxiMissionInProgress: false,
+        busMissionInProgress: false,
     };
 
     private lastLocation = null;
@@ -43,6 +44,7 @@ export class TaxiMissionService {
     private NpcBlip = 0;
     private DeliveryBlip = 0;
     private NpcTaken = false;
+    private savedNpcPosition: Vector4 = null;
 
     private updateState(newState: Partial<TaxiStatus>) {
         this.state = { ...this.state, ...newState };
@@ -70,6 +72,10 @@ export class TaxiMissionService {
             this.DeliveryBlip = 0;
         }
 
+        if (!this.NpcTaken && this.Npc) {
+            this.savedNpcPosition = [...GetEntityCoords(this.Npc), GetEntityHeading(this.Npc)] as Vector4;
+        }
+
         if (this.NpcTaken && this.Npc) {
             const veh = GetVehiclePedIsIn(this.Npc, false);
             let doorIndex = 2;
@@ -95,7 +101,7 @@ export class TaxiMissionService {
         }
 
         this.updateState({
-            missionInprogress: false,
+            taxiMissionInProgress: false,
         });
     }
 
@@ -193,7 +199,7 @@ export class TaxiMissionService {
             return;
         }
 
-        if (this.state.missionInprogress) {
+        if (this.state.taxiMissionInProgress || this.state.busMissionInProgress) {
             this.notifier.notify('Vous êtes déjà en mission', 'error');
             return;
         }
@@ -201,10 +207,10 @@ export class TaxiMissionService {
         await this.clearMission();
 
         this.updateState({
-            missionInprogress: true,
+            taxiMissionInProgress: true,
         });
 
-        const targetNPCLocation = getRandomItem(NPCTakeLocations);
+        const targetNPCLocation = this.savedNpcPosition ? this.savedNpcPosition : getRandomItem(NPCTakeLocations);
 
         const model = GetHashKey(getRandomItem(NpcSkins));
         this.Npc = await this.pedFactory.createPed({
@@ -240,7 +246,7 @@ export class TaxiMissionService {
 
     private async loopGoToNPC(targetNPCLocation: Vector4) {
         let hasHonked = false;
-        while (!this.NpcTaken && this.state.missionInprogress) {
+        while (!this.NpcTaken && this.state.taxiMissionInProgress) {
             const ped = PlayerPedId();
             const pos = GetEntityCoords(ped);
             const dist = Vdist(
@@ -301,6 +307,7 @@ export class TaxiMissionService {
                     SetNewWaypoint(deliveryLocation[0], deliveryLocation[1]);
 
                     this.NpcTaken = true;
+                    this.savedNpcPosition = null;
                     this.setHorodateurStarted(true);
                     this.loopGoToDestination(deliveryLocation);
                 }
@@ -311,7 +318,7 @@ export class TaxiMissionService {
     }
 
     private async loopGoToDestination(deliveryLocation: Vector4) {
-        while (this.NpcTaken && this.state.missionInprogress) {
+        while (this.NpcTaken && this.state.taxiMissionInProgress) {
             const ped = PlayerPedId();
             const pos = GetEntityCoords(ped);
             const dist = Vdist(pos[0], pos[1], pos[2], deliveryLocation[0], deliveryLocation[1], deliveryLocation[2]);

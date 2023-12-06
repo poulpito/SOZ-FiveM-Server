@@ -269,6 +269,7 @@ export enum NuiEvent {
     TaxiSetMission = 'soz-core:client:taxi:set-mission',
     TaxiSetHorodateur = 'soz-core:client:taxi:set-horodateur',
     TaxiDisplayHorodateur = 'soz-core:client:taxi:display-horodateur',
+    BusSetService = 'soz-core:client:taxi:bus-set-service',
 
     AlbumPlay = 'soz-core:client:album:play',
     AlbumVolume = 'soz-core:client:album:volume',

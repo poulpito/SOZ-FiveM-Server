@@ -232,7 +232,8 @@ export enum ServerEvent {
 
     REPOSITORY_REFRESH_DATA = 'soz-core:server:repository:refresh-data',
 
-    TAXI_NPC_PAY = 'soz-core:server:taxi:npc-pay',
+    TAXI_NPC_PAY = 'soz-core:server:taxi:taxi-npc-pay',
+    BUS_NPC_PAY = 'soz-core:server:taxi:bus-npc-pay',
 
     VEHICLE_USE_REPAIR_KIT = 'soz-core:server:vehicle:use-repair-kit',
     VEHICLE_USE_BODY_REPAIR_KIT = 'soz-core:server:vehicle:use-body-repair-kit',
