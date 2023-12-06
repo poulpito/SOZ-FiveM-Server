@@ -173,8 +173,8 @@ export class TaxiMissionService {
     private async checkVehicle(): Promise<boolean> {
         if (!this.validVehicle()) {
             this.notifier.notify('Remontez dans le taxi ou la mission sera annulée', 'warning');
-            for (let i = 0; i < 20; i++) {
-                await wait(500);
+            for (let i = 0; i < 120; i++) {
+                await wait(1000);
                 if (this.validVehicle()) {
                     return true;
                 }
