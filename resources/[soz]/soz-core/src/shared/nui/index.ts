@@ -20,6 +20,7 @@ import { NuiFieldMethodMap } from './field';
 import { NuiFishingMethodMap } from './fishing';
 import { NuiHoodMethodMap } from './hood';
 import { NuiInputMethodMap } from './input';
+import { NuiMedicalDiagMethodMap } from './medical_diag';
 import { NuiMenuMethodMap } from './menu';
 import { NuiPanelMethodMap } from './panel';
 import { NuiPLayerMethodMap } from './player';
@@ -74,6 +75,7 @@ export interface NuiMethodMap {
     craft: NuiCraftMethodMap;
     zombie: NuiZombieMethodMap;
     cold: NuiColdMethodMap;
+    medicalDiag: NuiMedicalDiagMethodMap;
 }
 
 export const eventNameFactory = <App extends keyof NuiMethodMap, Method extends keyof NuiMethodMap[App]>(

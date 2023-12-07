@@ -11,7 +11,6 @@ import { PlayerHealthBook } from '../../../shared/player';
 import { Vector3 } from '../../../shared/polyzone/vector';
 import { Err, Ok } from '../../../shared/result';
 import { InputService } from '../../nui/input.service';
-import { NuiDispatch } from '../../nui/nui.dispatch';
 import { NuiMenu } from '../../nui/nui.menu';
 import { PlayerService } from '../../player/player.service';
 import { ProgressService } from '../../progress.service';
@@ -30,9 +29,6 @@ export class LSMCCheckHealthProvider {
 
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
-
-    @Inject(NuiDispatch)
-    private nuiDispatch: NuiDispatch;
 
     @Inject(InputService)
     private inputService: InputService;

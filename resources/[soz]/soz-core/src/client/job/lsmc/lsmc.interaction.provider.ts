@@ -6,14 +6,16 @@ import { Monitor } from '@public/client/monitor/monitor';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
 import { TargetFactory } from '@public/client/target/target.factory';
-import { emitRpc } from '@public/core/rpc';
+import { emitRpc, emitRpcCache } from '@public/core/rpc';
 import { ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
+import { PlayerLicenceType } from '@public/shared/player';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
 import { PlayerListStateService } from '../../player/player.list.state.service';
+import { PoliceLicenceProvider } from '../police/police.licence.provider';
 import { LSMCDeathProvider } from './lsmc.death.provider';
 
 const hopital = BoxZone.fromZone({
@@ -42,6 +44,9 @@ export class LSMCInteractionProvider {
 
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
+
+    @Inject(PoliceLicenceProvider)
+    private policeLicenceProvider: PoliceLicenceProvider;
 
     @Inject(Monitor)
     public monitor: Monitor;
@@ -296,6 +301,54 @@ export class LSMCInteractionProvider {
                     );
                 },
                 item: 'empty_bloodbag',
+            },
+            {
+                label: 'Donner le diplôme de secourisme',
+                color: JobType.LSMC,
+                job: JobType.LSMC,
+                icon: 'c:ems/rescuer.png',
+                canInteract: async entity => {
+                    const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                    return !(await emitRpcCache(RpcServerEvent.POLICE_LICENSE_HAS_RECUER, target));
+                },
+                action: async entity => {
+                    const completed = await this.policeLicenceProvider.playLicenceAnimation(
+                        'Enregistrement du diplôme...'
+                    );
+                    if (!completed) {
+                        return;
+                    }
+
+                    TriggerServerEvent(
+                        ServerEvent.POLICE_GIVE_LICENCE,
+                        GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity)),
+                        PlayerLicenceType.Rescuer
+                    );
+                },
+            },
+            {
+                label: 'Retirer le diplôme de secourisme',
+                color: JobType.LSMC,
+                job: JobType.LSMC,
+                icon: 'c:ems/notrescuer.png',
+                canInteract: async entity => {
+                    const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                    return await emitRpcCache(RpcServerEvent.POLICE_LICENSE_HAS_RECUER, target);
+                },
+                action: async entity => {
+                    const completed = await this.policeLicenceProvider.playLicenceAnimation(
+                        'Suppression du diplôme...'
+                    );
+                    if (!completed) {
+                        return;
+                    }
+
+                    TriggerServerEvent(
+                        ServerEvent.POLICE_REMOVE_LICENCE,
+                        GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity)),
+                        PlayerLicenceType.Rescuer
+                    );
+                },
             },
         ]);
     }

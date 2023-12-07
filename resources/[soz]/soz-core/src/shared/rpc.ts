@@ -140,6 +140,8 @@ export enum RpcServerEvent {
     POLICE_GET_MARKED_MONEY = 'soz-core:server:police:get-marked-money',
     POLICE_GET_CLUES_IN_AREA = 'soz-core:server:police:get-clues-in-area',
     POLICE_GET_ALL_IDENTIFIED_CLUES = 'soz-core:server:police:get-all-identified-clues',
+    POLICE_LICENSE_HAS_RECUER = 'soz-core:server:police:has-recuer-license',
+
     HUB_EXIT_TIME = 'soz-core:server:hub:exit-time',
     HUB_ENTRY_FETCH_ALL = 'soz-core:server:hub:fetch-all',
     HUB_ENTRY_FETCH_ACTIVE = 'soz-core:server:hub:fetch-active',

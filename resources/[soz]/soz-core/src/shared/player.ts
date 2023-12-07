@@ -308,6 +308,7 @@ export type PlayerMetadata = PlayerHealthBook & {
     is_senator: boolean;
     injail: boolean;
     scuba: boolean;
+    health_book_update_date: number | null;
 };
 
 export const isAdmin = (player: PlayerData) => {

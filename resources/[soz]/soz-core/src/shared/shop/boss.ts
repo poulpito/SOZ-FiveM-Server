@@ -171,9 +171,6 @@ export const BossShop: (ShopConfig & { job: JobType })[] = [
             { id: 'pommade', type: 'item', price: 15 },
             { id: 'tissue', type: 'item', price: 5 },
             { id: 'weapon_fireextinguisher', type: 'weapon', metadata: { ammo: 400 }, price: 5 },
-            { id: 'poumon', type: 'item', price: 2000 },
-            { id: 'rein', type: 'item', price: 2000 },
-            { id: 'foie', type: 'item', price: 2000 },
             { id: 'flask_pee_empty', type: 'item', price: 15 },
             { id: 'flask_blood_empty', type: 'item', price: 15 },
             { id: 'antidepressant', type: 'item', price: 15 },
@@ -183,6 +180,14 @@ export const BossShop: (ShopConfig & { job: JobType })[] = [
             { id: 'screening_test', type: 'item', price: 5 },
             { id: 'naloxone', type: 'item', price: 20 },
         ],
+        orders: {
+            targetInv: 'lsmc_organ',
+            products: [
+                { id: 'poumon', type: 'item', price: 2000 },
+                { id: 'rein', type: 'item', price: 2000 },
+                { id: 'foie', type: 'item', price: 2000 },
+            ],
+        },
     },
     {
         name: 'lspd',

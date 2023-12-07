@@ -128,6 +128,13 @@ export enum ServerEvent {
     LSMC_SET_HAZMAT = 'soz-core:server:job:lsmc:set-hazmat',
     LSMC_SET_CURRENT_ORGAN = 'soz-core:server:job:lsmc:set-organ',
     LSMC_SET_PATIENT_OUTFIT = 'soz-core:server:job:lsmc:set-patient-outfit',
+    LSMC_DAMAGE_ADD = 'soz-core:server:job:lsmc:add-damage',
+    LSMC_STRETCHER_RETRIEVE = 'soz-core:server:job:lsmc:stretcher-retrieve',
+    LSMC_STRETCHER_PUT_ON = 'soz-core:server:job:lsmc:stretcher-put-on',
+    LSMC_STRETCHER_ON_AMBULANCE = 'soz-core:server:job:lsmc:stretcher-ambulance-put',
+    LSMC_STRETCHER_RETRIEVE_AMBULANCE = 'soz-core:server:job:lsmc:stretcher-ambulance-retrieve',
+    LSMC_WHEELCHAIR_RETRIEVE = 'soz-core:server:job:lsmc:wheelchair-retrieve',
+    LSMC_SCAN = 'soz-core:server:job:lsmc:scan',
 
     LSC_CHECK_STOCK = 'soz-core:server:job:lsc:check-stock',
 
@@ -191,7 +198,7 @@ export enum ServerEvent {
     STORY_HALLOWEEN_2023_SCENARIO_4 = 'soz-core:server:halloween:scenario4',
 
     STORAGE_REMOVE_ITEM = 'soz-core:server:storage:remove-item',
-    SHOP_BOSS_BUY = 'soz-core:server:shop:boss:buy',
+    SHOP_BOSS_ORDER = 'soz-core:server:shop:boss:order',
     SHOP_EASTER_BUY = 'soz-core:server:shop:easter:buy',
     SHOP_VALIDATE_CART = 'soz-core:server:shop:validate-cart',
 

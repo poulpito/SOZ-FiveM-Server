@@ -1,11 +1,9 @@
 import { Inject, Injectable } from '@core/decorators/injectable';
-import { CardType } from '@public/shared/nui/card';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 
 import { Outfit } from '../../shared/cloth';
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { FakeId, PlayerClientState, PlayerData, PlayerLicenceType } from '../../shared/player';
-import { AnimationService } from '../animation/animation.service';
 import { Notifier } from '../notifier';
 import { NuiDispatch } from '../nui/nui.dispatch';
 import { Qbcore } from '../qbcore';
@@ -14,9 +12,6 @@ import { Qbcore } from '../qbcore';
 export class PlayerService {
     @Inject(Notifier)
     private notifier: Notifier;
-
-    @Inject(AnimationService)
-    private animationService: AnimationService;
 
     private player: PlayerData | null = null;
     private fakeId: FakeId = null;
@@ -102,16 +97,26 @@ export class PlayerService {
         return !this.state.isDead && !this.state.isHandcuffed && !this.state.isZipped && !this.state.isEscorting;
     }
 
-    public getPlayersAround(position: Vector3, distance: number): number[] {
+    public getPlayersAround(
+        position: Vector3,
+        distance: number,
+        filterself = false,
+        filter: (number) => boolean = null
+    ): number[] {
         const players = GetActivePlayers() as number[];
+        const playerId = PlayerId();
         const closePlayers = [];
 
         for (const player of players) {
+            if (playerId == player && filterself) {
+                continue;
+            }
+
             const ped = GetPlayerPed(player);
             const pedCoords = GetEntityCoords(ped) as Vector3;
             const playerDistance = getDistance(position, pedCoords);
 
-            if (playerDistance <= distance) {
+            if (playerDistance <= distance && (!filter || filter(player))) {
                 closePlayers.push(GetPlayerServerId(player));
             }
         }
@@ -136,32 +141,6 @@ export class PlayerService {
         }
 
         return player;
-    }
-
-    public async showCard(type: CardType, accountId?: string) {
-        const position = GetEntityCoords(PlayerPedId()) as Vector3;
-        const players = this.getPlayersAround(position, 3.0);
-
-        if (players.length <= 1) {
-            this.notifier.notify("Il n'y a personne à proximité", 'error');
-            return;
-        }
-
-        const player = this.getId();
-        await this.animationService.playAnimation({
-            base: {
-                dictionary: 'mp_common',
-                name: 'givetake2_a',
-                blendInSpeed: 8.0,
-                blendOutSpeed: 8.0,
-                options: {
-                    enablePlayerControl: true,
-                    onlyUpperBody: true,
-                },
-            },
-        });
-
-        TriggerServerEvent(ServerEvent.PLAYER_SHOW_IDENTITY, type, players, player, accountId);
     }
 
     public toogleFakeId(fakeId: FakeId) {

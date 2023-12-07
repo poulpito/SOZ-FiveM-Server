@@ -22,6 +22,7 @@ import { emitRpc } from '@public/core/rpc';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
 import {
     BedLocations,
+    deathAnim,
     FailoverLocationName,
     getBedName,
     KillData,
@@ -37,18 +38,6 @@ import { VehicleSeat } from '@public/shared/vehicle/vehicle';
 import { Animation } from '../../../shared/animation';
 import { PlayerZombieProvider } from '../../player/player.zombie.provider';
 import { VoipService } from '../../voip/voip.service';
-
-const deathAnim: Animation = {
-    base: {
-        dictionary: 'dead',
-        name: 'dead_a',
-        blendInSpeed: 8.0,
-        blendOutSpeed: 8.0,
-        options: {
-            repeat: true,
-        },
-    },
-};
 
 const deathVehcleAnim: Animation = {
     base: {

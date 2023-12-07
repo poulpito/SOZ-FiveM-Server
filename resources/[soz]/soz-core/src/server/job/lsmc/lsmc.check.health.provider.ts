@@ -59,7 +59,7 @@ export class LSMCCheckHealthProvider {
 
     @OnEvent(ServerEvent.LSMC_SET_HEALTH_BOOK)
     async setHealthBook(source: number, target: number, field: keyof PlayerHealthBook, value: number) {
-        this.playerService.setPlayerMetadata(target, field, value);
+        this.playerService.setPlayerMetaDatas(target, { [field]: value, health_book_update_date: Date.now() });
 
         this.notifier.notify(source, `Carte de santé mise à jour.`, 'success');
     }

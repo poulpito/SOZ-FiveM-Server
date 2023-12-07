@@ -1,4 +1,6 @@
 import { PlayerZombieProvider } from '@public/server/player/player.zombie.provider';
+import { BoxZone } from '@public/shared/polyzone/box.zone';
+import { Vector3 } from '@public/shared/polyzone/vector';
 
 import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
@@ -27,6 +29,12 @@ const MAX_STAMINA_MIN = 60;
 const MAX_STAMINA_MAX = 150;
 const STRESS_MIN = 0;
 const STRESS_MAX = 100;
+
+const psyZone = new BoxZone([343.25, -1373.04, 37.98], 26.4, 20.2, {
+    heading: 50.12,
+    minZ: 36.98,
+    maxZ: 41.58,
+});
 
 @Provider()
 export class PlayerHealthProvider {
@@ -132,11 +140,14 @@ export class PlayerHealthProvider {
 
             if (stressTimeDiff > 30 * 60 * 1000) {
                 playerState.lastStressLevelUpdate = new Date();
+                const ped = GetPlayerPed(source);
+                const coords = GetEntityCoords(ped) as Vector3;
+                const psyCoef = psyZone.isPointInside(coords) ? 2 : 1;
 
                 datas.stress_level = this.playerService.getIncrementedMetadata(
                     player,
                     'stress_level',
-                    this.yogaAndNaturalMultiplier(source) * STRESS_RATE,
+                    this.yogaAndNaturalMultiplier(source) * STRESS_RATE * psyCoef,
                     STRESS_MIN,
                     STRESS_MAX
                 );

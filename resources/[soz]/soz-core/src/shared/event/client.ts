@@ -96,6 +96,10 @@ export enum ClientEvent {
     LSMC_HEAL = 'soz-core:lsmc:client:heal',
     LSMC_NEW_URGENCY = 'soz-core:lsmc:client:new-urgency',
     LSMC_END_URGENCY = 'soz-core:lsmc:client:end-urgency',
+    LSMC_STRETCHER_USE = 'soz-core:lsmc:client:stretcher-use',
+    LSMC_STRETCHER_PUT_ON = 'soz-core:lsmc:client:stretcher-put-on',
+    LSMC_WHEELCHAIR_USE = 'soz-core:lsmc:client:wheelchair-use',
+    LSMC_SHOW_MEDICAL_DIAG = 'soz-core:lsmc:client:show-medical-diag',
 
     LSC_ENTER_SHOP = 'soz-core:client:job:lsc:enter-shop',
     LSC_EXIT_SHOP = 'soz-core:client:job:lsc:exit-shop',

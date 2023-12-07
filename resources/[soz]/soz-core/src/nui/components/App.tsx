@@ -29,6 +29,7 @@ import { CraftApp } from './Craft/CraftApp';
 import { FieldHealthApp } from './Field/FieldHealthApp';
 import { HudApp } from './Hud/HudApp';
 import { InputApp } from './Input/InputApp';
+import { MedicalApp } from './LSMC/DiagnosticPad/MedicalApp';
 import { MenuApp } from './Menu/MenuApp';
 import { PanelApp } from './Panel/PanelApp';
 import { BreathAnalyzerApp } from './Police/BreathAnalyzer';
@@ -48,7 +49,7 @@ export const App: FunctionComponent = () => {
     useNuiEvent('global', 'PauseMenuActive', setPauseMenuActive);
     useNuiEvent('global', 'HideHud', setHideHud);
 
-    const classes = classNames('font-prompt transition-all duration-500overflow-hidden', {
+    const classes = classNames('font-prompt transition-all duration-500 overflow-hidden', {
         'opacity-0': pauseMenuActive || hideHud,
         'opacity-100': !pauseMenuActive && !hideHud,
     });
@@ -106,6 +107,7 @@ export const App: FunctionComponent = () => {
                 <FieldHealthApp />
                 <CraftApp />
                 <InputApp />
+                <MedicalApp />
             </div>
         </Provider>
     );

@@ -332,6 +332,7 @@ model player {
   records_history_author  player_records_history[] @relation("records_history_author")
   records_history_deletor player_records_history[] @relation("records_history_deletor")
   fishes                  player_fish[]            @relation("fishes")
+  damages                 player_damage[]          @relation("damages")
   sozedex_rewards         player_sozedex_rewards[] @relation("sozedex_rewards")
   race_scores             race_score[]             @relation("race_scores")
   criminal_actions        criminal_action[]        @relation("criminal_actions")
@@ -721,6 +722,20 @@ model Zone {
   name String   @db.VarChar(50)
 
   @@map("zone")
+}
+
+model player_damage {
+  id         Int      @default(autoincrement())
+  player     player   @relation(fields: [citizenid], references: [citizenid], onDelete: Cascade, map: "FK_damages_player", name: "damages")
+  citizenid  String   @db.VarChar(50)
+  attackerId String   @db.VarChar(50)
+  bone       Int
+  damageType Int
+  weapon     String   @db.VarChar(50)
+  damageQty  Int
+  isFatal    Boolean
+  date       DateTime?  @default(now()) @db.Timestamp(0)
+  @@id([id, citizenid])
 }
 
 model fdf_crops {

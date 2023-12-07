@@ -11,8 +11,9 @@ import {
     PlayOptions,
     Scenario,
 } from '../../shared/animation';
-import { getDistance, transformForwardPoint2D, Vector2, Vector3 } from '../../shared/polyzone/vector';
+import { transformForwardPoint2D, Vector2, Vector3 } from '../../shared/polyzone/vector';
 import { WeaponName } from '../../shared/weapons/weapon';
+import { PlayerService } from '../player/player.service';
 import { ResourceLoader } from '../repository/resource.loader';
 
 const defaultPlayOptions: PlayOptions = {
@@ -177,6 +178,9 @@ export class AnimationFactory {
     @Inject(ResourceLoader)
     private resourceLoader: ResourceLoader;
 
+    @Inject(PlayerService)
+    private playerService: PlayerService;
+
     public createAnimation(animation: Animation, options: Partial<PlayOptions> = {}): AnimationRunner {
         return this.createFromCallback(async (animationCanceller, ped) => {
             if (animation.enter?.dictionary) {
@@ -311,19 +315,9 @@ export class AnimationFactory {
             );
 
             if (prop.fx.net) {
-                const playerId = PlayerId();
                 const playerPedId = PlayerPedId();
                 const coords = GetEntityCoords(playerPedId) as Vector3;
-                const playersInrange = [];
-                for (const player of GetActivePlayers()) {
-                    if (playerId == player) {
-                        continue;
-                    }
-
-                    if (getDistance(coords, GetEntityCoords(GetPlayerPed(playerId)) as Vector3) < 100.0) {
-                        playersInrange.push(GetPlayerServerId(player));
-                    }
-                }
+                const playersInrange = this.playerService.getPlayersAround(coords, 100.0, true);
                 if (playersInrange.length) {
                     TriggerServerEvent(ServerEvent.ANIMATION_FX, ObjToNet(entity), prop.fx, playersInrange);
                 }

@@ -1,12 +1,16 @@
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
-import { Once } from '@public/core/decorators/event';
+import { Once, OnEvent } from '@public/core/decorators/event';
 import { InventoryManager } from '@public/server/inventory/inventory.manager';
 import { ItemService } from '@public/server/item/item.service';
 import { Notifier } from '@public/server/notifier';
 import { PlayerService } from '@public/server/player/player.service';
-import { ClientEvent } from '@public/shared/event';
+import { PlayerStateService } from '@public/server/player/player.state.service';
+import { ProgressService } from '@public/server/player/progress.service';
+import { VehicleStateService } from '@public/server/vehicle/vehicle.state.service';
+import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { InventoryItem, Item } from '@public/shared/item';
+import { StretcherFoldedModel, StretcherModel, WheelChairModel } from '@public/shared/job/lsmc';
 
 @Provider()
 export class LSMCItemProvider {
@@ -22,6 +26,15 @@ export class LSMCItemProvider {
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
 
+    @Inject(PlayerStateService)
+    private playerStateService: PlayerStateService;
+
+    @Inject(ProgressService)
+    private progressService: ProgressService;
+
+    @Inject(VehicleStateService)
+    private vehicleStateService: VehicleStateService;
+
     @Once()
     public async onInit() {
         this.item.setItemUseCallback('tissue', this.useTissue.bind(this));
@@ -29,6 +42,8 @@ export class LSMCItemProvider {
         //this.item.setItemUseCallback('pommade', this.usePommade.bind(this));
         this.item.setItemUseCallback('ifaks', this.useIfaks.bind(this));
         this.item.setItemUseCallback('painkiller', this.usePainkiller.bind(this));
+        this.item.setItemUseCallback('stretcher', this.useStretcher.bind(this));
+        this.item.setItemUseCallback('wheelchair', this.useWheelChair.bind(this));
     }
 
     private async useTissue(source: number, _item: Item, inventoryItem: InventoryItem) {
@@ -72,5 +87,169 @@ export class LSMCItemProvider {
 
     private async useIfaks(source: number) {
         TriggerClientEvent(ClientEvent.LSMC_HEAL, source, 25);
+    }
+
+    private async useStretcher(source: number, _item: Item, inventoryItem: InventoryItem) {
+        const { completed } = await this.progressService.progress(
+            source,
+            'use_stretcher',
+            'Vous dépliez le brancard...',
+            3000,
+            {
+                dictionary: 'mp_common',
+                name: 'givetake2_a',
+                blendInSpeed: 8.0,
+                blendOutSpeed: 8.0,
+                options: {
+                    enablePlayerControl: true,
+                    onlyUpperBody: true,
+                },
+            },
+            {
+                useAnimationService: true,
+            }
+        );
+
+        if (!completed) {
+            return;
+        }
+
+        if (this.inventoryManager.removeInventoryItem(source, inventoryItem)) {
+            TriggerClientEvent(ClientEvent.LSMC_STRETCHER_USE, source);
+        }
+    }
+
+    @OnEvent(ServerEvent.LSMC_STRETCHER_RETRIEVE)
+    public onStretcherRetrieve(source: number, netId: number) {
+        if (!this.inventoryManager.canCarryItem(source, 'stretcher', 1)) {
+            this.notifier.notify(source, `Tu n'as pas assez de place dans ton inventaire.`, 'error');
+            return;
+        }
+
+        const entity = NetworkGetEntityFromNetworkId(netId);
+        if (
+            !DoesEntityExist(entity) ||
+            ![GetHashKey(StretcherModel), GetHashKey(StretcherFoldedModel)].includes(GetEntityModel(entity))
+        ) {
+            return;
+        }
+
+        DeleteEntity(entity);
+        this.inventoryManager.addItemToInventory(source, 'stretcher', 1);
+
+        this.notifier.notify(source, 'Tu as ramassé un brancard');
+    }
+
+    @OnEvent(ServerEvent.LSMC_STRETCHER_PUT_ON)
+    public onPutOnStretcher(source: number, netId: number) {
+        const playerState = this.playerStateService.getClientState(source);
+        if (!playerState || !playerState.isEscorting || !playerState.escorting) {
+            return false;
+        }
+
+        const player = this.playerService.getPlayer(source);
+        const target = this.playerService.getPlayer(playerState.escorting);
+
+        if (player && target && player != target) {
+            this.playerStateService.setClientState(target.source, { isEscorted: false });
+            this.playerStateService.setClientState(player.source, { isEscorting: false, escorting: null });
+            TriggerClientEvent(ClientEvent.LSMC_STRETCHER_PUT_ON, target.source, netId);
+        }
+    }
+
+    @OnEvent(ServerEvent.LSMC_STRETCHER_ON_AMBULANCE)
+    public onAmbulanceStretcher(
+        source: number,
+        target: number,
+        netId: number,
+        vehNetId: number,
+        newStretcherNetID: number
+    ) {
+        const entity = NetworkGetEntityFromNetworkId(netId);
+        if (!DoesEntityExist(entity) || GetEntityModel(entity) != GetHashKey(StretcherModel)) {
+            return;
+        }
+
+        DeleteEntity(entity);
+
+        this.vehicleStateService.updateVehicleVolatileState(vehNetId, {
+            ambulanceAttachedStretcher: newStretcherNetID,
+        });
+
+        if (target) {
+            TriggerClientEvent(ClientEvent.LSMC_STRETCHER_PUT_ON, target, newStretcherNetID);
+        }
+    }
+
+    @OnEvent(ServerEvent.LSMC_STRETCHER_RETRIEVE_AMBULANCE)
+    public onAmbulanceretrieveStretcher(
+        source: number,
+        target: number,
+        netId: number,
+        vehNetId: number,
+        newStretcherNetID: number
+    ) {
+        const entity = NetworkGetEntityFromNetworkId(netId);
+        if (!DoesEntityExist(entity) || GetEntityModel(entity) != GetHashKey(StretcherFoldedModel)) {
+            return;
+        }
+
+        DeleteEntity(entity);
+
+        this.vehicleStateService.updateVehicleVolatileState(vehNetId, {
+            ambulanceAttachedStretcher: null,
+        });
+
+        if (target) {
+            TriggerClientEvent(ClientEvent.LSMC_STRETCHER_PUT_ON, target, newStretcherNetID);
+        }
+    }
+
+    private async useWheelChair(source: number, _item: Item, inventoryItem: InventoryItem) {
+        const { completed } = await this.progressService.progress(
+            source,
+            'use_wheelchair',
+            'Vous dépliez la chaise roulante...',
+            3000,
+            {
+                dictionary: 'mp_common',
+                name: 'givetake2_a',
+                blendInSpeed: 8.0,
+                blendOutSpeed: 8.0,
+                options: {
+                    enablePlayerControl: true,
+                    onlyUpperBody: true,
+                },
+            },
+            {
+                useAnimationService: true,
+            }
+        );
+
+        if (!completed) {
+            return;
+        }
+
+        if (this.inventoryManager.removeInventoryItem(source, inventoryItem)) {
+            TriggerClientEvent(ClientEvent.LSMC_WHEELCHAIR_USE, source);
+        }
+    }
+
+    @OnEvent(ServerEvent.LSMC_WHEELCHAIR_RETRIEVE)
+    public onWheelChairRetrieve(source: number, netId: number) {
+        if (!this.inventoryManager.canCarryItem(source, 'wheelchair', 1)) {
+            this.notifier.notify(source, `Tu n'as pas assez de place dans ton inventaire.`, 'error');
+            return;
+        }
+
+        const entity = NetworkGetEntityFromNetworkId(netId);
+        if (!DoesEntityExist(entity) || GetEntityModel(entity) != GetHashKey(WheelChairModel)) {
+            return;
+        }
+
+        DeleteEntity(entity);
+        this.inventoryManager.addItemToInventory(source, 'wheelchair', 1);
+
+        this.notifier.notify(source, 'Tu as ramassé une chaisse roulante');
     }
 }

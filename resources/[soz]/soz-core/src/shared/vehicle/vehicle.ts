@@ -160,6 +160,7 @@ export type VehicleVolatileState = {
     primaryRadio: RadioChannel | null;
     secondaryRadio: RadioChannel | null;
     flatbedAttachedVehicle: number | null;
+    ambulanceAttachedStretcher: number | null;
     rentOwner: string | null;
     policeLocatorEnabled: boolean;
     job: JobType | null;
@@ -245,6 +246,7 @@ export const getDefaultVehicleVolatileState = (): VehicleVolatileState => ({
     primaryRadio: null,
     secondaryRadio: null,
     flatbedAttachedVehicle: null,
+    ambulanceAttachedStretcher: null,
     rentOwner: null,
     policeLocatorEnabled: false,
     job: null,

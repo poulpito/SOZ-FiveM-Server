@@ -1,7 +1,8 @@
 import { DrugContractInfo } from '@private/shared/drugs';
 import { MissiveType } from '@private/shared/missive';
 
-import { FakeId } from './player';
+import { DamageServerData } from './job/lsmc';
+import { FakeId, PlayerCharInfo, PlayerJob, PlayerMetadata } from './player';
 import { WeaponComponentType } from './weapons/attachment';
 import { WeaponMk2TintColor, WeaponTintColor } from './weapons/tint';
 
@@ -203,6 +204,16 @@ export type EvidenceMetadata = {
     support?: string;
     isAnalyzed?: boolean;
     dateAnalyzed?: string;
+};
+
+export type MedicalMetadata = {
+    damages: DamageServerData[];
+    patient: {
+        charinfo: PlayerCharInfo;
+        job: PlayerJob;
+        metadata: PlayerMetadata;
+    };
+    date: number;
 };
 
 export type InventoryItemMetadata = {
