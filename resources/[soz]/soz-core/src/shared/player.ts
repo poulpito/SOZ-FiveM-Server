@@ -8,6 +8,7 @@ import { Disease, Organ } from './disease';
 import { DrivingSchoolLicenseType } from './driving-school';
 import { InventoryItem } from './item';
 import { JobType } from './job';
+import { PlasterLocation } from './job/lsmc';
 import { Halloween2022, Halloween2023 } from './story/halloween2022';
 
 export type QBCorePlayer = {
@@ -309,6 +310,7 @@ export type PlayerMetadata = PlayerHealthBook & {
     injail: boolean;
     scuba: boolean;
     health_book_update_date: number | null;
+    plaster: PlasterLocation[];
 };
 
 export const isAdmin = (player: PlayerData) => {

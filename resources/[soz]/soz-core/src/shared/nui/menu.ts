@@ -9,6 +9,7 @@ import { DrivingSchoolMenuData } from '../driving-school';
 import { FuelType } from '../fuel';
 import { AdminMapperMenuData, HousingUpgradesMenuData } from '../housing/menu';
 import { DmcJobMenuData } from '../job/dmc';
+import { PlasterMenuData } from '../job/lsmc';
 import {
     PoliceJobFineMenuData,
     PoliceJobLicencesMenuData,
@@ -111,6 +112,7 @@ export enum MenuType {
     HousingAddRoommateMenu = 'housing_add_roommate_menu',
     HousingRemoveRoommateMenu = 'housing_remove_roommate_menu',
     HousingCloakroomMenu = 'housing_cloakroom_menu',
+    LsmcPlaster = 'lsmc_plaster',
 }
 
 export interface MenuTypeMap extends Record<MenuType, any> {
@@ -173,4 +175,5 @@ export interface MenuTypeMap extends Record<MenuType, any> {
     [MenuType.HousingCloakroomMenu]: {
         items: PlayerCloakroomItem[];
     };
+    [MenuType.LsmcPlaster]: PlasterMenuData;
 }

@@ -105,6 +105,7 @@ export enum NuiEvent {
     JobPlaceProps = 'soz-core:client:job:place-props',
 
     LsmcPharmacyBuyItem = 'soz-core:nui:job:lsmc:pharmacy:buy-item',
+    LsmcPlaster = 'soz-core:nui:job:lsmc:plaster',
 
     NewsCreateAnnounce = 'soz-core:nui:news:create-announce',
     NewsPlaceObject = 'soz-core:client:news:place-object',

@@ -33,6 +33,7 @@ import { HousingUpgradesMenu } from '../Housing/HousingUpgradesMenu';
 import { HousingVisitMenu } from '../Housing/HousingVisitMenu';
 import { JobOnDutyMenu } from '../Job/OnDutyMenu';
 import { LsmcJobMenu } from '../LSMC/LsmcJobMenu';
+import { LsmcPlasterMenu } from '../LSMC/LsmcPlasterMenu';
 import { MandatoryJobMenu } from '../Mandatory/MandatoryJobMenu';
 import { FinesMenu } from '../Police/Fines';
 import { LicencesMenu } from '../Police/Licences';
@@ -257,6 +258,7 @@ const MenuRouter: FunctionComponent = () => {
             />
             <Route path={`/${MenuType.HousingSellMenu}/*`} element={<HousingSellMenu data={menuData} />} />
             <Route path={`/${MenuType.HousingVisitMenu}/*`} element={<HousingVisitMenu data={menuData} />} />
+            <Route path={`/${MenuType.LsmcPlaster}/*`} element={<LsmcPlasterMenu data={menuData} />} />
         </Routes>
     );
 };

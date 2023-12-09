@@ -135,6 +135,7 @@ export enum ServerEvent {
     LSMC_STRETCHER_RETRIEVE_AMBULANCE = 'soz-core:server:job:lsmc:stretcher-ambulance-retrieve',
     LSMC_WHEELCHAIR_RETRIEVE = 'soz-core:server:job:lsmc:wheelchair-retrieve',
     LSMC_SCAN = 'soz-core:server:job:lsmc:scan',
+    LSMC_PLASTER = 'soz-core:server:job:lsmc:plaster',
 
     LSC_CHECK_STOCK = 'soz-core:server:job:lsc:check-stock',
 

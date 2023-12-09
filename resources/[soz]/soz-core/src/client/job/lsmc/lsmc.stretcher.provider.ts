@@ -18,7 +18,7 @@ import { Vector3 } from '@public/shared/polyzone/vector';
 
 import { PolicePlayerProvider } from '../police/police.player.provider';
 
-const ambulance = GetHashKey('ambulance');
+const ambulance = GetHashKey('ambulance2');
 
 const defaultAnim: Animation = {
     base: {
@@ -72,6 +72,7 @@ export class LSMCStretcherProvider {
                         NetworkGetEntityIsNetworked(entity) &&
                         this.getPlayerUsingStretcher(entity) == null,
                     label: 'Ramasser',
+                    icon: 'c:baun/createCocktailBox.png',
                     action: async entity => {
                         const { completed } = await this.progressService.progress(
                             'stretcher_retrieve',
@@ -104,6 +105,7 @@ export class LSMCStretcherProvider {
         this.targetFactory.createForModel(StretcherModel, [
             {
                 label: 'Pousser',
+                icon: 'c:ems/push.png',
                 canInteract: entity =>
                     this.pushing == 0 && !IsEntityAttached(entity) && NetworkGetEntityIsNetworked(entity),
                 action: async entity => {
@@ -124,6 +126,7 @@ export class LSMCStretcherProvider {
             },
             {
                 label: "S'allonger",
+                icon: 'fas fa-bed',
                 canInteract: entity =>
                     this.getPlayerUsingStretcher(entity) == null && NetworkGetEntityIsNetworked(entity),
                 action: async entity => {
@@ -134,6 +137,7 @@ export class LSMCStretcherProvider {
             },
             {
                 label: 'Installer sur le brancard',
+                icon: 'c:ems/streter.png',
                 canInteract: entity => {
                     const state = this.playerService.getState();
                     return (
@@ -150,6 +154,7 @@ export class LSMCStretcherProvider {
             },
             {
                 label: 'Faire descendre',
+                icon: 'c:police/escorter.png',
                 canInteract: entity =>
                     this.getPlayerUsingStretcher(entity) != null && NetworkGetEntityIsNetworked(entity),
                 action: async entity => {
@@ -163,6 +168,7 @@ export class LSMCStretcherProvider {
             [
                 {
                     label: 'Installer le brancard',
+                    icon: 'c:ems/streter.png',
                     canInteract: async entity => {
                         if (!this.pushing) {
                             return false;
@@ -204,10 +210,10 @@ export class LSMCStretcherProvider {
                         AttachEntityToEntity(
                             id,
                             entity,
-                            GetEntityBoneIndexByName(entity, 'door_pside_r'),
+                            GetEntityBoneIndexByName(entity, 'forks'),
                             0.0,
-                            1.5,
                             -1.0,
+                            -0.2,
                             0.0,
                             0.0,
                             90.0,
@@ -230,6 +236,7 @@ export class LSMCStretcherProvider {
                 },
                 {
                     label: 'Récupérer le brancard',
+                    icon: 'c:ems/streter.png',
                     canInteract: async entity => {
                         if (this.pushing) {
                             return false;

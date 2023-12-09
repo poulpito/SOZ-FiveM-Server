@@ -524,3 +524,100 @@ export const deathAnim: Animation = {
         },
     },
 };
+
+export enum PlasterLocation {
+    //LeftArm = 'left_arm',
+    //RightArm = 'right_arm',
+    LeftFeet = 'left_feet',
+    RightFeet = 'right_feet',
+    LeftHand = 'left_hand',
+    RighHand = 'right_hand',
+    Neck = 'neck',
+}
+
+export type PlasterConfig = {
+    label: string;
+    bone: number;
+    prop: Record<number, string>;
+    position: Vector3;
+    rotation: Vector3;
+};
+
+export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
+    /*
+    [PlasterLocation.LeftArm]: {
+        label: 'Bras Gauche',
+        bone: 22711,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_a_l_h',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_a_l_f',
+        },
+        position: [0.0, 0.0, 0.0],
+        rotation: [0.0, 0.0, 0.0],
+    },
+    [PlasterLocation.RightArm]: {
+        label: 'Bras Droit',
+        bone: 2992,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_a_r_h',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_a_r_f',
+        },
+        position: [0.0, 0.0, 0.0],
+        rotation: [0.0, 0.0, 0.0],
+    },*/
+    [PlasterLocation.LeftFeet]: {
+        label: 'Pied Gauche',
+        bone: 63931,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_f_l',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_f_l',
+        },
+        position: [0.32, 0.13, 0.0],
+        rotation: [0.0, -2.0, 8.0],
+    },
+    [PlasterLocation.RightFeet]: {
+        label: 'Pied Droit',
+        bone: 36864,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_f_r',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_f_r',
+        },
+        position: [0.32, 0.13, 0.0],
+        rotation: [0.0, 0.0, 8.0],
+    },
+    [PlasterLocation.LeftHand]: {
+        label: 'Main Gauche',
+        bone: 61163,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_h_l',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_h_l',
+        },
+        position: [0.27, 0.0, 0.0],
+        rotation: [180.0, 0.0, 0.0],
+    },
+    [PlasterLocation.RighHand]: {
+        label: 'Main Droit',
+        bone: 28252,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_h_r',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_h_r',
+        },
+        position: [0.27, 0.0, 0.0],
+        rotation: [180.0, 0.0, 0.0],
+    },
+    [PlasterLocation.Neck]: {
+        label: 'Cou',
+        bone: 39317,
+        prop: {
+            [joaat('mp_m_freemode_01')]: 'soz_med_plaster_n',
+            [joaat('mp_f_freemode_01')]: 'soz_med_plaster_n',
+        },
+        position: [0.08, 0.0, 0.0],
+        rotation: [0.0, 0.0, 180.0],
+    },
+};
+
+export type PlasterMenuData = {
+    locations: PlasterLocation[];
+    playerServerId: number;
+};

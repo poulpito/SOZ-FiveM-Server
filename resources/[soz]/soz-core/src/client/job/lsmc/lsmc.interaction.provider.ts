@@ -3,12 +3,15 @@ import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { InventoryManager } from '@public/client/inventory/inventory.manager';
 import { Monitor } from '@public/client/monitor/monitor';
+import { NuiMenu } from '@public/client/nui/nui.menu';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
 import { TargetFactory } from '@public/client/target/target.factory';
 import { emitRpc, emitRpcCache } from '@public/core/rpc';
 import { ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
+import { PlasterLocation } from '@public/shared/job/lsmc';
+import { MenuType } from '@public/shared/nui/menu';
 import { PlayerLicenceType } from '@public/shared/player';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
@@ -53,6 +56,9 @@ export class LSMCInteractionProvider {
 
     @Inject(PlayerListStateService)
     private playerListStateService: PlayerListStateService;
+
+    @Inject(NuiMenu)
+    private nuiMenu: NuiMenu;
 
     @Once()
     public onStart() {
@@ -308,6 +314,9 @@ export class LSMCInteractionProvider {
                 job: JobType.LSMC,
                 icon: 'c:ems/rescuer.png',
                 canInteract: async entity => {
+                    if (!this.playerService.isOnDuty()) {
+                        return false;
+                    }
                     const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
                     return !(await emitRpcCache(RpcServerEvent.POLICE_LICENSE_HAS_RECUER, target));
                 },
@@ -332,6 +341,9 @@ export class LSMCInteractionProvider {
                 job: JobType.LSMC,
                 icon: 'c:ems/notrescuer.png',
                 canInteract: async entity => {
+                    if (!this.playerService.isOnDuty()) {
+                        return false;
+                    }
                     const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
                     return await emitRpcCache(RpcServerEvent.POLICE_LICENSE_HAS_RECUER, target);
                 },
@@ -348,6 +360,27 @@ export class LSMCInteractionProvider {
                         GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity)),
                         PlayerLicenceType.Rescuer
                     );
+                },
+            },
+            {
+                label: 'Plâtre',
+                color: JobType.LSMC,
+                job: JobType.LSMC,
+                icon: 'c:ems/platre.png',
+                canInteract: () => {
+                    if (!this.playerService.isOnDuty()) {
+                        return false;
+                    }
+                    return true;
+                },
+                action: async entity => {
+                    const playerServerId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                    const data = await emitRpc<PlasterLocation[]>(RpcServerEvent.LSMC_PLAYER_PLASTER, playerServerId);
+
+                    this.nuiMenu.openMenu<MenuType.LsmcPlaster>(MenuType.LsmcPlaster, {
+                        locations: data,
+                        playerServerId: playerServerId,
+                    });
                 },
             },
         ]);

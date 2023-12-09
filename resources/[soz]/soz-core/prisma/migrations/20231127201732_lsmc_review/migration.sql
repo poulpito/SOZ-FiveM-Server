@@ -23,8 +23,12 @@ VALUES
     ('lsmc', 'lguard', 177030, 'car', 0),
     ('lsmc', 'blazer2', 7000, 'car', 0);
 
+UPDATE concess_entreprise SET vehicle='ambulance2' WHERE vehicle='ambulance';
+UPDATE player_vehicles SET vehicle='ambulance2', hash=-794924083 WHERE vehicle='ambulance';
+
 INSERT IGNORE INTO vehicles (model, hash, name, price, category, dealership_id, required_licence, size, job_name, stock, radio, maxStock)
 VALUES 
-    ('seashark2', -616331036, 'Seashark Lifeguard', 10000, 'Boats', null, 'boat', 1, NULL, 0, 0, 0),
-    ('lguard', 469291905, 'Granger Lifeguard', 177030, 'Suvs', null, 'car', 1, NULL, 0, 0, 0),
-    ('blazer2', -48031959, 'Blazer Lifeguard', 7000, 'Off-road', NULL, 'car', 1, NULL, 0, 0, 0);
+    ('ambulance2', -794924083, 'Ambulance', 150000, 'Emergency', null, 'car', 1, NULL, 0, 1, 0),
+    ('seashark2', -616331036, 'Seashark Lifeguard', 10000, 'Boats', null, 'boat', 1, NULL, 0, 1, 0),
+    ('lguard', 469291905, 'Granger Lifeguard', 177030, 'Suvs', null, 'car', 1, NULL, 0, 1, 0),
+    ('blazer2', -48031959, 'Blazer Lifeguard', 7000, 'Off-road', NULL, 'car', 1, NULL, 0, 1, 0);
