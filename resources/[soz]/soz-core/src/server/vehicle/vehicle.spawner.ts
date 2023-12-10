@@ -40,6 +40,7 @@ type ClosestVehicle = {
 
 const VEHICLE_HAS_RADIO = [
     'ambulance',
+    'ambulance2',
     'ambcar',
     'firetruk',
     'mule6',

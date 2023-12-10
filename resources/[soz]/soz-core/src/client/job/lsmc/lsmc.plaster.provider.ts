@@ -3,6 +3,7 @@ import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { NuiMenu } from '@public/client/nui/nui.menu';
 import { PlayerService } from '@public/client/player/player.service';
+import { ProgressService } from '@public/client/progress.service';
 import { ResourceLoader } from '@public/client/repository/resource.loader';
 import { Command } from '@public/core/decorators/command';
 import { emitRpc } from '@public/core/rpc';
@@ -19,6 +20,9 @@ export class LSMCPlasterProvider {
 
     @Inject(ResourceLoader)
     public resourceLoader: ResourceLoader;
+
+    @Inject(ProgressService)
+    public progressService: ProgressService;
 
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
@@ -50,7 +54,28 @@ export class LSMCPlasterProvider {
 
     @OnNuiEvent(NuiEvent.LsmcPlaster)
     public async onPlaster({ location, playerServerId }: { location: PlasterLocation; playerServerId: number }) {
+        const { completed } = await this.progressService.progress(
+            'plaster',
+            'Platre',
+            5000,
+            {
+                dictionary: 'mp_fm_intro_cut',
+                name: 'fixing_a_ped',
+                options: {
+                    repeat: true,
+                },
+            },
+            {
+                useAnimationService: true,
+            }
+        );
+
+        if (!completed) {
+            return;
+        }
+
         TriggerServerEvent(ServerEvent.LSMC_PLASTER, playerServerId, location);
+        this.nuiMenu.closeMenu();
     }
 
     private async addPlaster(newplaster: PlasterLocation, model: number) {

@@ -3,10 +3,19 @@ import { useNuiEvent, useNuiFocus } from '@public/nui/hook/nui';
 import { useOutside } from '@public/nui/hook/outside';
 import { healthLevelToLabel, stressLevelToLabel } from '@public/shared/health';
 import { MedicalMetadata } from '@public/shared/item';
-import { bones, DamageGravity, DamageServerData, DamagesTypes, JobsWithInjuries } from '@public/shared/job/lsmc';
-import { PlayerCriminalState } from '@public/shared/player';
+import {
+    bones,
+    DamageConfigs,
+    DamageGravity,
+    DamageServerData,
+    DamagesTypes,
+    JobsWithInjuries,
+} from '@public/shared/job/lsmc';
+import { PlayerCriminalState, PlayerMetadata } from '@public/shared/player';
+import { getRandomInt } from '@public/shared/random';
 import { format } from 'date-fns';
 import { FunctionComponent, useState } from 'react';
+
 export const MedicalApp: FunctionComponent = () => {
     const [medicalDatas, setMedicalDatas] = useState<MedicalMetadata>(null);
 
@@ -27,24 +36,7 @@ export const MedicalApp: FunctionComponent = () => {
         return null;
     }
 
-    const damages = medicalDatas.damages;
     const patient = medicalDatas.patient;
-
-    const groupByBones = (arr, property) => {
-        return arr.reduce(function (memo, x) {
-            if (!memo[bones[x[property]]]) {
-                memo[bones[x[property]]] = [];
-            }
-            memo[bones[x[property]]].push(x);
-            return memo;
-        }, {});
-    };
-
-    const groupedDamages = groupByBones(damages, 'bone');
-
-    const getRandomInt = (min: number, max: number) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
 
     const getBodyStatesStyle = (level: number) => {
         if (level < 25) {
@@ -80,27 +72,27 @@ export const MedicalApp: FunctionComponent = () => {
         return getRandomInt(min, max);
     };
 
-    const getInjuriesStatus = (patient): [allowed: boolean, label: string] => {
+    const getInjuriesStatus = (metadata: PlayerMetadata): [allowed: boolean, label: string] => {
         let state = '';
         let allowed = false;
-        if (patient.metadata.criminal_state == PlayerCriminalState.Allowed) {
+        if (metadata.criminal_state == PlayerCriminalState.Allowed) {
             allowed = true;
-            if (patient.metadata.injuries_count >= 7) {
+            if (metadata.injuries_count >= 7) {
                 state = 'graves';
-            } else if (patient.metadata.injuries_count >= 4) {
+            } else if (metadata.injuries_count >= 4) {
                 state = 'moyennes';
-            } else if (patient.metadata.injuries_count >= 1) {
+            } else if (metadata.injuries_count >= 1) {
                 state = 'légères';
             } else {
                 state = 'aucunes';
             }
         } else if (JobsWithInjuries.includes(patient.job.id)) {
             allowed = true;
-            if (patient.metadata.injuries_count >= 3) {
+            if (metadata.injuries_count >= 3) {
                 state = 'graves';
-            } else if (patient.metadata.injuries_count >= 2) {
+            } else if (metadata.injuries_count >= 2) {
                 state = 'moyennes';
-            } else if (patient.metadata.injuries_count >= 1) {
+            } else if (metadata.injuries_count >= 1) {
                 state = 'légères';
             } else {
                 state = 'aucunes';
@@ -111,21 +103,19 @@ export const MedicalApp: FunctionComponent = () => {
 
     const getWoundImportance = (damageQty: number, isFatal?: boolean) => {
         if (isFatal) {
-            return 4;
+            return DamageGravity.Critical;
         }
 
         if (damageQty <= 10) {
-            return 0;
+            return DamageGravity.VerySmall;
         } else if (damageQty <= 30) {
-            return 1;
-        } else if (damageQty <= 60) {
-            return 2;
-        } else if (damageQty >= 60) {
-            return 3;
-        } else if (damageQty >= 100) {
-            return 4;
+            return DamageGravity.Small;
+        } else if (damageQty <= 50) {
+            return DamageGravity.Medium;
+        } else if (damageQty <= 70) {
+            return DamageGravity.Heavy;
         } else {
-            return 5;
+            return DamageGravity.Critical;
         }
     };
 
@@ -144,32 +134,9 @@ export const MedicalApp: FunctionComponent = () => {
         }
     }
 
-    const getShadowByWoundGravity = (woundGravity: number) => {
-        switch (woundGravity) {
-            case 1:
-                return '[box-shadow:_0_1px_12px_rgb(39_169_43)] border-[rgb(39,169,43)] hover:bg-[rgba(39,169,43,0.5)]';
-                break;
-            case 2:
-                return '[box-shadow:_0_1px_12px_rgb(0_177_247)] border-[rgb(0,177,247)] hover:bg-[rgba(0,177,247,0.5)]';
-                break;
-            case 3:
-                return '[box-shadow:_0_1px_12px_rgb(226_60_0)] border-[rgb(226,60,0)] hover:bg-[rgba(226,60,0,0.5)]';
-                break;
-            case 4:
-                return '[box-shadow:_0_1px_12px_rgb(141_0_250)] border-[rgb(141,0,250)] hover:bg-[rgba(141,0,250,0.5)]';
-                break;
-            case 5:
-                return '[box-shadow:_0_1px_12px_rgb(255_255_255)] border-[rgb(255,255,255)] hover:bg-[rgba(255,255,255,0.5)]';
-                break;
-
-            default:
-                return '[box-shadow:_0_1px_12px_rgb(255_255_255)] border-[rgb(255,255,255)] hover:bg-[rgba(255,255,255,0.5)]';
-                break;
-        }
-    };
-
     function getStyleByGravity(damage: number, isFatal: boolean) {
-        return getShadowByWoundGravity(getWoundImportance(damage, isFatal));
+        const woundGravity = getWoundImportance(damage, isFatal);
+        return DamageConfigs[woundGravity].style;
     }
 
     const getMaxGravityInzone = (damages: DamageServerData[]) => {
@@ -180,30 +147,6 @@ export const MedicalApp: FunctionComponent = () => {
             damage.isFatal ? (isOneFatal = true) : false;
         });
         return getWoundImportance(globalDamages, isOneFatal);
-    };
-
-    const getColorByWoundGravity = (woundGravity: number) => {
-        switch (woundGravity) {
-            case 1:
-                return '#27A92B';
-                break;
-            case 2:
-                return '#00B1F7';
-                break;
-            case 3:
-                return '#E23C00';
-                break;
-            case 4:
-                return '#8D00FA';
-                break;
-            case 5:
-                return '#FFFFFF';
-                break;
-
-            default:
-                return '#FFFFFF';
-                break;
-        }
     };
 
     const getIconByDamageType = (damageType: number) => {
@@ -272,7 +215,15 @@ export const MedicalApp: FunctionComponent = () => {
         });
     }
 
-    const renderDamagedZones = (damages: DamageServerData[]) => {
+    const renderDamagedZones = () => {
+        const damages = medicalDatas.damages.reduce(function (memo, damage) {
+            if (!memo[bones[damage.bone]]) {
+                memo[bones[damage.bone]] = [];
+            }
+            memo[bones[damage.bone]].push(damage);
+            return memo;
+        }, {});
+
         const headZone = {
             label: bones[31086],
             zones: damages[bones[31086]],
@@ -327,11 +278,11 @@ export const MedicalApp: FunctionComponent = () => {
         return (
             <div className="flex-col w-full">
                 <div className="flex flex-col h-full">
-                    <div className="flex flex-row mt-[1rem] justify-center h-[12%]">
+                    <div className="flex flex-row mt-[1rem] justify-center h-[10%]">
                         {renderCenterZones(headZone.label, headZone.zones)}
                     </div>
 
-                    <div className="flex flex-row my-[2rem] h-[12%]">
+                    <div className="flex flex-row my-[2rem] h-[10%]">
                         <div className="flex flex-col w-[42%]">
                             {renderLeftZones(rightShoulder.label, rightShoulder.zones)}
                         </div>
@@ -341,28 +292,28 @@ export const MedicalApp: FunctionComponent = () => {
                             {renderRightZones(leftShoulder.label, leftShoulder.zones)}
                         </div>
                     </div>
-                    <div className="flex flex-row my-[2rem]  h-[12%]">
+                    <div className="flex flex-row my-[2rem]  h-[10%]">
                         <div className="flex flex-col  w-[40%]">{renderLeftZones(rightArm.label, rightArm.zones)}</div>
                         <div className="flex flex-col w-[20%]"></div>
                         <div className="flex flex-col w-[40%]">{renderRightZones(leftArm.label, leftArm.zones)}</div>
                     </div>
-                    <div className="flex flex-row my-[2rem] h-[12%]">
+                    <div className="flex flex-row my-[2rem] h-[10%]">
                         <div className="flex flex-col w-[38%]">{renderLeftZones(rightHand.label, rightHand.zones)}</div>
                         <div className="flex flex-col w-[24%]"></div>
                         <div className="flex flex-col w-[38%]">{renderRightZones(leftHand.label, leftHand.zones)}</div>
                     </div>
-                    <div className="flex flex-row my-[2rem]  h-[12%]">
+                    <div className="flex flex-row my-[2rem]  h-[10%]">
                         <div className="flex flex-col  w-[42%]">{renderLeftZones(rightLeg.label, rightLeg.zones)}</div>
                         <div className="flex flex-col  w-[16%]"></div>
 
                         <div className="flex flex-col  w-[42%]">{renderRightZones(leftLeg.label, leftLeg.zones)}</div>
                     </div>
-                    <div className="flex flex-row my-[2rem] h-[12%]">
+                    <div className="flex flex-row my-[2rem] h-[10%]">
                         <div className="flex flex-col w-[40%]">{renderLeftZones(rightFoot.label, rightFoot.zones)}</div>
                         <div className="flex flex-col w-[20%]"></div>
                         <div className="flex flex-col w-[40%]">{renderRightZones(leftFoot.label, leftFoot.zones)}</div>
                     </div>
-                    <div className="flex flex-row mb-[3rem] justify-center w-full h-[12%] mt-2">
+                    <div className="flex flex-row mb-[3rem] justify-center w-full h-[10%] mt-2">
                         <div className="flex flex-col w-[33%] h-full">
                             {renderCenterZones(bones[0], damages[bones[0]])}
                         </div>
@@ -378,8 +329,12 @@ export const MedicalApp: FunctionComponent = () => {
         );
     };
 
+    function getGlobalZoneColor(damages: DamageServerData[]) {
+        return damages ? DamageConfigs[getMaxGravityInzone(damages)].color : 'rgba(39,169,43,0.7)';
+    }
+
     const renderRightZones = (name: string, damages: DamageServerData[]) => {
-        const globalZoneColor = damages ? getColorByWoundGravity(getMaxGravityInzone(damages)) : 'rgba(39,169,43,0.7)';
+        const globalZoneColor = getGlobalZoneColor(damages);
 
         return (
             <div className={`flex flex-row justify-start items-center h-full`}>
@@ -401,7 +356,7 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     const renderLeftZones = (name: string, damages: DamageServerData[]) => {
-        const globalZoneColor = damages ? getColorByWoundGravity(getMaxGravityInzone(damages)) : 'rgba(39,169,43,0.7)';
+        const globalZoneColor = getGlobalZoneColor(damages);
 
         return (
             <div className={`flex flex-row justify-end items-center h-full`}>
@@ -423,7 +378,7 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     const renderCenterZones = (name: string, damages: DamageServerData[]) => {
-        const globalZoneColor = damages ? getColorByWoundGravity(getMaxGravityInzone(damages)) : 'rgba(39,169,43,0.7)';
+        const globalZoneColor = getGlobalZoneColor(damages);
 
         return (
             <div className={`flex flex-col justify-end items-center  h-full`}>
@@ -446,7 +401,7 @@ export const MedicalApp: FunctionComponent = () => {
 
     const renderDetail = (damage: DamageServerData, count: number, globalDamages) => {
         const gravity = getWoundImportance(globalDamages, damage.isFatal);
-        const textColor = getColorByWoundGravity(gravity);
+        const textColor = DamageConfigs[gravity].color;
 
         return (
             <div className="flex flex-col h-full opacity-90 text-[rgb(255,255,255)] [text-shadow:_0_1px_12px_rgb(255_255_255)]">
@@ -471,7 +426,7 @@ export const MedicalApp: FunctionComponent = () => {
                                 textShadow: `0 1px 12px ${textColor}`,
                             }}
                         >
-                            {DamageGravity[gravity]}
+                            {DamageConfigs[gravity].label}
                         </p>
                         <div
                             className={`h-[2] w-full opacity-30 pt-[1px] my-2`}
@@ -480,7 +435,7 @@ export const MedicalApp: FunctionComponent = () => {
                         <p className="text-m">{getWoundAnteriority(damage.date)}</p>
                     </div>
                     <div className="flex flex-col justify-start h-[6rem] items-start w-[25%]">
-                        {<img src={`/public/images/lsmc/icons/${getIconByDamageType(damage.damageType)}.webp`}></img>}
+                        {<img src={`public/images/lsmc/icons/${getIconByDamageType(damage.damageType)}.webp`}></img>}
                     </div>
                 </div>
                 <div
@@ -524,9 +479,7 @@ export const MedicalApp: FunctionComponent = () => {
                                 {
                                     <img
                                         className="p-1"
-                                        src={`/public/images/lsmc/icons/${getIconByDamageType(
-                                            damages[0].damageType
-                                        )}.webp`}
+                                        src={`public/images/lsmc/icons/${getIconByDamageType(damages[0].damageType)}.webp`}
                                     ></img>
                                 }
                                 <div
@@ -566,7 +519,7 @@ export const MedicalApp: FunctionComponent = () => {
                     <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
                     <div className="my-1 flex flex-row items-center">
                         <div className="flex flex-col me-[1rem]">
-                            <img className="w-[2.5rem]" src={`/public/images/lsmc/icons/heart.webp`}></img>
+                            <img className="w-[2.5rem]" src={`public/images/lsmc/icons/heart.webp`}></img>
                         </div>
                         <div className="flex flex-col text-l">
                             {getHeartRate(patient.metadata.stress_level, patient.metadata.health)}
@@ -574,7 +527,7 @@ export const MedicalApp: FunctionComponent = () => {
                     </div>
                     <div className="flex flex-row items-center my-2">
                         <div className="flex flex-col me-[1rem]">
-                            <img className="w-[2.5rem]" src={`/public/images/lsmc/icons/O2.webp`}></img>
+                            <img className="w-[2.5rem]" src={`public/images/lsmc/icons/o2.webp`}></img>
                         </div>
                         <div className="flex flex-col text-l">{getRandomInt(95, 99)} %</div>
                     </div>
@@ -588,7 +541,7 @@ export const MedicalApp: FunctionComponent = () => {
         const stressLevelLabel = stressLevelToLabel(patient.metadata.stress_level);
         const maxStaminaLevelLabel = healthLevelToLabel(patient.metadata.max_stamina, 60, 150);
         const strengthLevelLabel = healthLevelToLabel(patient.metadata.strength, 60, 150);
-        const [injuriesAllowed, injuriesLabel] = getInjuriesStatus(patient);
+        const [injuriesAllowed, injuriesLabel] = getInjuriesStatus(patient.metadata);
 
         return (
             <>
@@ -675,7 +628,7 @@ export const MedicalApp: FunctionComponent = () => {
             <div
                 ref={refOutside}
                 style={{
-                    backgroundImage: `url(/public/images/lsmc/background.png)`,
+                    backgroundImage: `url(/images/lsmc/background.png)`,
                     margin: 'auto auto',
                     height: '90%',
                     width: '89%',
@@ -692,7 +645,7 @@ export const MedicalApp: FunctionComponent = () => {
                                 {renderRightPatientInformations()}
                             </div>
                         </div>
-                        <div className="flex flex-row h-full">{renderDamagedZones(groupedDamages)}</div>
+                        <div className="flex flex-row h-full">{renderDamagedZones()}</div>
                     </div>
                 </div>
             </div>

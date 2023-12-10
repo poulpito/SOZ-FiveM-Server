@@ -44,6 +44,7 @@ export class LSMCItemProvider {
         this.item.setItemUseCallback('painkiller', this.usePainkiller.bind(this));
         this.item.setItemUseCallback('stretcher', this.useStretcher.bind(this));
         this.item.setItemUseCallback('wheelchair', this.useWheelChair.bind(this));
+        this.item.setItemUseCallback('naloxone', this.useNaloxone.bind(this));
     }
 
     private async useTissue(source: number, _item: Item, inventoryItem: InventoryItem) {
@@ -251,5 +252,87 @@ export class LSMCItemProvider {
         this.inventoryManager.addItemToInventory(source, 'wheelchair', 1);
 
         this.notifier.notify(source, 'Tu as ramassé une chaisse roulante');
+    }
+
+    public async useNaloxone(source: number, item: Item, inventoryItem: InventoryItem): Promise<void> {
+        const player = this.playerService.getPlayer(source);
+
+        if (!player) {
+            return;
+        }
+
+        const progress = await this.progressService.progress(
+            source,
+            'use_naloxone',
+            'Injection de Naloxone...',
+            10000,
+            {
+                name: 'miranda_shooting_up',
+                dictionary: 'rcmpaparazzo1ig_4',
+                options: {
+                    onlyUpperBody: true,
+                },
+                playbackRate: 0.4,
+            },
+            {
+                useAnimationService: true,
+                firstProp: {
+                    model: 'prop_syringe_01',
+                    bone: 28422,
+                    coords: { x: 0.0, y: 0.0, z: -0.045 },
+                    rotation: { x: 0, y: 0, z: 0 },
+                },
+            }
+        );
+
+        if (!progress.completed) {
+            return;
+        }
+
+        this.playerService.setPlayerMetadata(source, 'drug', Math.max(0, player.metadata.drug - 50));
+        this.inventoryManager.removeInventoryItem(source, inventoryItem, 1);
+
+        this.notifier.notify(
+            source,
+            'Vous vous êtes injecté une dose de ~g~Naloxone~s~, vous êtes désormais désintoxiqué.'
+        );
+    }
+
+    @OnEvent(ServerEvent.LSMC_NALOXONE)
+    public async onNaloxone(source: number, target: number) {
+        const { completed } = await this.progressService.progress(
+            source,
+            'use_naloxone',
+            'Injection de Naloxone...',
+            10000,
+            {
+                name: 'miranda_shooting_up',
+                dictionary: 'rcmpaparazzo1ig_4',
+                options: {
+                    onlyUpperBody: true,
+                },
+                playbackRate: 0.4,
+            },
+            {
+                useAnimationService: true,
+                firstProp: {
+                    model: 'prop_syringe_01',
+                    bone: 28422,
+                    coords: { x: 0.0, y: 0.0, z: -0.045 },
+                    rotation: { x: 0, y: 0, z: 0 },
+                },
+            }
+        );
+
+        if (!completed) {
+            return;
+        }
+
+        const targetPlayer = this.playerService.getPlayer(target);
+        this.playerService.setPlayerMetadata(target, 'drug', Math.max(0, targetPlayer.metadata.drug - 50));
+        this.inventoryManager.removeItemFromInventory(source, 'naloxone', 1);
+
+        this.notifier.notify(source, 'Vous avez injecté une dose de ~g~Naloxone~s~.');
+        this.notifier.notify(target, 'Vous recu une dose de ~g~Naloxone~s~, vous êtes désormais désintoxiqué.');
     }
 }

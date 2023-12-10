@@ -31,6 +31,7 @@ export class LSMCMedicalDiagProvider {
 
     @OnEvent(ClientEvent.LSMC_SHOW_MEDICAL_DIAG)
     public async showMedicalDiag(data: MedicalMetadata) {
+        console.log(JSON.stringify(data));
         this.nuiDispatch.dispatch('medicalDiag', 'open', data);
     }
 
@@ -43,7 +44,7 @@ export class LSMCMedicalDiagProvider {
                 color: JobType.LSMC,
                 job: JobType.LSMC,
                 blackoutGlobal: true,
-                icon: 'TODO',
+                icon: 'c:ems/irm.png',
                 canInteract: () => {
                     if (!this.playerService.isOnDuty()) {
                         return false;
@@ -65,7 +66,7 @@ export class LSMCMedicalDiagProvider {
 
                     const { completed } = await this.progressService.progress(
                         'damage_inspection',
-                        'Vous observez le patient.',
+                        'Scan du patient...',
                         LSMCConfig.scanTime,
                         {
                             dictionary: 'mp_fib_grab',

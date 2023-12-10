@@ -11,7 +11,7 @@
 9  hiver Stonks
 10 intervention LSPD/BCSO
 11 anti-emeute LSPD/BCSO
-12 sport LSPD/BCSO (14 for femme)
+12 sport LSPD/BCSO
 
     Decalque
 0  chevron 0-4
@@ -41,7 +41,7 @@
 5  ceinture LSMC
 6  pilote BCSO
 7  antiemeute LSPD/BCSO
-8  harnais holster
+9  gilets Life Guard
 
     Accessories
 0  stétho    //same as vanilla?

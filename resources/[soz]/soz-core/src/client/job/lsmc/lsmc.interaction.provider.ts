@@ -383,6 +383,23 @@ export class LSMCInteractionProvider {
                     });
                 },
             },
+            {
+                label: 'Naloxone',
+                color: JobType.LSMC,
+                job: JobType.LSMC,
+                icon: 'c:ems/naloxone.png',
+                canInteract: () => {
+                    if (!this.playerService.isOnDuty()) {
+                        return false;
+                    }
+                    return true;
+                },
+                action: async entity => {
+                    const playerServerId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                    TriggerServerEvent(ServerEvent.LSMC_NALOXONE, playerServerId);
+                },
+                item: 'naloxone',
+            },
         ]);
     }
 }

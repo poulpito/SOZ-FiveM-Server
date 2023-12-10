@@ -423,14 +423,14 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                 Components: {
                     [Component.Torso]: { Drawable: 11, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
-                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Legs] + 11,
+                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Legs] + 10,
                         Texture: 0,
                         Palette: 0,
                     },
                     [Component.Shoes]: { Drawable: 10, Texture: 0, Palette: 0 },
                     [Component.Undershirt]: { Drawable: 15, Texture: 0, Palette: 0 },
                     [Component.Tops]: {
-                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 14,
+                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 12,
                         Texture: 1,
                         Palette: 0,
                     },
@@ -770,14 +770,14 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                 Components: {
                     [Component.Torso]: { Drawable: 11, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
-                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Legs] + 11,
+                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Legs] + 10,
                         Texture: 1,
                         Palette: 0,
                     },
                     [Component.Shoes]: { Drawable: 10, Texture: 0, Palette: 0 },
                     [Component.Undershirt]: { Drawable: 15, Texture: 0, Palette: 0 },
                     [Component.Tops]: {
-                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 14,
+                        Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 12,
                         Texture: 0,
                         Palette: 0,
                     },

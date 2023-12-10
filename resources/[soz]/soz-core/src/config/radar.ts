@@ -134,6 +134,7 @@ export const RadarList: Record<number, Radar> = {
 export const RadarAllowedVehicle: number[] = [
     //LSMC
     GetHashKey('ambulance'),
+    GetHashKey('ambulance2'),
     GetHashKey('ambcar'),
     GetHashKey('firetruk'),
     // LSPD

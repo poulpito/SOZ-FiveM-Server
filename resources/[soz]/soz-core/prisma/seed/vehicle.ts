@@ -32,7 +32,7 @@ const vehicleJobList: [JobType, string, number][] = [
     [JobType.Food, 'sadler1', 2],
     [JobType.Food, 'taco1', 1],
     [JobType.Garbage, 'trash', 0],
-    [JobType.LSMC, 'ambulance', 0],
+    [JobType.LSMC, 'ambulance2', 0],
     [JobType.LSMC, 'ambcar', 0],
     [JobType.LSMC, 'firetruk', 1],
     [JobType.LSPD, 'lspd10', 0],

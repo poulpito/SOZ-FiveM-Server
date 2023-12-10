@@ -115,13 +115,46 @@ export const bones = {
     65068: 'FACIAL_facialRoot',
 };
 
-export const DamageGravity = {
-    0: 'Très faible',
-    1: 'Faible',
-    2: 'Moyenne',
-    3: 'Sévère',
-    4: 'Critique',
-    5: 'Inconnue',
+export enum DamageGravity {
+    VerySmall = 0,
+    Small,
+    Medium,
+    Heavy,
+    Critical,
+}
+
+export type DamageConfig = {
+    label: string;
+    color: string;
+    style: string;
+};
+
+export const DamageConfigs: Record<DamageGravity, DamageConfig> = {
+    [DamageGravity.VerySmall]: {
+        label: 'Très faible',
+        color: '#FFFFFF',
+        style: '[box-shadow:_0_1px_12px_rgb(255_255_255)] border-[rgb(255,255,255)] hover:bg-[rgba(255,255,255,0.5)]',
+    },
+    [DamageGravity.Small]: {
+        label: 'Faible',
+        color: '#27A92B',
+        style: '[box-shadow:_0_1px_12px_rgb(39_169_43)] border-[rgb(39,169,43)] hover:bg-[rgba(39,169,43,0.5)]',
+    },
+    [DamageGravity.Medium]: {
+        label: 'Moyenne',
+        color: '#00B1F7',
+        style: '[box-shadow:_0_1px_12px_rgb(0_177_247)] border-[rgb(0,177,247)] hover:bg-[rgba(0,177,247,0.5)]',
+    },
+    [DamageGravity.Heavy]: {
+        label: 'Sévère',
+        color: '#E23C00',
+        style: '[box-shadow:_0_1px_12px_rgb(226_60_0)] border-[rgb(226,60,0)] hover:bg-[rgba(226,60,0,0.5)]',
+    },
+    [DamageGravity.Critical]: {
+        label: 'Critique',
+        color: '#8D00FA',
+        style: '[box-shadow:_0_1px_12px_rgb(141_0_250)] border-[rgb(141,0,250)] hover:bg-[rgba(141,0,250,0.5)]',
+    },
 };
 
 export const DamagesTypes = {
@@ -401,6 +434,24 @@ export const LsmcCloakroom: WardrobeConfig = {
             },
             Props: {},
         },
+        ['Sauveteur en mer']: {
+            Components: {
+                [Component.Torso]: { Drawable: 15, Texture: 0, Palette: 0 },
+                [Component.Legs]: { Drawable: 14, Texture: 3, Palette: 0 },
+                [Component.Shoes]: { Drawable: 67, Texture: 3, Palette: 0 },
+                [Component.Accessories]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [Component.Undershirt]: {
+                    Drawable:
+                        VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.Undershirt] + 8,
+                    Texture: 0,
+                    Palette: 0,
+                },
+                [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [Component.Tops]: { Drawable: 15, Texture: 0, Palette: 0 },
+            },
+            Props: {},
+        },
     },
     [joaat('mp_f_freemode_01')]: {
         [DUTY_OUTFIT_NAME]: {
@@ -488,6 +539,24 @@ export const LsmcCloakroom: WardrobeConfig = {
                     Texture: 0,
                     Palette: 0,
                 },
+            },
+            Props: {},
+        },
+        ['Sauveteur en mer']: {
+            Components: {
+                [Component.Torso]: { Drawable: 15, Texture: 0, Palette: 0 },
+                [Component.Legs]: { Drawable: 17, Texture: 3, Palette: 0 },
+                [Component.Shoes]: { Drawable: 70, Texture: 0, Palette: 0 },
+                [Component.Accessories]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [Component.Undershirt]: {
+                    Drawable:
+                        VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Undershirt] + 8,
+                    Texture: 0,
+                    Palette: 0,
+                },
+                [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [Component.Tops]: { Drawable: 18, Texture: 4, Palette: 0 },
             },
             Props: {},
         },

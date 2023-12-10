@@ -11,6 +11,7 @@ import { VehicleStateService } from '../../vehicle/vehicle.state.service';
 export const VehicleWithSirens = {
     // LSMC
     [GetHashKey('ambulance')]: true,
+    [GetHashKey('ambulance2')]: true,
     [GetHashKey('ambcar')]: true,
     [GetHashKey('firetruk')]: true,
     // LSPD
