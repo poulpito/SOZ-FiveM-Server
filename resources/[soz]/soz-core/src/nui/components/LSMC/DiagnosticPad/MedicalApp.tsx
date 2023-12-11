@@ -435,7 +435,7 @@ export const MedicalApp: FunctionComponent = () => {
                         <p className="text-m">{getWoundAnteriority(damage.date)}</p>
                     </div>
                     <div className="flex flex-col justify-start h-[6rem] items-start w-[25%]">
-                        {<img src={`public/images/lsmc/icons/${getIconByDamageType(damage.damageType)}.webp`}></img>}
+                        {<img src={`/public/images/lsmc/icons/${getIconByDamageType(damage.damageType)}.webp`}></img>}
                     </div>
                 </div>
                 <div
@@ -479,7 +479,9 @@ export const MedicalApp: FunctionComponent = () => {
                                 {
                                     <img
                                         className="p-1"
-                                        src={`public/images/lsmc/icons/${getIconByDamageType(damages[0].damageType)}.webp`}
+                                        src={`/public/images/lsmc/icons/${getIconByDamageType(
+                                            damages[0].damageType
+                                        )}.webp`}
                                     ></img>
                                 }
                                 <div
@@ -519,7 +521,7 @@ export const MedicalApp: FunctionComponent = () => {
                     <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
                     <div className="my-1 flex flex-row items-center">
                         <div className="flex flex-col me-[1rem]">
-                            <img className="w-[2.5rem]" src={`public/images/lsmc/icons/heart.webp`}></img>
+                            <img className="w-[2.5rem]" src={`/public/images/lsmc/icons/heart.webp`}></img>
                         </div>
                         <div className="flex flex-col text-l">
                             {getHeartRate(patient.metadata.stress_level, patient.metadata.health)}
@@ -527,7 +529,7 @@ export const MedicalApp: FunctionComponent = () => {
                     </div>
                     <div className="flex flex-row items-center my-2">
                         <div className="flex flex-col me-[1rem]">
-                            <img className="w-[2.5rem]" src={`public/images/lsmc/icons/o2.webp`}></img>
+                            <img className="w-[2.5rem]" src={`/public/images/lsmc/icons/o2.webp`}></img>
                         </div>
                         <div className="flex flex-col text-l">{getRandomInt(95, 99)} %</div>
                     </div>
@@ -628,7 +630,7 @@ export const MedicalApp: FunctionComponent = () => {
             <div
                 ref={refOutside}
                 style={{
-                    backgroundImage: `url(/images/lsmc/background.png)`,
+                    backgroundImage: `url(/public/images/lsmc/background.png)`,
                     margin: 'auto auto',
                     height: '90%',
                     width: '89%',
