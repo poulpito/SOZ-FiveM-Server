@@ -196,6 +196,19 @@ export class PropPlacementProvider {
         await this.refreshPropPlacementMenuData(newCollections);
     }
 
+    @OnNuiEvent(NuiEvent.RequestPersistPropCollection)
+    public async onRequestPersistCollection({ name, persist }: { name: string; persist: boolean }) {
+        const newCollections = await emitRpc<PropCollectionData[]>(
+            RpcServerEvent.PROP_REQUEST_PERSIST_COLLECTION,
+            name,
+            persist
+        );
+        if (!newCollections) {
+            return;
+        }
+        await this.refreshPropPlacementMenuData(newCollections);
+    }
+
     public async refreshPropPlacementMenuData(
         propCollectionDatas?: PropCollectionData[],
         currentCollection?: PropCollection | null

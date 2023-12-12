@@ -172,6 +172,7 @@ export enum RpcServerEvent {
     PROP_REQUEST_DELETE_COLLECTION = 'soz-core:server:prop:delete-collection',
     PROP_REQUEST_CREATE_PROP = 'soz-core:server:prop:create-prop',
     PROP_REQUEST_TOGGLE_LOAD_COLLECTION = 'soz-core:server:prop:load-collection',
+    PROP_REQUEST_PERSIST_COLLECTION = 'soz-core:server:prop:persist-collection',
 
     CRAFT_GET_RECIPES = 'soz-core:server:craft:get-recipes',
     CRAFT_DO_RECIPES = 'soz-core:server:craft:do-recipes',

@@ -331,6 +331,7 @@ export enum NuiEvent {
     RequestToggleCollectionLoad = 'soz-core:client:placement:toggle-collection-load',
     RequestDeletePropCollection = 'soz-core:client:placement:delete-collection',
     RequestCreatePropCollection = 'soz-core:client:placement:create-collection',
+    RequestPersistPropCollection = 'soz-core:client:placement:persist-collection',
     RequestDeleteProp = 'soz-core:client:placement:delete-prop',
     PlacementCollectionRename = 'soz-core:client:placement:rename-collection',
 

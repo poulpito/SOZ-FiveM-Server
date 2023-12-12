@@ -41,6 +41,7 @@ export type PropCollectionData = {
     creation_date: Date;
     size: number;
     loaded_size: number;
+    persistant: boolean;
 };
 
 export type PropCollection = PropCollectionData & {

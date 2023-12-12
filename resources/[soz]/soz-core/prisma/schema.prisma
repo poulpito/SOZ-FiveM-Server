@@ -177,11 +177,12 @@ model persistent_prop {
 }
 
 model collection_prop {
-  id      BigInt        @id @default(autoincrement())
-  name    String        @unique @db.VarChar(50)
-  creator String        @db.VarChar(50)
-  date    DateTime      @default(now()) @db.Timestamp(0)
-  props   placed_prop[]
+  id          BigInt          @id @default(autoincrement())
+  name        String          @unique @db.VarChar(50)
+  creator     String          @db.VarChar(50)
+  date        DateTime        @default(now()) @db.Timestamp(0)
+  props       placed_prop[]
+  persistant  Boolean         @default(false)
 }
 
 model placed_prop {
