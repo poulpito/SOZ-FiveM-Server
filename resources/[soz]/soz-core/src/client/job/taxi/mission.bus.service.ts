@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@core/decorators/injectable';
 import { BlipFactory } from '@public/client/blip';
-import { DrawService } from '@public/client/draw.service';
 import { PedFactory } from '@public/client/factory/ped.factory';
 import { Notifier } from '@public/client/notifier';
 import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { wait } from '@public/core/utils';
+import { ServerEvent } from '@public/shared/event';
 import {
     AllowedVehicleModel,
     busLines,
@@ -17,7 +17,6 @@ import { getDistance, Vector4 } from '@public/shared/polyzone/vector';
 import { getRandomInt, getRandomItem } from '@public/shared/random';
 
 import { VehicleSeat } from '../../../shared/vehicle/vehicle';
-import { ServerEvent } from '@public/shared/event';
 
 @Injectable()
 export class BusMissionService {
@@ -103,12 +102,9 @@ export class BusMissionService {
     }
 
     private endMission() {
-        if (this.busStopNumber !== 0) {
+        if (this.busStopNumber !== 0 && this.busStopNumber > 1) {
             const money = this.busStopNumber * BusStopTarif;
-            TriggerServerEvent(
-                ServerEvent.TAXI_NPC_PAY,
-                money
-            );
+            TriggerServerEvent(ServerEvent.TAXI_NPC_PAY, money);
         }
     }
 
