@@ -18,6 +18,7 @@ import { ClientEvent, ServerEvent } from '../../shared/event';
 import { Vector3, Vector4 } from '../../shared/polyzone/vector';
 import { getDefaultVehicleConfiguration, VehicleColor, VehicleConfiguration } from '../../shared/vehicle/modification';
 import {
+    DisableNPCBike,
     getDefaultVehicleCondition,
     getDefaultVehicleVolatileState,
     VehicleCategory,
@@ -175,6 +176,12 @@ export class VehicleSpawner {
         }
 
         if (scriptType === 7) {
+            return;
+        }
+
+        if (DisableNPCBike && GetVehicleType(entity) == VehicleType.Bike) {
+            CancelEvent();
+
             return;
         }
 

@@ -408,3 +408,6 @@ export const ALLOWED_AIR_CONTROL: Partial<Record<VehicleClass, true>> = {
     [VehicleClass.Planes]: true,
     [VehicleClass.Military]: true,
 };
+
+//update MissiveVehicleModelList when toggle
+export const DisableNPCBike = true;
