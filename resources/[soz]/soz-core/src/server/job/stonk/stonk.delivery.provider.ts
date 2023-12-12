@@ -47,9 +47,10 @@ export class StonkDeliveryProvider {
     private fieldIdentifier = 'stonk_delivery';
 
     private getLiveryLocation(): NamedZone {
-        const locationId = Math.trunc((new Date().getHours() / 4) % StonkConfig.delivery.location.length);
+        const locationId = Math.trunc(new Date().getHours() % StonkConfig.delivery.location.length);
         return StonkConfig.delivery.location[locationId];
     }
+
     @Once(OnceStep.Start)
     public async onInit() {
         await this.fieldService.createField({

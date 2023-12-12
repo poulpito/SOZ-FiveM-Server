@@ -75,6 +75,24 @@ const deliveryZones: NamedZone[] = [
         minZ: 28.66,
         maxZ: 32.66,
     },
+    {
+        name: 'NOOSE',
+        center: [2539.98, -335.57, 94.07],
+        length: 0.8,
+        width: 1.6,
+        heading: 205.31,
+        minZ: 93.07,
+        maxZ: 95.67,
+    },
+    {
+        name: 'CASINO',
+        center: [936.01, 47.31, 80.9],
+        length: 0.8,
+        width: 2.2,
+        heading: 148.05,
+        minZ: 79.9,
+        maxZ: 82.9,
+    },
 ];
 
 export const StonkConfig = {
