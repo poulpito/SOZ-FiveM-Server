@@ -1,4 +1,4 @@
-import { Vector2 } from '@public/shared/polyzone/vector';
+import { Vector2, Vector3 } from '@public/shared/polyzone/vector';
 
 import { WardrobeConfig } from '../cloth';
 import { CraftCategory } from '../craft/craft';
@@ -426,7 +426,7 @@ export type FoodField = {
     harvestRange: { min: number; max: number };
     refillDelay: number;
     item: string;
-    zones: Vector2[][];
+    zones: (Vector2 | Vector3)[][];
 };
 
 export const FoodFields: Record<FoodFieldType, FoodField> = {

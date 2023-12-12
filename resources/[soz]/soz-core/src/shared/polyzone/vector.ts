@@ -1,7 +1,7 @@
-export type Vector2 = [number, number] | Vector3;
+export type Vector2 = [number, number];
 export type Point2D = Vector2;
 
-export type Vector3 = [number, number, number] | Vector4;
+export type Vector3 = [number, number, number];
 export type Point3D = Vector3;
 
 export type Vector4 = [number, number, number, number];

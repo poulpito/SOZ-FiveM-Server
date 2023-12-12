@@ -44,8 +44,12 @@ export enum ServerEvent {
     BASE_LEFT_VEHICLE = 'baseevents:leftVehicle',
     BASE_CHANGE_VEHICLE_SEAT = 'baseevents:changeVehicleSeat',
 
+    BAUN_CREATE_COCKTAIL_BOX = 'soz-core:server:job:baun:create-cocktail-box',
+    BAUN_CREATE_ICE_CUBES = 'soz-core:server:job:baun:create-ice-cubes',
+    BAUN_HARVEST = 'soz-core:server:job:baun:harvest',
     BAUN_RESELL = 'soz-core:server:job:baun:resell',
     BAUN_ICE_CUBE = 'soz-core:server:job:baun:ice-cube',
+    BAUN_RESTOCK = 'soz-core:server:job:baun:restock',
 
     BENNYS_ESTIMATE_VEHICLE = 'soz-core:server:job:bennys:estimate-vehicle',
     BENNYS_SELL_VEHICLE = 'soz-core:server:job:bennys:sell-vehicle',

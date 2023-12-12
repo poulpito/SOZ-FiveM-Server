@@ -256,7 +256,7 @@ export class InventoryManager {
     }
 
     public canCarryItems(
-        source: number,
+        source: number | string,
         items: { name: string; amount: number }[],
         metadata?: InventoryItemMetadata
     ): boolean {

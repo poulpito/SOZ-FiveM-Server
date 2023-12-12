@@ -5,9 +5,7 @@ import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { ServerEvent } from '../../../shared/event';
 import { InventoryManager } from '../../inventory/inventory.manager';
-import { Monitor } from '../../monitor/monitor';
 import { Notifier } from '../../notifier';
-import { ProgressService } from '../../player/progress.service';
 
 @Provider()
 export class BaunCraftProvider {
@@ -19,12 +17,6 @@ export class BaunCraftProvider {
 
     @Inject(ItemService)
     private itemService: ItemService;
-
-    @Inject(ProgressService)
-    private progressService: ProgressService;
-
-    @Inject(Monitor)
-    private monitor: Monitor;
 
     @OnEvent(ServerEvent.BAUN_ICE_CUBE)
     public onIceCube(source: number, count: number) {
