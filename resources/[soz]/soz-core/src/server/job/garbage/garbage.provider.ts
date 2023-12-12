@@ -9,13 +9,13 @@ import { Store } from '../../store/store';
 const PROCESSING_STORAGE = 'garbage_processing';
 const PROCESSING_AMOUNT = 300;
 
-const DEFAULT_SELL_PRICE = 30;
+const DEFAULT_SELL_PRICE = 60;
 const SELL_PRICE: Record<string, number> = {
-    sawdust: 3,
-    petroleum_residue: 8,
-    seeweed_acid: 35,
-    torn_garbagebag: 16,
-    halloween_infernus_garbage: 16,
+    sawdust: 6,
+    petroleum_residue: 16,
+    seeweed_acid: 70,
+    torn_garbagebag: 32,
+    halloween_infernus_garbage: 32,
 };
 
 @Provider()
