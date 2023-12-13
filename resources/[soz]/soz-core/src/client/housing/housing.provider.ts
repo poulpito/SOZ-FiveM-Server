@@ -123,7 +123,7 @@ export class HousingProvider {
         let hasParking = true;
 
         if (enableParking) {
-            const apartment = property.apartments[id];
+            const apartment = property.apartments.find(apartment => apartment.id === id);
 
             hasParking = apartment && apartment.hasParkingPlace;
         }

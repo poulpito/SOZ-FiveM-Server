@@ -177,6 +177,7 @@ export enum ClientEvent {
     VEHICLE_GET_CLOSEST = 'soz-core:client:vehicle:get-closest',
     VEHICLE_GARAGE_HOUSE_OPEN_MENU = 'soz-core:client:vehicle:garage:house:open-menu',
     VEHICLE_GARAGE_HOUSE_SHOW_PARKING = 'soz-core:client:vehicle:garage:house:show-parking',
+    VEHICLE_GARAGE_UPDATE = 'soz-core:client:vehicle:garage:update',
     VEHICLE_ROUTE_EJECTION = 'soz-core:client:vehicle:route-ejection',
     VEHICLE_SET_TRUNK_STATE = 'soz-core:client:vehicle:set-trunk-state',
     VEHICLE_RADAR_FLASHED = 'soz-core:client:vehicle:radar:flashed',

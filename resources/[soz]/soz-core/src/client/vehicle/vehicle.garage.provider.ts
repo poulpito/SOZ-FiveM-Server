@@ -1,11 +1,11 @@
-import { Once, OnceStep, OnNuiEvent } from '@core/decorators/event';
+import { Once, OnceStep, OnEvent, OnNuiEvent } from '@core/decorators/event';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { emitRpc } from '@core/rpc';
 import { wait } from '@core/utils';
 import { Apartment } from '@public/shared/housing/housing';
 
-import { NuiEvent, ServerEvent } from '../../shared/event';
+import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
 import { Feature, isFeatureEnabled } from '../../shared/features';
 import { JobPermission, JobType } from '../../shared/job';
 import { MenuType } from '../../shared/nui/menu';
@@ -636,5 +636,11 @@ export class VehicleGarageProvider {
                 },
             }
         );
+    }
+
+    @OnEvent(ClientEvent.VEHICLE_GARAGE_UPDATE)
+    public onUpdate(identifier: string, garage: Garage) {
+        const garageList = this.garageRepository.get();
+        garageList[identifier] = garage;
     }
 }
