@@ -111,6 +111,7 @@ export enum ServerEvent {
     JOB_GRADE_SET_DEFAULT = 'soz-core:server:job:grade:set-default',
     JOB_GRADE_SET_SALARY = 'soz-core:server:job:grade:set-salary',
     JOB_GRADE_SET_WEIGHT = 'soz-core:server:job:grade:set-weight',
+    JOB_GRADE_SET_NAME = 'soz-core:server:job:grade:set-name',
     JOB_GRADE_SET_PERMISSION = 'soz-core:server:job:grade:set-permission',
 
     LSMC_BLOOD_FILL_FLASK = 'soz-core:server:job:lsmc:blood-fill-flask',

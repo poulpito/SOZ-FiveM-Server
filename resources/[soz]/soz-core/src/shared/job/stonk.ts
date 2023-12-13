@@ -93,6 +93,24 @@ const deliveryZones: NamedZone[] = [
         minZ: 79.9,
         maxZ: 82.9,
     },
+    {
+        name: 'PALETO BANK',
+        center: [-92.29, 6469.71, 31.44],
+        length: 0.8,
+        width: 3.6,
+        heading: 314.7,
+        minZ: 30.44,
+        maxZ: 33.64,
+    },
+    {
+        name: 'AIRPORT',
+        center: [-1911.32, -2992.59, 14.54],
+        length: 0.4,
+        width: 2.8,
+        heading: 60.12,
+        minZ: 12.54,
+        maxZ: 15.54,
+    },
 ];
 
 export const StonkConfig = {

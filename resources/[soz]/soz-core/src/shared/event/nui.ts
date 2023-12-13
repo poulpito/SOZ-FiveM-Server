@@ -150,6 +150,7 @@ export enum NuiEvent {
     PlayerMenuJobGradeSetDefault = 'soz-core:nui:player:menu:job-grade-set-default',
     PlayerMenuJobGradeUpdateSalary = 'soz-core:nui:player:menu:job-grade-update-salary',
     PlayerMenuJobGradeUpdateWeight = 'soz-core:nui:player:menu:job-grade-update-weight',
+    PlayerMenuJobGradeUpdateName = 'soz-core:nui:player:menu:job-grade-update-name',
     PlayerMenuJobGradePermissionUpdate = 'soz-core:nui:player:menu:job-grade-permission-update',
     PlayerMenuRemoveDeguisement = 'soz-core:nui:player:menu:cloth-remove-deguisement',
     PlayerMenuReDress = 'soz-core:nui:player:menu:cloth-redress',

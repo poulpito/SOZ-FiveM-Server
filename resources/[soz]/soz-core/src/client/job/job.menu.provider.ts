@@ -44,7 +44,7 @@ export class JobMenuProvider {
     @OnNuiEvent(NuiEvent.PlayerMenuJobGradeDelete)
     public async onPlayerMenuJobGradeDelete({ grade }: { grade: JobGrade }) {
         const confirm = await this.inputService.askConfirm(
-            `Etes vous sur de vouloir supprimer le grade ${grade.name} ?`
+            `Êtes-vous sûr(e) de vouloir supprimer le grade ${grade.name} ? (OUI)`
         );
 
         if (!confirm) {
@@ -94,6 +94,22 @@ export class JobMenuProvider {
         const weightNumber = parseInt(weight, 10);
 
         TriggerServerEvent(ServerEvent.JOB_GRADE_SET_WEIGHT, gradeId, weightNumber);
+        this.nuiMenu.closeMenu();
+    }
+
+    @OnNuiEvent(NuiEvent.PlayerMenuJobGradeUpdateName)
+    public async onPlayerMenuJobGradeUpdateName({ gradeId }: { gradeId: number }) {
+        const newName = await this.inputService.askInput({
+            title: 'Nouveau nom :',
+            defaultValue: '',
+            maxCharacters: 32,
+        });
+
+        if (!newName || newName.length === 0) {
+            return;
+        }
+
+        TriggerServerEvent(ServerEvent.JOB_GRADE_SET_NAME, gradeId, newName);
         this.nuiMenu.closeMenu();
     }
 

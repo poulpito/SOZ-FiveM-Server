@@ -477,7 +477,7 @@ const MenuJob: FunctionComponent<MenuJobProps> = ({ data }) => {
                     {jobGrades.map((grade, i) => {
                         return (
                             <MenuItemSubMenuLink key={i} id={`job_grade_${grade.id}`}>
-                                {grade.name} {!!grade.is_default && '(par défaut)'}
+                                {!!grade.owner && '⭐'} {grade.name} {!!grade.is_default && '(par défaut)'}
                             </MenuItemSubMenuLink>
                         );
                     })}
@@ -510,7 +510,7 @@ const MenuJob: FunctionComponent<MenuJobProps> = ({ data }) => {
                                         });
                                     }}
                                 >
-                                    Changer le salaire ({grade.salary}$)
+                                    💵 Changer le salaire ({grade.salary}$)
                                 </MenuItemButton>
                                 {!grade.is_default && (
                                     <MenuItemButton
@@ -525,12 +525,21 @@ const MenuJob: FunctionComponent<MenuJobProps> = ({ data }) => {
                                 )}
                                 <MenuItemButton
                                     onConfirm={() => {
+                                        fetchNui(NuiEvent.PlayerMenuJobGradeUpdateName, {
+                                            gradeId: grade.id,
+                                        });
+                                    }}
+                                >
+                                    ✎ Renommer le grade
+                                </MenuItemButton>
+                                <MenuItemButton
+                                    onConfirm={() => {
                                         fetchNui(NuiEvent.PlayerMenuJobGradeDelete, {
                                             grade,
                                         });
                                     }}
                                 >
-                                    Supprimer le grade
+                                    ❌ Supprimer le grade
                                 </MenuItemButton>
                                 {Object.keys(data.job.permissions).map(permission => {
                                     const permissionValue = data.job.permissions[permission];
