@@ -151,6 +151,7 @@ export enum RpcServerEvent {
     DRUG_DO_TRANSFORM = 'soz-core:server:drugs:recipes-transform',
     DRUGS_PAY_LOCATION = 'soz-core:server:drugs:location-pay',
     DRUGS_FIELD_HEALTH = 'soz-core:server:drugs:field-health',
+    DRUGS_CAN_CONTRACT = 'soz-core:server:drugs:can-contract',
 
     SOZEDEX_CLAIM_REWARD = 'soz-core:server:sozedex:claim-reward',
 
