@@ -42,7 +42,10 @@ const weaponUnarmed = GetHashKey('WEAPON_UNARMED');
 const weaponPetrolCan = GetHashKey('WEAPON_PETROLCAN');
 
 const messageExclude = [GetHashKey('weapon_musket'), GetHashKey('weapon_raypistol'), GetHashKey('weapon_pumpshotgun')];
-const NonLethalWeapons = [GetHashKey('weapon_pumpshotgun')];
+const NonLethalWeapons = {
+    [GetHashKey('weapon_pumpshotgun')]: 10,
+    [GetHashKey('WEAPON_SNOWBALL')]: 2,
+};
 
 @Provider()
 export class WeaponProvider {
@@ -95,7 +98,6 @@ export class WeaponProvider {
         SetWeaponDamageModifier(WeaponName.KNUCKLE, 0.2);
         SetWeaponDamageModifier(WeaponName.POOLCUE, 0.2);
 
-        SetWeaponDamageModifier('AMMO_SNOWBALL', 0.0);
         SetWeaponDamageModifier('AMMO_FIREWORK', 0.0);
         SetWeaponDamageModifier(WeaponName.SMOKEGRENADE, 0.0);
         SetWeaponDamageModifier(WeaponName.BZGAS, 0.1);
@@ -378,9 +380,16 @@ export class WeaponProvider {
         weaponHash: number
     ) {
         const playerPed = PlayerPedId();
-        if (playerPed == victim && NonLethalWeapons.includes(weaponHash) && !IsPedRagdoll(playerPed)) {
-            this.weapon.clear();
-            SetPedToRagdoll(playerPed, 10000, 10000, 0, false, false, false);
+        if (
+            (playerPed == victim || (IsEntityAPed(victim) && NetworkHasControlOfEntity(victim))) &&
+            Object.keys(NonLethalWeapons).find(weap => Number(weap) == weaponHash) &&
+            !IsPedRagdoll(playerPed)
+        ) {
+            if (playerPed == victim) {
+                this.weapon.clear();
+            }
+            const duration = NonLethalWeapons[weaponHash];
+            SetPedToRagdoll(victim, duration * 1000, duration * 1000, 0, false, false, false);
             const attackerCoords = GetEntityCoords(attacker);
             const victimCoords = GetEntityCoords(victim);
             const vec = [
@@ -389,7 +398,7 @@ export class WeaponProvider {
                 victimCoords[2] - attackerCoords[2],
             ] as Vector3;
             const magnitude = Math.sqrt(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]);
-            SetEntityVelocity(playerPed, (2 * vec[0]) / magnitude, (2 * vec[1]) / magnitude, (2 * vec[2]) / magnitude);
+            SetEntityVelocity(victim, (2 * vec[0]) / magnitude, (2 * vec[1]) / magnitude, (2 * vec[2]) / magnitude);
         }
     }
 
@@ -421,6 +430,37 @@ export class WeaponProvider {
             }
         } else {
             await wait(500);
+        }
+    }
+
+    @OnEvent(ClientEvent.WEAPON_PICK_SNOWBALL, false)
+    public async onSnowPickup() {
+        const playerPedId = PlayerPedId();
+        const playerId = PlayerId();
+        if (
+            IsPedInAnyVehicle(playerPedId, true) ||
+            IsPlayerFreeAiming(playerId) ||
+            IsPedSwimming(playerPedId) ||
+            IsPedSwimmingUnderWater(playerPedId) ||
+            IsPedRagdoll(playerPedId) ||
+            IsPedFalling(playerPedId) ||
+            IsPedRunning(playerPedId) ||
+            IsPedSprinting(playerPedId) ||
+            GetInteriorFromEntity(playerPedId) ||
+            IsPedShooting(playerPedId) ||
+            IsPedUsingAnyScenario(playerPedId) ||
+            IsPedInCover(playerPedId, false)
+        ) {
+            return;
+        }
+
+        const { completed } = await this.progressService.progress('snow', 'Ramassage de neige...', 2000, {
+            dictionary: 'anim@mp_snowball',
+            name: 'pickup_snowball',
+        });
+
+        if (completed) {
+            TriggerServerEvent(ServerEvent.WEAPON_GET_SNOW);
         }
     }
 }

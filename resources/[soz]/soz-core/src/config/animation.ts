@@ -1,4 +1,7 @@
+import { ClientEvent } from '@public/shared/event';
+
 import { AnimationConfigList, MoodConfigList, WalkConfigList } from '../shared/animation';
+
 export const Walks: WalkConfigList = [
     { type: 'walk', name: 'Démarche par défaut Homme', walk: 'move_m@multiplayer' },
     { type: 'walk', name: 'Démarche par défaut Femme', walk: 'move_f@multiplayer' },
@@ -11129,6 +11132,13 @@ export const Animations: AnimationConfigList = [
                         },
                     },
                 ],
+            },
+            {
+                type: 'event',
+                name: 'Ramasser de la neige',
+                rightLabel: null,
+                icon: '❄️',
+                event: ClientEvent.WEAPON_PICK_SNOWBALL,
             },
             {
                 type: 'animation',

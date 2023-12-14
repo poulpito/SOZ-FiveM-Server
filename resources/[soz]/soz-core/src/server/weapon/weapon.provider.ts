@@ -7,7 +7,6 @@ import { On, Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
-import { Logger } from '../../core/logger';
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { InventoryItem } from '../../shared/item';
 import { RpcServerEvent } from '../../shared/rpc';
@@ -18,6 +17,7 @@ import { Notifier } from '../notifier';
 import { PlayerService } from '../player/player.service';
 import { PlayerStateService } from '../player/player.state.service';
 import { ServerStateService } from '../server.state.service';
+import { Store } from '../store/store';
 
 @Provider()
 export class WeaponProvider {
@@ -30,9 +30,6 @@ export class WeaponProvider {
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
 
-    @Inject(Logger)
-    private logger: Logger;
-
     @Inject(PlayerStateService)
     private playerStateService: PlayerStateService;
 
@@ -44,6 +41,9 @@ export class WeaponProvider {
 
     @Inject(ServerStateService)
     private serverStateService: ServerStateService;
+
+    @Inject('Store')
+    private store: Store;
 
     private lastAlertByZone: Record<string, number> = {};
 
@@ -317,6 +317,28 @@ export class WeaponProvider {
             ammo: (weapon.metadata.ammo || 0) + ammoInClip,
         });
         return this.inventoryManager.getSlot(source, weaponSlot);
+    }
+
+    @OnEvent(ServerEvent.WEAPON_GET_SNOW)
+    public snow(source: number) {
+        if (!this.store.getState().global.snow) {
+            this.notifier.notify(source, 'Où tu as vu de la neige ???', 'error');
+            return;
+        }
+
+        const weapon = this.inventoryManager.getFirstItemInventory(source, 'weapon_snowball');
+        if (weapon) {
+            if (weapon.metadata.ammo >= 10) {
+                this.notifier.notify(source, 'Tu as trop de boules de neige sur toi !', 'error');
+                return;
+            }
+            this.inventoryManager.updateMetadata(source, weapon.slot, {
+                ammo: weapon.metadata.ammo + 1,
+            });
+        } else {
+            this.inventoryManager.addItemToInventory(source, 'weapon_snowball', 1, { ammo: 1 });
+        }
+        this.notifier.notify(source, 'Tu as ramassé une boule de neige');
     }
 
     @Once(OnceStep.Start)

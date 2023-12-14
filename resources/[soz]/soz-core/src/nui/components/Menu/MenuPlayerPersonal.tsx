@@ -415,9 +415,10 @@ const createAnimationLeafItem = (item: AnimationConfigItem): ReactElement => {
                     <div>{item.name}</div>
                 </div>
             }
+            titleWidth={60}
         >
             <MenuItemSelectOption value="play">Jouer</MenuItemSelectOption>
-            <MenuItemSelectOption value="favorite">Mettre en Raccourci</MenuItemSelectOption>
+            <MenuItemSelectOption value="favorite">Raccourci</MenuItemSelectOption>
         </MenuItemSelect>
     );
 };

@@ -1,4 +1,4 @@
-import { On } from '@public/core/decorators/event';
+import { On, Once } from '@public/core/decorators/event';
 
 import { Command } from '../../core/decorators/command';
 import { Exportable } from '../../core/decorators/exports';
@@ -14,8 +14,8 @@ import { getRandomInt, getRandomKeyWeighted } from '../../shared/random';
 import { Forecast, ForecastWithTemperature, TemperatureRange, Time, Weather } from '../../shared/weather';
 import { Pollution } from '../pollution';
 import { Store } from '../store/store';
-import { Halloween, Polluted, SpringAutumn } from './forecast';
-import { DayAutumnTemperature, ForecastAdderTemperatures, NightAutumnTemperature } from './temperature';
+import { Halloween, Polluted, Winter } from './forecast';
+import { DayWinterTemperature, ForecastAdderTemperatures, NightWinterTemperature } from './temperature';
 
 const INCREMENT_SECOND = (3600 * 24) / (60 * 48);
 const MAX_FORECASTS = 5;
@@ -38,11 +38,11 @@ export class WeatherProvider {
     private pollutionManagerReady = false;
 
     // See forecast.ts for the list of available forecasts
-    private forecast: Forecast = isFeatureEnabled(Feature.Halloween) ? Halloween : SpringAutumn;
+    private forecast: Forecast = isFeatureEnabled(Feature.Halloween) ? Halloween : Winter;
     // See temperature.ts for the list of available temperature ranges,
     // please ensure that the day and night temperature ranges are using the same season
-    private dayTemperatureRange: TemperatureRange = DayAutumnTemperature;
-    private nightTemperatureRange: TemperatureRange = NightAutumnTemperature;
+    private dayTemperatureRange: TemperatureRange = DayWinterTemperature;
+    private nightTemperatureRange: TemperatureRange = NightWinterTemperature;
 
     private defaultWeather: Weather = isFeatureEnabled(Feature.Halloween) ? 'CLOUDS' : 'OVERCAST';
 
@@ -55,6 +55,13 @@ export class WeatherProvider {
     private incomingForecasts: ForecastWithTemperature[] = [this.currentForecast];
 
     private stormDeadline = 0; // timestamp
+
+    @Once()
+    public init() {
+        if (this.forecast == Winter) {
+            this.store.dispatch.global.update({ snow: true });
+        }
+    }
 
     @Tick(TickInterval.EVERY_SECOND * UPDATE_TIME_INTERVAL, 'weather:time:advance', true)
     async advanceTime() {
