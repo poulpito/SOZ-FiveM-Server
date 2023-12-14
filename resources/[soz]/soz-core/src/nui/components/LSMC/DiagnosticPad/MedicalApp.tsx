@@ -1,3 +1,5 @@
+import '../DiagnosticPad/index.scss';
+
 import { useBackspace } from '@public/nui/hook/control';
 import { useNuiEvent, useNuiFocus } from '@public/nui/hook/nui';
 import { useOutside } from '@public/nui/hook/outside';
@@ -15,7 +17,6 @@ import { PlayerCriminalState, PlayerMetadata } from '@public/shared/player';
 import { getRandomInt } from '@public/shared/random';
 import { format } from 'date-fns';
 import { FunctionComponent, useState } from 'react';
-
 export const MedicalApp: FunctionComponent = () => {
     const [medicalDatas, setMedicalDatas] = useState<MedicalMetadata>(null);
 
@@ -136,7 +137,7 @@ export const MedicalApp: FunctionComponent = () => {
 
     function getStyleByGravity(damage: number, isFatal: boolean) {
         const woundGravity = getWoundImportance(damage, isFatal);
-        return DamageConfigs[woundGravity].style;
+        return DamageConfigs[woundGravity].color;
     }
 
     const getMaxGravityInzone = (damages: DamageServerData[]) => {
@@ -276,53 +277,60 @@ export const MedicalApp: FunctionComponent = () => {
         };
 
         return (
-            <div className="flex-col w-full">
-                <div className="flex flex-col h-full">
-                    <div className="flex flex-row mt-[1rem] justify-center h-[10%]">
-                        {renderCenterZones(headZone.label, headZone.zones)}
+            <div className="flex flex-row h-full w-full ">
+                <div className="flex flex-col pl-[13vh] w-[80%] h-full">
+                    <div className="flex flex-row pb-[1vh] justify-center h-[15%]">
+                        {renderZones(headZone.label, headZone.zones)}
                     </div>
-
-                    <div className="flex flex-row my-[2rem] h-[10%]">
-                        <div className="flex flex-col w-[42%]">
-                            {renderLeftZones(rightShoulder.label, rightShoulder.zones)}
+                    <div className="flex flex-row h-[16%]">
+                        <div className="flex flex-col w-[33%] items-end">
+                            {renderZones(rightShoulder.label, rightShoulder.zones)}
                         </div>
-                        <div className="flex flex-col w-[16%]"></div>
+                        <div className="flex flex-col w-[33%]"></div>
 
-                        <div className="flex flex-col w-[42%]">
-                            {renderRightZones(leftShoulder.label, leftShoulder.zones)}
+                        <div className="flex flex-col w-[33%] items-start">
+                            {renderZones(leftShoulder.label, leftShoulder.zones)}
                         </div>
                     </div>
-                    <div className="flex flex-row my-[2rem]  h-[10%]">
-                        <div className="flex flex-col  w-[40%]">{renderLeftZones(rightArm.label, rightArm.zones)}</div>
-                        <div className="flex flex-col w-[20%]"></div>
-                        <div className="flex flex-col w-[40%]">{renderRightZones(leftArm.label, leftArm.zones)}</div>
+                    <div className="flex flex-row h-[15%]">
+                        <div className="flex flex-col w-[28%] items-end">
+                            {renderZones(rightArm.label, rightArm.zones)}
+                        </div>
+                        <div className="flex flex-col w-[41%]"></div>
+                        <div className="flex flex-col w-[20%] items-start">
+                            {renderZones(leftArm.label, leftArm.zones)}
+                        </div>
                     </div>
-                    <div className="flex flex-row my-[2rem] h-[10%]">
-                        <div className="flex flex-col w-[38%]">{renderLeftZones(rightHand.label, rightHand.zones)}</div>
+                    <div className="flex flex-row h-[20%]">
+                        <div className="flex flex-col w-[37%]">{renderZones(rightHand.label, rightHand.zones)}</div>
                         <div className="flex flex-col w-[24%]"></div>
-                        <div className="flex flex-col w-[38%]">{renderRightZones(leftHand.label, leftHand.zones)}</div>
+                        <div className="flex flex-col w-[38%]">{renderZones(leftHand.label, leftHand.zones)}</div>
                     </div>
-                    <div className="flex flex-row my-[2rem]  h-[10%]">
-                        <div className="flex flex-col  w-[42%]">{renderLeftZones(rightLeg.label, rightLeg.zones)}</div>
-                        <div className="flex flex-col  w-[16%]"></div>
+                    <div className="flex flex-row h-[20%]">
+                        <div className="flex flex-col w-[35%] items-end">
+                            {renderZones(rightLeg.label, rightLeg.zones)}
+                        </div>
+                        <div className="flex flex-col w-[28%]"></div>
 
-                        <div className="flex flex-col  w-[42%]">{renderRightZones(leftLeg.label, leftLeg.zones)}</div>
+                        <div className="flex flex-col w-[27%] items-start">
+                            {renderZones(leftLeg.label, leftLeg.zones)}
+                        </div>
                     </div>
-                    <div className="flex flex-row my-[2rem] h-[10%]">
-                        <div className="flex flex-col w-[40%]">{renderLeftZones(rightFoot.label, rightFoot.zones)}</div>
-                        <div className="flex flex-col w-[20%]"></div>
-                        <div className="flex flex-col w-[40%]">{renderRightZones(leftFoot.label, leftFoot.zones)}</div>
+                    <div className="flex flex-row h-[20%]">
+                        <div className="flex flex-col w-[28%] items-end">
+                            {renderZones(rightFoot.label, rightFoot.zones)}
+                        </div>
+                        <div className="flex flex-col w-[40%]"></div>
+                        <div className="flex flex-col w-[30%] items-start">
+                            {renderZones(leftFoot.label, leftFoot.zones)}
+                        </div>
                     </div>
-                    <div className="flex flex-row mb-[3rem] justify-center w-full h-[10%] mt-2">
-                        <div className="flex flex-col w-[33%] h-full">
-                            {renderCenterZones(bones[0], damages[bones[0]])}
-                        </div>
-                        <div className="flex flex-col w-[33%]">
-                            {renderCenterZones(bones[24817], damages[bones[24817]])}
-                        </div>
-                        <div className="flex flex-col w-[33%]">
-                            {renderCenterZones(bones[24816], damages[bones[24816]])}
-                        </div>
+                </div>
+                <div className="flex flex-col h-full w-[20%] justify-start items-center">
+                    <div className="bg-[black] h-[65%] bg-opacity-25 p-8 border-[2px] border-[#8bfee19a] rounded-[3vh] [box-shadow:_0_1px_5px_rgb(39_169_151)]">
+                        <div className="flex flex-col h-[33%]">{renderZones(bones[0], damages[bones[0]])}</div>
+                        <div className="flex flex-col h-[33%]">{renderZones(bones[24817], damages[bones[24817]])}</div>
+                        <div className="flex flex-col h-[33%]">{renderZones(bones[24816], damages[bones[24816]])}</div>
                     </div>
                 </div>
             </div>
@@ -330,65 +338,21 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     function getGlobalZoneColor(damages: DamageServerData[]) {
-        return damages ? DamageConfigs[getMaxGravityInzone(damages)].color : 'rgba(39,169,43,0.7)';
+        return damages ? DamageConfigs[getMaxGravityInzone(damages)].color : 'rgba(39,169,151,0.7)';
     }
 
-    const renderRightZones = (name: string, damages: DamageServerData[]) => {
+    const renderZones = (name: string, damages: DamageServerData[]) => {
         const globalZoneColor = getGlobalZoneColor(damages);
 
         return (
-            <div className={`flex flex-row justify-start items-center h-full`}>
-                <div
-                    className="flex flex-row h-full p-4 min-w-[7rem] min-h-[7rem] [box-shadow:_0_1px_5px_rgb(39_169_43)] bg-black bg-opacity-50"
-                    style={{
-                        borderWidth: '0.1rem 0.1rem 0.1rem 0.3rem',
-                        borderColor: globalZoneColor,
-                        boxShadow: `0 1px 12px ${globalZoneColor}`,
-                    }}
-                >
-                    {renderDamagedIcons(damages)}
-                </div>
-                <div className="flex flex-col h-full items-start pt-[1rem] text-lg ps-4 uppercase text-green-500 font-bold">
-                    <p className="[text-shadow:_0_1px_12px_rgb(39_169_43)]">{name}</p>
-                </div>
-            </div>
-        );
-    };
-
-    const renderLeftZones = (name: string, damages: DamageServerData[]) => {
-        const globalZoneColor = getGlobalZoneColor(damages);
-
-        return (
-            <div className={`flex flex-row justify-end items-center h-full`}>
-                <div className="flex flex-col h-full items-start pt-[1rem] text-lg pe-4 uppercase text-green-500 font-bold">
-                    <p className="[text-shadow:_0_1px_12px_rgb(39_169_43)]">{name}</p>
+            <div className={`flex flex-col justify-end items-center`}>
+                <div className="flex flex-col justify-center items-start py-[0.5vh] text-[#53e2cf]">
+                    <p className="neuropol text-s [text-shadow:_0_1px_12px_rgb(39_169_151)]">{name}</p>
                 </div>
                 <div
-                    className="flex flex-row h-full min-w-[7rem] min-h-[7rem] p-4  bg-black bg-opacity-50"
+                    className="flex flex-row justify-center min-w-[8vh] min-h-[8vh] rounded-lg [box-shadow:_0_1px_5px_rgb(39_169_151)] bg-black bg-opacity-50"
                     style={{
-                        borderWidth: '0.1rem 0.3rem 0.1rem 0.1rem',
-                        borderColor: globalZoneColor,
-                        boxShadow: `0 1px 12px ${globalZoneColor}`,
-                    }}
-                >
-                    {renderDamagedIcons(damages)}
-                </div>
-            </div>
-        );
-    };
-
-    const renderCenterZones = (name: string, damages: DamageServerData[]) => {
-        const globalZoneColor = getGlobalZoneColor(damages);
-
-        return (
-            <div className={`flex flex-col justify-end items-center  h-full`}>
-                <div className="flex flex-col h-full justify-center items-start pt-[1rem] text-lg pb-2 uppercase text-green-500 font-bold   ">
-                    <p className="[text-shadow:_0_1px_12px_rgb(39_169_43)]">{name}</p>
-                </div>
-                <div
-                    className="flex flex-row p-4 min-w-[7rem] min-h-[7rem] h-full [box-shadow:_0_1px_5px_rgb(39_169_43)] bg-black bg-opacity-50"
-                    style={{
-                        borderWidth: '0.3rem 0.1rem 0.1rem 0.1rem',
+                        borderWidth: '0.2vh',
                         borderColor: globalZoneColor,
                         boxShadow: `0 1px 12px ${globalZoneColor}`,
                     }}
@@ -402,16 +366,18 @@ export const MedicalApp: FunctionComponent = () => {
     const renderDetail = (damage: DamageServerData, count: number, globalDamages) => {
         const gravity = getWoundImportance(globalDamages, damage.isFatal);
         const textColor = DamageConfigs[gravity].color;
-
         return (
-            <div className="flex flex-col h-full opacity-90 text-[rgb(255,255,255)] [text-shadow:_0_1px_12px_rgb(255_255_255)]">
+            <div
+                className="flex flex-col h-full p-4 opacity-90 [text-shadow:_0_1px_12px_rgb(39_169_151)]"
+                style={{ color: 'white' }}
+            >
                 <div className="flex flex-row">
-                    <div className="flex flex-col uppercase font-bold w-[75%] justify-center items-start pe-[1rem]">
+                    <div className="flex flex-col uppercase  w-[75%] justify-center items-start pe-[1rem]">
                         <p className="text-2xs mb-[1rem]">
                             Analyse : #
                             {(Math.random() * 10000).toFixed(0) + '-' + patient.charinfo.lastname.toUpperCase()}
                         </p>
-                        <p className="text-lg">
+                        <p className="text-lg neuropol">
                             {DamagesTypes[damage.damageType].label}
                             {count > 1 && ' Multiple'}
                         </p>
@@ -420,7 +386,7 @@ export const MedicalApp: FunctionComponent = () => {
                             style={{ backgroundColor: textColor, boxShadow: `0 1px 12px ${textColor}` }}
                         ></div>
                         <p
-                            className={`text-m`}
+                            className={`text-m neuropol`}
                             style={{
                                 color: textColor,
                                 textShadow: `0 1px 12px ${textColor}`,
@@ -432,7 +398,7 @@ export const MedicalApp: FunctionComponent = () => {
                             className={`h-[2] w-full opacity-30 pt-[1px] my-2`}
                             style={{ backgroundColor: textColor, boxShadow: `0 1px 12px ${textColor}` }}
                         ></div>{' '}
-                        <p className="text-m">{getWoundAnteriority(damage.date)}</p>
+                        <p className="text-m neuropol">{getWoundAnteriority(damage.date)}</p>
                     </div>
                     <div className="flex flex-col justify-start h-[6rem] items-start w-[25%]">
                         {<img src={`/public/images/lsmc/icons/${getIconByDamageType(damage.damageType)}.webp`}></img>}
@@ -442,10 +408,6 @@ export const MedicalApp: FunctionComponent = () => {
                     className={`h-[2] w-full opacity-30 pt-[1px] my-2`}
                     style={{ backgroundColor: textColor, boxShadow: `0 1px 12px ${textColor}` }}
                 ></div>
-                <div className="flex flex-col w-full">
-                    <p className="uppercase text-lg font-bold mt-[1rem]">Informations détaillées : </p>
-                    <p className="pt-4 text-justify px-1">{DamagesTypes[damage.damageType].description}</p>
-                </div>
             </div>
         );
     };
@@ -466,15 +428,18 @@ export const MedicalApp: FunctionComponent = () => {
                         damages.map(damage => {
                             globalDamages += damage.damageQty;
                         });
-
                         const styleByGravity = getStyleByGravity(globalDamages, damages[0].isFatal);
                         return (
                             <div
                                 key={index}
-                                className={`w-[5rem] h-[5rem]  mx-2 ${styleByGravity} bg-opacity-50 border-solid border-4 rounded flex items-center justify-center mx-1 cursor-pointer group`}
+                                className={`h-[5vh] w-[5vh] bg-opacity-50 border-solid border-4 rounded flex items-center justify-center cursor-pointer group`}
+                                style={{
+                                    boxShadow: `0 1px 12px ${styleByGravity}`,
+                                    borderColor: styleByGravity,
+                                }}
                             >
                                 {false && damages.length > 1 && (
-                                    <span className="absolute ms-[4rem] mb-[4rem] font-bold">{damages.length}</span>
+                                    <span className="absolute ms-[4rem] mb-[4rem] ">{damages.length}</span>
                                 )}
                                 {
                                     <img
@@ -485,8 +450,12 @@ export const MedicalApp: FunctionComponent = () => {
                                     ></img>
                                 }
                                 <div
-                                    className={`flex flex-col top-[30rem] left-[30rem] absolute min-h-[30rem] w-[25rem] bg-[black] 
-                                    border-2 p-2 ${styleByGravity} bg-opacity-100 scale-0 group-hover:scale-100 border-l-8`}
+                                    className={`flex flex-col bottom-[9vh] left-[132vh] absolute w-[30vh] rounded-[2vh] bg-[black] 
+                                    border-2 p-2 bg-opacity-100 scale-0 group-hover:scale-100`}
+                                    style={{
+                                        boxShadow: `0 1px 12px ${styleByGravity}`,
+                                        borderColor: styleByGravity,
+                                    }}
                                 >
                                     {renderDetail(damages[0], damages.length, globalDamages)}
                                 </div>
@@ -498,27 +467,34 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     const renderLeftPatientInformations = () => {
+        const healthStateLabel = healthLevelToLabel(patient.metadata.health_level, 0, 100);
+        const stressLevelLabel = stressLevelToLabel(patient.metadata.stress_level);
+        const maxStaminaLevelLabel = healthLevelToLabel(patient.metadata.max_stamina, 60, 150);
+        const strengthLevelLabel = healthLevelToLabel(patient.metadata.strength, 60, 150);
+        const [injuriesAllowed, injuriesLabel] = getInjuriesStatus(patient.metadata);
         return (
             <>
-                <div className="[box-shadow:_0_1px_10px_rgb(39_169_43)] [text-shadow:_0_1px_15px_rgb(255_255_255)] border-2 border-green-700 p-2 h-full">
-                    <h1 className="mb-2 text-xl text-green-500 [text-shadow:_0_1px_5px_rgb(39_169_43)]">
+                <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] [text-shadow:_0_1px_15px_rgb(255_255_255)] rounded-lg border-2 border-[#27a997] h-full">
+                    <h1 className="neuropol mb-2 text-xl text-[#53e2cf] [text-shadow:_0_1px_5px_rgb(39_169_151)] px-2 pu-1 rounded-t bg-[#27a99842]">
                         Informations
                     </h1>
-                    <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
-                    <p className="my-1">
-                        Nom : <span>{patient.charinfo.lastname}</span>
-                    </p>
-                    <p className="mb-2">
-                        Prénom : <span>{patient.charinfo.firstname}</span>
-                    </p>
-                    <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)] mb-2"></div>
-                    <p className="mb-2">
-                        DATE : <span>{format(medicalDatas.date, 'yyyy-MM-dd HH:mm:ss')} </span>
-                    </p>
+                    <div className="px-2">
+                        <p className="my-1">
+                            Nom : <span>{patient.charinfo.lastname}</span>
+                        </p>
+                        <p className="mb-2">
+                            Prénom : <span>{patient.charinfo.firstname}</span>
+                        </p>
+                        <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_151)] mb-2"></div>
+                        <p className="mb-2">
+                            DATE : <span>{format(medicalDatas.date, 'yyyy-MM-dd HH:mm:ss')} </span>
+                        </p>
+                    </div>
                 </div>
-                <div className="[box-shadow:_0_1px_10px_rgb(39_169_43)] mt-10 [text-shadow:_0_2px_12px_rgb(255_255_255)] border-2 border-green-700 p-2 h-full">
-                    <h1 className="mb-2 text-xl text-green-500 [text-shadow:_0_2px_12px_rgb(39_169_43)]">Constantes</h1>
-                    <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
+                <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] mt-10 [text-shadow:_0_2px_12px_rgb(255_255_255)]  rounded-lg border-2 border-[#27a997] h-full">
+                    <h1 className="neuropol mb-2 text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-1 rounded-t bg-[#27a99842]">
+                        Constantes
+                    </h1>
                     <div className="my-1 flex flex-row items-center">
                         <div className="flex flex-col me-[1rem]">
                             <img className="w-[2.5rem]" src={`/public/images/lsmc/icons/heart.webp`}></img>
@@ -534,120 +510,108 @@ export const MedicalApp: FunctionComponent = () => {
                         <div className="flex flex-col text-l">{getRandomInt(95, 99)} %</div>
                     </div>
                 </div>
-            </>
-        );
-    };
-
-    const renderRightPatientInformations = () => {
-        const healthStateLabel = healthLevelToLabel(patient.metadata.health_level, 0, 100);
-        const stressLevelLabel = stressLevelToLabel(patient.metadata.stress_level);
-        const maxStaminaLevelLabel = healthLevelToLabel(patient.metadata.max_stamina, 60, 150);
-        const strengthLevelLabel = healthLevelToLabel(patient.metadata.strength, 60, 150);
-        const [injuriesAllowed, injuriesLabel] = getInjuriesStatus(patient.metadata);
-
-        return (
-            <>
-                <div className="[box-shadow:_0_1px_10px_rgb(39_169_43)] [text-shadow:_0_1px_15px_rgb(255_255_255)] border-2 border-green-700 p-2 h-full">
-                    <h1 className="mb-2 text-xl text-green-500 [text-shadow:_0_2px_12px_rgb(39_169_43)]">
+                <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] mt-10 [text-shadow:_0_1px_15px_rgb(255_255_255)] rounded-lg border-2 border-[#27a997] h-full">
+                    <h1 className="neuropol mb-2 text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-1 rounded-t bg-[#27a99842]">
                         Santé Générale
                     </h1>
-                    <div className="h-[1px] bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
-                    <h2 className="mb-2 text-l text-green-500 [text-shadow:_0_2px_12px_rgb(39_169_43)]">Nutrition</h2>
-                    <div className="capitalize">
-                        <p>
-                            Glucides :{' '}
-                            <span
-                                style={{
-                                    color: getBodyStatesStyle(patient.metadata.sugar),
-                                    textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.sugar)}`,
-                                }}
-                            >
-                                {patient.metadata.sugar} %{' '}
-                            </span>
-                        </p>
-                        <p>
-                            Lipides :{' '}
-                            <span
-                                style={{
-                                    color: getBodyStatesStyle(patient.metadata.lipid),
-                                    textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.lipid)}`,
-                                }}
-                            >
-                                {patient.metadata.lipid} %{' '}
-                            </span>
-                        </p>
-                        <p>
-                            Protéïnes :{' '}
-                            <span
-                                style={{
-                                    color: getBodyStatesStyle(patient.metadata.protein),
-                                    textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.protein)}`,
-                                }}
-                            >
-                                {patient.metadata.protein} %{' '}
-                            </span>
-                        </p>
-                        <p>
-                            Fibres :{' '}
-                            <span
-                                style={{
-                                    color: getBodyStatesStyle(patient.metadata.fiber),
-                                    textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.fiber)}`,
-                                }}
-                            >
-                                {patient.metadata.fiber} %{' '}
-                            </span>
-                        </p>
+                    <div className="px-2">
+                        <h2 className="mb-2 text-l text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
+                            Nutrition
+                        </h2>
+                        <div className="capitalize">
+                            <p>
+                                Glucides :{' '}
+                                <span
+                                    style={{
+                                        color: getBodyStatesStyle(patient.metadata.sugar),
+                                        textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.sugar)}`,
+                                    }}
+                                >
+                                    {patient.metadata.sugar} %{' '}
+                                </span>
+                            </p>
+                            <p>
+                                Lipides :{' '}
+                                <span
+                                    style={{
+                                        color: getBodyStatesStyle(patient.metadata.lipid),
+                                        textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.lipid)}`,
+                                    }}
+                                >
+                                    {patient.metadata.lipid} %{' '}
+                                </span>
+                            </p>
+                            <p>
+                                Protéïnes :{' '}
+                                <span
+                                    style={{
+                                        color: getBodyStatesStyle(patient.metadata.protein),
+                                        textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.protein)}`,
+                                    }}
+                                >
+                                    {patient.metadata.protein} %{' '}
+                                </span>
+                            </p>
+                            <p>
+                                Fibres :{' '}
+                                <span
+                                    style={{
+                                        color: getBodyStatesStyle(patient.metadata.fiber),
+                                        textShadow: `0 1px 12px ${getBodyStatesStyle(patient.metadata.fiber)}`,
+                                    }}
+                                >
+                                    {patient.metadata.fiber} %{' '}
+                                </span>
+                            </p>
+                        </div>
+                        <div className="h-[1px] my-2 bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_151)]  mb-2"></div>
+                        <h2 className="my-2 text-l text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
+                            Condition physique
+                        </h2>
+                        <div className="capitalize">
+                            <p>Santé : {healthStateLabel}</p>
+                            <p>Force : {strengthLevelLabel}</p>
+                            <p>Stress : {stressLevelLabel}</p>
+                            <p>Endurance : {maxStaminaLevelLabel}</p>
+                        </div>
+                        {injuriesAllowed && (
+                            <>
+                                <div className="h-[1px] my-2 bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_151)]  mb-2"></div>
+                                <h2 className="my-2 text-l text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
+                                    Blessures
+                                </h2>
+                                <div className="capitalize">
+                                    <p>État des blessures : {injuriesLabel}</p>
+                                </div>
+                            </>
+                        )}
                     </div>
-                    <div className="h-[1px] my-2 bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
-                    <h2 className="my-2 text-l text-green-500 [text-shadow:_0_2px_12px_rgb(39_169_43)]">
-                        Condition physique
-                    </h2>
-                    <div className="capitalize">
-                        <p>Santé : {healthStateLabel}</p>
-                        <p>Force : {strengthLevelLabel}</p>
-                        <p>Stress : {stressLevelLabel}</p>
-                        <p>Endurance : {maxStaminaLevelLabel}</p>
-                    </div>
-                    {injuriesAllowed && (
-                        <>
-                            <div className="h-[1px] my-2 bg-green-500 bg-opacity-30 [box-shadow:_0_1px_10px_rgb(39_169_43)]  mb-2"></div>
-                            <h2 className="my-2 text-l text-green-500 [text-shadow:_0_2px_12px_rgb(39_169_43)]">
-                                Blessures
-                            </h2>
-                            <div className="capitalize">
-                                <p>État des blessures : {injuriesLabel}</p>
-                            </div>
-                        </>
-                    )}
                 </div>
             </>
         );
     };
 
     return (
-        <div className="absolute w-full h-full flex justify-center items-center text-white">
+        <div className="absolute w-[177vh] h-full flex justify-center items-center text-white">
             <div
                 ref={refOutside}
                 style={{
-                    backgroundImage: `url(/public/images/lsmc/background.png)`,
-                    margin: 'auto auto',
-                    height: '90%',
-                    width: '89%',
+                    backgroundImage: `url(/public/images/lsmc/medical_app_background_${
+                        patient.charinfo.gender === 0 ? 'male' : 'female'
+                    }.png)`,
+                    width: '100%',
+                    height: '100%',
+                    margin: '4vh',
                     backgroundSize: 'cover',
+                    padding: '6vh',
                 }}
             >
                 <div className="w-full h-full p-5">
-                    <div className="h-full flex flex-col ">
-                        <div className="flex flex-row w-ful relative">
-                            <div className="font-bold fixed ms-2 mt-2 flex flex-col w-[25rem]">
-                                {renderLeftPatientInformations()}
-                            </div>
-                            <div className="font-bold fixed flex flex-col right-[12vh] w-[25rem]">
-                                {renderRightPatientInformations()}
-                            </div>
+                    <div className="h-full flex flex-row ">
+                        <div className="flex flex-col relative w-[40vh]">
+                            <div className=" ms-2 mt-2 flex flex-col ">{renderLeftPatientInformations()}</div>
                         </div>
-                        <div className="flex flex-row h-full">{renderDamagedZones()}</div>
+                        <div className="flex flex-col w-full h-full">{renderDamagedZones()}</div>
                     </div>
                 </div>
             </div>
