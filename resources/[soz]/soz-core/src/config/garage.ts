@@ -826,6 +826,15 @@ export const GarageList: Record<string, Omit<Garage, 'id'>> = {
                 minZ: 30.23,
                 maxZ: 34.23,
             }),
+
+            new BoxZone([48.61, 6340.86, 31.23], 15.2, 15.2, {
+                heading: 298.95,
+                minZ: 29.23,
+                maxZ: 33.23,
+                data: {
+                    capacity: [PlaceCapacity.Medium, PlaceCapacity.Large],
+                },
+            }),
         ],
         transferList: ['cayo'],
     },
