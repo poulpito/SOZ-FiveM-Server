@@ -36,12 +36,12 @@ const DutyZoneConfig: Zone<JobType>[] = [
     },
     {
         data: JobType.Bennys,
-        center: [1908.09, 3090.02, 46.93],
-        length: 2.8,
-        width: 0.8,
-        heading: 330.0,
-        minZ: 45.93,
-        maxZ: 46.932,
+        center: [1907.77, 3089.4, 46.13],
+        length: 0.6,
+        width: 1.2,
+        heading: 58.27,
+        minZ: 46.73,
+        maxZ: 47.13,
     },
     {
         data: JobType.Gouv,

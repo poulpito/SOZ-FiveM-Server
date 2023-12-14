@@ -126,7 +126,7 @@ export class BennysOrderProvider {
                 mods: JSON.stringify(BennysConfig.UpgradeConfiguration),
                 condition: JSON.stringify(getDefaultVehicleCondition()),
                 plate: 'ESSAI N' + (this.orderedVehicle + 1),
-                garage: 'bennys_luxury',
+                garage: 'bennys_north', //'bennys_luxury',
                 job: 'bennys',
                 category: category,
                 fuel: 100,

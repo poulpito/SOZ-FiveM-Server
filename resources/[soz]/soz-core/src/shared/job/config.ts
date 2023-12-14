@@ -321,6 +321,11 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
                 maxZ: 37.89,
                 debugPoly: false,
             },
+            new BoxZone([1908.1, 3086.76, 51.75], 18.4, 9.2, {
+                heading: 61.21,
+                minZ: 50.75,
+                maxZ: 52.75,
+            }),
         ],
         phone: '555-NEWGAHRAY',
         canReceiveSocietyInvoice: true,
