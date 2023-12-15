@@ -73,7 +73,7 @@ export const BennysConfig = {
     UpgradeConfiguration: defaultUpgradeConfiguration,
     Order: {
         zone: orderNorthZone,
-        waitingTime: 2, // In minutes
+        waitingTime: 60, // In minutes
     },
     Resell: [
         {
