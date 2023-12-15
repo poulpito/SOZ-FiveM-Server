@@ -115,7 +115,7 @@ export const MainMenu: FunctionComponent<PropsWithChildren> = ({ children }) => 
 };
 
 export const MenuContainer: FunctionComponent<PropsWithChildren> = ({ children }) => {
-    return <div className="absolute left-8 top-8 w-1/5 min-w-[24rem] select-none">{children}</div>;
+    return <div className="absolute left-8 top-8 w-[40vh] min-w-[40vh] select-none">{children}</div>;
 };
 
 export type MenuTitleProps = {
@@ -784,7 +784,7 @@ export const MenuItemSelectHelper: FunctionComponent = () => {
     }
 
     return (
-        <div className="absolute -right-3 translate-x-full top-0 w-1/5 min-w-[24rem] bg-black/50 rounded-b-lg max-h-[40vh]">
+        <div className="absolute -right-3 translate-x-full top-0 w-[40vh] bg-black/50 rounded-b-lg max-h-[40vh]">
             <ul
                 onClick={() => setClicked(true)}
                 className="bg-black/50 py-2 rounded-b-lg max-h-[40vh] overflow-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
