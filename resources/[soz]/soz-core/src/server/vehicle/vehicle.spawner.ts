@@ -43,6 +43,7 @@ const VEHICLE_HAS_RADIO = [
     'ambulance2',
     'ambcar',
     'firetruk',
+    'lsmcheli',
     'mule6',
     'taco1',
     'dynasty2',

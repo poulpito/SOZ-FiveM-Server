@@ -31,7 +31,6 @@ export class LSMCMedicalDiagProvider {
 
     @OnEvent(ClientEvent.LSMC_SHOW_MEDICAL_DIAG)
     public async showMedicalDiag(data: MedicalMetadata) {
-        console.log(JSON.stringify(data));
         this.nuiDispatch.dispatch('medicalDiag', 'open', data);
     }
 
