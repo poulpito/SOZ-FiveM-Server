@@ -66,6 +66,7 @@ export type DeveloperSubMenuState = {
 
 export type VehicleSubMenuState = {
     noStall: boolean;
+    noBurstTyres: boolean;
 };
 
 export type AdminMenuData = {

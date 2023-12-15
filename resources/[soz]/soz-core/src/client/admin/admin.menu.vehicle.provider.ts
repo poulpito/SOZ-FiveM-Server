@@ -1,8 +1,8 @@
-import { OnNuiEvent } from '../../core/decorators/event';
+import { OnEvent, OnNuiEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { emitRpc } from '../../core/rpc';
-import { NuiEvent, ServerEvent } from '../../shared/event';
+import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
 import { Err, Ok } from '../../shared/result';
 import { RpcServerEvent } from '../../shared/rpc';
 import { groupBy } from '../../shared/utils/array';
@@ -26,6 +26,8 @@ export class AdminMenuVehicleProvider {
 
     @Inject(VehicleDamageProvider)
     private vehicleDamageProvider: VehicleDamageProvider;
+
+    private noBurstTyre = false;
 
     @OnNuiEvent(NuiEvent.AdminGetVehicles)
     public async getVehicles() {
@@ -187,5 +189,40 @@ export class AdminMenuVehicleProvider {
     @OnNuiEvent(NuiEvent.AdminToggleNoStall)
     public async setNoStall(value: boolean): Promise<void> {
         this.vehicleDamageProvider.setAdminNoStall(value);
+    }
+
+    @OnNuiEvent(NuiEvent.AdminToggleBurstTyres)
+    public async setNoBurstTyres(value: boolean): Promise<void> {
+        this.noBurstTyre = value;
+        const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+        if (veh) {
+            SetVehicleTyresCanBurst(veh, !this.noBurstTyre);
+        }
+    }
+
+    @OnEvent(ClientEvent.BASE_ENTERED_VEHICLE)
+    public onPlayerEnteredVehicle(veh: number) {
+        if (!veh) {
+            return;
+        }
+
+        if (this.noBurstTyre) {
+            SetVehicleTyresCanBurst(veh, false);
+        }
+    }
+
+    @OnEvent(ClientEvent.BASE_LEFT_VEHICLE)
+    public onPlayerLeftVehicle(veh: number) {
+        if (!veh) {
+            return;
+        }
+
+        if (this.noBurstTyre) {
+            SetVehicleTyresCanBurst(veh, true);
+        }
+    }
+
+    public getNoBurstTyres(): boolean {
+        return this.noBurstTyre;
     }
 }

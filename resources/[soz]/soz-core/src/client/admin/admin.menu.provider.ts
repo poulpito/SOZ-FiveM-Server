@@ -17,6 +17,7 @@ import { VehicleDamageProvider } from '../vehicle/vehicle.damage.provider';
 import { VehiclePoliceLocator } from '../vehicle/vehicle.police.locator.provider';
 import { AdminMenuDeveloperProvider } from './admin.menu.developer.provider';
 import { AdminMenuInteractiveProvider } from './admin.menu.interactive.provider';
+import { AdminMenuVehicleProvider } from './admin.menu.vehicle.provider';
 
 @Provider()
 export class AdminMenuProvider {
@@ -46,6 +47,9 @@ export class AdminMenuProvider {
 
     @Inject(SenateRepository)
     private senateRepository: SenateRepository;
+
+    @Inject(AdminMenuVehicleProvider)
+    private adminMenuVehicleProvider: AdminMenuVehicleProvider;
 
     @OnEvent(ClientEvent.ADMIN_OPEN_MENU)
     @Command('admin', {
@@ -104,6 +108,7 @@ export class AdminMenuProvider {
                     },
                     vehicule: {
                         noStall: this.vehicleDamageProvider.getAdminNoStall(),
+                        noBurstTyres: this.adminMenuVehicleProvider.getNoBurstTyres(),
                     },
                 },
             },

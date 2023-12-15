@@ -65,6 +65,7 @@ export enum NuiEvent {
     AdminToggleDisplayPlayersOnMap = 'soz-core:client:admin:toggle-display-players-on-map',
     AdminToggleDuty = 'soz-core:client:admin:set-job-duty',
     AdminToggleNoStall = 'soz-core:client:admin:set-no-stall',
+    AdminToggleBurstTyres = 'soz-core:client:admin:set-no-burst-tyres',
     AdminToggleMoneyCase = 'soz-core:client:admin:toggle-disable-money-case',
     AdminToggleNoClip = 'soz-core:client:admin:toggle-noclip',
     AdminToggleShowCoordinates = 'soz-core:client:admin:toggle-show-coordinates',
