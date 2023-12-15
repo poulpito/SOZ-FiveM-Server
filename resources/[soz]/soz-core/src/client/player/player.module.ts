@@ -9,6 +9,7 @@ import { PlayerInOutProvider } from './player.inout.provider';
 import { PlayerMenuProvider } from './player.menu.provider';
 import { PlayerPositionProvider } from './player.position.provider';
 import { PlayerQbcoreProvider } from './player.qbcore.provider';
+import { PlayerSnowProvider } from './player.snow.provider';
 import { PlayerStateProvider } from './player.state.provider';
 import { PlayerStressProvider } from './player.stress.provider';
 import { PlayerTokenProvider } from './player.token.provider';
@@ -36,6 +37,7 @@ import { ProgressProvider } from './progress.provider';
         PlayerWardrobe,
         PlayerZombieProvider,
         ProgressProvider,
+        PlayerSnowProvider,
     ],
 })
 export class PlayerModule {}

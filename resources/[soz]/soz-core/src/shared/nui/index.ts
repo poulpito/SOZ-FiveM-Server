@@ -31,6 +31,7 @@ import { NuiRepairMethodMap } from './repair';
 import { NuiSozedexMethodMap } from './sozedex';
 import { NuiTaxiMethodMap } from './taxi';
 import { NuiUpwOrderMenuMethodMap } from './upw_order_menu';
+import { NuiColdMethodMap } from './xmas';
 
 export interface NuiGlobalMethodMap {
     PauseMenuActive: boolean;
@@ -72,6 +73,7 @@ export interface NuiMethodMap {
     placement_prop: NuiPlacementPropMethodMap;
     craft: NuiCraftMethodMap;
     zombie: NuiZombieMethodMap;
+    cold: NuiColdMethodMap;
 }
 
 export const eventNameFactory = <App extends keyof NuiMethodMap, Method extends keyof NuiMethodMap[App]>(

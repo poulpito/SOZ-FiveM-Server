@@ -60,6 +60,9 @@ export enum RpcServerEvent {
     CRAFTING_DO_CRAFT = 'soz-core:crafting:do-craft',
     CRAFTING_DO_SALVAGE = 'soz-core:crafting:do-salvage',
 
+    CLOTHING_GET_CATEGORY = 'soz-core:clothing:get-category',
+    CLOTHING_GET_SHOP = 'soz-core:clothing:get-shop',
+
     STORY_HALLOWEEN_SCENARIO1 = 'soz-story:server:halloween1',
     STORY_HALLOWEEN_SCENARIO2 = 'soz-story:server:halloween2',
     STORY_HALLOWEEN_SCENARIO3 = 'soz-story:server:halloween3',
@@ -67,7 +70,6 @@ export enum RpcServerEvent {
 
     REPOSITORY_GET_DATA = 'soz-core:repository:get-data',
     REPOSITORY_GET_DATA_2 = 'soz-core:repository:get-data-2',
-    REPOSITORY_CLOTHING_GET_SHOP = 'soz-core:repository:clothing:get-shop',
 
     VEHICLE_CUSTOM_GET_MODS = 'soz-core:vehicle:custom:get-mods',
     VEHICLE_CUSTOM_SET_MODS = 'soz-core:vehicle:custom:set-mods',
