@@ -122,7 +122,6 @@ export class LSMCDamageProvider {
             isFatal: health < 100 ? true : false,
             weapon: weapon,
         };
-
         TriggerServerEvent(ServerEvent.LSMC_DAMAGE_ADD, data);
     }
 }

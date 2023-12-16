@@ -92,7 +92,6 @@ export class LSMCDamageProvider {
             },
             date: Date.now(),
         };
-
         TriggerClientEvent(ClientEvent.LSMC_SHOW_MEDICAL_DIAG, source, data);
     }
 
