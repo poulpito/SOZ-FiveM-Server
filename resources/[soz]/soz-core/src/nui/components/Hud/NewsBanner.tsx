@@ -96,7 +96,7 @@ const Banner: FunctionComponent<BannerProps> = ({ index, news, onDelete }) => {
 
     return (
         <div
-            className="absolute w-full bottom-0 overflow-hidden mb-[.3rem] transition-all text-white bg-no-repeat bg-contain"
+            className="absolute w-[60vh] bottom-0 overflow-hidden mb-[.3rem] transition-all text-white bg-no-repeat bg-contain"
             style={{
                 transform: `translateX(${index * 0.5}rem) translateY(-${index * 0.5}rem)`,
                 opacity: `calc(1.0 - ${index * 0.3})`,
