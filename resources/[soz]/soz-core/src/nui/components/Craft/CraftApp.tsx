@@ -189,7 +189,7 @@ const ItemTierList: FunctionComponent<ItemTierListProps> = ({
                                     alt={item.name}
                                     className="h-full w-full object-contain"
                                     src={itemIcon(item)}
-                                    onError={e => (e.currentTarget.src = 'https://placekitten.com/200/200')}
+                                    onError={e => (e.currentTarget.src = 'https://cfx-nui-soz-core/public/images/default/cat.webp')}
                                 />
                             </div>
                         );
@@ -240,7 +240,7 @@ const SelectedItem: FunctionComponent<SelectedItemProps> = ({ selected, craftLis
                             }}
                             className="aspect-square object-contain"
                             src={itemIcon(selectedItem)}
-                            onError={e => (e.currentTarget.src = 'https://placekitten.com/300/200')}
+                            onError={e => (e.currentTarget.src = 'https://cfx-nui-soz-core/public/images/default/cat.webp')}
                         />
                     </div>
                 </div>
@@ -283,7 +283,7 @@ const SelectedItem: FunctionComponent<SelectedItemProps> = ({ selected, craftLis
                                             alt={requiredItem.label}
                                             className="h-8 w-8"
                                             src={itemIcon(requiredItem)}
-                                            onError={e => (e.currentTarget.src = 'https://placekitten.com/300/200')}
+                                            onError={e => (e.currentTarget.src = 'https://cfx-nui-soz-core/public/images/default/cat.webp')}
                                         />
                                         <span className="ml-4">
                                             {input.count}x {requiredItem.label}

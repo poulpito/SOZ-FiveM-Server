@@ -210,7 +210,7 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
                         alt=""
                         className={style.Icon}
                         src={itemIcon(item)}
-                        onError={(e) => e.currentTarget.src = 'https://placekitten.com/200/200'}
+                        onError={(e) => e.currentTarget.src = 'https://cfx-nui-soz-core/public/images/default/cat.webp'}
                     />
                 </DragOverlay>, document.body
             )
@@ -265,7 +265,7 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
                             alt=""
                             className={style.Icon}
                             src={itemIcon(item)}
-                            onError={(e) => e.currentTarget.src = 'https://placekitten.com/200/200'}
+                            onError={(e) => e.currentTarget.src = 'https://cfx-nui-soz-core/public/images/default/cat.webp'}
                         />
                     </>
                 )}
