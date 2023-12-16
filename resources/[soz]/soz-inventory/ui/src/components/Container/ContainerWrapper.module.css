@@ -1,5 +1,5 @@
 .Wrapper {
-    min-width: 40vh;
+    min-width: 24rem;
     transition: transform 0.3s, opacity 0.3s;
 }
 

@@ -25,8 +25,8 @@
     font-size: 0.9rem;
     left: 37vh;
     top: 4rem;
-    min-width: 40vh;
-    max-width: 40vh;
+    min-width: 20rem;
+    max-width: 20rem;
     position: absolute;
     border-radius: .5rem;
     background: rgba(0, 0, 0, .6);
