@@ -346,7 +346,7 @@ function ApplyPlayerClothSet(playerId, clothSet)
 
     ApplyPedClothSet(ped, clothSet)
 
-    TriggerEvent('soz-character:Client:Cloth;Applied', clothSet)
+    TriggerEvent("soz-character:Client:Cloth:Applied", clothSet)
 end
 
 function ApplyPlayerClothConfig(playerId, clothConfig)

@@ -103,7 +103,7 @@ export class ClothingService {
         return maxOptions;
     }
 
-    public async checkWearingGloves(): Promise<boolean> {
+    public checkWearingGloves(): boolean {
         const ped = PlayerPedId();
         const armIndex = GetPedDrawableVariation(ped, 3);
         const model = GetEntityModel(ped);

@@ -1,11 +1,12 @@
 import { Provider } from '@core/decorators/provider';
 import { Inject } from '@public/core/decorators/injectable';
 import { Rpc } from '@public/core/decorators/rpc';
+import { Component, OutfitItem } from '@public/shared/cloth';
 import { RpcServerEvent } from '@public/shared/rpc';
 import { ClothingShop, ClothingShopCategory, ClothingShopRepositoryData } from '@public/shared/shop';
 
-import { ClothingShopRepository } from '../repository/cloth.shop.repository';
 import { PlayerService } from '../player/player.service';
+import { ClothingShopRepository } from '../repository/cloth.shop.repository';
 
 @Provider()
 export class ClothingProvider {
@@ -52,21 +53,39 @@ export class ClothingProvider {
     public async getClothCategory(
         source: number,
         outfit: Partial<Record<Component, OutfitItem>>
-    ): Promise<{ shop: ClothingShop; content: Record<number, ClothingShopCategory> }> {
+    ): Promise<Partial<Record<Component, number>>> {
         const player = this.playerService.getPlayer(source);
         if (!player) {
             return null;
         }
 
-        const clothingData = await this.getClothingData(source, playerPedHash);
-
-        if (!clothingData) {
+        const shop = await this.clothingShopRepository.get();
+        if (!shop) {
             return null;
         }
 
-        return {
-            shop: clothingData.shops[shop],
-            content: clothingData.categories[playerPedHash][clothingData.shops[shop].id],
-        };
+        const ret: Partial<Record<Component, number>> = {};
+
+        for (const compString of Object.keys(outfit)) {
+            const component = Number(compString) as Component;
+            for (const shopContent of Object.values(shop.categories[player.skin.Model.Hash])) {
+                const cat = Object.values(shopContent).find(category => {
+                    return !!Object.values(category.content).find(item => {
+                        return item.find(
+                            elem =>
+                                elem.components[component] &&
+                                outfit[component] &&
+                                elem.components[component].Drawable == outfit[component].Drawable
+                        );
+                    });
+                });
+                if (cat) {
+                    ret[component] = cat.id;
+                    break;
+                }
+            }
+        }
+
+        return ret;
     }
 }
