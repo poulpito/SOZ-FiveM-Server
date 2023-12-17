@@ -19,20 +19,20 @@ export const SpringAutumn: Forecast = {
 };
 
 export const Winter: Forecast = {
-    EXTRASUNNY: { SNOWLIGHT: 60 },
+    EXTRASUNNY: { SNOWLIGHT: 60, XMAS: 40 },
     CLEAR: { SNOWLIGHT: 65, FOGGY: 5, EXTRASUNNY: 5 },
     NEUTRAL: {},
-    SMOG: { SNOWLIGHT: 60 },
-    FOGGY: { SNOWLIGHT: 65, CLEAR: 5 },
+    SMOG: { SNOWLIGHT: 60, XMAS: 40 },
+    FOGGY: { SNOWLIGHT: 65, CLEAR: 5, XMAS: 30 },
     OVERCAST: { SNOWLIGHT: 60 },
-    CLOUDS: { SNOWLIGHT: 60 },
+    CLOUDS: { SNOWLIGHT: 60, XMAS: 40 },
     CLEARING: {},
     RAIN: {},
     THUNDER: {},
-    SNOW: {},
-    BLIZZARD: {},
-    SNOWLIGHT: { SNOWLIGHT: 60, FOGGY: 5, CLEAR: 5 },
-    XMAS: {},
+    SNOW: { BLIZZARD: 20, SNOWLIGHT: 50, CLOUDS: 10, XMAS: 20 },
+    BLIZZARD: { SNOW: 40, SNOWLIGHT: 10, FOGGY: 20, CLOUDS: 10, XMAS: 30 },
+    SNOWLIGHT: { XMAS: 40, FOGGY: 5, CLEAR: 5, SNOW: 40, BLIZZARD: 10 },
+    XMAS: { BLIZZARD: 20, SNOWLIGHT: 50, SNOW: 30 },
     HALLOWEEN: {},
 };
 

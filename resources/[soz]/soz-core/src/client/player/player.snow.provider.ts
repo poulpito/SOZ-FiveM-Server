@@ -121,10 +121,6 @@ export class PlayerSnowProvider {
     @On('soz-character:Client:Cloth:Applied')
     async onClothUpdate(outfit: Outfit): Promise<void> {
         const player = this.playerService.getPlayer();
-        if (player.metadata.godmode) {
-            this.coldProtected = true;
-            return;
-        }
 
         const clothConfig = player.cloth_config.Config;
 
@@ -184,6 +180,16 @@ export class PlayerSnowProvider {
 
     @Tick(TickInterval.EVERY_SECOND)
     public onColdCheckTick() {
+        const player = this.playerService.getPlayer();
+        if (!player) {
+            return;
+        }
+
+        if (player.metadata.godmode) {
+            this.setCold(false);
+            return;
+        }
+
         const weather = this.store.getState().global.weather;
         if (!ColdWeather.includes(weather)) {
             this.setCold(false);

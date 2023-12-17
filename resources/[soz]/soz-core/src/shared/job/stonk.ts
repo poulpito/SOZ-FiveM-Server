@@ -344,7 +344,7 @@ export const StonkCloakroom: WardrobeConfig = {
             },
             Props: {},
         },
-        ['Tenues Hiver']: {
+        ['Tenue Hiver']: {
             Components: {
                 [Component.Torso]: { Drawable: 5, Texture: 0, Palette: 0 },
                 [Component.Legs]: {
