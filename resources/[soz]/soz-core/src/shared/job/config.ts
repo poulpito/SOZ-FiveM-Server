@@ -128,6 +128,15 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         canInvoice: true,
         permissions: {
             ...BasePermissions,
+            [JobPermission.ManageRoster]: { label: 'Gérer les photos/matricules dans les effectifs panel' },
+            [JobPermission.AssignCertification]: { label: 'Assigner des certifications aux médecins' },
+            [JobPermission.ManageCertification]: { label: 'Gérer les certifications' },
+            [JobPermission.MedicalPatientAccess]: { label: 'Accéder aux dossiers patients panel' },
+            [JobPermission.MedicalPatientEdit]: { label: 'Editer les dossiers patients panel' },
+            [JobPermission.MedicalPatientDelete]: { label: 'Supprimer les dossiers patients panel' },
+            [JobPermission.MedicalPatientHistoryEdit]: { label: 'Créer / Editer une intervention panel' },
+            [JobPermission.MedicalPatientHistoryDelete]: { label: 'Supprimer une intervention panel' },
+            [JobPermission.MedicalPatientHistoryAccess]: { label: 'Accéder à la liste des interventions panel' },
         },
         bossZones: [
             new BoxZone([383.87, -1411.63, 37.99], 21.0, 25.6, {
