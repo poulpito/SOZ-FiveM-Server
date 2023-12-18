@@ -107,13 +107,17 @@ export class PlayerSnowProvider {
             return;
         }
 
-        const ped = PlayerPedId();
-        if (!IsPedWalking(ped) && !IsPedRunning(ped)) {
+        const playerPed = PlayerPedId();
+        if (!IsPedWalking(playerPed) && !IsPedRunning(playerPed)) {
+            return;
+        }
+
+        if (GetInteriorFromEntity(playerPed) != 0) {
             return;
         }
 
         if (Math.random() < 0.2) {
-            SetPedToRagdoll(PlayerPedId(), 1000, 1000, 0, false, false, false);
+            SetPedToRagdoll(playerPed, 2000, 2000, 0, false, false, false);
             this.lastSlipDate = Date.now();
         }
     }
