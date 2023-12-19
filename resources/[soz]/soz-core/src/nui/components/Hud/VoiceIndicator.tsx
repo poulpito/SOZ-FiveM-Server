@@ -14,15 +14,27 @@ export const VoiceIndicator: FunctionComponent = () => {
 
     useNuiEvent('hud', 'UpdateVoiceMode', setVoiceMode);
 
+    const dropShadow = 'drop-shadow-[2px_2px_2px_rgba(0,0,7,0.7)]';
+
     return (
         <div className="fixed right-[13vw] bottom-[1.5rem] text-white/75">
-            {voiceMode === VoiceMode.Mute && <MuteIcon className="w-12 h-12 animate-display-persist opacity-100" />}
-            {voiceMode === VoiceMode.Whisper && <WhisperIcon className="w-12 h-12 animate-display-in opacity-0" />}
-            {voiceMode === VoiceMode.Normal && <NormalIcon className="w-12 h-12 animate-display-in opacity-0" />}
-            {voiceMode === VoiceMode.Shouting && <ShoutingIcon className="w-12 h-12 animate-display-in opacity-0" />}
-            {voiceMode === VoiceMode.Megaphone && <MegaphoneIcon className="w-12 h-12 animate-display-in opacity-0" />}
+            {voiceMode === VoiceMode.Mute && (
+                <MuteIcon className={`w-12 h-12 animate-display-persist opacity-100 ${dropShadow}`} />
+            )}
+            {voiceMode === VoiceMode.Whisper && (
+                <WhisperIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+            )}
+            {voiceMode === VoiceMode.Normal && (
+                <NormalIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+            )}
+            {voiceMode === VoiceMode.Shouting && (
+                <ShoutingIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+            )}
+            {voiceMode === VoiceMode.Megaphone && (
+                <MegaphoneIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+            )}
             {voiceMode === VoiceMode.Microphone && (
-                <MicrophoneIcon className="w-12 h-12 animate-display-in opacity-0" />
+                <MicrophoneIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
             )}
         </div>
     );
