@@ -117,6 +117,17 @@
 	  <emitterSettingsName>resources:/soz-mapdata/snowheavy_emitter_ground</emitterSettingsName>
 	  <renderSettingsName>resources:/soz-mapdata/snowheavy_render_ground</renderSettingsName>
 	</Item>
+  	<Item>
+	  <Name>VFX_SNOW_LIGHT_GROUND</Name>
+	  <SystemType>SYSTEM_TYPE_GROUND</SystemType>
+	  <diffuseName>mist</diffuseName>
+	  <diffuseSplashName>mist</diffuseSplashName>
+	  <driveType>DRIVE_TYPE_SNOW</driveType>
+	  <windInfluence value="1.000000"/>
+	  <gravity value="-0.700000"/>
+	  <emitterSettingsName>common:/data/levels/gta5/weather/snowheavy_emitter_ground</emitterSettingsName>
+	  <renderSettingsName>common:/data/levels/gta5/weather/snowheavy_render_ground</renderSettingsName>
+	</Item>
 	<Item>
 	  <Name>BLIZZARD_DROP</Name>
 	  <SystemType>SYSTEM_TYPE_DROP</SystemType>
@@ -727,9 +738,9 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>VFX_SNOW_LIGHT_DROP</DropSettingName>
     <MistSettingName>VFX_SNOW_HEAVY_MIST</MistSettingName>
-    <GroundSettingName></GroundSettingName>
+    <GroundSettingName>VFX_SNOW_HEAVY_GROUND</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_SNOW.XML</TimeCycleFilename>
-    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
+    <CloudSettingsName>SNOWclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>BLIZZARD</Name>
@@ -768,9 +779,9 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>BLIZZARD_DROP</DropSettingName>
     <MistSettingName>VFX_SNOW_HEAVY_MIST</MistSettingName>
-    <GroundSettingName></GroundSettingName>
+    <GroundSettingName>BLIZZARD_GROUND</GroundSettingName>
 	<TimeCycleFilename>resources:/soz-mapdata/W_BLIZZARD.XML</TimeCycleFilename>
-    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
+    <CloudSettingsName>SNOWclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>SNOWLIGHT</Name>
@@ -809,9 +820,9 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>VFX_SNOW_LIGHT_DROP</DropSettingName>
     <MistSettingName>-</MistSettingName>
-    <GroundSettingName>-</GroundSettingName>
-    <TimeCycleFilename>COMMON:/DATA/TIMECYCLE/W_snowlight.XML</TimeCycleFilename>
-    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
+    <GroundSettingName>VFX_SNOW_LIGHT_GROUND</GroundSettingName>
+    <TimeCycleFilename>resources:/soz-mapdata/W_snowlight.XML</TimeCycleFilename>
+    <CloudSettingsName>SNOWclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>XMAS</Name>
@@ -850,9 +861,9 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>VFX_SNOW_LIGHT_DROP</DropSettingName>
     <MistSettingName>-</MistSettingName>
-    <GroundSettingName>-</GroundSettingName>
+    <GroundSettingName>VFX_SNOW_HEAVY_GROUND</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_XMAS.XML</TimeCycleFilename>
-    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
+    <CloudSettingsName>SNOWclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>HALLOWEEN</Name>

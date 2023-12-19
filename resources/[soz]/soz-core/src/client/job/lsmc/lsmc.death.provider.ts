@@ -11,6 +11,7 @@ import { NuiMenu } from '@public/client/nui/nui.menu';
 import { PhoneService } from '@public/client/phone/phone.service';
 import { PlayerInOutService } from '@public/client/player/player.inout.service';
 import { PlayerService } from '@public/client/player/player.service';
+import { PlayerSnowProvider } from '@public/client/player/player.snow.provider';
 import { PlayerWalkstyleProvider } from '@public/client/player/player.walkstyle.provider';
 import { SoundService } from '@public/client/sound.service';
 import { VehicleSeatbeltProvider } from '@public/client/vehicle/vehicle.seatbelt.provider';
@@ -28,7 +29,7 @@ import {
     PatientClothes,
 } from '@public/shared/job/lsmc';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
-import { rad } from '@public/shared/polyzone/vector';
+import { rad, Vector3 } from '@public/shared/polyzone/vector';
 import { Ok } from '@public/shared/result';
 import { RpcServerEvent } from '@public/shared/rpc';
 import { VehicleSeat } from '@public/shared/vehicle/vehicle';
@@ -157,6 +158,9 @@ export class LSMCDeathProvider {
     @Inject(BlipFactory)
     private blipFactory: BlipFactory;
 
+    @Inject(PlayerSnowProvider)
+    private playerSnowProvider: PlayerSnowProvider;
+
     private IsDead = false;
     private doFeeze = false;
     private hungerThristDeath = false;
@@ -256,18 +260,19 @@ export class LSMCDeathProvider {
                 killerid = -1;
             }
 
-            const killData = {
+            const killData: KillData = {
                 killerid: killerid,
                 killertype: killertype,
                 killerentitytype: killerentitytype,
                 weaponhash: killerweapon,
                 weapondamagetype: GetWeaponDamageType(killerweapon),
                 weapongroup: GetWeapontypeGroup(killerweapon),
-                killpos: GetEntityCoords(player),
+                killpos: GetEntityCoords(player) as Vector3,
                 killerveh: killVehData,
                 ejection: Date.now() - this.vehicleSeatbeltProvider.getLastEjectTime() < 10000,
                 hungerThristDeath: this.hungerThristDeath,
-            } as KillData;
+                frozenDeath: this.playerSnowProvider.isFrozenDeath(),
+            };
             this.hungerThristDeath = false;
 
             this.playerService.updateState({
@@ -314,7 +319,7 @@ export class LSMCDeathProvider {
             const playerMetadata = this.playerService.getPlayer().metadata;
             const injuries = playerMetadata.injuries_count;
             const status =
-                (playerMetadata.rp_death && !killData.hungerThristDeath) ||
+                (playerMetadata.rp_death && !killData.hungerThristDeath && !killData.frozenDeath) ||
                 injuries >= this.playerTalentService.getMaxInjuries()
                     ? 'de ton décès'
                     : 'du coma';

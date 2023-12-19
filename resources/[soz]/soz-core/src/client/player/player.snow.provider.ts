@@ -77,6 +77,21 @@ const ExtraWarnCloths: Record<number, Outfit[]> = {
     ],
 };
 
+const ExtraCagoule: Record<number, Outfit[]> = {
+    [joaat('mp_m_freemode_01')]: [
+        ObjectOutFits[JobType.LSPD][joaat('mp_m_freemode_01')]['light_intervention_outfit'],
+        ObjectOutFits[JobType.LSPD][joaat('mp_m_freemode_01')]['heavy_antiriot_outfit'],
+        ObjectOutFits[JobType.BCSO][joaat('mp_m_freemode_01')]['light_intervention_outfit'],
+        ObjectOutFits[JobType.BCSO][joaat('mp_m_freemode_01')]['heavy_antiriot_outfit'],
+    ],
+    [joaat('mp_f_freemode_01')]: [
+        ObjectOutFits[JobType.LSPD][joaat('mp_f_freemode_01')]['light_intervention_outfit'],
+        ObjectOutFits[JobType.LSPD][joaat('mp_f_freemode_01')]['heavy_antiriot_outfit'],
+        ObjectOutFits[JobType.BCSO][joaat('mp_f_freemode_01')]['light_intervention_outfit'],
+        ObjectOutFits[JobType.BCSO][joaat('mp_f_freemode_01')]['heavy_antiriot_outfit'],
+    ],
+};
+
 @Provider()
 export class PlayerSnowProvider {
     @Inject('Store')
@@ -96,6 +111,7 @@ export class PlayerSnowProvider {
     private coldProtected = false;
     private blizzardProtected = false;
     private nuiReady = false;
+    private frozenDeath = false;
 
     @Tick(TickInterval.EVERY_MINUTE)
     public onSlipCheck() {
@@ -166,8 +182,23 @@ export class PlayerSnowProvider {
             this.blizzardProtected = false;
         }
 
+        const hasCustomCagoule = ExtraCagoule[player.skin.Model.Hash].find(
+            item =>
+                item.Components[Component.Mask] &&
+                outfit.Components[Component.Mask] &&
+                item.Components[Component.Mask].Drawable == outfit.Components[Component.Mask].Drawable
+        );
+
+        //Cagoule
+        if (!!hasCustomCagoule || data[Component.Mask] == 39) {
+            coldScore++;
+            this.blizzardProtected = true;
+        } else {
+            this.blizzardProtected = false;
+        }
+
         this.coldProtected = coldScore >= 3;
-        this.blizzardProtected = this.blizzardProtected && coldScore >= 5 && data[Component.Mask] == 39; //Cagoule
+        this.blizzardProtected = this.blizzardProtected && coldScore >= 5;
     }
 
     @Once(OnceStep.NuiLoaded)
@@ -228,6 +259,12 @@ export class PlayerSnowProvider {
         }
 
         const playerPed = PlayerPedId();
-        SetEntityHealth(playerPed, GetEntityHealth(playerPed) - 1);
+        const newHealth = GetEntityHealth(playerPed) - 1;
+        this.frozenDeath = newHealth <= 100;
+        SetEntityHealth(playerPed, newHealth);
+    }
+
+    public isFrozenDeath() {
+        return this.frozenDeath;
     }
 }

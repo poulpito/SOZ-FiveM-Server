@@ -20,6 +20,7 @@ export type KillData = {
     killerveh?: KillerVehData;
     ejection: boolean;
     hungerThristDeath: boolean;
+    frozenDeath: boolean;
 };
 
 export const PHARMACY_PRICES = {
