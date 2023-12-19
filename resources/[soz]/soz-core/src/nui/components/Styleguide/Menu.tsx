@@ -115,7 +115,7 @@ export const MainMenu: FunctionComponent<PropsWithChildren> = ({ children }) => 
 };
 
 export const MenuContainer: FunctionComponent<PropsWithChildren> = ({ children }) => {
-    return <div className="absolute left-8 top-8 w-[40vh] min-w-[40vh] select-none">{children}</div>;
+    return <div className="absolute left-8 top-8 w-1/5 min-w-[24rem] select-none">{children}</div>;
 };
 
 export type MenuTitleProps = {
@@ -123,7 +123,7 @@ export type MenuTitleProps = {
 };
 
 const MenuHeader: FunctionComponent<MenuTitleProps> = ({ banner }) => {
-    return <img src={banner} className="opacity-80 w-full h-[8vh] object-cover mb-[-2px]" alt="banner" />;
+    return <img src={banner} className="opacity-80 w-full h-auto object-cover mb-[-2px]" alt="banner" />;
 };
 
 export const MenuTitle: FunctionComponent<PropsWithChildren<MenuTitleProps>> = ({ children, banner }) => {

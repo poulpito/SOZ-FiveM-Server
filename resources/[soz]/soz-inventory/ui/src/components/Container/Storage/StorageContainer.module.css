@@ -7,12 +7,12 @@
     left: 30%;
     right: 30%;
     transition: transform 0.15s, opacity 0.15s;
-    width: 40vh;
 }
 
 .PlayerContainer{
     grid-column: 1/1;
     justify-self: end;
+    width: auto
 }
 
 .StorageContainer{
