@@ -46,9 +46,7 @@ const PhoneWrapper: React.FC<PropsWithChildren> = memo(({ children }) => {
         >
             <div
                 className={cn(
-                    `fixed ${
-                        window.innerWidth > 3000 ? 'right-[100vh]' : 'right-0'
-                    } bottom-0 w-[500px] h-[1000px] bg-cover origin-bottom-right transition-any ease-in-out duration-300`,
+                    'fixed right-0 bottom-0 w-[500px] h-[1000px] bg-cover origin-bottom-right transition-any ease-in-out duration-300',
                     wrapperClass
                 )}
                 style={{
