@@ -72,7 +72,12 @@ export const showPhone = async (): Promise<void> => {
     }
 
     emitNet(PhoneEvents.FETCH_CREDENTIALS);
-    SetCursorLocation(0.9, 0.922); //Experimental
+    const resolution = GetActiveScreenResolution();
+    if (resolution[0] > 3000) {
+        SetCursorLocation(0.7, 0.927); //Experimental
+    } else {
+        SetCursorLocation(0.9, 0.922); //Experimental
+    }
     sendMessage('PHONE', EmergencyEvents.SET_EMERGENCY, state.isDead);
     sendMessage('PHONE', PhoneEvents.SET_VISIBILITY, true);
     sendMessage('PHONE', PhoneEvents.SET_TIME, time);

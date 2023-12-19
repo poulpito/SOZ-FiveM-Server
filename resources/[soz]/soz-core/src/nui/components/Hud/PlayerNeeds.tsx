@@ -57,7 +57,11 @@ export const PlayerNeeds: FunctionComponent = () => {
     }
 
     return (
-        <div className="absolute w-[12vw] bottom-[2.2rem] right-[0.8vw]">
+        <div
+            className={`absolute w-[18vh] bottom-[2.2rem] ${
+                window.innerWidth > 3000 ? 'right-[100vh]' : 'right-[0.8vw]'
+            }`}
+        >
             <StatusBar
                 percent={syringeDelay ? (syringeDelay.delay / syringeDelay.initialDelay) * 100 : 0}
                 backgroundPrimary="rgba(150, 8, 183, 0.6)"
