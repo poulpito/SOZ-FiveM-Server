@@ -58,6 +58,19 @@ export const NewsCloakroom: WardrobeConfig = {
             },
             Props: {},
         },
+        ['Tenue hiver']: {
+            Components: {
+                [3]: { Drawable: 33, Texture: 0, Palette: 0 },
+                [4]: { Drawable: 24, Texture: 0, Palette: 0 },
+                [6]: { Drawable: 111, Texture: 1, Palette: 0 },
+                [7]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [8]: { Drawable: 75, Texture: 6, Palette: 0 },
+                [9]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [10]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [11]: { Drawable: 192, Texture: 0, Palette: 0 },
+            },
+            Props: {},
+        },
         ['Tenue hélico']: {
             Components: {
                 [3]: { Drawable: 17, Texture: 0, Palette: 0 },
@@ -122,6 +135,19 @@ export const NewsCloakroom: WardrobeConfig = {
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [11]: { Drawable: 8, Texture: 2, Palette: 0 },
+            },
+            Props: {},
+        },
+        ['Tenue hiver']: {
+            Components: {
+                [3]: { Drawable: 36, Texture: 0, Palette: 0 },
+                [4]: { Drawable: 134, Texture: 23, Palette: 0 },
+                [6]: { Drawable: 114, Texture: 1, Palette: 0 },
+                [7]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [8]: { Drawable: 67, Texture: 3, Palette: 0 },
+                [9]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [10]: { Drawable: 0, Texture: 0, Palette: 0 },
+                [11]: { Drawable: 194, Texture: 0, Palette: 0 },
             },
             Props: {},
         },
