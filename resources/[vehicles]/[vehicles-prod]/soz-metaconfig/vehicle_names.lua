@@ -41,7 +41,6 @@ Citizen.CreateThread(function()
 
     -- Liveries
     AddTextEntry(GetHashKey('deity_livery13'),'Sticker MDR') -- Sticker MDR
-    AddTextEntry(GetHashKey('lspd11_livery1'),'Sticker BCSO') -- Sticker MDR
 
     AddTextEntry("0xA4849CEF", "Numéro - 0") -- LSPD10_A0
     AddTextEntry("0xD083F4ED", "Numéro - 1") -- LSPD10_A1
