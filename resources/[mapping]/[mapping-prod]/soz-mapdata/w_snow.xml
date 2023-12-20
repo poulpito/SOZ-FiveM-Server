@@ -433,8 +433,8 @@
         </region>
         <region name="URBAN">
             <artificial_int_ambient_multiplier> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</artificial_int_ambient_multiplier>
-            <blur_vignetting_intensity> 0.1600 0.1600 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.1600</blur_vignetting_intensity>
-            <blur_vignetting_radius> 10000.0000 10000.0000 10000.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 10000.0000</blur_vignetting_radius>
+            <blur_vignetting_intensity> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</blur_vignetting_intensity>
+            <blur_vignetting_radius> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</blur_vignetting_radius>
             <bokeh_brightness_max> 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000 3.0000</bokeh_brightness_max>
             <bokeh_brightness_min> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</bokeh_brightness_min>
             <bokeh_fade_max> 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600 0.0600</bokeh_fade_max>
@@ -665,7 +665,7 @@
             <postfx_correct_col_r> 1.0000 1.0000 1.0000 1.0000 0.9800 0.9600 0.9400 0.9600 0.9800 1.0000 1.0000 1.0000 1.0000</postfx_correct_col_r>
             <postfx_correct_cutoff> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_correct_cutoff>
             <postfx_desaturation> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</postfx_desaturation>
-            <postfx_exposure> 	0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_exposure>
+            <postfx_exposure> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_exposure>
             <postfx_exposure_max> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</postfx_exposure_max>
             <postfx_exposure_min> 1.0000 1.0000 1.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 1.0000 1.0000</postfx_exposure_min>
             <postfx_grad_bottom_col_b> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</postfx_grad_bottom_col_b>
@@ -714,7 +714,7 @@
             <postfx_vignetting_col_r> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_vignetting_col_r>
             <postfx_vignetting_contrast>  0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_vignetting_contrast>
             <postfx_vignetting_intensity> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_vignetting_intensity>
-            <postfx_vignetting_radius> 	0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_vignetting_radius>
+            <postfx_vignetting_radius> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</postfx_vignetting_radius>
             <reflection_hdr_mult> 6.0000 2.2000 1.2000 0.6000 0.5500 0.5500 0.5500 0.5500 0.5500 0.6000 2.2000 2.2000 6.0000</reflection_hdr_mult>
             <reflection_interior_range> 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000 500.0000</reflection_interior_range>
             <reflection_lod_range_end> 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000 50.0000</reflection_lod_range_end>
