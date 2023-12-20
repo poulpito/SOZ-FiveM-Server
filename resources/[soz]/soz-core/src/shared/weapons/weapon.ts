@@ -1110,10 +1110,11 @@ export const ExplosionMessage = [
 export enum ExplosionType {
     PETROL_PUMP = 9,
     DIR_WATER_HYDRANT = 13,
-    EXP_TAG_RAYGUN = 70,
     SMOKEGRENADELAUNCHER = 19,
     SMOKEGRENADE = 20,
     FLARE = 22,
+    EXP_TAG_SNOWBALL = 39,
+    EXP_TAG_RAYGUN = 70,
 }
 
 export const excludeExplosionAlert = [
@@ -1122,4 +1123,5 @@ export const excludeExplosionAlert = [
     ExplosionType.SMOKEGRENADELAUNCHER,
     ExplosionType.SMOKEGRENADE,
     ExplosionType.FLARE,
+    ExplosionType.EXP_TAG_SNOWBALL,
 ];
