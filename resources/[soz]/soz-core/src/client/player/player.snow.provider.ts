@@ -126,6 +126,15 @@ export class PlayerSnowProvider {
             return;
         }
 
+        const player = this.playerService.getPlayer();
+        if (!player) {
+            return;
+        }
+
+        if (player.metadata.godmode) {
+            return;
+        }
+
         if (Date.now() < this.lastSlipDate + 30 * 60_0000) {
             return;
         }
@@ -216,12 +225,10 @@ export class PlayerSnowProvider {
 
         const hatJewels = jewels['Chapeaux'];
         const bonnets = Object.keys(hatJewels.items['Bonnets']).map(item => Number(item));
-        const custumes = Object.keys(hatJewels.items['Costume']).map(item => Number(item));
-        const heads = [...custumes, bonnets];
         const helmetJewels = jewels['Casques'];
         const helmets = Object.keys(helmetJewels.items['Casques']).map(item => Number(item));
         const headProtected =
-            heads.includes(outfit.Props[hatJewels.propId]?.Drawable) ||
+            bonnets.includes(outfit.Props[hatJewels.propId]?.Drawable) ||
             helmets.includes(outfit.Props[helmetJewels.propId]?.Drawable);
         if (headProtected) {
             coldScore++;
@@ -232,7 +239,7 @@ export class PlayerSnowProvider {
             !!hasCustomCagoule ||
             data[Component.Mask] == 39 ||
             data[Component.Mask] == 37 ||
-            data[Component.Mask] == 37 ||
+            data[Component.Mask] == 35 ||
             neckProtected ||
             headProtected
         ) {
