@@ -47,7 +47,6 @@ const WarmClothCategory = [
 const ColdClothCategory = [
     21, //'Sous-vêtements',
     24, //'Maillots de bain',
-    66, //'Soutien-gorge',
 ];
 
 const ExtraWarnCloths: Record<number, Outfit[]> = {
