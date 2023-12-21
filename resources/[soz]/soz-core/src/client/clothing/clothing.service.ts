@@ -18,7 +18,7 @@ export class ClothingService {
     }
 
     public displayHairWithMask(maskDrawable: number): boolean {
-        return maskDrawable < 103 || KeepHairWithMask[maskDrawable];
+        return KeepHairWithMask[maskDrawable];
     }
 
     public applyProp(prop: Prop, outfitItem: OutfitItem) {

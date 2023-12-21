@@ -740,7 +740,7 @@
     <MistSettingName>VFX_SNOW_HEAVY_MIST</MistSettingName>
     <GroundSettingName>VFX_SNOW_HEAVY_GROUND</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_SNOW.XML</TimeCycleFilename>
-    <CloudSettingsName>SNOWclouds</CloudSettingsName>
+    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>BLIZZARD</Name>
@@ -781,7 +781,7 @@
     <MistSettingName>VFX_SNOW_HEAVY_MIST</MistSettingName>
     <GroundSettingName>BLIZZARD_GROUND</GroundSettingName>
 	<TimeCycleFilename>resources:/soz-mapdata/W_BLIZZARD.XML</TimeCycleFilename>
-    <CloudSettingsName>SNOWclouds</CloudSettingsName>
+    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>SNOWLIGHT</Name>
@@ -822,7 +822,7 @@
     <MistSettingName>-</MistSettingName>
     <GroundSettingName>VFX_SNOW_LIGHT_GROUND</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_snowlight.XML</TimeCycleFilename>
-    <CloudSettingsName>SNOWclouds</CloudSettingsName>
+    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>XMAS</Name>
@@ -863,7 +863,7 @@
     <MistSettingName>-</MistSettingName>
     <GroundSettingName>VFX_SNOW_HEAVY_GROUND</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_XMAS.XML</TimeCycleFilename>
-    <CloudSettingsName>SNOWclouds</CloudSettingsName>
+    <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
   <Item>
     <Name>HALLOWEEN</Name>

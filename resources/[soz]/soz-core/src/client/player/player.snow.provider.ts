@@ -1,4 +1,5 @@
 import { Provider } from '@core/decorators/provider';
+import { FemaleJewelryItems, MaleJewelryItems } from '@public/config/jewelry';
 import { On, Once, OnceStep } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { Tick, TickInterval } from '@public/core/decorators/tick';
@@ -9,6 +10,7 @@ import { JobType } from '@public/shared/job';
 import { HAZMAT_OUTFIT_NAME, LsmcCloakroom } from '@public/shared/job/lsmc';
 import { ObjectOutFits, POLICE_CLOAKROOM } from '@public/shared/job/police';
 import { StonkCloakroom } from '@public/shared/job/stonk';
+import { PlayerPedHash } from '@public/shared/player';
 import { RpcServerEvent } from '@public/shared/rpc';
 import { Weather } from '@public/shared/weather';
 
@@ -40,6 +42,12 @@ const WarmClothCategory = [
     37, //'Intégral'
     38, //'Costume'
     39, //'Cagoule'
+];
+
+const ColdClothCategory = [
+    21, //'Sous-vêtements',
+    24, //'Maillots de bain',
+    66, //'Soutien-gorge',
 ];
 
 const ExtraWarnCloths: Record<number, Outfit[]> = {
@@ -141,6 +149,9 @@ export class PlayerSnowProvider {
     @On('soz-character:Client:Cloth:Applied')
     async onClothUpdate(outfit: Outfit): Promise<void> {
         const player = this.playerService.getPlayer();
+        if (!player) {
+            return;
+        }
 
         const clothConfig = player.cloth_config.Config;
 
@@ -153,6 +164,9 @@ export class PlayerSnowProvider {
             RpcServerEvent.CLOTHING_GET_CATEGORY,
             outfit.Components
         );
+        if (!data) {
+            return;
+        }
 
         let coldScore = 0;
         [Component.Tops, Component.Legs, Component.Shoes].forEach(component => {
@@ -173,6 +187,10 @@ export class PlayerSnowProvider {
             if (WarmClothCategory.includes(cat)) {
                 coldScore++;
             }
+            if (ColdClothCategory.includes(cat)) {
+                this.coldProtected = false;
+                return;
+            }
         }
 
         if (this.clothingService.checkWearingGloves()) {
@@ -189,9 +207,36 @@ export class PlayerSnowProvider {
                 item.Components[Component.Mask].Drawable == outfit.Components[Component.Mask].Drawable
         );
 
-        //Cagoule
-        if (!!hasCustomCagoule || data[Component.Mask] == 39) {
+        const jewels = player.skin.Model.Hash == PlayerPedHash.Male ? MaleJewelryItems : FemaleJewelryItems;
+        const neckJewels = jewels['Cou'];
+        const scarfs = Object.keys(neckJewels.items['Echarpes']).map(item => Number(item));
+        const neckProtected = scarfs.includes(outfit.Components[neckJewels.componentId].Drawable);
+        if (neckProtected) {
             coldScore++;
+        }
+
+        const hatJewels = jewels['Chapeaux'];
+        const bonnets = Object.keys(hatJewels.items['Bonnets']).map(item => Number(item));
+        const custumes = Object.keys(hatJewels.items['Costume']).map(item => Number(item));
+        const heads = [...custumes, bonnets];
+        const helmetJewels = jewels['Casques'];
+        const helmets = Object.keys(helmetJewels.items['Casques']).map(item => Number(item));
+        const headProtected =
+            heads.includes(outfit.Props[hatJewels.propId]?.Drawable) ||
+            helmets.includes(outfit.Props[helmetJewels.propId]?.Drawable);
+        if (headProtected) {
+            coldScore++;
+        }
+
+        //Cagoule - bandana - écharpes
+        if (
+            !!hasCustomCagoule ||
+            data[Component.Mask] == 39 ||
+            data[Component.Mask] == 37 ||
+            data[Component.Mask] == 37 ||
+            neckProtected ||
+            headProtected
+        ) {
             this.blizzardProtected = true;
         } else {
             this.blizzardProtected = false;
