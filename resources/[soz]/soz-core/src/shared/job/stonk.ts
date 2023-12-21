@@ -186,7 +186,6 @@ export const StonkCloakroom: WardrobeConfig = {
                     Palette: 0,
                 },
                 [Component.Shoes]: { Drawable: 54, Texture: 0, Palette: 0 },
-                [Component.Accessories]: { Drawable: 8, Texture: 0, Palette: 0 },
                 [Component.Undershirt]: {
                     Drawable:
                         VanillaComponentDrawableIndexMaxValue[GetHashKey('mp_m_freemode_01')][Component.Undershirt] + 1,
@@ -233,7 +232,6 @@ export const StonkCloakroom: WardrobeConfig = {
                 [Component.Torso]: { Drawable: 4, Texture: 0, Palette: 0 },
                 [Component.Legs]: { Drawable: 24, Texture: 3, Palette: 0 },
                 [Component.Shoes]: { Drawable: 20, Texture: 3, Palette: 0 },
-                [Component.Accessories]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Undershirt]: { Drawable: 34, Texture: 1, Palette: 0 },
                 [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
@@ -250,7 +248,6 @@ export const StonkCloakroom: WardrobeConfig = {
                     Palette: 0,
                 },
                 [Component.Shoes]: { Drawable: 54, Texture: 0, Palette: 0 },
-                [Component.Accessories]: { Drawable: 8, Texture: 0, Palette: 0 },
                 [Component.Undershirt]: {
                     Drawable:
                         VanillaComponentDrawableIndexMaxValue[GetHashKey('mp_m_freemode_01')][Component.Undershirt] + 1,
@@ -289,7 +286,6 @@ export const StonkCloakroom: WardrobeConfig = {
                     Palette: 0,
                 },
                 [Component.Shoes]: { Drawable: 55, Texture: 0, Palette: 0 },
-                [Component.Accessories]: { Drawable: 8, Texture: 0, Palette: 0 },
                 [Component.Undershirt]: {
                     Drawable:
                         VanillaComponentDrawableIndexMaxValue[GetHashKey('mp_f_freemode_01')][Component.Undershirt] + 1,
@@ -336,7 +332,6 @@ export const StonkCloakroom: WardrobeConfig = {
                 [Component.Torso]: { Drawable: 3, Texture: 0, Palette: 0 },
                 [Component.Legs]: { Drawable: 37, Texture: 3, Palette: 0 },
                 [Component.Shoes]: { Drawable: 29, Texture: 1, Palette: 0 },
-                [Component.Accessories]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Undershirt]: { Drawable: 40, Texture: 4, Palette: 0 },
                 [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
@@ -353,7 +348,6 @@ export const StonkCloakroom: WardrobeConfig = {
                     Palette: 0,
                 },
                 [Component.Shoes]: { Drawable: 55, Texture: 0, Palette: 0 },
-                [Component.Accessories]: { Drawable: 8, Texture: 0, Palette: 0 },
                 [Component.Undershirt]: {
                     Drawable:
                         VanillaComponentDrawableIndexMaxValue[GetHashKey('mp_f_freemode_01')][Component.Undershirt] + 1,
