@@ -64,6 +64,7 @@ export const RadioApp: FunctionComponent = () => {
                 bottom: display ? '1vh' : '-50vh',
                 left: '1vw',
                 transition: 'bottom .3s',
+                zIndex: 30,
             }}
         >
             <form
