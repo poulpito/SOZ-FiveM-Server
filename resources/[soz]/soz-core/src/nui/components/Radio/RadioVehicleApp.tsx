@@ -64,6 +64,7 @@ export const RadioVehicleApp: FunctionComponent = () => {
                 bottom: '40vh',
                 left: display ? '1vw' : '-80vw',
                 transition: 'left .3s',
+                zIndex: 30,
             }}
         >
             <form
