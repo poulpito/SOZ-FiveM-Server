@@ -3,7 +3,7 @@
     <Sirens>
         <Item>
             <id value="5011" />
-            <name>sheriffdodge</name>
+            <name>sheriffsirens</name>
             <timeMultiplier value="1.00000000" />
             <lightFalloffMax value="70.00000000" />
             <lightFalloffExponent value="10.00000000" />
