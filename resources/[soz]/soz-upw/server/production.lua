@@ -159,7 +159,7 @@ QBCore.Functions.CreateCallback("soz-upw:server:Harvest", function(source, cb, i
     local facilityData = GetFacilityData(harvestType)
     local facility = facilityData.getFacility(identifier)
     if not facility then
-        cb(false, "invalid facility")
+        cb({false, "invalid facility"})
         return
     end
 
@@ -222,7 +222,7 @@ QBCore.Functions.CreateCallback("soz-upw:server:Harvest", function(source, cb, i
     local success, reason = Citizen.Await(p)
 
     if not success then
-        cb(false, reason)
+        cb({false, reason})
         return
     end
 
