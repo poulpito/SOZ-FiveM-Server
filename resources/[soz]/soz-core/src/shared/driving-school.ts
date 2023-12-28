@@ -388,5 +388,6 @@ export const Checkpoints: Checkpoint[] = [
     { coords: [521.78, -3475.37, 0.0], licenses: [DrivingSchoolLicenseType.Boat] },
     { coords: [-1994.94, -920.9, 0.0], licenses: [DrivingSchoolLicenseType.Boat] },
     { coords: [-3116.32, -77.52, 0.0], licenses: [DrivingSchoolLicenseType.Boat] },
-    { coords: [-993.82, -932.68, 0.0], licenses: [DrivingSchoolLicenseType.Boat] },
+    // Disable due to frozen vespucci canals
+    //{ coords: [-993.82, -932.68, 0.0], licenses: [DrivingSchoolLicenseType.Boat] },
 ];
