@@ -305,38 +305,35 @@ export class PolicePlayerProvider {
             );
         }
         for (const job of jobsCanEscort) {
-            this.targetFactory.createForAllPlayer(
-                [
-                    {
-                        label: 'Escorter',
-                        color: job,
-                        icon: 'c:police/escorter.png',
-                        job: job,
-                        canInteract: async entity => {
-                            if (
-                                this.playerService.getPlayer().job.id === JobType.CashTransfer &&
-                                !this.stonkCloakRoomProvider.wearVIPClothes()
-                            ) {
-                                return false;
-                            }
-                            if (
-                                !this.playerService.isOnDuty() ||
-                                IsPedInAnyVehicle(entity, true) ||
-                                IsPedInAnyVehicle(PlayerPedId(), true)
-                            ) {
-                                return false;
-                            }
+            this.targetFactory.createForAllPlayer([
+                {
+                    label: 'Escorter',
+                    color: job,
+                    icon: 'c:police/escorter.png',
+                    job: job,
+                    canInteract: async entity => {
+                        if (
+                            this.playerService.getPlayer().job.id === JobType.CashTransfer &&
+                            !this.stonkCloakRoomProvider.wearVIPClothes()
+                        ) {
+                            return false;
+                        }
+                        if (
+                            !this.playerService.isOnDuty() ||
+                            IsPedInAnyVehicle(entity, true) ||
+                            IsPedInAnyVehicle(PlayerPedId(), true)
+                        ) {
+                            return false;
+                        }
 
-                            const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
-                            return !this.playerListStateService.isEscorted(target);
-                        },
-                        action: async entity => {
-                            await this.jobInteractionService.escortPlayer(entity, false);
-                        },
+                        const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                        return !this.playerListStateService.isEscorted(target);
                     },
-                ],
-                1.5
-            );
+                    action: async entity => {
+                        await this.jobInteractionService.escortPlayer(entity, false);
+                    },
+                },
+            ]);
         }
         for (const job of jobsCanBreathAnalyze) {
             this.targetFactory.createForAllPlayer(
