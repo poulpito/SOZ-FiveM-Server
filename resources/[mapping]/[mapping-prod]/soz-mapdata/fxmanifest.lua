@@ -14,6 +14,8 @@ files {
     'w_blizzard.xml',
     'w_snowlight.xml',
     'w_xmas.xml',
+    'w_clear.xml',
+    'w_foggy.xml',
     'snowheavy_render_mist.xml',
     'snowlight_emitter_drop.xml',
     'snowlight_render_drop.xml',

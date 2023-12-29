@@ -365,7 +365,7 @@
       <GroundSettingName>-</GroundSettingName>
 <!--   <TimeCycleFilename platform="pc">COMMON:/DATA/TIMECYCLE/W_CLEAR_PC.XML</TimeCycleFilename>
       <TimeCycleFilename platform="!pc">COMMON:/DATA/TIMECYCLE/W_CLEAR.XML</TimeCycleFilename>-->
-      <TimeCycleFilename>COMMON:/DATA/TIMECYCLE/W_CLEAR.XML</TimeCycleFilename>
+      <TimeCycleFilename>resources:/soz-mapdata/W_CLEAR.XML</TimeCycleFilename>
       <CloudSettingsName>LIGHTclouds</CloudSettingsName>
     </Item>
     <Item>
@@ -454,7 +454,7 @@
   </Item>
   <Item>
     <Name>FOGGY</Name>
-    <Sun value="0.8"/>
+    <Sun value="0.4"/>
     <Cloud value="0.000000"/>
     <WindMin value="0.2"/>
     <WindMax value="0.7"/>
@@ -491,7 +491,7 @@
     <GroundSettingName>-</GroundSettingName>
 <!--    <TimeCycleFilename platform="pc">COMMON:/DATA/TIMECYCLE/W_FOGGY_PC.XML</TimeCycleFilename>
     <TimeCycleFilename platform="!pc">COMMON:/DATA/TIMECYCLE/W_FOGGY.XML</TimeCycleFilename>-->
-    <TimeCycleFilename>COMMON:/DATA/TIMECYCLE/W_FOGGY.XML</TimeCycleFilename>
+    <TimeCycleFilename>resources:/soz-mapdata/W_FOGGY.XML</TimeCycleFilename>
     <CloudSettingsName>MEDIUMclouds</CloudSettingsName>
   </Item>
   <Item>
@@ -708,7 +708,6 @@
     <WindMin value="0.0"/>
     <WindMax value="0.0"/>
  	<Rain value="0.000000"/>
-	<Wetness value="0.000000"/>
     <Snow value="1.000000"/>
     <SnowMist value="1.000000"/>
     <Fog value="0.100000"/>
@@ -738,7 +737,7 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>VFX_SNOW_LIGHT_DROP</DropSettingName>
     <MistSettingName>VFX_SNOW_HEAVY_MIST</MistSettingName>
-    <GroundSettingName>VFX_SNOW_HEAVY_GROUND</GroundSettingName>
+    <GroundSettingName>-</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_SNOW.XML</TimeCycleFilename>
     <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
@@ -749,7 +748,6 @@
     <WindMin value="1.0"/>
     <WindMax value="1.0"/>
  	<Rain value="0.000000"/>
-	<Wetness value="0.100000"/>
     <Snow value="1.000000"/>
     <SnowMist value="1.000000"/>
     <Fog value="1.000000"/>
@@ -790,7 +788,6 @@
     <WindMin value="0.0"/>
     <WindMax value="0.0"/>
     <Rain value="0.000000"/>
-	<Wetness value="0.000000"/>
     <Snow value="1.000000"/>
     <SnowMist value="1.000000"/>
     <Fog value="0.100000"/>
@@ -820,7 +817,7 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>VFX_SNOW_LIGHT_DROP</DropSettingName>
     <MistSettingName>-</MistSettingName>
-    <GroundSettingName>VFX_SNOW_LIGHT_GROUND</GroundSettingName>
+    <GroundSettingName>-</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_snowlight.XML</TimeCycleFilename>
     <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
@@ -831,7 +828,6 @@
     <WindMin value="0.0"/>
     <WindMax value="0.0"/>
  	<Rain value="0.000000"/>
-	<Wetness value="0.000000"/>
     <Snow value="1.000000"/>
     <SnowMist value="1.000000"/>
     <Fog value="1.000000"/>
@@ -861,7 +857,7 @@
 	<OldSettingName>-</OldSettingName>
     <DropSettingName>VFX_SNOW_LIGHT_DROP</DropSettingName>
     <MistSettingName>-</MistSettingName>
-    <GroundSettingName>VFX_SNOW_HEAVY_GROUND</GroundSettingName>
+    <GroundSettingName>-</GroundSettingName>
     <TimeCycleFilename>resources:/soz-mapdata/W_XMAS.XML</TimeCycleFilename>
     <CloudSettingsName>SUNNYclouds</CloudSettingsName>
   </Item>
