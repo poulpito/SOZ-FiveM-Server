@@ -382,7 +382,7 @@
             <sky_zenith_transition_east_blend> 0.7667 0.7667 0.7667 0.4667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667</sky_zenith_transition_east_blend>
             <sky_zenith_transition_position> 0.2888 0.1500 0.1500 0.1588 0.1588 0.1588 0.1588 0.1588 0.1588 0.1588 0.1500 0.1500 0.2888</sky_zenith_transition_position>
             <sky_zenith_transition_west_blend> 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 1.3067</sky_zenith_transition_west_blend>
-            <sprite_brightness> 25.0000 25.0000 25.0000 15.0000 15.0000 15.0000 15.0000 15.0000 15.0000 15.0000 25.0000 25.0000 25.0000</sprite_brightness>
+            <sprite_brightness> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</sprite_brightness>
             <sprite_corona_screenspace_expansion> 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</sprite_corona_screenspace_expansion>
             <sprite_distant_light_twinkle> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</sprite_distant_light_twinkle>
             <sprite_size> 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000</sprite_size>
@@ -812,7 +812,7 @@
             <sky_zenith_transition_east_blend> 0.7667 0.3667 0.3667 0.4667 0.7667 0.7667 0.4667 0.7667 0.7667 0.7667 0.6667 0.2066 0.7667</sky_zenith_transition_east_blend>
             <sky_zenith_transition_position> 0.2888 0.2800 0.1988 0.2888 0.1788 0.1888 0.1300 0.2200 0.2488 0.1988 0.2408 0.4400 0.6888</sky_zenith_transition_position>
             <sky_zenith_transition_west_blend> 0.7667 0.7667 0.7667 0.7667 0.7667 0.7667 0.5067 0.7667 0.7667 0.7667 0.6667 0.8067 1.1067</sky_zenith_transition_west_blend>
-            <sprite_brightness> 25.0000 25.0000 25.0000 15.0000 15.0000 15.0000 15.0000 15.0000 15.0000 15.0000 25.0000 25.0000 25.0000</sprite_brightness>
+            <sprite_brightness> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</sprite_brightness>
             <sprite_corona_screenspace_expansion> 20.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 110.0000 60.0000</sprite_corona_screenspace_expansion>
             <sprite_distant_light_twinkle> 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000</sprite_distant_light_twinkle>
             <sprite_size> 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000 1.5000</sprite_size>
