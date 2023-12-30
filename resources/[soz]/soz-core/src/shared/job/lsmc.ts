@@ -1,6 +1,7 @@
 import { Animation } from '../animation';
 import { Component, Prop, WardrobeConfig } from '../cloth';
 import { VanillaComponentDrawableIndexMaxValue, VanillaPropDrawableIndexMaxValue } from '../drawable';
+import { Control } from '../input';
 import { joaat } from '../joaat';
 import { JobType } from '../job';
 import { Vector3, Vector4 } from '../polyzone/vector';
@@ -610,6 +611,7 @@ export type PlasterConfig = {
     prop: Record<number, string>;
     position: Vector3;
     rotation: Vector3;
+    blockedAction: Control[];
 };
 
 export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
@@ -641,8 +643,17 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
             [joaat('mp_m_freemode_01')]: 'soz_med_plaster_f_l',
             [joaat('mp_f_freemode_01')]: 'soz_med_plaster_f_l',
         },
-        position: [0.32, 0.13, 0.0],
-        rotation: [0.0, -2.0, 8.0],
+        position: [0.33, 0.13, 0.03],
+        rotation: [10.0, -2.0, 8.0],
+        blockedAction: [
+            Control.Sprint,
+            Control.Jump,
+
+            Control.VehicleAccelerate,
+            Control.VehicleBrake,
+            Control.VehicleFlyThrottleUp,
+            Control.VehicleFlyThrottleDown,
+        ],
     },
     [PlasterLocation.RightFeet]: {
         label: 'Pied Droit',
@@ -653,6 +664,15 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
         },
         position: [0.32, 0.13, 0.0],
         rotation: [0.0, 0.0, 8.0],
+        blockedAction: [
+            Control.Sprint,
+            Control.Jump,
+
+            Control.VehicleAccelerate,
+            Control.VehicleBrake,
+            Control.VehicleFlyThrottleUp,
+            Control.VehicleFlyThrottleDown,
+        ],
     },
     [PlasterLocation.LeftHand]: {
         label: 'Main Gauche',
@@ -663,9 +683,20 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
         },
         position: [0.27, 0.0, 0.0],
         rotation: [180.0, 0.0, 0.0],
+        blockedAction: [
+            Control.Attack,
+            Control.Attack2,
+            Control.Aim,
+            Control.MeleeAttackLight,
+            Control.MeleeAttackHeavy,
+            Control.MeleeAttackAlternate,
+            Control.MeleeAttackLight,
+            Control.MeleeBlock,
+            Control.MeleeAttack2,
+        ],
     },
     [PlasterLocation.RighHand]: {
-        label: 'Main Droit',
+        label: 'Main Droite',
         bone: 28252,
         prop: {
             [joaat('mp_m_freemode_01')]: 'soz_med_plaster_h_r',
@@ -673,6 +704,17 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
         },
         position: [0.27, 0.0, 0.0],
         rotation: [180.0, 0.0, 0.0],
+        blockedAction: [
+            Control.Attack,
+            Control.Attack2,
+            Control.Aim,
+            Control.MeleeAttackLight,
+            Control.MeleeAttackHeavy,
+            Control.MeleeAttackAlternate,
+            Control.MeleeAttackLight,
+            Control.MeleeBlock,
+            Control.MeleeAttack2,
+        ],
     },
     [PlasterLocation.Neck]: {
         label: 'Cou',
@@ -683,6 +725,7 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
         },
         position: [0.08, 0.0, 0.0],
         rotation: [0.0, 0.0, 180.0],
+        blockedAction: [],
     },
 };
 

@@ -137,7 +137,7 @@ export class LSMCStretcherProvider {
             },
             {
                 label: 'Installer sur le brancard',
-                icon: 'c:ems/streter.png',
+                icon: 'c:ems/stretcher.png',
                 canInteract: entity => {
                     const state = this.playerService.getState();
                     return (
@@ -159,7 +159,7 @@ export class LSMCStretcherProvider {
                     this.getPlayerUsingStretcher(entity) != null && NetworkGetEntityIsNetworked(entity),
                 action: async entity => {
                     const serverPlayer = this.getPlayerUsingStretcher(entity);
-                    TriggerServerEvent(ServerEvent.ESCORT_PLAYER, serverPlayer);
+                    TriggerServerEvent(ServerEvent.ESCORT_PLAYER, serverPlayer, false, true);
                 },
             },
         ]);
@@ -168,7 +168,7 @@ export class LSMCStretcherProvider {
             [
                 {
                     label: 'Installer le brancard',
-                    icon: 'c:ems/streter.png',
+                    icon: 'c:ems/stretcher.png',
                     canInteract: async entity => {
                         if (!this.pushing) {
                             return false;
@@ -236,7 +236,7 @@ export class LSMCStretcherProvider {
                 },
                 {
                     label: 'Récupérer le brancard',
-                    icon: 'c:ems/streter.png',
+                    icon: 'c:ems/stretcher.png',
                     canInteract: async entity => {
                         if (this.pushing) {
                             return false;

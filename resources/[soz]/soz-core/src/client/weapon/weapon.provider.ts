@@ -6,6 +6,7 @@ import { emitRpc } from '@core/rpc';
 import { uuidv4, wait } from '@public/core/utils';
 import { FuelStationType } from '@public/shared/fuel';
 import { Control } from '@public/shared/input';
+import { PlasterConfigs } from '@public/shared/job/lsmc';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { getRandomItem } from '@public/shared/random';
@@ -124,6 +125,16 @@ export class WeaponProvider {
             await this.weapon.clear();
             return;
         }
+
+        if (
+            this.playerService.getState().isInHub ||
+            this.playerService
+                .getPlayer()
+                ?.metadata?.plaster.find(item => PlasterConfigs[item].blockedAction.includes(Control.Attack))
+        ) {
+            return;
+        }
+
         await this.weapon.set(weapon);
     }
 

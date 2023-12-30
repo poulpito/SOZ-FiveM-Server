@@ -6,6 +6,7 @@ import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
 import { ResourceLoader } from '@public/client/repository/resource.loader';
 import { Command } from '@public/core/decorators/command';
+import { Tick } from '@public/core/decorators/tick';
 import { emitRpc } from '@public/core/rpc';
 import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { PlasterConfigs, PlasterLocation } from '@public/shared/job/lsmc';
@@ -56,7 +57,7 @@ export class LSMCPlasterProvider {
     public async onPlaster({ location, playerServerId }: { location: PlasterLocation; playerServerId: number }) {
         const { completed } = await this.progressService.progress(
             'plaster',
-            'Platre',
+            'Gestion de platre...',
             5000,
             {
                 dictionary: 'mp_fm_intro_cut',
@@ -132,5 +133,21 @@ export class LSMCPlasterProvider {
             locations: data,
             playerServerId: playerServerId,
         });
+    }
+
+    @Tick()
+    public async onPlasterBlockActionTick() {
+        const player = this.playerService.getPlayer();
+        if (!player || !player.metadata) {
+            return;
+        }
+
+        for (const plaster of player.metadata.plaster) {
+            const plasterConfig = PlasterConfigs[plaster];
+
+            for (const control of plasterConfig.blockedAction) {
+                DisableControlAction(0, control, true);
+            }
+        }
     }
 }

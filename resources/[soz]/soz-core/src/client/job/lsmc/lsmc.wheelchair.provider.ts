@@ -44,7 +44,6 @@ export class LSMCWheelChairProvider {
 
     private pushing = false;
     private wheelchair = 0;
-    private collision = false;
 
     @Once()
     public onStart() {
@@ -261,7 +260,7 @@ export class LSMCWheelChairProvider {
 
             const speed = this.IsControlAlwaysPressed(1, CHANGE_SPEED_KEY) ? FAST_SPEED : NORMAL_SPEED;
             const rotate = GetDisabledControlNormal(0, Control.MoveLeftRight);
-            const move = GetDisabledControlNormal(0, Control.MoveUpDown);
+            let move = GetDisabledControlNormal(0, Control.MoveUpDown);
 
             const controlEntity = this.wheelchair;
             if (move != 0.0 || rotate != 0.0) {
@@ -269,25 +268,21 @@ export class LSMCWheelChairProvider {
                     NetworkRequestControlOfEntity(this.wheelchair);
                 } else {
                     const playerPed = PlayerPedId();
-                    const entityZOffset = 0.0;
                     const baserotation = GetEntityRotation(controlEntity, 0);
+                    const basePosition = GetEntityCoords(controlEntity);
 
-                    if (move != 0.0 && !this.collision) {
-                        FreezeEntityPosition(controlEntity, true); //FreezeEntityPosition seems to fix desync
+                    if (move != 0.0) {
+                        if (move > 0.0) {
+                            move = move / 2.5;
+                        }
                         const coords = GetOffsetFromEntityInWorldCoords(controlEntity, 0.0, move * speed, 0.0);
-                        SetEntityCoords(
-                            controlEntity,
-                            coords[0],
-                            coords[1],
-                            coords[2] - entityZOffset,
-                            true,
-                            true,
-                            true,
-                            false
-                        );
                         PlaceObjectOnGroundProperly_2(controlEntity);
-                    } else {
-                        FreezeEntityPosition(controlEntity, false); //FreezeEntityPosition seems to fix desync
+                        SetEntityVelocity(
+                            controlEntity,
+                            (coords[0] - basePosition[0]) * 100,
+                            (coords[1] - basePosition[1]) * 100,
+                            (coords[2] - basePosition[2]) * 100
+                        );
                     }
                     const rotation = GetEntityRotation(controlEntity, 0);
                     const targeHeading = baserotation[2] - rotate * speed * 20;
@@ -295,48 +290,6 @@ export class LSMCWheelChairProvider {
 
                     SetTaskMoveNetworkSignalFloat(controlEntity, 'Heading', targeHeading);
                     SetTaskMoveNetworkSignalFloat(playerPed, 'Heading', targeHeading);
-                }
-            } else {
-                FreezeEntityPosition(controlEntity, false);
-            }
-        }
-    }
-
-    @Tick(TickInterval.EVERY_FRAME)
-    async onWheelChairCollisionFrame(): Promise<void> {
-        if (this.wheelchair != 0 && this.getPlayerUsingWheelChair(this.wheelchair) == null) {
-            if (NetworkHasControlOfEntity(this.wheelchair)) {
-                const move = GetDisabledControlNormal(0, Control.MoveUpDown);
-
-                if (move != 0.0) {
-                    const chairCoords = GetEntityCoords(this.wheelchair);
-
-                    const distCoords = GetOffsetFromEntityInWorldCoords(
-                        this.wheelchair,
-                        0.0,
-                        move > 0 ? 0.5 : -0.5,
-                        0.3
-                    );
-
-                    const rayHandle = StartShapeTestCapsule(
-                        chairCoords[0],
-                        chairCoords[1],
-                        chairCoords[2] + 0.3,
-                        distCoords[0],
-                        distCoords[1],
-                        distCoords[2],
-                        0.4,
-                        19,
-                        this.wheelchair,
-                        0
-                    );
-                    let result: [number, any, number[], number[], number];
-                    do {
-                        result = GetShapeTestResult(rayHandle);
-                        await wait(0);
-                    } while (result[0] == 1);
-
-                    this.collision = !!result[1];
                 }
             }
         }

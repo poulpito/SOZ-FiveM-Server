@@ -459,9 +459,13 @@ export class PolicePlayerProvider {
     }
 
     @OnEvent(ClientEvent.GET_ESCORTED)
-    public async getEscorted(playerId: number, crimi: boolean) {
+    public async getEscorted(playerId: number, crimi: boolean, clearPedTask: boolean) {
         const ped = PlayerPedId();
         const dragger = GetPlayerPed(GetPlayerFromServerId(playerId));
+
+        if (clearPedTask) {
+            ClearPedTasks(ped);
+        }
 
         let delta_x = 0.45;
         let delta_y = 0.45;
