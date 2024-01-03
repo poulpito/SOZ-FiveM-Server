@@ -365,7 +365,7 @@
       <GroundSettingName>-</GroundSettingName>
 <!--   <TimeCycleFilename platform="pc">COMMON:/DATA/TIMECYCLE/W_CLEAR_PC.XML</TimeCycleFilename>
       <TimeCycleFilename platform="!pc">COMMON:/DATA/TIMECYCLE/W_CLEAR.XML</TimeCycleFilename>-->
-      <TimeCycleFilename>resources:/soz-mapdata/W_CLEAR.XML</TimeCycleFilename>
+      <TimeCycleFilename>COMMON:/DATA/TIMECYCLE/W_CLEAR.XML</TimeCycleFilename>
       <CloudSettingsName>LIGHTclouds</CloudSettingsName>
     </Item>
     <Item>
@@ -491,7 +491,7 @@
     <GroundSettingName>-</GroundSettingName>
 <!--    <TimeCycleFilename platform="pc">COMMON:/DATA/TIMECYCLE/W_FOGGY_PC.XML</TimeCycleFilename>
     <TimeCycleFilename platform="!pc">COMMON:/DATA/TIMECYCLE/W_FOGGY.XML</TimeCycleFilename>-->
-    <TimeCycleFilename>resources:/soz-mapdata/W_FOGGY.XML</TimeCycleFilename>
+    <TimeCycleFilename>COMMON:/DATA/TIMECYCLE/W_FOGGY.XML</TimeCycleFilename>
     <CloudSettingsName>MEDIUMclouds</CloudSettingsName>
   </Item>
   <Item>
