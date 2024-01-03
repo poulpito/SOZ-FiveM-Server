@@ -93,7 +93,7 @@ const SpeedGauge: FunctionComponent<{ hasFuel: boolean; useRpm: boolean }> = ({ 
     const vehicleSpeed = useVehicleSpeed();
 
     const classes = classNames(
-        'font-prompt font-semibold flex absolute flex-col text-center top-[1.5rem] mr-[80px] w-[100px] text-white/80 uppercase text-sm tabular-nums',
+        'font-prompt font-semibold flex absolute flex-col text-center top-[1.5rem] mr-[80px] w-[100px] text-white/80 uppercase text-sm tabular-nums [text-shadow:_0px_0px_4px_rgb(0_0_0_/_40%)]',
         {
             'mr-[50px]': !hasFuel,
         }
