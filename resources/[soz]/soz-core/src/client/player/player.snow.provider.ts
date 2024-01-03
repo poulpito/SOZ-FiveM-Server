@@ -140,7 +140,11 @@ export class PlayerSnowProvider {
         }
 
         const playerPed = PlayerPedId();
-        if (!IsPedWalking(playerPed) && !IsPedRunning(playerPed)) {
+        if (IsPedInAnyVehicle(playerPed, true)) {
+            return;
+        }
+
+        if (!IsPedWalking(playerPed) && !IsPedRunning(playerPed) && !IsPedSprinting(playerPed)) {
             return;
         }
 
