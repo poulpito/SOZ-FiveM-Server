@@ -40,7 +40,7 @@ const lsmcBeds: LSMCBed[] = [
     },
     {
         model: GetHashKey('soz_lsmc_operationrm_operation_table'),
-        offset: [0, -0.8, 0],
+        offset: [0, -0.2, 0],
         rotation: 0,
     },
     {
