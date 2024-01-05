@@ -73,7 +73,7 @@ export const FFSCraftsLists: Record<string, CraftCategory> = {
                 },
             },
             [FabricMaterial.LEATHER]: {
-                amount: 8,
+                amount: 24,
                 inputs: {
                     [SewingRawMaterial.SKIN]: { count: 1 },
                 },
