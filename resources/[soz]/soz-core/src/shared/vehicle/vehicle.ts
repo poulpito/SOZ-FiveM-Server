@@ -416,4 +416,4 @@ export const ALLOWED_AIR_CONTROL: Partial<Record<VehicleClass, true>> = {
 };
 
 //update MissiveVehicleModelList when toggle
-export const DisableNPCBike = true;
+export const DisableNPCBike = false;
