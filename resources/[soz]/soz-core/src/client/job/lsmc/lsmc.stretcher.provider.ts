@@ -318,11 +318,20 @@ export class LSMCStretcherProvider {
             },
         });
 
+        this.pushing = 0;
+
+        for (let i = 0; i < 10; i++) {
+            if (NetworkHasControlOfEntity(entity)) {
+                break;
+            }
+            NetworkRequestControlOfEntity(entity);
+            await wait(i * 100);
+        }
+
         DetachEntity(entity, false, false);
         SetEntityCompletelyDisableCollision(entity, false, true);
         SetEntityCollision(entity, true, true);
         PlaceObjectOnGroundProperly(entity);
-        this.pushing = 0;
     }
 
     private getPlayerUsingStretcher(entity: number) {

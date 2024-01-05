@@ -4,6 +4,7 @@ import { Once, OnceStep, OnGameEvent } from '@public/core/decorators/event';
 import { Tick } from '@public/core/decorators/tick';
 import { GameEvent, ServerEvent } from '@public/shared/event';
 import { DamageData } from '@public/shared/job/lsmc';
+import { PlayerData } from '@public/shared/player';
 import { ExtraWeaponName, WeaponName } from '@public/shared/weapons/weapon';
 
 import { PlayerService } from '../../player/player.service';
@@ -13,13 +14,15 @@ export class LSMCDamageProvider {
     @Inject(PlayerService)
     private playerService: PlayerService;
 
-    private lastHealth = GetEntityHealth(PlayerPedId());
+    private lastHealth = null;
     private lastWeaponHash = 0;
     private lastAttacker = 0;
 
     @Once(OnceStep.PlayerLoaded)
-    onInit(player) {
-        if (player) this.lastHealth = player.metadata.health;
+    public onInit(player: PlayerData) {
+        if (player) {
+            this.lastHealth = player.metadata.health;
+        }
     }
 
     @OnGameEvent(GameEvent.CEventNetworkEntityDamage)
@@ -43,42 +46,31 @@ export class LSMCDamageProvider {
 
     @Tick(100)
     private weaponInjuriesLoop() {
+        if (this.lastHealth === null) {
+            return;
+        }
+
         const playerPed = PlayerPedId();
         const health = GetEntityHealth(playerPed);
         const damageQty = this.lastHealth - health;
+        const playerData = this.playerService.getPlayer();
 
         this.lastHealth = health;
         if (damageQty <= 0) {
             return;
         }
 
-        const playerData = this.playerService.getPlayer();
         const [damaged, damagedBone] = GetPedLastDamageBone(playerPed);
-        if (!damaged) {
-            return;
-        }
         const attackerId = GetPlayerServerId(this.lastAttacker);
-
-        this.lastHealth = health;
-
-        let weapon = '';
-        let damageType = 0;
-        let bone = damagedBone;
-
-        // Weapon Name Management
-        for (const weaponId of Object.keys(WeaponName)) {
-            if (GetHashKey(WeaponName[weaponId]) == this.lastWeaponHash) {
-                weapon = WeaponName[weaponId];
-                break;
-            }
+        let bone = 24818; // Torse
+        if (damaged) {
+            bone = damagedBone;
         }
+
+        let damageType = 0;
+        let weapon: string = Object.values(WeaponName).find(elem => GetHashKey(elem) == this.lastWeaponHash);
         if (!weapon) {
-            for (const weaponId of Object.keys(ExtraWeaponName)) {
-                if (GetHashKey(ExtraWeaponName[weaponId]) == this.lastWeaponHash) {
-                    weapon = ExtraWeaponName[weaponId];
-                    break;
-                }
-            }
+            weapon = Object.values(ExtraWeaponName).find(elem => GetHashKey(elem) == this.lastWeaponHash);
         }
         if (!weapon) {
             weapon = this.lastWeaponHash.toString();
@@ -86,14 +78,49 @@ export class LSMCDamageProvider {
 
         damageType = GetWeaponDamageType(this.lastWeaponHash);
 
+        if (damageType == 1) {
+            return;
+        }
+
         // Damage Type Management
 
         if (weapon == ExtraWeaponName.FALL) {
-            damageType = 8;
+            if (IsEntityOnFire(playerPed)) {
+                weapon = ExtraWeaponName.WEAPON_FIRE;
+                damageType = 6;
+            } else if (IsPedSwimmingUnderWater(playerPed)) {
+                weapon = ExtraWeaponName.WEAPON_DROWNING;
+                damageType = 906;
+            } else {
+                damageType = 8;
+            }
         }
 
         if (weapon == ExtraWeaponName.RAMMED_BY_CAR || weapon == ExtraWeaponName.RUN_OVER_BY_CAR) {
             damageType = 905;
+        }
+
+        if (weapon == ExtraWeaponName.WEAPON_DROWNING || weapon == ExtraWeaponName.DROWNING_IN_VEHICLE) {
+            damageType = 906;
+            bone = 24818; // Torse
+        }
+
+        if (
+            weapon == ExtraWeaponName.ROTORS ||
+            weapon == WeaponName.DAGGER ||
+            weapon == WeaponName.BOTTE ||
+            weapon == WeaponName.KNIFE ||
+            weapon == WeaponName.MACHETE ||
+            weapon == WeaponName.SWITCHBLADE ||
+            weapon == WeaponName.BATTLEAXE ||
+            weapon == WeaponName.STONE_HATCHET ||
+            weapon == WeaponName.HATCHET
+        ) {
+            damageType = 907;
+        }
+
+        if (weapon == WeaponName.UNARMED) {
+            damageType = 908;
         }
 
         if (playerData.metadata.thirst <= 0) {
@@ -104,13 +131,12 @@ export class LSMCDamageProvider {
             damageType = 904;
         }
 
-        if (weapon == ExtraWeaponName.WEAPON_DROWNING) {
-            damageType = 906;
-            bone = 24818; // Torse
+        if (playerData.metadata.alcohol >= 100) {
+            damageType = 902;
         }
 
-        if (weapon == ExtraWeaponName.ROTORS) {
-            damageType = 907;
+        if (playerData.metadata.drug >= 100) {
+            damageType = 903;
         }
 
         const data: DamageData = {
@@ -122,6 +148,7 @@ export class LSMCDamageProvider {
             isFatal: health < 100 ? true : false,
             weapon: weapon,
         };
+
         TriggerServerEvent(ServerEvent.LSMC_DAMAGE_ADD, data);
     }
 }

@@ -19,7 +19,7 @@ import { format } from 'date-fns';
 import { FunctionComponent, useEffect, useState } from 'react';
 export const MedicalApp: FunctionComponent = () => {
     const [medicalDatas, setMedicalDatas] = useState<MedicalMetadata>(null);
-    const [detail, setDetail] = useState(null);
+    const [detail, setDetail] = useState<[DamageServerData, number, number, string, number, number]>(null);
     const [heartRate, setHeartRate] = useState(0);
     const [oxygenRate, setOxygenRate] = useState(0);
 
@@ -163,69 +163,17 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     const getIconByDamageType = (damageType: number) => {
-        switch (damageType) {
-            case 0:
-                return 'unknown';
-                break;
-            case 2:
-                return 'melee';
-                break;
-            case 3:
-                return 'bullet';
-                break;
-            case 5:
-                return 'explosive';
-                break;
-            case 6:
-                return 'fire';
-                break;
-            case 8:
-                return 'fall';
-                break;
-            case 10:
-                return 'electrocution';
-                break;
-            case 11:
-                return 'wire-';
-                break;
-            case 901:
-                return 'dehydratation';
-                break;
-            case 902:
-                return 'alcohol';
-                break;
-            case 903:
-                return 'overdose';
-                break;
-            case 904:
-                return 'hunger';
-                break;
-            case 905:
-                return 'choc';
-                break;
-            case 906:
-                return 'drown';
-                break;
-            case 907:
-                return 'entaille';
-                break;
-
-            default:
-                return 'unknown';
-                break;
-        }
+        return DamagesTypes[damageType]?.icon || 'unknown';
     };
 
-    function groupByMultiple(array, f) {
-        const groups = {};
-        array.forEach(function (o) {
-            const group = JSON.stringify(f(o));
+    function groupByMultiple(array: DamageServerData[]) {
+        const groups: Record<number, DamageServerData[]> = {};
+        array.forEach(function (damage) {
+            const group = damage.damageType;
             groups[group] = groups[group] || [];
-            groups[group].push(o);
+            groups[group].push(damage);
         });
-        return Object.keys(groups).map(function (group) {
-            return groups[group];
-        });
+        return Object.keys(groups).map(group => groups[group]);
     }
 
     const renderDamagedZones = () => {
@@ -378,7 +326,14 @@ export const MedicalApp: FunctionComponent = () => {
         );
     };
 
-    const renderDetail = (damage: DamageServerData, count: number, globalDamages, styleByGravity, screenX, screenY) => {
+    const renderDetail = (
+        damage: DamageServerData,
+        count: number,
+        globalDamages: number,
+        styleByGravity: string,
+        screenX: number,
+        screenY: number
+    ) => {
         const gravity = getWoundImportance(globalDamages, damage.isFatal);
         const textColor = DamageConfigs[gravity].color;
         const rightPopup = screenX;
@@ -407,7 +362,7 @@ export const MedicalApp: FunctionComponent = () => {
                                 {(Math.random() * 10000).toFixed(0) + '-' + patient.charinfo.lastname.toUpperCase()}
                             </p>
                             <p className="text-lg neuropol">
-                                {DamagesTypes[damage.damageType].label}
+                                {DamagesTypes[damage.damageType]?.label}
                                 {count > 1 && ' Multiple'}
                             </p>
                             <div
@@ -448,12 +403,7 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     const renderDamagedIcons = (damages: DamageServerData[]) => {
-        let sortedDamage = [];
-        if (damages) {
-            sortedDamage = groupByMultiple(damages, function (damage: DamageServerData) {
-                return [damage.damageType, getWoundImportance(damage.damageQty)];
-            });
-        } else {
+        if (!damages) {
             return (
                 <div className="flex justify-center items-center">
                     <img
@@ -463,16 +413,14 @@ export const MedicalApp: FunctionComponent = () => {
                 </div>
             );
         }
-
+        const sortedDamage = groupByMultiple(damages);
         return (
             <div className="flex flex-row items-center min-w-[20%] h-full">
                 {sortedDamage &&
                     sortedDamage.map((damages, index) => {
-                        let globalDamages = 0;
-                        damages.map(damage => {
-                            globalDamages += damage.damageQty;
-                        });
-                        const styleByGravity = getStyleByGravity(globalDamages, damages[0].isFatal);
+                        const globalDamages = damages.reduce((prev, cur) => prev + cur.damageQty, 0);
+                        const fatal = !!damages.find(item => item.isFatal);
+                        const styleByGravity = getStyleByGravity(globalDamages, fatal);
                         return (
                             <div
                                 key={index}

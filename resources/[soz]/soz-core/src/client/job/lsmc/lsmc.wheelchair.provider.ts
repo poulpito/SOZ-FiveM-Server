@@ -49,7 +49,10 @@ export class LSMCWheelChairProvider {
     public onStart() {
         this.targetFactory.createForModel(WheelChairModel, [
             {
-                canInteract: entity => !IsEntityAttached(entity) && NetworkGetEntityIsNetworked(entity),
+                canInteract: entity =>
+                    !IsEntityAttached(entity) &&
+                    NetworkGetEntityIsNetworked(entity) &&
+                    this.getPlayerUsingWheelChair(entity) == null,
                 label: 'Ramasser',
                 icon: 'c:baun/createCocktailBox.png',
                 action: async entity => {
@@ -131,11 +134,20 @@ export class LSMCWheelChairProvider {
                         },
                     });
 
+                    this.pushing = false;
+
+                    for (let i = 0; i < 10; i++) {
+                        if (NetworkHasControlOfEntity(entity)) {
+                            break;
+                        }
+                        NetworkRequestControlOfEntity(entity);
+                        await wait(i * 100);
+                    }
+
                     DetachEntity(entity, false, false);
                     SetEntityCompletelyDisableCollision(entity, false, true);
                     SetEntityCollision(entity, true, true);
                     PlaceObjectOnGroundProperly(entity);
-                    this.pushing = false;
                 },
             },
             {

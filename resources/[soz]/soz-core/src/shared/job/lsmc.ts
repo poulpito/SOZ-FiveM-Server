@@ -158,75 +158,100 @@ export const DamageConfigs: Record<DamageGravity, DamageConfig> = {
     },
 };
 
-export const DamagesTypes = {
+export type DamagesType = {
+    label: string;
+    description: string;
+    icon: string;
+};
+
+export const DamagesTypes: Record<number, DamagesType> = {
     0: {
         label: 'Blessure',
         description: 'Détection de blessures de nature inconnue.',
+        icon: 'unknown',
     },
     2: {
-        label: 'Mélée',
-        description:
-            "Blessure pouvant être induite par des coups à main nue, ou à l'aide d'une arme blanche telle qu'une batte de baseball, ou un couteau.",
+        label: 'Contendant',
+        description: "Blessure pouvant être objet ou d'une arme ayant causé un grand choc.",
+        icon: 'melee',
     },
     3: {
         label: 'Balles',
         description:
             "Détection d'une blessure par balle. Il s'agit d'un traumatisme physique causé par une balle d'une arme à feu. Les dommages peuvent inclure des saignements, des fractures, des dommages aux organes, une infection de la plaie, ou la perte de la capacité de bouger une partie du corps",
+        icon: 'bullet',
     },
     5: {
         label: 'Explosif',
         description:
             'Détection de blessures internes épidermiques ayant pu être causé par une onde de choc brûlante typique des explosifs.',
+        icon: 'explosive',
     },
     6: {
         label: 'Brûlure',
         description:
             'Détection de lésions épidermiques ayant pu être causées par des chaleurs extrêmes telles que des flammes, ou une explosion.',
+        icon: 'fire',
     },
     8: {
         label: 'Chute',
         description: "Détection d'écchymoses ayant pu être causés par une chute plus ou moins importante.",
+        icon: 'fall',
     },
     10: {
         label: 'Électrocution',
+        icon: 'electrocution',
         description:
             "Détection d'un passage d'électricité dans le corps ayant pu bauser des brûlures, des troubles cardiaques, des lésions d'organes ou le décès dans des cas sévères.",
     },
     11: {
         label: 'Barbelés',
+        icon: 'wire-fence',
         description: 'Détection de multiples entailles rapprochées typiques de grillages, barbelés, ronces.',
     },
     901: {
         label: 'Déshydratation',
+        icon: 'dehydratation',
         description:
             "Détection d'une élimination trop importante d'eau et de sels minéraux, qui sont essentiels au bon fonctionnement de l'organisme. Risque de fièvre, de gastroentérite, de diarhée, ou d'évanouissement dans des cas sévère.",
     },
     902: {
         label: "Overdose d'alcool",
+        icon: 'alcohol',
         description: "Détection d'un taux d'alcoolémie dans le sang ayant amené à une perte de conscience. ",
     },
     903: {
         label: 'Overdose de drogue',
+        icon: 'overdose',
         description: "Détection d'une surdose critique de molécules ayant amené à une perte de conscience.",
     },
     904: {
         label: 'Faim',
+        icon: 'hunger',
         description:
             "Détection d'une importante baisse de glycémie ayant pu amener à une transpiration excessive, des tremblements, une asthénie, une faiblesse et une incapacité à réfléchir clairement, voir l'évanouissement.",
     },
     905: {
         label: 'Choc',
+        icon: 'choc',
         description:
             "Détection d'écchymoses pouvant être amenée par un choc ayant provoqué la rupture de vaisseaux sanguins.",
     },
     906: {
         label: 'Noyade',
+        icon: 'drown',
         description: "Détection d'une insuffisance respiratoire résultant de la submersion dans un milieu liquide.",
     },
     907: {
         label: 'Grosse Entaille',
+        icon: 'entaille',
         description:
             "Détection d'une blessure nette faite par un objet tranchant (arme blanche frappant de taille, éclat de verre, tôle, etc.), plus ou moins profonde mais souvent hémorragique.",
+    },
+    908: {
+        label: 'Poing',
+        icon: 'fist',
+        description: "Détection d'une blessure causé par des coups de poings ou coups de pieds",
     },
 };
 

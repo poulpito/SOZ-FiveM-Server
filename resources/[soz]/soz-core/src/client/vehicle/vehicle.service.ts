@@ -54,11 +54,14 @@ const applyVehicleTire = (
 const VehicleConditionHelpers: Partial<VehicleConditionHelper<keyof VehicleCondition>> = {
     bodyHealth: {
         apply: (vehicle, value: number, condition) => {
-            SetVehicleBodyHealth(vehicle, value);
+            if (GetVehicleBodyHealth(vehicle) != value) {
+                //avoid uneeded update as SetVehicleFixed closes doors
+                SetVehicleBodyHealth(vehicle, value);
 
-            if (value > 999.99) {
-                SetVehicleDeformationFixed(vehicle);
-                SetVehicleFixed(vehicle);
+                if (value > 999.99) {
+                    SetVehicleDeformationFixed(vehicle);
+                    SetVehicleFixed(vehicle);
+                }
             }
 
             SetVehicleEngineHealth(vehicle, Math.max(condition.engineHealth, 0));

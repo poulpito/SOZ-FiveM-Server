@@ -3458,8 +3458,8 @@ QBShared.Items = {
         ['unique'] = false,
         ['useable'] = true,
         ['shouldClose'] = true,
-        ['description'] = '',
-        ['illustrator'] = '.'
+        ['description'] = 'Sert à porter des blessés, des malades, des fardeaux, ou les trois en même temps.',
+        ['illustrator'] = '.Sniteur'
     },
     ['wheelchair'] = {
         ['name'] = 'wheelchair',
@@ -3469,8 +3469,8 @@ QBShared.Items = {
         ['unique'] = false,
         ['useable'] = true,
         ['shouldClose'] = true,
-        ['description'] = '',
-        ['illustrator'] = '.'
+        ['description'] = "Fauteuil muni de roues, ou alors roues munies d'un fauteuil, on saiy pas trop",
+        ['illustrator'] = '.Sniteur'
     },
     ['used_bloodbag'] = {
         ['name'] = 'used_bloodbag',
