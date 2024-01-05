@@ -6299,6 +6299,10 @@
                   <Name>COMPONENT_ASSAULTRIFLE_CLIP_02</Name>
                   <Default value="false" />
                 </Item>
+                <Item>
+                  <Name>COMPONENT_ASSAULTRIFLE_CLIP_03</Name>
+                  <Default value="false" />
+                </Item>
               </Components>
             </Item>
             <Item>
