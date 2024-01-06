@@ -482,17 +482,20 @@ export const MedicalApp: FunctionComponent = () => {
                             ></img>
                         </div>
                         <div className="flex flex-col w-[80%]">
-                            <div className="uppercase flex flex-row">
-                                <div className="flex flex-col w-[30%]">Nom</div>
-                                <div className="flex flex-col w-[5%]">:</div>
-                                <div className="flex flex-col text-white">{patient.charinfo.lastname}</div>
+                            <div className=" flex flex-row">
+                                <div className="flex flex-col uppercase">Nom</div>
+                                <div className="flex flex-col w-[5%] text-center">:</div>
+                                <div className="flex flex-col text-white capitalize">{patient.charinfo.lastname}</div>
                             </div>
-                            <div className="uppercase flex flex-row">
-                                <div className="flex flex-col w-[30%]">Prénom</div>
-                                <div className="flex flex-col w-[5%]">:</div>
-                                <div className="flex flex-col text-white">{patient.charinfo.firstname}</div>
+                            <div className=" flex flex-row">
+                                <div className="flex flex-col uppercase">Prénom</div>
+                                <div className="flex flex-col w-[5%] text-center">:</div>
+                                <div className="flex flex-col text-white capitalize">{patient.charinfo.firstname}</div>
                             </div>
                         </div>
+                    </div>
+                    <div className="flex w-full h-[20px] justify-center items-center">
+                        <div className="flex h-[1px] w-[80%] bg-[#27a997ab]"></div>
                     </div>
                     <div className="flex flex-row items-center pb-4">
                         <div className="flex-col w-[20%] ">
@@ -500,8 +503,8 @@ export const MedicalApp: FunctionComponent = () => {
                         </div>
                         <div className="flex flex-col w-[80%]">
                             <div className="uppercase flex flex-row">
-                                <div className="flex flex-col w-[30%]">Date</div>
-                                <div className="flex flex-col w-[5%]">:</div>
+                                <div className="flex flex-col">Date</div>
+                                <div className="flex flex-col w-[5%] text-center">:</div>
                                 <div className="flex flex-col text-white">
                                     {format(medicalDatas.date, 'yyyy-MM-dd HH:mm:ss')}
                                 </div>
@@ -524,20 +527,20 @@ export const MedicalApp: FunctionComponent = () => {
                         </div>
                         <div className="flex-col w-[80%]">
                             <div className="uppercase flex flex-row">
-                                <div className="flex flex-col w-[65%]">Rythme cardiaque</div>
-                                <div className="flex flex-col w-[5%]">:</div>
+                                <div className="flex flex-col">Rythme cardiaque</div>
+                                <div className="flex flex-col w-[5%] text-center">:</div>
                                 <div className="flex flex-col text-white">{heartRate} BPM</div>
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center pb-2">
                         <div className="flex-col w-[20%] ">
                             <img className="w-[3vh] mx-auto" src={`/public/images/lsmc/icons/icon_o2.webp`}></img>
                         </div>
                         <div className="flex-col w-[80%]">
                             <div className="uppercase flex flex-row">
-                                <div className="flex flex-col w-[65%]">niveau d'oxygène</div>
-                                <div className="flex flex-col w-[5%]">:</div>
+                                <div className="flex flex-col">niveau d'oxygène</div>
+                                <div className="flex flex-col w-[5%] text-center">:</div>
                                 <div className="flex flex-col text-white">{oxygenRate} %</div>
                             </div>
                         </div>
@@ -554,13 +557,13 @@ export const MedicalApp: FunctionComponent = () => {
                             </div>
                             <div className="flex-col w-[80%]">
                                 <div className="flex flex-row items-center pb-2">
-                                    <h2 className="mb-2 font-semibold  text-l uppercase text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
+                                    <h2 className="mb-2 font-semibold text-2xl uppercase text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
                                         Nutrition
                                     </h2>
                                 </div>
                                 <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Glucides</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
+                                    <div className="flex flex-col">Glucides</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
                                     <div
                                         className="flex flex-col"
                                         style={{
@@ -572,8 +575,8 @@ export const MedicalApp: FunctionComponent = () => {
                                     </div>
                                 </div>
                                 <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Lipides</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
+                                    <div className="flex flex-col">Lipides</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
                                     <div
                                         className="flex flex-col"
                                         style={{
@@ -585,8 +588,8 @@ export const MedicalApp: FunctionComponent = () => {
                                     </div>
                                 </div>
                                 <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Protéïnes</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
+                                    <div className="flex flex-col">Protéïnes</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
                                     <div
                                         className="flex flex-col"
                                         style={{
@@ -598,8 +601,8 @@ export const MedicalApp: FunctionComponent = () => {
                                     </div>
                                 </div>
                                 <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Fibres</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
+                                    <div className="flex flex-col">Fibres</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
                                     <div
                                         className="flex flex-col"
                                         style={{
@@ -621,56 +624,57 @@ export const MedicalApp: FunctionComponent = () => {
                             </div>
                             <div className="flex-col w-[80%]">
                                 <div className="flex flex-row items-center pb-2">
-                                    <h2 className="mb-2 font-semibold  text-l uppercase text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
+                                    <h2 className="mb-2 font-semibold  text-2xl uppercase text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
                                         Condition Physique
                                     </h2>
                                 </div>
-                                <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Santé</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
-                                    <div className="flex flex-col text-white">{healthStateLabel}</div>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col uppercase">Santé</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
+                                    <div className="flex flex-col text-white capitalize">{healthStateLabel}</div>
                                 </div>
-                                <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Force</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
-                                    <div className="flex flex-col text-white">{strengthLevelLabel}</div>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col uppercase">Force</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
+                                    <div className="flex flex-col text-white capitalize">{strengthLevelLabel}</div>
                                 </div>
-                                <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Stress</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
-                                    <div className="flex flex-col text-white">{stressLevelLabel}</div>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col uppercase">Stress</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
+                                    <div className="flex flex-col text-white capitalize">{stressLevelLabel}</div>
                                 </div>
-                                <div className="uppercase flex flex-row">
-                                    <div className="flex flex-col w-[40%]">Endurance</div>
-                                    <div className="flex flex-col w-[5%]">:</div>
-                                    <div className="flex flex-col text-white">{maxStaminaLevelLabel}</div>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col uppercase">Endurance</div>
+                                    <div className="flex flex-col w-[5%] text-center">:</div>
+                                    <div className="flex flex-col text-white capitalize">{maxStaminaLevelLabel}</div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-row pt-2">
-                            <div className="flex-col w-[20%] ">
-                                <img
-                                    className="w-[3.5vh] mx-auto"
-                                    src={`/public/images/lsmc/icons/icon_injuries.webp`}
-                                ></img>
-                            </div>
-                            <div className="flex-col">
-                                {injuriesAllowed && (
+                        {injuriesAllowed && (
+                            <div className="flex flex-row pt-2">
+                                <div className="flex-col w-[20%] ">
+                                    <img
+                                        className="w-[3.5vh] mx-auto"
+                                        src={`/public/images/lsmc/icons/icon_injuries.webp`}
+                                    ></img>
+                                </div>
+                                <div className="flex-col">
                                     <>
                                         <div className="flex flex-row items-center pb-2">
-                                            <h2 className="mb-2 font-semibold text-l uppercase text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
+                                            <h2 className="mb-2 font-semibold text-2xl uppercase text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)]">
                                                 Blessures
                                             </h2>
                                         </div>
-                                        <div className="uppercase pb-8">
+                                        <div className="pb-8">
                                             <p>
-                                                État des blessures : <span className="text-white">{injuriesLabel}</span>
+                                                ÉTAT DES BLESSURES :{' '}
+                                                <span className="text-white capitalize">{injuriesLabel}</span>
                                             </p>
                                         </div>
                                     </>
-                                )}
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </>
