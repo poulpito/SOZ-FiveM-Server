@@ -126,6 +126,7 @@ export enum RpcServerEvent {
     LSMC_CAN_REMOVE_ITT = 'soz-core:server:lsmc:can-remove-itt',
     LSMC_CAN_SET_ITT = 'soz-core:server:lsmc:can-set-itt',
     LSMC_PLAYER_PLASTER = 'soz-core:server:lsmc:get-plaster',
+    LSMC_STRETCHER_AMBULANCE_STATUS = 'soz-core:server:lsmc:ambulance-stretcher-status',
 
     TALENT_TREE_UNLOCK = 'soz-core:server:talent:unlock',
     TALENT_TREE_RESET = 'soz-core:server:talent:reset',

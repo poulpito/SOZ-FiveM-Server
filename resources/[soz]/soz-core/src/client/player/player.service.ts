@@ -16,6 +16,7 @@ export class PlayerService {
     private player: PlayerData | null = null;
     private fakeId: FakeId = null;
     private deguisement = false;
+    private pushing = false;
 
     private state: PlayerClientState = {
         isDead: false,
@@ -163,5 +164,13 @@ export class PlayerService {
 
     public hasDeguisement() {
         return this.deguisement;
+    }
+
+    public setPushing(value: boolean) {
+        this.pushing = value;
+    }
+
+    public isPushing() {
+        return this.pushing;
     }
 }

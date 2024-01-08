@@ -459,11 +459,12 @@ export class PolicePlayerProvider {
     }
 
     @OnEvent(ClientEvent.GET_ESCORTED)
-    public async getEscorted(playerId: number, crimi: boolean, clearPedTask: boolean) {
+    public async getEscorted(playerId: number, crimi: boolean) {
         const ped = PlayerPedId();
+        const player = this.playerService.getPlayer();
         const dragger = GetPlayerPed(GetPlayerFromServerId(playerId));
 
-        if (clearPedTask) {
+        if (!crimi && !player.metadata.isdead) {
             ClearPedTasks(ped);
         }
 

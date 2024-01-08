@@ -465,13 +465,13 @@ export const LsmcCloakroom: WardrobeConfig = {
                 [Component.Torso]: { Drawable: 15, Texture: 0, Palette: 0 },
                 [Component.Legs]: { Drawable: 14, Texture: 3, Palette: 0 },
                 [Component.Shoes]: { Drawable: 67, Texture: 3, Palette: 0 },
-                [Component.Accessories]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [Component.Undershirt]: {
+                [Component.Accessories]: {
                     Drawable:
-                        VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.Undershirt] + 8,
+                        VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.Accessories] + 5,
                     Texture: 0,
                     Palette: 0,
                 },
+                [Component.Undershirt]: { Drawable: 15, Texture: 0, Palette: 0 },
                 [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Tops]: { Drawable: 15, Texture: 0, Palette: 0 },
@@ -571,18 +571,26 @@ export const LsmcCloakroom: WardrobeConfig = {
         ['Sauveteur en mer']: {
             Components: {
                 [Component.Torso]: { Drawable: 15, Texture: 0, Palette: 0 },
-                [Component.Legs]: { Drawable: 17, Texture: 3, Palette: 0 },
+                [Component.Legs]: {
+                    Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Legs] + 11,
+                    Texture: 2,
+                    Palette: 0,
+                },
                 [Component.Shoes]: { Drawable: 70, Texture: 0, Palette: 0 },
-                [Component.Accessories]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [Component.Undershirt]: {
+                [Component.Accessories]: {
                     Drawable:
-                        VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Undershirt] + 8,
+                        VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Accessories] + 5,
                     Texture: 0,
                     Palette: 0,
                 },
+                [Component.Undershirt]: { Drawable: 14, Texture: 0, Palette: 0 },
                 [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [Component.Tops]: { Drawable: 18, Texture: 4, Palette: 0 },
+                [Component.Tops]: {
+                    Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 13,
+                    Texture: 2,
+                    Palette: 0,
+                },
             },
             Props: {},
         },

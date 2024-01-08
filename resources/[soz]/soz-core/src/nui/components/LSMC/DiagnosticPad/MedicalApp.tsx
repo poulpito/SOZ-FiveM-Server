@@ -1,8 +1,10 @@
 import '../DiagnosticPad/index.scss';
 
+import { fetchNui } from '@public/nui/fetch';
 import { useBackspace } from '@public/nui/hook/control';
 import { useNuiEvent, useNuiFocus } from '@public/nui/hook/nui';
 import { useOutside } from '@public/nui/hook/outside';
+import { NuiEvent } from '@public/shared/event/nui';
 import { healthLevelToLabel, stressLevelToLabel } from '@public/shared/health';
 import { MedicalMetadata } from '@public/shared/item';
 import {
@@ -17,6 +19,7 @@ import { PlayerCriminalState, PlayerMetadata } from '@public/shared/player';
 import { getRandomInt } from '@public/shared/random';
 import { format } from 'date-fns';
 import { FunctionComponent, useEffect, useState } from 'react';
+
 export const MedicalApp: FunctionComponent = () => {
     const [medicalDatas, setMedicalDatas] = useState<MedicalMetadata>(null);
     const [detail, setDetail] = useState<[DamageServerData, number, number, string, number, number]>(null);
@@ -27,12 +30,16 @@ export const MedicalApp: FunctionComponent = () => {
     useNuiEvent('medicalDiag', 'open', setMedicalDatas);
 
     const refOutside = useOutside({
-        click: () => setMedicalDatas(null),
+        click: () => {
+            setMedicalDatas(null);
+            fetchNui(NuiEvent.LsmcMedicalDiagExit);
+        },
     });
 
     useBackspace(() => {
         if (medicalDatas) {
             setMedicalDatas(null);
+            fetchNui(NuiEvent.LsmcMedicalDiagExit);
         }
     });
 

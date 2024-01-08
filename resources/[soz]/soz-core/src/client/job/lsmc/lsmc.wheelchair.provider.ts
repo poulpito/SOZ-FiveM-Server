@@ -2,7 +2,6 @@ import { Once, OnEvent } from '@core/decorators/event';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { AnimationService } from '@public/client/animation/animation.service';
-import { DrawService } from '@public/client/draw.service';
 import { Notifier } from '@public/client/notifier';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
@@ -39,18 +38,15 @@ export class LSMCWheelChairProvider {
     @Inject(ProgressService)
     private progressService: ProgressService;
 
-    @Inject(DrawService)
-    private drawService: DrawService;
-
-    private pushing = false;
     private wheelchair = 0;
+    private pushed = 0;
 
     @Once()
     public onStart() {
         this.targetFactory.createForModel(WheelChairModel, [
             {
                 canInteract: entity =>
-                    !IsEntityAttached(entity) &&
+                    (!IsEntityAttached(entity) || GetEntityAttachedTo(entity) == 0) &&
                     NetworkGetEntityIsNetworked(entity) &&
                     this.getPlayerUsingWheelChair(entity) == null,
                 label: 'Ramasser',
@@ -86,7 +82,9 @@ export class LSMCWheelChairProvider {
                 label: 'Pousser',
                 icon: 'c:ems/push.png',
                 canInteract: entity =>
-                    !this.pushing && !IsEntityAttached(entity) && NetworkGetEntityIsNetworked(entity),
+                    !this.playerService.isPushing() &&
+                    (!IsEntityAttached(entity) || GetEntityAttachedTo(entity) == 0) &&
+                    NetworkGetEntityIsNetworked(entity),
                 action: async entity => {
                     for (let i = 0; i < 10; i++) {
                         if (NetworkHasControlOfEntity(entity)) {
@@ -100,27 +98,36 @@ export class LSMCWheelChairProvider {
                         return;
                     }
 
-                    SetEntityCollision(entity, false, true);
-                    SetEntityCompletelyDisableCollision(entity, true, true);
                     const playerPed = PlayerPedId();
-                    AttachEntityToEntity(
+
+                    SetEntityHeading(entity, GetEntityHeading(playerPed) + 180);
+                    AttachEntityToEntityPhysically(
                         entity,
                         playerPed,
                         GetPedBoneIndex(playerPed, 17916),
                         0.0,
-                        0.7,
+
+                        0.0,
+                        0.0,
                         -0.5,
+
                         0.0,
                         0.0,
-                        180.0,
+                        0.2,
+
+                        0.0,
+                        0.0,
+                        0.0,
+
+                        0.0,
+                        true,
                         false,
                         false,
                         false,
-                        false,
-                        0,
-                        true
+                        2
                     );
-                    this.pushing = true;
+                    this.playerService.setPushing(true);
+                    this.pushed = entity;
 
                     await this.animationService.playAnimation({
                         base: {
@@ -134,7 +141,8 @@ export class LSMCWheelChairProvider {
                         },
                     });
 
-                    this.pushing = false;
+                    this.playerService.setPushing(false);
+                    this.pushed = 0;
 
                     for (let i = 0; i < 10; i++) {
                         if (NetworkHasControlOfEntity(entity)) {
@@ -145,8 +153,6 @@ export class LSMCWheelChairProvider {
                     }
 
                     DetachEntity(entity, false, false);
-                    SetEntityCompletelyDisableCollision(entity, false, true);
-                    SetEntityCollision(entity, true, true);
                     PlaceObjectOnGroundProperly(entity);
                 },
             },
@@ -189,7 +195,6 @@ export class LSMCWheelChairProvider {
     private async onWheelChairUse(entity: number) {
         const playerPed = PlayerPedId();
         this.weaponDrawingProvider.undrawWeapons();
-        SetEntityCompletelyDisableCollision(playerPed, true, false);
         AttachEntityToEntity(
             playerPed,
             entity,
@@ -225,13 +230,9 @@ export class LSMCWheelChairProvider {
             DetachEntity(playerPed, false, false);
         }
 
-        SetEntityCompletelyDisableCollision(entity, false, true);
-        SetEntityCollision(entity, true, true);
         this.wheelchair = 0;
         this.weaponDrawingProvider.drawWeapons();
         ClearPedTasks(playerPed);
-        FreezeEntityPosition(playerPed, false);
-        FreezeEntityPosition(entity, false);
     }
 
     private IsControlAlwaysPressed(inputGroup: number, control: Control) {
@@ -240,31 +241,31 @@ export class LSMCWheelChairProvider {
 
     @Tick(TickInterval.EVERY_FRAME)
     async onSWheelChairFrame(): Promise<void> {
-        if (!this.pushing && this.wheelchair == 0) {
+        if (!this.playerService.isPushing() && this.wheelchair == 0) {
             return;
         }
 
-        DisableControlAction(0, Control.Sprint, true); // disable sprint
-        DisableControlAction(0, Control.Jump, true); // disable jump
-        DisableControlAction(0, Control.Attack, true); // Attack
-        DisableControlAction(0, Control.Aim, true); // Aim
-        DisableControlAction(2, Control.Duck, true); // Disable going stealth
-        DisableControlAction(0, Control.SelectWeapon, true); // Select Weapon
-        DisableControlAction(0, Control.Cover, true); // Cover
-        DisableControlAction(0, Control.Reload, true); // Reload
-        DisableControlAction(0, Control.Detonate, true); // Disable weapon
-        DisableControlAction(0, Control.VehicleAccelerate, true); // disable vehicle accelerate
-        DisableControlAction(0, Control.VehicleBrake, true); // disable vehicle brake
-        DisableControlAction(0, Control.VehicleFlyThrottleUp, true); // disable vehicle throttle up
-        DisableControlAction(0, Control.VehicleFlyThrottleDown, true); // disable vehicle throttle down
-        DisableControlAction(0, Control.MeleeAttackLight, true); // Disable melee
-        DisableControlAction(0, Control.MeleeAttackHeavy, true); // Disable melee
-        DisableControlAction(0, Control.MeleeAttackAlternate, true); // Disable melee
-        DisableControlAction(0, Control.MeleeBlock, true); // Disable melee
-        DisableControlAction(0, Control.Attack2, true); // Attack 2
-        DisableControlAction(0, Control.MeleeAttack1, true); // Melee Attack 1
-        DisableControlAction(0, Control.MeleeAttack2, true); // Disable melee
-        DisableControlAction(0, Control.Enter, true); // Disable vehicule entry
+        DisableControlAction(0, Control.Sprint, true);
+        DisableControlAction(0, Control.Jump, true);
+        DisableControlAction(0, Control.Attack, true);
+        DisableControlAction(0, Control.Aim, true);
+        DisableControlAction(2, Control.Duck, true);
+        DisableControlAction(0, Control.SelectWeapon, true);
+        DisableControlAction(0, Control.Cover, true);
+        DisableControlAction(0, Control.Reload, true);
+        DisableControlAction(0, Control.Detonate, true);
+        DisableControlAction(0, Control.VehicleAccelerate, true);
+        DisableControlAction(0, Control.VehicleBrake, true);
+        DisableControlAction(0, Control.VehicleFlyThrottleUp, true);
+        DisableControlAction(0, Control.VehicleFlyThrottleDown, true);
+        DisableControlAction(0, Control.MeleeAttackLight, true);
+        DisableControlAction(0, Control.MeleeAttackHeavy, true);
+        DisableControlAction(0, Control.MeleeAttackAlternate, true);
+        DisableControlAction(0, Control.MeleeBlock, true);
+        DisableControlAction(0, Control.Attack2, true);
+        DisableControlAction(0, Control.MeleeAttack1, true);
+        DisableControlAction(0, Control.MeleeAttack2, true);
+        DisableControlAction(0, Control.Enter, true);
 
         if (this.wheelchair != 0 && this.getPlayerUsingWheelChair(this.wheelchair) == null) {
             DisableControlAction(0, Control.MoveUpDown, true);

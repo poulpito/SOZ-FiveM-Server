@@ -1,6 +1,7 @@
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { Once, OnEvent } from '@public/core/decorators/event';
+import { Rpc } from '@public/core/decorators/rpc';
 import { InventoryManager } from '@public/server/inventory/inventory.manager';
 import { ItemService } from '@public/server/item/item.service';
 import { Notifier } from '@public/server/notifier';
@@ -11,6 +12,7 @@ import { VehicleStateService } from '@public/server/vehicle/vehicle.state.servic
 import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { InventoryItem, Item } from '@public/shared/item';
 import { StretcherFoldedModel, StretcherModel, WheelChairModel } from '@public/shared/job/lsmc';
+import { RpcServerEvent } from '@public/shared/rpc';
 
 @Provider()
 export class LSMCItemProvider {
@@ -204,6 +206,11 @@ export class LSMCItemProvider {
         if (target) {
             TriggerClientEvent(ClientEvent.LSMC_STRETCHER_PUT_ON, target, newStretcherNetID);
         }
+    }
+
+    @Rpc(RpcServerEvent.LSMC_STRETCHER_AMBULANCE_STATUS)
+    public getAmbulanceStretcherStatus(source: number, vehicleNetworkId: number) {
+        return this.vehicleStateService.getVehicleState(vehicleNetworkId).volatile.ambulanceAttachedStretcher;
     }
 
     private async useWheelChair(source: number, _item: Item, inventoryItem: InventoryItem) {

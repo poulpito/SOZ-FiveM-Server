@@ -12,6 +12,7 @@
 10 intervention LSPD/BCSO
 11 anti-emeute LSPD/BCSO
 12 sport LSPD/BCSO
+13 M N/A | F Swimsuit LSMC
 
     Decalque
 0  chevron 0-4
@@ -41,7 +42,6 @@
 5  ceinture LSMC
 6  pilote BCSO
 7  antiemeute LSPD/BCSO
-9  gilets Life Guard
 
     Accessories
 0  stétho    //same as vanilla?
@@ -49,6 +49,7 @@
 2  badge LSPD/BCSO  -- no longer used IG
 3  harnais holster
 4  holster ceinture
+5  gilets Life Guard
 
     bag
 0  LSPD badge pectoraux
@@ -64,7 +65,9 @@
 6  intervention LSPD/BCSO
 7  antiemeute LSPD/BCSO
 8  SASP Sombre
-9  sport LSPD/BCSO (10 for femme)
+9  M sport LSPD/BCSO | F ??
+10 M N/A | F sport LSPD/BCSO
+11 M N/A | F Swimsuit LSMC
 
     chapeau
 0  casquette stonk

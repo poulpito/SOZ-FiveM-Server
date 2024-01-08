@@ -1,12 +1,13 @@
+import { AnimationRunner } from '@public/client/animation/animation.factory';
 import { AnimationService } from '@public/client/animation/animation.service';
 import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
 import { TargetFactory } from '@public/client/target/target.factory';
-import { Once, OnEvent } from '@public/core/decorators/event';
+import { Once, OnEvent, OnNuiEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
-import { ClientEvent, ServerEvent } from '@public/shared/event';
+import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { MedicalMetadata } from '@public/shared/item';
 import { JobType } from '@public/shared/job';
 import { LSMCConfig } from '@public/shared/job/lsmc';
@@ -29,9 +30,19 @@ export class LSMCMedicalDiagProvider {
     @Inject(AnimationService)
     private animationService: AnimationService;
 
+    private anim: AnimationRunner = null;
+
     @OnEvent(ClientEvent.LSMC_SHOW_MEDICAL_DIAG)
     public async showMedicalDiag(data: MedicalMetadata) {
         this.nuiDispatch.dispatch('medicalDiag', 'open', data);
+    }
+
+    @OnNuiEvent(NuiEvent.LsmcMedicalDiagExit)
+    public async exitMedicalDiag() {
+        if (this.anim) {
+            this.anim.cancel();
+            this.anim = null;
+        }
     }
 
     @Once()
@@ -63,21 +74,23 @@ export class LSMCMedicalDiagProvider {
                     const heading = GetEntityHeading(entity);
                     await this.animationService.walkToCoords([...coords, heading], 6000);
 
-                    const { completed } = await this.progressService.progress(
-                        'damage_inspection',
-                        'Scan du patient...',
-                        LSMCConfig.scanTime,
-                        {
+                    this.anim = this.animationService.playAnimation({
+                        base: {
                             dictionary: 'mp_fib_grab',
                             name: 'loop',
                             options: { repeat: true },
                         },
-                        {
-                            useAnimationService: true,
-                        }
+                    });
+
+                    const { completed } = await this.progressService.progress(
+                        'damage_inspection',
+                        'Scan du patient...',
+                        LSMCConfig.scanTime
                     );
 
                     if (!completed) {
+                        this.anim.cancel();
+                        this.anim = null;
                         return;
                     }
 

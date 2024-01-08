@@ -9,12 +9,14 @@ import { TargetFactory } from '@public/client/target/target.factory';
 import { VehicleStateService } from '@public/client/vehicle/vehicle.state.service';
 import { WeaponDrawingProvider } from '@public/client/weapon/weapon.drawing.provider';
 import { Tick, TickInterval } from '@public/core/decorators/tick';
+import { emitRpcCache } from '@public/core/rpc';
 import { wait } from '@public/core/utils';
 import { Animation } from '@public/shared/animation';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { Control } from '@public/shared/input';
 import { deathAnim, StretcherFoldedModel, StretcherModel } from '@public/shared/job/lsmc';
 import { Vector3 } from '@public/shared/polyzone/vector';
+import { RpcServerEvent } from '@public/shared/rpc';
 
 import { PolicePlayerProvider } from '../police/police.player.provider';
 
@@ -68,7 +70,7 @@ export class LSMCStretcherProvider {
             [
                 {
                     canInteract: entity =>
-                        !IsEntityAttached(entity) &&
+                        (!IsEntityAttached(entity) || GetEntityAttachedTo(entity) == 0) &&
                         NetworkGetEntityIsNetworked(entity) &&
                         this.getPlayerUsingStretcher(entity) == null,
                     label: 'Ramasser',
@@ -107,7 +109,10 @@ export class LSMCStretcherProvider {
                 label: 'Pousser',
                 icon: 'c:ems/push.png',
                 canInteract: entity =>
-                    this.pushing == 0 && !IsEntityAttached(entity) && NetworkGetEntityIsNetworked(entity),
+                    this.pushing == 0 &&
+                    (!IsEntityAttached(entity) || GetEntityAttachedTo(entity) == 0) &&
+                    NetworkGetEntityIsNetworked(entity) &&
+                    !this.playerService.isPushing(),
                 action: async entity => {
                     for (let i = 0; i < 10; i++) {
                         if (NetworkHasControlOfEntity(entity)) {
@@ -159,7 +164,7 @@ export class LSMCStretcherProvider {
                     this.getPlayerUsingStretcher(entity) != null && NetworkGetEntityIsNetworked(entity),
                 action: async entity => {
                     const serverPlayer = this.getPlayerUsingStretcher(entity);
-                    TriggerServerEvent(ServerEvent.ESCORT_PLAYER, serverPlayer, false, true);
+                    TriggerServerEvent(ServerEvent.ESCORT_PLAYER, serverPlayer);
                 },
             },
         ]);
@@ -179,14 +184,30 @@ export class LSMCStretcherProvider {
                             return false;
                         }
 
-                        const vehState = await this.vehicleStateService.getVehicleState(entity);
-                        if (vehState.ambulanceAttachedStretcher) {
+                        if (IsEntityDead(entity)) {
+                            return false;
+                        }
+
+                        if (GetConvertibleRoofState(entity) != 2) {
+                            return false;
+                        }
+
+                        const attached = await emitRpcCache<number>(
+                            RpcServerEvent.LSMC_STRETCHER_AMBULANCE_STATUS,
+                            NetworkGetNetworkIdFromEntity(entity)
+                        );
+                        if (attached) {
                             return false;
                         }
 
                         return true;
                     },
                     action: async entity => {
+                        const vehState = await this.vehicleStateService.getServerVehicleState(entity);
+                        if (vehState.ambulanceAttachedStretcher) {
+                            return;
+                        }
+
                         const serverPlayer = this.getPlayerUsingStretcher(this.pushing);
                         this.animationService.stop();
 
@@ -247,15 +268,26 @@ export class LSMCStretcherProvider {
                             return false;
                         }
 
-                        const vehState = await this.vehicleStateService.getVehicleState(entity);
-                        if (!vehState.ambulanceAttachedStretcher) {
+                        if (this.playerService.isPushing()) {
+                            return false;
+                        }
+
+                        if (GetConvertibleRoofState(entity) != 2) {
+                            return false;
+                        }
+
+                        const attached = await emitRpcCache<number>(
+                            RpcServerEvent.LSMC_STRETCHER_AMBULANCE_STATUS,
+                            NetworkGetNetworkIdFromEntity(entity)
+                        );
+                        if (!attached) {
                             return false;
                         }
 
                         return true;
                     },
                     action: async entity => {
-                        const vehState = await this.vehicleStateService.getVehicleState(entity);
+                        const vehState = await this.vehicleStateService.getServerVehicleState(entity);
                         if (!vehState.ambulanceAttachedStretcher) {
                             return;
                         }
@@ -284,27 +316,37 @@ export class LSMCStretcherProvider {
     }
 
     private async pushStretcher(entity: number) {
-        SetEntityCollision(entity, false, true);
-        SetEntityCompletelyDisableCollision(entity, true, true);
         const playerPed = PlayerPedId();
-        AttachEntityToEntity(
+
+        SetEntityHeading(entity, GetEntityHeading(playerPed) + 90);
+        AttachEntityToEntityPhysically(
             entity,
             playerPed,
             GetPedBoneIndex(playerPed, 17916),
             0.0,
-            1.5,
-            -1.0,
+
             0.0,
             0.0,
-            90.0,
+            -1.5,
+
+            0.0,
+            0.0,
+            1.0,
+
+            0.0,
+            0.0,
+            0.0,
+
+            0.0,
+            true,
             false,
             false,
             false,
-            false,
-            0,
-            true
+            2
         );
+
         this.pushing = entity;
+        this.playerService.setPushing(true);
 
         await this.animationService.playAnimation({
             base: {
@@ -319,6 +361,7 @@ export class LSMCStretcherProvider {
         });
 
         this.pushing = 0;
+        this.playerService.setPushing(false);
 
         for (let i = 0; i < 10; i++) {
             if (NetworkHasControlOfEntity(entity)) {
@@ -329,8 +372,6 @@ export class LSMCStretcherProvider {
         }
 
         DetachEntity(entity, false, false);
-        SetEntityCompletelyDisableCollision(entity, false, true);
-        SetEntityCollision(entity, true, true);
         PlaceObjectOnGroundProperly(entity);
     }
 
@@ -352,7 +393,7 @@ export class LSMCStretcherProvider {
         const id = CreateObject(GetHashKey(StretcherModel), coords[0], coords[1], coords[2], true, true, false);
         SetEntityHeading(id, GetEntityHeading(playerPed) + 90.0);
         PlaceObjectOnGroundProperly(id);
-        FreezeEntityPosition(id, true);
+        FreezeEntityPosition(id, false);
         SetNetworkIdCanMigrate(ObjToNet(id), true);
         SetEntityAsMissionEntity(id, true, false);
 
@@ -378,7 +419,6 @@ export class LSMCStretcherProvider {
         const playerPed = PlayerPedId();
         const player = this.playerService.getPlayer();
         this.weaponDrawingProvider.undrawWeapons();
-        SetEntityCompletelyDisableCollision(playerPed, true, false);
 
         const zoffset = GetEntityModel(entity) == GetHashKey(StretcherModel) ? 2.1 : 1.5;
         AttachEntityToEntity(
@@ -406,8 +446,6 @@ export class LSMCStretcherProvider {
             DetachEntity(playerPed, false, false);
         }
 
-        SetEntityCompletelyDisableCollision(playerPed, false, true);
-        SetEntityCollision(playerPed, true, true);
         this.laydown = false;
         this.weaponDrawingProvider.drawWeapons();
         ClearPedTasks(playerPed);
@@ -415,30 +453,30 @@ export class LSMCStretcherProvider {
 
     @Tick(TickInterval.EVERY_FRAME)
     async onStretcherFrame(): Promise<void> {
-        if (!this.pushing && !this.laydown) {
+        if (!this.laydown) {
             return;
         }
 
-        DisableControlAction(0, Control.Sprint, true); // disable sprint
-        DisableControlAction(0, Control.Jump, true); // disable jump
-        DisableControlAction(0, Control.Attack, true); // Attack
-        DisableControlAction(0, Control.Aim, true); // Aim
-        DisableControlAction(2, Control.Duck, true); // Disable going stealth
-        DisableControlAction(0, Control.SelectWeapon, true); // Select Weapon
-        DisableControlAction(0, Control.Cover, true); // Cover
-        DisableControlAction(0, Control.Reload, true); // Reload
-        DisableControlAction(0, Control.Detonate, true); // Disable weapon
-        DisableControlAction(0, Control.VehicleAccelerate, true); // disable vehicle accelerate
-        DisableControlAction(0, Control.VehicleBrake, true); // disable vehicle brake
-        DisableControlAction(0, Control.VehicleFlyThrottleUp, true); // disable vehicle throttle up
-        DisableControlAction(0, Control.VehicleFlyThrottleDown, true); // disable vehicle throttle down
-        DisableControlAction(0, Control.MeleeAttackLight, true); // Disable melee
-        DisableControlAction(0, Control.MeleeAttackHeavy, true); // Disable melee
-        DisableControlAction(0, Control.MeleeAttackAlternate, true); // Disable melee
-        DisableControlAction(0, Control.MeleeBlock, true); // Disable melee
-        DisableControlAction(0, Control.Attack2, true); // Attack 2
-        DisableControlAction(0, Control.MeleeAttack1, true); // Melee Attack 1
-        DisableControlAction(0, Control.MeleeAttack2, true); // Disable melee
-        DisableControlAction(0, Control.Enter, true); // Disable vehicule entry
+        DisableControlAction(0, Control.Sprint, true);
+        DisableControlAction(0, Control.Jump, true);
+        DisableControlAction(0, Control.Attack, true);
+        DisableControlAction(0, Control.Aim, true);
+        DisableControlAction(2, Control.Duck, true);
+        DisableControlAction(0, Control.SelectWeapon, true);
+        DisableControlAction(0, Control.Cover, true);
+        DisableControlAction(0, Control.Reload, true);
+        DisableControlAction(0, Control.Detonate, true);
+        DisableControlAction(0, Control.VehicleAccelerate, true);
+        DisableControlAction(0, Control.VehicleBrake, true);
+        DisableControlAction(0, Control.VehicleFlyThrottleUp, true);
+        DisableControlAction(0, Control.VehicleFlyThrottleDown, true);
+        DisableControlAction(0, Control.MeleeAttackLight, true);
+        DisableControlAction(0, Control.MeleeAttackHeavy, true);
+        DisableControlAction(0, Control.MeleeAttackAlternate, true);
+        DisableControlAction(0, Control.MeleeBlock, true);
+        DisableControlAction(0, Control.Attack2, true);
+        DisableControlAction(0, Control.MeleeAttack1, true);
+        DisableControlAction(0, Control.MeleeAttack2, true);
+        DisableControlAction(0, Control.Enter, true);
     }
 }

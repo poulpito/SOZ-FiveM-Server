@@ -67,7 +67,7 @@ export class PolicePlayerProvider {
     }
 
     @OnEvent(ServerEvent.ESCORT_PLAYER)
-    public onEscortPlayer(source: number, targetId: number, crimi: boolean, clearPedTask: boolean) {
+    public onEscortPlayer(source: number, targetId: number, crimi: boolean) {
         const player = this.playerService.getPlayer(source);
         const target = this.playerService.getPlayer(targetId);
 
@@ -76,13 +76,7 @@ export class PolicePlayerProvider {
             this.playerStateService.setClientState(player.source, { isEscorting: true, escorting: target.source });
 
             TriggerClientEvent(ClientEvent.SET_ESCORTING, player.source, target.source, crimi);
-            TriggerClientEvent(
-                ClientEvent.GET_ESCORTED,
-                target.source,
-                player.source,
-                crimi,
-                clearPedTask && !target.metadata.isdead
-            );
+            TriggerClientEvent(ClientEvent.GET_ESCORTED, target.source, player.source, crimi);
         }
     }
 

@@ -106,6 +106,7 @@ export enum NuiEvent {
 
     LsmcPharmacyBuyItem = 'soz-core:nui:job:lsmc:pharmacy:buy-item',
     LsmcPlaster = 'soz-core:nui:job:lsmc:plaster',
+    LsmcMedicalDiagExit = 'soz-core:nui:job:lsmc:exit-medical-diag',
 
     NewsCreateAnnounce = 'soz-core:nui:news:create-announce',
     NewsPlaceObject = 'soz-core:client:news:place-object',
