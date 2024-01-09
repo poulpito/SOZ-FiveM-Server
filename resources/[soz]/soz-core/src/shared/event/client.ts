@@ -191,13 +191,18 @@ export enum ClientEvent {
     VEHICLE_SET_OPEN_LIST = 'soz-core:client:vehicle:set-open-list',
     VEHICLE_DAMAGE_BLUR = 'soz-core:client:vehicle:damage-blur',
 
-    VOIP_UPDATE_MODE = 'soz-core:client:voip:update-mode',
     VOIP_SET_MEGAPHONE = 'soz-core:client:voip:set-megaphone',
     VOIP_ITEM_RADIO_TOGGLE = 'soz-core:client:voip:item-radio:toggle',
     VOIP_ITEM_MEGAPHONE_TOGGLE = 'soz-core:client:voip:item-megaphone:toggle',
     VOIP_ITEM_MICROPHONE_TOGGLE = 'soz-core:client:voip:item-microphone:toggle',
     VOIP_RADIO_VEHICLE_ENABLE = 'soz-core:client:voip:radio-vehicle-enable',
     VOIP_RADIO_VEHICLE_UPDATE = 'soz-core:client:voip:radio-vehicle-update',
+
+    VOIP_VOICE_START_CALL = 'soz-core:client:voip:voice:start-call',
+    VOIP_VOICE_END_CALL = 'soz-core:client:voip:voice:end-call',
+    VOIP_VOICE_MUTE_CALL = 'soz-core:client:voip:voice:mute-call',
+    VOIP_VOICE_RADIO_PLAYER_START_TRANSMITTING = 'soz-core:client:voip:voice:radio:player-start-transmitting',
+    VOIP_VOICE_RADIO_PLAYER_STOP_TRANSMITTING = 'soz-core:client:voip:voice:radio:player-stop-transmitting',
 
     UPW_OPEN_CLOAKROOM = 'soz-core:client:job:upw:open-cloakroom',
     UPW_CREATE_CHARGER = 'soz-core:client:job:upw:create-charger',

@@ -1,4 +1,9 @@
 import { Module } from '../../core/decorators/module';
+import { VoiceCarProvider } from './voice/voice.car.provider';
+import { VoicePhoneProvider } from './voice/voice.phone.provider';
+import { VoiceProvider } from './voice/voice.provider';
+import { VoiceProximityProvider } from './voice/voice.proximity.provider';
+import { VoiceRadioProvider } from './voice/voice.radio.provider';
 import { VoipMegaphoneProvider } from './voip.megaphone.provider';
 import { VoipMicrophoneProvider } from './voip.microphone.provider';
 import { VoipProvider } from './voip.provider';
@@ -7,6 +12,11 @@ import { VoipRadioVehicleProvider } from './voip.radio.vehicle.provider';
 
 @Module({
     providers: [
+        VoiceCarProvider,
+        VoicePhoneProvider,
+        VoiceProvider,
+        VoiceProximityProvider,
+        VoiceRadioProvider,
         VoipMegaphoneProvider,
         VoipMicrophoneProvider,
         VoipProvider,

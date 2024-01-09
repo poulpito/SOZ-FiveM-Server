@@ -18,6 +18,7 @@ import { NuiDispatch } from '../nui/nui.dispatch';
 import { NuiMenu } from '../nui/nui.menu';
 import { HalloweenSpiderService } from '../object/halloween.spider.service';
 import { ProgressService } from '../progress.service';
+import { VoiceProvider } from '../voip/voice/voice.provider';
 import { PlayerAnimationProvider } from './player.animation.provider';
 import { PlayerService } from './player.service';
 import { PlayerWardrobe } from './player.wardrobe';
@@ -56,6 +57,9 @@ export class PlayerMenuProvider {
 
     @Inject(HalloweenSpiderService)
     private halloweenSpiderService: HalloweenSpiderService;
+
+    @Inject(VoiceProvider)
+    private voiceProvider: VoiceProvider;
 
     @Once()
     public async init() {
@@ -175,7 +179,7 @@ export class PlayerMenuProvider {
 
     @OnNuiEvent(NuiEvent.PlayerMenuVoipReset)
     public async resetVoip() {
-        TriggerEvent('voip:client:reset');
+        await this.voiceProvider.reconnect(true, 'Demande joueur');
     }
 
     @OnNuiEvent(NuiEvent.PlayerMenuHudSetArachnophobe)

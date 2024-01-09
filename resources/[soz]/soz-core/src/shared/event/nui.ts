@@ -163,6 +163,8 @@ export enum NuiEvent {
     SetFocusInput = 'soz-core:nui:set-focus-input',
     SetWardrobeOutfit = 'soz-core:nui:set-wardrobe-outfit',
 
+    PlaySound = 'soz-core:nui:play-sound',
+
     BossShopBuy = 'soz-core:client:shop:boss:buy',
 
     SuperetteShopBuy = 'soz-core:client:shop:superette:buy',
@@ -214,10 +216,12 @@ export enum NuiEvent {
     VoipCloseRadio = 'soz-core:nui:voip:close-radio',
     VoipEnableRadio = 'soz-core:nui:voip:enable-radio',
     VoipUpdateRadioChannel = 'soz-core:nui:voip:update-radio-channel',
+    VoipUpdateRadioVolumeClick = 'soz-core:nui:voip:update-radio-volume-click',
 
     VoipCloseRadioVehicle = 'soz-core:nui:voip:close-radio-vehicle',
     VoipEnableRadioVehicle = 'soz-core:nui:voip:enable-radio-vehicle',
     VoipUpdateRadioVehicleChannel = 'soz-core:nui:voip:update-radio-vehicle-channel',
+    VoipUpdateRadioVehicleVolumeClick = 'soz-core:nui:voip:update-radio-volume-vehicle-click',
 
     UpwGetOrders = 'soz-core:client:job:upw:get-orders',
     UpwOrder = 'soz-core:client:job:upw:order',

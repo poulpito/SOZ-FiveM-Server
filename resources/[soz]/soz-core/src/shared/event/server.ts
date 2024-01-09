@@ -269,11 +269,14 @@ export enum ServerEvent {
     VEHICLE_DAMAGE_BLUR = 'soz-core:server:vehicle:damage-blur',
     VEHICLE_LOCKPICK = 'soz-core:server:vehicle:lockpick',
 
-    VOIP_IS_MUTED = 'voip:server:player:isMuted',
-    VOIP_MUTE = 'voip:server:player:mute',
+    VOIP_MUTE = 'soz-core:server:voip:mute',
     VOIP_SET_MEGAPHONE = 'soz-core:server:voip:set-megaphone',
     VOIP_RADIO_VEHICLE_ENABLE = 'soz-core:server:voip:radio-vehicle-enable',
     VOIP_RADIO_VEHICLE_UPDATE = 'soz-core:server:voip:radio-vehicle-update',
+    VOIP_PHONE_CALL_START = 'soz-core:server:voip:phone-call-start',
+    VOIP_PHONE_CALL_END = 'soz-core:server:voip:phone-call-end',
+    VOIP_RADIO_JOIN_CHANNEL = 'soz-core:server:voip:radio-join-channel',
+    VOIP_RADIO_LEAVE_CHANNEL = 'soz-core:server:voip:radio-leave-channel',
 
     HALLOWEEN2022_HUNT = 'halloween2022:server:hunt',
     LSMC_HALLOWEEN_LOOT_PLAYER = 'lsmc:halloween:lootPlayer',

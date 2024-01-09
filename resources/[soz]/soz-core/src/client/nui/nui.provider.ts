@@ -6,12 +6,16 @@ import { OnceLoader } from '../../core/loader/once.loader';
 import { NuiEvent } from '../../shared/event';
 import { Control } from '../../shared/input';
 import { FocusInput, SetFocusInput } from '../../shared/nui/focus';
+import { SoundService } from '../sound.service';
 import { NuiDispatch } from './nui.dispatch';
 
 @Provider()
 export class NuiProvider {
     @Inject(NuiDispatch)
     private dispatcher: NuiDispatch;
+
+    @Inject(SoundService)
+    private soundService: SoundService;
 
     private state: Record<string, FocusInput> = {};
 
@@ -76,6 +80,11 @@ export class NuiProvider {
             DisableAllControlActions(0);
             EnableControlAction(0, Control.PushToTalk, true);
         }
+    }
+
+    @OnNuiEvent(NuiEvent.PlaySound)
+    public async onPlaySound({ name, volume }) {
+        this.soundService.play(name, volume);
     }
 
     private computeFocusInput() {

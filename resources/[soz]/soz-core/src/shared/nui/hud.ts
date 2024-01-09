@@ -10,6 +10,7 @@ export interface NuiHudMethodMap {
     UpdateVehicleSpeed: VehicleHudSpeed;
     UpdateMinimap: Minimap;
     UpdateVoiceMode: VoiceMode;
+    UpdateVoiceActive: boolean;
     SetSyringeDelay: number;
     SetTwitchNewsOverlay: JobType | null;
     SetShowHud: boolean;
