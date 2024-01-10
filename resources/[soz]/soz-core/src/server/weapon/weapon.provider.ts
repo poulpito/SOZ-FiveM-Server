@@ -122,7 +122,8 @@ export class WeaponProvider {
             weaponGroup == GetHashKey('GROUP_THROWN') ||
             weaponGroup == GetHashKey('GROUP_FIREEXTINGUISHER') ||
             weaponGroup == GetHashKey('GROUP_MELEE') ||
-            weaponGroup == GetHashKey('GROUP_PETROLCAN')
+            weaponGroup == GetHashKey('GROUP_PETROLCAN') ||
+            weaponGroup == GetHashKey('GROUP_STUNGUN')
         ) {
             return;
         }
