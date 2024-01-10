@@ -239,19 +239,6 @@ export class WeaponProvider {
         }
     }
 
-    // @Tick(TickInterval.EVERY_HOUR)
-    // public async resetLatestIdentifiedShot() {
-    //     const players = this.serverStateService.getPlayers();
-    //     for (const player of players) {
-    //         if (player.metadata.last_identified_shot && Date.now() - player.metadata.last_identified_shot > 3600000) {
-    //             this.playerService.setPlayerMetaDatas(player.source, {
-    //                 last_identified_shot: 0,
-    //                 last_weapon_used: '',
-    //             });
-    //         }
-    //     }
-    // }
-
     @OnEvent(ServerEvent.WEAPON_SHOOTING_ALERT)
     async onWeaponShootingAlert(source: number, alertMessage: string, htmlMessage: string, zoneID: string) {
         //No longer used
