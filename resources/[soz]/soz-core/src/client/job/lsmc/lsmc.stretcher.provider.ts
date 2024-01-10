@@ -133,7 +133,9 @@ export class LSMCStretcherProvider {
                 label: "S'allonger",
                 icon: 'fas fa-bed',
                 canInteract: entity =>
-                    this.getPlayerUsingStretcher(entity) == null && NetworkGetEntityIsNetworked(entity),
+                    this.getPlayerUsingStretcher(entity) == null &&
+                    NetworkGetEntityIsNetworked(entity) &&
+                    !this.playerService.isPushing(),
                 action: async entity => {
                     if (this.getPlayerUsingStretcher(entity) == null) {
                         this.onStretcher(entity);
@@ -295,7 +297,7 @@ export class LSMCStretcherProvider {
                         const folded = NetToObj(vehState.ambulanceAttachedStretcher);
                         const serverPlayer = this.getPlayerUsingStretcher(folded);
 
-                        const id = this.onUseStretcher();
+                        const id = await this.onUseStretcher();
                         const vehNetId = VehToNet(entity);
                         const newStretcherNetId = ObjToNet(id);
 
@@ -318,6 +320,7 @@ export class LSMCStretcherProvider {
     private async pushStretcher(entity: number) {
         const playerPed = PlayerPedId();
 
+        FreezeEntityPosition(entity, false);
         SetEntityHeading(entity, GetEntityHeading(playerPed) + 90);
         AttachEntityToEntityPhysically(
             entity,
@@ -387,15 +390,16 @@ export class LSMCStretcherProvider {
     }
 
     @OnEvent(ClientEvent.LSMC_STRETCHER_USE)
-    public onUseStretcher() {
+    public async onUseStretcher() {
         const playerPed = PlayerPedId();
         const coords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.5, 0.0);
         const id = CreateObject(GetHashKey(StretcherModel), coords[0], coords[1], coords[2], true, true, false);
         SetEntityHeading(id, GetEntityHeading(playerPed) + 90.0);
         PlaceObjectOnGroundProperly(id);
-        FreezeEntityPosition(id, false);
         SetNetworkIdCanMigrate(ObjToNet(id), true);
         SetEntityAsMissionEntity(id, true, false);
+        await wait(100);
+        FreezeEntityPosition(id, false);
 
         return id;
     }

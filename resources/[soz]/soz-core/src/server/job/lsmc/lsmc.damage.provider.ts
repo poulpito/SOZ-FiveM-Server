@@ -89,6 +89,7 @@ export class LSMCDamageProvider {
                 metadata: target.metadata,
                 charinfo: target.charinfo,
                 job: target.job,
+                hash: target.skin.Model.Hash,
             },
             date: Date.now(),
         };

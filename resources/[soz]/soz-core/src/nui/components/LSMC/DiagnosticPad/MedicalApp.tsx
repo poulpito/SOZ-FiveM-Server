@@ -15,7 +15,7 @@ import {
     DamagesTypes,
     JobsWithInjuries,
 } from '@public/shared/job/lsmc';
-import { PlayerCriminalState, PlayerMetadata } from '@public/shared/player';
+import { PlayerCriminalState, PlayerMetadata, PlayerPedHash } from '@public/shared/player';
 import { getRandomInt } from '@public/shared/random';
 import { format } from 'date-fns';
 import { FunctionComponent, useEffect, useState } from 'react';
@@ -695,7 +695,7 @@ export const MedicalApp: FunctionComponent = () => {
                     ref={refOutside}
                     style={{
                         backgroundImage: `url(/public/images/lsmc/medical_app_background_${
-                            patient.charinfo.gender === 0 ? 'male' : 'female'
+                            patient.hash === PlayerPedHash.Male ? 'male' : 'female'
                         }.webp)`,
                         width: '100%',
                         height: '100%',

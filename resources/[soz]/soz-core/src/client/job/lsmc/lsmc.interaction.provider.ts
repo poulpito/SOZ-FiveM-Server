@@ -318,7 +318,11 @@ export class LSMCInteractionProvider {
                         return false;
                     }
                     const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
-                    return !(await emitRpcCache(RpcServerEvent.POLICE_LICENSE_HAS_RECUER, target));
+                    const hasRescuerLicense = await emitRpcCache<number>(
+                        RpcServerEvent.POLICE_LICENSE_HAS_RECUER,
+                        target
+                    );
+                    return !hasRescuerLicense;
                 },
                 action: async entity => {
                     const completed = await this.policeLicenceProvider.playLicenceAnimation(
@@ -345,7 +349,11 @@ export class LSMCInteractionProvider {
                         return false;
                     }
                     const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
-                    return await emitRpcCache(RpcServerEvent.POLICE_LICENSE_HAS_RECUER, target);
+                    const hasRescuerLicense = await emitRpcCache<number>(
+                        RpcServerEvent.POLICE_LICENSE_HAS_RECUER,
+                        target
+                    );
+                    return !!hasRescuerLicense;
                 },
                 action: async entity => {
                     const completed = await this.policeLicenceProvider.playLicenceAnimation(

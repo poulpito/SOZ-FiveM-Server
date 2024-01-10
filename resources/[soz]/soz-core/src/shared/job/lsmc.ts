@@ -570,10 +570,10 @@ export const LsmcCloakroom: WardrobeConfig = {
         },
         ['Sauveteur en mer']: {
             Components: {
-                [Component.Torso]: { Drawable: 15, Texture: 0, Palette: 0 },
+                [Component.Torso]: { Drawable: 11, Texture: 0, Palette: 0 },
                 [Component.Legs]: {
                     Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Legs] + 11,
-                    Texture: 2,
+                    Texture: 0,
                     Palette: 0,
                 },
                 [Component.Shoes]: { Drawable: 70, Texture: 0, Palette: 0 },
@@ -588,7 +588,7 @@ export const LsmcCloakroom: WardrobeConfig = {
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Tops]: {
                     Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 13,
-                    Texture: 2,
+                    Texture: 0,
                     Palette: 0,
                 },
             },

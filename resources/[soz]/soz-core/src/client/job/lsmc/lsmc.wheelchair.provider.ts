@@ -160,7 +160,9 @@ export class LSMCWheelChairProvider {
                 label: "S'asseoir",
                 icon: 'c:ems/wheelchair.png',
                 canInteract: entity =>
-                    this.getPlayerUsingWheelChair(entity) == null && NetworkGetEntityIsNetworked(entity),
+                    this.getPlayerUsingWheelChair(entity) == null &&
+                    NetworkGetEntityIsNetworked(entity) &&
+                    !this.playerService.isPushing(),
                 action: async entity => {
                     if (this.getPlayerUsingWheelChair(entity) == null) {
                         this.onWheelChairUse(entity);

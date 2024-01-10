@@ -212,6 +212,7 @@ export type MedicalMetadata = {
         charinfo: PlayerCharInfo;
         job: PlayerJob;
         metadata: PlayerMetadata;
+        hash: number;
     };
     date: number;
 };

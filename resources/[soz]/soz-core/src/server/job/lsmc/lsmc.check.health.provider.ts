@@ -6,7 +6,7 @@ import { Notifier } from '@public/server/notifier';
 import { PlayerService } from '@public/server/player/player.service';
 import { ProgressService } from '@public/server/player/progress.service';
 import { ServerEvent } from '@public/shared/event';
-import { healthLevelToLabel, stressLevelToLabel } from '@public/shared/health';
+import { healthLevelToLabel, injuriesLevelToLabel, stressLevelToLabel } from '@public/shared/health';
 import { PlayerHealthBook } from '@public/shared/player';
 
 @Provider()
@@ -91,25 +91,16 @@ export class LSMCCheckHealthProvider {
         const stressLevelLabel = stressLevelToLabel(targetPlayer.metadata.stress_level);
         const maxStaminaLevelLabel = healthLevelToLabel(targetPlayer.metadata.max_stamina, 60, 150);
         const strengthLevelLabel = healthLevelToLabel(targetPlayer.metadata.strength, 60, 150);
+        const injuriesLevelLabel = injuriesLevelToLabel(targetPlayer);
 
         this.notifier.notify(
             source,
-            `Etat de santé ${healthStateLabel} (${targetPlayer.metadata.health_level}).`,
-            'success'
-        );
-        this.notifier.notify(
-            source,
-            `Etat de force ${strengthLevelLabel} (${targetPlayer.metadata.strength}).`,
-            'success'
-        );
-        this.notifier.notify(
-            source,
-            `Etat d'endurance ${maxStaminaLevelLabel} (${targetPlayer.metadata.max_stamina}).`,
-            'success'
-        );
-        this.notifier.notify(
-            source,
-            `Etat de stress ${stressLevelLabel} (${targetPlayer.metadata.stress_level}).`,
+            `<strong>Etat de santé de ${targetPlayer.charinfo.firstname} ${targetPlayer.charinfo.lastname}</strong>~n~` +
+                `<span style="text-decoration: underline;">Santé :</span> ${healthStateLabel}~n~` +
+                `<span style="text-decoration: underline;">Force :</span> ${strengthLevelLabel}~n~` +
+                `<span style="text-decoration: underline;">Endurance :</span> ${maxStaminaLevelLabel}~n~` +
+                `<span style="text-decoration: underline;">Stress :</span> ${stressLevelLabel}~n~` +
+                `<span style="text-decoration: underline;">Bléssures :</span> ${injuriesLevelLabel}~n~`,
             'success'
         );
     }
