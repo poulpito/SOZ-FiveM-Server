@@ -141,11 +141,11 @@
             <colors>
                 <Item>
                     <indices content="char_array">
-                        0
                         111
                         0
                         0
-                        2
+                        93
+                        134
                     </indices>
                     <liveries>
                         <Item value="false"/>
@@ -179,11 +179,11 @@
             <colors>
                 <Item>
                     <indices content="char_array">
-                        0
                         111
                         0
                         0
-                        2
+                        93
+                        134
                     </indices>
                     <liveries>
                         <Item value="false"/>

@@ -195,7 +195,7 @@
             <frequency value="100" />
             <swankness>SWANKNESS_3</swankness>
             <maxNum value="999" />
-            <flags>FLAG_AVERAGE_CAR FLAG_RECESSED_HEADLIGHT_CORONAS FLAG_HAS_INTERIOR_EXTRAS</flags>
+            <flags>FLAG_EXTRAS_ALL FLAG_EXTRAS_STRONG FLAG_LAW_ENFORCEMENT FLAG_EMERGENCY_SERVICE FLAG_NO_RESPRAY FLAG_DONT_SPAWN_IN_CARGEN FLAG_REPORT_CRIME_IF_STANDING_ON FLAG_HAS_LIVERY </flags>
             <type>VEHICLE_TYPE_CAR</type>
             <plateType>VPT_BACK_PLATES</plateType>
             <dashboardType>VDT_GENTAXI</dashboardType>
@@ -204,7 +204,9 @@
             <trailers />
             <additionalTrailers />
             <drivers />
-            <extraIncludes />
+            <extraIncludes>
+                <Item>EXTRA_1 EXTRA_2 EXTRA_4 EXTRA_5 EXTRA_6 EXTRA_11 EXTRA_12</Item>
+            </extraIncludes>
             <doorsWithCollisionWhenClosed />
             <driveableDoors />
             <bumpersNeedToCollideWithMap value="false" />
@@ -314,7 +316,7 @@
             <frequency value="50" />
             <swankness>SWANKNESS_5</swankness>
             <maxNum value="5" />
-            <flags>FLAG_RICH_CAR FLAG_NO_BROKEN_DOWN_SCENARIO FLAG_HAS_INTERIOR_EXTRAS FLAG_INCREASE_CAMBER_WITH_SUSPENSION_MOD</flags>
+            <flags>FLAG_EXTRAS_ALL FLAG_EXTRAS_STRONG FLAG_LAW_ENFORCEMENT FLAG_EMERGENCY_SERVICE FLAG_NO_RESPRAY FLAG_DONT_SPAWN_IN_CARGEN FLAG_REPORT_CRIME_IF_STANDING_ON FLAG_HAS_LIVERY </flags>
             <type>VEHICLE_TYPE_CAR</type>
             <plateType>VPT_BACK_PLATES</plateType>
             <dashboardType>VDT_SUPERGT</dashboardType>
@@ -323,7 +325,9 @@
             <trailers />
             <additionalTrailers />
             <drivers />
-            <extraIncludes />
+            <extraIncludes>
+                <Item>EXTRA_1 EXTRA_2 EXTRA_4 EXTRA_5 EXTRA_6 EXTRA_7</Item>
+            </extraIncludes>
             <doorsWithCollisionWhenClosed />
             <driveableDoors />
             <bumpersNeedToCollideWithMap value="false" />
