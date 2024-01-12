@@ -122,6 +122,7 @@ export enum DamageGravity {
     Medium,
     Heavy,
     Critical,
+    Fatal,
 }
 
 export type DamageConfig = {
@@ -143,16 +144,21 @@ export const DamageConfigs: Record<DamageGravity, DamageConfig> = {
     },
     [DamageGravity.Medium]: {
         label: 'Moyenne',
-        color: '#00B1F7',
-        style: '[box-shadow:_0_1px_12px_rgb(0_177_247)] border-[rgb(0,177,247)] hover:bg-[rgba(0,177,247,0.5)]',
+        color: '#f7e400',
+        style: '[box-shadow:_0_1px_12px_rgb(247_248_0)] border-[rgb(247,248,0)] hover:bg-[rgba(247,248,0,0.5)]',
     },
     [DamageGravity.Heavy]: {
         label: 'Sévère',
-        color: '#E23C00',
-        style: '[box-shadow:_0_1px_12px_rgb(226_60_0)] border-[rgb(226,60,0)] hover:bg-[rgba(226,60,0,0.5)]',
+        color: '#d11e1e',
+        style: '[box-shadow:_0_1px_12px_rgb(209_30_30)] border-[#d11e1e] hover:bg-[rgba(209,30,30,0.5)]',
     },
     [DamageGravity.Critical]: {
         label: 'Critique',
+        color: '#8D00FA',
+        style: '[box-shadow:_0_1px_12px_rgb(141_0_250)] border-[rgb(141,0,250)] hover:bg-[rgba(141,0,250,0.5)]',
+    },
+    [DamageGravity.Fatal]: {
+        label: 'Fatale',
         color: '#8D00FA',
         style: '[box-shadow:_0_1px_12px_rgb(141_0_250)] border-[rgb(141,0,250)] hover:bg-[rgba(141,0,250,0.5)]',
     },

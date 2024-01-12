@@ -46,7 +46,7 @@ export const MedicalApp: FunctionComponent = () => {
     const getHeartRate = (stressLevel: number, health: number) => {
         const healthLevel = health - 100;
         let min = 60;
-        let max = 90;
+        let max = 80;
         if (stressLevel > 50) {
             min = 100;
             max = 140;
@@ -67,10 +67,14 @@ export const MedicalApp: FunctionComponent = () => {
 
     useEffect(() => {
         if (medicalDatas && medicalDatas.patient) {
-            setHeartRate(
-                getHeartRate(medicalDatas.patient.metadata.stress_level, medicalDatas.patient.metadata.health)
-            );
-            setOxygenRate(getRandomInt(95, 99));
+            const interval = setInterval(() => {
+                setHeartRate(
+                    getHeartRate(medicalDatas.patient.metadata.stress_level, medicalDatas.patient.metadata.health)
+                );
+                setOxygenRate(getRandomInt(96, 99));
+            }, 1000);
+
+            return () => clearInterval(interval);
         }
     }, [medicalDatas]);
 
@@ -123,7 +127,7 @@ export const MedicalApp: FunctionComponent = () => {
 
     const getWoundImportance = (damageQty: number, isFatal?: boolean) => {
         if (isFatal) {
-            return DamageGravity.Critical;
+            return DamageGravity.Heavy;
         }
 
         if (damageQty <= 10) {
@@ -135,7 +139,7 @@ export const MedicalApp: FunctionComponent = () => {
         } else if (damageQty <= 70) {
             return DamageGravity.Heavy;
         } else {
-            return DamageGravity.Critical;
+            return DamageGravity.Heavy;
         }
     };
 
@@ -320,11 +324,12 @@ export const MedicalApp: FunctionComponent = () => {
                     <p className="neuropol text-s [text-shadow:_0_1px_12px_rgb(39_169_151)]">{name}</p>
                 </div>
                 <div
-                    className="flex flex-row justify-center min-w-[8vh] min-h-[8vh] rounded-lg [box-shadow:_0_1px_5px_rgb(39_169_151)] bg-black bg-opacity-50"
+                    className="flex flex-row justify-center min-w-[8vh] min-h-[8vh] rounded-lg [box-shadow:_0_1px_5px_rgb(39_169_151)] bg-opacity-50"
                     style={{
                         borderWidth: '0.2vh',
-                        borderColor: globalZoneColor,
-                        boxShadow: `0 1px 12px ${globalZoneColor}`,
+                        borderColor: damages ? 'transparent' : 'rgba(39,169,151,0.7)',
+                        boxShadow: damages ? 'none' : `0 1px 12px rgba(39,169,151,0.7)`,
+                        background: damages ? 'none' : '#0000005e',
                     }}
                 >
                     {renderDamagedIcons(damages)}
@@ -412,11 +417,19 @@ export const MedicalApp: FunctionComponent = () => {
     const renderDamagedIcons = (damages: DamageServerData[]) => {
         if (!damages) {
             return (
-                <div className="flex justify-center items-center">
-                    <img
+                <div
+                    className="flex justify-center items-center w-full h-full"
+                    style={{
+                        backgroundImage: `url(/public/images/lsmc/icons/default_zone_background.webp)`,
+                        backgroundSize: '85%',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                    }}
+                >
+                    {/* <img
                         className="w-[90%] h-[90%]"
                         src={`/public/images/lsmc/icons/default_zone_background.webp`}
-                    ></img>
+                    ></img> */}
                 </div>
             );
         }
@@ -431,7 +444,15 @@ export const MedicalApp: FunctionComponent = () => {
                         return (
                             <div
                                 key={index}
-                                className={`h-[6vh] w-[6vh] bg-opacity-50 border-solid border-4 rounded flex items-center  justify-center cursor-pointer group m-[0.5vh]`}
+                                className={`h-[8vh] w-[8vh] bg-opacity-50 border-solid border-4 rounded-lg flex items-center  justify-center cursor-pointer group m-[0.5vh] p-[1vh] bg-[#0000005e]`}
+                                style={{
+                                    backgroundImage: `url(/public/images/lsmc/icons/default_zone_background.webp)`,
+                                    backgroundSize: '85%',
+                                    backgroundPosition: 'center',
+                                    backgroundRepeat: 'no-repeat',
+                                    boxShadow: `0 1px 12px ${styleByGravity}`,
+                                    borderColor: styleByGravity,
+                                }}
                                 onMouseEnter={e => {
                                     setDetail([
                                         damages[0],
@@ -444,10 +465,6 @@ export const MedicalApp: FunctionComponent = () => {
                                 }}
                                 onMouseLeave={() => {
                                     setDetail(null);
-                                }}
-                                style={{
-                                    boxShadow: `0 1px 12px ${styleByGravity}`,
-                                    borderColor: styleByGravity,
                                 }}
                             >
                                 {false && damages.length > 1 && (
@@ -554,10 +571,10 @@ export const MedicalApp: FunctionComponent = () => {
                     </div>
                 </div>
                 <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] mt-10 [text-shadow:_0_2px_12px_rgb(39_169_151)] text-[#53e2cf]  rounded-lg border-2 border-[#27a997] h-full">
-                    <h1 className="neuropol mb-2 text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-2 rounded-t bg-[#27a99842]">
+                    <h1 className="neuropol text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-2 rounded-t bg-[#27a99842]">
                         Santé Générale
                     </h1>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col py-[1vh]">
                         <div className="flex flex-row">
                             <div className="flex-col w-[20%] ">
                                 <img className="w-[3vh] mx-auto" src={`/public/images/lsmc/icons/icon_list.webp`}></img>
@@ -672,7 +689,7 @@ export const MedicalApp: FunctionComponent = () => {
                                                 Blessures
                                             </h2>
                                         </div>
-                                        <div className="pb-8">
+                                        <div>
                                             <p>
                                                 ÉTAT DES BLESSURES :{' '}
                                                 <span className="text-white capitalize">{injuriesLabel}</span>
