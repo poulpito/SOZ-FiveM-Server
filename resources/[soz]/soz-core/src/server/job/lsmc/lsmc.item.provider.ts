@@ -130,10 +130,7 @@ export class LSMCItemProvider {
         }
 
         const entity = NetworkGetEntityFromNetworkId(netId);
-        if (
-            !DoesEntityExist(entity) ||
-            ![GetHashKey(StretcherModel), GetHashKey(StretcherFoldedModel)].includes(GetEntityModel(entity))
-        ) {
+        if (!DoesEntityExist(entity) || ![StretcherModel, StretcherFoldedModel].includes(GetEntityModel(entity))) {
             return;
         }
 
@@ -169,7 +166,7 @@ export class LSMCItemProvider {
         newStretcherNetID: number
     ) {
         const entity = NetworkGetEntityFromNetworkId(netId);
-        if (!DoesEntityExist(entity) || GetEntityModel(entity) != GetHashKey(StretcherModel)) {
+        if (!DoesEntityExist(entity) || GetEntityModel(entity) != StretcherModel) {
             return;
         }
 
@@ -193,7 +190,7 @@ export class LSMCItemProvider {
         newStretcherNetID: number
     ) {
         const entity = NetworkGetEntityFromNetworkId(netId);
-        if (!DoesEntityExist(entity) || GetEntityModel(entity) != GetHashKey(StretcherFoldedModel)) {
+        if (!DoesEntityExist(entity) || GetEntityModel(entity) != StretcherFoldedModel) {
             return;
         }
 
@@ -251,7 +248,7 @@ export class LSMCItemProvider {
         }
 
         const entity = NetworkGetEntityFromNetworkId(netId);
-        if (!DoesEntityExist(entity) || GetEntityModel(entity) != GetHashKey(WheelChairModel)) {
+        if (!DoesEntityExist(entity) || GetEntityModel(entity) != WheelChairModel) {
             return;
         }
 

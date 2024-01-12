@@ -216,7 +216,7 @@ export class LSMCStretcherProvider {
                         const coords = GetEntityCoords(this.pushing);
 
                         const id = CreateObject(
-                            GetHashKey(StretcherFoldedModel),
+                            StretcherFoldedModel,
                             coords[0],
                             coords[1],
                             coords[2],
@@ -393,7 +393,7 @@ export class LSMCStretcherProvider {
     public async onUseStretcher() {
         const playerPed = PlayerPedId();
         const coords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.5, 0.0);
-        const id = CreateObject(GetHashKey(StretcherModel), coords[0], coords[1], coords[2], true, true, false);
+        const id = CreateObject(StretcherModel, coords[0], coords[1], coords[2], true, true, false);
         SetEntityHeading(id, GetEntityHeading(playerPed) + 90.0);
         PlaceObjectOnGroundProperly(id);
         SetNetworkIdCanMigrate(ObjToNet(id), true);
@@ -424,7 +424,7 @@ export class LSMCStretcherProvider {
         const player = this.playerService.getPlayer();
         this.weaponDrawingProvider.undrawWeapons();
 
-        const zoffset = GetEntityModel(entity) == GetHashKey(StretcherModel) ? 2.1 : 1.5;
+        const zoffset = GetEntityModel(entity) == StretcherModel ? 2.1 : 1.5;
         AttachEntityToEntity(
             playerPed,
             entity,

@@ -619,9 +619,9 @@ export type DamageServerData = {
     date: number;
 };
 
-export const WheelChairModel = 'prop_wheelchair_01';
-export const StretcherModel = 'fernocot';
-export const StretcherFoldedModel = 'loweredfernocot';
+export const WheelChairModel = joaat('prop_wheelchair_01');
+export const StretcherModel = joaat('fernocot');
+export const StretcherFoldedModel = joaat('loweredfernocot');
 export const deathAnim: Animation = {
     base: {
         dictionary: 'dead',

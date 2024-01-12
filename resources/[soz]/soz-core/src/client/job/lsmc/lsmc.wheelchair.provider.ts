@@ -187,7 +187,7 @@ export class LSMCWheelChairProvider {
     public onUseWheelChair() {
         const playerPed = PlayerPedId();
         const coords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.5, 0.0);
-        const id = CreateObject(GetHashKey(WheelChairModel), coords[0], coords[1], coords[2], true, true, false);
+        const id = CreateObject(WheelChairModel, coords[0], coords[1], coords[2], true, true, false);
         SetEntityHeading(id, GetEntityHeading(playerPed) + 180.0);
         PlaceObjectOnGroundProperly(id);
         SetNetworkIdCanMigrate(ObjToNet(id), true);
