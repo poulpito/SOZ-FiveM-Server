@@ -1835,7 +1835,7 @@
                 <!-- CINQ_HOOD -->
 
                 <Item>
-                    <modelName>cinquemila_hood2</modelName>
+                    <modelName>lspd12_hood2</modelName>
                     <modShopLabel>CINQ_HOOD2</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1852,7 +1852,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood3</modelName>
+                    <modelName>lspd12_hood3</modelName>
                     <modShopLabel>CINQ_HOOD3</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1869,7 +1869,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood4</modelName>
+                    <modelName>lspd12_hood4</modelName>
                     <modShopLabel>CINQ_HOOD4</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1886,7 +1886,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood5</modelName>
+                    <modelName>lspd12_hood5</modelName>
                     <modShopLabel>CINQ_HOOD5</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1903,7 +1903,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood6</modelName>
+                    <modelName>lspd12_hood6</modelName>
                     <modShopLabel>CINQ_HOOD6</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1920,7 +1920,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood7</modelName>
+                    <modelName>lspd12_hood7</modelName>
                     <modShopLabel>CINQ_HOOD7</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1937,7 +1937,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood8</modelName>
+                    <modelName>lspd12_hood8</modelName>
                     <modShopLabel>CINQ_HOOD8</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1954,7 +1954,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood9</modelName>
+                    <modelName>lspd12_hood9</modelName>
                     <modShopLabel>CINQ_HOOD9</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1971,7 +1971,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood10</modelName>
+                    <modelName>lspd12_hood10</modelName>
                     <modShopLabel>CINQ_HOOD10</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -1988,7 +1988,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood11</modelName>
+                    <modelName>lspd12_hood11</modelName>
                     <modShopLabel>CINQ_HOOD11</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2005,7 +2005,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood12</modelName>
+                    <modelName>lspd12_hood12</modelName>
                     <modShopLabel>CINQ_HOOD12</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2022,7 +2022,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood13</modelName>
+                    <modelName>lspd12_hood13</modelName>
                     <modShopLabel>CINQ_HOOD13</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2039,7 +2039,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood14</modelName>
+                    <modelName>lspd12_hood14</modelName>
                     <modShopLabel>CINQ_HOOD14</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2056,7 +2056,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood15</modelName>
+                    <modelName>lspd12_hood15</modelName>
                     <modShopLabel>CINQ_HOOD15</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2073,7 +2073,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood16</modelName>
+                    <modelName>lspd12_hood16</modelName>
                     <modShopLabel>CINQ_HOOD16</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2090,7 +2090,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood17</modelName>
+                    <modelName>lspd12_hood17</modelName>
                     <modShopLabel>CINQ_HOOD17</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2107,7 +2107,7 @@
                     <allowBonnetSlide value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_hood18</modelName>
+                    <modelName>lspd12_hood18</modelName>
                     <modShopLabel>CINQ_HOOD18</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2127,7 +2127,7 @@
                 <!-- CINQ_SPLIT -->
 
                 <Item>
-                    <modelName>cinquemila_split2</modelName>
+                    <modelName>lspd12_split2</modelName>
                     <modShopLabel>CINQ_SPLIT2</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2144,7 +2144,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split3</modelName>
+                    <modelName>lspd12_split3</modelName>
                     <modShopLabel>CINQ_SPLIT3</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2161,7 +2161,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split4</modelName>
+                    <modelName>lspd12_split4</modelName>
                     <modShopLabel>CINQ_SPLIT4</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2178,7 +2178,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split5</modelName>
+                    <modelName>lspd12_split5</modelName>
                     <modShopLabel>CINQ_SPLIT5</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2195,7 +2195,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split6</modelName>
+                    <modelName>lspd12_split6</modelName>
                     <modShopLabel>CINQ_SPLIT6</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2212,7 +2212,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split7</modelName>
+                    <modelName>lspd12_split7</modelName>
                     <modShopLabel>CINQ_SPLIT7</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2229,7 +2229,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split8</modelName>
+                    <modelName>lspd12_split8</modelName>
                     <modShopLabel>CINQ_SPLIT8</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2246,7 +2246,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split9</modelName>
+                    <modelName>lspd12_split9</modelName>
                     <modShopLabel>CINQ_SPLIT9</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2263,7 +2263,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split10</modelName>
+                    <modelName>lspd12_split10</modelName>
                     <modShopLabel>CINQ_SPLIT10</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2280,7 +2280,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split11</modelName>
+                    <modelName>lspd12_split11</modelName>
                     <modShopLabel>CINQ_SPLIT11</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2297,7 +2297,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split12</modelName>
+                    <modelName>lspd12_split12</modelName>
                     <modShopLabel>CINQ_SPLIT12</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2314,7 +2314,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split13</modelName>
+                    <modelName>lspd12_split13</modelName>
                     <modShopLabel>CINQ_SPLIT13</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2331,7 +2331,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split14</modelName>
+                    <modelName>lspd12_split14</modelName>
                     <modShopLabel>CINQ_SPLIT14</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2348,7 +2348,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_split15</modelName>
+                    <modelName>lspd12_split15</modelName>
                     <modShopLabel>CINQ_SPLIT15</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2368,7 +2368,7 @@
                 <!-- CINQ_BUMR -->
 
                 <Item>
-                    <modelName>cinquemila_bumr2</modelName>
+                    <modelName>lspd12_bumr2</modelName>
                     <modShopLabel>CINQ_BUMR2</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2385,7 +2385,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_bumr3</modelName>
+                    <modelName>lspd12_bumr3</modelName>
                     <modShopLabel>CINQ_BUMR3</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2402,7 +2402,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_bumr4</modelName>
+                    <modelName>lspd12_bumr4</modelName>
                     <modShopLabel>CINQ_BUMR4</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2419,7 +2419,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_bumr5</modelName>
+                    <modelName>lspd12_bumr5</modelName>
                     <modShopLabel>CINQ_BUMR5</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2440,7 +2440,7 @@
 
 
                 <Item>
-                    <modelName>cinquemila_skirt2</modelName>
+                    <modelName>lspd12_skirt2</modelName>
                     <modShopLabel>CINQ_SKIRT2</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2455,7 +2455,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt3</modelName>
+                    <modelName>lspd12_skirt3</modelName>
                     <modShopLabel>CINQ_SKIRT3</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2470,7 +2470,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt4</modelName>
+                    <modelName>lspd12_skirt4</modelName>
                     <modShopLabel>CINQ_SKIRT4</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2485,7 +2485,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt5</modelName>
+                    <modelName>lspd12_skirt5</modelName>
                     <modShopLabel>CINQ_SKIRT5</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2500,7 +2500,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt6</modelName>
+                    <modelName>lspd12_skirt6</modelName>
                     <modShopLabel>CINQ_SKIRT6</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2515,7 +2515,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt7</modelName>
+                    <modelName>lspd12_skirt7</modelName>
                     <modShopLabel>CINQ_SKIRT7</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2530,7 +2530,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt8</modelName>
+                    <modelName>lspd12_skirt8</modelName>
                     <modShopLabel>CINQ_SKIRT8</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2545,7 +2545,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt9</modelName>
+                    <modelName>lspd12_skirt9</modelName>
                     <modShopLabel>CINQ_SKIRT9</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2560,7 +2560,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt10</modelName>
+                    <modelName>lspd12_skirt10</modelName>
                     <modShopLabel>CINQ_SKIRT10</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2575,7 +2575,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt11</modelName>
+                    <modelName>lspd12_skirt11</modelName>
                     <modShopLabel>CINQ_SKIRT11</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2590,7 +2590,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt12</modelName>
+                    <modelName>lspd12_skirt12</modelName>
                     <modShopLabel>CINQ_SKIRT12</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2605,7 +2605,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt13</modelName>
+                    <modelName>lspd12_skirt13</modelName>
                     <modShopLabel>CINQ_SKIRT13</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2620,7 +2620,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt14</modelName>
+                    <modelName>lspd12_skirt14</modelName>
                     <modShopLabel>CINQ_SKIRT14</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2635,7 +2635,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_skirt15</modelName>
+                    <modelName>lspd12_skirt15</modelName>
                     <modShopLabel>CINQ_SKIRT15</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -2653,7 +2653,7 @@
                 <!-- CINQ_EXHAUST -->
 
                 <Item>
-                    <modelName>cinquemila_exh2</modelName>
+                    <modelName>lspd12_exh2</modelName>
                     <modShopLabel>CINQ_EXH2</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2674,7 +2674,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh3</modelName>
+                    <modelName>lspd12_exh3</modelName>
                     <modShopLabel>CINQ_EXH3</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2695,7 +2695,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh4</modelName>
+                    <modelName>lspd12_exh4</modelName>
                     <modShopLabel>CINQ_EXH4</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2714,7 +2714,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh5</modelName>
+                    <modelName>lspd12_exh5</modelName>
                     <modShopLabel>CINQ_EXH5</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2735,7 +2735,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh6</modelName>
+                    <modelName>lspd12_exh6</modelName>
                     <modShopLabel>CINQ_EXH6</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2756,7 +2756,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh7</modelName>
+                    <modelName>lspd12_exh7</modelName>
                     <modShopLabel>CINQ_EXH7</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2777,7 +2777,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh8</modelName>
+                    <modelName>lspd12_exh8</modelName>
                     <modShopLabel>CINQ_EXH8</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2798,7 +2798,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_exh9</modelName>
+                    <modelName>lspd12_exh9</modelName>
                     <modShopLabel>CINQ_EXH9</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2822,7 +2822,7 @@
                 <!-- CINQ_FLAPS -->
 
                 <Item>
-                    <modelName>cinquemila_flaps1</modelName>
+                    <modelName>lspd12_flaps1</modelName>
                     <modShopLabel>CINQ_FLAPS1</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -2837,7 +2837,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_flaps2</modelName>
+                    <modelName>lspd12_flaps2</modelName>
                     <modShopLabel>CINQ_FLAPS2</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -2852,7 +2852,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_flaps3</modelName>
+                    <modelName>lspd12_flaps3</modelName>
                     <modShopLabel>CINQ_FLAPS3</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -2870,7 +2870,7 @@
                 <!-- CINQ_GRILL -->
 
                 <Item>
-                    <modelName>cinquemila_grill2</modelName>
+                    <modelName>lspd12_grill2</modelName>
                     <modShopLabel>CINQ_GRILL2</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2887,7 +2887,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_grill3</modelName>
+                    <modelName>lspd12_grill3</modelName>
                     <modShopLabel>CINQ_GRILL3</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2904,7 +2904,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_grill4</modelName>
+                    <modelName>lspd12_grill4</modelName>
                     <modShopLabel>CINQ_GRILL4</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2921,7 +2921,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_grill5</modelName>
+                    <modelName>lspd12_grill5</modelName>
                     <modShopLabel>CINQ_GRILL5</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2938,7 +2938,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_grill6</modelName>
+                    <modelName>lspd12_grill6</modelName>
                     <modShopLabel>CINQ_GRILL6</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2955,7 +2955,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_grill7</modelName>
+                    <modelName>lspd12_grill7</modelName>
                     <modShopLabel>CINQ_GRILL7</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2972,7 +2972,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_grill8</modelName>
+                    <modelName>lspd12_grill8</modelName>
                     <modShopLabel>CINQ_GRILL8</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -2992,10 +2992,10 @@
                 <!-- CINQ_MIRROR -->
 
                 <Item>
-                    <modelName>cinquemila_mirr_df2</modelName>
+                    <modelName>lspd12_mirr_df2</modelName>
                     <modShopLabel>CINQ_MIRR2</modShopLabel>
                     <linkedModels>
-                        <Item>cinquemila_mirr_pf2</Item>
+                        <Item>lspd12_mirr_pf2</Item>
                     </linkedModels>
                     <turnOffBones>
                         <Item>misc_c</Item>
@@ -3012,10 +3012,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_mirr_df3</modelName>
+                    <modelName>lspd12_mirr_df3</modelName>
                     <modShopLabel>CINQ_MIRR3</modShopLabel>
                     <linkedModels>
-                        <Item>cinquemila_mirr_pf3</Item>
+                        <Item>lspd12_mirr_pf3</Item>
                     </linkedModels>
                     <turnOffBones>
                         <Item>misc_c</Item>
@@ -3035,7 +3035,7 @@
                 <!-- CINQ_ROOF -->
 
                 <Item>
-                    <modelName>cinquemila_roof2</modelName>
+                    <modelName>lspd12_roof2</modelName>
                     <modShopLabel>CINQ_ROOF2</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3052,7 +3052,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof3</modelName>
+                    <modelName>lspd12_roof3</modelName>
                     <modShopLabel>CINQ_ROOF3</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3069,7 +3069,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof4</modelName>
+                    <modelName>lspd12_roof4</modelName>
                     <modShopLabel>CINQ_ROOF4</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3086,7 +3086,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof5</modelName>
+                    <modelName>lspd12_roof5</modelName>
                     <modShopLabel>CINQ_ROOF5</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3103,7 +3103,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof6</modelName>
+                    <modelName>lspd12_roof6</modelName>
                     <modShopLabel>CINQ_ROOF6</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3120,7 +3120,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof7</modelName>
+                    <modelName>lspd12_roof7</modelName>
                     <modShopLabel>CINQ_ROOF7</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3137,7 +3137,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof8</modelName>
+                    <modelName>lspd12_roof8</modelName>
                     <modShopLabel>CINQ_ROOF8</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3154,7 +3154,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof9</modelName>
+                    <modelName>lspd12_roof9</modelName>
                     <modShopLabel>CINQ_ROOF9</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3171,7 +3171,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof10</modelName>
+                    <modelName>lspd12_roof10</modelName>
                     <modShopLabel>CINQ_ROOF10</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3188,7 +3188,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof11</modelName>
+                    <modelName>lspd12_roof11</modelName>
                     <modShopLabel>CINQ_ROOF11</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3205,7 +3205,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_roof12</modelName>
+                    <modelName>lspd12_roof12</modelName>
                     <modShopLabel>CINQ_ROOF12</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -3225,7 +3225,7 @@
                 <!-- CINQ_STRIP -->
 
                 <Item>
-                    <modelName>cinquemila_strip2</modelName>
+                    <modelName>lspd12_strip2</modelName>
                     <modShopLabel>CINQ_STRIP2</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -3240,7 +3240,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_strip3</modelName>
+                    <modelName>lspd12_strip3</modelName>
                     <modShopLabel>CINQ_STRIP3</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -3255,7 +3255,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_strip4</modelName>
+                    <modelName>lspd12_strip4</modelName>
                     <modShopLabel>CINQ_STRIP4</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -3274,7 +3274,7 @@
                 <!-- CINQ_WING -->
 
                 <Item>
-                    <modelName>cinquemila_wing2</modelName>
+                    <modelName>lspd12_wing2</modelName>
                     <modShopLabel>CINQ_WING2</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3289,7 +3289,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing3</modelName>
+                    <modelName>lspd12_wing3</modelName>
                     <modShopLabel>CINQ_WING3</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3304,7 +3304,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing4</modelName>
+                    <modelName>lspd12_wing4</modelName>
                     <modShopLabel>CINQ_WING4</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3319,7 +3319,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing5</modelName>
+                    <modelName>lspd12_wing5</modelName>
                     <modShopLabel>CINQ_WING5</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3334,7 +3334,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing6</modelName>
+                    <modelName>lspd12_wing6</modelName>
                     <modShopLabel>CINQ_WING6</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3349,7 +3349,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing7</modelName>
+                    <modelName>lspd12_wing7</modelName>
                     <modShopLabel>CINQ_WING7</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3364,7 +3364,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing8</modelName>
+                    <modelName>lspd12_wing8</modelName>
                     <modShopLabel>CINQ_WING8</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3379,7 +3379,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing9</modelName>
+                    <modelName>lspd12_wing9</modelName>
                     <modShopLabel>CINQ_WING9</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3394,7 +3394,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing10</modelName>
+                    <modelName>lspd12_wing10</modelName>
                     <modShopLabel>CINQ_WING10</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3409,7 +3409,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing11</modelName>
+                    <modelName>lspd12_wing11</modelName>
                     <modShopLabel>CINQ_WING11</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3424,7 +3424,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing12</modelName>
+                    <modelName>lspd12_wing12</modelName>
                     <modShopLabel>CINQ_WING12</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3439,7 +3439,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing13</modelName>
+                    <modelName>lspd12_wing13</modelName>
                     <modShopLabel>CINQ_WING13</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3454,7 +3454,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing14</modelName>
+                    <modelName>lspd12_wing14</modelName>
                     <modShopLabel>CINQ_WING14</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3469,7 +3469,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing15</modelName>
+                    <modelName>lspd12_wing15</modelName>
                     <modShopLabel>CINQ_WING15</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3484,7 +3484,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing16</modelName>
+                    <modelName>lspd12_wing16</modelName>
                     <modShopLabel>CINQ_WING16</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3499,7 +3499,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing17</modelName>
+                    <modelName>lspd12_wing17</modelName>
                     <modShopLabel>CINQ_WING17</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3514,7 +3514,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_wing18</modelName>
+                    <modelName>lspd12_wing18</modelName>
                     <modShopLabel>CINQ_WING18</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -3531,12 +3531,12 @@
             </visibleMods>
             <linkMods>
                 <Item>
-                    <modelName>cinquemila_mirr_pf2</modelName>
+                    <modelName>lspd12_mirr_pf2</modelName>
                     <bone>door_pside_f</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>cinquemila_mirr_pf3</modelName>
+                    <modelName>lspd12_mirr_pf3</modelName>
                     <bone>door_pside_f</bone>
                     <turnOffExtra value="false" />
                 </Item>
