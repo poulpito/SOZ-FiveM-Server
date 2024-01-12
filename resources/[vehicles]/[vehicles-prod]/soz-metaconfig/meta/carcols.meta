@@ -5512,7 +5512,7 @@
             <kitType>MKT_SPECIAL</kitType>
             <visibleMods>
                 <Item>
-                    <modelName>manchez3_handlebarpad_1</modelName>
+                    <modelName>bcso30_handlebarpad_1</modelName>
                     <modShopLabel>MAN3_HANBAR1</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
@@ -5527,7 +5527,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_frameb</modelName>
+                    <modelName>bcso30_frameb</modelName>
                     <modShopLabel>MAN3_FRAME1</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -5542,10 +5542,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_framed</modelName>
+                    <modelName>bcso30_framed</modelName>
                     <modShopLabel>MAN3_FRAME2</modShopLabel>
                     <linkedModels>
-                        <Item>manchez3_frameb</Item>
+                        <Item>bcso30_frameb</Item>
                     </linkedModels>
                     <turnOffBones />
                     <type>VMT_CHASSIS</type>
@@ -5559,7 +5559,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_tanka</modelName>
+                    <modelName>bcso30_tanka</modelName>
                     <modShopLabel>MAN_TANKA</modShopLabel>
                     <linkedModels />
                     <turnOffBones />
@@ -5574,10 +5574,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_tanka</modelName>
+                    <modelName>bcso30_tanka</modelName>
                     <modShopLabel>MAN3_TANK2</modShopLabel>
                     <linkedModels>
-                        <Item>manchez3_tankb</Item>
+                        <Item>bcso30_tankb</Item>
                     </linkedModels>
                     <turnOffBones />
                     <type>VMT_ROOF</type>
@@ -5591,10 +5591,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_tanka</modelName>
+                    <modelName>bcso30_tanka</modelName>
                     <modShopLabel>MAN3_TANK3</modShopLabel>
                     <linkedModels>
-                        <Item>manchez3_tankc</Item>
+                        <Item>bcso30_tankc</Item>
                     </linkedModels>
                     <turnOffBones />
                     <type>VMT_ROOF</type>
@@ -5608,7 +5608,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_tankd</modelName>
+                    <modelName>bcso30_tankd</modelName>
                     <modShopLabel>MAN3_TANK4</modShopLabel>
                     <linkedModels/>
                     <turnOffBones />
@@ -5623,7 +5623,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_fenda</modelName>
+                    <modelName>bcso30_fenda</modelName>
                     <modShopLabel>MAN_FENDA</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5640,7 +5640,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_fendb</modelName>
+                    <modelName>bcso30_fendb</modelName>
                     <modShopLabel>MAN3_FEND2</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5657,7 +5657,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_fendc</modelName>
+                    <modelName>bcso30_fendc</modelName>
                     <modShopLabel>MAN3_FEND3</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5674,7 +5674,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_fendd</modelName>
+                    <modelName>bcso30_fendd</modelName>
                     <modShopLabel>MAN3_FEND4</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5691,7 +5691,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_fende</modelName>
+                    <modelName>bcso30_fende</modelName>
                     <modShopLabel>MAN3_FEND5</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5708,7 +5708,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exha</modelName>
+                    <modelName>bcso30_exha</modelName>
                     <modShopLabel>MAN_EXHA</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5726,10 +5726,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exha</modelName>
+                    <modelName>bcso30_exha</modelName>
                     <modShopLabel>MAN_EXHB</modShopLabel>
                     <linkedModels>
-                        <Item>manchez3_exhb</Item>
+                        <Item>bcso30_exhb</Item>
                     </linkedModels>
                     <turnOffBones>
                         <Item>misc_b</Item>
@@ -5746,7 +5746,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exhc</modelName>
+                    <modelName>bcso30_exhc</modelName>
                     <modShopLabel>MAN_EXHC</modShopLabel>
                     <linkedModels />
                     <turnOffBones>
@@ -5764,10 +5764,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exhc</modelName>
+                    <modelName>bcso30_exhc</modelName>
                     <modShopLabel>MAN_EXHD</modShopLabel>
                     <linkedModels>
-                        <Item>manchez3_exhd</Item>
+                        <Item>bcso30_exhd</Item>
                     </linkedModels>
                     <turnOffBones>
                         <Item>misc_b</Item>
@@ -5784,7 +5784,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exh_1</modelName>
+                    <modelName>bcso30_exh_1</modelName>
                     <modShopLabel>MAN3_EXH1</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5802,7 +5802,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exh_2</modelName>
+                    <modelName>bcso30_exh_2</modelName>
                     <modShopLabel>MAN3_EXH2</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5820,7 +5820,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exh_3</modelName>
+                    <modelName>bcso30_exh_3</modelName>
                     <modShopLabel>MAN3_EXH3</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5838,7 +5838,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exh_4</modelName>
+                    <modelName>bcso30_exh_4</modelName>
                     <modShopLabel>MAN3_EXH4</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5856,7 +5856,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_shroud_1</modelName>
+                    <modelName>bcso30_shroud_1</modelName>
                     <modShopLabel>MAN3_SHROUD1</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5873,7 +5873,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_shroud_2</modelName>
+                    <modelName>bcso30_shroud_2</modelName>
                     <modShopLabel>MAN3_SHROUD2</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5890,10 +5890,10 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_shroud_3</modelName>
+                    <modelName>bcso30_shroud_3</modelName>
                     <modShopLabel>MAN3_SHROUD3</modShopLabel>
                     <linkedModels>
-                        <Item>manchez3_shroud_1</Item>
+                        <Item>bcso30_shroud_1</Item>
                     </linkedModels>
                     <turnOffBones>
                         <Item>misc_f</Item>
@@ -5909,7 +5909,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_seat_1</modelName>
+                    <modelName>bcso30_seat_1</modelName>
                     <modShopLabel>MAN3_SEAT1</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5926,7 +5926,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_seat_2</modelName>
+                    <modelName>bcso30_seat_2</modelName>
                     <modShopLabel>MAN3_SEAT2</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5943,7 +5943,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_seat_3</modelName>
+                    <modelName>bcso30_seat_3</modelName>
                     <modShopLabel>MAN3_SEAT3</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5960,7 +5960,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_swingarm_1</modelName>
+                    <modelName>bcso30_swingarm_1</modelName>
                     <modShopLabel>MAN3_SWING1</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5977,7 +5977,7 @@
                     <allowBonnetSlide value="true" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_fairing_1</modelName>
+                    <modelName>bcso30_fairing_1</modelName>
                     <modShopLabel>MAN3_FAIR1</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
@@ -5996,62 +5996,62 @@
             </visibleMods>
             <linkMods>
                 <Item>
-                    <modelName>manchez3_boxa</modelName>
+                    <modelName>bcso30_boxa</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_frameb</modelName>
+                    <modelName>bcso30_frameb</modelName>
                     <bone>forks_u</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_boxb</modelName>
+                    <modelName>bcso30_boxb</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_boxc</modelName>
+                    <modelName>bcso30_boxc</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_jcan</modelName>
+                    <modelName>bcso30_jcan</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exha</modelName>
+                    <modelName>bcso30_exha</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exhc</modelName>
+                    <modelName>bcso30_exhc</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exhb</modelName>
+                    <modelName>bcso30_exhb</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_exhd</modelName>
+                    <modelName>bcso30_exhd</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_shroud_1</modelName>
+                    <modelName>bcso30_shroud_1</modelName>
                     <bone>forks_l</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_tankb</modelName>
+                    <modelName>bcso30_tankb</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>
                 <Item>
-                    <modelName>manchez3_tankc</modelName>
+                    <modelName>bcso30_tankc</modelName>
                     <bone>chassis</bone>
                     <turnOffExtra value="false" />
                 </Item>

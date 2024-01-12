@@ -2657,18 +2657,25 @@
             <sirenSettings value="1"/>
         </Item>
         <Item>
-            <modelName>sheriffb</modelName>
+            <modelName>dodgebana</modelName>
             <colors>
                 <Item>
                     <indices content="char_array">
-                        111
-                        1
-                        134
-                        156
                         0
                         0
+                        55
+                        23
                     </indices>
-                    <liveries/>
+                    <liveries>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                    </liveries>
                 </Item>
             </colors>
             <kits>

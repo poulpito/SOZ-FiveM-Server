@@ -774,7 +774,7 @@
         </Item>
         <Item>
             <id value="5012"/>
-            <name>bcso40</name>
+            <name>bcso20</name>
             <timeMultiplier value="1.00000000"/>
             <lightFalloffMax value="70.00000000"/>
             <lightFalloffExponent value="10.00000000"/>
@@ -1546,13 +1546,13 @@
     </Sirens>
     <Kits>
         <Item>
-            <kitName>1011_bcso40_modkit</kitName>
+            <kitName>1011_bcso20_modkit</kitName>
             <id value="1011"/>
             <kitType>MKT_SPECIAL</kitType>
             <visibleMods>
                 <Item>
-                    <modelName>bcso40_hooda</modelName>
-                    <modShopLabel>bcso40_HOOD_A</modShopLabel>
+                    <modelName>bcso20_hooda</modelName>
+                    <modShopLabel>cara2_HOOD_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1568,8 +1568,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoodb</modelName>
-                    <modShopLabel>bcso40_HOOD_B</modShopLabel>
+                    <modelName>bcso20_hoodb</modelName>
+                    <modShopLabel>cara2_HOOD_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1585,8 +1585,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoodc</modelName>
-                    <modShopLabel>bcso40_HOOD_C</modShopLabel>
+                    <modelName>bcso20_hoodc</modelName>
+                    <modShopLabel>cara2_HOOD_C</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1602,8 +1602,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoodd</modelName>
-                    <modShopLabel>bcso40_HOOD_D</modShopLabel>
+                    <modelName>bcso20_hoodd</modelName>
+                    <modShopLabel>cara2_HOOD_D</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1619,8 +1619,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoode</modelName>
-                    <modShopLabel>bcso40_HOOD_E</modShopLabel>
+                    <modelName>bcso20_hoode</modelName>
+                    <modShopLabel>cara2_HOOD_E</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1636,8 +1636,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoodf</modelName>
-                    <modShopLabel>bcso40_HOOD_F</modShopLabel>
+                    <modelName>bcso20_hoodf</modelName>
+                    <modShopLabel>cara2_HOOD_F</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1653,8 +1653,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoodg</modelName>
-                    <modShopLabel>bcso40_HOOD_G</modShopLabel>
+                    <modelName>bcso20_hoodg</modelName>
+                    <modShopLabel>cara2_HOOD_G</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1670,8 +1670,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_hoodh</modelName>
-                    <modShopLabel>bcso40_HOOD_H</modShopLabel>
+                    <modelName>bcso20_hoodh</modelName>
+                    <modShopLabel>cara2_HOOD_H</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>bonnet</Item>
@@ -1687,8 +1687,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumfa</modelName>
-                    <modShopLabel>bcso40_BUMF_A</modShopLabel>
+                    <modelName>bcso20_bumfa</modelName>
+                    <modShopLabel>cara2_BUMF_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1704,8 +1704,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumfb</modelName>
-                    <modShopLabel>bcso40_BUMF_B</modShopLabel>
+                    <modelName>bcso20_bumfb</modelName>
+                    <modShopLabel>cara2_BUMF_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1721,8 +1721,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumfc</modelName>
-                    <modShopLabel>bcso40_BUMF_C</modShopLabel>
+                    <modelName>bcso20_bumfc</modelName>
+                    <modShopLabel>cara2_BUMF_C</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1738,8 +1738,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumfd</modelName>
-                    <modShopLabel>bcso40_BUMF_D</modShopLabel>
+                    <modelName>bcso20_bumfd</modelName>
+                    <modShopLabel>cara2_BUMF_D</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1755,8 +1755,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumfe</modelName>
-                    <modShopLabel>bcso40_BUMF_E</modShopLabel>
+                    <modelName>bcso20_bumfe</modelName>
+                    <modShopLabel>cara2_BUMF_E</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1772,8 +1772,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumff</modelName>
-                    <modShopLabel>bcso40_BUMF_F</modShopLabel>
+                    <modelName>bcso20_bumff</modelName>
+                    <modShopLabel>cara2_BUMF_F</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1789,8 +1789,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumfg</modelName>
-                    <modShopLabel>bcso40_BUMF_G</modShopLabel>
+                    <modelName>bcso20_bumfg</modelName>
+                    <modShopLabel>cara2_BUMF_G</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_a</Item>
@@ -1806,8 +1806,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_archa</modelName>
-                    <modShopLabel>bcso40_ARCH_A</modShopLabel>
+                    <modelName>bcso20_archa</modelName>
+                    <modShopLabel>cara2_ARCH_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_c</Item>
@@ -1823,8 +1823,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_archb</modelName>
-                    <modShopLabel>bcso40_ARCH_B</modShopLabel>
+                    <modelName>bcso20_archb</modelName>
+                    <modShopLabel>cara2_ARCH_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_c</Item>
@@ -1840,8 +1840,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_archc</modelName>
-                    <modShopLabel>bcso40_ARCH_C</modShopLabel>
+                    <modelName>bcso20_archc</modelName>
+                    <modShopLabel>cara2_ARCH_C</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <Item>misc_c</Item>
@@ -1857,8 +1857,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_winga</modelName>
-                    <modShopLabel>bcso40_WING_A</modShopLabel>
+                    <modelName>bcso20_winga</modelName>
+                    <modShopLabel>cara2_WING_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1872,8 +1872,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingb</modelName>
-                    <modShopLabel>bcso40_WING_B</modShopLabel>
+                    <modelName>bcso20_wingb</modelName>
+                    <modShopLabel>cara2_WING_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1887,8 +1887,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingc</modelName>
-                    <modShopLabel>bcso40_WING_C</modShopLabel>
+                    <modelName>bcso20_wingc</modelName>
+                    <modShopLabel>cara2_WING_C</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1902,8 +1902,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingd</modelName>
-                    <modShopLabel>bcso40_WING_D</modShopLabel>
+                    <modelName>bcso20_wingd</modelName>
+                    <modShopLabel>cara2_WING_D</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1917,8 +1917,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_winge</modelName>
-                    <modShopLabel>bcso40_WING_E</modShopLabel>
+                    <modelName>bcso20_winge</modelName>
+                    <modShopLabel>cara2_WING_E</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1932,8 +1932,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingf</modelName>
-                    <modShopLabel>bcso40_WING_F</modShopLabel>
+                    <modelName>bcso20_wingf</modelName>
+                    <modShopLabel>cara2_WING_F</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1947,8 +1947,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingg</modelName>
-                    <modShopLabel>bcso40_WING_G</modShopLabel>
+                    <modelName>bcso20_wingg</modelName>
+                    <modShopLabel>cara2_WING_G</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1962,8 +1962,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingh</modelName>
-                    <modShopLabel>bcso40_WING_H</modShopLabel>
+                    <modelName>bcso20_wingh</modelName>
+                    <modShopLabel>cara2_WING_H</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1977,8 +1977,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingi</modelName>
-                    <modShopLabel>bcso40_WING_I</modShopLabel>
+                    <modelName>bcso20_wingi</modelName>
+                    <modShopLabel>cara2_WING_I</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -1992,8 +1992,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_wingj</modelName>
-                    <modShopLabel>bcso40_WING_J</modShopLabel>
+                    <modelName>bcso20_wingj</modelName>
+                    <modShopLabel>cara2_WING_J</modShopLabel>
                     <linkedModels/>
                     <turnOffBones/>
                     <type>VMT_SPOILER</type>
@@ -2007,8 +2007,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumra</modelName>
-                    <modShopLabel>bcso40_BUMR_A</modShopLabel>
+                    <modelName>bcso20_bumra</modelName>
+                    <modShopLabel>cara2_BUMR_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>bumper_r</item>
@@ -2024,8 +2024,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumrb</modelName>
-                    <modShopLabel>bcso40_BUMR_B</modShopLabel>
+                    <modelName>bcso20_bumrb</modelName>
+                    <modShopLabel>cara2_BUMR_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>bumper_r</item>
@@ -2041,8 +2041,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumrc</modelName>
-                    <modShopLabel>bcso40_BUMR_C</modShopLabel>
+                    <modelName>bcso20_bumrc</modelName>
+                    <modShopLabel>cara2_BUMR_C</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>bumper_r</item>
@@ -2058,8 +2058,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumrd</modelName>
-                    <modShopLabel>bcso40_BUMR_D</modShopLabel>
+                    <modelName>bcso20_bumrd</modelName>
+                    <modShopLabel>cara2_BUMR_D</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>bumper_r</item>
@@ -2075,8 +2075,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_bumre</modelName>
-                    <modShopLabel>bcso40_BUMR_E</modShopLabel>
+                    <modelName>bcso20_bumre</modelName>
+                    <modShopLabel>cara2_BUMR_E</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>bumper_r</item>
@@ -2092,8 +2092,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_grilla</modelName>
-                    <modShopLabel>bcso40_GRILL_A</modShopLabel>
+                    <modelName>bcso20_grilla</modelName>
+                    <modShopLabel>cara2_GRILL_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>misc_e</item>
@@ -2109,8 +2109,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_grillb</modelName>
-                    <modShopLabel>bcso40_GRILL_B</modShopLabel>
+                    <modelName>bcso20_grillb</modelName>
+                    <modShopLabel>cara2_GRILL_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>misc_e</item>
@@ -2126,8 +2126,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_grillc</modelName>
-                    <modShopLabel>bcso40_GRILL_C</modShopLabel>
+                    <modelName>bcso20_grillc</modelName>
+                    <modShopLabel>cara2_GRILL_C</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>misc_e</item>
@@ -2143,8 +2143,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_exha</modelName>
-                    <modShopLabel>bcso40_EXH_A</modShopLabel>
+                    <modelName>bcso20_exha</modelName>
+                    <modShopLabel>cara2_EXH_A</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>misc_d</item>
@@ -2162,8 +2162,8 @@
                     <allowBonnetSlide value="true"/>
                 </Item>
                 <Item>
-                    <modelName>bcso40_exhb</modelName>
-                    <modShopLabel>bcso40_EXH_B</modShopLabel>
+                    <modelName>bcso20_exhb</modelName>
+                    <modShopLabel>cara2_EXH_B</modShopLabel>
                     <linkedModels/>
                     <turnOffBones>
                         <item>misc_d</item>
@@ -2732,7 +2732,7 @@
             <liveryNames/>
         </Item>
         <Item>
-            <kitName>946_bcso40_modkit</kitName>
+            <kitName>946_fewf_modkit</kitName>
             <id value="946"/>
             <kitType>MKT_SPECIAL</kitType>
             <visibleMods>
