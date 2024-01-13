@@ -85,7 +85,7 @@ export const healthLevelToLabel = (
 };
 
 export const injuriesLevelToLabel = (targetPlayer: PlayerData): string => {
-    let state: string;
+    let state = 'aucunes';
     if (targetPlayer.metadata.criminal_state == PlayerCriminalState.Allowed) {
         if (targetPlayer.metadata.injuries_count >= 7) {
             state = 'graves';

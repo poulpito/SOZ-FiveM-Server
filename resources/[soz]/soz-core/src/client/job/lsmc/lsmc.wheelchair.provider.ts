@@ -232,9 +232,14 @@ export class LSMCWheelChairProvider {
             DetachEntity(playerPed, false, false);
         }
 
+        const upsideDown = IsEntityUpsidedown(this.wheelchair);
         this.wheelchair = 0;
         this.weaponDrawingProvider.drawWeapons();
         ClearPedTasks(playerPed);
+        if (upsideDown) {
+            const coords = GetEntityCoords(playerPed);
+            SetEntityCoords(playerPed, coords[0], coords[1], coords[2] + 0.5, false, false, false, false);
+        }
     }
 
     private IsControlAlwaysPressed(inputGroup: number, control: Control) {
@@ -290,7 +295,7 @@ export class LSMCWheelChairProvider {
                         if (move > 0.0) {
                             move = move / 2.5;
                         }
-                        const coords = GetOffsetFromEntityInWorldCoords(controlEntity, 0.0, move * speed, 0.0);
+                        const coords = GetOffsetFromEntityInWorldCoords(controlEntity, 0.0, move * speed, 0.01);
                         PlaceObjectOnGroundProperly_2(controlEntity);
                         SetEntityVelocity(
                             controlEntity,

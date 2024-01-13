@@ -322,6 +322,7 @@ export class LSMCStretcherProvider {
 
         FreezeEntityPosition(entity, false);
         SetEntityHeading(entity, GetEntityHeading(playerPed) + 90);
+        await wait(100);
         AttachEntityToEntityPhysically(
             entity,
             playerPed,
