@@ -127,11 +127,11 @@ export const MedicalApp: FunctionComponent = () => {
 
     const getWoundImportance = (damageQty: number, isFatal?: boolean) => {
         if (isFatal) {
-            return DamageGravity.Heavy;
+            return DamageGravity.Fatal;
         }
 
         if (damageQty <= 10) {
-            return DamageGravity.VerySmall;
+            return DamageGravity.Small;
         } else if (damageQty <= 30) {
             return DamageGravity.Small;
         } else if (damageQty <= 50) {
@@ -395,6 +395,18 @@ export const MedicalApp: FunctionComponent = () => {
                                 style={{ backgroundColor: textColor, boxShadow: `0 1px 12px ${textColor}` }}
                             ></div>{' '}
                             <p className="text-m neuropol">{getWoundAnteriority(damage.date)}</p>
+                            {damage.isFatal && (
+                                <span className="flex flex-row justify-center items-center">
+                                    <p className="text-m neuropol mt-1 mr-4">
+                                        Cette blessure a entraînée <br />
+                                        une perte de conscience.
+                                    </p>
+                                    <img
+                                        className="p-1 w-[3vh] h-[3vh] opacity-80"
+                                        src={`/public/images/lsmc/icons/icon_death.webp`}
+                                    ></img>
+                                </span>
+                            )}
                         </div>
                         <div className="flex flex-col justify-start h-[6vh] items-start w-[25%]">
                             {
@@ -441,6 +453,22 @@ export const MedicalApp: FunctionComponent = () => {
                         const globalDamages = damages.reduce((prev, cur) => prev + cur.damageQty, 0);
                         const fatal = !!damages.find(item => item.isFatal);
                         const styleByGravity = getStyleByGravity(globalDamages, fatal);
+                        if (globalDamages < 10) {
+                            return (
+                                <div
+                                    className={`h-[8vh] w-[8vh] bg-opacity-50 border-solid border-4 rounded-lg flex items-center  justify-center cursor-pointer group m-[0.5vh] p-[1vh] bg-[#0000005e]`}
+                                    style={{
+                                        backgroundImage: `url(/public/images/lsmc/icons/default_zone_background.webp)`,
+                                        backgroundSize: '85%',
+                                        backgroundPosition: 'center',
+                                        backgroundRepeat: 'no-repeat',
+                                        borderWidth: '0.2vh',
+                                        borderColor: 'rgba(39,169,151,0.7)',
+                                        boxShadow: `0 1px 12px rgba(39,169,151,0.7)`,
+                                    }}
+                                ></div>
+                            );
+                        }
                         return (
                             <div
                                 key={index}
@@ -467,6 +495,12 @@ export const MedicalApp: FunctionComponent = () => {
                                     setDetail(null);
                                 }}
                             >
+                                {damages[0].isFatal && (
+                                    <img
+                                        className="p-1 fixed mb-[-5vh] w-[3vh] ml-[-5vh] opacity-70"
+                                        src={`/public/images/lsmc/icons/icon_death.webp`}
+                                    ></img>
+                                )}
                                 {false && damages.length > 1 && (
                                     <span className="absolute ms-[4rem] mb-[4rem] ">{damages.length}</span>
                                 )}

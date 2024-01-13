@@ -139,13 +139,13 @@ export const DamageConfigs: Record<DamageGravity, DamageConfig> = {
     },
     [DamageGravity.Small]: {
         label: 'Faible',
-        color: '#27A92B',
-        style: '[box-shadow:_0_1px_12px_rgb(39_169_43)] border-[rgb(39,169,43)] hover:bg-[rgba(39,169,43,0.5)]',
+        color: '#f7e400',
+        style: '[box-shadow:_0_1px_12px_rgb(247_248_0)] border-[rgb(247,248,0)] hover:bg-[rgba(247,248,0,0.5)]',
     },
     [DamageGravity.Medium]: {
         label: 'Moyenne',
-        color: '#f7e400',
-        style: '[box-shadow:_0_1px_12px_rgb(247_248_0)] border-[rgb(247,248,0)] hover:bg-[rgba(247,248,0,0.5)]',
+        color: '#F77800',
+        style: '[box-shadow:_0_1px_12px_rgb(247_120_0)] border-[rgb(247,120,0)] hover:bg-[rgba(247,120,0,0.5)]',
     },
     [DamageGravity.Heavy]: {
         label: 'Sévère',
@@ -159,8 +159,8 @@ export const DamageConfigs: Record<DamageGravity, DamageConfig> = {
     },
     [DamageGravity.Fatal]: {
         label: 'Fatale',
-        color: '#8D00FA',
-        style: '[box-shadow:_0_1px_12px_rgb(141_0_250)] border-[rgb(141,0,250)] hover:bg-[rgba(141,0,250,0.5)]',
+        color: '#d11e1e',
+        style: '[box-shadow:_0_1px_12px_rgb(209_30_30)] border-[#d11e1e] hover:bg-[rgba(209,30,30,0.5)]',
     },
 };
 
