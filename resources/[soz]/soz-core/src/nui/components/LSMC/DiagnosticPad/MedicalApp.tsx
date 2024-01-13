@@ -178,13 +178,17 @@ export const MedicalApp: FunctionComponent = () => {
     };
 
     function groupByMultiple(array: DamageServerData[]) {
-        const groups: Record<number, DamageServerData[]> = {};
-        array.forEach(function (damage) {
-            const group = damage.damageType;
-            groups[group] = groups[group] || [];
-            groups[group].push(damage);
-        });
-        return Object.keys(groups).map(group => groups[group]);
+        const groups: DamageServerData[][] = [];
+        array
+            .sort((a, b) => b.date - a.date)
+            .forEach(function (damage) {
+                if (groups.length > 0 && groups[groups.length - 1][0].damageType == damage.damageType) {
+                    groups[groups.length - 1].push(damage);
+                } else {
+                    groups.push([damage]);
+                }
+            });
+        return groups;
     }
 
     const renderDamagedZones = () => {
@@ -249,59 +253,81 @@ export const MedicalApp: FunctionComponent = () => {
 
         return (
             <div className="flex flex-row h-full w-full ">
-                <div className="flex flex-col pl-[13vh] w-[80%] h-full">
+                <div className="flex flex-col w-[79%] h-full">
+                    {/* HEAD */}
                     <div className="flex flex-row pb-[1vh] justify-center h-[15%]">
-                        {renderZones(headZone.label, headZone.zones)}
+                        {renderZones(headZone.label, headZone.zones, 'center')}
                     </div>
-                    <div className="flex flex-row h-[16%]">
-                        <div className="flex flex-col w-[33%] items-end">
-                            {renderZones(rightShoulder.label, rightShoulder.zones)}
-                        </div>
-                        <div className="flex flex-col w-[33%]"></div>
 
-                        <div className="flex flex-col w-[33%] items-start">
-                            {renderZones(leftShoulder.label, leftShoulder.zones)}
+                    {/* SHOULDERS */}
+                    <div className="flex flex-row h-[16%]">
+                        <div className="flex flex-col w-[40%] items-end">
+                            {renderZones(rightShoulder.label, rightShoulder.zones, 'end')}
+                        </div>
+                        <div className="flex flex-col w-[20%]"></div>
+
+                        <div className="flex flex-col w-[40%] items-start">
+                            {renderZones(leftShoulder.label, leftShoulder.zones, 'start')}
                         </div>
                     </div>
+
+                    {/* ARMS */}
                     <div className="flex flex-row h-[15%]">
-                        <div className="flex flex-col w-[28%] items-end">
-                            {renderZones(rightArm.label, rightArm.zones)}
+                        <div className="flex flex-col w-[33%] items-end">
+                            {renderZones(rightArm.label, rightArm.zones, 'end')}
                         </div>
-                        <div className="flex flex-col w-[41%]"></div>
-                        <div className="flex flex-col w-[20%] items-start">
-                            {renderZones(leftArm.label, leftArm.zones)}
+                        <div className="flex flex-col w-[34%]"></div>
+                        <div className="flex flex-col w-[34%] items-start">
+                            {renderZones(leftArm.label, leftArm.zones, 'start')}
                         </div>
                     </div>
+
+                    {/* HANDS */}
                     <div className="flex flex-row h-[20%]">
-                        <div className="flex flex-col w-[37%]">{renderZones(rightHand.label, rightHand.zones)}</div>
-                        <div className="flex flex-col w-[24%]"></div>
-                        <div className="flex flex-col w-[38%]">{renderZones(leftHand.label, leftHand.zones)}</div>
+                        <div className="flex flex-col w-[32%]">
+                            {renderZones(rightHand.label, rightHand.zones, 'end')}
+                        </div>
+                        <div className="flex flex-col w-[34%]"></div>
+                        <div className="flex flex-col w-[33%]">
+                            {renderZones(leftHand.label, leftHand.zones, 'start')}
+                        </div>
                     </div>
+
+                    {/* LEGS */}
                     <div className="flex flex-row h-[20%]">
                         <div className="flex flex-col w-[35%] items-end">
-                            {renderZones(rightLeg.label, rightLeg.zones)}
+                            {renderZones(rightLeg.label, rightLeg.zones, 'end')}
                         </div>
                         <div className="flex flex-col w-[28%]"></div>
 
                         <div className="flex flex-col w-[27%] items-start">
-                            {renderZones(leftLeg.label, leftLeg.zones)}
+                            {renderZones(leftLeg.label, leftLeg.zones, 'start')}
                         </div>
                     </div>
+                    {/* FOOT */}
                     <div className="flex flex-row h-[20%]">
                         <div className="flex flex-col w-[28%] items-end">
-                            {renderZones(rightFoot.label, rightFoot.zones)}
+                            {renderZones(rightFoot.label, rightFoot.zones, 'end')}
                         </div>
                         <div className="flex flex-col w-[40%]"></div>
                         <div className="flex flex-col w-[30%] items-start">
-                            {renderZones(leftFoot.label, leftFoot.zones)}
+                            {renderZones(leftFoot.label, leftFoot.zones, 'start')}
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col h-full w-[20%] justify-center items-center">
+
+                {/* OTHER */}
+                <div className="flex flex-col h-full w-[20%] justify-center items-end">
                     <div className="bg-[black] h-[65%] bg-opacity-25 p-8 border-[2px] border-[#8bfee19a] rounded-[3vh] [box-shadow:_0_1px_12px_rgb(39_169_151)]">
-                        <div className="flex flex-col h-[33%]">{renderZones(bones[0], damages[bones[0]])}</div>
-                        <div className="flex flex-col h-[33%]">{renderZones(bones[24817], damages[bones[24817]])}</div>
-                        <div className="flex flex-col h-[33%]">{renderZones(bones[24816], damages[bones[24816]])}</div>
+                        <div className="flex flex-col h-[33%]">
+                            {renderZones(bones[0], damages[bones[0]], 'center')}
+                        </div>
+                        <div className="flex flex-col h-[33%]">
+                            {renderZones(bones[24817], damages[bones[24817]], 'center')}
+                        </div>
+                        <div className="flex flex-col h-[33%]">
+                            {renderZones(bones[24816], damages[bones[24816]], 'center')}
+                        </div>
                     </div>
                     <div>
                         {detail && renderDetail(detail[0], detail[1], detail[2], detail[3], detail[4], detail[5])}
@@ -315,16 +341,16 @@ export const MedicalApp: FunctionComponent = () => {
         return damages ? DamageConfigs[getMaxGravityInzone(damages)].color : 'rgba(39,169,151,0.7)';
     }
 
-    const renderZones = (name: string, damages: DamageServerData[]) => {
+    const renderZones = (name: string, damages: DamageServerData[], orientation?: 'center' | 'end' | 'start') => {
         const globalZoneColor = getGlobalZoneColor(damages);
 
         return (
-            <div className={`flex flex-col justify-end items-center`}>
+            <div className={`flex flex-col justify-end items-${orientation}`}>
                 <div className="flex flex-col justify-center items-start py-[0.5vh] text-[#53e2cf]">
                     <p className="neuropol text-s [text-shadow:_0_1px_12px_rgb(39_169_151)]">{name}</p>
                 </div>
                 <div
-                    className="flex flex-row justify-center min-w-[8vh] min-h-[8vh] rounded-lg [box-shadow:_0_1px_5px_rgb(39_169_151)] bg-opacity-50"
+                    className="flex flex-row justify-center min-w-[7vh] min-h-[7vh] rounded-lg [box-shadow:_0_1px_5px_rgb(39_169_151)] bg-opacity-50"
                     style={{
                         borderWidth: '0.2vh',
                         borderColor: damages ? 'transparent' : 'rgba(39,169,151,0.7)',
@@ -350,17 +376,16 @@ export const MedicalApp: FunctionComponent = () => {
         const textColor = DamageConfigs[gravity].color;
         const rightPopup = screenX;
         const topPopup = screenY;
-
+        console.log(rightPopup * 1.1);
         return (
             <div
-                className={`flex flex-col absolute min-w-[25vh] rounded-[2vh] bg-[black] 
+                className={`flex flex-col absolute min-w-[40vh] max-w-[60vh] rounded-[2vh] bg-[black] 
             border-2 p-2 bg-opacity-100 scale-[0.9]`}
                 style={{
                     boxShadow: `0 1px 12px ${styleByGravity}`,
                     borderColor: styleByGravity,
-                    left: `${rightPopup * 1.1}px`,
+                    left: `${rightPopup * 1.1 > window.screen.width * 0.8 ? rightPopup * 0.6 : rightPopup * 1.1}px`,
                     top: `${topPopup}px`,
-                    //marginLeft: '2vh',
                 }}
             >
                 <div
@@ -398,8 +423,7 @@ export const MedicalApp: FunctionComponent = () => {
                             {damage.isFatal && (
                                 <span className="flex flex-row justify-center items-center">
                                     <p className="text-m neuropol mt-1 mr-4">
-                                        Cette blessure a entraînée <br />
-                                        une perte de conscience.
+                                        Cette blessure a entraînée une perte de conscience.
                                     </p>
                                     <img
                                         className="p-1 w-[3vh] h-[3vh] opacity-80"
@@ -446,33 +470,39 @@ export const MedicalApp: FunctionComponent = () => {
             );
         }
         const sortedDamage = groupByMultiple(damages);
+        if (!sortedDamage.find(damages => damages.reduce((prev, cur) => prev + cur.damageQty, 0) > 10)) {
+            return (
+                <div
+                    className={`h-[6vh] w-[6vh] bg-opacity-50 border-solid border-4 rounded-lg flex items-center  justify-center cursor-pointer group m-[0.5vh] p-[1vh] bg-[#0000005e]`}
+                    style={{
+                        backgroundImage: `url(/public/images/lsmc/icons/default_zone_background.webp)`,
+                        backgroundSize: '85%',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        borderWidth: '0.2vh',
+                        borderColor: 'rgba(39,169,151,0.7)',
+                        boxShadow: `0 1px 12px rgba(39,169,151,0.7)`,
+                    }}
+                ></div>
+            );
+        }
         return (
             <div className="flex flex-row items-center min-w-[20%] h-full">
                 {sortedDamage &&
                     sortedDamage.map((damages, index) => {
+                        if (index > 2) {
+                            return null;
+                        }
                         const globalDamages = damages.reduce((prev, cur) => prev + cur.damageQty, 0);
                         const fatal = !!damages.find(item => item.isFatal);
                         const styleByGravity = getStyleByGravity(globalDamages, fatal);
                         if (globalDamages < 10) {
-                            return (
-                                <div
-                                    className={`h-[8vh] w-[8vh] bg-opacity-50 border-solid border-4 rounded-lg flex items-center  justify-center cursor-pointer group m-[0.5vh] p-[1vh] bg-[#0000005e]`}
-                                    style={{
-                                        backgroundImage: `url(/public/images/lsmc/icons/default_zone_background.webp)`,
-                                        backgroundSize: '85%',
-                                        backgroundPosition: 'center',
-                                        backgroundRepeat: 'no-repeat',
-                                        borderWidth: '0.2vh',
-                                        borderColor: 'rgba(39,169,151,0.7)',
-                                        boxShadow: `0 1px 12px rgba(39,169,151,0.7)`,
-                                    }}
-                                ></div>
-                            );
+                            return null;
                         }
                         return (
                             <div
                                 key={index}
-                                className={`h-[8vh] w-[8vh] bg-opacity-50 border-solid border-4 rounded-lg flex items-center  justify-center cursor-pointer group m-[0.5vh] p-[1vh] bg-[#0000005e]`}
+                                className={`h-[7vh] w-[7vh] bg-opacity-50 border-solid border-4 rounded-lg flex items-center  justify-center cursor-pointer group m-[0.5vh] p-[1vh] bg-[#0000005e]`}
                                 style={{
                                     backgroundImage: `url(/public/images/lsmc/icons/default_zone_background.webp)`,
                                     backgroundSize: '85%',
@@ -483,7 +513,16 @@ export const MedicalApp: FunctionComponent = () => {
                                 }}
                                 onMouseEnter={e => {
                                     setDetail([
-                                        damages[0],
+                                        {
+                                            attackerId: null,
+                                            bone: damages[0].bone,
+                                            citizenid: damages[0].citizenid,
+                                            damageQty: globalDamages,
+                                            damageType: damages[0].damageType,
+                                            weapon: damages[0].weapon,
+                                            isFatal: fatal,
+                                            date: damages[damages.length - 1].date,
+                                        },
                                         damages.length,
                                         globalDamages,
                                         styleByGravity,
@@ -495,7 +534,7 @@ export const MedicalApp: FunctionComponent = () => {
                                     setDetail(null);
                                 }}
                             >
-                                {damages[0].isFatal && (
+                                {fatal && (
                                     <img
                                         className="p-1 fixed mb-[-5vh] w-[3vh] ml-[-5vh] opacity-70"
                                         src={`/public/images/lsmc/icons/icon_death.webp`}
@@ -741,7 +780,7 @@ export const MedicalApp: FunctionComponent = () => {
 
     return (
         <div className="h-full w-full justify-center items-center flex">
-            <div className="z-10 h-[100vh] flex justify-center items-center text-white w-[177vh] scale-[0.8]">
+            <div className="z-10 h-[100vh] flex justify-center items-center text-white w-[180vh] scale-[0.8]">
                 <div
                     ref={refOutside}
                     style={{
@@ -750,9 +789,9 @@ export const MedicalApp: FunctionComponent = () => {
                         }.webp)`,
                         width: '100%',
                         height: '100%',
-                        margin: '4vh',
                         backgroundSize: 'cover',
-                        padding: '6vh',
+                        paddingInline: '6vh',
+                        paddingTop: '6vh',
                     }}
                 >
                     <div className="w-full h-full p-5">
