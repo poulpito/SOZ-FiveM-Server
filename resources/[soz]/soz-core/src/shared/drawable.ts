@@ -24,7 +24,7 @@ export const VanillaComponentDrawableIndexMaxValue: Record<number, Record<Compon
         [Component.Shoes]: 154,
         [Component.Accessories]: 148,
         [Component.Undershirt]: 253,
-        [Component.BodyArmor]: 63,
+        [Component.BodyArmor]: 62,
         [Component.Decals]: 209,
         [Component.Tops]: 565,
     },
