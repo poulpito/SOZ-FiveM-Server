@@ -172,5 +172,32 @@
             <lightSettings value="261569894523"/>
             <sirenSettings value="5012"/>
         </Item>
+        <Item>
+            <modelName>SHERIFF</modelName>
+            <colors itemType="CVehicleModelColorIndices">
+                <Item>
+                    <indices>111 111 0 156 0 0</indices>
+                    <liveries>
+                        0 0 0 0 0 0 0 0 0 0
+                        0 0 0 0 0 0 0 0 0 0
+                        0 0 0 0 0 0 0 0 0 0
+                    </liveries>
+                </Item>
+            </colors>
+            <kits>
+                <Item>hash_0D21AC6D</Item>
+            </kits>
+            <windowsWithExposedEdges />
+            <plateProbabilities>
+                <Probabilities itemType="LicensePlateProbabilityNamed">
+                    <Item>
+                        <Name>hash_69E137FC</Name>
+                        <Value value="100" />
+                    </Item>
+                </Probabilities>
+            </plateProbabilities>
+            <lightSettings value="0" />
+            <sirenSettings value="5012" />
+        </Item>
     </variationData>
 </CVehicleModelInfoVariation>

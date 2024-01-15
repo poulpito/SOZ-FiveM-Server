@@ -41,6 +41,9 @@ Citizen.CreateThread(function()
 
     -- Liveries
     AddTextEntry(GetHashKey('deity_livery13'),'Sticker MDR') -- Sticker MDR
+    AddTextEntry(GetHashKey('polgaunt_liv23'),'FIB Black Edition') -- Sticker PolGauntlet
+    AddTextEntry(GetHashKey('polgaunt_liv24'),'FIB White Edition') -- Sticker PolGauntlet
+
 
     AddTextEntry("0xA4849CEF", "Numéro - 0") -- LSPD10_A0
     AddTextEntry("0xD083F4ED", "Numéro - 1") -- LSPD10_A1
