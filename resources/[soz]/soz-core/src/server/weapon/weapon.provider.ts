@@ -122,8 +122,7 @@ export class WeaponProvider {
             weaponGroup == GetHashKey('GROUP_THROWN') ||
             weaponGroup == GetHashKey('GROUP_FIREEXTINGUISHER') ||
             weaponGroup == GetHashKey('GROUP_MELEE') ||
-            weaponGroup == GetHashKey('GROUP_PETROLCAN') ||
-            weaponGroup == GetHashKey('GROUP_STUNGUN')
+            weaponGroup == GetHashKey('GROUP_PETROLCAN')
         ) {
             return;
         }
@@ -238,6 +237,19 @@ export class WeaponProvider {
             });
         }
     }
+
+    // @Tick(TickInterval.EVERY_HOUR)
+    // public async resetLatestIdentifiedShot() {
+    //     const players = this.serverStateService.getPlayers();
+    //     for (const player of players) {
+    //         if (player.metadata.last_identified_shot && Date.now() - player.metadata.last_identified_shot > 3600000) {
+    //             this.playerService.setPlayerMetaDatas(player.source, {
+    //                 last_identified_shot: 0,
+    //                 last_weapon_used: '',
+    //             });
+    //         }
+    //     }
+    // }
 
     @OnEvent(ServerEvent.WEAPON_SHOOTING_ALERT)
     async onWeaponShootingAlert(source: number, alertMessage: string, htmlMessage: string, zoneID: string) {
