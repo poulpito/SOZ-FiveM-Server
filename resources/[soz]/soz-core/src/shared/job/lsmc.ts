@@ -605,7 +605,6 @@ export const LsmcCloakroom: WardrobeConfig = {
 
 export const LSMCConfig = {
     scanTime: 10000,
-    damageRetentionDays: 3,
 };
 
 export type DamageServerData = {

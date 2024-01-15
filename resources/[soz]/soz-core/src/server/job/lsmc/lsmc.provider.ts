@@ -13,6 +13,8 @@ import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
+import { LSMCDamageProvider } from './lsmc.damage.provider';
+
 @Provider()
 export class LSMCProvider {
     @Inject(PlayerService)
@@ -29,6 +31,9 @@ export class LSMCProvider {
 
     @Inject(PlayerInjuryProvider)
     private playerInjuryProvider: PlayerInjuryProvider;
+
+    @Inject(LSMCDamageProvider)
+    private LSMCDamageProvider: LSMCDamageProvider;
 
     @Rpc(RpcServerEvent.LSMC_CAN_REMOVE_ITT)
     public canRemoveITT(source: number, target: number) {
@@ -102,6 +107,8 @@ export class LSMCProvider {
             this.playerService.setPlayerDisease(player.source, false);
             this.notifier.notify(player.source, 'Vous êtes guéri!');
         }
+
+        this.LSMCDamageProvider.removeDamages(player.source);
 
         TriggerClientEvent(ClientEvent.LSMC_HEAL, player.source, 25);
     }

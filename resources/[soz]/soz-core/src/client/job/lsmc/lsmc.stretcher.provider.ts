@@ -60,7 +60,8 @@ export class LSMCStretcherProvider {
     @Inject(VehicleStateService)
     private vehicleStateService: VehicleStateService;
 
-    private pushing = 0;
+    private pushed = 0;
+    private pushedTP = 0;
     private laydown = false;
 
     @Once()
@@ -109,7 +110,7 @@ export class LSMCStretcherProvider {
                 label: 'Pousser',
                 icon: 'c:ems/push.png',
                 canInteract: entity =>
-                    this.pushing == 0 &&
+                    this.pushed == 0 &&
                     (!IsEntityAttached(entity) || GetEntityAttachedTo(entity) == 0) &&
                     NetworkGetEntityIsNetworked(entity) &&
                     !this.playerService.isPushing(),
@@ -177,7 +178,7 @@ export class LSMCStretcherProvider {
                     label: 'Installer le brancard',
                     icon: 'c:ems/stretcher.png',
                     canInteract: async entity => {
-                        if (!this.pushing) {
+                        if (!this.pushed) {
                             return false;
                         }
 
@@ -210,10 +211,10 @@ export class LSMCStretcherProvider {
                             return;
                         }
 
-                        const serverPlayer = this.getPlayerUsingStretcher(this.pushing);
+                        const serverPlayer = this.getPlayerUsingStretcher(this.pushed);
                         this.animationService.stop();
 
-                        const coords = GetEntityCoords(this.pushing);
+                        const coords = GetEntityCoords(this.pushed);
 
                         const id = CreateObject(
                             StretcherFoldedModel,
@@ -251,7 +252,7 @@ export class LSMCStretcherProvider {
                         TriggerServerEvent(
                             ServerEvent.LSMC_STRETCHER_ON_AMBULANCE,
                             serverPlayer,
-                            ObjToNet(this.pushing),
+                            ObjToNet(this.pushed),
                             VehToNet(entity),
                             ObjToNet(id)
                         );
@@ -261,7 +262,7 @@ export class LSMCStretcherProvider {
                     label: 'Récupérer le brancard',
                     icon: 'c:ems/stretcher.png',
                     canInteract: async entity => {
-                        if (this.pushing) {
+                        if (this.pushed) {
                             return false;
                         }
 
@@ -349,7 +350,7 @@ export class LSMCStretcherProvider {
             2
         );
 
-        this.pushing = entity;
+        this.pushed = entity;
         this.playerService.setPushing(true);
 
         await this.animationService.playAnimation({
@@ -364,7 +365,7 @@ export class LSMCStretcherProvider {
             },
         });
 
-        this.pushing = 0;
+        this.pushed = 0;
         this.playerService.setPushing(false);
 
         for (let i = 0; i < 10; i++) {
@@ -454,6 +455,43 @@ export class LSMCStretcherProvider {
         this.laydown = false;
         this.weaponDrawingProvider.drawWeapons();
         ClearPedTasks(playerPed);
+    }
+
+    public async startTp() {
+        if (!this.pushed) {
+            return;
+        }
+
+        this.pushedTP = this.pushed;
+        DetachEntity(this.pushed, false, false);
+        await wait(200);
+    }
+
+    public async endTp() {
+        if (!this.pushedTP) {
+            return;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            if (NetworkHasControlOfEntity(this.pushedTP)) {
+                break;
+            }
+            NetworkRequestControlOfEntity(this.pushedTP);
+            await wait(i * 100);
+        }
+        if (!NetworkHasControlOfEntity(this.pushedTP)) {
+            this.notifier.notify('Fail to control entity');
+            return;
+        }
+
+        const playerPed = PlayerPedId();
+        const coords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.5, -1.0);
+        SetEntityCoordsNoOffset(this.pushedTP, coords[0], coords[1], coords[2], false, false, false);
+        await wait(200);
+
+        this.pushStretcher(this.pushedTP);
+
+        this.pushedTP = 0;
     }
 
     @Tick(TickInterval.EVERY_FRAME)

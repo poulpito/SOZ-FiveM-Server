@@ -1,12 +1,13 @@
-import { Once, OnceStep, OnEvent } from '@core/decorators/event';
+import { OnEvent } from '@core/decorators/event';
 import { Provider } from '@core/decorators/provider';
 import { Command } from '@public/core/decorators/command';
 import { Inject } from '@public/core/decorators/injectable';
 import { PrismaService } from '@public/server/database/prisma.service';
+import { Monitor } from '@public/server/monitor/monitor';
 import { PlayerService } from '@public/server/player/player.service';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { MedicalMetadata } from '@public/shared/item';
-import { DamageData, DamageServerData, LSMCConfig } from '@public/shared/job/lsmc';
+import { DamageData, DamageServerData } from '@public/shared/job/lsmc';
 
 @Provider()
 export class LSMCDamageProvider {
@@ -16,18 +17,8 @@ export class LSMCDamageProvider {
     @Inject(PlayerService)
     private playerService: PlayerService;
 
-    @Once(OnceStep.DatabaseConnected)
-    public async onDBConnected() {
-        const delay = new Date();
-        delay.setDate(delay.getDate() - LSMCConfig.damageRetentionDays);
-        await this.prismaService.player_damage.deleteMany({
-            where: {
-                date: {
-                    lt: delay,
-                },
-            },
-        });
-    }
+    @Inject(Monitor)
+    private monitor: Monitor;
 
     @OnEvent(ServerEvent.LSMC_DAMAGE_ADD)
     public async addDamage(source: number, damage: DamageData) {
@@ -106,6 +97,14 @@ export class LSMCDamageProvider {
                 citizenid: player.citizenid,
             },
         });
+
+        this.monitor.publish(
+            'job_lsmc_damageremove',
+            {
+                player_source: source,
+            },
+            {}
+        );
     }
 
     @Command('damageshow', {

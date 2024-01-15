@@ -40,6 +40,7 @@ export class LSMCWheelChairProvider {
 
     private wheelchair = 0;
     private pushed = 0;
+    private pushedTP = 0;
 
     @Once()
     public onStart() {
@@ -85,76 +86,7 @@ export class LSMCWheelChairProvider {
                     !this.playerService.isPushing() &&
                     (!IsEntityAttached(entity) || GetEntityAttachedTo(entity) == 0) &&
                     NetworkGetEntityIsNetworked(entity),
-                action: async entity => {
-                    for (let i = 0; i < 10; i++) {
-                        if (NetworkHasControlOfEntity(entity)) {
-                            break;
-                        }
-                        NetworkRequestControlOfEntity(entity);
-                        await wait(i * 100);
-                    }
-                    if (!NetworkHasControlOfEntity(entity)) {
-                        this.notifier.notify('Fail to control entity');
-                        return;
-                    }
-
-                    const playerPed = PlayerPedId();
-
-                    SetEntityHeading(entity, GetEntityHeading(playerPed) + 180);
-                    AttachEntityToEntityPhysically(
-                        entity,
-                        playerPed,
-                        GetPedBoneIndex(playerPed, 17916),
-                        0.0,
-
-                        0.0,
-                        0.0,
-                        -0.5,
-
-                        0.0,
-                        0.0,
-                        0.2,
-
-                        0.0,
-                        0.0,
-                        0.0,
-
-                        0.0,
-                        true,
-                        false,
-                        false,
-                        false,
-                        2
-                    );
-                    this.playerService.setPushing(true);
-                    this.pushed = entity;
-
-                    await this.animationService.playAnimation({
-                        base: {
-                            dictionary: 'anim@heists@box_carry@',
-                            name: 'idle',
-                            options: {
-                                repeat: true,
-                                onlyUpperBody: true,
-                                enablePlayerControl: true,
-                            },
-                        },
-                    });
-
-                    this.playerService.setPushing(false);
-                    this.pushed = 0;
-
-                    for (let i = 0; i < 10; i++) {
-                        if (NetworkHasControlOfEntity(entity)) {
-                            break;
-                        }
-                        NetworkRequestControlOfEntity(entity);
-                        await wait(i * 100);
-                    }
-
-                    DetachEntity(entity, false, false);
-                    PlaceObjectOnGroundProperly(entity);
-                },
+                action: async entity => this.pushWheelChair(entity),
             },
             {
                 label: "S'asseoir",
@@ -170,6 +102,80 @@ export class LSMCWheelChairProvider {
                 },
             },
         ]);
+    }
+
+    private async pushWheelChair(entity: number) {
+        {
+            for (let i = 0; i < 10; i++) {
+                if (NetworkHasControlOfEntity(entity)) {
+                    break;
+                }
+                NetworkRequestControlOfEntity(entity);
+                await wait(i * 100);
+            }
+            if (!NetworkHasControlOfEntity(entity)) {
+                this.notifier.notify('Fail to control entity');
+                return;
+            }
+
+            const playerPed = PlayerPedId();
+
+            SetEntityHeading(entity, GetEntityHeading(playerPed) + 180);
+            await wait(100);
+            AttachEntityToEntityPhysically(
+                entity,
+                playerPed,
+                GetPedBoneIndex(playerPed, 17916),
+                0.0,
+
+                0.0,
+                0.0,
+                -0.5,
+
+                0.0,
+                0.0,
+                0.2,
+
+                0.0,
+                0.0,
+                0.0,
+
+                0.0,
+                true,
+                false,
+                false,
+                false,
+                2
+            );
+            this.playerService.setPushing(true);
+            this.pushed = entity;
+
+            await this.animationService.playAnimation({
+                base: {
+                    dictionary: 'anim@heists@box_carry@',
+                    name: 'idle',
+                    options: {
+                        repeat: true,
+                        onlyUpperBody: true,
+                        enablePlayerControl: true,
+                    },
+                },
+            });
+
+            this.playerService.setPushing(false);
+            this.pushed = 0;
+
+            for (let i = 0; i < 10; i++) {
+                if (NetworkHasControlOfEntity(entity)) {
+                    break;
+                }
+                NetworkRequestControlOfEntity(entity);
+                await wait(i * 100);
+            }
+
+            DetachEntity(entity, false, false);
+            PlaceObjectOnGroundProperly(entity);
+        }
     }
 
     private getPlayerUsingWheelChair(entity: number) {
@@ -246,6 +252,45 @@ export class LSMCWheelChairProvider {
         return IsControlPressed(inputGroup, control) || IsDisabledControlPressed(inputGroup, control);
     }
 
+    public async startTp() {
+        if (!this.pushed) {
+            return;
+        }
+
+        this.pushedTP = this.pushed;
+        const playerPed = PlayerPedId();
+        ClearPedTasks(playerPed);
+        DetachEntity(this.pushed, false, false);
+        await wait(200);
+    }
+
+    public async endTp() {
+        if (!this.pushedTP) {
+            return;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            if (NetworkHasControlOfEntity(this.pushedTP)) {
+                break;
+            }
+            NetworkRequestControlOfEntity(this.pushedTP);
+            await wait(i * 100);
+        }
+        if (!NetworkHasControlOfEntity(this.pushedTP)) {
+            this.notifier.notify('Fail to control entity');
+            return;
+        }
+
+        const playerPed = PlayerPedId();
+        const coords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.5, -1.0);
+        SetEntityCoordsNoOffset(this.pushedTP, coords[0], coords[1], coords[2], false, false, false);
+        await wait(200);
+
+        this.pushWheelChair(this.pushedTP);
+
+        this.pushedTP = 0;
+    }
+
     @Tick(TickInterval.EVERY_FRAME)
     async onSWheelChairFrame(): Promise<void> {
         if (!this.playerService.isPushing() && this.wheelchair == 0) {
@@ -295,8 +340,12 @@ export class LSMCWheelChairProvider {
                         if (move > 0.0) {
                             move = move / 2.5;
                         }
-                        const coords = GetOffsetFromEntityInWorldCoords(controlEntity, 0.0, move * speed, 0.01);
-                        PlaceObjectOnGroundProperly_2(controlEntity);
+                        if (IsEntityUpsidedown(controlEntity)) {
+                            PlaceObjectOnGroundProperly_2(controlEntity);
+                        }
+
+                        const gravity = GetEntityHeightAboveGround(controlEntity) > 0.55 ? -0.1 : 0.0;
+                        const coords = GetOffsetFromEntityInWorldCoords(controlEntity, 0.0, move * speed, gravity);
                         SetEntityVelocity(
                             controlEntity,
                             (coords[0] - basePosition[0]) * 100,

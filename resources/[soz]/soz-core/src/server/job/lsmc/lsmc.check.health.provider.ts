@@ -100,7 +100,7 @@ export class LSMCCheckHealthProvider {
                 `<span style="text-decoration: underline;">Force :</span> ${strengthLevelLabel}~n~` +
                 `<span style="text-decoration: underline;">Endurance :</span> ${maxStaminaLevelLabel}~n~` +
                 `<span style="text-decoration: underline;">Stress :</span> ${stressLevelLabel}~n~` +
-                `<span style="text-decoration: underline;">Bléssures :</span> ${injuriesLevelLabel}~n~`,
+                `<span style="text-decoration: underline;">Blessures :</span> ${injuriesLevelLabel}~n~`,
             'success'
         );
     }

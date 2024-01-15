@@ -7,6 +7,8 @@ import { RpcServerEvent } from '@public/shared/rpc';
 import { Provider } from '../../core/decorators/provider';
 import { wait } from '../../core/utils';
 import { ClientEvent } from '../../shared/event';
+import { LSMCStretcherProvider } from '../job/lsmc/lsmc.stretcher.provider';
+import { LSMCWheelChairProvider } from '../job/lsmc/lsmc.wheelchair.provider';
 import { WeaponDrawingProvider } from '../weapon/weapon.drawing.provider';
 
 @Provider()
@@ -16,6 +18,12 @@ export class PlayerPositionProvider {
     @Inject(WeaponDrawingProvider)
     private weaponDrawingProvider: WeaponDrawingProvider;
 
+    @Inject(LSMCWheelChairProvider)
+    private LSMCWheelChairProvider: LSMCWheelChairProvider;
+
+    @Inject(LSMCStretcherProvider)
+    private LSMCStretcherProvider: LSMCStretcherProvider;
+
     @OnEvent(ClientEvent.PLAYER_TELEPORT)
     async onPlayerTeleport(zone: string) {
         await this.teleportPlayerToPosition(zone);
@@ -24,14 +32,35 @@ export class PlayerPositionProvider {
     async teleportPlayerToPosition(target: string, cb?: () => void) {
         const playerPed = PlayerPedId();
 
+        await this.startTp(playerPed);
+
+        await emitRpc(RpcServerEvent.PLAYER_TELEPORT, target);
+
+        await this.endTp(playerPed, cb);
+    }
+
+    async teleportAdminToPosition([x, y, z, w]: Vector4) {
+        const playerPed = PlayerPedId();
+
+        await this.startTp(playerPed);
+
+        SetEntityCoords(playerPed, x, y, z, false, false, false, false);
+        SetEntityHeading(playerPed, w || 0.0);
+
+        this.endTp(playerPed, null);
+    }
+
+    private async startTp(playerPed: number) {
+        FreezeEntityPosition(playerPed, true);
         DoScreenFadeOut(this.fadeDelay);
         await wait(this.fadeDelay);
         await this.weaponDrawingProvider.undrawWeapons();
 
-        FreezeEntityPosition(playerPed, true);
+        await this.LSMCStretcherProvider.startTp();
+        await this.LSMCWheelChairProvider.startTp();
+    }
 
-        await emitRpc(RpcServerEvent.PLAYER_TELEPORT, target);
-
+    private async endTp(playerPed: number, cb?: () => void) {
         while (!HasCollisionLoadedAroundEntity(playerPed)) {
             await wait(1);
         }
@@ -44,29 +73,8 @@ export class PlayerPositionProvider {
             await cb();
         }
 
-        this.weaponDrawingProvider.drawWeapons();
-        DoScreenFadeIn(this.fadeDelay);
-        await wait(this.fadeDelay);
-    }
-
-    async teleportAdminToPosition([x, y, z, w]: Vector4) {
-        const playerPed = PlayerPedId();
-        DoScreenFadeOut(this.fadeDelay);
-        await wait(this.fadeDelay);
-        await this.weaponDrawingProvider.undrawWeapons();
-
-        FreezeEntityPosition(playerPed, true);
-
-        SetEntityCoords(playerPed, x, y, z, false, false, false, false);
-        SetEntityHeading(playerPed, w || 0.0);
-
-        while (!HasCollisionLoadedAroundEntity(playerPed)) {
-            await wait(1);
-        }
-
-        await wait(1000);
-
-        FreezeEntityPosition(playerPed, false);
+        await this.LSMCStretcherProvider.endTp();
+        await this.LSMCWheelChairProvider.endTp();
 
         this.weaponDrawingProvider.drawWeapons();
         DoScreenFadeIn(this.fadeDelay);

@@ -114,7 +114,7 @@ const Elevators: Record<ElevatorFloorName, ElevatorFloor> = {
         button: new BoxZone([337.45, -1432.94, 46.85], 0.2, 0.8, { minZ: 46.85, maxZ: 47.25, heading: 320 }),
         upTo: [],
         downTo: [ElevatorFloorName.lsmc0, ElevatorFloorName.lsmc1],
-        spawnPoint: [336.3, -1431.05, 46.52, 140.67],
+        spawnPoint: [334.41, -1432.06, 46.52, 134.22],
     },
     //LSPD
     [ElevatorFloorName.lspd0]: {
@@ -237,7 +237,7 @@ export class ElevatorProvider {
     @Once()
     public onStart() {
         for (const [id, value] of Object.entries(Elevators)) {
-            this.targetFactory.createForBoxZone('Elevator:' + id, value.button, this.createTargetOptions(value), 1.5);
+            this.targetFactory.createForBoxZone('Elevator:' + id, value.button, this.createTargetOptions(value));
         }
     }
 
