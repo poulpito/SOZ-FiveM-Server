@@ -315,7 +315,7 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
                     <>
                         {price ?
                         <span className={style.Amount}>
-                            {price > 1 && price} $
+                            {price > 0 && price} $
                         </span> : <span className={style.Amount}>
                             {item.amount > 1 && item.amount}
                         </span>}
