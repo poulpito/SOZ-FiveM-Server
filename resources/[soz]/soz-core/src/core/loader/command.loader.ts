@@ -27,6 +27,10 @@ export class CommandLoader {
                     ) {
                         return;
                     }
+
+                    if (!commandMetadata.passthroughPauseMenu && IsPauseMenuActive()) {
+                        return;
+                    }
                 }
 
                 method(source, ...args);

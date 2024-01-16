@@ -13,6 +13,8 @@ const SHOUT_RANGE = 8.0;
 const MEGAPHONE_RANGE = 38.0;
 const MICROPHONE_RANGE = 38.0;
 
+type VoiceModeRange = VoiceMode.Shouting | VoiceMode.Normal | VoiceMode.Whisper;
+
 @Injectable()
 export class VoipService {
     @Inject(NuiDispatch)
@@ -23,7 +25,11 @@ export class VoipService {
 
     private channels = new Map<number, number>();
 
-    private voiceMode: VoiceMode = VoiceMode.Normal;
+    private voiceModeRange: VoiceModeRange = VoiceMode.Normal;
+
+    private isMicrophoneInUse = false;
+
+    private isMegaphoneInUse = false;
 
     private overrideInputRange: number | null = null;
 
@@ -37,14 +43,26 @@ export class VoipService {
         SetResourceKvp(`radio_volume_${radioType}_${channelType}`, value.toString());
     }
 
-    public setVoiceMode(mode: VoiceMode) {
-        this.voiceMode = mode;
-        this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', this.voiceMode);
+    public setVoiceModeRange(mode: VoiceModeRange) {
+        this.voiceModeRange = mode;
+
         this.updateRange();
     }
 
-    public getVoiceMode() {
-        return this.voiceMode;
+    public getVoiceMode(): VoiceMode {
+        if (this.isMuted) {
+            return VoiceMode.Mute;
+        }
+
+        if (this.isMegaphoneInUse) {
+            return VoiceMode.Megaphone;
+        }
+
+        if (this.isMicrophoneInUse) {
+            return VoiceMode.Microphone;
+        }
+
+        return this.voiceModeRange;
     }
 
     public getOverrideInputRange() {
@@ -53,10 +71,11 @@ export class VoipService {
 
     public resetVoiceMode() {
         this.isMuted = false;
-        this.voiceMode = VoiceMode.Normal;
+        this.isMicrophoneInUse = false;
+        this.isMicrophoneInUse = false;
+        this.voiceModeRange = VoiceMode.Normal;
         this.overrideInputRange = null;
 
-        this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', this.voiceMode);
         this.updateRange();
     }
 
@@ -69,11 +88,7 @@ export class VoipService {
 
         this.isMuted = value;
 
-        if (this.isMuted) {
-            this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', VoiceMode.Mute);
-        } else {
-            this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', this.voiceMode);
-        }
+        this.updateRange();
     }
 
     public isPlayerMuted() {
@@ -84,24 +99,14 @@ export class VoipService {
         TriggerServerEvent(ServerEvent.VOIP_SET_MEGAPHONE, value);
 
         this.overrideInputRange = value ? range : null;
-
-        if (value) {
-            this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', VoiceMode.Megaphone);
-        } else {
-            this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', this.voiceMode);
-        }
+        this.isMegaphoneInUse = value;
 
         this.updateRange();
     }
 
     public setPlayerMicrophoneInUse(value: boolean) {
         this.overrideInputRange = value ? MICROPHONE_RANGE : null;
-
-        if (value) {
-            this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', VoiceMode.Microphone);
-        } else {
-            this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', this.voiceMode);
-        }
+        this.isMicrophoneInUse = value;
 
         this.updateRange();
     }
@@ -132,24 +137,23 @@ export class VoipService {
     }
 
     public updateRange() {
-        if (this.voiceMode === VoiceMode.Normal) {
-            MumbleSetTalkerProximity(NORMAL_RANGE);
-        } else if (this.voiceMode === VoiceMode.Whisper) {
-            MumbleSetTalkerProximity(WHISPER_RANGE);
-        } else if (this.voiceMode === VoiceMode.Shouting) {
-            MumbleSetTalkerProximity(SHOUT_RANGE);
-        }
+        const voiceMode = this.getVoiceMode();
+        this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', voiceMode);
 
-        if (this.voiceMode === VoiceMode.Megaphone) {
+        if (voiceMode === VoiceMode.Normal) {
             MumbleSetTalkerProximity(NORMAL_RANGE);
-            MumbleSetAudioInputDistance(MEGAPHONE_RANGE);
-        } else if (this.voiceMode === VoiceMode.Microphone) {
-            MumbleSetTalkerProximity(NORMAL_RANGE);
-            MumbleSetAudioInputDistance(MICROPHONE_RANGE);
+        } else if (voiceMode === VoiceMode.Whisper) {
+            MumbleSetTalkerProximity(WHISPER_RANGE);
+        } else if (voiceMode === VoiceMode.Shouting) {
+            MumbleSetTalkerProximity(SHOUT_RANGE);
+        } else if (voiceMode === VoiceMode.Megaphone) {
+            MumbleSetTalkerProximity(MEGAPHONE_RANGE);
+        } else if (voiceMode === VoiceMode.Microphone) {
+            MumbleSetTalkerProximity(MICROPHONE_RANGE);
         }
 
         if (this.overrideInputRange !== null) {
-            MumbleSetAudioInputDistance(this.overrideInputRange);
+            MumbleSetTalkerProximity(this.overrideInputRange);
         }
     }
 }

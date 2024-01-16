@@ -66,12 +66,12 @@ export class VoipProvider {
         }
 
         if (currentMode === VoiceMode.Normal) {
-            this.voipService.setVoiceMode(VoiceMode.Shouting);
+            this.voipService.setVoiceModeRange(VoiceMode.Shouting);
             return;
         }
 
         if (currentMode === VoiceMode.Whisper) {
-            this.voipService.setVoiceMode(VoiceMode.Normal);
+            this.voipService.setVoiceModeRange(VoiceMode.Normal);
             return;
         }
     }
@@ -99,12 +99,12 @@ export class VoipProvider {
         }
 
         if (currentMode === VoiceMode.Normal) {
-            this.voipService.setVoiceMode(VoiceMode.Whisper);
+            this.voipService.setVoiceModeRange(VoiceMode.Whisper);
             return;
         }
 
         if (currentMode === VoiceMode.Shouting) {
-            this.voipService.setVoiceMode(VoiceMode.Normal);
+            this.voipService.setVoiceModeRange(VoiceMode.Normal);
             return;
         }
     }
