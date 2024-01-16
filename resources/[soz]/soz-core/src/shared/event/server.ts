@@ -270,7 +270,6 @@ export enum ServerEvent {
     VEHICLE_DAMAGE_BLUR = 'soz-core:server:vehicle:damage-blur',
     VEHICLE_LOCKPICK = 'soz-core:server:vehicle:lockpick',
 
-    VOIP_MUTE = 'soz-core:server:voip:mute',
     VOIP_SET_MEGAPHONE = 'soz-core:server:voip:set-megaphone',
     VOIP_RADIO_VEHICLE_ENABLE = 'soz-core:server:voip:radio-vehicle-enable',
     VOIP_RADIO_VEHICLE_UPDATE = 'soz-core:server:voip:radio-vehicle-update',

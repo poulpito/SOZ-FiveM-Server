@@ -93,6 +93,7 @@ export enum RpcServerEvent {
     VEHICLE_PITSTOP_PRICES_UPDATE = 'soz-core:rpc:vehicle:pitstop:price-update',
     VEHICLE_SPAWN_TEMPORARY = 'soz-core:rpc:vehicle:spawn-temporary',
 
+    VOIP_SET_MUTE = 'soz-core:voip:set-mute',
     VOIP_IS_MUTED = 'soz-core:voip:is-muted',
     VOIP_GET_MEGAPHONE_PLAYERS = 'soz-core:voip:get-megaphone-players',
     VOIP_VOICE_START_TRANSMITTING = 'soz-core:server:voip:voice-start-transmitting',

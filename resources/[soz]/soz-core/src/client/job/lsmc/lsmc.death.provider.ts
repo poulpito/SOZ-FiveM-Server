@@ -205,7 +205,7 @@ export class LSMCDeathProvider {
             this.IsDead = true;
 
             this.nuiMenu.closeAll(false);
-            this.voipService.mutePlayer(true);
+            await this.voipService.mutePlayer(true);
 
             // Skip death process if player is zombie
             if (this.playerZombieProvider.isZombie() || this.playerZombieProvider.isTransforming()) {
@@ -407,7 +407,7 @@ export class LSMCDeathProvider {
         ClearPedBloodDamage(player);
         SetPlayerSprint(PlayerId(), true);
 
-        this.voipService.mutePlayer(false);
+        await this.voipService.mutePlayer(false);
 
         TriggerServerEvent(ServerEvent.PLAYER_SET_CURRENT_DISEASE, false);
 

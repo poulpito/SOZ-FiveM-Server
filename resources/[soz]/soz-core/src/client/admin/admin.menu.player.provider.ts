@@ -111,11 +111,21 @@ export class AdminMenuPlayerProvider {
                 this.notifier.notify(`Le joueur ~g~n'est pas muté.`, 'info');
             }
         } else if (action === 'mute') {
-            TriggerServerEvent(ServerEvent.VOIP_MUTE, true, player.id);
-            this.notifier.notify(`Le joueur ~g~${player.name}~s~ est maintenant ~r~muté.`, 'info');
+            const hasBeenMuted = await emitRpc<boolean>(RpcServerEvent.VOIP_SET_MUTE, player.id, true);
+
+            if (hasBeenMuted) {
+                this.notifier.notify(`Le joueur ~g~${player.name}~s~ est maintenant ~r~muté.`, 'info');
+            } else {
+                this.notifier.notify(`Le joueur ~g~${player.name}~s~ n'a pas pu être ~r~muté.`, 'error');
+            }
         } else {
-            TriggerServerEvent(ServerEvent.VOIP_MUTE, false, player.id);
-            this.notifier.notify(`Le joueur ~g~${player.name}~s~ n'est plus ~r~muté.`, 'info');
+            const hasBeenUnmuted = await emitRpc<boolean>(RpcServerEvent.VOIP_SET_MUTE, player.id, false);
+
+            if (hasBeenUnmuted) {
+                this.notifier.notify(`Le joueur ~g~${player.name}~s~ est maintenant ~g~démuté.`, 'info');
+            } else {
+                this.notifier.notify(`Le joueur ~g~${player.name}~s~ n'a pas pu être ~g~démuté.`, 'error');
+            }
         }
     }
 

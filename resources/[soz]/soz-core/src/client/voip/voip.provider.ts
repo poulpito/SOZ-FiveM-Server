@@ -119,13 +119,13 @@ export class VoipProvider {
             },
         ],
     })
-    public mute() {
+    public async mute() {
         const state = this.playerService.getState();
 
         if (state.isInHub) {
             return;
         }
 
-        this.voipService.mutePlayer(!this.voipService.isPlayerMuted());
+        await this.voipService.mutePlayer(!this.voipService.isPlayerMuted());
     }
 }

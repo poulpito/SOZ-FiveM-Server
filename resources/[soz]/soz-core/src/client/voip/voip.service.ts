@@ -1,8 +1,10 @@
+import { emitRpc } from '@core/rpc';
 import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { VoiceRadioProvider } from '@public/client/voip/voice/voice.radio.provider';
 import { Inject, Injectable } from '@public/core/decorators/injectable';
 import { ServerEvent } from '@public/shared/event';
 import { VoiceMode } from '@public/shared/hud';
+import { RpcServerEvent } from '@public/shared/rpc';
 import { RadioChannelType, RadioType } from '@public/shared/voip';
 
 const WHISPER_RANGE = 2.0;
@@ -49,9 +51,23 @@ export class VoipService {
         return this.overrideInputRange;
     }
 
-    public mutePlayer(value: boolean) {
+    public resetVoiceMode() {
+        this.isMuted = false;
+        this.voiceMode = VoiceMode.Normal;
+        this.overrideInputRange = null;
+
+        this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', this.voiceMode);
+        this.updateRange();
+    }
+
+    public async mutePlayer(value: boolean) {
+        const isOk = await emitRpc<boolean>(RpcServerEvent.VOIP_SET_MUTE, value);
+
+        if (!isOk) {
+            return;
+        }
+
         this.isMuted = value;
-        TriggerServerEvent(ServerEvent.VOIP_MUTE, value);
 
         if (this.isMuted) {
             this.nuiDispatch.dispatch('hud', 'UpdateVoiceMode', VoiceMode.Mute);
