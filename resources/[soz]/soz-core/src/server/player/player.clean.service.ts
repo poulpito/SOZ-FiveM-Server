@@ -15,7 +15,7 @@ export class PlayerCleanService {
             `SELECT p.citizenId
              FROM soz_fivem.player p
                       INNER JOIN soz_fivem.housing_apartment h ON h.owner = p.citizenId
-             WHERE p.last_updated < DATE_SUB(CURDATE(),INTERVAL 30 DAY) AND p.is_default = 0`
+             WHERE p.last_updated < DATE_SUB(CURDATE(),INTERVAL 30 DAY)`
         )) as { citizenId: string }[];
 
         const ids = [];
@@ -29,7 +29,7 @@ export class PlayerCleanService {
              FROM soz_fivem.player p
                 LEFT JOIN soz_api.account_identities ai ON p.license = ai.identityId AND ai.identityType = 'STEAM'
                 INNER JOIN soz_fivem.housing_apartment h ON h.owner = p.citizenId
-             WHERE ai.identityType IS NULL AND p.is_default = 0`
+             WHERE ai.identityType IS NULL`
         )) as { citizenId: string }[];
 
         for (const data of deletedPlayersToClean) {
