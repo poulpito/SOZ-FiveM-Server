@@ -513,7 +513,6 @@ export const NpcSkins = [
     'ig_tylerdix',
     'ig_wade',
     'ig_zimbor',
-    's_m_m_paramedic_01',
     'a_m_m_afriamer_01',
     'a_m_m_beach_01',
     'a_m_m_beach_02',
