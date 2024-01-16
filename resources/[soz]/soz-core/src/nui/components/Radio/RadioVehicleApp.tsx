@@ -63,17 +63,29 @@ export const RadioVehicleApp: FunctionComponent = () => {
         return null;
     }
 
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    const leftOffset = () => {
+        if (aspectRatio > 3.5 && window.innerWidth > 5000) {
+            return '34vw';
+        } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
+            return '33vw';
+        } else {
+            return '16.5vw';
+        }
+    };
+
     return (
         <div
             className="absolute font-digital7"
             style={{
                 bottom: display ? '2vh' : '-50vh',
-                left: '17vw',
+                left: leftOffset(),
                 transition: 'bottom .3s',
                 zIndex: 30,
-                width: '38vw',
+                width: '45vh',
                 aspectRatio: '1463/802',
-                fontSize: '0.8vw',
+                fontSize: '1.3vh',
+                color: '#0000009c',
             }}
         >
             <form
@@ -227,8 +239,8 @@ export const RadioVehicleApp: FunctionComponent = () => {
                         value=""
                         className="absolute cursor-pointer bg-transparent hover:bg-white/50"
                         style={{
-                            WebkitMaskImage: 'radial-gradient(black, rgba(0,0,0,.1), transparent)',
-                            maskImage: 'radial-gradient(black, rgba(0,0,0,.1), transparent)',
+                            WebkitMaskImage: 'radial-gradient(black, rgba(0,0,0,0), transparent)',
+                            maskImage: 'radial-gradient(black, rgba(0,0,0,0), transparent)',
                             transition: 'background-color .2s',
                             bottom: '5%',
                             left: '38%',
