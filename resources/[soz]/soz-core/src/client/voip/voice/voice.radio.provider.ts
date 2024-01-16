@@ -11,7 +11,7 @@ import { wait } from '../../../core/utils';
 import { ClientEvent } from '../../../shared/event/client';
 import { Vector3 } from '../../../shared/polyzone/vector';
 import { RpcServerEvent } from '../../../shared/rpc';
-import { Ear, RadioChannelType, RadioType } from '../../../shared/voip';
+import { AudioContextRadio, Ear, RadioChannelType, RadioType } from '../../../shared/voip';
 import { AnimationRunner } from '../../animation/animation.factory';
 import { AnimationService } from '../../animation/animation.service';
 import { SoundService } from '../../sound.service';
@@ -188,6 +188,7 @@ export class VoiceRadioProvider {
             isTransmitting = false;
         });
 
+        const selfPlayerId = GetPlayerServerId(PlayerId());
         const clickVolume = this.getVoiceClickVolume(radioType, channelType) / 100;
         const position = GetEntityCoords(PlayerPedId(), false) as Vector3;
         const players = await emitRpc<number[]>(
@@ -198,6 +199,10 @@ export class VoiceRadioProvider {
         );
 
         for (const player of players) {
+            if (player === selfPlayerId) {
+                continue;
+            }
+
             this.voiceTargetService.addPlayer(player, 'radio');
         }
 
@@ -210,6 +215,10 @@ export class VoiceRadioProvider {
         }
 
         for (const player of players) {
+            if (player === selfPlayerId) {
+                continue;
+            }
+
             this.voiceTargetService.removePlayer(player, 'radio');
         }
 
@@ -262,7 +271,23 @@ export class VoiceRadioProvider {
         }
 
         const clickVolume = this.getVoiceClickVolume(radioInfo.radioType, radioInfo.channelType);
-        this.soundService.play(radioInfo.radioType + '/mic_click_on', clickVolume / 100);
+        this.soundService.play(radioInfo.radioType + '/mic_click_off', clickVolume / 100);
+    }
+
+    public removeListenersOnFrequency(frequency: number) {
+        for (const player of this.voiceListeningService.getListeners()) {
+            const audioContext = player.contexts.radio as AudioContextRadio;
+
+            if (!audioContext) {
+                continue;
+            }
+
+            if (audioContext.frequency !== frequency) {
+                continue;
+            }
+
+            this.voiceListeningService.removePlayerAudioContext(player.serverId, 'radio');
+        }
     }
 
     @Tick()

@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 
-import { VoiceDebugInfo } from '../../../shared/voip';
+import { AudioContext, VoiceDebugInfo } from '../../../shared/voip';
 import { useNuiEvent } from '../../hook/nui';
 
 export const DebugVoip: FunctionComponent = () => {
@@ -22,11 +22,11 @@ export const DebugVoip: FunctionComponent = () => {
             <div>
                 <h2 className="text-xl">Targets</h2>
                 {Object.keys(debugVoip.targets).map(target => {
-                    const targetInfo = debugVoip.targets[target];
+                    const targetInfo = debugVoip.targets[target] as string[];
 
                     return (
                         <div key={target}>
-                            Target: {target}, contexts: {targetInfo.contexts}
+                            Target: {target}, contexts: {targetInfo.join(', ')}
                         </div>
                     );
                 })}
@@ -48,6 +48,16 @@ export const DebugVoip: FunctionComponent = () => {
                     </div>
                 );
             })}
+            <div>
+                <h2 className="text-xl">Submixes</h2>
+                {debugVoip.submixes.map(([serverId, submixId]) => {
+                    return (
+                        <div key={serverId}>
+                            ServerId: {serverId} - Submix: {submixId}
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };

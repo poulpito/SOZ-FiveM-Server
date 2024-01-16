@@ -43,6 +43,7 @@ export class VoiceDebugProvider {
             targets: this.voiceTargetService.getTargets(),
             voiceMode: this.voipService.getVoiceMode(),
             overrideInputRange: this.voipService.getOverrideInputRange(),
+            submixes: this.voiceListeningService.getSubmixes(),
         });
     }
 }

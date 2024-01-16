@@ -87,4 +87,5 @@ export type VoiceDebugInfo = {
     overrideInputRange: number | null;
     targets: Record<number, AudioContextType[]>;
     listeners: PlayerVoice[];
+    submixes: [number, number][];
 };

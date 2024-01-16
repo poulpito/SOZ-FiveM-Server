@@ -78,6 +78,10 @@ export class VoiceListeningService {
         return [...this.players.values()];
     }
 
+    public getSubmixes(): [number, number][] {
+        return [...this.usedSubmixes.entries()];
+    }
+
     public addPlayerAudioContext(playerId: number, audioContextType: AudioContextType, audioContext: AudioContext) {
         let player = this.players.get(playerId);
 

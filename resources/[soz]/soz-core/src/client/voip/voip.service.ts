@@ -100,6 +100,7 @@ export class VoipService {
         if (this.channels.get(frequency) <= 0) {
             this.channels.delete(frequency);
             this.voiceRadioProvider.stopTransmitting(frequency);
+            this.voiceRadioProvider.removeListenersOnFrequency(frequency);
 
             TriggerServerEvent(ServerEvent.VOIP_RADIO_LEAVE_CHANNEL, frequency);
         }
