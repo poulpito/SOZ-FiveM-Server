@@ -90,6 +90,7 @@ const VEHICLE_HAS_RADIO = [
     'cogfbi',
     'paragonfbi',
     'dodgebana',
+    'polgauntlet',
     'sadler1',
     'hauler1',
     'brickade1',
