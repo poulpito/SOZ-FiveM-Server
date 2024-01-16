@@ -1,5 +1,6 @@
 import { Module } from '../../core/decorators/module';
 import { VoiceCarProvider } from './voice/voice.car.provider';
+import { VoiceDebugProvider } from './voice/voice.debug.provider';
 import { VoicePhoneProvider } from './voice/voice.phone.provider';
 import { VoiceProvider } from './voice/voice.provider';
 import { VoiceProximityProvider } from './voice/voice.proximity.provider';
@@ -13,6 +14,7 @@ import { VoipRadioVehicleProvider } from './voip.radio.vehicle.provider';
 @Module({
     providers: [
         VoiceCarProvider,
+        VoiceDebugProvider,
         VoicePhoneProvider,
         VoiceProvider,
         VoiceProximityProvider,

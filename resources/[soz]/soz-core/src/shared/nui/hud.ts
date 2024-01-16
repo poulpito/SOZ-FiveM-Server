@@ -1,6 +1,7 @@
 import { JobType } from '@public/shared/job';
 import { News } from '@public/shared/news';
 import { AdvancedNotification, BasicNotification, TPoliceNotification } from '@public/shared/notification';
+import { VoiceDebugInfo } from '@public/shared/voip';
 
 import { Minimap, VoiceMode } from '../hud';
 import { VehicleHud, VehicleHudSpeed } from '../vehicle/vehicle';
@@ -17,4 +18,5 @@ export interface NuiHudMethodMap {
     DrawNotification: Omit<BasicNotification | AdvancedNotification | TPoliceNotification, 'id'> & { id?: string };
     CancelNotification: string;
     AddNews: Omit<News, 'id'>;
+    VoipDebug: VoiceDebugInfo | null;
 }

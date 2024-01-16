@@ -45,6 +45,10 @@ export class VoipService {
         return this.voiceMode;
     }
 
+    public getOverrideInputRange() {
+        return this.overrideInputRange;
+    }
+
     public mutePlayer(value: boolean) {
         this.isMuted = value;
         TriggerServerEvent(ServerEvent.VOIP_MUTE, value);

@@ -1,3 +1,4 @@
+import { VoiceMode } from '@public/shared/hud';
 import { Vector3 } from '@public/shared/polyzone/vector';
 
 export const VOICE_TARGET = 1;
@@ -78,3 +79,11 @@ export enum Ear {
     Both,
     Right,
 }
+
+export type VoiceDebugInfo = {
+    proximity: number;
+    voiceMode: VoiceMode;
+    overrideInputRange: number | null;
+    targets: Record<number, AudioContextType[]>;
+    listeners: PlayerVoice[];
+};

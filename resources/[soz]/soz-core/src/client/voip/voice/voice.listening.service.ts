@@ -74,6 +74,10 @@ export class VoiceListeningService {
 
     private usedSubmixes = new Map<number, number>();
 
+    public getListeners(): PlayerVoice[] {
+        return [...this.players.values()];
+    }
+
     public addPlayerAudioContext(playerId: number, audioContextType: AudioContextType, audioContext: AudioContext) {
         let player = this.players.get(playerId);
 

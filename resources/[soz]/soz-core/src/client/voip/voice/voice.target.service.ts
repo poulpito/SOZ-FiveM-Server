@@ -11,6 +11,16 @@ import { AudioContextType, VOICE_TARGET } from '../../../shared/voip';
 export class VoiceTargetService {
     private players: Map<number, AudioContextType[]> = new Map();
 
+    public getTargets(): Record<number, AudioContextType[]> {
+        const targets: Record<number, AudioContextType[]> = {};
+
+        for (const [playerId, audioContextTypes] of this.players) {
+            targets[playerId] = audioContextTypes;
+        }
+
+        return targets;
+    }
+
     public refresh() {
         MumbleClearVoiceTarget(VOICE_TARGET);
 
