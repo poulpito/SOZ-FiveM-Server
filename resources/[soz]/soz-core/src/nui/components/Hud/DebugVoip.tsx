@@ -16,6 +16,7 @@ export const DebugVoip: FunctionComponent = () => {
     return (
         <div className="bg-black/25 absolute right-5 top-5">
             <div>Proximity: {debugVoip.proximity}</div>
+            <div>Net Proximity: {debugVoip.networkProximity}</div>
             <div>VoiceMode: {debugVoip.voiceMode}</div>
             <div>Override input range: {debugVoip.overrideInputRange}</div>
             <div>

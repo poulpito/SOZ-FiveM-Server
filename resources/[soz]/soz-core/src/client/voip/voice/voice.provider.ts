@@ -4,9 +4,11 @@ import { wait } from '@public/core/utils';
 
 import { Inject } from '../../../core/decorators/injectable';
 import { Tick } from '../../../core/decorators/tick';
+import { VoiceMode } from '../../../shared/hud';
 import { Monitor } from '../../monitor/monitor';
 import { Notifier } from '../../notifier';
 import { NuiDispatch } from '../../nui/nui.dispatch';
+import { VoipService } from '../voip.service';
 import { VoiceListeningService } from './voice.listening.service';
 import { VoiceTargetService } from './voice.target.service';
 
@@ -26,6 +28,9 @@ export class VoiceProvider {
     @Inject(VoiceTargetService)
     private voiceTargetService: VoiceTargetService;
 
+    @Inject(VoipService)
+    private voipService: VoipService;
+
     @Inject(NuiDispatch)
     private readonly nuiDispatch: NuiDispatch;
 
@@ -35,6 +40,8 @@ export class VoiceProvider {
     @Once(OnceStep.PlayerLoaded)
     public async initVoice(): Promise<void> {
         await this.reconnect();
+
+        this.voipService.setVoiceMode(VoiceMode.Normal);
 
         this.voiceListeningService.createAudioSubmixes();
         this.isReady = true;

@@ -82,6 +82,7 @@ export enum Ear {
 
 export type VoiceDebugInfo = {
     proximity: number;
+    networkProximity: number;
     voiceMode: VoiceMode;
     overrideInputRange: number | null;
     targets: Record<number, AudioContextType[]>;

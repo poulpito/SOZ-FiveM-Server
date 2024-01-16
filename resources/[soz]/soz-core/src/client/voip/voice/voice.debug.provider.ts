@@ -26,7 +26,6 @@ export class VoiceDebugProvider {
     @Command('voip-debug')
     public voipDebug() {
         this.inDebug = !this.inDebug;
-        console.log('Voip debug:', this.inDebug);
     }
 
     @Tick(50)
@@ -39,6 +38,7 @@ export class VoiceDebugProvider {
 
         this.nuiDispatch.dispatch('hud', 'VoipDebug', {
             proximity: MumbleGetTalkerProximity(),
+            networkProximity: NetworkGetTalkerProximity(),
             listeners: this.voiceListeningService.getListeners(),
             targets: this.voiceTargetService.getTargets(),
             voiceMode: this.voipService.getVoiceMode(),
