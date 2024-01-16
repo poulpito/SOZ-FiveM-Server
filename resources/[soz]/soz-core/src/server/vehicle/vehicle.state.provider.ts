@@ -212,10 +212,12 @@ export class VehicleStateProvider {
         vehicleNetworkId: number,
         condition: Partial<VehicleCondition>
     ): Promise<void> {
+        console.log(condition.windowStatus);
         if (condition.windowStatus && Object.values(condition.windowStatus).filter(w => w).length > 0) {
             const entityId = NetworkGetEntityFromNetworkId(vehicleNetworkId);
             const position = GetEntityCoords(entityId) as Vector4;
             position[2] -= 0.5;
+            position[0] += 0.6;
             const vehicleName = await emitClientRpc<string>(
                 RpcClientEvent.VEHICLE_GET_NAME,
                 source,
