@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 
-import { AudioContext, VoiceDebugInfo } from '../../../shared/voip';
+import { VoiceDebugInfo } from '../../../shared/voip';
 import { useNuiEvent } from '../../hook/nui';
 
 export const DebugVoip: FunctionComponent = () => {

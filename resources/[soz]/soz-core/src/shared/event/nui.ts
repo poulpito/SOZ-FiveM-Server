@@ -91,6 +91,7 @@ export enum NuiEvent {
     AdminSetPoliceLocator = 'soz-core:client:admin:police-locator',
     AdminMenuCharacterCreateNew = 'soz-core:client:admin:character:create-new',
     AdminMenuCharacterSwitch = 'soz-core:client:admin:character:switch',
+    AdminMenuPlayerSetVoipDebug = 'soz-core:nui:admin:player:set-voip-debug',
 
     GetAPIConfig = 'soz-core:nui:get-api-config',
     GetJWTToken = 'soz-core:nui:get-jwt-token',

@@ -1,7 +1,8 @@
-import { Command } from '../../../core/decorators/command';
+import { OnEvent } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { Tick } from '../../../core/decorators/tick';
+import { ClientEvent } from '../../../shared/event/client';
 import { NuiDispatch } from '../../nui/nui.dispatch';
 import { VoipService } from '../voip.service';
 import { VoiceListeningService } from './voice.listening.service';
@@ -23,9 +24,9 @@ export class VoiceDebugProvider {
 
     private inDebug = false;
 
-    @Command('voip-debug')
-    public voipDebug() {
-        this.inDebug = !this.inDebug;
+    @OnEvent(ClientEvent.VOIP_DEBUG)
+    public setVoipDebug(active: boolean) {
+        this.inDebug = active;
     }
 
     @Tick(50)

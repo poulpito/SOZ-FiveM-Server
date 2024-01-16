@@ -38,6 +38,7 @@ export enum ServerEvent {
     ADMIN_ADD_VEHICLE = 'soz-core:server:admin:add-vehicle',
     ADMIN_PLAYER_SET_ZOMBIE = 'soz-core:server:admin:player:set-zombie',
     ADMIN_PLAYER_SET_SENATE_PARTY = 'soz-core:server:admin:player:set-senate-party',
+    ADMIN_PLAYER_SET_VOIP_DEBUG = 'soz-core:server:admin:player:set-voip-debug',
 
     BASE_ENTERED_VEHICLE = 'baseevents:enteredVehicle',
     BASE_LEFT_VEHICLE = 'baseevents:leftVehicle',

@@ -290,4 +290,9 @@ export class AdminMenuPlayerProvider {
     public async handlePlayerSetZombie({ player, value }: { player: AdminPlayer; value: boolean }): Promise<void> {
         TriggerServerEvent(ServerEvent.ADMIN_PLAYER_SET_ZOMBIE, player.id, value);
     }
+
+    @OnNuiEvent(NuiEvent.AdminMenuPlayerSetVoipDebug)
+    public async setPlayerDebug({ player, value }: { player: AdminPlayer; value: boolean }): Promise<void> {
+        TriggerServerEvent(ServerEvent.ADMIN_PLAYER_SET_VOIP_DEBUG, player.id, value);
+    }
 }
