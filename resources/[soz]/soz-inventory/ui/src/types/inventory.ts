@@ -85,6 +85,7 @@ export type BaitMetadata = {
 export type EvidenceMetadata = {
     type: string;
     generalInfo: string;
+    quantity?: number;
     zone?: string;
     support?: string;
     isAnalyzed?: boolean;

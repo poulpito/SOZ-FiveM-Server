@@ -1395,6 +1395,7 @@ export type PoliceClue = {
     type: 'evidence_bullet' | 'evidence_blood' | 'evidence_glass';
     information: string;
     outline: boolean;
+    quantity: number;
 };
 
 export type PoliceJobMoneycheckerMenuData = {

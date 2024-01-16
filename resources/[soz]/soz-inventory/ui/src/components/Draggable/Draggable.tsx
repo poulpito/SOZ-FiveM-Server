@@ -182,6 +182,9 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
                     secondaryDescription += `<b>Informations: </b><span>${item.metadata.evidenceInfos.generalInfo}</span><br>`
                 }
             }
+            if (item.metadata.evidenceInfos?.quantity) {
+                secondaryDescription += `<b>Quantité: </b><span>${item.metadata.evidenceInfos?.quantity}</span><br>`
+            }
             if (item.metadata.creation) {
                 secondaryDescription += `<b>Récupéré le: </b><span>${new Date(item.metadata.creation).toLocaleDateString('fr-FR', FORMAT_LOCALIZED)}</span><br>`
             }

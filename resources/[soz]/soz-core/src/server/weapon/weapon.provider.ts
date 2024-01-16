@@ -89,6 +89,7 @@ export class WeaponProvider {
                 type: 'evidence_blood',
                 information: `Sang de ${targetData.charinfo.firstname} ${targetData.charinfo.lastname}`,
                 outline: true,
+                quantity: 1,
             },
         ]);
     }
@@ -225,6 +226,7 @@ export class WeaponProvider {
                 type: 'evidence_bullet',
                 information: `Balle de type ${bulletInfo}`,
                 outline: true,
+                quantity: 1,
             },
         ]);
         const playerData = this.playerService.getPlayer(source);

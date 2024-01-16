@@ -250,6 +250,7 @@ export class VehicleStateProvider {
                         '15': 1,
                     } as any,
                     outline: true,
+                    quantity: 1,
                 },
             ]);
         }
