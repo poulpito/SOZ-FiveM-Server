@@ -56,7 +56,7 @@ Config.Storages["lsmc_male_cloakroom"] = {
     minZ = 36.99,
     maxZ = 38.99,
     heading = 49.35,
-    targetOptions = getCloakroomTargetOptions("lsmc", "lsmc_male_cloakroom"),
+    targetOptions = concatTables(getCloakroomTargetOptions("lsmc", "lsmc_male_cloakroom"), getPoliceCloakroomTargetOptions("lsmc")),
 }
 
 Config.Storages["lsmc_female_cloakroom"] = {
@@ -68,5 +68,5 @@ Config.Storages["lsmc_female_cloakroom"] = {
     minZ = 36.99,
     maxZ = 38.99,
     heading = 49.61,
-    targetOptions = getCloakroomTargetOptions("lsmc", "lsmc_female_cloakroom"),
+    targetOptions = concatTables(getCloakroomTargetOptions("lsmc", "lsmc_female_cloakroom"), getPoliceCloakroomTargetOptions("lsmc")),
 }

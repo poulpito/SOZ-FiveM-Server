@@ -5,6 +5,7 @@ import { Command } from '@public/core/decorators/command';
 import { OnEvent } from '@public/core/decorators/event';
 import { Rpc } from '@public/core/decorators/rpc';
 import { InventoryManager } from '@public/server/inventory/inventory.manager';
+import { ItemService } from '@public/server/item/item.service';
 import { Notifier } from '@public/server/notifier';
 import { PlayerService } from '@public/server/player/player.service';
 import { PlayerStateService } from '@public/server/player/player.state.service';
@@ -34,6 +35,9 @@ export class LSMCProvider {
 
     @Inject(LSMCDamageProvider)
     private LSMCDamageProvider: LSMCDamageProvider;
+
+    @Inject(ItemService)
+    private itemService: ItemService;
 
     @Rpc(RpcServerEvent.LSMC_CAN_REMOVE_ITT)
     public canRemoveITT(source: number, target: number) {
@@ -110,7 +114,7 @@ export class LSMCProvider {
 
         this.LSMCDamageProvider.removeDamages(player.source);
 
-        TriggerClientEvent(ClientEvent.LSMC_HEAL, player.source, 25);
+        TriggerClientEvent(ClientEvent.LSMC_HEAL, player.source, 100);
     }
 
     @OnEvent(ServerEvent.LSMC_GIVE_BLOOD)
@@ -140,7 +144,7 @@ export class LSMCProvider {
     }
 
     @OnEvent(ServerEvent.LSMC_TOOGLE_ITT)
-    public onToogleITT(source: number, id: number) {
+    public onToogleITT(source: number, id: number, duration: number) {
         const player = this.playerService.getPlayer(id);
 
         if (!player) {
@@ -160,6 +164,7 @@ export class LSMCProvider {
             }
 
             this.playerService.setPlayerMetadata(id, 'itt', true);
+            this.playerService.setPlayerMetadata(id, 'itt_end', Date.now() + duration);
             this.notifier.notify(id, 'Vous avez été mis en interdiction de travail temporaire');
             this.notifier.notify(source, 'Vous avez mis la personne en interdiction de travail temporaire');
         }
@@ -167,7 +172,7 @@ export class LSMCProvider {
 
     @Command('toggleitt', { role: ['staff', 'admin'], description: 'toogle itt for myself' })
     async toggleItt(source: number) {
-        this.onToogleITT(source, source);
+        this.onToogleITT(source, source, 0);
     }
 
     @OnEvent(ServerEvent.LSMC_SET_CURRENT_ORGAN)
@@ -183,9 +188,20 @@ export class LSMCProvider {
             if (!this.inventoryManager.removeItemFromInventory(source, player.metadata.organ)) {
                 return;
             }
+        } else {
+            if (!this.inventoryManager.canCarryItem(source, 'expired_organ', 1)) {
+                this.notifier.notify(source, `Tu n’as pas assez de place dans ton inventaire.`, 'error');
+                return;
+            }
         }
 
         this.playerService.setPlayerMetadata(id, 'organ', organ);
+
+        if (organ) {
+            const item = this.itemService.getItem(organ as string);
+            this.inventoryManager.addItemToInventory(source, 'expired_organ', 1);
+            this.notifier.notify(source, `Vous avez retiré un ${item.label}`, 'success');
+        }
     }
 
     @OnEvent(ServerEvent.LSMC_SET_HAZMAT)

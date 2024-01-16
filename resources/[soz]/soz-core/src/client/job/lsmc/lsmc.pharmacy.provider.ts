@@ -1,5 +1,6 @@
 import { InventoryManager } from '@public/client/inventory/inventory.manager';
 import { ItemService } from '@public/client/item/item.service';
+import { PlayerService } from '@public/client/player/player.service';
 import { Feature, isFeatureEnabled } from '@public/shared/features';
 import { PHARMACY_PRICES } from '@public/shared/job/lsmc';
 import { toVector4Object } from '@public/shared/polyzone/vector';
@@ -8,7 +9,6 @@ import { Once, OnceStep } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { ServerEvent } from '../../../shared/event';
-import { NuiMenu } from '../../nui/nui.menu';
 import { TargetFactory } from '../../target/target.factory';
 
 @Provider()
@@ -16,11 +16,11 @@ export class LSMCPharmacyProvider {
     @Inject(TargetFactory)
     private targetFactory: TargetFactory;
 
-    @Inject(NuiMenu)
-    private nuiMenu: NuiMenu;
-
     @Inject(ItemService)
     private itemService: ItemService;
+
+    @Inject(PlayerService)
+    private playerService: PlayerService;
 
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
@@ -74,6 +74,17 @@ export class LSMCPharmacyProvider {
                         icon: 'c:/ems/heal.png',
                         action: () => {
                             TriggerServerEvent(ServerEvent.LSMC_NPC_HEAL);
+                        },
+                    },
+                    {
+                        label: "Lever de l'ITT",
+                        icon: 'c:ems/Rehabiliter.png',
+                        canInteract: () => {
+                            const player = this.playerService.getPlayer();
+                            return player.metadata.itt && Date.now() > player.metadata.itt_end;
+                        },
+                        action: () => {
+                            TriggerServerEvent(ServerEvent.LSMC_TOOGLE_ITT, GetPlayerServerId(PlayerId()));
                         },
                     },
                 ],

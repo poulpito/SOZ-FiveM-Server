@@ -3578,6 +3578,31 @@ QBShared.Items = {
         ['description'] = 'Ca pourrait t\'en couter un.',
         ['illustrator'] = '.TheSeds'
     },
+    ['expired_organ'] = {
+        ['name'] = 'expired_organ',
+        ['label'] = 'Organe périmé',
+        ['weight'] = 1000,
+        ['type'] = 'organ',
+        ['unique'] = false,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['expiresIn'] = 1440,
+        ['combinable'] = nil,
+        ['description'] = '.',
+        ['illustrator'] = '.'
+    },
+    ['morphine'] = {
+        ['name'] = 'morphine',
+        ['label'] = 'Morphine',
+        ['weight'] = 200,
+        ['type'] = 'item',
+        ['unique'] = false,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = '.',
+        ['illustrator'] = '.'
+    },
     ['antidepressant'] = {
         ['name'] = 'antidepressant',
         ['label'] = 'Antidépresseur',

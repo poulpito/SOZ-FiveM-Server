@@ -303,6 +303,7 @@ export type PlayerMetadata = PlayerHealthBook & {
     last_identified_shot: number | undefined;
     last_weapon_used: string | undefined;
     itt: boolean;
+    itt_end: number;
     hazmat: boolean;
     mood?: string | null;
     rp_death: boolean;

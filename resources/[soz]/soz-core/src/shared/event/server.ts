@@ -137,6 +137,7 @@ export enum ServerEvent {
     LSMC_SCAN = 'soz-core:server:job:lsmc:scan',
     LSMC_PLASTER = 'soz-core:server:job:lsmc:plaster',
     LSMC_NALOXONE = 'soz-core:server:job:lsmc:nolaxone',
+    LSMC_MORPHINE = 'soz-core:server:job:lsmc:morphine',
 
     LSC_CHECK_STOCK = 'soz-core:server:job:lsc:check-stock',
 

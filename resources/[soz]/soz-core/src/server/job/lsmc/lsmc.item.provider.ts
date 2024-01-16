@@ -47,6 +47,7 @@ export class LSMCItemProvider {
         this.item.setItemUseCallback('stretcher', this.useStretcher.bind(this));
         this.item.setItemUseCallback('wheelchair', this.useWheelChair.bind(this));
         this.item.setItemUseCallback('naloxone', this.useNaloxone.bind(this));
+        this.item.setItemUseCallback('morphine', this.useMorphine.bind(this));
     }
 
     private async useTissue(source: number, _item: Item, inventoryItem: InventoryItem) {
@@ -338,5 +339,52 @@ export class LSMCItemProvider {
 
         this.notifier.notify(source, 'Vous avez injecté une dose de ~g~Naloxone~s~.');
         this.notifier.notify(target, 'Vous recu une dose de ~g~Naloxone~s~, vous êtes désormais désintoxiqué.');
+    }
+
+    public async useMorphine(source: number, item: Item, inventoryItem: InventoryItem): Promise<void> {
+        this.onMorphine(source, source, inventoryItem.slot);
+    }
+
+    @OnEvent(ServerEvent.LSMC_MORPHINE)
+    public async onMorphine(source: number, target: number, slot: number) {
+        const { completed } = await this.progressService.progress(
+            source,
+            'use_naloxone',
+            'Injection de Naloxone...',
+            10000,
+            {
+                name: 'miranda_shooting_up',
+                dictionary: 'rcmpaparazzo1ig_4',
+                options: {
+                    onlyUpperBody: true,
+                },
+                playbackRate: 0.4,
+            },
+            {
+                useAnimationService: true,
+                firstProp: {
+                    model: 'prop_syringe_01',
+                    bone: 28422,
+                    coords: { x: 0.0, y: 0.0, z: -0.045 },
+                    rotation: { x: 0, y: 0, z: 0 },
+                },
+            }
+        );
+
+        if (!completed) {
+            return;
+        }
+
+        this.inventoryManager.removeItemFromInventory(source, 'morphine', 1, null, slot);
+
+        this.playerService.incrementMetadata(target, 'drug', 10, 0, 110);
+        this.playerService.incrementMetadata(source, 'stress_level', -20, 0, 100);
+
+        if (target != source) {
+            this.notifier.notify(source, 'Vous avez injecté une dose de ~g~Morphine~s~.');
+            this.notifier.notify(target, 'Vous recu une dose de ~g~Morphine~s~, vous êtes désormais apaisé.');
+        } else {
+            this.notifier.notify(source, 'Vous vous êtes injecté une dose de ~g~Morphine~s~.');
+        }
     }
 }

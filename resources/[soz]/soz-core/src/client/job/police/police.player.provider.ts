@@ -1,4 +1,5 @@
 import { AnimationRunner } from '@public/client/animation/animation.factory';
+import { AnimationRagdollProvider } from '@public/client/animation/animation.ragdoll.provider';
 import { AnimationService } from '@public/client/animation/animation.service';
 import { Notifier } from '@public/client/notifier';
 import { NuiDispatch } from '@public/client/nui/nui.dispatch';
@@ -72,6 +73,9 @@ export class PolicePlayerProvider {
 
     @Inject(ProgressService)
     private progressService: ProgressService;
+
+    @Inject(AnimationRagdollProvider)
+    private animationRagdollProvider: AnimationRagdollProvider;
 
     private escortingAnimation: null | { animation: AnimationRunner | null; target: number; crimi: boolean } = null;
     private escortedAnimation: null | { animation: AnimationRunner | null; target: number; crimi: boolean } = null;
@@ -466,6 +470,7 @@ export class PolicePlayerProvider {
 
         if (!crimi && !player.metadata.isdead) {
             ClearPedTasks(ped);
+            this.animationRagdollProvider.stopRagdoll();
         }
 
         let delta_x = 0.45;

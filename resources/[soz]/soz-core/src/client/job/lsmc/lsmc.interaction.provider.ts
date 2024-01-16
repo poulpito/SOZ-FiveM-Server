@@ -3,6 +3,7 @@ import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { InventoryManager } from '@public/client/inventory/inventory.manager';
 import { Monitor } from '@public/client/monitor/monitor';
+import { InputService } from '@public/client/nui/input.service';
 import { NuiMenu } from '@public/client/nui/nui.menu';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
@@ -15,6 +16,7 @@ import { MenuType } from '@public/shared/nui/menu';
 import { PlayerLicenceType } from '@public/shared/player';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
+import { Err, Ok } from '@public/shared/result';
 import { RpcServerEvent } from '@public/shared/rpc';
 
 import { PlayerListStateService } from '../../player/player.list.state.service';
@@ -59,6 +61,9 @@ export class LSMCInteractionProvider {
 
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
+
+    @Inject(InputService)
+    private inputService: InputService;
 
     @Once()
     public onStart() {
@@ -110,10 +115,33 @@ export class LSMCInteractionProvider {
 
                     return await emitRpc<boolean>(RpcServerEvent.LSMC_CAN_SET_ITT, target);
                 },
-                action: entity => {
+                action: async entity => {
+                    const duration = await this.inputService.askInput(
+                        {
+                            title: "Durée avant que le pharmacien puisse enlever l'ITT en minutes",
+                            defaultValue: '',
+                        },
+                        value => {
+                            if (!value) {
+                                Ok(null);
+                            }
+
+                            if (isNaN(Number(value))) {
+                                return Err('La durée doit être un nombre');
+                            }
+
+                            return Ok(value);
+                        }
+                    );
+
+                    if (!duration) {
+                        return;
+                    }
+
                     TriggerServerEvent(
                         ServerEvent.LSMC_TOOGLE_ITT,
-                        GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity))
+                        GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity)),
+                        Number(duration) * 60_000
                     );
                 },
             },
@@ -211,9 +239,7 @@ export class LSMCInteractionProvider {
                         'job_lsmc_heal',
                         {},
                         {
-                            amount: 25,
                             before_health: beforeHealth,
-                            after_health: beforeHealth + 25,
                             target_source: serverId,
                             position: GetEntityCoords(entity),
                         },
@@ -407,6 +433,26 @@ export class LSMCInteractionProvider {
                     TriggerServerEvent(ServerEvent.LSMC_NALOXONE, playerServerId);
                 },
                 item: 'naloxone',
+            },
+            {
+                label: 'Morphine',
+                color: JobType.LSMC,
+                icon: 'c:ems/morphine.png',
+                job: JobType.LSMC,
+                canInteract: entity => {
+                    if (!this.playerService.isOnDuty()) {
+                        return false;
+                    }
+
+                    const target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+
+                    return !this.playerListStateService.isDead(target);
+                },
+                action: async entity => {
+                    const serverId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity));
+                    TriggerServerEvent(ServerEvent.LSMC_MORPHINE, serverId);
+                },
+                item: 'morphine',
             },
         ]);
     }
