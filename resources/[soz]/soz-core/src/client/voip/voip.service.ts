@@ -5,9 +5,9 @@ import { ServerEvent } from '@public/shared/event';
 import { VoiceMode } from '@public/shared/hud';
 import { RadioChannelType, RadioType } from '@public/shared/voip';
 
-const WHISPER_RANGE = 1.0;
-const NORMAL_RANGE = 2.0;
-const SHOUT_RANGE = 4.0;
+const WHISPER_RANGE = 2.0;
+const NORMAL_RANGE = 4.5;
+const SHOUT_RANGE = 8.0;
 const MEGAPHONE_RANGE = 38.0;
 const MICROPHONE_RANGE = 38.0;
 
