@@ -15,7 +15,9 @@ export class PlayerCleanService {
             `SELECT p.citizenId
              FROM soz_fivem.player p
                       INNER JOIN soz_fivem.housing_apartment h ON h.owner = p.citizenId
-             WHERE p.last_updated < DATE_SUB(CURDATE(),INTERVAL 30 DAY)`
+                      INNER JOIN soz_api.account_identities i ON i.identityId = p.license
+                      INNER JOIN soz_api.accounts a ON i.accountId = a.id
+             WHERE p.last_updated < DATE_SUB(CURDATE(),INTERVAL 30 DAY) and a.role NOT IN ('STAFF', 'ADMIN')`
         )) as { citizenId: string }[];
 
         const ids = [];
