@@ -66,17 +66,27 @@ export const RadioApp: FunctionComponent = () => {
         return null;
     }
 
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    const rightOffset = () => {
+        if (aspectRatio > 3.5 && window.innerWidth > 5000) {
+            return '20vw';
+        } else {
+            return '25vw';
+        }
+    };
+
     return (
         <div
             className="absolute font-digital7"
             style={{
                 bottom: display ? '2vh' : '-50vh',
-                right: '25vw',
+                right: rightOffset(),
                 transition: 'bottom .3s',
                 zIndex: 30,
-                width: '12vw',
+                width: '20vh',
                 aspectRatio: '696/1453',
-                fontSize: '0.8vw',
+                fontSize: '1.7vh',
+                color: '#0000009c',
             }}
         >
             <form
@@ -232,8 +242,8 @@ export const RadioApp: FunctionComponent = () => {
                         value=""
                         className="absolute cursor-pointer bg-transparent hover:bg-white/50"
                         style={{
-                            WebkitMaskImage: 'radial-gradient(black, rgba(0,0,0,.1), transparent)',
-                            maskImage: 'radial-gradient(black, rgba(0,0,0,.1), transparent)',
+                            WebkitMaskImage: 'radial-gradient(black, rgba(0,0,0,0.01), transparent)',
+                            maskImage: 'radial-gradient(black, rgba(0,0,0,0.01), transparent)',
                             transition: 'background-color .2s',
                             bottom: '46.2%',
                             left: '12%',
@@ -243,7 +253,7 @@ export const RadioApp: FunctionComponent = () => {
                     />
                     <RadioButton
                         style={{
-                            bottom: '75%',
+                            bottom: '72%',
                             right: '6%',
                             height: '20%',
                             width: '35%',
