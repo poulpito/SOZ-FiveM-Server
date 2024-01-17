@@ -66,11 +66,21 @@ export const RadioVehicleApp: FunctionComponent = () => {
     const aspectRatio = window.innerWidth / window.innerHeight;
     const leftOffset = () => {
         if (aspectRatio > 3.5 && window.innerWidth > 5000) {
-            return '34vw';
-        } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
             return '33vw';
+        } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
+            return '32.7vw';
         } else {
-            return '16.5vw';
+            return '15vw';
+        }
+    };
+
+    const globalWidth = () => {
+        if (aspectRatio > 3.5 && window.innerWidth > 5000) {
+            return '52vh';
+        } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
+            return '51vh';
+        } else {
+            return '52vh';
         }
     };
 
@@ -82,7 +92,7 @@ export const RadioVehicleApp: FunctionComponent = () => {
                 left: leftOffset(),
                 transition: 'bottom .3s',
                 zIndex: 30,
-                width: '45vh',
+                width: globalWidth(),
                 aspectRatio: '1463/802',
                 fontSize: '1.3vh',
                 color: '#0000009c',
