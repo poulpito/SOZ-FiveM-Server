@@ -71,4 +71,8 @@ export class BankService {
     public clearAccount(targetAccount: string) {
         exports['soz-bank'].ClearAccount(targetAccount);
     }
+
+    public getAccountMoney(accountName: string): number {
+        return exports['soz-bank'].GetAccountMoney(accountName);
+    }
 }
