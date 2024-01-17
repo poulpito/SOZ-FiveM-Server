@@ -219,6 +219,7 @@ Container["bin"] = InventoryDatastore:new({
         "crate",
         "drug_pot",
         "tool",
+        "metal",
     },
     populateDatastoreCallback = function()
         local inventory = {}
