@@ -253,7 +253,7 @@ export class VoiceListeningService {
 
             if (distance > SHORT_RANGE_DISTANCE && radioContext.radioType === RadioType.RadioShortRange) {
                 const distanceRatio = distance / SHORT_RANGE_DISTANCE;
-                const fudge = 4 + distanceRatio * 4.0;
+                const fudge = 6.0 + distanceRatio * 4.0;
                 volume = volume * 0.8 * (1.0 / (distanceRatio * 35.0));
 
                 SetAudioSubmixEffectParamFloat(submixId, 1, GetHashKey('fudge'), fudge);
