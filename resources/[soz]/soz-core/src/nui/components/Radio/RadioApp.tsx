@@ -83,7 +83,7 @@ export const RadioApp: FunctionComponent = () => {
                 right: rightOffset(),
                 transition: 'bottom .3s',
                 zIndex: 30,
-                width: '23vh',
+                width: '20vh',
                 aspectRatio: '696/1453',
                 fontSize: '1.7vh',
                 color: '#0000009c',
