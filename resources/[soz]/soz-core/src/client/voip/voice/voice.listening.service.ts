@@ -159,7 +159,7 @@ export class VoiceListeningService {
 
     private handlePlayerVoiceRadio(player: PlayerVoice, context: AudioContextRadio) {
         // Don't use proximity
-        MumbleSetVolumeOverrideByServerId(player.serverId, context.volume / 100);
+        MumbleSetVolumeOverrideByServerId(player.serverId, (0.8 * context.volume) / 100);
 
         // Apply filter
         this.setSubmix(player.serverId, SubmixType.RADIO, context);
@@ -254,11 +254,11 @@ export class VoiceListeningService {
             if (distance > SHORT_RANGE_DISTANCE && radioContext.radioType === RadioType.RadioShortRange) {
                 const distanceRatio = distance / SHORT_RANGE_DISTANCE;
                 const fudge = 4 + distanceRatio * 4.0;
-                volume = volume * (1.0 / (distanceRatio * 40.0));
+                volume = volume * 0.8 * (1.0 / (distanceRatio * 35.0));
 
                 SetAudioSubmixEffectParamFloat(submixId, 1, GetHashKey('fudge'), fudge);
             } else {
-                SetAudioSubmixEffectParamFloat(submixId, 1, GetHashKey('fudge'), 4.0);
+                SetAudioSubmixEffectParamFloat(submixId, 1, GetHashKey('fudge'), 6.0);
             }
 
             const leftVolume = radioContext.ear === Ear.Both || radioContext.ear === Ear.Left ? volume : 0.0;

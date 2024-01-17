@@ -260,7 +260,7 @@ export class VoiceRadioProvider {
             volume: radioInfo.volume,
         });
 
-        const clickVolume = this.getVoiceClickVolume(radioInfo.radioType, radioInfo.channelType);
+        const clickVolume = 0.8 * this.getVoiceClickVolume(radioInfo.radioType, radioInfo.channelType);
         this.soundService.play(radioInfo.radioType + '/mic_click_on', clickVolume / 100);
     }
 
