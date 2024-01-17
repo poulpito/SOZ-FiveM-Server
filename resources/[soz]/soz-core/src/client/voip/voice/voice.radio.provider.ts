@@ -47,6 +47,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio immobile (primaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -78,6 +79,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio immobile (secondaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -109,6 +111,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio mobile (primaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -140,6 +143,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio mobile (secondaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
