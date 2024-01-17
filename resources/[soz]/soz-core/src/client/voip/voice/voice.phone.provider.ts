@@ -48,11 +48,10 @@ export class VoicePhoneProvider {
             return;
         }
 
+        // This event is received by the person that did not mute the call, so we remove the caller from the context
         if (isMuted) {
-            this.voiceTargetService.removePlayer(this.currentCallerId, 'phone');
             this.voiceListeningService.removePlayerAudioContext(this.currentCallerId, 'phone');
         } else {
-            this.voiceTargetService.addPlayer(this.currentCallerId, 'phone');
             this.voiceListeningService.addPlayerAudioContext(this.currentCallerId, 'phone', {
                 type: 'phone',
                 priority: 1,
