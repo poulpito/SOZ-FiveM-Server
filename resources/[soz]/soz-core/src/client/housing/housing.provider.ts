@@ -128,7 +128,7 @@ export class HousingProvider {
             hasParking = apartment && apartment.hasParkingPlace;
         }
 
-        const position = GetEntityCoords(GetPlayerPed(-1)) as Vector3;
+        const position = GetEntityCoords(PlayerPedId()) as Vector3;
 
         this.nuiMenu.openMenu(
             MenuType.HousingUpgrades,
