@@ -6,7 +6,7 @@ import { ClientEvent } from '../../shared/event/client';
 import { ServerEvent } from '../../shared/event/server';
 import { Vector3 } from '../../shared/polyzone/vector';
 import { RpcServerEvent } from '../../shared/rpc';
-import { RadioType } from '../../shared/voip';
+import { RadioChannelType, RadioType } from '../../shared/voip';
 import { Store } from '../store/store';
 
 const MIN_FREQUENCY = 10000;
@@ -48,7 +48,13 @@ export class VoipVoiceRadioProvider {
     }
 
     @Rpc(RpcServerEvent.VOIP_VOICE_START_TRANSMITTING)
-    public async startTransmitting(source: number, frequency: number, radioType: RadioType, position: Vector3) {
+    public async startTransmitting(
+        source: number,
+        frequency: number,
+        radioType: RadioType,
+        channelType: RadioChannelType,
+        position: Vector3
+    ) {
         const blackoutLevel = this.store.getState().global.blackoutLevel;
 
         if (blackoutLevel > 1) {
@@ -75,6 +81,7 @@ export class VoipVoiceRadioProvider {
                 source,
                 frequency,
                 radioType,
+                channelType,
                 position
             );
         }

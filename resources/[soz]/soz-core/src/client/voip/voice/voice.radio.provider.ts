@@ -199,6 +199,7 @@ export class VoiceRadioProvider {
             RpcServerEvent.VOIP_VOICE_START_TRANSMITTING,
             frequency,
             radioType,
+            channelType,
             position
         );
 
@@ -242,7 +243,13 @@ export class VoiceRadioProvider {
     }
 
     @OnEvent(ClientEvent.VOIP_VOICE_RADIO_PLAYER_START_TRANSMITTING)
-    public onPlayerStartTransmitting(player: number, frequency: number, radioType: RadioType, position: Vector3) {
+    public onPlayerStartTransmitting(
+        player: number,
+        frequency: number,
+        radioType: RadioType,
+        channelType: RadioChannelType,
+        position: Vector3
+    ) {
         // get info about the radio frequency
         const radioInfo = this.getRadioInfoFromFrequency(frequency);
 
@@ -260,8 +267,8 @@ export class VoiceRadioProvider {
             volume: radioInfo.volume,
         });
 
-        const clickVolume = 0.8 * this.getVoiceClickVolume(radioInfo.radioType, radioInfo.channelType);
-        this.soundService.play(radioInfo.radioType + '/mic_click_on', clickVolume / 100);
+        const clickVolume = 0.8 * this.getVoiceClickVolume(radioType, channelType);
+        this.soundService.play(radioType + '/mic_click_on', clickVolume / 100);
     }
 
     @OnEvent(ClientEvent.VOIP_VOICE_RADIO_PLAYER_STOP_TRANSMITTING)
