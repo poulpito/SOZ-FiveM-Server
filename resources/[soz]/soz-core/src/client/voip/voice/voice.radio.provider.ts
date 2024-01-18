@@ -47,6 +47,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio immobile (primaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -78,6 +79,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio immobile (secondaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -109,6 +111,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio mobile (primaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -140,6 +143,7 @@ export class VoiceRadioProvider {
         description: 'Parler en radio mobile (secondaire)',
         toggle: true,
         passthroughNuiFocus: true,
+        passthroughPauseMenu: true,
         keys: [
             {
                 mapper: 'keyboard',
@@ -256,7 +260,7 @@ export class VoiceRadioProvider {
             volume: radioInfo.volume,
         });
 
-        const clickVolume = this.getVoiceClickVolume(radioInfo.radioType, radioInfo.channelType);
+        const clickVolume = 0.8 * this.getVoiceClickVolume(radioInfo.radioType, radioInfo.channelType);
         this.soundService.play(radioInfo.radioType + '/mic_click_on', clickVolume / 100);
     }
 
