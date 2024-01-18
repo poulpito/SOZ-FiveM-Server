@@ -35,6 +35,7 @@ const MAX_LENGTH_ROPE = 15.0;
 
 const VehicleClassFuelMultiplier: Partial<Record<VehicleClass, number>> = {
     [VehicleClass.Helicopters]: 6.33,
+    [VehicleClass.Motorcycles]: 2.0,
 };
 
 @Provider()
