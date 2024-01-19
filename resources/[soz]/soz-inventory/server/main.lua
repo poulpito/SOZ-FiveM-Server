@@ -608,9 +608,7 @@ function Inventory.AddItem(source, inv, item, amount, metadata, slot, cb)
     success = true
 
     if inv.type == "temporary_trunk" or inv.type == "trunk" then
-        if item.type == "drug" then
-            TriggerClientEvent("soz-core:client:police:drug-in-trunk", source, item)
-        end
+        TriggerClientEvent("soz-core:client:police:drug-in-trunk", source, item)
     end
 
     inv.changed = true

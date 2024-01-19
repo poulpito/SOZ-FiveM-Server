@@ -100,6 +100,7 @@ export class VehicleProvider {
                 type: 'evidence_drug',
                 zone,
                 support: model,
+                quantity: 1,
             },
         });
         if (!success) {
