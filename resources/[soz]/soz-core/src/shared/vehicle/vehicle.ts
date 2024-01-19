@@ -273,7 +273,7 @@ export type VehicleVolatileState = {
     label: string;
     neonLightsStatus: boolean | null;
     fingerprint: string | null;
-    lastDrugTrace: string | null;
+    lastDrugTrace: string[] | null;
     isAnalyzed: boolean;
 };
 

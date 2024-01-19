@@ -89,14 +89,14 @@ export class VehicleProvider {
 
     @OnEvent(ServerEvent.VEHICLE_COLLECT_DRUG)
     public async collectDrug(source: number, vehicleNetworkId: number, zone: string, model: string) {
-        const drugType = this.vehicleStateService.getVehicleState(vehicleNetworkId).volatile.lastDrugTrace;
-        if (!drugType) {
+        const drugTypes = this.vehicleStateService.getVehicleState(vehicleNetworkId).volatile.lastDrugTrace;
+        if (!drugTypes || drugTypes.length == 0) {
             this.notifier.error(source, "Aucune trace de drogue n'a été trouvée sur ce véhicule.");
             return;
         }
         const { success, reason } = this.inventoryManager.addItemToInventory(source, 'evidence_drug', 1, {
             evidenceInfos: {
-                generalInfo: `Trace de ${drugType}`,
+                generalInfo: `Trace de ${drugTypes[0]}`,
                 type: 'evidence_drug',
                 zone,
                 support: model,
@@ -109,7 +109,7 @@ export class VehicleProvider {
         }
         this.notifier.notify(source, 'Échantillon de drogue récupéré.');
         this.vehicleStateService.updateVehicleVolatileState(vehicleNetworkId, {
-            lastDrugTrace: null,
+            lastDrugTrace: drugTypes.slice(1),
         });
     }
 }
