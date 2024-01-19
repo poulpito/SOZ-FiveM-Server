@@ -350,7 +350,7 @@ export class LSMCItemProvider {
         const { completed } = await this.progressService.progress(
             source,
             'use_naloxone',
-            'Injection de Naloxone...',
+            'Injection de Morphine...',
             10000,
             {
                 name: 'miranda_shooting_up',
@@ -378,7 +378,7 @@ export class LSMCItemProvider {
         this.inventoryManager.removeItemFromInventory(source, 'morphine', 1, null, slot);
 
         this.playerService.incrementMetadata(target, 'drug', 10, 0, 110);
-        this.playerService.incrementMetadata(source, 'stress_level', -20, 0, 100);
+        this.playerService.incrementMetadata(target, 'stress_level', -20, 0, 100);
 
         if (target != source) {
             this.notifier.notify(source, 'Vous avez injecté une dose de ~g~Morphine~s~.');

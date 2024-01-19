@@ -3586,10 +3586,9 @@ QBShared.Items = {
         ['unique'] = false,
         ['useable'] = false,
         ['shouldClose'] = true,
-        ['expiresIn'] = 1440,
         ['combinable'] = nil,
-        ['description'] = '.',
-        ['illustrator'] = '.'
+        ['description'] = 'A première vue, ca fonctionne plus.',
+        ['illustrator'] = '.Sniteur'
     },
     ['morphine'] = {
         ['name'] = 'morphine',
@@ -3600,8 +3599,8 @@ QBShared.Items = {
         ['useable'] = true,
         ['shouldClose'] = true,
         ['combinable'] = nil,
-        ['description'] = '.',
-        ['illustrator'] = '.'
+        ['description'] = 'Drogue ou médicament, ou un peu des deux.',
+        ['illustrator'] = '.Sniteur'
     },
     ['antidepressant'] = {
         ['name'] = 'antidepressant',

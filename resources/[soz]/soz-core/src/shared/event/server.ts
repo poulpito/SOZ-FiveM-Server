@@ -279,6 +279,7 @@ export enum ServerEvent {
     VEHICLE_TOW_ROPE_DELETE = 'soz-core:server:vehicle:tow-rope-delete',
     VEHICLE_DAMAGE_BLUR = 'soz-core:server:vehicle:damage-blur',
     VEHICLE_LOCKPICK = 'soz-core:server:vehicle:lockpick',
+    VEHICLE_BREAK_DOOR = 'soz-core:server:vehicle:break-door',
 
     VOIP_SET_MEGAPHONE = 'soz-core:server:voip:set-megaphone',
     VOIP_RADIO_VEHICLE_ENABLE = 'soz-core:server:voip:radio-vehicle-enable',

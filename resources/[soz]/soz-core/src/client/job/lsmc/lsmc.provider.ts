@@ -1,18 +1,22 @@
 import { Once, OnEvent } from '@core/decorators/event';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
+import { AnimationService } from '@public/client/animation/animation.service';
 import { BlipFactory } from '@public/client/blip';
 import { Notifier } from '@public/client/notifier';
 import { NuiMenu } from '@public/client/nui/nui.menu';
 import { PlayerService } from '@public/client/player/player.service';
 import { PlayerWalkstyleProvider } from '@public/client/player/player.walkstyle.provider';
+import { ProgressService } from '@public/client/progress.service';
 import { ResourceLoader } from '@public/client/repository/resource.loader';
 import { TargetFactory } from '@public/client/target/target.factory';
+import { VehicleLockProvider } from '@public/client/vehicle/vehicle.lock.provider';
 import { wait } from '@public/core/utils';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
 import { MenuType } from '@public/shared/nui/menu';
 import { Vector3 } from '@public/shared/polyzone/vector';
+import { SEATS_CONFIG } from '@public/shared/vehicle/vehicle';
 
 import { PlayerListStateService } from '../../player/player.list.state.service';
 
@@ -86,6 +90,15 @@ export class LSMCProvider {
     @Inject(PlayerListStateService)
     private playerListStateService: PlayerListStateService;
 
+    @Inject(VehicleLockProvider)
+    private vehicleLockProvider: VehicleLockProvider;
+
+    @Inject(AnimationService)
+    private animationService: AnimationService;
+
+    @Inject(ProgressService)
+    private progressService: ProgressService;
+
     @Once()
     public onStart() {
         this.blipFactory.create('LSMC', {
@@ -150,9 +163,49 @@ export class LSMCProvider {
                         return deadPed !== null;
                     },
                     action: async entity => {
-                        const ped = this.getDeadPedInVehicle(entity);
-                        const coords = GetEntityCoords(PlayerPedId());
+                        const [ped, place] = this.getDeadPedInVehicle(entity);
+                        const playerPed = PlayerPedId();
 
+                        const seat = Object.values(SEATS_CONFIG).find(elem => elem.seatIndex == place);
+
+                        if (seat && seat.doorBone && !IsVehicleDoorDamaged(entity, place + 1)) {
+                            const targetPedCoords = GetWorldPositionOfEntityBone(
+                                entity,
+                                GetEntityBoneIndexByName(entity, seat.doorBone)
+                            ) as Vector3;
+
+                            await this.animationService.walkToCoordsAvoidObstacles(targetPedCoords, 10000);
+                            TaskTurnPedToFaceEntity(playerPed, entity, 1000);
+                            await wait(1000);
+
+                            const { completed } = await this.progressService.progress(
+                                'ded_extract',
+                                'Désincarcération  en cours ...',
+                                20000,
+                                {
+                                    task: 'world_human_welding',
+                                },
+                                {
+                                    useAnimationService: true,
+                                }
+                            );
+
+                            if (!completed) {
+                                return;
+                            }
+
+                            TriggerServerEvent(ServerEvent.VEHICLE_BREAK_DOOR, VehToNet(entity), place + 1);
+                        }
+
+                        if (seat.doorIndex != null && seat.doorIndex <= 0) {
+                            this.vehicleLockProvider.setLockTempDisabled(true);
+                            TaskEnterVehicle(playerPed, entity, 0.8, place, 1.0, 8, 0);
+                            await wait(2000);
+                            ClearPedTasksImmediately(playerPed);
+                            this.vehicleLockProvider.setLockTempDisabled(false);
+                        }
+
+                        const coords = GetEntityCoords(playerPed);
                         TriggerServerEvent(
                             ServerEvent.LSMC_TELEPORTATION,
                             GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped)),
@@ -178,7 +231,7 @@ export class LSMCProvider {
             }
 
             if (this.playerListStateService.isDead(target)) {
-                return ped;
+                return [ped, i];
             }
         }
 

@@ -328,4 +328,11 @@ export class VehicleConditionProvider {
             mileage: state.condition.mileage + mileage,
         });
     }
+
+    @OnEvent(ServerEvent.VEHICLE_BREAK_DOOR)
+    public brokeDoor(source: number, vehicleNetworkId: number, door: number) {
+        const entity = NetworkGetEntityFromNetworkId(vehicleNetworkId);
+
+        SetVehicleDoorBroken(entity, door, true);
+    }
 }

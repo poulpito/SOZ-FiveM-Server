@@ -455,5 +455,94 @@ export class LSMCInteractionProvider {
                 item: 'morphine',
             },
         ]);
+
+        this.targetFactory.createForBoxZone(
+            'lsmc_amphi_dummy',
+            new BoxZone([344.82, -1366.77, 33.31], 1.0, 1.95, {
+                heading: 229.77,
+                minZ: 32.31,
+                maxZ: 32.71,
+            }),
+            [
+                {
+                    label: "S'entrainer aux soins",
+                    color: JobType.LSMC,
+                    icon: 'c:ems/heal.png',
+                    job: JobType.LSMC,
+                    canInteract: () => this.playerService.isOnDuty(),
+                    action: () => {
+                        this.progressService.progress(
+                            'heal_training',
+                            'Entraînement aux soins...',
+                            10000,
+                            {
+                                task: 'CODE_HUMAN_MEDIC_TEND_TO_DEAD',
+                            },
+                            {
+                                useAnimationService: true,
+                                disableMovement: true,
+                                disableCarMovement: true,
+                                disableMouse: false,
+                                disableCombat: true,
+                            }
+                        );
+                    },
+                },
+                {
+                    label: "S'entrainer aux piqûres",
+                    color: JobType.LSMC,
+                    icon: 'c:ems/morphine.png',
+                    job: JobType.LSMC,
+                    canInteract: () => this.playerService.isOnDuty(),
+                    action: () => {
+                        this.progressService.progress(
+                            'shooting_training',
+                            'Entraînement aux piqûres...',
+                            10000,
+                            {
+                                name: 'miranda_shooting_up',
+                                dictionary: 'rcmpaparazzo1ig_4',
+                                options: {
+                                    onlyUpperBody: true,
+                                },
+                                playbackRate: 0.4,
+                            },
+                            {
+                                useAnimationService: true,
+                                firstProp: {
+                                    model: 'prop_syringe_01',
+                                    bone: 28422,
+                                    coords: { x: 0.0, y: 0.0, z: -0.045 },
+                                    rotation: { x: 0, y: 0, z: 0 },
+                                },
+                            }
+                        );
+                    },
+                },
+                {
+                    label: "S'entrainer à la chirurgie",
+                    color: JobType.LSMC,
+                    icon: 'c:ems/greffer.png',
+                    job: JobType.LSMC,
+                    canInteract: () => this.playerService.isOnDuty(),
+                    action: () => {
+                        this.progressService.progress(
+                            'Soigner',
+                            'Entraînement à la chirurgie',
+                            10000,
+                            {
+                                dictionary: 'mini@repair',
+                                name: 'fixing_a_ped',
+                            },
+                            {
+                                useAnimationService: true,
+                                disableMovement: true,
+                                disableCarMovement: true,
+                            }
+                        );
+                    },
+                },
+            ]
+        );
     }
 }

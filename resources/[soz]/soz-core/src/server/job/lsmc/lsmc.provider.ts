@@ -156,7 +156,9 @@ export class LSMCProvider {
         if (itt) {
             this.playerService.setPlayerMetadata(id, 'itt', false);
             this.notifier.notify(id, 'Vous pouvez reprendre le travail');
-            this.notifier.notify(source, "Vous avez enlevé l'interdiction de travail temporaire");
+            if (source != id) {
+                this.notifier.notify(source, "Vous avez enlevé l'interdiction de travail temporaire");
+            }
         } else {
             if (player.job.onduty) {
                 this.playerService.setJobDuty(id, false);

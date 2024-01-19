@@ -13,9 +13,10 @@ import { BoxZone } from '../../shared/polyzone/box.zone';
 import { getDistance, Vector3 } from '../../shared/polyzone/vector';
 import { RpcServerEvent } from '../../shared/rpc';
 import {
+    DoorType,
     LockPickAlertMessage,
+    SEATS_CONFIG,
     VehicleClass,
-    VehicleDoorIndex,
     VehicleLockStatus,
     VehicleSeat,
     VehicleVolatileState,
@@ -28,110 +29,6 @@ import { SoundService } from '../sound.service';
 import { VehicleSeatbeltProvider } from './vehicle.seatbelt.provider';
 import { VehicleService } from './vehicle.service';
 import { VehicleStateService } from './vehicle.state.service';
-
-const DoorType = {
-    Door: 'door',
-    Bone: 'bone',
-};
-
-type VehicleSeatConfig = {
-    type: string;
-    doorIndex?: number;
-    seatIndex: number;
-    seatBone?: string;
-    doorBone?: string;
-};
-
-const SEATS_CONFIG: Record<string, VehicleSeatConfig> = {
-    ['driver_seat']: {
-        type: DoorType.Door,
-        doorIndex: VehicleDoorIndex.FrontLeftDoor,
-        seatIndex: VehicleSeat.Driver,
-        seatBone: 'seat_dside_f',
-        doorBone: 'door_dside_f',
-    },
-    ['passenger_seat']: {
-        type: DoorType.Door,
-        doorIndex: VehicleDoorIndex.FrontRightDoor,
-        seatIndex: VehicleSeat.Copilot,
-        seatBone: 'seat_pside_f',
-        doorBone: 'door_pside_f',
-    },
-    ['rear_left_seat']: {
-        type: DoorType.Door,
-        doorIndex: VehicleDoorIndex.BackLeftDoor,
-        seatIndex: VehicleSeat.BackLeft,
-        seatBone: 'seat_dside_r',
-        doorBone: 'door_dside_r',
-    },
-    ['rear_right_seat']: {
-        type: DoorType.Door,
-        doorIndex: VehicleDoorIndex.BackRightDoor,
-        seatIndex: VehicleSeat.BackRight,
-        seatBone: 'seat_pside_r',
-        doorBone: 'door_pside_r',
-    },
-    ['extra_1']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat1,
-        seatBone: 'wheel_lr',
-    },
-    ['extra_2']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat2,
-        seatBone: 'wheel_rr',
-    },
-    ['extra_3']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat3,
-        seatBone: 'wheel_lr',
-    },
-    ['extra_4']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat5,
-        seatBone: 'wheel_rr',
-    },
-    ['extra_5']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat6,
-        seatBone: 'wheel_lr',
-    },
-    ['extra_6']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat7,
-        seatBone: 'wheel_rr',
-    },
-    ['extra_7']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat8,
-        seatBone: 'wheel_lr',
-    },
-    ['extra_8']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat9,
-        seatBone: 'wheel_rr',
-    },
-    ['extra_9']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat10,
-        seatBone: 'wheel_lr',
-    },
-    ['extra_10']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat11,
-        seatBone: 'wheel_rr',
-    },
-    ['extra_11']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat12,
-        seatBone: 'wheel_lr',
-    },
-    ['extra_12']: {
-        type: DoorType.Bone,
-        seatIndex: VehicleSeat.ExtraSeat13,
-        seatBone: 'wheel_rr',
-    },
-};
 
 export const VEHICLE_TRUNK_TYPES = {
     [GetHashKey('tanker')]: 'tanker',
@@ -185,6 +82,8 @@ export class VehicleLockProvider {
     private vehicleTrunkOpened: TrunkOpened | null = null;
 
     private vehicleOpened: Set<number> = new Set();
+
+    private lockTempDisabled = false;
 
     @Once(OnceStep.PlayerLoaded)
     public async setupVehicleOpened() {
@@ -280,6 +179,10 @@ export class VehicleLockProvider {
         const vehicleNetworkId = NetworkGetNetworkIdFromEntity(vehicle);
 
         if (!vehicleNetworkId) {
+            return;
+        }
+
+        if (this.lockTempDisabled) {
             return;
         }
 
@@ -669,5 +572,9 @@ export class VehicleLockProvider {
             info: { type: 'auto-theft' },
             overrideIdentifier: 'System',
         });
+    }
+
+    public setLockTempDisabled(value: boolean) {
+        this.lockTempDisabled = value;
     }
 }
