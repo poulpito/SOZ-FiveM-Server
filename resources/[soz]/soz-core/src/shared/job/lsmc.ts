@@ -135,7 +135,6 @@ export const LsmcCloakroom: WardrobeConfig = {
                     Texture: 0,
                     Palette: 0,
                 },
-                [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Tops]: {
                     Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.Tops] + 3,
@@ -226,7 +225,6 @@ export const LsmcCloakroom: WardrobeConfig = {
                     Texture: 0,
                     Palette: 0,
                 },
-                [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Tops]: {
                     Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 3,

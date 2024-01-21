@@ -192,7 +192,6 @@ export const StonkCloakroom: WardrobeConfig = {
                     Texture: 0,
                     Palette: 0,
                 },
-                [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: {
                     Drawable:
                         VanillaComponentDrawableIndexMaxValue[GetHashKey('mp_m_freemode_01')][Component.Decals] + 3,
@@ -292,7 +291,6 @@ export const StonkCloakroom: WardrobeConfig = {
                     Texture: 0,
                     Palette: 0,
                 },
-                [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [Component.Decals]: {
                     Drawable:
                         VanillaComponentDrawableIndexMaxValue[GetHashKey('mp_f_freemode_01')][Component.Decals] + 3,
