@@ -422,18 +422,31 @@ export enum FoodFieldType {
 }
 
 export type FoodField = {
-    productionRange: { min: number; max: number };
-    harvestRange: { min: number; max: number };
-    refillDelay: number;
+    harvest: {
+        delay: number;
+        min: number;
+        max: number;
+    };
+    capacity: {
+        start: number;
+        max: number;
+    };
+    refill: {
+        delay: number;
+        amount: number;
+    };
     item: string;
     zones: (Vector2 | Vector3)[][];
 };
 
 export const FoodFields: Record<FoodFieldType, FoodField> = {
     [FoodFieldType.Cardinal]: {
-        productionRange: { min: 500, max: 800 },
-        harvestRange: { min: 3, max: 5 },
-        refillDelay: 30_000,
+        capacity: { start: 500, max: 800 },
+        harvest: { delay: 10_000, min: 3, max: 5 },
+        refill: {
+            delay: 60_000,
+            amount: 2,
+        },
         item: 'grape1',
         zones: [
             [
@@ -504,9 +517,12 @@ export const FoodFields: Record<FoodFieldType, FoodField> = {
         ],
     },
     [FoodFieldType.Muscat]: {
-        productionRange: { min: 800, max: 1200 },
-        harvestRange: { min: 3, max: 5 },
-        refillDelay: 30_000,
+        capacity: { start: 800, max: 1200 },
+        harvest: { delay: 10_000, min: 3, max: 5 },
+        refill: {
+            delay: 60_000,
+            amount: 2,
+        },
         item: 'grape2',
         zones: [
             [
@@ -535,9 +551,12 @@ export const FoodFields: Record<FoodFieldType, FoodField> = {
         ],
     },
     [FoodFieldType.Centennial]: {
-        productionRange: { min: 800, max: 1200 },
-        harvestRange: { min: 3, max: 5 },
-        refillDelay: 30_000,
+        capacity: { start: 800, max: 1200 },
+        harvest: { delay: 10_000, min: 3, max: 5 },
+        refill: {
+            delay: 60_000,
+            amount: 2,
+        },
         item: 'grape3',
         zones: [
             [
@@ -563,9 +582,12 @@ export const FoodFields: Record<FoodFieldType, FoodField> = {
         ],
     },
     [FoodFieldType.Chasselas]: {
-        productionRange: { min: 800, max: 1200 },
-        harvestRange: { min: 3, max: 5 },
-        refillDelay: 30_000,
+        capacity: { start: 800, max: 1200 },
+        harvest: { delay: 10_000, min: 3, max: 5 },
+        refill: {
+            delay: 60_000,
+            amount: 2,
+        },
         item: 'grape4',
         zones: [
             [

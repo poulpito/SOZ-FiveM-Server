@@ -3,6 +3,7 @@ import { DrugSkill } from '@private/shared/drugs';
 import { Once, OnceStep } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
+import { ServerEvent } from '../../../shared/event/server';
 import { JobPermission, JobType } from '../../../shared/job';
 import { FoodFields, FoodFieldType } from '../../../shared/job/food';
 import { PolygonZone } from '../../../shared/polyzone/polygon.zone';
@@ -61,6 +62,9 @@ export class FoodFieldProvider {
 
                             return player.job.onduty;
                         },
+                        action: () => {
+                            this.collectIngredients(type as FoodFieldType, index);
+                        },
                     },
                     {
                         label: 'Récolter de la Zeed',
@@ -85,17 +89,13 @@ export class FoodFieldProvider {
         }
     }
 
-    public collectIngredients(type: FoodFieldType) {
-        const player = this.playerService.getPlayer();
-
-        if (!player) {
-            return;
-        }
-
+    public async collectIngredients(type: FoodFieldType, index: string) {
         if (IsPedInAnyVehicle(PlayerPedId(), false)) {
             return;
         }
 
-        // Get field health
+        TriggerServerEvent(ServerEvent.FOOD_COLLECT, type, index);
     }
+
+    public harvestZeed(type: FoodFieldType) {}
 }

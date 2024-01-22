@@ -1,7 +1,7 @@
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Tick, TickInterval } from '../../core/decorators/tick';
-import { Field } from '../../shared/field';
+import { Field, getAmount } from '../../shared/field';
 import { PrismaService } from '../database/prisma.service';
 
 @Provider()
@@ -37,6 +37,7 @@ export class FieldProvider {
 
     public harvestField(identifier: string, amount: number): boolean {
         const field = this.getField(identifier);
+
         if (!field) {
             return false;
         }
@@ -60,12 +61,14 @@ export class FieldProvider {
             return;
         }
 
-        if (field.capacity + field.refill.amount > field.maxCapacity) {
+        const refillAmount = getAmount(field.refill.amount);
+
+        if (field.capacity + refillAmount > field.maxCapacity) {
             field.capacity = field.maxCapacity;
             return;
         }
 
-        field.capacity += field.refill.amount;
+        field.capacity += refillAmount;
         field.refill.lastAction = new Date().getTime();
     }
 
@@ -77,6 +80,7 @@ export class FieldProvider {
             }
         });
     }
+
     @Tick(TickInterval.EVERY_MINUTE, 'field:save')
     public async saveTick() {
         for (const field of this.fields) {
