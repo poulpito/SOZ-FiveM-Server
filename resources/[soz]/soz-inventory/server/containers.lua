@@ -188,10 +188,7 @@ Container["organ"] = InventoryContainer:new({
 
 Container["stash"] = InventoryContainer:new({
     type = "stash",
-    allowedTypes = {
-        "item",
-        "evidence"
-    },
+    allowedTypes = {"item", "evidence"},
     inventoryPermissionCallback = playerHaveStashAccess,
 })
 
