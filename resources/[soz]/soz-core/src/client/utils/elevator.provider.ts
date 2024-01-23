@@ -111,7 +111,7 @@ const Elevators: Record<ElevatorFloorName, ElevatorFloor> = {
     },
     [ElevatorFloorName.lsmc2]: {
         label: 'Toit',
-        button: new BoxZone([337.45, -1432.94, 46.85], 0.2, 0.8, { minZ: 46.85, maxZ: 47.25, heading: 320 }),
+        button: new BoxZone([333.35, -1430.19, 47.21], 0.2, 0.3, { heading: 138.09, minZ: 47.01, maxZ: 47.31 }),
         upTo: [],
         downTo: [ElevatorFloorName.lsmc0, ElevatorFloorName.lsmc1],
         spawnPoint: [334.41, -1432.06, 46.52, 134.22],

@@ -139,6 +139,10 @@ export class LSMCDamageProvider {
             damageType = 903;
         }
 
+        if (bone == 39317) {
+            bone = 31086;
+        }
+
         const data: DamageData = {
             victimId: playerData.citizenid,
             attackerId: attackerId,

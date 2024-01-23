@@ -96,10 +96,10 @@ export class LSMCCheckHealthProvider {
         this.notifier.notify(
             source,
             `<strong>Etat de santé de ${targetPlayer.charinfo.firstname} ${targetPlayer.charinfo.lastname}</strong>~n~` +
-                `<span style="text-decoration: underline;">Santé :</span> ${healthStateLabel}~n~` +
-                `<span style="text-decoration: underline;">Endurance :</span> ${maxStaminaLevelLabel}~n~` +
-                `<span style="text-decoration: underline;">Force :</span> ${strengthLevelLabel}~n~` +
-                `<span style="text-decoration: underline;">Stress :</span> ${stressLevelLabel}~n~` +
+                `<span style="text-decoration: underline;">Santé :</span> ${healthStateLabel} (${targetPlayer.metadata.health_level})~n~` +
+                `<span style="text-decoration: underline;">Endurance :</span> ${maxStaminaLevelLabel} (${targetPlayer.metadata.max_stamina})~n~` +
+                `<span style="text-decoration: underline;">Force :</span> ${strengthLevelLabel} (${targetPlayer.metadata.strength})~n~` +
+                `<span style="text-decoration: underline;">Stress :</span> ${stressLevelLabel} (${targetPlayer.metadata.stress_level})~n~` +
                 `<span style="text-decoration: underline;">Blessures :</span> ${injuriesLevelLabel}~n~`,
             'success'
         );

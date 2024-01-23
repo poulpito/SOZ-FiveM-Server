@@ -20,28 +20,13 @@ import { getRandomInt } from '@public/shared/random';
 import { format } from 'date-fns';
 import { FunctionComponent, useEffect, useState } from 'react';
 
-export const MedicalApp: FunctionComponent = () => {
-    const [medicalDatas, setMedicalDatas] = useState<MedicalMetadata>(null);
-    const [detail, setDetail] = useState<[DamageServerData, number, number, string, number, number]>(null);
+type ConstantMedicalProps = {
+    medicalDatas: MedicalMetadata;
+};
+
+export const ConstantMedicalApp: FunctionComponent<ConstantMedicalProps> = ({ medicalDatas }) => {
     const [heartRate, setHeartRate] = useState(0);
     const [oxygenRate, setOxygenRate] = useState(0);
-
-    useNuiFocus(medicalDatas !== null, medicalDatas !== null, false);
-    useNuiEvent('medicalDiag', 'open', setMedicalDatas);
-
-    const refOutside = useOutside({
-        click: () => {
-            setMedicalDatas(null);
-            fetchNui(NuiEvent.LsmcMedicalDiagExit);
-        },
-    });
-
-    useBackspace(() => {
-        if (medicalDatas) {
-            setMedicalDatas(null);
-            fetchNui(NuiEvent.LsmcMedicalDiagExit);
-        }
-    });
 
     const getHeartRate = (stressLevel: number, health: number) => {
         const healthLevel = health - 100;
@@ -77,6 +62,61 @@ export const MedicalApp: FunctionComponent = () => {
             return () => clearInterval(interval);
         }
     }, [medicalDatas]);
+
+    return (
+        <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] mt-10 [text-shadow:_0_2px_12px_rgb(39_169_151)] text-[#53e2cf] rounded-lg border-2 border-[#27a997] h-full">
+            <h1 className="neuropol mb-2 text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-2 rounded-t bg-[#27a99842]">
+                Constantes
+            </h1>
+
+            <div className="flex flex-row items-center">
+                <div className="flex-col w-[20%] ">
+                    <img className="w-[3vh] mx-auto" src={`/public/images/lsmc/icons/icon_heartbeat.webp`}></img>
+                </div>
+                <div className="flex-col w-[80%]">
+                    <div className="uppercase flex flex-row">
+                        <div className="flex flex-col">Rythme cardiaque</div>
+                        <div className="flex flex-col w-[5%] text-center">:</div>
+                        <div className="flex flex-col text-white">{heartRate} BPM</div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-row items-center pb-2">
+                <div className="flex-col w-[20%] ">
+                    <img className="w-[3vh] mx-auto" src={`/public/images/lsmc/icons/icon_o2.webp`}></img>
+                </div>
+                <div className="flex-col w-[80%]">
+                    <div className="uppercase flex flex-row">
+                        <div className="flex flex-col">niveau d'oxygène</div>
+                        <div className="flex flex-col w-[5%] text-center">:</div>
+                        <div className="flex flex-col text-white">{oxygenRate} %</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export const MedicalApp: FunctionComponent = () => {
+    const [medicalDatas, setMedicalDatas] = useState<MedicalMetadata>(null);
+    const [detail, setDetail] = useState<[DamageServerData, number, number, string, number, number]>(null);
+
+    useNuiFocus(medicalDatas !== null, medicalDatas !== null, false);
+    useNuiEvent('medicalDiag', 'open', setMedicalDatas);
+
+    const refOutside = useOutside({
+        click: () => {
+            setMedicalDatas(null);
+            fetchNui(NuiEvent.LsmcMedicalDiagExit);
+        },
+    });
+
+    useBackspace(() => {
+        if (medicalDatas) {
+            setMedicalDatas(null);
+            fetchNui(NuiEvent.LsmcMedicalDiagExit);
+        }
+    });
 
     if (!medicalDatas) {
         return null;
@@ -162,16 +202,6 @@ export const MedicalApp: FunctionComponent = () => {
         const woundGravity = getWoundImportance(damage, isFatal);
         return DamageConfigs[woundGravity].color;
     }
-
-    const getMaxGravityInzone = (damages: DamageServerData[]) => {
-        let globalDamages = 0;
-        let isOneFatal = false;
-        damages.map(damage => {
-            globalDamages += damage.damageQty;
-            damage.isFatal ? (isOneFatal = true) : false;
-        });
-        return getWoundImportance(globalDamages, isOneFatal);
-    };
 
     const getIconByDamageType = (damageType: number) => {
         return DamagesTypes[damageType]?.icon || 'unknown';
@@ -337,13 +367,7 @@ export const MedicalApp: FunctionComponent = () => {
         );
     };
 
-    function getGlobalZoneColor(damages: DamageServerData[]) {
-        return damages ? DamageConfigs[getMaxGravityInzone(damages)].color : 'rgba(39,169,151,0.7)';
-    }
-
     const renderZones = (name: string, damages: DamageServerData[], orientation?: 'center' | 'end' | 'start') => {
-        const globalZoneColor = getGlobalZoneColor(damages);
-
         return (
             <div className={`flex flex-col justify-end items-${orientation}`}>
                 <div className="flex flex-col justify-center items-start py-[0.5vh] text-[#53e2cf]">
@@ -376,7 +400,6 @@ export const MedicalApp: FunctionComponent = () => {
         const textColor = DamageConfigs[gravity].color;
         const rightPopup = screenX;
         const topPopup = screenY;
-        console.log(rightPopup * 1.1);
         return (
             <div
                 className={`flex flex-col absolute min-w-[40vh] max-w-[60vh] rounded-[2vh] bg-[black] 
@@ -610,39 +633,8 @@ export const MedicalApp: FunctionComponent = () => {
                     </div>
                 </div>
 
-                <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] mt-10 [text-shadow:_0_2px_12px_rgb(39_169_151)] text-[#53e2cf] rounded-lg border-2 border-[#27a997] h-full">
-                    <h1 className="neuropol mb-2 text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-2 rounded-t bg-[#27a99842]">
-                        Constantes
-                    </h1>
+                <ConstantMedicalApp medicalDatas={medicalDatas} />
 
-                    <div className="flex flex-row items-center">
-                        <div className="flex-col w-[20%] ">
-                            <img
-                                className="w-[3vh] mx-auto"
-                                src={`/public/images/lsmc/icons/icon_heartbeat.webp`}
-                            ></img>
-                        </div>
-                        <div className="flex-col w-[80%]">
-                            <div className="uppercase flex flex-row">
-                                <div className="flex flex-col">Rythme cardiaque</div>
-                                <div className="flex flex-col w-[5%] text-center">:</div>
-                                <div className="flex flex-col text-white">{heartRate} BPM</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-row items-center pb-2">
-                        <div className="flex-col w-[20%] ">
-                            <img className="w-[3vh] mx-auto" src={`/public/images/lsmc/icons/icon_o2.webp`}></img>
-                        </div>
-                        <div className="flex-col w-[80%]">
-                            <div className="uppercase flex flex-row">
-                                <div className="flex flex-col">niveau d'oxygène</div>
-                                <div className="flex flex-col w-[5%] text-center">:</div>
-                                <div className="flex flex-col text-white">{oxygenRate} %</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="[box-shadow:_0_1px_10px_rgb(39_169_151)] mt-10 [text-shadow:_0_2px_12px_rgb(39_169_151)] text-[#53e2cf]  rounded-lg border-2 border-[#27a997] h-full">
                     <h1 className="neuropol text-xl text-[#53e2cf] [text-shadow:_0_2px_12px_rgb(39_169_151)] px-2 py-2 rounded-t bg-[#27a99842]">
                         Santé Générale
