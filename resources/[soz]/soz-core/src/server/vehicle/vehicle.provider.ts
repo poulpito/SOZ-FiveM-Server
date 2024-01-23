@@ -75,6 +75,7 @@ export class VehicleProvider {
                 type: 'evidence_fingerprint',
                 zone,
                 support: model,
+                quantity: 1,
             },
         });
         if (!success) {
@@ -96,7 +97,7 @@ export class VehicleProvider {
         }
         const { success, reason } = this.inventoryManager.addItemToInventory(source, 'evidence_drug', 1, {
             evidenceInfos: {
-                generalInfo: `Trace de ${drugTypes[0]}`,
+                generalInfo: `Trace de ${drugTypes.join(', ')}`,
                 type: 'evidence_drug',
                 zone,
                 support: model,
@@ -109,7 +110,7 @@ export class VehicleProvider {
         }
         this.notifier.notify(source, 'Échantillon de drogue récupéré.');
         this.vehicleStateService.updateVehicleVolatileState(vehicleNetworkId, {
-            lastDrugTrace: drugTypes.slice(1),
+            lastDrugTrace: null,
         });
     }
 }
