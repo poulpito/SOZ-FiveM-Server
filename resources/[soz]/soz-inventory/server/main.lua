@@ -503,7 +503,7 @@ function Inventory.AddItem(source, inv, item, amount, metadata, slot, cb)
         metadata.expiration = os.date("!%Y-%m-%d", os.time() + (item.durability * 60 * 60 * 24))
     end
     if item.type == "evidence" then
-        metadata.creation = os.date("%Y-%m-%dT%H:%M:00Z", os.time())
+        metadata.creation = os.date("!%Y-%m-%dT%H:%M:00Z", os.time())
     end
     if item.storageItemType then
         if metadata.id == nil then
