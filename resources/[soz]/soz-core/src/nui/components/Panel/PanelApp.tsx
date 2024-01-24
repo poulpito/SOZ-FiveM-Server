@@ -33,8 +33,29 @@ export const PanelApp: FunctionComponent = () => {
         return null;
     }
 
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    const leftOffset = () => {
+        if (aspectRatio > 3.5 && window.innerWidth > 5000) {
+            return '79vh';
+        } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
+            return '79vh';
+        } else {
+            return '0vh';
+        }
+    };
+
+    const width = () => {
+        if (aspectRatio > 3.5 && window.innerWidth > 5000) {
+            return '200vh';
+        } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
+            return '200vh';
+        } else {
+            return '100%';
+        }
+    };
+
     return (
-        <div className="absolute h-full w-full p-40">
+        <div className="absolute h-full p-40 z-30" style={{ left: leftOffset(), width: width() }}>
             <div ref={refOutside} className="flex flex-col h-full">
                 <div
                     style={{
@@ -44,25 +65,25 @@ export const PanelApp: FunctionComponent = () => {
                 >
                     <div
                         style={{ width: '99px', backgroundImage: `url(/public/images/panel/top-left.webp)` }}
-                        className="h-full z-20"
+                        className="h-full z-30"
                     ></div>
                     <div
                         style={{ backgroundImage: `url(/public/images/panel/top.webp)` }}
-                        className="grow h-full bg-center z-20"
+                        className="grow h-full bg-center z-30"
                     ></div>
                     <div
                         style={{ width: '103px', backgroundImage: `url(/public/images/panel/top-right.webp)` }}
-                        className="h-full z-20"
+                        className="h-full z-30"
                     ></div>
                 </div>
                 <div className="flex flex-row items-center grow">
                     <div
                         style={{ width: '99px', backgroundImage: `url(/public/images/panel/left.webp)` }}
-                        className="h-full bg-center z-20"
+                        className="h-full bg-center z-30"
                     ></div>
-                    <div className="grow h-full relative z-0">
+                    <div className="grow h-full relative z-20">
                         <div
-                            className="absolute z-10"
+                            className="absolute z-30"
                             style={{
                                 zIndex: -1,
                                 width: 'calc(100% + 60px)',
@@ -85,26 +106,26 @@ export const PanelApp: FunctionComponent = () => {
                     </div>
                     <div
                         style={{ width: '103px', backgroundImage: `url(/public/images/panel/right.webp)` }}
-                        className="h-full bg-center  z-20"
+                        className="h-full bg-center  z-30"
                     ></div>
                 </div>
                 <div
                     style={{
                         height: '101px',
                     }}
-                    className="flex flex-row items-center  z-20"
+                    className="flex flex-row items-center  z-30"
                 >
                     <div
                         style={{ width: '99px', backgroundImage: `url(/public/images/panel/bottom-left.webp)` }}
-                        className="h-full  z-20"
+                        className="h-full  z-30"
                     ></div>
                     <div
                         style={{ backgroundImage: `url(/public/images/panel/bottom.webp)` }}
-                        className="h-full grow bg-center z-20"
+                        className="h-full grow bg-center z-30"
                     ></div>
                     <div
                         style={{ width: '103px', backgroundImage: `url(/public/images/panel/bottom-right.webp)` }}
-                        className="h-full z-20"
+                        className="h-full z-30"
                     ></div>
                 </div>
             </div>
