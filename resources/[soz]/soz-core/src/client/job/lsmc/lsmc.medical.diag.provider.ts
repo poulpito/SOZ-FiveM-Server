@@ -64,7 +64,10 @@ export class LSMCMedicalDiagProvider {
                     const coord = GetEntityCoords(playerPed) as Vector3;
                     const players = this.playerService.getPlayersAround(coord, 3.0, true, player => {
                         const ped = GetPlayerPed(player);
-                        return IsEntityPlayingAnim(ped, 'anim@gangops@morgue@table@', 'body_search', 3);
+                        return (
+                            IsEntityPlayingAnim(ped, 'anim@gangops@morgue@table@', 'body_search', 3) ||
+                            IsEntityPlayingAnim(ped, 'dead', 'dead_a', 3)
+                        );
                     });
 
                     return players.length > 0;
@@ -98,7 +101,10 @@ export class LSMCMedicalDiagProvider {
                     const coord = GetEntityCoords(playerPed) as Vector3;
                     const players = this.playerService.getPlayersAround(coord, 3.0, true, player => {
                         const ped = GetPlayerPed(player);
-                        return IsEntityPlayingAnim(ped, 'anim@gangops@morgue@table@', 'body_search', 3);
+                        return (
+                            IsEntityPlayingAnim(ped, 'anim@gangops@morgue@table@', 'body_search', 3) ||
+                            IsEntityPlayingAnim(ped, 'dead', 'dead_a', 3)
+                        );
                     });
 
                     if (players.length == 0) {

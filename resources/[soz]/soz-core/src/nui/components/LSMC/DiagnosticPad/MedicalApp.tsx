@@ -28,7 +28,11 @@ export const ConstantMedicalApp: FunctionComponent<ConstantMedicalProps> = ({ me
     const [heartRate, setHeartRate] = useState(0);
     const [oxygenRate, setOxygenRate] = useState(0);
 
-    const getHeartRate = (stressLevel: number, health: number) => {
+    const getHeartRate = (stressLevel: number, health: number, dead: boolean) => {
+        if (dead) {
+            return 0;
+        }
+
         const healthLevel = health - 100;
         let min = 60;
         let max = 80;
@@ -54,9 +58,13 @@ export const ConstantMedicalApp: FunctionComponent<ConstantMedicalProps> = ({ me
         if (medicalDatas && medicalDatas.patient) {
             const interval = setInterval(() => {
                 setHeartRate(
-                    getHeartRate(medicalDatas.patient.metadata.stress_level, medicalDatas.patient.metadata.health)
+                    getHeartRate(
+                        medicalDatas.patient.metadata.stress_level,
+                        medicalDatas.patient.metadata.health,
+                        medicalDatas.patient.metadata.isdead
+                    )
                 );
-                setOxygenRate(getRandomInt(96, 99));
+                setOxygenRate(medicalDatas.patient.metadata.isdead ? 0 : getRandomInt(96, 99));
             }, 1000);
 
             return () => clearInterval(interval);

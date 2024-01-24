@@ -1195,7 +1195,7 @@ export const GarageList: Record<string, Omit<Garage, 'id'>> = {
         job: JobType.LSMC,
         category: GarageCategory.Air,
         zone: new BoxZone([1830.12, 3689.08, 37.28], 1.0, 1.0, {
-            heading: 216.52,
+            heading: 210,
             minZ: 37.28,
             maxZ: 40.28,
         }),
