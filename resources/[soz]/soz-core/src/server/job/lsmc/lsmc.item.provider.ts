@@ -145,7 +145,7 @@ export class LSMCItemProvider {
     public onPutOnStretcher(source: number, netId: number) {
         const playerState = this.playerStateService.getClientState(source);
         if (!playerState || !playerState.isEscorting || !playerState.escorting) {
-            return false;
+            return;
         }
 
         const player = this.playerService.getPlayer(source);

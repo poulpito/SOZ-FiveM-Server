@@ -75,6 +75,28 @@ const reviveAnim: Animation = {
     },
 };
 
+const reviveAnimFail: Animation = {
+    enter: {
+        dictionary: 'mini@cpr@char_b@cpr_def',
+        name: 'cpr_intro',
+        duration: 15000.0,
+    },
+    base: {
+        dictionary: 'mini@cpr@char_b@cpr_str',
+        name: 'cpr_pumpchest',
+        duration: 5000.0,
+        options: {
+            cancellable: false,
+            repeat: true,
+        },
+    },
+    exit: {
+        dictionary: 'mini@cpr@char_b@cpr_str',
+        name: 'cpr_fail',
+        duration: 25000.0,
+    },
+};
+
 const reviveAnimDoc: Animation = {
     enter: {
         dictionary: 'mini@cpr@char_a@cpr_def',
@@ -93,6 +115,28 @@ const reviveAnimDoc: Animation = {
     exit: {
         dictionary: 'mini@cpr@char_a@cpr_str',
         name: 'cpr_success',
+        duration: 25000.0,
+    },
+};
+
+const reviveAnimDocFail: Animation = {
+    enter: {
+        dictionary: 'mini@cpr@char_a@cpr_def',
+        name: 'cpr_intro',
+        duration: 15000.0,
+    },
+    base: {
+        dictionary: 'mini@cpr@char_a@cpr_str',
+        name: 'cpr_pumpchest',
+        duration: 5000.0,
+        options: {
+            cancellable: false,
+            repeat: true,
+        },
+    },
+    exit: {
+        dictionary: 'mini@cpr@char_a@cpr_str',
+        name: 'cpr_fail',
         duration: 25000.0,
     },
 };
@@ -366,7 +410,7 @@ export class LSMCDeathProvider {
     }
 
     @OnEvent(ClientEvent.LSMC_REVIVE)
-    public async revive(skipanim: boolean, uniteHU: boolean, uniteHUBed: number) {
+    public async revive(skipanim: boolean, uniteHU: boolean, uniteHUBed: number, rpDeath: boolean) {
         const player = PlayerPedId();
 
         if (uniteHU) {
@@ -387,8 +431,14 @@ export class LSMCDeathProvider {
             }
 
             if (!skipanim) {
-                await this.animationService.playAnimation(reviveAnim);
+                await this.animationService.playAnimation(rpDeath ? reviveAnimFail : reviveAnim);
             }
+        }
+
+        if (rpDeath) {
+            this.IsDead = true;
+        } else {
+            this.notifier.notify('Vous êtes réanimé!');
         }
 
         FreezeEntityPosition(PlayerPedId(), false);
@@ -398,15 +448,11 @@ export class LSMCDeathProvider {
 
         await this.voipService.mutePlayer(false);
 
-        TriggerServerEvent(ServerEvent.PLAYER_SET_CURRENT_DISEASE, false);
-
         this.playerWalkstyleProvider.updateWalkStyle('injury', null);
 
         if (uniteHU) {
             this.uniteHU(uniteHUBed);
         }
-
-        this.notifier.notify('Vous êtes réanimé!');
     }
 
     private async uniteHU(uniteHUBed: number) {
@@ -480,7 +526,6 @@ export class LSMCDeathProvider {
             false,
             bloodbag
         );
-        TriggerServerEvent(ServerEvent.LSMC_REVIVE2, GetPlayerServerId(NetworkGetPlayerIndexFromPed(target)));
         this.monitor.publish(
             bloodbag ? 'job_lsmc_revive_bloodbag' : 'job_lsmc_revive_defibrillator',
             {},
@@ -490,8 +535,11 @@ export class LSMCDeathProvider {
             },
             true
         );
+    }
 
-        await this.animationService.playAnimation(reviveAnimDoc);
+    @OnEvent(ClientEvent.LSMC_REVIVE_DOC)
+    public async reviveDoc(rpDeath: boolean) {
+        await this.animationService.playAnimation(rpDeath ? reviveAnimDocFail : reviveAnimDoc);
     }
 
     @OnEvent(ClientEvent.LSMC_CALL, false)

@@ -88,6 +88,7 @@ export enum ClientEvent {
 
     LSMC_DISEASE_APPLY_CURRENT_EFFECT = 'lsmc:maladie:client:ApplyCurrentDiseaseEffect',
     LSMC_REVIVE = 'soz-core:lsmc:client:revive',
+    LSMC_REVIVE_DOC = 'soz-core:lsmc:client:revive-doc',
     LSMC_CALL = 'soz-core:lsmc:client:call',
     LSMC_APPLY_PATIENT_CLOTHING = 'soz-core:client:lsmc:applyPatientClothing',
     LSMC_REMOVE_PATIENT_CLOTHING = 'soz-core:client:lsmc:removePatientClothing',
@@ -100,6 +101,8 @@ export enum ClientEvent {
     LSMC_STRETCHER_PUT_ON = 'soz-core:lsmc:client:stretcher-put-on',
     LSMC_WHEELCHAIR_USE = 'soz-core:lsmc:client:wheelchair-use',
     LSMC_SHOW_MEDICAL_DIAG = 'soz-core:lsmc:client:show-medical-diag',
+    LSMC_BED_PUT_ON = 'soz-core:client:job:lsmc:bed-put-on',
+    LSMC_VEH_PUT_ON = 'soz-core:client:job:lsmc:veh-put-on',
 
     LSC_ENTER_SHOP = 'soz-core:client:job:lsc:enter-shop',
     LSC_EXIT_SHOP = 'soz-core:client:job:lsc:exit-shop',

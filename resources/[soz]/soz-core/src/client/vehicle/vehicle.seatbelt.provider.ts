@@ -51,6 +51,10 @@ export class VehicleSeatbeltProvider {
             return;
         }
 
+        if (this.playerService.getPlayer().metadata.isdead) {
+            return;
+        }
+
         const vehicle = GetVehiclePedIsIn(PlayerPedId(), false);
 
         if (!vehicle) {

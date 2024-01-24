@@ -221,4 +221,38 @@ export class LSMCProvider {
 
         return player.metadata.organ;
     }
+
+    @OnEvent(ServerEvent.LSMC_BED_PUT_ON)
+    public onPutOnBed(source: number, model: number, coords: Vector3) {
+        const playerState = this.playerStateService.getClientState(source);
+        if (!playerState || !playerState.isEscorting || !playerState.escorting) {
+            return;
+        }
+
+        const player = this.playerService.getPlayer(source);
+        const target = this.playerService.getPlayer(playerState.escorting);
+
+        if (player && target && player != target) {
+            this.playerStateService.setClientState(target.source, { isEscorted: false });
+            this.playerStateService.setClientState(player.source, { isEscorting: false, escorting: null });
+            TriggerClientEvent(ClientEvent.LSMC_BED_PUT_ON, target.source, model, coords);
+        }
+    }
+
+    @OnEvent(ServerEvent.LSMC_VEH_PUT_ON)
+    public onPutOnVeh(source: number, netId: number) {
+        const playerState = this.playerStateService.getClientState(source);
+        if (!playerState || !playerState.isEscorting || !playerState.escorting) {
+            return;
+        }
+
+        const player = this.playerService.getPlayer(source);
+        const target = this.playerService.getPlayer(playerState.escorting);
+
+        if (player && target && player != target) {
+            this.playerStateService.setClientState(target.source, { isEscorted: false });
+            this.playerStateService.setClientState(player.source, { isEscorting: false, escorting: null });
+            TriggerClientEvent(ClientEvent.LSMC_VEH_PUT_ON, target.source, netId);
+        }
+    }
 }

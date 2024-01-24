@@ -322,32 +322,27 @@ export class LSMCStretcherProvider {
         const playerPed = PlayerPedId();
 
         FreezeEntityPosition(entity, false);
+        PlaceObjectOnGroundProperly(entity);
         SetEntityHeading(entity, GetEntityHeading(playerPed) + 90);
         await wait(100);
-        AttachEntityToEntityPhysically(
+        SetEntityCollision(entity, false, true);
+        SetEntityCompletelyDisableCollision(entity, true, true);
+        AttachEntityToEntity(
             entity,
             playerPed,
             GetPedBoneIndex(playerPed, 17916),
             0.0,
-
+            1.5,
+            -1.0,
             0.0,
             0.0,
-            -1.5,
-
-            0.0,
-            0.0,
-            1.0,
-
-            0.0,
-            0.0,
-            0.0,
-
-            0.0,
-            true,
+            90.0,
             false,
             false,
             false,
-            2
+            false,
+            0,
+            true
         );
 
         this.pushed = entity;
@@ -377,6 +372,9 @@ export class LSMCStretcherProvider {
         }
 
         DetachEntity(entity, false, false);
+        FreezeEntityPosition(entity, true);
+        SetEntityCompletelyDisableCollision(entity, false, true);
+        SetEntityCollision(entity, true, true);
         PlaceObjectOnGroundProperly(entity);
     }
 
@@ -401,7 +399,7 @@ export class LSMCStretcherProvider {
         SetNetworkIdCanMigrate(ObjToNet(id), true);
         SetEntityAsMissionEntity(id, true, false);
         await wait(100);
-        FreezeEntityPosition(id, false);
+        FreezeEntityPosition(id, true);
 
         return id;
     }
@@ -425,6 +423,7 @@ export class LSMCStretcherProvider {
         const playerPed = PlayerPedId();
         const player = this.playerService.getPlayer();
         this.weaponDrawingProvider.undrawWeapons();
+        SetEntityCompletelyDisableCollision(playerPed, true, false);
 
         const zoffset = GetEntityModel(entity) == StretcherModel ? 2.1 : 1.5;
         AttachEntityToEntity(
@@ -452,6 +451,8 @@ export class LSMCStretcherProvider {
             DetachEntity(playerPed, false, false);
         }
 
+        SetEntityCompletelyDisableCollision(playerPed, false, true);
+        SetEntityCollision(playerPed, true, true);
         this.laydown = false;
         this.weaponDrawingProvider.drawWeapons();
         ClearPedTasks(playerPed);
@@ -496,6 +497,26 @@ export class LSMCStretcherProvider {
 
     @Tick(TickInterval.EVERY_FRAME)
     async onStretcherFrame(): Promise<void> {
+        const playerPed = PlayerPedId();
+        if (IsControlPressed(0, 101)) {
+            const veh = GetVehiclePedIsIn(playerPed, false);
+            const model = GetEntityModel(veh);
+            if (model == ambulance) {
+                const state = GetConvertibleRoofState(veh);
+                if (state == 1) {
+                    SetVehicleDoorOpen(veh, 2, false, false);
+                    SetVehicleDoorOpen(veh, 3, false, false);
+                } else if (state == 3) {
+                    if (IsVehicleDoorFullyOpen(veh, 2)) {
+                        SetVehicleDoorShut(veh, 2, false);
+                    }
+                    if (IsVehicleDoorFullyOpen(veh, 3)) {
+                        SetVehicleDoorShut(veh, 3, false);
+                    }
+                }
+            }
+        }
+
         if (!this.laydown) {
             return;
         }

@@ -19,6 +19,7 @@ import { Vector3 } from '@public/shared/polyzone/vector';
 import { SEATS_CONFIG } from '@public/shared/vehicle/vehicle';
 
 import { PlayerListStateService } from '../../player/player.list.state.service';
+import { PolicePlayerProvider } from '../police/police.player.provider';
 
 type LSMCBed = {
     model: number;
@@ -99,6 +100,9 @@ export class LSMCProvider {
     @Inject(ProgressService)
     private progressService: ProgressService;
 
+    @Inject(PolicePlayerProvider)
+    private policePlayerProvider: PolicePlayerProvider;
+
     @Once()
     public onStart() {
         this.blipFactory.create('LSMC', {
@@ -115,32 +119,21 @@ export class LSMCProvider {
                     icon: 'fas fa-bed',
                     label: "S'allonger sur le lit",
                     action: async entity => {
-                        const player = PlayerPedId();
-                        const model = GetEntityModel(entity);
-                        const bedType = lsmcBeds.find(bed => bed.model == model);
-
-                        const coords = GetOffsetFromEntityInWorldCoords(
-                            entity,
-                            bedType.offset[0],
-                            bedType.offset[1],
-                            bedType.offset[2]
-                        );
-                        const heading = GetEntityHeading(entity) - bedType.rotation;
-                        SetEntityHeading(player, heading);
-                        SetPedCoordsKeepVehicle(player, coords[0], coords[1], coords[2] + 0.1);
-                        await this.resourceLoader.loadAnimationDictionary('anim@gangops@morgue@table@');
-                        TaskPlayAnim(
-                            player,
-                            'anim@gangops@morgue@table@',
-                            'body_search',
-                            8.0,
-                            2.0,
-                            -1,
-                            1,
-                            0,
-                            false,
-                            false,
-                            false
+                        this.onBed(entity);
+                    },
+                },
+                {
+                    icon: 'c:ems/stretcher.png',
+                    label: 'Allonger sur le lit',
+                    canInteract: () => {
+                        const state = this.playerService.getState();
+                        return state.isEscorting;
+                    },
+                    action: async entity => {
+                        TriggerServerEvent(
+                            ServerEvent.LSMC_BED_PUT_ON,
+                            GetEntityModel(entity),
+                            GetEntityCoords(entity)
                         );
                     },
                 },
@@ -153,6 +146,13 @@ export class LSMCProvider {
                 {
                     label: 'Extraire le mort',
                     icon: 'c:ems/sortir.png',
+                    job: {
+                        [JobType.LSMC]: 0,
+                        [JobType.LSPD]: 0,
+                        [JobType.BCSO]: 0,
+                        [JobType.SASP]: 0,
+                        [JobType.FBI]: 0,
+                    },
                     canInteract: entity => {
                         if (!this.playerService.isOnDuty()) {
                             return false;
@@ -168,16 +168,25 @@ export class LSMCProvider {
 
                         const seat = Object.values(SEATS_CONFIG).find(elem => elem.seatIndex == place);
 
-                        if (seat && seat.doorBone && !IsVehicleDoorDamaged(entity, place + 1)) {
-                            const targetPedCoords = GetWorldPositionOfEntityBone(
-                                entity,
-                                GetEntityBoneIndexByName(entity, seat.doorBone)
-                            ) as Vector3;
+                        const targetPedCoords =
+                            seat && seat.doorBone
+                                ? (GetWorldPositionOfEntityBone(
+                                      entity,
+                                      GetEntityBoneIndexByName(entity, seat.doorBone)
+                                  ) as Vector3)
+                                : seat && seat.seatBone
+                                ? GetWorldPositionOfEntityBone(entity, GetEntityBoneIndexByName(entity, seat.seatBone))
+                                : GetEntityCoords(ped);
 
-                            await this.animationService.walkToCoordsAvoidObstacles(targetPedCoords, 10000);
-                            TaskTurnPedToFaceEntity(playerPed, entity, 1000);
-                            await wait(1000);
+                        await this.animationService.walkToCoordsAvoidObstacles(targetPedCoords as Vector3, 10000);
+                        TaskTurnPedToFaceEntity(playerPed, entity, 1000);
+                        await wait(1000);
 
+                        if (
+                            seat.doorBone &&
+                            !IsVehicleDoorDamaged(entity, place + 1) &&
+                            !this.vehicleLockProvider.isVehOpen(entity)
+                        ) {
                             const { completed } = await this.progressService.progress(
                                 'ded_extract',
                                 'Désincarcération  en cours ...',
@@ -212,11 +221,63 @@ export class LSMCProvider {
                             coords
                         );
                     },
-                    job: JobType.LSMC,
+                },
+                {
+                    label: 'Faire monter',
+                    icon: 'c:ems/sortir.png',
+                    canInteract: entity => {
+                        if (!this.vehicleLockProvider.isVehOpen(entity)) {
+                            return false;
+                        }
+
+                        const state = this.playerService.getState();
+                        return state.isEscorting;
+                    },
+                    action: async entity => {
+                        TriggerServerEvent(ServerEvent.LSMC_VEH_PUT_ON, VehToNet(entity));
+                    },
                 },
             ],
             2.5
         );
+    }
+
+    @OnEvent(ClientEvent.LSMC_BED_PUT_ON)
+    public async onPutOnBed(model: number, coords: Vector3) {
+        await this.policePlayerProvider.removeEscorted();
+        const entity = GetClosestObjectOfType(coords[0], coords[1], coords[2], 3.0, model, false, false, false);
+
+        if (entity) {
+            this.onBed(entity);
+        }
+    }
+
+    private async onBed(entity: number) {
+        const player = PlayerPedId();
+        const model = GetEntityModel(entity);
+        const bedType = lsmcBeds.find(bed => bed.model == model);
+
+        const coords = GetOffsetFromEntityInWorldCoords(
+            entity,
+            bedType.offset[0],
+            bedType.offset[1],
+            bedType.offset[2]
+        );
+        const heading = GetEntityHeading(entity) - bedType.rotation;
+        SetEntityHeading(player, heading);
+        SetPedCoordsKeepVehicle(player, coords[0], coords[1], coords[2] + 0.1);
+        await this.resourceLoader.loadAnimationDictionary('anim@gangops@morgue@table@');
+        TaskPlayAnim(player, 'anim@gangops@morgue@table@', 'body_search', 8.0, 2.0, -1, 1, 0, false, false, false);
+    }
+
+    @OnEvent(ClientEvent.LSMC_VEH_PUT_ON)
+    public async onPutOnVeh(netId: number) {
+        await this.policePlayerProvider.removeEscorted();
+        const veh = NetToVeh(netId);
+        const ped = PlayerPedId();
+
+        const closestSeat = this.vehicleLockProvider.getClosestSeat(ped, veh);
+        TaskEnterVehicle(ped, veh, 1.0, closestSeat, 1.0, 16, 0);
     }
 
     private getDeadPedInVehicle(entity: number) {

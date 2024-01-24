@@ -92,6 +92,10 @@ export class VehicleLockProvider {
         this.vehicleOpened = new Set(vehicleOpened);
     }
 
+    public isVehOpen(entity: number) {
+        return this.vehicleOpened.has(VehToNet(entity));
+    }
+
     @Once(OnceStep.Start)
     private async initLockStateSelector() {
         this.vehicleStateService.addVehicleStateSelector(
@@ -203,6 +207,32 @@ export class VehicleLockProvider {
             return;
         }
 
+        const closestSeat = this.getClosestSeat(ped, vehicle);
+
+        const start = GetGameTimer();
+
+        if (closestSeat !== null) {
+            TaskEnterVehicle(ped, vehicle, -1, closestSeat, 1.0, 1, 0);
+
+            await wait(200);
+
+            let enteringVehicle = GetVehiclePedIsEntering(ped) || GetVehiclePedIsTryingToEnter(ped);
+            let time = GetGameTimer() - start;
+
+            while (enteringVehicle !== 0 && time < 10000) {
+                await wait(200);
+                time = GetGameTimer() - start;
+
+                enteringVehicle = GetVehiclePedIsEntering(ped) || GetVehiclePedIsTryingToEnter(ped);
+            }
+
+            if (enteringVehicle !== 0) {
+                ClearPedTasksImmediately(ped);
+            }
+        }
+    }
+
+    public getClosestSeat(ped: number, vehicle: number): number | null {
         const maxSeats = GetVehicleMaxNumberOfPassengers(vehicle);
         const playerPosition = GetEntityCoords(ped, false) as Vector3;
         const minDistance = 2.0;
@@ -265,27 +295,7 @@ export class VehicleLockProvider {
             }
         }
 
-        const start = GetGameTimer();
-
-        if (closestDoor !== null) {
-            TaskEnterVehicle(ped, vehicle, -1, closestDoor.seatIndex, 1.0, 1, 0);
-
-            await wait(200);
-
-            let enteringVehicle = GetVehiclePedIsEntering(ped) || GetVehiclePedIsTryingToEnter(ped);
-            let time = GetGameTimer() - start;
-
-            while (enteringVehicle !== 0 && time < 10000) {
-                await wait(200);
-                time = GetGameTimer() - start;
-
-                enteringVehicle = GetVehiclePedIsEntering(ped) || GetVehiclePedIsTryingToEnter(ped);
-            }
-
-            if (enteringVehicle !== 0) {
-                ClearPedTasksImmediately(ped);
-            }
-        }
+        return closestDoor ? closestDoor.seatIndex : null;
     }
 
     @Command('soz_vehicle_toggle_vehicle_trunk', {
