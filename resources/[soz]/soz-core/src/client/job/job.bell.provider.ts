@@ -108,6 +108,20 @@ const BELL_ZONES: Zone<BellProps>[] = [
         data: {
             job: JobType.LSMC,
             number: '555-LSMC',
+            location: 'Hopital',
+        },
+    },
+    {
+        center: [1829.47, 3674.55, 34.28],
+        length: 0.25,
+        width: 0.35,
+        heading: 16.44,
+        minZ: 34.48,
+        maxZ: 34.68,
+        data: {
+            job: JobType.LSMC,
+            number: '555-LSMC',
+            location: 'Clinique',
         },
     },
     {
@@ -156,7 +170,7 @@ const BELL_ZONES: Zone<BellProps>[] = [
         data: {
             job: JobType.Baun,
             number: '555-BAUN',
-            location: "Bahama",
+            location: 'Bahama',
         },
     },
     {
@@ -169,7 +183,7 @@ const BELL_ZONES: Zone<BellProps>[] = [
         data: {
             job: JobType.Baun,
             number: '555-BAUN',
-            location: "Unicorn",
+            location: 'Unicorn',
         },
     },
     {
@@ -291,9 +305,9 @@ export class JobBellProvider {
             },
         });
 
-        let message = "Une personne vous demande à l'accueil"
-        if (!location) {
-            message += ` - ${location}`
+        let message = "Une personne vous demande à l'accueil";
+        if (location) {
+            message += ` - ${location}`;
         }
 
         TriggerServerEvent('phone:sendSocietyMessage', 'phone:sendSocietyMessage:' + uuidv4(), {

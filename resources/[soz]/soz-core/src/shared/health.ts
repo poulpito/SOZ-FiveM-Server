@@ -13,18 +13,18 @@ export const stressLevelToLabel = (level: number | null): string => {
     }
 
     if (level < 40) {
-        return 'bon';
+        return 'Bon';
     }
 
     if (level <= 60) {
-        return 'moyen';
+        return 'Moyen';
     }
 
     if (level <= 80) {
-        return 'élevé';
+        return 'Élevé';
     }
 
-    return 'très élevé';
+    return 'Très élevé';
 };
 
 export const healthLevelToLabel = (
@@ -34,7 +34,7 @@ export const healthLevelToLabel = (
     strategy = LabelStrategy.MinMax
 ): string => {
     if (!level && level !== 0) {
-        return 'inconnu';
+        return 'Inconnu';
     }
 
     const base0Level = level - min;
@@ -47,41 +47,41 @@ export const healthLevelToLabel = (
 
     if (strategy === LabelStrategy.MinMaxAverage) {
         if (percentLevel < 0 || percentLevel > 100) {
-            return 'exécrable';
+            return 'Exécrable';
         }
 
         if (percentLevel < 15 || percentLevel > 85) {
-            return 'mauvais';
+            return 'Mauvais';
         }
 
         if (percentLevel < 30 || percentLevel > 70) {
-            return 'moyen';
+            return 'Moyen';
         }
 
         if (percentLevel < 45 || percentLevel > 55) {
-            return 'bon';
+            return 'Bon';
         }
 
-        return 'excellent';
+        return 'Excellent';
     }
 
     if (percentLevel < 20) {
-        return 'exécrable';
+        return 'Exécrable';
     }
 
     if (percentLevel < 40) {
-        return 'mauvais';
+        return 'Mauvais';
     }
 
     if (percentLevel < 60) {
-        return 'moyen';
+        return 'Moyen';
     }
 
     if (percentLevel < 80) {
-        return 'bon';
+        return 'Bon';
     }
 
-    return 'excellent';
+    return 'Excellent';
 };
 
 export const injuriesLevelToLabel = (targetPlayer: PlayerData): string => {

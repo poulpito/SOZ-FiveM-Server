@@ -95,7 +95,7 @@ export class LSMCCheckHealthProvider {
 
         this.notifier.notify(
             source,
-            `<strong>Etat de santé de ${targetPlayer.charinfo.firstname} ${targetPlayer.charinfo.lastname}</strong>~n~` +
+            `<strong>État de santé de ${targetPlayer.charinfo.firstname} ${targetPlayer.charinfo.lastname}</strong>~n~` +
                 `<span style="text-decoration: underline;">Santé :</span> ${healthStateLabel} (${targetPlayer.metadata.health_level})~n~` +
                 `<span style="text-decoration: underline;">Endurance :</span> ${maxStaminaLevelLabel} (${targetPlayer.metadata.max_stamina})~n~` +
                 `<span style="text-decoration: underline;">Force :</span> ${strengthLevelLabel} (${targetPlayer.metadata.strength})~n~` +

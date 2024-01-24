@@ -7,6 +7,17 @@ Config.Storages["lsmc_fridge"] = {
     heading = 320,
 }
 
+Config.Storages["lsmc_north_fridge"] = {
+    label = "Frigo LSMC Nord",
+    type = "fridge",
+    owner = "lsmc",
+    position = vector3(1820.94, 3677.60, 38.28),
+    size = vec2(1.00, 1.60),
+    heading = 300,
+    minZ = 37.28,
+    maxZ = 39.28,
+}
+
 Config.Storages["lsmc_armory"] = {
     label = "Stockage des armes LSMC",
     type = "armory",
@@ -27,6 +38,17 @@ Config.Storages["lsmc_stash"] = {
     heading = 320,
 }
 
+Config.Storages["lsmc_north_stash"] = {
+    label = "Stockage des médecins Nord",
+    type = "storage",
+    owner = "lsmc",
+    position = vector3(1825.85, 3674.69, 33.23),
+    size = vec2(1.30, 0.60),
+    heading = 320,
+    minZ = 32.23,
+    maxZ = 34.23,
+}
+
 Config.Storages["lsmc_boss_storage"] = {
     label = "Coffre Patron LSMC",
     type = "boss_storage",
@@ -34,6 +56,17 @@ Config.Storages["lsmc_boss_storage"] = {
     position = vector3(374.06, -1412.06, 38.04),
     size = vec2(2.60, 0.80),
     heading = 51.07,
+}
+
+Config.Storages["lsmc_north_boss_storage"] = {
+    label = "Coffre Patron LSMC Nord",
+    type = "boss_storage",
+    owner = "lsmc",
+    position = vector3(1826.23, 3674.01, 37.18),
+    size = vec2(1.00, 1.20),
+    heading = 29.75,
+    minZ = 36.18,
+    maxZ = 38.18,
 }
 
 Config.Storages["lsmc_organ"] = {
@@ -69,4 +102,16 @@ Config.Storages["lsmc_female_cloakroom"] = {
     maxZ = 38.99,
     heading = 49.61,
     targetOptions = concatTables(getCloakroomTargetOptions("lsmc", "lsmc_female_cloakroom"), getPoliceCloakroomTargetOptions("lsmc")),
+}
+
+Config.Storages["lsmc_north_cloakroom"] = {
+    label = "Vestiaire - LSMC Nord",
+    type = "cloakroom",
+    owner = "ffs",
+    position = vector3(1837.87, 3682.32, 34.28),
+    size = vec2(0.75, 2.55),
+    minZ = 33.28,
+    maxZ = 35.28,
+    heading = 299.58,
+    targetOptions = concatTables(getCloakroomTargetOptions("lsmc", "lsmc_north_cloakroom"), getPoliceCloakroomTargetOptions("lsmc")),
 }

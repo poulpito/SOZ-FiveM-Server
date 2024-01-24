@@ -15,6 +15,7 @@ import { PlasterLocation } from '@public/shared/job/lsmc';
 import { MenuType } from '@public/shared/nui/menu';
 import { PlayerLicenceType } from '@public/shared/player';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
+import { MultiZone } from '@public/shared/polyzone/multi.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { Err, Ok } from '@public/shared/result';
 import { RpcServerEvent } from '@public/shared/rpc';
@@ -23,15 +24,18 @@ import { PlayerListStateService } from '../../player/player.list.state.service';
 import { PoliceLicenceProvider } from '../police/police.licence.provider';
 import { LSMCDeathProvider } from './lsmc.death.provider';
 
-const hopital = BoxZone.fromZone({
-    center: [346.73, -1413.53, 32.26] as Vector3,
-    length: 84.4,
-    width: 92.6,
-    heading: 320,
-    debugPoly: false,
-    minZ: 28.46,
-    maxZ: 39.86,
-});
+const hopital = new MultiZone([
+    new BoxZone([346.73, -1413.53, 32.26], 84.4, 92.6, {
+        heading: 320,
+        minZ: 28.46,
+        maxZ: 39.86,
+    }),
+    new BoxZone([1826.47, 3679.85, 33.73], 36.4, 33.6, {
+        heading: 211.67,
+        minZ: 32.73,
+        maxZ: 41.13,
+    }),
+]);
 
 @Provider()
 export class LSMCInteractionProvider {

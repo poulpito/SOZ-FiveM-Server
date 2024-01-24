@@ -1135,6 +1135,31 @@ export const GarageList: Record<string, Omit<Garage, 'id'>> = {
             }),
         ],
     },
+    lsmc_north: {
+        name: 'LSMC Nord Parking',
+        type: GarageType.Job,
+        job: JobType.LSMC,
+        category: GarageCategory.Car,
+        zone: new BoxZone([1806.96, 3675.22, 33.21], 1.0, 1.0, {
+            heading: 123.21,
+            minZ: 33.21,
+            maxZ: 36.21,
+        }),
+        parkingPlaces: [
+            new BoxZone([1812.62, 3669.99, 33.93], 6.6, 3.2, {
+                heading: 210,
+                minZ: 32.93,
+                maxZ: 34.93,
+                data: { capacity: [PlaceCapacity.Small, PlaceCapacity.Medium, PlaceCapacity.Large] },
+            }),
+            new BoxZone([1817.19, 3672.09, 33.93], 5.2, 3.4, {
+                heading: 210,
+                minZ: 32.93,
+                maxZ: 34.93,
+                data: { capacity: [PlaceCapacity.Small, PlaceCapacity.Medium, PlaceCapacity.Large] },
+            }),
+        ],
+    },
     lsmc_air: {
         name: 'LSMC Air Parking',
         type: GarageType.Job,
@@ -1158,6 +1183,27 @@ export const GarageList: Record<string, Omit<Garage, 'id'>> = {
                 heading: 50,
                 minZ: 45.51,
                 maxZ: 49.51,
+                data: {
+                    capacity: [PlaceCapacity.Small, PlaceCapacity.Medium, PlaceCapacity.Large],
+                },
+            }),
+        ],
+    },
+    lsmc_north_air: {
+        name: 'LSMC Nord Air Parking',
+        type: GarageType.Job,
+        job: JobType.LSMC,
+        category: GarageCategory.Air,
+        zone: new BoxZone([1830.12, 3689.08, 37.28], 1.0, 1.0, {
+            heading: 216.52,
+            minZ: 37.28,
+            maxZ: 40.28,
+        }),
+        parkingPlaces: [
+            new BoxZone([1836.44, 3682.93, 39.78], 8.4, 6.2, {
+                heading: 212.38,
+                minZ: 38.78,
+                maxZ: 40.78,
                 data: {
                     capacity: [PlaceCapacity.Small, PlaceCapacity.Medium, PlaceCapacity.Large],
                 },

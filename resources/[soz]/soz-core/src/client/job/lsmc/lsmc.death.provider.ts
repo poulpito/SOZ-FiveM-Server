@@ -437,16 +437,16 @@ export class LSMCDeathProvider {
 
         if (rpDeath) {
             this.IsDead = true;
+            TriggerScreenblurFadeOut(1000);
         } else {
             this.notifier.notify('Vous êtes réanimé!');
+            await this.voipService.mutePlayer(false);
         }
 
         FreezeEntityPosition(PlayerPedId(), false);
         SetEntityHealth(player, 200);
         ClearPedBloodDamage(player);
         SetPlayerSprint(PlayerId(), true);
-
-        await this.voipService.mutePlayer(false);
 
         this.playerWalkstyleProvider.updateWalkStyle('injury', null);
 

@@ -30,38 +30,48 @@ type LSMCBed = {
 const lsmcBeds: LSMCBed[] = [
     {
         model: 2117668672,
-        offset: [0, 0, 0],
+        offset: [0, 0, 0.22],
         rotation: 180,
     },
     {
         model: 1631638868,
-        offset: [0, 0, 0],
+        offset: [0, 0, 0.22],
         rotation: 180,
     },
     {
         model: -1182962909,
-        offset: [0, 0, 0],
+        offset: [0, -0.1, 0.9],
         rotation: 0,
     },
     {
         model: GetHashKey('soz_lsmc_operationrm_operation_table'),
-        offset: [0, -0.2, 0],
+        offset: [0, -0.2, -0.13],
         rotation: 0,
     },
     {
         model: GetHashKey('soz_lsmc_operationrm_irm'),
-        offset: [-1, 0.6, 0],
+        offset: [-1, 0.6, -0.13],
         rotation: -90,
     },
     {
         model: 1615299850,
-        offset: [0, 0, 0],
+        offset: [0, 0, 0.22],
         rotation: 0,
     },
     {
         model: 1728397219,
-        offset: [0, 0, 0],
+        offset: [0, 0, 0.22],
         rotation: 0,
+    },
+    {
+        model: 1298129707, // bed LSMC North
+        offset: [0, 0, 0.22],
+        rotation: 180,
+    },
+    {
+        model: -1367355192, // surgery LSMC North
+        offset: [-0.1, 0.4, -0.7],
+        rotation: 5,
     },
 ];
 
@@ -266,8 +276,20 @@ export class LSMCProvider {
         const heading = GetEntityHeading(entity) - bedType.rotation;
         SetEntityHeading(player, heading);
         SetPedCoordsKeepVehicle(player, coords[0], coords[1], coords[2] + 0.1);
-        await this.resourceLoader.loadAnimationDictionary('anim@gangops@morgue@table@');
-        TaskPlayAnim(player, 'anim@gangops@morgue@table@', 'body_search', 8.0, 2.0, -1, 1, 0, false, false, false);
+        FreezeEntityPosition(player, true);
+
+        await this.animationService.playAnimation({
+            base: {
+                dictionary: 'anim@gangops@morgue@table@',
+                name: 'body_search',
+                blendInSpeed: 8.0,
+                blendOutSpeed: 2.0,
+                options: {
+                    repeat: true,
+                },
+            },
+        });
+        FreezeEntityPosition(player, false);
     }
 
     @OnEvent(ClientEvent.LSMC_VEH_PUT_ON)
