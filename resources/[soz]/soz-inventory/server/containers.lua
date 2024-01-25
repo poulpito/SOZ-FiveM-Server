@@ -146,6 +146,7 @@ Container["storage"] = InventoryContainer:new({
 Container["evidence_storage"] = InventoryContainer:new({
     type = "storage",
     allowedTypes = {"evidence"},
+    allowedItems = {"detective_board"},
     inventoryPermissionCallback = playerHaveJobAndDuty,
 })
 
