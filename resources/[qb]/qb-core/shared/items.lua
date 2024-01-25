@@ -4204,6 +4204,7 @@ QBShared.Items = {
         ['name'] = 'scientist_photo',
         ['durability'] = 30,
         ['label'] = 'Photo scientifique',
+        ['durability'] = 30,
         ['weight'] = 50,
         ['type'] = 'evidence',
         ['unique'] = true,
