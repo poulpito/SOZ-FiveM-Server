@@ -290,6 +290,7 @@ export class PoliceProvider {
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
 
         SetEntityAsMissionEntity(object, true, true);
+        SetEntityCollision(object, false, true);
         AttachEntityToEntity(
             object,
             playerPed,

@@ -73,6 +73,7 @@ export class RopeService {
         );
         const netId = ObjToNet(object);
         SetNetworkIdCanMigrate(netId, false);
+        SetEntityCollision(object, false, true);
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
         AttachEntityToEntity(
             object,

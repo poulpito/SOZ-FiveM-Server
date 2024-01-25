@@ -90,6 +90,8 @@ export class LSMCPlasterProvider {
         const mainprop = CreateObject(plasterConfig.prop[model], coords[0], coords[1], coords[2], true, true, false);
         const netId = ObjToNet(mainprop);
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
+        SetEntityCollision(mainprop, false, true);
+        SetEntityAsMissionEntity(mainprop, true, true);
         AttachEntityToEntity(
             mainprop,
             playerPed,

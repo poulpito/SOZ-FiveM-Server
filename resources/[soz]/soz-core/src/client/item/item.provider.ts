@@ -119,6 +119,7 @@ export class ItemProvider {
 
             const netId = ObjToNet(object);
             SetNetworkIdCanMigrate(netId, false);
+            SetEntityCollision(object, false, true);
             TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
 
             AttachEntityToEntity(
