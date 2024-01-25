@@ -672,6 +672,7 @@
                 </Item>
                 <Item type="NULL"/>
                 <Item type="NULL"/>
+            </SubHandlingData>
         </Item>
         <Item type="CHandlingData">
             <handlingName>LSMCHELI</handlingName>
