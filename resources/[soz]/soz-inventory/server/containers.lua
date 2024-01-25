@@ -142,6 +142,13 @@ Container["storage"] = InventoryContainer:new({
     allowedTypes = {"item", "oil_and_item", "outfit", "crate", "drug_pot", "evidence"},
     inventoryPermissionCallback = playerHaveJobAndDuty,
 })
+
+Container["evidence_storage"] = InventoryContainer:new({
+    type = "storage",
+    allowedTypes = {"evidence"},
+    inventoryPermissionCallback = playerHaveJobAndDuty,
+})
+
 --- Todo: convert to storage type : storage
 Container["storage_tank"] = InventoryContainer:new({
     type = "storage_tank",

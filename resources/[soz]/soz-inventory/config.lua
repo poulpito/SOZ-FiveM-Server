@@ -12,6 +12,7 @@ Config.StorageCapacity = {
     ["organ"] = {slot = 100, weight = 10000000},
     ["seizure"] = {slot = 100, weight = 10000000},
     ["storage"] = {slot = 100, weight = 10000000},
+    ["evidence_storage"] = {slot = 100, weight = 10000000},
     ["storage_tank"] = {slot = 10, weight = 10000000},
     ["cloakroom"] = {slot = 10, weight = 1000000},
     --- houses
