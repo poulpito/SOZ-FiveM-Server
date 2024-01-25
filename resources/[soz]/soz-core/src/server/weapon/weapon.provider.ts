@@ -55,7 +55,7 @@ export class WeaponProvider {
             return;
         }
         const targetData = this.playerService.getPlayer(NetworkGetEntityOwner(target));
-        if (!targetData || targetData.metadata.armor.current > 0) {
+        if (!targetData || targetData.metadata.armor.current > 0 || data.weaponType == joaat('weapon_snowball')) {
             return;
         }
         const positionVictim = GetEntityCoords(target) as Vector4;
