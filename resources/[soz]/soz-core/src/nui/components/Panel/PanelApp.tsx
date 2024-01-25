@@ -55,13 +55,13 @@ export const PanelApp: FunctionComponent = () => {
     };
 
     return (
-        <div className="absolute h-full p-40 z-30" style={{ left: leftOffset(), width: width() }}>
+        <div className="absolute h-full p-[8rem] z-30" style={{ left: leftOffset(), width: width() }}>
             <div ref={refOutside} className="flex flex-col h-full">
                 <div
                     style={{
                         height: '97px',
                     }}
-                    className="flex flex-row items-center"
+                    className="flex flex-row items-start"
                 >
                     <div
                         style={{ width: '99px', backgroundImage: `url(/public/images/panel/top-left.webp)` }}
@@ -69,7 +69,7 @@ export const PanelApp: FunctionComponent = () => {
                     ></div>
                     <div
                         style={{ backgroundImage: `url(/public/images/panel/top.webp)` }}
-                        className="grow h-full bg-center z-30"
+                        className="grow h-[73px] bg-center z-30"
                     ></div>
                     <div
                         style={{ width: '103px', backgroundImage: `url(/public/images/panel/top-right.webp)` }}
@@ -78,7 +78,7 @@ export const PanelApp: FunctionComponent = () => {
                 </div>
                 <div className="flex flex-row items-center grow">
                     <div
-                        style={{ width: '99px', backgroundImage: `url(/public/images/panel/left.webp)` }}
+                        style={{ width: '73px', backgroundImage: `url(/public/images/panel/left.webp)` }}
                         className="h-full bg-center z-30"
                     ></div>
                     <div className="grow h-full relative z-20">
@@ -90,6 +90,7 @@ export const PanelApp: FunctionComponent = () => {
                                 height: 'calc(100% + 60px)',
                                 top: '-30px',
                                 left: '-30px',
+                                paddingInline: '20px',
                             }}
                         >
                             <iframe
@@ -106,7 +107,7 @@ export const PanelApp: FunctionComponent = () => {
                         </div>
                     </div>
                     <div
-                        style={{ width: '103px', backgroundImage: `url(/public/images/panel/right.webp)` }}
+                        style={{ width: '77px', backgroundImage: `url(/public/images/panel/right.webp)` }}
                         className="h-full bg-center  z-30"
                     ></div>
                 </div>
@@ -114,7 +115,7 @@ export const PanelApp: FunctionComponent = () => {
                     style={{
                         height: '101px',
                     }}
-                    className="flex flex-row items-center  z-30"
+                    className="flex flex-row items-end"
                 >
                     <div
                         style={{ width: '99px', backgroundImage: `url(/public/images/panel/bottom-left.webp)` }}
@@ -122,7 +123,7 @@ export const PanelApp: FunctionComponent = () => {
                     ></div>
                     <div
                         style={{ backgroundImage: `url(/public/images/panel/bottom.webp)` }}
-                        className="h-full grow bg-center z-30"
+                        className="h-[76px] grow bg-center z-30"
                     ></div>
                     <div
                         style={{ width: '103px', backgroundImage: `url(/public/images/panel/bottom-right.webp)` }}
