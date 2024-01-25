@@ -676,13 +676,13 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
     },*/
     [PlasterLocation.LeftFeet]: {
         label: 'Pied Gauche',
-        bone: 63931,
+        bone: 14201,
         prop: {
             [joaat('mp_m_freemode_01')]: 'soz_med_plaster_f_l',
             [joaat('mp_f_freemode_01')]: 'soz_med_plaster_f_l',
         },
-        position: [0.33, 0.13, 0.03],
-        rotation: [10.0, -2.0, 8.0],
+        position: [0.1, 0.1, 0.01],
+        rotation: [0.0, 5.0, -75.0],
         blockedAction: [
             Control.Sprint,
             Control.Jump,
@@ -719,7 +719,7 @@ export const PlasterConfigs: Record<PlasterLocation, PlasterConfig> = {
             [joaat('mp_m_freemode_01')]: 'soz_med_plaster_h_l',
             [joaat('mp_f_freemode_01')]: 'soz_med_plaster_h_l',
         },
-        position: [0.27, 0.0, 0.0],
+        position: [0.25, 0.0, 0.0],
         rotation: [180.0, 0.0, 0.0],
         blockedAction: [
             Control.Attack,

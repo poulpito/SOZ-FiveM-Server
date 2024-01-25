@@ -37,6 +37,8 @@ export class LSMCItemProvider {
     @Inject(VehicleStateService)
     private vehicleStateService: VehicleStateService;
 
+    private usedMorphine = new Set<string>();
+
     @Once()
     public async onInit() {
         this.item.setItemUseCallback('tissue', this.useTissue.bind(this));
@@ -347,6 +349,11 @@ export class LSMCItemProvider {
 
     @OnEvent(ServerEvent.LSMC_MORPHINE)
     public async onMorphine(source: number, target: number, slot: number) {
+        const player = this.playerService.getPlayer(target);
+        if (!player) {
+            return;
+        }
+
         const { completed } = await this.progressService.progress(
             source,
             'use_naloxone',
@@ -378,11 +385,17 @@ export class LSMCItemProvider {
         this.inventoryManager.removeItemFromInventory(source, 'morphine', 1, null, slot);
 
         this.playerService.incrementMetadata(target, 'drug', 10, 0, 110);
-        this.playerService.incrementMetadata(target, 'stress_level', -20, 0, 100);
+
+        if (this.usedMorphine.has(player.citizenid)) {
+            this.notifier.notify(source, 'Vous avez déjà pris de la morphine.', 'error');
+        } else {
+            this.playerService.incrementMetadata(target, 'stress_level', -20, 0, 100);
+            this.usedMorphine.add(player.citizenid);
+        }
 
         if (target != source) {
             this.notifier.notify(source, 'Vous avez injecté une dose de ~g~Morphine~s~.');
-            this.notifier.notify(target, 'Vous recu une dose de ~g~Morphine~s~, vous êtes désormais apaisé.');
+            this.notifier.notify(target, 'Vous recu une dose de ~g~Morphine~s~');
         } else {
             this.notifier.notify(source, 'Vous vous êtes injecté une dose de ~g~Morphine~s~.');
         }
