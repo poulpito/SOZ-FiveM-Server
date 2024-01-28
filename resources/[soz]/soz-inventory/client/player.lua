@@ -145,8 +145,13 @@ RegisterNUICallback("player/giveItemToTarget", function(data, cb)
     if hit == 1 and entityType == 1 then
         local amount = data.amount
 
-        if amount > 1 then
-            amount = exports["soz-core"]:Input("Quantité", 5, data.amount)
+        if tonumber(amount) > 1 then
+            amount = tostring(exports["soz-core"]:Input("Quantité", 5, data.amount))
+            if tonumber(amount, 10) == nil then
+                exports["soz-core"]:DrawNotification("Vous devez entrer un nombre entier", "error")
+                cb(true)
+                return
+            end
         end
 
         if amount and tonumber(amount) > 0 then
