@@ -92,6 +92,7 @@ export class LSMCPlasterProvider {
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
         SetEntityCollision(mainprop, false, true);
         SetEntityAsMissionEntity(mainprop, true, true);
+        SetNetworkIdCanMigrate(netId, false);
         AttachEntityToEntity(
             mainprop,
             playerPed,
