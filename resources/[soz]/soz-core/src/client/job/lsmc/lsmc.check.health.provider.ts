@@ -145,14 +145,19 @@ export class LSMCCheckHealthProvider {
             },
         ]);
 
-        this.targetFactory.createForBoxZone(
-            'lsmc_analyze',
+        [
+            new BoxZone([1816.41, 3680.58, 33.48], 1.0, 1.0, {
+                heading: 310.81,
+                minZ: 33.88,
+                maxZ: 34.48,
+            }),
             new BoxZone([373.02, -1416.34, 32.41], 0.8, 0.6, {
                 heading: 231.23,
                 minZ: 32.41,
                 maxZ: 32.86,
             }),
-            [
+        ].forEach((zone, index) =>
+            this.targetFactory.createForBoxZone('lsmc_analyze_' + index, zone, [
                 {
                     label: 'Analyse urinaire',
                     icon: 'c:ems/urine_test.png',
@@ -180,7 +185,7 @@ export class LSMCCheckHealthProvider {
                     },
                     item: 'flask_blood_full',
                 },
-            ]
+            ])
         );
     }
 }
