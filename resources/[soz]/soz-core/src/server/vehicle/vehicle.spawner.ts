@@ -114,11 +114,10 @@ const VEHICLE_HAS_RADIO = [
 
 const DISALLOWED_VEHICLE_MODELS = { [GetHashKey('dune2')]: true };
 
-//Prevent police bike to spawn inside custom BCSO mapping
-const frontBCSO = new BoxZone([1865.68, 3682.6, 33.57], 10.0, 6.4, {
-    heading: 300.0,
-    minZ: 32.57,
-    maxZ: 35.57,
+const frontBCSO = new BoxZone([1844.67, 3688.55, 33.75], 44.4, 93.2, {
+    heading: 210.06,
+    minZ: 32.75,
+    maxZ: 38.75,
 });
 
 const lsmcParking = new BoxZone([427.27, -1325.76, 39.02], 78.8, 111.0, {
