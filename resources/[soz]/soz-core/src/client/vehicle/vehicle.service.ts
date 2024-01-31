@@ -183,6 +183,7 @@ const VehicleConditionHelpers: Partial<VehicleConditionHelper<keyof VehicleCondi
                 if (value[i]) {
                     SmashVehicleWindow(vehicle, i);
                 } else {
+                    FixVehicleWindow(vehicle, i);
                     RollUpWindow(vehicle, i);
                 }
             }
@@ -222,6 +223,10 @@ const VehicleConditionHelpers: Partial<VehicleConditionHelper<keyof VehicleCondi
             for (let i = 0; i < doorNumber; i++) {
                 if (value[i]) {
                     SetVehicleDoorBroken(vehicle, i, true);
+                } else if (IsVehicleDoorDamaged(vehicle, i)) {
+                    //Cannot fix doors one by one
+                    SetVehicleDeformationFixed(vehicle);
+                    SetVehicleFixed(vehicle);
                 }
             }
         },
