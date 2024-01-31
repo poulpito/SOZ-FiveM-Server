@@ -388,6 +388,13 @@ export class VehicleFuelProvider {
         this.ready = true;
     }
 
+    @OnEvent(ClientEvent.BASE_ENTERING_VEHICLE, false)
+    public async onEnteringVehicle() {
+        if (this.currentStationPistol !== null) {
+            await this.disableStationPistol();
+        }
+    }
+
     public isReady() {
         return this.ready;
     }

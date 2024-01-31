@@ -8,6 +8,7 @@ export enum ClientEvent {
     ANIMATION_GIVE = 'soz-core:client:animation:give',
 
     BASE_ENTERED_VEHICLE = 'baseevents:enteredVehicle',
+    BASE_ENTERING_VEHICLE = 'baseevents:enteringVehicle',
     BASE_LEFT_VEHICLE = 'baseevents:leftVehicle',
     BASE_CHANGE_VEHICLE_SEAT = 'baseevents:changedVehicleSeat',
 

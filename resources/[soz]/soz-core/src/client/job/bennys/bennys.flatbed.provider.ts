@@ -176,6 +176,13 @@ export class BennysFlatbedProvider {
         }
     }
 
+    @OnEvent(ClientEvent.BASE_ENTERING_VEHICLE, false)
+    public async onEnteringVehicle() {
+        if (this.currentFlatbedAttach) {
+            await this.disableFlatbedAttach();
+        }
+    }
+
     private async disableFlatbedAttach() {
         if (!this.currentFlatbedAttach) {
             return;
