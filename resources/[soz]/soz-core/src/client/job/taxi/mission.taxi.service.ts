@@ -348,8 +348,8 @@ export class TaxiMissionService {
                     );
                     this.notifier.notify('Vous avez déposé la personne', 'success');
 
-                    this.setHorodateurStarted(false);
                     await this.clearMission();
+                    this.setHorodateurStarted(false);
                     break;
                 }
             }
