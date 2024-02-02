@@ -1,3 +1,5 @@
+import { VehicleClass, VehicleClassFuelStorageMultiplier } from '@public/shared/vehicle/vehicle';
+
 import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
@@ -36,7 +38,7 @@ export class VehicleFuelProvider {
     private currentFilling = new Set<number>();
 
     @OnEvent(ServerEvent.VEHICLE_FUEL_START)
-    public async startFuel(source: number, vehicleNetworkId: number, stationId: number) {
+    public async startFuel(source: number, vehicleNetworkId: number, stationId: number, vehClass: VehicleClass) {
         const player = this.playerService.getPlayer(source);
 
         if (!player) {
@@ -51,8 +53,9 @@ export class VehicleFuelProvider {
 
         this.currentFilling.add(vehicleNetworkId);
         try {
+            const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
             const vehicleState = this.vehicleStateService.getVehicleState(vehicleNetworkId);
-            const fuelToFill = Math.floor(100 - vehicleState.condition.fuelLevel);
+            const fuelToFill = Math.floor(100 * storageMultiplier - vehicleState.condition.fuelLevel);
 
             const [reservedFuel, station, maxFuelMoney] = await this.lockService.lock(
                 `fuel_station_${stationId}`,
