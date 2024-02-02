@@ -180,8 +180,8 @@ const FuelGauge: FunctionComponent<{ value: number; fuelType: string; vehClass: 
                     style={{
                         strokeDashoffset:
                             60 -
-                            (Math.min(value, 100 * VehicleClassFuelStorageMultiplier[vehClass] || 1.0) /
-                                (100 * VehicleClassFuelStorageMultiplier[vehClass] || 1.0)) *
+                            (Math.min(value, 100 * (VehicleClassFuelStorageMultiplier[vehClass] || 1.0)) /
+                                (100 * (VehicleClassFuelStorageMultiplier[vehClass] || 1.0))) *
                                 60,
                     }}
                 />
