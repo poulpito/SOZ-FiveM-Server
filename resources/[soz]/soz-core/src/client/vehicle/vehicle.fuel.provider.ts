@@ -10,7 +10,13 @@ import { FuelStation, FuelStationType, FuelType } from '../../shared/fuel';
 import { JobType } from '../../shared/job';
 import { Vector3 } from '../../shared/polyzone/vector';
 import { RpcServerEvent } from '../../shared/rpc';
-import { isVehicleModelElectric, VehicleClass, VehicleCondition, VehicleSeat } from '../../shared/vehicle/vehicle';
+import {
+    isVehicleModelElectric,
+    VehicleClass,
+    VehicleClassFuelStorageMultiplier,
+    VehicleCondition,
+    VehicleSeat,
+} from '../../shared/vehicle/vehicle';
 import { AnimationService } from '../animation/animation.service';
 import { BlipFactory } from '../blip';
 import { Notifier } from '../notifier';
@@ -35,7 +41,6 @@ const MAX_LENGTH_ROPE = 15.0;
 
 const VehicleClassFuelMultiplier: Partial<Record<VehicleClass, number>> = {
     [VehicleClass.Helicopters]: 6.33,
-    [VehicleClass.Motorcycles]: 2.0,
 };
 
 @Provider()
@@ -469,9 +474,11 @@ export class VehicleFuelProvider {
             return;
         }
 
+        const vehClass = GetVehicleClass(vehicle) as VehicleClass;
+        const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
         const condition = await this.vehicleStateService.getVehicleCondition(vehicle);
 
-        if (condition.fuelLevel > 99.0) {
+        if (condition.fuelLevel > 99.0 * storageMultiplier) {
             this.notifier.notify('Le véhicule est déjà plein.', 'error');
             await this.disableStationPistol();
 
@@ -481,7 +488,7 @@ export class VehicleFuelProvider {
         const vehicleNetworkId = NetworkGetNetworkIdFromEntity(vehicle);
 
         this.currentStationPistol.filling = true;
-        TriggerServerEvent(ServerEvent.VEHICLE_FUEL_START, vehicleNetworkId, station.id);
+        TriggerServerEvent(ServerEvent.VEHICLE_FUEL_START, vehicleNetworkId, station.id, vehClass);
     }
 
     @OnEvent(ClientEvent.VEHICLE_FUEL_START)
