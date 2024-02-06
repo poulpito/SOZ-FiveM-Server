@@ -42,7 +42,12 @@ const messageExcludeGroups = [
 const weaponUnarmed = GetHashKey('WEAPON_UNARMED');
 const weaponPetrolCan = GetHashKey('WEAPON_PETROLCAN');
 
-const messageExclude = [GetHashKey('weapon_musket'), GetHashKey('weapon_raypistol'), GetHashKey('weapon_pumpshotgun')];
+const messageExclude = [
+    GetHashKey('weapon_musket'),
+    GetHashKey('weapon_raypistol'),
+    GetHashKey('weapon_pumpshotgun'),
+    GetHashKey('weapon_flaregun'),
+];
 const NonLethalWeapons = {
     [GetHashKey('weapon_pumpshotgun')]: 10,
     [GetHashKey('WEAPON_SNOWBALL')]: 2,
@@ -245,7 +250,7 @@ export class WeaponProvider {
         }
 
         const weaponGroup = GetWeapontypeGroup(weapon.name);
-        const isWearingGloves = await this.clothingService.checkWearingGloves();
+        const isWearingGloves = this.clothingService.checkWearingGloves();
         emitNet(
             ServerEvent.WEAPON_SHOOTING,
             weapon.slot,
