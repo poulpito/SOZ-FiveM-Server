@@ -444,6 +444,10 @@ export class VehicleSpawner {
                 return null;
             }
 
+            if (!volatile.plate) {
+                volatile.plate = GetVehicleNumberPlateText(entityId).trim();
+            }
+
             this.vehicleStateService.register(
                 netId,
                 player,
