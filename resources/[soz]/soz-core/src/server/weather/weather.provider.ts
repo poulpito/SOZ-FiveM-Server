@@ -12,6 +12,7 @@ import { Feature, isFeatureEnabled } from '../../shared/features';
 import { PollutionLevel } from '../../shared/pollution';
 import { getRandomInt, getRandomKeyWeighted } from '../../shared/random';
 import { Forecast, ForecastWithTemperature, TemperatureRange, Time, Weather } from '../../shared/weather';
+import { Monitor } from '../monitor/monitor';
 import { Pollution } from '../pollution';
 import { Store } from '../store/store';
 import { Halloween, Polluted, Winter } from './forecast';
@@ -31,6 +32,9 @@ export class WeatherProvider {
 
     @Inject(Logger)
     private logger: Logger;
+
+    @Inject(Monitor)
+    private monitor: Monitor;
 
     private currentTime: Time = { hour: 2, minute: 0, second: 0 };
 
@@ -151,6 +155,8 @@ export class WeatherProvider {
         this.prepareForecasts(this.store.getState().global.weather, true);
 
         TriggerClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_FORECASTS, -1);
+
+        this.monitor.publish('weather_update', {}, { weather: weather || defaultWeather });
     }
 
     @Command('block_weather', { role: 'admin' })

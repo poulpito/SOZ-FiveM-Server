@@ -1,3 +1,4 @@
+import { Logger } from '@public/core/logger';
 import { formatDuration } from '@public/shared/utils/timeformat';
 import { add } from 'date-fns';
 
@@ -53,6 +54,9 @@ export class VehicleDealershipProvider {
     @Inject(Monitor)
     private monitor: Monitor;
 
+    @Inject(Logger)
+    private logger: Logger;
+
     private auctions: Record<string, AuctionVehicle> = {};
 
     @Once(OnceStep.DatabaseConnected)
@@ -68,6 +72,8 @@ export class VehicleDealershipProvider {
                 dealershipId: DealershipType.Luxury,
             },
         });
+
+        this.logger.info(vehicles.map(veh => veh?.model).join(','));
 
         const selectedVehicles = getRandomItems(vehicles, 2);
 
