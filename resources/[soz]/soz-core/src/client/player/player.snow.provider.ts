@@ -233,20 +233,17 @@ export class PlayerSnowProvider {
         const helmets = Object.keys(helmetJewels.items['Casques']).map(item => Number(item));
         const headProtected =
             bonnets.includes(outfit.Props[hatJewels.propId]?.Drawable) ||
-            helmets.includes(outfit.Props[helmetJewels.propId]?.Drawable);
+            helmets.includes(outfit.Props[helmetJewels.propId]?.Drawable) ||
+            !!hasCustomCagoule ||
+            data[Component.Mask] == 39 ||
+            data[Component.Mask] == 37 ||
+            data[Component.Mask] == 35;
         if (headProtected) {
             coldScore++;
         }
 
         //Cagoule - bandana - écharpes
-        if (
-            !!hasCustomCagoule ||
-            data[Component.Mask] == 39 ||
-            data[Component.Mask] == 37 ||
-            data[Component.Mask] == 35 ||
-            neckProtected ||
-            headProtected
-        ) {
+        if (neckProtected || headProtected) {
             this.blizzardProtected = true;
         } else {
             this.blizzardProtected = false;
