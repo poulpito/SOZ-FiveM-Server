@@ -114,7 +114,7 @@ export class RaceProvider {
                 },
                 action: entity => {
                     const race = Object.values(this.raceRepository.get()).find(race => race.npc == entity);
-                    this.startRace(race.id, false);
+                    this.startRace(race.id, false, false);
                 },
             },
             {
@@ -421,7 +421,7 @@ export class RaceProvider {
 
     @OnNuiEvent(NuiEvent.RaceMenuLaunch)
     public async onRaceLaunch({ raceId, option }: { option: RaceLaunchMenuOptions; raceId: number }) {
-        this.startRace(raceId, option == RaceLaunchMenuOptions.test);
+        this.startRace(raceId, option == RaceLaunchMenuOptions.test, true);
     }
 
     @OnNuiEvent(NuiEvent.RaceAddCheckpoint)
@@ -510,7 +510,7 @@ export class RaceProvider {
         return await emitRpc<RaceRankingInfo>(RpcServerEvent.RACE_GET_RANKING, raceId);
     }
 
-    private async startRace(raceId: number, test: boolean) {
+    private async startRace(raceId: number, test: boolean, admin: boolean) {
         const race = this.raceRepository.find(raceId);
         const start = Date.now();
 
@@ -522,6 +522,8 @@ export class RaceProvider {
         }
 
         const ped = PlayerPedId();
+        const coords = GetEntityCoords(ped);
+        const heading = GetEntityHeading(ped);
 
         const [bestRun, bestSplits] = await emitRpc<[number[], number[]]>(RpcServerEvent.RACE_GET_SPLITS, race.id);
 
@@ -607,7 +609,11 @@ export class RaceProvider {
             DeleteVehicle(vehicle);
         }
 
-        await this.playerPositionProvider.teleportPlayerToPosition(getRacePNJPosID(race));
+        if (admin) {
+            await this.playerPositionProvider.teleportAdminToPosition([...coords, heading] as Vector4);
+        } else {
+            await this.playerPositionProvider.teleportPlayerToPosition(getRacePNJPosID(race));
+        }
 
         this.objectProvider.enable();
 
