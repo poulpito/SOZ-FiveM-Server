@@ -31,6 +31,7 @@ export type VehicleHud = {
     lightState: number;
     fuelType: 'essence' | 'electric' | 'none';
     fuelLevel: number;
+    vehClass: VehicleClass;
     useRpm: boolean;
 };
 
@@ -523,3 +524,7 @@ export const ALLOWED_AIR_CONTROL: Partial<Record<VehicleClass, true>> = {
 
 //update MissiveVehicleModelList when toggle
 export const DisableNPCBike = false;
+
+export const VehicleClassFuelStorageMultiplier: Partial<Record<VehicleClass, number>> = {
+    [VehicleClass.Motorcycles]: 0.5,
+};

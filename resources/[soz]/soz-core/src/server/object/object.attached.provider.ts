@@ -14,6 +14,10 @@ export class ObjectAttachedProvider {
             this.objects.set(source, playerObjects);
         }
 
+        if (GetPlayerRoutingBucket(source.toString()) != 0) {
+            return;
+        }
+
         playerObjects.add(netId);
     }
 

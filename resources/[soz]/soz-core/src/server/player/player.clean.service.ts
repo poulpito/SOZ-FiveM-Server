@@ -93,7 +93,7 @@ export class PlayerCleanService {
         await this.prismaService.bank_accounts.updateMany({
             where: {
                 houseid: {
-                    in: housingOwnerIdentifiers.map(h => 'property_' + h.identifier),
+                    in: housingOwnerIdentifiers.map(h => h.identifier),
                 },
             },
             data: {

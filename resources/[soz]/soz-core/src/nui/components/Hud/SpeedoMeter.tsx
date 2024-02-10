@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import { FunctionComponent, useEffect, useState } from 'react';
 
 import {
+    VehicleClass,
+    VehicleClassFuelStorageMultiplier,
     VehicleCriticalDamageThreshold,
     VehicleHighDamageThreshold,
     VehicleLightState,
@@ -142,7 +144,11 @@ const SpeedGauge: FunctionComponent<{ hasFuel: boolean; useRpm: boolean }> = ({ 
     );
 };
 
-const FuelGauge: FunctionComponent<{ value: number; fuelType: string }> = ({ value, fuelType }) => {
+const FuelGauge: FunctionComponent<{ value: number; fuelType: string; vehClass: VehicleClass }> = ({
+    value,
+    fuelType,
+    vehClass,
+}) => {
     const fuelTypeClasses = classNames('relative top-[7px] left-[10px] w-4 h-4 text-gray-400/60');
 
     return (
@@ -171,7 +177,13 @@ const FuelGauge: FunctionComponent<{ value: number; fuelType: string }> = ({ val
                     strokeWidth="3"
                     strokeOpacity="1.0"
                     strokeDasharray="60"
-                    style={{ strokeDashoffset: 60 - (value / 100) * 60 }}
+                    style={{
+                        strokeDashoffset:
+                            60 -
+                            (Math.min(value, 100 * (VehicleClassFuelStorageMultiplier[vehClass] || 1.0)) /
+                                (100 * (VehicleClassFuelStorageMultiplier[vehClass] || 1.0))) *
+                                60,
+                    }}
                 />
             </svg>
             {fuelType === 'electric' && <EnergyIcon className={fuelTypeClasses} />}
@@ -234,7 +246,9 @@ export const SpeedoMeter: FunctionComponent = () => {
             </div>
             <div className="flex justify-center mr-[-50px]">
                 <SpeedGauge hasFuel={vehicle.fuelType !== 'none'} useRpm={vehicle.useRpm} />
-                {vehicle.fuelType !== 'none' && <FuelGauge value={vehicle.fuelLevel} fuelType={vehicle.fuelType} />}
+                {vehicle.fuelType !== 'none' && (
+                    <FuelGauge value={vehicle.fuelLevel} fuelType={vehicle.fuelType} vehClass={vehicle.vehClass} />
+                )}
                 <MotorIndicator motor={vehicle.engineHealth} oil={vehicle.oilLevel} fuelType={vehicle.fuelType} />
             </div>
             <div className={classesLight}>

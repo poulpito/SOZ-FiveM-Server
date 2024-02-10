@@ -116,6 +116,15 @@ export class VehicleStateService {
         forwardToEveryone = false
     ): void {
         const previousState = this.getVehicleState(vehicleNetworkId);
+        const entityId = NetworkGetEntityFromNetworkId(vehicleNetworkId);
+
+        if (!entityId) {
+            return;
+        }
+
+        if (!previousState?.volatile.plate) {
+            previousState.volatile.plate = GetVehicleNumberPlateText(entityId).trim();
+        }
 
         const newState = {
             volatile: {
@@ -129,12 +138,6 @@ export class VehicleStateService {
         };
 
         this.state.set(vehicleNetworkId, newState);
-
-        const entityId = NetworkGetEntityFromNetworkId(vehicleNetworkId);
-
-        if (!entityId) {
-            return;
-        }
 
         if (newState.volatile.locatorEndJam > 0) {
             this.vehicleLocatorJam.set(newState.volatile.plate, newState.volatile.locatorEndJam);

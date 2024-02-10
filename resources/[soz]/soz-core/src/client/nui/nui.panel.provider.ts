@@ -46,6 +46,7 @@ export class NuiPanelProvider {
 
         const netId = ObjToNet(this.tablet);
         SetNetworkIdCanMigrate(netId, false);
+        SetEntityCollision(this.tablet, false, true);
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
 
         AttachEntityToEntity(

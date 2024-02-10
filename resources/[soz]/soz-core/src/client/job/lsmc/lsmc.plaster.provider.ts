@@ -8,6 +8,7 @@ import { ResourceLoader } from '@public/client/repository/resource.loader';
 import { Command } from '@public/core/decorators/command';
 import { Tick } from '@public/core/decorators/tick';
 import { emitRpc } from '@public/core/rpc';
+import { wait } from '@public/core/utils';
 import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { PlasterConfigs, PlasterLocation } from '@public/shared/job/lsmc';
 import { MenuType } from '@public/shared/nui/menu';
@@ -28,17 +29,24 @@ export class LSMCPlasterProvider {
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
 
-    private plasters = new Map<PlasterLocation, number>();
+    private plasters: Map<PlasterLocation, number> = null;
 
     @Once(OnceStep.PlayerLoaded)
     public async playerPlasterLoaded(player: PlayerData) {
+        this.plasters = new Map<PlasterLocation, number>();
         for (const newplaster of player.metadata.plaster) {
-            await this.addPlaster(newplaster, player.skin.Model.Hash);
+            if (!this.plasters.has(newplaster)) {
+                await this.addPlaster(newplaster, player.skin.Model.Hash);
+            }
         }
     }
 
     @OnEvent(ClientEvent.PLAYER_UPDATE)
     public async onPlasterPlayerUpdate(player: PlayerData) {
+        if (!this.plasters) {
+            return;
+        }
+
         for (const plaster of player.metadata.plaster) {
             if (!this.plasters.has(plaster)) {
                 await this.addPlaster(plaster, player.skin.Model.Hash);
@@ -80,6 +88,7 @@ export class LSMCPlasterProvider {
     }
 
     private async addPlaster(newplaster: PlasterLocation, model: number) {
+        this.plasters.set(newplaster, 0);
         const plasterConfig = PlasterConfigs[newplaster];
         if (!(await this.resourceLoader.loadModel(plasterConfig.prop[model]))) {
             return;
@@ -90,6 +99,9 @@ export class LSMCPlasterProvider {
         const mainprop = CreateObject(plasterConfig.prop[model], coords[0], coords[1], coords[2], true, true, false);
         const netId = ObjToNet(mainprop);
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
+        SetEntityCollision(mainprop, false, true);
+        SetEntityAsMissionEntity(mainprop, true, true);
+        SetNetworkIdCanMigrate(netId, false);
         AttachEntityToEntity(
             mainprop,
             playerPed,

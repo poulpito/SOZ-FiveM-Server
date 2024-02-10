@@ -57,6 +57,7 @@ export class PoliceJobMenuProvider {
 
         const netId = ObjToNet(badgeProp);
         SetNetworkIdCanMigrate(netId, false);
+        SetEntityCollision(badgeProp, false, true);
         TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
         AttachEntityToEntity(
             badgeProp,

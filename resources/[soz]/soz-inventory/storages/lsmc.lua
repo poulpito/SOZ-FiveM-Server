@@ -80,6 +80,17 @@ Config.Storages["lsmc_organ"] = {
     maxZ = 32.51,
 }
 
+Config.Storages["lsmc_north_organ"] = {
+    label = "Stockage des organes",
+    type = "organ",
+    owner = "lsmc",
+    position = vector3(1821.94, 3681.11, 34.38),
+    size = vec2(1.00, 2.40),
+    heading = 120,
+    minZ = 33.38,
+    maxZ = 34.18,
+}
+
 Config.Storages["lsmc_male_cloakroom"] = {
     label = "Vestiaire pour hommes - LSMC",
     type = "cloakroom",

@@ -283,9 +283,8 @@ export class LSMCProvider {
         const heading = GetEntityHeading(entity) - bedType.rotation;
         SetEntityHeading(player, heading);
         SetPedCoordsKeepVehicle(player, coords[0], coords[1], coords[2] + 0.1);
-        FreezeEntityPosition(player, true);
 
-        await this.animationService.playAnimation({
+        this.animationService.playAnimation({
             base: {
                 dictionary: 'anim@gangops@morgue@table@',
                 name: 'body_search',
@@ -296,7 +295,6 @@ export class LSMCProvider {
                 },
             },
         });
-        FreezeEntityPosition(player, false);
     }
 
     @OnEvent(ClientEvent.LSMC_VEH_PUT_ON)

@@ -126,6 +126,7 @@ export class HudVehicleProvider {
                     : null,
             oilLevel: condition.oilLevel,
             lockStatus: GetVehicleDoorLockStatus(vehicle) as VehicleLockStatus,
+            vehClass: vehicleClass,
             useRpm,
             lightState: hasLight
                 ? hasHighBeam

@@ -216,6 +216,7 @@ export class AnimationFactory {
 
                     this.resourceLoader.unloadModel(prop.model);
 
+                    SetEntityCollision(propId, false, true);
                     SetEntityAsMissionEntity(propId, true, true);
                     const netId = ObjToNet(propId);
                     SetNetworkIdCanMigrate(netId, false);
