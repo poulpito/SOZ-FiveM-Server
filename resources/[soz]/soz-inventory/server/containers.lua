@@ -139,6 +139,7 @@ Container["trash"] = InventoryContainer:new({
 
 Container["storage"] = InventoryContainer:new({
     type = "storage",
+    allowedItems = {"weapon_uvflashlight"},
     allowedTypes = {"item", "oil_and_item", "outfit", "crate", "drug_pot", "evidence"},
     inventoryPermissionCallback = playerHaveJobAndDuty,
 })
