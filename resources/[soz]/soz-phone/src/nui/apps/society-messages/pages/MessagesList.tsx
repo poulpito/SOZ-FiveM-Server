@@ -105,6 +105,7 @@ const MessagesList = (): any => {
                         height={height}
                         deferredMeasurementCache={cache}
                         rowHeight={cache.rowHeight}
+                        containerStyle={{ overflow: 'initial' }}
                     />
                 )}
             </AutoSizer>
