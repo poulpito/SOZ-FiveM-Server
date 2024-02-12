@@ -8,7 +8,12 @@ import { getDistance, Vector3 } from '../../shared/polyzone/vector';
 import { getRandomFloat } from '../../shared/random';
 import { RpcServerEvent } from '../../shared/rpc';
 import { VehicleConfiguration } from '../../shared/vehicle/modification';
-import { getDefaultVehicleCondition, VehicleCondition, VehicleVolatileState } from '../../shared/vehicle/vehicle';
+import {
+    getDefaultVehicleCondition,
+    VehicleClassFuelStorageMultiplier,
+    VehicleCondition,
+    VehicleVolatileState,
+} from '../../shared/vehicle/vehicle';
 import { NuiMenu } from '../nui/nui.menu';
 import { TargetFactory } from '../target/target.factory';
 import { VehicleFuelProvider } from './vehicle.fuel.provider';
@@ -75,11 +80,12 @@ export class VehicleConditionProvider {
         } else {
             // This is trigger when a new vehicle is registered without a spawn, like the vehicle was forced by a player
             const state = await this.vehicleStateService.getVehicleState(entityId);
+            const vehClass = GetVehicleClass(entityId);
             const currentVehicleCondition: VehicleCondition = {
                 ...getDefaultVehicleCondition(),
                 ...this.vehicleService.getClientVehicleCondition(entityId, state),
                 oilLevel: getRandomFloat(30, 100),
-                fuelLevel: getRandomFloat(10, 100),
+                fuelLevel: getRandomFloat(10, 100 * (VehicleClassFuelStorageMultiplier[vehClass] || 1.0)),
                 mileage: getRandomFloat(1000000, 25000000),
             };
             const currentVehicleConfiguration = this.vehicleService.getClientVehicleConfiguration(entityId);
