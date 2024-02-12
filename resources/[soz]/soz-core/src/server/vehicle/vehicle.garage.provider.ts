@@ -144,8 +144,8 @@ export class VehicleGarageProvider {
         });
 
         const garages = await this.garageRepository.get();
-        const toPound = [];
-        const toVoid = [];
+        const toPound: number[] = [];
+        const toVoid: number[] = [];
 
         for (const vehicle of vehicles) {
             const parkingTime = new Date(vehicle.parkingtime * 1000);
@@ -180,10 +180,19 @@ export class VehicleGarageProvider {
                 toVoid.push(vehicle.id);
             } else if (garage && garage.type === GarageType.Depot && days > 7) {
                 toVoid.push(vehicle.id);
-            } else if ((!garage || garage.type !== GarageType.Job) && days > 21) {
+            } else if ((!garage || garage.type !== GarageType.Job || !vehicle.job) && days > 21) {
                 toPound.push(vehicle.id);
             }
         }
+
+        this.monitor.publish(
+            'vehicle_init_move',
+            {},
+            {
+                pound: toPound.join(','),
+                destroyed: toVoid.join(','),
+            }
+        );
 
         if (toVoid.length) {
             await this.prismaService.playerVehicle.updateMany({
