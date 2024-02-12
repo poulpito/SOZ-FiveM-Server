@@ -36,18 +36,15 @@ end
 function societyTaxPayment(society, percentage, tax)
     exports["soz-core"]:Log("INFO", "Society " .. society .. " paid " .. tax .. "$ tax. Percentage: " .. percentage .. "%")
 
-    for account, repartition in pairs(Config.SocietyTaxes.taxRepartition) do
-        local money = math.ceil(tax * repartition / 100)
+    local money = math.ceil(tax)
 
-        Account.TransfertMoney(society, account, money, function(success, reason)
-            if success then
-                exports["soz-core"]:Log("INFO", "Public society " .. account .. " receive " .. money .. "$ tax. Percentage: " .. repartition .. "%")
-            else
-                exports["soz-core"]:Log("ERROR", "Public society " .. account .. " can't receive " .. money .. "$ tax. Percentage: " .. repartition .. "%" ..
-                                            " | Reason: " .. reason)
-            end
-        end)
-    end
+    Account.TransfertMoney(society, "gouv", money, function(success, reason)
+        if success then
+            exports["soz-core"]:Log("INFO", "gouv receive " .. money .. "$ tax from " .. society .. " .")
+        else
+            exports["soz-core"]:Log("ERROR", "gouv can't receive " .. money .. "$ tax from " .. society .. " | Reason: " .. reason)
+        end
+    end)
 end
 
 TriggerEvent("cron:runAt", 5, 0, PaySocietyTaxes)
