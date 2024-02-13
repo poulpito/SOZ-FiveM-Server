@@ -312,6 +312,7 @@ export class VehicleSpawner {
             locatorEndJam: this.vehicleStateService.getJamLocator(vehicle.plate),
             model: vehicle.vehicle,
             label: vehicle.label,
+            lastDrugTrace: this.vehicleStateService.getDrugTrace(vehicle.plate),
         };
 
         const hash = parseInt(vehicle.hash || '0', 10);
