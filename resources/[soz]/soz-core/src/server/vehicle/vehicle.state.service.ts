@@ -52,6 +52,8 @@ export class VehicleStateService {
 
     private vehicleLocatorJam: Map<string, number> = new Map<string, number>();
 
+    private vehicleDrugTrace: Map<string, string[]> = new Map<string, string[]>();
+
     public getVehicleState(vehicleNetworkId: number): Readonly<VehicleState> {
         if (this.state.has(vehicleNetworkId)) {
             return this.state.get(vehicleNetworkId);
@@ -141,6 +143,10 @@ export class VehicleStateService {
 
         if (newState.volatile.locatorEndJam > 0) {
             this.vehicleLocatorJam.set(newState.volatile.plate, newState.volatile.locatorEndJam);
+        }
+
+        if (newState.volatile.lastDrugTrace) {
+            this.vehicleDrugTrace.set(newState.volatile.plate, newState.volatile.lastDrugTrace);
         }
 
         const owner = NetworkGetEntityOwner(entityId);
@@ -369,5 +375,9 @@ export class VehicleStateService {
 
     public getJamLocator(plate: string) {
         return this.vehicleLocatorJam.get(plate) || 0;
+    }
+
+    public getDrugTrace(plate: string) {
+        return this.vehicleDrugTrace.get(plate) || [];
     }
 }

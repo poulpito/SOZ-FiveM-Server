@@ -48,6 +48,15 @@ Config.Storages["bcso_storage"] = {
     offsetUpZ = 1.5,
 }
 
+Config.Storages["bcso_evidence_storage"] = {
+    label = "Coffre de preuves BCSO",
+    type = "evidence_storage",
+    owner = "bcso",
+    position = vector3(1847.09, 3691.61, 34.27),
+    size = vec2(2.0, 1.80),
+    heading = 208.54,
+}
+
 Config.Storages["bcso_ammo"] = {
     label = "Munition BCSO",
     type = "ammo",

@@ -55,7 +55,7 @@ export class WeaponProvider {
             return;
         }
         const targetData = this.playerService.getPlayer(NetworkGetEntityOwner(target));
-        if (!targetData || targetData.metadata.armor.current > 0) {
+        if (!targetData || targetData.metadata.armor.current > 0 || data.weaponType == joaat('weapon_snowball')) {
             return;
         }
         const positionVictim = GetEntityCoords(target) as Vector4;
@@ -124,7 +124,9 @@ export class WeaponProvider {
             weaponGroup == GetHashKey('GROUP_FIREEXTINGUISHER') ||
             weaponGroup == GetHashKey('GROUP_MELEE') ||
             weaponGroup == GetHashKey('GROUP_PETROLCAN') ||
-            weaponGroup == GetHashKey('GROUP_STUNGUN')
+            weaponGroup == GetHashKey('GROUP_STUNGUN') ||
+            weapon.name == 'weapon_snowball' ||
+            weapon.name == 'weapon_ammo'
         ) {
             return;
         }

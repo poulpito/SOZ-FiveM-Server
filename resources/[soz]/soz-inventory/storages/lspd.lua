@@ -40,6 +40,16 @@ Config.Storages["lspd_storage"] = {
     label = "Coffre LSPD",
     type = "storage",
     owner = "lspd",
+    position = vector3(616.57, -7.69, 90.51),
+    size = vec2(2.0, 2.80),
+    heading = 158.27,
+    offsetUpZ = 2.5,
+}
+
+Config.Storages["lspd_evidence_storage"] = {
+    label = "Coffre de preuves LSPD",
+    type = "evidence_storage",
+    owner = "lspd",
     position = vector3(615.95, -15.24, 90.5),
     size = vec2(2.5, 6.5),
     heading = 160,

@@ -5,6 +5,7 @@ function InventoryItemStorage:new(options)
     local inventoryOptions = {
         type = nil,
         allowedTypes = {},
+        allowedItems = {},
         inventoryGetContentCallback = nil,
         inventoryPutContentCallback = nil,
     }
@@ -13,8 +14,8 @@ function InventoryItemStorage:new(options)
         error("InventoryItemStorage:new() - type is required")
     end
 
-    if not options.allowedTypes then
-        error("InventoryItemStorage:new() - allowedTypes is required")
+    if not options.allowedTypes and not options.allowedItems then
+        error("InventoryItemStorage:new() - allowedTypes or allowedItems is required")
     end
 
     for key, value in pairs(options) do
@@ -24,6 +25,14 @@ function InventoryItemStorage:new(options)
                 itemsType[v] = true
             end
             value = itemsType
+        end
+
+        if key == "allowedItems" then
+            local itemsName = {}
+            for _, v in pairs(value) do
+                itemsName[v] = true
+            end
+            value = itemsName
         end
 
         inventoryOptions[key] = value
@@ -65,7 +74,7 @@ function InventoryItemStorage:SyncInventory(inv)
 end
 
 function InventoryItemStorage:ItemIsAllowed(item)
-    return self.allowedTypes[item.type or ""] or false
+    return self.allowedTypes[item.type or ""] or self.allowedItems[item.name or ""] or false
 end
 
 function InventoryItemStorage:CanPlayerUseInventory(owner, playerId)

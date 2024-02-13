@@ -49,7 +49,7 @@ export const App: FunctionComponent = () => {
     useNuiEvent('global', 'PauseMenuActive', setPauseMenuActive);
     useNuiEvent('global', 'HideHud', setHideHud);
 
-    const classes = classNames('font-prompt transition-all duration-500 overflow-hidden', {
+    const classes = classNames('font-prompt transition-all duration-500', {
         'opacity-0': pauseMenuActive || hideHud,
         'opacity-100': !pauseMenuActive && !hideHud,
     });
