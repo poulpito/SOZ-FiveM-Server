@@ -567,8 +567,6 @@ export class PlayerHealthProvider {
             this.lastRunPosition = null;
         }
 
-        return;
-        //Disbased for DLC 3095, to astivate once FiveM 7310 is in stable
         const playerId = PlayerId();
         const stamina = GetPlayerStamina(playerId);
 
