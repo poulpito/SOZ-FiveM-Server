@@ -22,6 +22,8 @@ export interface Society {
     number: string;
     display: string;
     avatar?: string;
+    type: string;
+    order?: number;
 }
 
 export interface SocietyMessageInfo {
