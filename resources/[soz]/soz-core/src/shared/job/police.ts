@@ -910,7 +910,12 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                         Texture: 0,
                         Palette: 0,
                     },
-                    [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
+                    [Component.BodyArmor]: {
+                        Drawable:
+                            VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.BodyArmor] + 10,
+                        Texture: 0,
+                        Palette: 0,
+                    },
                     [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
                     [Component.Tops]: {
                         Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 2,
@@ -952,7 +957,12 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                         Texture: 0,
                         Palette: 0,
                     },
-                    [Component.BodyArmor]: { Drawable: 0, Texture: 0, Palette: 0 },
+                    [Component.BodyArmor]: {
+                        Drawable:
+                            VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.BodyArmor] + 10,
+                        Texture: 0,
+                        Palette: 0,
+                    },
                     [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
                     [Component.Tops]: {
                         Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Tops] + 2,
@@ -974,23 +984,35 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
 
 export const RankOutfit = {
     [JobType.LSPD]: {
-        [78]: [0, 0], // Officier
-        [77]: [0, 1], // Sergeant
-        [76]: [2, 0], // Lieutenant
-        [75]: [2, 1], // Captain
-        [74]: [2, 2], // Commander
-        [73]: [2, 3], // Deputy Chief
-        [30]: [2, 4], // Chief of Police
+        [78]: [7, 0], // Officier
+        [284]: [7, 1], // Caporal
+        [77]: [7, 2], // Sergeant
+        [76]: [2, 0], // Second Lieutenant
+        [285]: [2, 1], // Premier Lieutenant
+        [75]: [2, 2], // Captain
+        [74]: [2, 3], // Commander
+        [73]: [2, 4], // Deputy Chief
+        [30]: [2, 5], // Chief of Police
     },
     [JobType.BCSO]: {
-        [70]: [0, 2], // Senior
-        [69]: [0, 3], // Major
-        [68]: [2, 5], // Major Chief
-        [201]: [2, 6], // Division Sheriff - previously 67 - Assistant Sheriff
-        [66]: [2, 7], // Undersheriff
-        [38]: [1, 0], // Sheriff
+        [71]: [0, 0], // Junior
+        [70]: [0, 1], // Senior
+        [69]: [0, 2], // Major
+        [282]: [5, 0], // Second Brigadier
+        [68]: [5, 1], // Premier Brigadier
+        [283]: [5, 2], // supervisor
+        [201]: [5, 3], // Division chief
+        [66]: [5, 4], // Undersheriff
+        [38]: [5, 5], // Sheriff
     },
-    [JobType.SASP]: {},
+    [JobType.SASP]: {
+        [235]: [6, 0], // Trooper
+        [286]: [6, 1], // Corporal Trooper
+        [234]: [6, 2], // Sergeant Trooper
+        [233]: [6, 3], // Lieutenant Trooper
+        [232]: [6, 4], // Assistant Commissioner
+        [231]: [6, 5], // Commissioner
+    },
 };
 
 export const Armors = {
@@ -1063,12 +1085,12 @@ export const Armors = {
         },
         ['news']: { Drawable: 31, Texture: 2, Palette: 0 }, // is unmarked, need reskin
         ['sasp1']: {
-            Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.BodyArmor] + 8,
+            Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.BodyArmor] + 9,
             Texture: 0,
             Palette: 0,
         },
         ['sasp2']: {
-            Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.BodyArmor] + 8,
+            Drawable: VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.BodyArmor] + 8,
             Texture: 0,
             Palette: 0,
         },

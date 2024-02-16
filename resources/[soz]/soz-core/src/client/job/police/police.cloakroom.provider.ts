@@ -97,6 +97,15 @@ export class PoliceCloakRoomProvider {
                 Texture: RankOutfit[player.job.id][player.job.grade][1],
                 Palette: 0,
             };
+            if (player.job.id == JobType.SASP && configs[model]['Tenue sombre']) {
+                configs[model]['Tenue sombre'].Components[Component.Decals] = {
+                    Drawable:
+                        VanillaComponentDrawableIndexMaxValue[model][Component.Decals] +
+                        RankOutfit[player.job.id][player.job.grade][0],
+                    Texture: RankOutfit[player.job.id][player.job.grade][1],
+                    Palette: 0,
+                };
+            }
         }
 
         await this.jobCloakroomProvider.openCloakroom(storageIdToSave, configs, 'Tenue Personnalisée');

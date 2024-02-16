@@ -15,11 +15,14 @@
 13 M N/A | F Swimsuit LSMC
 
     Decalque
-0  chevron 0-4
+0  chevron BCSO 0-3 
 1  4 étoiles or 0
-2  col or et argent 0-7
+2  col BCSO 0-5
 3  épaullete stonks
 4  badge LSPD/BCSO
+5  col LSPD 0-5
+6  col SASP or 0-5
+7  chevron LSPD 0-3 
 
     Armor
 0  stonks
@@ -30,8 +33,9 @@
 5  anti-emeute LSPD/BCSO
 6  light crimi
 7  medium crimi
-8  bandoulière SASP       / femme armor SASP
-9  armor SASP
+8  bandoulière SASP       / femme armor SASP2 moche
+9  armor SASP1            / femme armor SASP1
+10 armor SASP2            / femme bandoulière SASP
 
     Undershirt
 0  stonk holster radio epaule // pas utilisé?
