@@ -16,6 +16,20 @@ export const VoiceIndicator: FunctionComponent = () => {
     useNuiEvent('hud', 'UpdateVoiceMode', setVoiceMode);
     useNuiEvent('hud', 'UpdateVoiceActive', setVoiceActive);
 
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    let rightOffset = 'right-[23vh]';
+    let bottomOffset = 'bottom-[2.5vh]';
+    let iconSize = 'w-[4vh] h-[4vh]';
+    if (aspectRatio > 3.5 && window.innerWidth > 5000) {
+        rightOffset = 'right-[122vh]';
+        iconSize = 'w-[3vh] h-[3vh]';
+        bottomOffset = 'bottom-[2vh]';
+    } else if (aspectRatio > 3.5 && window.innerWidth < 5000) {
+        rightOffset = 'right-[23vh]';
+    } else if (aspectRatio < 2 && window.innerHeight > 1080) {
+        iconSize = 'w-[3vh] h-[3vh]';
+        bottomOffset = 'bottom-[2vh]';
+    }
     const dropShadow = 'drop-shadow-[2px_2px_2px_rgba(0,0,7,0.7)]';
 
     return (
@@ -30,24 +44,24 @@ export const VoiceIndicator: FunctionComponent = () => {
                     VOIP déconnecté
                 </div>
             )}
-            <div className="fixed right-[13vw] bottom-[1.5rem] text-white/75">
+            <div className={`fixed ${bottomOffset} text-white/75 ${rightOffset}`}>
                 {voiceMode === VoiceMode.Mute && (
-                    <MuteIcon className={`w-12 h-12 animate-display-persist opacity-100 ${dropShadow}`} />
+                    <MuteIcon className={`${iconSize} animate-display-persist opacity-100 ${dropShadow}`} />
                 )}
                 {voiceMode === VoiceMode.Whisper && (
-                    <WhisperIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+                    <WhisperIcon className={`${iconSize} animate-display-in opacity-0 ${dropShadow}`} />
                 )}
                 {voiceMode === VoiceMode.Normal && (
-                    <NormalIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+                    <NormalIcon className={`${iconSize} animate-display-in opacity-0 ${dropShadow}`} />
                 )}
                 {voiceMode === VoiceMode.Shouting && (
-                    <ShoutingIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+                    <ShoutingIcon className={`${iconSize} animate-display-in opacity-0 ${dropShadow}`} />
                 )}
                 {voiceMode === VoiceMode.Megaphone && (
-                    <MegaphoneIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+                    <MegaphoneIcon className={`${iconSize} animate-display-in opacity-0 ${dropShadow}`} />
                 )}
                 {voiceMode === VoiceMode.Microphone && (
-                    <MicrophoneIcon className={`w-12 h-12 animate-display-in opacity-0 ${dropShadow}`} />
+                    <MicrophoneIcon className={`${iconSize} animate-display-in opacity-0 ${dropShadow}`} />
                 )}
             </div>
         </>
