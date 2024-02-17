@@ -23,6 +23,12 @@
 5  col LSPD 0-5
 6  col SASP or 0-5
 7  chevron LSPD 0-3 
+8  moto col BCSO
+9  moto col LSPD
+10 Hiver col LSPD
+11 Hiver col BCSO
+12 moto chevron LSPD
+13 moto chevron BCSO
 
     Armor
 0  stonks

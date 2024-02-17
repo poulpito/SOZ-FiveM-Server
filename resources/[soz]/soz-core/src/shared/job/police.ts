@@ -6,6 +6,9 @@ import { PlayerLicenceType } from '../player';
 import { Vector4 } from '../polyzone/vector';
 
 export const DUTY_OUTFIT_NAME = 'Tenue de service';
+export const WINTER = 'Tenue Hiver';
+export const SASP_DARK = 'Tenue sombre';
+export const MOTO = 'Tenue de moto';
 
 export const PrisonerClothes = {
     [joaat('mp_m_freemode_01')]: {
@@ -94,7 +97,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue Hiver']: {
+            [WINTER]: {
                 Components: {
                     [Component.Torso]: { Drawable: 1, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -176,7 +179,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue de moto']: {
+            [MOTO]: {
                 Components: {
                     [Component.Torso]: { Drawable: 22, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -284,7 +287,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue Hiver']: {
+            [WINTER]: {
                 Components: {
                     [Component.Torso]: { Drawable: 3, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -366,7 +369,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue de moto']: {
+            [MOTO]: {
                 Components: {
                     [Component.Torso]: { Drawable: 23, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -476,7 +479,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue Hiver']: {
+            [WINTER]: {
                 Components: {
                     [Component.Torso]: { Drawable: 1, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -540,7 +543,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue de moto']: {
+            [MOTO]: {
                 Components: {
                     [Component.Torso]: { Drawable: 20, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -649,7 +652,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue Hiver']: {
+            [WINTER]: {
                 Components: {
                     [Component.Torso]: { Drawable: 3, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -713,7 +716,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue de moto']: {
+            [MOTO]: {
                 Components: {
                     [Component.Torso]: { Drawable: 23, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -835,7 +838,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue sombre']: {
+            [SASP_DARK]: {
                 Components: {
                     [Component.Torso]: { Drawable: 22, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -931,7 +934,7 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                     },
                 },
             },
-            ['Tenue sombre']: {
+            [SASP_DARK]: {
                 Components: {
                     [Component.Torso]: { Drawable: 9, Texture: 0, Palette: 0 },
                     [Component.Legs]: {
@@ -982,36 +985,94 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
     },
 };
 
-export const RankOutfit = {
+export const RankOutfit: Partial<Record<JobType, Record<string, Record<number, [number, number]>>>> = {
     [JobType.LSPD]: {
-        [78]: [7, 0], // Officier
-        [284]: [7, 1], // Caporal
-        [77]: [7, 2], // Sergeant
-        [76]: [2, 0], // Second Lieutenant
-        [285]: [2, 1], // Premier Lieutenant
-        [75]: [2, 2], // Captain
-        [74]: [2, 3], // Commander
-        [73]: [2, 4], // Deputy Chief
-        [30]: [2, 5], // Chief of Police
+        [DUTY_OUTFIT_NAME]: {
+            [78]: [7, 0], // Officier
+            [284]: [7, 1], // Caporal
+            [77]: [7, 2], // Sergeant
+            [76]: [2, 0], // Second Lieutenant
+            [285]: [2, 1], // Premier Lieutenant
+            [75]: [2, 2], // Captain
+            [74]: [2, 3], // Commander
+            [73]: [2, 4], // Deputy Chief
+            [30]: [2, 5], // Chief of Police
+        },
+        [MOTO]: {
+            [78]: [7, 0], // Officier
+            [284]: [7, 1], // Caporal
+            [77]: [7, 2], // Sergeant
+            [76]: [9, 0], // Second Lieutenant
+            [285]: [9, 1], // Premier Lieutenant
+            [75]: [9, 2], // Captain
+            [74]: [9, 3], // Commander
+            [73]: [9, 4], // Deputy Chief
+            [30]: [9, 5], // Chief of Police
+        },
+        [WINTER]: {
+            [78]: [12, 0], // Officier
+            [284]: [12, 1], // Caporal
+            [77]: [12, 2], // Sergeant
+            [76]: [10, 0], // Second Lieutenant
+            [285]: [10, 1], // Premier Lieutenant
+            [75]: [10, 2], // Captain
+            [74]: [10, 3], // Commander
+            [73]: [10, 4], // Deputy Chief
+            [30]: [10, 5], // Chief of Police
+        },
     },
     [JobType.BCSO]: {
-        [71]: [0, 0], // Junior
-        [70]: [0, 1], // Senior
-        [69]: [0, 2], // Major
-        [282]: [5, 0], // Second Brigadier
-        [68]: [5, 1], // Premier Brigadier
-        [283]: [5, 2], // supervisor
-        [201]: [5, 3], // Division chief
-        [66]: [5, 4], // Undersheriff
-        [38]: [5, 5], // Sheriff
+        [DUTY_OUTFIT_NAME]: {
+            [71]: [0, 0], // Junior
+            [70]: [0, 1], // Senior
+            [69]: [0, 2], // Major
+            [282]: [5, 0], // Second Brigadier
+            [68]: [5, 1], // Premier Brigadier
+            [283]: [5, 2], // supervisor
+            [201]: [5, 3], // Division chief
+            [66]: [5, 4], // Undersheriff
+            [38]: [5, 5], // Sheriff
+        },
+        [MOTO]: {
+            [71]: [0, 0], // Junior
+            [70]: [0, 1], // Senior
+            [69]: [0, 2], // Major
+            [282]: [8, 0], // Second Brigadier
+            [68]: [8, 1], // Premier Brigadier
+            [283]: [8, 2], // supervisor
+            [201]: [8, 3], // Division chief
+            [66]: [8, 4], // Undersheriff
+            [38]: [8, 5], // Sheriff
+        },
+        [WINTER]: {
+            [71]: [13, 0], // Junior
+            [70]: [13, 1], // Senior
+            [69]: [13, 2], // Major
+            [282]: [11, 0], // Second Brigadier
+            [68]: [11, 1], // Premier Brigadier
+            [283]: [11, 2], // supervisor
+            [201]: [11, 3], // Division chief
+            [66]: [11, 4], // Undersheriff
+            [38]: [11, 5], // Sheriff
+        },
     },
     [JobType.SASP]: {
-        [235]: [6, 0], // Trooper
-        [286]: [6, 1], // Corporal Trooper
-        [234]: [6, 2], // Sergeant Trooper
-        [233]: [6, 3], // Lieutenant Trooper
-        [232]: [6, 4], // Assistant Commissioner
-        [231]: [6, 5], // Commissioner
+        [DUTY_OUTFIT_NAME]: {
+            [235]: [6, 0], // Trooper
+            [286]: [6, 1], // Corporal Trooper
+            [234]: [6, 2], // Sergeant Trooper
+            [233]: [6, 3], // Lieutenant Trooper
+            [232]: [6, 4], // Assistant Commissioner
+            [231]: [6, 5], // Commissioner
+        },
+        [SASP_DARK]: {
+            [235]: [6, 0], // Trooper
+            [286]: [6, 1], // Corporal Trooper
+            [234]: [6, 2], // Sergeant Trooper
+            [233]: [6, 3], // Lieutenant Trooper
+            [232]: [6, 4], // Assistant Commissioner
+            [231]: [6, 5], // Commissioner
+        },
     },
 };
 
