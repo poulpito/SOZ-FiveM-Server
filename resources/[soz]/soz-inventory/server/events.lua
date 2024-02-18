@@ -13,8 +13,8 @@ RegisterServerEvent("inventory:server:openInventory", function(storageType, invI
     if Inventory.AccessGranted(targetInv, Player.PlayerData.source) then
         targetInv.users[Player.PlayerData.source] = true
 
-        TriggerClientEvent("inventory:client:openInventory", Player.PlayerData.source, Inventory.FilterItems(sourceInv, targetInv.type),
-                           Inventory.FilterItems(targetInv, sourceInv.type), targetMoney)
+        TriggerLatentClientEvent("inventory:client:openInventory", Player.PlayerData.source, 16 * 1024, Inventory.FilterItems(sourceInv, targetInv.type),
+                                 Inventory.FilterItems(targetInv, sourceInv.type), targetMoney)
     else
         TriggerClientEvent("soz-core:client:notification:draw", Player.PlayerData.source, "Vous n'avez pas accès à ce stockage", "error")
     end
@@ -42,8 +42,8 @@ RegisterServerEvent("inventory:server:openItemStorage", function(slot)
     targetInv.slot = slot
     targetInv.owner = source
 
-    TriggerClientEvent("inventory:client:openInventory", Player.PlayerData.source, Inventory.FilterItems(sourceInv, targetInv.type),
-                       Inventory.FilterItems(targetInv, sourceInv.type), nil)
+    TriggerLatentClientEvent("inventory:client:openInventory", Player.PlayerData.source, 16 * 1024, Inventory.FilterItems(sourceInv, targetInv.type),
+                             Inventory.FilterItems(targetInv, sourceInv.type), nil)
 end)
 
 RegisterServerEvent("inventory:server:bin-vandalism", function(invID, ctx)

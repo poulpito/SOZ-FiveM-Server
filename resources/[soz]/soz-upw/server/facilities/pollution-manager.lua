@@ -48,7 +48,7 @@ function PollutionManager:UpdatePollution()
     local newPollutionLevel = self:GetPollutionLevel()
     if newPollutionLevel ~= previousPollutionLevel then
         TriggerEvent("soz-upw:server:onPollutionLevelChanged", newPollutionLevel, previousPollutionLevel)
-        TriggerClientEvent("soz-upw:client:onPollutionLevelChanged", -1, newPollutionLevel, previousPollutionLevel)
+        TriggerLatentClientEvent("soz-upw:client:onPollutionLevelChanged", -1, 16 * 1024, newPollutionLevel, previousPollutionLevel)
     end
 
     -- Reset buffer

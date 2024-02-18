@@ -1,7 +1,7 @@
 local eventPrefix = '__PolyZone__:'
 
 function triggerZoneEvent(eventName, ...)
-  TriggerClientEvent(eventPrefix .. eventName, -1, ...)
+  TriggerLatentClientEvent(eventPrefix .. eventName, -1, 16 * 1024, ...)
 end
 
 RegisterNetEvent("PolyZone:TriggerZoneEvent")

@@ -49,7 +49,7 @@ export class RaceProvider {
 
         this.notifier.notify(source, `Course ~g~${race.name}~s~ créée`, 'success');
 
-        TriggerClientEvent(ClientEvent.RACE_ADD_UPDATE, -1, race);
+        TriggerLatentClientEvent(ClientEvent.RACE_ADD_UPDATE, -1, 16 * 1024, race);
     }
 
     @OnEvent(ServerEvent.RACE_UPDATE)
@@ -81,7 +81,7 @@ export class RaceProvider {
 
         this.notifier.notify(source, `Course ~g~${race.name}~s~ mise à jour`, 'success');
 
-        TriggerClientEvent(ClientEvent.RACE_ADD_UPDATE, -1, race);
+        TriggerLatentClientEvent(ClientEvent.RACE_ADD_UPDATE, -1, 16 * 1024, race);
     }
 
     @OnEvent(ServerEvent.RACE_DELETE)
@@ -97,7 +97,7 @@ export class RaceProvider {
 
         this.notifier.notify(source, `Course ~g~${dbRace.name}~s~ supprimmée`, 'success');
 
-        TriggerClientEvent(ClientEvent.RACE_DELETE, -1, raceId);
+        TriggerLatentClientEvent(ClientEvent.RACE_DELETE, -1, 16 * 1024, raceId);
     }
 
     @OnEvent(ServerEvent.RACE_FINISH)

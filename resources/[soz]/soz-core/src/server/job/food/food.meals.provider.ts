@@ -159,6 +159,6 @@ export class FoodMealsProvider {
 
     private updateOrderInProgress(newValue: boolean) {
         this.orderInProgress = newValue;
-        TriggerClientEvent(ClientEvent.FOOD_UPDATE_ORDER, -1, this.orderInProgress);
+        TriggerLatentClientEvent(ClientEvent.FOOD_UPDATE_ORDER, -1, 16 * 1024, this.orderInProgress);
     }
 }

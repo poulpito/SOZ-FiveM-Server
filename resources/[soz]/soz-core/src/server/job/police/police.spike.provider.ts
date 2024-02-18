@@ -49,7 +49,7 @@ export class PoliceSpikeProvider {
         FreezeEntityPosition(spike, true);
 
         this.spikes[NetworkGetNetworkIdFromEntity(spike)] = position;
-        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPIKE, -1, this.spikes);
+        TriggerLatentClientEvent(ClientEvent.POLICE_SYNC_SPIKE, -1, 16 * 1024, this.spikes);
     }
 
     @OnEvent(ServerEvent.POLICE_REMOVE_SPIKE)
@@ -57,7 +57,7 @@ export class PoliceSpikeProvider {
         if (this.spikes[id]) {
             DeleteEntity(NetworkGetEntityFromNetworkId(id));
             delete this.spikes[id];
-            TriggerClientEvent(ClientEvent.POLICE_SYNC_SPIKE, -1, this.spikes);
+            TriggerLatentClientEvent(ClientEvent.POLICE_SYNC_SPIKE, -1, 16 * 1024, this.spikes);
         }
     }
 

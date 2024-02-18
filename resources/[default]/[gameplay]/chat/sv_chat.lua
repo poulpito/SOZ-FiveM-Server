@@ -68,7 +68,7 @@ exports('registerMode', function(modeData)
     }
 
     if not modeData.seObject then
-        TriggerClientEvent('chat:addMode', -1, clObj)
+        TriggerLatentClientEvent('chat:addMode', -1, 16 * 1024, clObj)
     else
         for _, v in ipairs(getMatchingPlayers(modeData.seObject)) do
             TriggerClientEvent('chat:addMode', v, clObj)
@@ -100,7 +100,7 @@ local function unregisterHooks(resource)
     end
 
     for _, v in ipairs(toRemove) do
-        TriggerClientEvent('chat:removeMode', -1, {
+        TriggerLatentClientEvent('chat:removeMode', -1, 16 * 1024, {
             name = v
         })
 

@@ -30,7 +30,7 @@ export class FoodHuntProvider {
         if (this.zonesValue[zoneId] >= FoodHuntConfig.noSpawnHarvestCount) {
             this.zonesValue[zoneId] = 0;
             this.zonesDespawnTime[zoneId] = Date.now() + FoodHuntConfig.noSpawnDelay;
-            TriggerClientEvent(ClientEvent.FOOD_HUNT_SYNC, -1, zoneId, this.zonesDespawnTime[zoneId]);
+            TriggerLatentClientEvent(ClientEvent.FOOD_HUNT_SYNC, -1, 16 * 1024, zoneId, this.zonesDespawnTime[zoneId]);
 
             this.monitor.publish(
                 'food_hunt_no_spawn',

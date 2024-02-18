@@ -124,6 +124,6 @@ export class ObjectProvider {
     public updateObject(object: WorldObject) {
         this.objects[object.id] = object;
 
-        TriggerClientEvent(ClientEvent.OBJECT_EDIT, -1, object);
+        TriggerLatentClientEvent(ClientEvent.OBJECT_EDIT, -1, 16 * 1024, object);
     }
 }

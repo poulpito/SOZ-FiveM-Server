@@ -156,7 +156,14 @@ export class VehicleStateService {
         }
 
         if (forwardToEveryone) {
-            TriggerClientEvent(ClientEvent.VEHICLE_UPDATE_STATE, -1, vehicleNetworkId, newState.volatile, false);
+            TriggerLatentClientEvent(
+                ClientEvent.VEHICLE_UPDATE_STATE,
+                -1,
+                16 * 1024,
+                vehicleNetworkId,
+                newState.volatile,
+                false
+            );
         } else if (owner !== excludeSource) {
             TriggerClientEvent(ClientEvent.VEHICLE_UPDATE_STATE, owner, vehicleNetworkId, newState.volatile);
         }
@@ -250,7 +257,13 @@ export class VehicleStateService {
         }
 
         if (Object.keys(conditionToAllServer).length > 0) {
-            TriggerClientEvent(ClientEvent.VEHICLE_CONDITION_SYNC, -1, vehicleNetworkId, conditionToAllServer);
+            TriggerLatentClientEvent(
+                ClientEvent.VEHICLE_CONDITION_SYNC,
+                -1,
+                16 * 1024,
+                vehicleNetworkId,
+                conditionToAllServer
+            );
         }
 
         return newState.condition;
@@ -305,12 +318,12 @@ export class VehicleStateService {
 
     public unregister(netId: number) {
         this.state.delete(netId);
-        TriggerClientEvent(ClientEvent.VEHICLE_DELETE_STATE, -1, netId);
-        TriggerClientEvent(ClientEvent.VEHICLE_CONDITION_UNREGISTER, -1, netId);
+        TriggerLatentClientEvent(ClientEvent.VEHICLE_DELETE_STATE, -1, 16 * 1024, netId);
+        TriggerLatentClientEvent(ClientEvent.VEHICLE_CONDITION_UNREGISTER, -1, 16 * 1024, netId);
 
         if (this.vehicleOpened.has(netId)) {
             this.vehicleOpened.delete(netId);
-            TriggerClientEvent(ClientEvent.VEHICLE_SET_OPEN_LIST, -1, [...this.vehicleOpened]);
+            TriggerLatentClientEvent(ClientEvent.VEHICLE_SET_OPEN_LIST, -1, 16 * 1024, [...this.vehicleOpened]);
         }
 
         this.vehicleTowProvider.unregister(netId);
@@ -364,12 +377,12 @@ export class VehicleStateService {
 
         if (isOpen && !this.vehicleOpened.has(vehicleNetworkId)) {
             this.vehicleOpened.add(vehicleNetworkId);
-            TriggerClientEvent(ClientEvent.VEHICLE_SET_OPEN_LIST, -1, [...this.vehicleOpened]);
+            TriggerLatentClientEvent(ClientEvent.VEHICLE_SET_OPEN_LIST, -1, 16 * 1024, [...this.vehicleOpened]);
         }
 
         if (!isOpen && this.vehicleOpened.has(vehicleNetworkId)) {
             this.vehicleOpened.delete(vehicleNetworkId);
-            TriggerClientEvent(ClientEvent.VEHICLE_SET_OPEN_LIST, -1, [...this.vehicleOpened]);
+            TriggerLatentClientEvent(ClientEvent.VEHICLE_SET_OPEN_LIST, -1, 16 * 1024, [...this.vehicleOpened]);
         }
     }
 
