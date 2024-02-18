@@ -17,6 +17,7 @@ import { Provider } from '../../core/decorators/provider';
 import { Logger } from '../../core/logger';
 import { TaxType } from '../../shared/bank';
 import { ClientEvent, ServerEvent } from '../../shared/event';
+import { PriceService } from '../bank/price.service';
 import { PrismaService } from '../database/prisma.service';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { Monitor } from '../monitor/monitor';
@@ -51,8 +52,11 @@ export class ShopProvider {
     @Inject(Logger)
     private logger: Logger;
 
+    @Inject(PriceService)
+    private priceService: PriceService;
+
     @OnEvent(ServerEvent.SHOP_VALIDATE_CART)
-    public async onShopMaskBuy(source: number, cartContent: CartElement[]) {
+    public async onShopBuy(source: number, cartContent: CartElement[], taxType?: TaxType) {
         const player = this.playerService.getPlayer(source);
         if (!player) {
             return;
@@ -74,8 +78,13 @@ export class ShopProvider {
             return;
         }
 
-        if (!(await this.playerMoneyService.buyHT(source, cartAmount, TaxType.SUPPLY))) {
+        const hasRemovedMoney = taxType
+            ? await this.playerMoneyService.buy(source, cartAmount, taxType)
+            : this.playerMoneyService.remove(source, cartAmount);
+
+        if (!hasRemovedMoney) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
+
             return;
         }
 
@@ -89,12 +98,19 @@ export class ShopProvider {
             }
         });
 
-        this.notifier.notify(source, `Votre achat a bien été validé ! Merci. Prix : ~g~$${cartAmount}`, 'success');
+        this.notifier.notify(
+            source,
+            `Votre achat a bien été validé ! Merci. Prix : ~g~$${await this.priceService.getPrice(
+                cartAmount,
+                taxType
+            )}`,
+            'success'
+        );
 
         this.monitor.publish(
             'Shop Buy',
             { player_source: source },
-            { cartContent: cartContent, cartPrice: cartAmount }
+            { cartContent: cartContent, cartPrice: cartAmount, taxType: taxType }
         );
     }
 
@@ -198,7 +214,10 @@ export class ShopProvider {
                 break;
         }
 
-        const notif = `Vous avez changé de ~b~${label}~s~ pour ~g~$${product.price}.`;
+        const notif = `Vous avez changé de ~b~${label}~s~ pour ~g~$${await this.priceService.getPrice(
+            product.price,
+            TaxType.SUPPLY
+        )}.`;
 
         this.notifier.notify(source, notif, 'success');
     }
@@ -247,7 +266,10 @@ export class ShopProvider {
         // Notify player
         this.notifier.notify(
             source,
-            `Vous avez acheté un.e ~b~${product.label}~s~ pour ~g~$${product.price}.`,
+            `Vous avez acheté un.e ~b~${product.label}~s~ pour ~g~$${await this.priceService.getPrice(
+                product.price,
+                TaxType.SUPPLY
+            )}.`,
             'success'
         );
     }
@@ -343,7 +365,10 @@ export class ShopProvider {
         // Notify player
         this.notifier.notify(
             source,
-            `Vous avez acheté un.e ~b~${product.label}~s~ pour ~g~$${product.price}.`,
+            `Vous avez acheté un.e ~b~${product.label}~s~ pour ~g~$${await this.priceService.getPrice(
+                product.price,
+                TaxType.SUPPLY
+            )}.`,
             'success'
         );
     }
@@ -375,7 +400,14 @@ export class ShopProvider {
             },
             false
         );
-        this.notifier.notify(source, `Vous venez de vous faire tatouer pour ~g~$${product.Price}`, 'success');
+        this.notifier.notify(
+            source,
+            `Vous venez de vous faire tatouer pour ~g~$${await this.priceService.getPrice(
+                product.Price,
+                TaxType.SUPPLY
+            )}`,
+            'success'
+        );
     }
 
     @OnEvent(ServerEvent.SHOP_TATTOO_RESET)
@@ -416,7 +448,10 @@ export class ShopProvider {
         if (this.inventoryManager.addItemToInventory(source, product.id, quantity, product.metadata)) {
             this.notifier.notify(
                 source,
-                `Vous avez acheté ~b~${quantity} ${product.item.label}~s~ pour ~g~$${product.price * quantity}`
+                `Vous avez acheté ~b~${quantity} ${product.item.label}~s~ pour ~g~$${await this.priceService.getPrice(
+                    product.price * quantity,
+                    TaxType.SUPPLY
+                )}`
             );
         } else {
             this.notifier.notify(source, `Oups, une erreur est survenue... Réessaye !`, 'error');
@@ -424,6 +459,6 @@ export class ShopProvider {
     }
 
     public async shopPay(source: number, price: number): Promise<boolean> {
-        return this.playerMoneyService.buyHT(source, price, TaxType.SUPPLY);
+        return this.playerMoneyService.buy(source, price, TaxType.SUPPLY);
     }
 }

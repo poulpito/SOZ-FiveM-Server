@@ -262,7 +262,7 @@ export class PlayerHealthProvider {
             return;
         }
 
-        if (await this.playerMoneyService.buyHT(source, 270, TaxType.SERVICE)) {
+        if (await this.playerMoneyService.buy(source, 270, TaxType.SERVICE)) {
             this.playerService.setPlayerMetadata(
                 source,
                 'gym_subscription_expire_at',

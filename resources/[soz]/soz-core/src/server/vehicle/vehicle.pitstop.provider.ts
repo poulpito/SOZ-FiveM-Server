@@ -132,7 +132,7 @@ export class VehiclePitStopProvider {
     public async onPitStop(source: number, vehicleNetworkId: number) {
         const price = await this.getPrice(vehicleNetworkId);
 
-        if (!(await this.playerMoneyService.buyHT(source, price, TaxType.SERVICE))) {
+        if (!(await this.playerMoneyService.buy(source, price, TaxType.SERVICE))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
             return;
         }

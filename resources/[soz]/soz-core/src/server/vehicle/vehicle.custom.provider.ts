@@ -8,6 +8,7 @@ import {
     VehicleConfiguration,
     VehicleModificationPricing,
 } from '../../shared/vehicle/modification';
+import { PriceService } from '../bank/price.service';
 import { PrismaService } from '../database/prisma.service';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { Notifier } from '../notifier';
@@ -32,6 +33,9 @@ export class VehicleCustomProvider {
 
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
+
+    @Inject(PriceService)
+    private priceService: PriceService;
 
     @Rpc(RpcServerEvent.VEHICLE_CUSTOM_SET_MODS)
     public async setMods(
@@ -95,7 +99,12 @@ export class VehicleCustomProvider {
         }
 
         if (price) {
-            this.notifier.notify(source, `Vous avez payé $${price.toFixed(0)} pour modifier votre véhicule.`);
+            this.notifier.notify(
+                source,
+                `Vous avez payé $${(await this.priceService.getPrice(price, TaxType.VEHICLE)).toFixed(
+                    0
+                )} pour modifier votre véhicule.`
+            );
         } else if (notify) {
             this.notifier.notify(source, 'Le véhicule a été modifié');
         }

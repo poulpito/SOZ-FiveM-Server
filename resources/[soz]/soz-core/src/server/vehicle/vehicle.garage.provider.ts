@@ -1100,7 +1100,6 @@ export class VehicleGarageProvider {
         const weight = await this.inventoryManager.getVehicleStorageWeight(playerVehicle.plate);
         const transferPrice = getTransferPrice(weight);
 
-        // @TODO Price add tax
         if (!(await this.playerMoneyService.buy(source, transferPrice, TaxType.TRAVEL))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent.", 'error');
 

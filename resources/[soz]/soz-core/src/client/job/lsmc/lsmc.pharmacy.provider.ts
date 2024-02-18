@@ -8,6 +8,7 @@ import { toVector4Object } from '@public/shared/polyzone/vector';
 import { Once, OnceStep } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
+import { TaxType } from '../../../shared/bank';
 import { ServerEvent } from '../../../shared/event';
 import { TargetFactory } from '../../target/target.factory';
 
@@ -66,7 +67,11 @@ export class LSMCPharmacyProvider {
                         label: 'Liste des médicaments',
                         icon: 'c:/ems/painkiller.png',
                         action: () => {
-                            this.inventoryManager.openShopInventory(getLsmcShopProduct(products), 'menu_shop_pharmacy');
+                            this.inventoryManager.openShopInventory(
+                                getLsmcShopProduct(products),
+                                'menu_shop_pharmacy',
+                                TaxType.SERVICE
+                            );
                         },
                     },
                     {

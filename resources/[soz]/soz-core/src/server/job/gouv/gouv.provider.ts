@@ -4,6 +4,7 @@ import { Provider } from '../../../core/decorators/provider';
 import { TaxLabel, TaxType } from '../../../shared/bank';
 import { ServerEvent } from '../../../shared/event/server';
 import { JobPermission, JobType } from '../../../shared/job';
+import { PrismaService } from '../../database/prisma.service';
 import { JobService } from '../../job.service';
 import { Notifier } from '../../notifier';
 import { PlayerService } from '../../player/player.service';
@@ -23,6 +24,9 @@ export class GouvProvider {
     @Inject(Notifier)
     private notifier: Notifier;
 
+    @Inject(PrismaService)
+    private prismaService: PrismaService;
+
     @OnEvent(ServerEvent.GOUV_UPDATE_TAX)
     public async updateTax(source: number, taxType: TaxType, value: number) {
         const player = this.playerService.getPlayer(source);
@@ -34,6 +38,12 @@ export class GouvProvider {
         if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
             return;
         }
+
+        await this.prismaService.tax.upsert({
+            where: { id: taxType },
+            update: { value },
+            create: { id: taxType, value },
+        });
 
         await this.taxRepository.set(taxType, { id: taxType, value });
 

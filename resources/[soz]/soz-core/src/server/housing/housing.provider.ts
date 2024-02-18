@@ -19,6 +19,7 @@ import { PlayerData } from '../../shared/player';
 import { getDistance, Vector3, Vector4 } from '../../shared/polyzone/vector';
 import { RpcServerEvent } from '../../shared/rpc';
 import { BankService } from '../bank/bank.service';
+import { PriceService } from '../bank/price.service';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { Monitor } from '../monitor/monitor';
 import { Notifier } from '../notifier';
@@ -68,6 +69,9 @@ export class HousingProvider {
 
     @Inject(ProgressService)
     private progressService: ProgressService;
+
+    @Inject(PriceService)
+    private priceService: PriceService;
 
     private playerTemporaryAccess = new Map<string, Set<number>>();
 
@@ -280,7 +284,7 @@ export class HousingProvider {
             return;
         }
 
-        if (!(await this.playerMoneyService.buyHT(player.source, apartment.price, TaxType.HOUSING))) {
+        if (!(await this.playerMoneyService.buy(player.source, apartment.price, TaxType.HOUSING))) {
             this.notifier.error(player.source, "Vous n'avez pas assez d'argent.");
 
             return;
@@ -303,7 +307,10 @@ export class HousingProvider {
 
         this.notifier.notify(
             player.source,
-            `Vous venez ~g~d'acquérir~s~ une maison pour ~b~$${apartment.price}.`,
+            `Vous venez ~g~d'acquérir~s~ une maison pour ~b~$${await this.priceService.getPrice(
+                apartment.price,
+                TaxType.HOUSING
+            )}.`,
             'success'
         );
     }
@@ -579,7 +586,10 @@ export class HousingProvider {
 
         this.notifier.notify(
             player.source,
-            `Vous venez ~g~d'améliorer~s~ votre appartement au palier ~g~${tier}~s~ pour ~b~$${price}~s~.`,
+            `Vous venez ~g~d'améliorer~s~ votre appartement au palier ~g~${tier}~s~ pour ~b~$${await this.priceService.getPrice(
+                price,
+                TaxType.HOUSING
+            )}~s~.`,
             'success'
         );
 
@@ -644,7 +654,10 @@ export class HousingProvider {
 
         this.notifier.notify(
             player.source,
-            `Vous venez ~g~d'ajouter~s~ une place de parking à votre caravane pour ~b~$${price}~s~.`,
+            `Vous venez ~g~d'ajouter~s~ une place de parking à votre caravane pour ~b~$${await this.priceService.getPrice(
+                price,
+                TaxType.HOUSING
+            )}~s~.`,
             'success'
         );
     }

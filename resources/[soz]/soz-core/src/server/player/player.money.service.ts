@@ -23,7 +23,12 @@ export class PlayerMoneyService {
         return this.QBCore.getPlayer(source).Functions.AddMoney(type, money);
     }
 
-    public async buyHT(source: number, money: number, tax: TaxType, type: 'money' | 'marked_money' = 'money') {
+    /**
+     * Buy something without the Tax percentage
+     *
+     * All prices should be transferred without Tax, the tax will be added automatically and only the display can be changed to display it
+     */
+    public async buy(source: number, money: number, tax: TaxType, type: 'money' | 'marked_money' = 'money') {
         if (isNaN(money)) {
             return false;
         }
@@ -33,24 +38,6 @@ export class PlayerMoneyService {
         const realMoney = money + taxMoney;
 
         const moneyRemoved = this.QBCore.getPlayer(source).Functions.RemoveMoney(type, realMoney);
-
-        if (taxMoney > 0 && moneyRemoved) {
-            this.bankService.addAccountMoney('safe_gouv', taxMoney, type, true);
-        }
-
-        return moneyRemoved;
-    }
-
-    public async buy(source: number, money: number, tax: TaxType, type: 'money' | 'marked_money' = 'money') {
-        if (isNaN(money)) {
-            return false;
-        }
-
-        const taxValue = (await this.taxRepository.getTaxValue(tax)) / 100;
-        const realMoney = Math.round(money - money * taxValue);
-        const taxMoney = money - realMoney;
-
-        const moneyRemoved = this.QBCore.getPlayer(source).Functions.RemoveMoney(type, money);
 
         if (taxMoney > 0 && moneyRemoved) {
             this.bankService.addAccountMoney('safe_gouv', taxMoney, type, true);

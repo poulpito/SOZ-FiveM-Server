@@ -1,8 +1,10 @@
 import { Logger } from '@core/logger';
+import { InventoryManager } from '@public/client/inventory/inventory.manager';
 import { ShopBrand, ShopsConfig } from '@public/config/shops';
 import { OnNuiEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
+import { TaxType } from '@public/shared/bank';
 import { NuiEvent, ServerEvent } from '@public/shared/event';
 import { MenuType } from '@public/shared/nui/menu';
 import { Vector4 } from '@public/shared/polyzone/vector';
@@ -29,6 +31,9 @@ export class SuperetteShopProvider {
     @Inject(PlayerService)
     private playerService: PlayerService;
 
+    @Inject(InventoryManager)
+    private inventoryManager: InventoryManager;
+
     @Inject(Logger)
     private logger: Logger;
 
@@ -44,7 +49,8 @@ export class SuperetteShopProvider {
                 } as SuperetteItem;
                 superetteContent.push(sharedItem);
             }
-            exports['soz-inventory'].openShop(superetteContent, 'menu_shop_supermarket'); // Superettes are handled by soz-inventory
+
+            this.inventoryManager.openShopInventory(superetteContent, 'menu_shop_supermarket', TaxType.FOOD);
         } else {
             // Zkea and Ammunation are handled by soz-core here
             const licences = this.playerService.getPlayer().metadata.licences;

@@ -6,6 +6,8 @@ import { uuidv4 } from '@public/core/utils';
 import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { MenuType } from '@public/shared/nui/menu';
 
+import { TaxType } from '../../../shared/bank';
+import { Err, Ok } from '../../../shared/result';
 import { BlipFactory } from '../../blip';
 import { NuiMenu } from '../../nui/nui.menu';
 import { PlayerService } from '../../player/player.service';
@@ -48,6 +50,33 @@ export class GouvProvider {
             sprite: 76,
             scale: 1.1,
         });
+    }
+    @OnNuiEvent(NuiEvent.GouvSetTax)
+    public async setTax({ type }: { type: TaxType }) {
+        const value = await this.inputService.askInput(
+            {
+                title: 'Pourcentage de taxe',
+                maxCharacters: 3,
+                defaultValue: '',
+            },
+            input => {
+                const inputNumber = Number(input);
+
+                if (isNaN(inputNumber) || inputNumber < 0 || inputNumber > 40) {
+                    return Err('Veuillez entrer un nombre entre 0 et 40');
+                }
+
+                return Ok(inputNumber);
+            }
+        );
+
+        if (!value) {
+            return;
+        }
+
+        const valueNumber = Number(value);
+
+        TriggerServerEvent(ServerEvent.GOUV_UPDATE_TAX, type, valueNumber);
     }
 
     @OnNuiEvent(NuiEvent.GouvAnnoncement)

@@ -34,7 +34,7 @@ export class WeaponGunsmithProvider {
             return false;
         }
 
-        if (await this.playerMoneyService.buyHT(source, WEAPON_CUSTOM_PRICE.label, TaxType.WEAPON)) {
+        if (await this.playerMoneyService.buy(source, WEAPON_CUSTOM_PRICE.label, TaxType.WEAPON)) {
             this.inventoryManager.updateMetadata(source, slot, { label: label.replace(WEAPON_NAME_REGEX, '') });
             return true;
         }
@@ -65,7 +65,7 @@ export class WeaponGunsmithProvider {
 
         const price = WEAPON_CUSTOM_PRICE.repair * Math.floor(100 - (health / maxHealth) * WEAPON_CUSTOM_PRICE.repair);
 
-        if (await this.playerMoneyService.buyHT(source, price, TaxType.WEAPON)) {
+        if (await this.playerMoneyService.buy(source, price, TaxType.WEAPON)) {
             const heal = maxHealth * REPAIR_HEALTH_REDUCER;
 
             this.inventoryManager.updateMetadata(source, slot, { maxHealth: heal, health: heal });
@@ -142,6 +142,6 @@ export class WeaponGunsmithProvider {
             return true;
         }
 
-        return this.playerMoneyService.buyHT(source, price, TaxType.WEAPON);
+        return this.playerMoneyService.buy(source, price, TaxType.WEAPON);
     }
 }

@@ -90,7 +90,7 @@ export class EasterShopProvider {
         }
 
         // @TODO Price client side
-        if (!(await this.playerMoneyService.buyHT(source, item.price, TaxType.SUPPLY))) {
+        if (!(await this.playerMoneyService.buy(source, item.price, TaxType.SUPPLY))) {
             this.notifier.notify(source, "Vous avez n'avez pas assez d'argent.", 'error');
             return;
         }

@@ -2,9 +2,11 @@ import { PlayerData } from '@public/shared/player';
 import { BarberConfiguration, BarberShopCategory, BarberShopColors, BarberShopContent } from '@public/shared/shop';
 import { FunctionComponent, useState } from 'react';
 
+import { TaxType } from '../../../shared/bank';
 import { NuiEvent } from '../../../shared/event';
 import { MenuType } from '../../../shared/nui/menu';
 import { fetchNui } from '../../fetch';
+import { useGetPrice } from '../../hook/price';
 import {
     MainMenu,
     Menu,
@@ -128,9 +130,12 @@ const MenuBarberValidateButton: FunctionComponent<{
     cat: BarberShopCategory;
     config: BarberConfiguration;
 }> = ({ cat, config }) => {
+    const getPrice = useGetPrice();
+
     if (!cat) {
         return null;
     }
+
     return (
         <MenuItemButton
             onConfirm={async () => {
@@ -143,7 +148,7 @@ const MenuBarberValidateButton: FunctionComponent<{
         >
             <div className="flex justify-between items-center">
                 <span>Valider les modifications</span>
-                <span className="mr-1">${cat.price}</span>
+                <span className="mr-1">${getPrice(cat.price, TaxType.SUPPLY)}</span>
             </div>
         </MenuItemButton>
     );

@@ -328,6 +328,7 @@ export enum NuiEvent {
     RaceUpdateGarage = 'soz-core:client:race:garage',
 
     GouvAnnoncement = 'soz-core:client:gouv:annoncement',
+    GouvSetTax = 'soz-core:nui:gouv:set-tax',
 
     SelectPlacedProp = 'soz-core:client:placement:select-placed-prop',
     SelectPropToCreate = 'soz-core:client:placement:select-prop-to-create',

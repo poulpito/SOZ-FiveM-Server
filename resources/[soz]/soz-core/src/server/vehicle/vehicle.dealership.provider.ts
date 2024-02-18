@@ -19,7 +19,7 @@ import { AuctionVehicle } from '../../shared/vehicle/auction';
 import { DealershipId } from '../../shared/vehicle/dealership';
 import { getDefaultVehicleConfiguration, VehicleConfiguration } from '../../shared/vehicle/modification';
 import { PlayerVehicleState } from '../../shared/vehicle/player.vehicle';
-import { getDefaultVehicleCondition, Vehicle } from '../../shared/vehicle/vehicle';
+import { getDefaultVehicleCondition, isVehicleModelElectric, Vehicle } from '../../shared/vehicle/vehicle';
 import { PrismaService } from '../database/prisma.service';
 import { LockService } from '../lock.service';
 import { Monitor } from '../monitor/monitor';
@@ -444,7 +444,9 @@ export class VehicleDealershipProvider {
                     }
                 }
 
-                if (!(await this.playerMoneyService.buyHT(source, vehicle.price, TaxType.VEHICLE))) {
+                const taxType = isVehicleModelElectric(vehicle.hash) ? TaxType.GREEN : TaxType.VEHICLE;
+
+                if (!(await this.playerMoneyService.buy(source, vehicle.price, taxType))) {
                     this.notifier.notify(source, `Tu n'as pas assez d'argent.`, 'error');
 
                     return false;

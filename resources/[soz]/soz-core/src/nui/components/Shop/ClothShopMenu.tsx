@@ -6,9 +6,11 @@ import { ClothingCategoryID, ClothingShop, ClothingShopCategory } from '@public/
 import { FunctionComponent, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { TaxType } from '../../../shared/bank';
 import { NuiEvent } from '../../../shared/event';
 import { MenuType } from '../../../shared/nui/menu';
 import { fetchNui } from '../../fetch';
+import { useGetPrice } from '../../hook/price';
 import {
     MainMenu,
     Menu,
@@ -34,6 +36,7 @@ type MenuClothShopStateProps = {
 export const ClothShopMenu: FunctionComponent<MenuClothShopStateProps> = ({
     catalog: { brand, shop_content, shop_categories, player_data, under_types },
 }: MenuClothShopStateProps) => {
+    const getPrice = useGetPrice();
     const [shopCategories, setShopCategories] = useState<Record<number, ClothingShopCategory>>(shop_categories);
     const [playerData, setPlayerData] = useState<PlayerData>(player_data);
 
@@ -190,13 +193,20 @@ export const ClothShopMenu: FunctionComponent<MenuClothShopStateProps> = ({
                                         onSelectedValue={async (_, item) =>
                                             await fetchNui(NuiEvent.ClothingShopPreview, item)
                                         }
-                                        descriptionValue={item => `💸 Prix : $${item.price} - 📦 Stock : ${item.stock}`}
+                                        descriptionValue={item =>
+                                            `💸 Prix : $${getPrice(item.price, TaxType.SUPPLY)} - 📦 Stock : ${
+                                                item.stock
+                                            }`
+                                        }
                                     >
                                         {items.map(item => (
                                             <MenuItemSelectOption
                                                 key={item.id}
                                                 value={item}
-                                                description={`💸 Prix : $${item.price} - 📦 Stock : ${item.stock}`}
+                                                description={`💸 Prix : $${getPrice(
+                                                    item.price,
+                                                    TaxType.SUPPLY
+                                                )} - 📦 Stock : ${item.stock}`}
                                                 disabled={item.stock == 0}
                                                 onSelected={async () =>
                                                     await fetchNui(NuiEvent.ClothingShopPreview, item)

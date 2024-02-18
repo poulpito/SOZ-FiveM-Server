@@ -57,5 +57,9 @@ export const StateApp: FunctionComponent = () => {
         dispatch.drugLocation.removeZone(data);
     });
 
+    useNuiEvent('repository', 'Set', data => {
+        dispatch.repository.set(data.type, data.data);
+    });
+
     return null;
 };
