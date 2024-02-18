@@ -4,6 +4,7 @@ import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
 import { wait } from '../../core/utils';
+import { TaxType } from '../../shared/bank';
 import { ClientEvent } from '../../shared/event/client';
 import { ServerEvent } from '../../shared/event/server';
 import {
@@ -279,7 +280,7 @@ export class HousingProvider {
             return;
         }
 
-        if (this.playerMoneyService.remove(player.source, apartment.price) === false) {
+        if (!(await this.playerMoneyService.buy(player.source, apartment.price, TaxType.HOUSING))) {
             this.notifier.error(player.source, "Vous n'avez pas assez d'argent.");
 
             return;
@@ -557,7 +558,7 @@ export class HousingProvider {
             return;
         }
 
-        if (!this.playerMoneyService.remove(player.source, price)) {
+        if (!(await this.playerMoneyService.buy(player.source, price, TaxType.HOUSING))) {
             this.notifier.error(player.source, "Vous n'avez pas assez d'argent.");
 
             return;
@@ -629,7 +630,7 @@ export class HousingProvider {
             return;
         }
 
-        if (!this.playerMoneyService.remove(player.source, price)) {
+        if (!(await this.playerMoneyService.buy(player.source, price, TaxType.HOUSING))) {
             this.notifier.error(player.source, "Vous n'avez pas assez d'argent.");
 
             return;

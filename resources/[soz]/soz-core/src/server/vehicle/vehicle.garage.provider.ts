@@ -6,6 +6,7 @@ import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
+import { TaxType } from '../../shared/bank';
 import { ServerEvent } from '../../shared/event';
 import { joaat } from '../../shared/joaat';
 import { FDO, JobPermission, JobType } from '../../shared/job';
@@ -986,7 +987,12 @@ export class VehicleGarageProvider {
                     price = Math.min(200, hours * 20);
                 }
 
-                if (!use_ticket && price !== 0 && !this.playerMoneyService.remove(source, price)) {
+                // @TODO Price add tax
+                if (
+                    !use_ticket &&
+                    price !== 0 &&
+                    !(await this.playerMoneyService.buy(source, price, TaxType.VEHICLE))
+                ) {
                     this.notifier.notify(source, "Vous n'avez pas assez d'argent.", 'error');
 
                     return;
@@ -1095,7 +1101,8 @@ export class VehicleGarageProvider {
         const weight = await this.inventoryManager.getVehicleStorageWeight(playerVehicle.plate);
         const transferPrice = getTransferPrice(weight);
 
-        if (!this.playerMoneyService.remove(source, transferPrice)) {
+        // @TODO Price add tax
+        if (!(await this.playerMoneyService.buy(source, transferPrice, TaxType.TRAVEL))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent.", 'error');
 
             return;

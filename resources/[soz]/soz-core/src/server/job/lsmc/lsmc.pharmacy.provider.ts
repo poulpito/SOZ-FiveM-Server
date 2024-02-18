@@ -10,6 +10,8 @@ import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
 import { PHARMACY_PRICES } from '@public/shared/job/lsmc';
 
+import { TaxType } from '../../../shared/bank';
+
 @Provider()
 export class LSMCPharmacyProvider {
     @Inject(InventoryManager)
@@ -36,7 +38,7 @@ export class LSMCPharmacyProvider {
             return;
         }
 
-        if (this.playerMoneyService.remove(source, price)) {
+        if (await this.playerMoneyService.buy(source, price, TaxType.SERVICE)) {
             this.bankService.addMoney('safe_' + JobType.LSMC, Math.round(price / 2));
             if (player.metadata.disease == 'grippe') {
                 this.playerService.setPlayerDisease(player.source, false);

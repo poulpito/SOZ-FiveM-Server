@@ -1,6 +1,7 @@
 import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
+import { TaxType } from '../../shared/bank';
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { toVector3Object, Vector3 } from '../../shared/polyzone/vector';
 import { ProgressAnimation, ProgressOptions } from '../../shared/progress';
@@ -270,33 +271,37 @@ export class VehicleConditionProvider {
 
     @OnEvent(ServerEvent.VEHICLE_WASH)
     public async onVehicleWash(source: number, vehicleId: number) {
-        if (this.playerMoneyService.remove(source, 50)) {
-            const { completed } = await this.progressService.progress(
-                source,
-                'cleaning_vehicle',
-                'Lavage du véhicule...',
-                10000,
-                {
-                    task: 'WORLD_HUMAN_MAID_CLEAN',
-                },
-                {
-                    disableMovement: true,
-                    disableCarMovement: true,
-                    disableMouse: false,
-                    disableCombat: true,
-                }
-            );
-            if (completed) {
-                this.vehicleStateService.updateVehicleCondition(vehicleId, {
-                    dirtLevel: 0,
-                });
-
-                this.notifier.notify(source, 'Votre véhicule a été lavé.', 'success');
-            } else {
-                this.notifier.notify(source, 'Lavage échoué.', 'error');
-            }
-        } else {
+        // @TODO Price add tax
+        if (!(await this.playerMoneyService.buy(source, 50, TaxType.VEHICLE))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
+
+            return;
+        }
+
+        const { completed } = await this.progressService.progress(
+            source,
+            'cleaning_vehicle',
+            'Lavage du véhicule...',
+            10000,
+            {
+                task: 'WORLD_HUMAN_MAID_CLEAN',
+            },
+            {
+                disableMovement: true,
+                disableCarMovement: true,
+                disableMouse: false,
+                disableCombat: true,
+            }
+        );
+
+        if (completed) {
+            this.vehicleStateService.updateVehicleCondition(vehicleId, {
+                dirtLevel: 0,
+            });
+
+            this.notifier.notify(source, 'Votre véhicule a été lavé.', 'success');
+        } else {
+            this.notifier.notify(source, 'Lavage échoué.', 'error');
         }
     }
 

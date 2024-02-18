@@ -3,6 +3,7 @@ import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { EasterShopContent } from '@public/shared/shop/easter';
 
+import { TaxType } from '../../shared/bank';
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { ItemService } from '../item/item.service';
@@ -88,7 +89,7 @@ export class EasterShopProvider {
             return;
         }
 
-        if (!this.playerMoneyService.remove(source, item.price)) {
+        if (!(await this.playerMoneyService.buy(source, item.price, TaxType.SUPPLY))) {
             this.notifier.notify(source, "Vous avez n'avez pas assez d'argent.", 'error');
             return;
         }

@@ -7,6 +7,7 @@ import { ServerEvent } from '@public/shared/event/server';
 import { RpcServerEvent } from '@public/shared/rpc';
 import axios from 'axios';
 
+import { TaxType } from '../../shared/bank';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { ItemService } from '../item/item.service';
 import { Monitor } from '../monitor/monitor';
@@ -57,13 +58,15 @@ export class UtilsProvider {
     }
 
     @OnEvent(ServerEvent.DISPENSER_BUY)
-    public onDispenserBuy(source: number, price: number, item: string, quantity: number) {
+    public async onDispenserBuy(source: number, price: number, item: string, quantity: number) {
         if (!this.inventoryManager.canCarryItem(source, item, quantity)) {
             this.notifier.notify(source, `Vous n'avez pas assez de place dans votre inventaire`, 'error');
             return;
         }
-        if (this.playerMoneyService.remove(source, price * quantity, 'money')) {
+
+        if (await this.playerMoneyService.buy(source, price * quantity, TaxType.SUPPLY)) {
             this.inventoryManager.addItemToInventory(source, item, quantity);
+
             const itemFull = this.itemService.getItem(item);
             this.notifier.notify(source, `Vous avez acheté ~g~${quantity}~s~ ~b~${itemFull.label}~s~.`, 'success');
         } else {

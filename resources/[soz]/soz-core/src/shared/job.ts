@@ -91,6 +91,7 @@ export enum JobPermission {
     FDOFedPound = 'fdo-fed-pound',
     OnDutyView = 'view-employe-on-duty',
     BennysPitStopPrice = 'pitstop-price',
+    GouvUpdateTax = 'update-tax',
 }
 
 export const JobLabel: Record<JobType, string> = {

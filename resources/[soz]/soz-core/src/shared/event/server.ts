@@ -429,4 +429,6 @@ export enum ServerEvent {
     ANIMATION_FX = 'soz-core:server:animation:fx',
 
     DISPENSER_BUY = 'soz-core:server:dispenser:buy',
+
+    GOUV_UPDATE_TAX = 'soz-core:server:gouv:update-tax',
 }

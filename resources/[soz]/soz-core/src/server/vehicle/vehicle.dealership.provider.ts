@@ -8,6 +8,7 @@ import { Once, OnceStep } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
+import { TaxType } from '../../shared/bank';
 import { ClientEvent } from '../../shared/event';
 import { JobType } from '../../shared/job';
 import { Zone } from '../../shared/polyzone/box.zone';
@@ -443,7 +444,8 @@ export class VehicleDealershipProvider {
                     }
                 }
 
-                if (!this.playerMoneyService.remove(source, vehicle.price)) {
+                // @TODO Price add tax
+                if (!(await this.playerMoneyService.buy(source, vehicle.price, TaxType.VEHICLE))) {
                     this.notifier.notify(source, `Tu n'as pas assez d'argent.`, 'error');
 
                     return false;

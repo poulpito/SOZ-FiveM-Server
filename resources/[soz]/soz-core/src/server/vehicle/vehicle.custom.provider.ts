@@ -1,6 +1,7 @@
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
+import { TaxType } from '../../shared/bank';
 import { RpcServerEvent } from '../../shared/rpc';
 import {
     getDefaultVehicleConfiguration,
@@ -78,7 +79,7 @@ export class VehicleCustomProvider {
                 return originalConfiguration;
             }
 
-            this.playerMoneyService.remove(source, price);
+            await this.playerMoneyService.buy(source, price, TaxType.VEHICLE);
         }
 
         if (playerVehicle) {

@@ -15,6 +15,7 @@ import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Logger } from '../../core/logger';
+import { TaxType } from '../../shared/bank';
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { PrismaService } from '../database/prisma.service';
 import { InventoryManager } from '../inventory/inventory.manager';
@@ -73,7 +74,7 @@ export class ShopProvider {
             return;
         }
 
-        if (!this.playerMoneyService.remove(source, cartAmount, 'money')) {
+        if (!(await this.playerMoneyService.buy(source, cartAmount, TaxType.SUPPLY))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
             return;
         }
@@ -156,7 +157,7 @@ export class ShopProvider {
     }
 
     public async shopBarberBuy(source: number, product: BarberShopItem) {
-        if (!this.shopPay(source, product.price)) {
+        if (!(await this.shopPay(source, product.price))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -203,7 +204,7 @@ export class ShopProvider {
     }
 
     public async shopJewelryBuy(source: number, product: JewelryShopItem) {
-        if (!this.shopPay(source, product.price)) {
+        if (!(await this.shopPay(source, product.price))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -263,7 +264,7 @@ export class ShopProvider {
             return;
         }
 
-        if (!this.shopPay(source, product.price)) {
+        if (!(await this.shopPay(source, product.price))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -354,7 +355,7 @@ export class ShopProvider {
             this.notifier.notify(source, `Une erreur s'est produite, désolé.`, 'error');
             return;
         }
-        if (!this.shopPay(source, product.Price)) {
+        if (!(await this.shopPay(source, product.Price))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -408,7 +409,7 @@ export class ShopProvider {
             this.notifier.notify(source, `Vous n'avez pas assez de place dans votre inventaire`, 'error');
             return;
         }
-        if (!this.shopPay(source, product.price * quantity)) {
+        if (!(await this.shopPay(source, product.price * quantity))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -422,7 +423,7 @@ export class ShopProvider {
         }
     }
 
-    public shopPay(source: number, price: number): boolean {
-        return this.playerMoneyService.remove(source, price, 'money');
+    public async shopPay(source: number, price: number): Promise<boolean> {
+        return this.playerMoneyService.buy(source, price, TaxType.SUPPLY);
     }
 }

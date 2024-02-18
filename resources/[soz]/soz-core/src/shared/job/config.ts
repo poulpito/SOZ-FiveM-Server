@@ -482,6 +482,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         platePrefix: 'GOUV',
         permissions: {
             ...BasePermissions,
+            [JobPermission.GouvUpdateTax]: { label: 'Mettre à jour les taxes' },
         },
         bossZones: [
             {

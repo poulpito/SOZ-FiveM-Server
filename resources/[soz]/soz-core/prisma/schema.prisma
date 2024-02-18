@@ -799,3 +799,8 @@ model hub_entry {
   lanternCoords  String     @db.VarChar(100)
   exitCoords     String     @db.VarChar(100)
 }
+
+model tax {
+  id          String   @id
+  value       Int      @db.Int
+}

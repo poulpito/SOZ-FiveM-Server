@@ -1,4 +1,5 @@
 import { PlayerZombieProvider } from '@public/server/player/player.zombie.provider';
+import { TaxType } from '@public/shared/bank';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
 
@@ -250,7 +251,7 @@ export class PlayerHealthProvider {
     }
 
     @OnEvent(ServerEvent.PLAYER_HEALTH_GYM_SUBSCRIBE)
-    public onGymSubscribe(source: number) {
+    public async onGymSubscribe(source: number) {
         const player = this.playerService.getPlayer(source);
 
         if (!player) {
@@ -261,7 +262,7 @@ export class PlayerHealthProvider {
             return;
         }
 
-        if (this.playerMoneyService.remove(source, 300)) {
+        if (await this.playerMoneyService.buy(source, 300, TaxType.SERVICE)) {
             this.playerService.setPlayerMetadata(
                 source,
                 'gym_subscription_expire_at',

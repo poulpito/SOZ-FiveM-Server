@@ -1,3 +1,4 @@
+import { Tax, TaxType } from '@public/shared/bank';
 import { ZoneTyped } from '@public/shared/polyzone/box.zone';
 import { SenateParty } from '@public/shared/senate';
 
@@ -31,6 +32,7 @@ export enum RepositoryType {
     StationFuel = 'stationFuel',
     StationUpw = 'stationUpw',
     Vehicle = 'vehicle',
+    Tax = 'tax',
     TowRope = 'towRope',
     Zone = 'zone',
 }
@@ -52,6 +54,7 @@ export type RepositoryMapping = {
     [RepositoryType.StationFuel]: FuelStation;
     [RepositoryType.StationUpw]: UpwStation;
     [RepositoryType.Vehicle]: Vehicle;
+    [RepositoryType.Tax]: Tax;
     [RepositoryType.TowRope]: TowRope;
     [RepositoryType.Zone]: ZoneTyped;
 };
@@ -61,6 +64,7 @@ export interface RepositoryConfig extends Record<keyof RepositoryMapping, any> {
     [RepositoryType.Housing]: Record<number, Property>;
     [RepositoryType.JobGrade]: Record<number, JobGrade>;
     [RepositoryType.SenateParty]: Record<string, SenateParty>;
+    [RepositoryType.Tax]: Record<TaxType, Tax>;
     [RepositoryType.TowRope]: Record<string, TowRope>;
     [RepositoryType.Zone]: Record<number, ZoneTyped>;
     // Not implemented
