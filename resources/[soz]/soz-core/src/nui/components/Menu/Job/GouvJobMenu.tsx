@@ -2,9 +2,11 @@ import { FunctionComponent } from 'react';
 
 import { TaxLabel, TaxType } from '../../../../shared/bank';
 import { NuiEvent } from '../../../../shared/event';
+import { JobPermission, JobType } from '../../../../shared/job';
 import { MenuType } from '../../../../shared/nui/menu';
 import { RepositoryType } from '../../../../shared/repository';
 import { fetchNui } from '../../../fetch';
+import { useHasJobPermission } from '../../../hook/job';
 import { useRepository } from '../../../hook/repository';
 import {
     MainMenu,
@@ -29,6 +31,7 @@ type MandatoryStateProps = {
 export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) => {
     const banner = 'https://nui-img/soz/menu_job_gouv';
     const taxData = useRepository(RepositoryType.Tax);
+    const allowed = useHasJobPermission(JobType.Gouv, JobPermission.GouvUpdateTax);
 
     if (!data.onDuty) {
         return (
@@ -55,30 +58,32 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
                     >
                         Faire une communication
                     </MenuItemButton>
-                    <MenuItemSubMenuLink id="tax">Gérer les taxes</MenuItemSubMenuLink>
+                    {allowed && <MenuItemSubMenuLink id="tax">Gérer les taxes</MenuItemSubMenuLink>}
                 </MenuContent>
             </MainMenu>
-            <SubMenu id="tax">
-                <MenuTitle banner={banner}>Les taxes</MenuTitle>
-                <MenuContent>
-                    {Object.values(TaxType).map(taxType => {
-                        const tax = taxData[taxType] ?? { id: taxType, value: 11 };
+            {allowed && (
+                <SubMenu id="tax">
+                    <MenuTitle banner={banner}>Les taxes</MenuTitle>
+                    <MenuContent>
+                        {Object.values(TaxType).map(taxType => {
+                            const tax = taxData[taxType] ?? { id: taxType, value: 11 };
 
-                        return (
-                            <MenuItemButton
-                                key={tax.id}
-                                onConfirm={() => {
-                                    fetchNui(NuiEvent.GouvSetTax, {
-                                        type: tax.id,
-                                    });
-                                }}
-                            >
-                                {TaxLabel[tax.id]}: {tax.value}%
-                            </MenuItemButton>
-                        );
-                    })}
-                </MenuContent>
-            </SubMenu>
+                            return (
+                                <MenuItemButton
+                                    key={tax.id}
+                                    onConfirm={() => {
+                                        fetchNui(NuiEvent.GouvSetTax, {
+                                            type: tax.id,
+                                        });
+                                    }}
+                                >
+                                    {TaxLabel[tax.id]}: {tax.value}%
+                                </MenuItemButton>
+                            );
+                        })}
+                    </MenuContent>
+                </SubMenu>
+            )}
         </Menu>
     );
 };
