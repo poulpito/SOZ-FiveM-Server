@@ -271,8 +271,7 @@ export class VehicleConditionProvider {
 
     @OnEvent(ServerEvent.VEHICLE_WASH)
     public async onVehicleWash(source: number, vehicleId: number) {
-        // @TODO Price add tax
-        if (!(await this.playerMoneyService.buy(source, 50, TaxType.VEHICLE))) {
+        if (!(await this.playerMoneyService.buyHT(source, 45, TaxType.VEHICLE))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
 
             return;

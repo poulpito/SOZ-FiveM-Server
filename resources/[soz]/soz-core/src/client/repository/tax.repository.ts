@@ -1,5 +1,5 @@
 import { Injectable } from '../../core/decorators/injectable';
-import { TaxType } from '../../shared/bank';
+import { DEFAULT_TAX_PERCENTAGE, TaxType } from '../../shared/bank';
 import { RepositoryType } from '../../shared/repository';
 import { Repository } from './repository';
 
@@ -11,7 +11,7 @@ export class TaxRepository extends Repository<RepositoryType.Tax> {
         const tax = this.find(taxType);
 
         if (!tax) {
-            return 0;
+            return DEFAULT_TAX_PERCENTAGE;
         }
 
         return tax.value;

@@ -280,7 +280,7 @@ export class HousingProvider {
             return;
         }
 
-        if (!(await this.playerMoneyService.buy(player.source, apartment.price, TaxType.HOUSING))) {
+        if (!(await this.playerMoneyService.buyHT(player.source, apartment.price, TaxType.HOUSING))) {
             this.notifier.error(player.source, "Vous n'avez pas assez d'argent.");
 
             return;
@@ -537,6 +537,7 @@ export class HousingProvider {
 
     @OnEvent(ServerEvent.HOUSING_UPGRADE_APARTMENT_TIER)
     public async upgradeTier(source: number, tier: number, price: number, zkeaAmount: number) {
+        // @TODO Price client side
         const player = this.playerService.getPlayer(source);
 
         if (!player) {
@@ -605,6 +606,7 @@ export class HousingProvider {
 
     @OnEvent(ServerEvent.HOUSING_ADD_PARKING_PLACE)
     public async addParkingPlace(source: number, hasParking: boolean, price: number) {
+        // @TODO Price client side
         const player = this.playerService.getPlayer(source);
 
         if (!player) {

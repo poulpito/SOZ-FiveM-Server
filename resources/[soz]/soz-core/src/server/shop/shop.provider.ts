@@ -74,7 +74,7 @@ export class ShopProvider {
             return;
         }
 
-        if (!(await this.playerMoneyService.buy(source, cartAmount, TaxType.SUPPLY))) {
+        if (!(await this.playerMoneyService.buyHT(source, cartAmount, TaxType.SUPPLY))) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
             return;
         }
@@ -424,6 +424,6 @@ export class ShopProvider {
     }
 
     public async shopPay(source: number, price: number): Promise<boolean> {
-        return this.playerMoneyService.buy(source, price, TaxType.SUPPLY);
+        return this.playerMoneyService.buyHT(source, price, TaxType.SUPPLY);
     }
 }

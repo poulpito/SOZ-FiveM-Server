@@ -4,19 +4,19 @@ export const HousingTiers = {
         zkeaPrice: 0,
     },
     1: {
-        pricePercent: 20,
-        zkeaPrice: 20,
+        pricePercent: 18,
+        zkeaPrice: 18,
     },
     2: {
-        pricePercent: 45,
-        zkeaPrice: 45,
+        pricePercent: 41,
+        zkeaPrice: 41,
     },
     3: {
-        pricePercent: 70,
-        zkeaPrice: 80,
+        pricePercent: 63,
+        zkeaPrice: 72,
     },
     4: {
-        pricePercent: 100,
-        zkeaPrice: 100,
+        pricePercent: 90,
+        zkeaPrice: 90,
     },
 };

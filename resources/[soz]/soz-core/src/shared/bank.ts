@@ -38,3 +38,5 @@ export type Tax = {
     id: TaxType;
     value: number;
 };
+
+export const DEFAULT_TAX_PERCENTAGE = 11;

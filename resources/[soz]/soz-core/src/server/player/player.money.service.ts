@@ -23,6 +23,24 @@ export class PlayerMoneyService {
         return this.QBCore.getPlayer(source).Functions.AddMoney(type, money);
     }
 
+    public async buyHT(source: number, money: number, tax: TaxType, type: 'money' | 'marked_money' = 'money') {
+        if (isNaN(money)) {
+            return false;
+        }
+
+        const taxValue = (await this.taxRepository.getTaxValue(tax)) / 100;
+        const taxMoney = Math.round(money * taxValue);
+        const realMoney = money + taxMoney;
+
+        const moneyRemoved = this.QBCore.getPlayer(source).Functions.RemoveMoney(type, realMoney);
+
+        if (taxMoney > 0 && moneyRemoved) {
+            this.bankService.addAccountMoney('safe_gouv', taxMoney, type, true);
+        }
+
+        return moneyRemoved;
+    }
+
     public async buy(source: number, money: number, tax: TaxType, type: 'money' | 'marked_money' = 'money') {
         if (isNaN(money)) {
             return false;

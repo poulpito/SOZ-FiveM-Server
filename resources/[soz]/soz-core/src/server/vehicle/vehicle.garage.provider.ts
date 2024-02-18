@@ -987,7 +987,6 @@ export class VehicleGarageProvider {
                     price = Math.min(200, hours * 20);
                 }
 
-                // @TODO Price add tax
                 if (
                     !use_ticket &&
                     price !== 0 &&

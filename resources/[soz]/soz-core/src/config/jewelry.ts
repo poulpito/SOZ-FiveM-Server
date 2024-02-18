@@ -13,7 +13,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 1,
         propId: 2,
         overlay: 'Ear',
-        price: 50,
+        price: 45,
         items: {
             Oreilles: {
                 '0': {
@@ -251,7 +251,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 2,
         propId: 1,
         overlay: 'Glasses',
-        price: 50,
+        price: 45,
         items: {
             'Lunette de Soleil': {
                 '0': {
@@ -1805,7 +1805,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 3,
         propId: 0,
         overlay: 'Head',
-        price: 50,
+        price: 45,
         items: {
             Bonnets: {
                 '5': {
@@ -5495,7 +5495,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 4,
         propId: 0,
         overlay: 'Helmet',
-        price: 50,
+        price: 45,
         items: {
             Casques: {
                 '16': {
@@ -6391,7 +6391,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 5,
         propId: 6,
         overlay: 'LeftHand',
-        price: 50,
+        price: 45,
         items: {
             Montre: {
                 '0': {
@@ -6901,7 +6901,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 6,
         propId: 7,
         overlay: 'RightHand',
-        price: 50,
+        price: 45,
         items: {
             Bracelet: {
                 '0': {
@@ -7063,7 +7063,7 @@ export const FemaleJewelryItems: ShopJewelryContent = {
         categoryId: 7,
         componentId: 7,
         overlay: 'Neck',
-        price: 50,
+        price: 45,
         items: {
             Colliers: {
                 '6': {
@@ -7786,7 +7786,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 1,
         propId: 2,
         overlay: 'Ear',
-        price: 50,
+        price: 45,
         items: {
             Oreilles: {
                 '0': {
@@ -8328,7 +8328,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 2,
         propId: 1,
         overlay: 'Glasses',
-        price: 50,
+        price: 45,
         items: {
             'Lunette de Soleil': {
                 '1': {
@@ -9866,7 +9866,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 3,
         propId: 0,
         overlay: 'Head',
-        price: 50,
+        price: 45,
         items: {
             Bonnets: {
                 '2': {
@@ -13442,7 +13442,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 4,
         propId: 0,
         overlay: 'Helmet',
-        price: 50,
+        price: 45,
         items: {
             Casques: {
                 '16': {
@@ -14404,7 +14404,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 5,
         propId: 6,
         overlay: 'LeftHand',
-        price: 50,
+        price: 45,
         items: {
             Montre: {
                 '0': {
@@ -15072,7 +15072,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 6,
         propId: 7,
         overlay: 'RightHand',
-        price: 50,
+        price: 45,
         items: {
             Bracelet: {
                 '0': {
@@ -15192,7 +15192,7 @@ export const MaleJewelryItems: ShopJewelryContent = {
         categoryId: 7,
         componentId: 7,
         overlay: 'Neck',
-        price: 50,
+        price: 45,
         items: {
             Colliers: {
                 '113': {

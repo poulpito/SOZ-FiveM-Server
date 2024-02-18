@@ -292,7 +292,7 @@ export const PHARMACY_PRICES = {
     pommade: 125,
     painkiller: 125,
     antiacide: 125,
-    heal: 400,
+    heal: 360,
     health_book: 50,
 };
 

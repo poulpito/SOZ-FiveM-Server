@@ -42,6 +42,7 @@ export class VehicleCustomProvider {
         price: number | null = null,
         notify = true
     ) {
+        // @TODO Price client side
         const state = this.vehicleStateService.getVehicleState(vehicleNetworkId);
 
         const playerVehicle = state.volatile.id

@@ -9,9 +9,9 @@ import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { TargetFactory } from '../target/target.factory';
 
-const dispenser_eat_price = 10;
-const dispenser_drink_price = 10;
-const dispenser_cafe_price = 10;
+const dispenser_eat_price = 9;
+const dispenser_drink_price = 9;
+const dispenser_cafe_price = 9;
 
 const vending_machine_drink = ['prop_vend_soda_01', 'prop_vend_soda_02', 'prop_watercooler_dark', 'prop_watercooler'];
 const vending_machine_food = ['prop_vend_snak_01', 'prop_vend_snak_01_tu'];

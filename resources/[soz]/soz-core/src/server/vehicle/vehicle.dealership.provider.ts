@@ -444,8 +444,7 @@ export class VehicleDealershipProvider {
                     }
                 }
 
-                // @TODO Price add tax
-                if (!(await this.playerMoneyService.buy(source, vehicle.price, TaxType.VEHICLE))) {
+                if (!(await this.playerMoneyService.buyHT(source, vehicle.price, TaxType.VEHICLE))) {
                     this.notifier.notify(source, `Tu n'as pas assez d'argent.`, 'error');
 
                     return false;
