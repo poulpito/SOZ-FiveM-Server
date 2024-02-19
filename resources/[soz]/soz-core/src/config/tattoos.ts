@@ -7,7 +7,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_000_M',
         HashNameFemale: 'MP_Airraces_Tattoo_000_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_001',
@@ -15,7 +15,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_001_M',
         HashNameFemale: 'MP_Airraces_Tattoo_001_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_002',
@@ -23,7 +23,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_002_M',
         HashNameFemale: 'MP_Airraces_Tattoo_002_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_003',
@@ -31,7 +31,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_003_M',
         HashNameFemale: 'MP_Airraces_Tattoo_003_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_004',
@@ -39,7 +39,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_004_M',
         HashNameFemale: 'MP_Airraces_Tattoo_004_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_005',
@@ -48,7 +48,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameFemale: 'MP_Airraces_Tattoo_005_F',
         LocalizedName: 'Ah! La belle étoile!',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_006',
@@ -56,7 +56,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_006_M',
         HashNameFemale: 'MP_Airraces_Tattoo_006_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AR_007',
@@ -64,7 +64,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Airraces_Tattoo_007_M',
         HashNameFemale: 'MP_Airraces_Tattoo_007_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_018',
@@ -72,7 +72,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Back_000',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_019',
@@ -80,7 +80,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Chest_000',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_020',
@@ -88,7 +88,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Chest_001',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_021',
@@ -96,7 +96,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Head_000',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_022',
@@ -104,7 +104,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Head_001',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_031',
@@ -112,7 +112,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Head_002',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_027',
@@ -120,7 +120,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Lleg_000',
         HashNameFemale: '',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_025',
@@ -128,7 +128,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Rleg_000',
         HashNameFemale: '',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_026',
@@ -136,7 +136,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_RArm_000',
         HashNameFemale: '',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_024',
@@ -144,7 +144,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_LArm_000',
         HashNameFemale: '',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_017',
@@ -152,7 +152,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_LArm_001',
         HashNameFemale: '',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_028',
@@ -160,7 +160,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Neck_000',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_029',
@@ -168,7 +168,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Neck_001',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_030',
@@ -176,7 +176,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_RArm_001',
         HashNameFemale: '',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_023',
@@ -184,7 +184,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Stom_000',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_032',
@@ -192,7 +192,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Bea_M_Stom_001',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_003',
@@ -200,7 +200,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Back_000',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_001',
@@ -208,7 +208,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Back_001',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_005',
@@ -216,7 +216,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Back_002',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_012',
@@ -224,7 +224,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Chest_000',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_013',
@@ -232,7 +232,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Chest_001',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_000',
@@ -240,7 +240,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Chest_002',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_006',
@@ -248,7 +248,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_RSide_000',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_007',
@@ -256,7 +256,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_RLeg_000',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_015',
@@ -264,7 +264,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_RArm_001',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_008',
@@ -272,7 +272,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Neck_000',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_011',
@@ -280,7 +280,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Should_000',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_004',
@@ -288,7 +288,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Should_001',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_014',
@@ -296,7 +296,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Stom_000',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_009',
@@ -304,7 +304,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Stom_001',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_010',
@@ -312,7 +312,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_Stom_002',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_002',
@@ -320,7 +320,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_LArm_000',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BB_016',
@@ -328,7 +328,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Bea_F_LArm_001',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_000',
@@ -336,7 +336,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_000_M',
         HashNameFemale: 'MP_MP_Biker_Tat_000_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_001',
@@ -344,7 +344,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_001_M',
         HashNameFemale: 'MP_MP_Biker_Tat_001_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_002',
@@ -352,7 +352,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_002_M',
         HashNameFemale: 'MP_MP_Biker_Tat_002_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_003',
@@ -360,7 +360,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_003_M',
         HashNameFemale: 'MP_MP_Biker_Tat_003_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_004',
@@ -368,7 +368,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_004_M',
         HashNameFemale: 'MP_MP_Biker_Tat_004_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_005',
@@ -376,7 +376,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_005_M',
         HashNameFemale: 'MP_MP_Biker_Tat_005_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_006',
@@ -384,7 +384,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_006_M',
         HashNameFemale: 'MP_MP_Biker_Tat_006_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_007',
@@ -392,7 +392,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_007_M',
         HashNameFemale: 'MP_MP_Biker_Tat_007_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_008',
@@ -400,7 +400,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_008_M',
         HashNameFemale: 'MP_MP_Biker_Tat_008_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_009',
@@ -408,7 +408,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_009_M',
         HashNameFemale: 'MP_MP_Biker_Tat_009_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_010',
@@ -416,7 +416,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_010_M',
         HashNameFemale: 'MP_MP_Biker_Tat_010_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_011',
@@ -424,7 +424,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_011_M',
         HashNameFemale: 'MP_MP_Biker_Tat_011_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_012',
@@ -432,7 +432,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_012_M',
         HashNameFemale: 'MP_MP_Biker_Tat_012_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_013',
@@ -440,7 +440,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_013_M',
         HashNameFemale: 'MP_MP_Biker_Tat_013_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_014',
@@ -448,7 +448,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_014_M',
         HashNameFemale: 'MP_MP_Biker_Tat_014_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_015',
@@ -456,7 +456,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_015_M',
         HashNameFemale: 'MP_MP_Biker_Tat_015_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_016',
@@ -464,7 +464,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_016_M',
         HashNameFemale: 'MP_MP_Biker_Tat_016_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_017',
@@ -472,7 +472,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_017_M',
         HashNameFemale: 'MP_MP_Biker_Tat_017_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_018',
@@ -480,7 +480,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_018_M',
         HashNameFemale: 'MP_MP_Biker_Tat_018_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_019',
@@ -488,7 +488,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_019_M',
         HashNameFemale: 'MP_MP_Biker_Tat_019_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_020',
@@ -496,7 +496,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_020_M',
         HashNameFemale: 'MP_MP_Biker_Tat_020_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_021',
@@ -504,7 +504,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_021_M',
         HashNameFemale: 'MP_MP_Biker_Tat_021_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_022',
@@ -512,7 +512,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_022_M',
         HashNameFemale: 'MP_MP_Biker_Tat_022_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_023',
@@ -520,7 +520,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_023_M',
         HashNameFemale: 'MP_MP_Biker_Tat_023_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_024',
@@ -528,7 +528,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_024_M',
         HashNameFemale: 'MP_MP_Biker_Tat_024_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_025',
@@ -536,7 +536,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_025_M',
         HashNameFemale: 'MP_MP_Biker_Tat_025_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_026',
@@ -544,7 +544,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_026_M',
         HashNameFemale: 'MP_MP_Biker_Tat_026_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_027',
@@ -552,7 +552,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_027_M',
         HashNameFemale: 'MP_MP_Biker_Tat_027_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_028',
@@ -560,7 +560,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_028_M',
         HashNameFemale: 'MP_MP_Biker_Tat_028_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_029',
@@ -568,7 +568,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_029_M',
         HashNameFemale: 'MP_MP_Biker_Tat_029_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_030',
@@ -576,7 +576,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_030_M',
         HashNameFemale: 'MP_MP_Biker_Tat_030_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_031',
@@ -584,7 +584,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_031_M',
         HashNameFemale: 'MP_MP_Biker_Tat_031_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_032',
@@ -592,7 +592,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_032_M',
         HashNameFemale: 'MP_MP_Biker_Tat_032_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_033',
@@ -600,7 +600,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_033_M',
         HashNameFemale: 'MP_MP_Biker_Tat_033_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_034',
@@ -608,7 +608,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_034_M',
         HashNameFemale: 'MP_MP_Biker_Tat_034_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_035',
@@ -616,7 +616,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_035_M',
         HashNameFemale: 'MP_MP_Biker_Tat_035_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_036',
@@ -624,7 +624,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_036_M',
         HashNameFemale: 'MP_MP_Biker_Tat_036_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_037',
@@ -632,7 +632,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_037_M',
         HashNameFemale: 'MP_MP_Biker_Tat_037_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_038',
@@ -640,7 +640,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_038_M',
         HashNameFemale: 'MP_MP_Biker_Tat_038_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_039',
@@ -648,7 +648,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_039_M',
         HashNameFemale: 'MP_MP_Biker_Tat_039_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_040',
@@ -656,7 +656,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_040_M',
         HashNameFemale: 'MP_MP_Biker_Tat_040_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_041',
@@ -664,7 +664,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_041_M',
         HashNameFemale: 'MP_MP_Biker_Tat_041_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_042',
@@ -672,7 +672,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_042_M',
         HashNameFemale: 'MP_MP_Biker_Tat_042_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_043',
@@ -680,7 +680,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_043_M',
         HashNameFemale: 'MP_MP_Biker_Tat_043_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_044',
@@ -688,7 +688,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_044_M',
         HashNameFemale: 'MP_MP_Biker_Tat_044_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_045',
@@ -696,7 +696,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_045_M',
         HashNameFemale: 'MP_MP_Biker_Tat_045_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_046',
@@ -704,7 +704,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_046_M',
         HashNameFemale: 'MP_MP_Biker_Tat_046_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_047',
@@ -712,7 +712,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_047_M',
         HashNameFemale: 'MP_MP_Biker_Tat_047_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_048',
@@ -720,7 +720,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_048_M',
         HashNameFemale: 'MP_MP_Biker_Tat_048_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_049',
@@ -728,7 +728,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_049_M',
         HashNameFemale: 'MP_MP_Biker_Tat_049_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_050',
@@ -736,7 +736,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_050_M',
         HashNameFemale: 'MP_MP_Biker_Tat_050_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_051',
@@ -744,7 +744,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_051_M',
         HashNameFemale: 'MP_MP_Biker_Tat_051_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_052',
@@ -752,7 +752,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_052_M',
         HashNameFemale: 'MP_MP_Biker_Tat_052_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_053',
@@ -760,7 +760,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_053_M',
         HashNameFemale: 'MP_MP_Biker_Tat_053_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_054',
@@ -768,7 +768,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_054_M',
         HashNameFemale: 'MP_MP_Biker_Tat_054_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_055',
@@ -776,7 +776,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_055_M',
         HashNameFemale: 'MP_MP_Biker_Tat_055_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_056',
@@ -784,7 +784,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_056_M',
         HashNameFemale: 'MP_MP_Biker_Tat_056_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_057',
@@ -792,7 +792,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_057_M',
         HashNameFemale: 'MP_MP_Biker_Tat_057_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_058',
@@ -800,7 +800,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_058_M',
         HashNameFemale: 'MP_MP_Biker_Tat_058_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_059',
@@ -808,7 +808,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_059_M',
         HashNameFemale: 'MP_MP_Biker_Tat_059_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BI_060',
@@ -816,7 +816,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Biker_Tat_060_M',
         HashNameFemale: 'MP_MP_Biker_Tat_060_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_005',
@@ -824,7 +824,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Neck_000',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_006',
@@ -832,7 +832,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Neck_001',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_007',
@@ -840,7 +840,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Neck_002',
         HashNameFemale: '',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_008',
@@ -849,7 +849,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameFemale: '',
         LocalizedName: '100$',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_003',
@@ -858,7 +858,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameFemale: '',
         LocalizedName: 'Billet de 100$',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_004',
@@ -866,7 +866,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_LeftArm_001',
         HashNameFemale: '',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_009',
@@ -874,7 +874,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_RightArm_000',
         HashNameFemale: '',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_010',
@@ -882,7 +882,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_RightArm_001',
         HashNameFemale: '',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_011',
@@ -890,7 +890,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Stomach_000',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_001',
@@ -898,7 +898,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Chest_000',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_002',
@@ -906,7 +906,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Chest_001',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_000',
@@ -914,7 +914,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Buis_M_Back_000',
         HashNameFemale: '',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_002',
@@ -922,7 +922,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Chest_000',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_003',
@@ -930,7 +930,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Chest_001',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_004',
@@ -938,7 +938,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Chest_002',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_011',
@@ -946,7 +946,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Stom_000',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_012',
@@ -954,7 +954,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Stom_001',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_013',
@@ -962,7 +962,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Stom_002',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_000',
@@ -970,7 +970,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Back_000',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_001',
@@ -978,7 +978,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Back_001',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_007',
@@ -986,7 +986,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Neck_000',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_008',
@@ -994,7 +994,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_Neck_001',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_009',
@@ -1002,7 +1002,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_RArm_000',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_005',
@@ -1010,7 +1010,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_LArm_000',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_006',
@@ -1018,7 +1018,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_LLeg_000',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_BUS_F_010',
@@ -1026,7 +1026,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: '',
         HashNameFemale: 'MP_Buis_F_RLeg_000',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_000',
@@ -1034,7 +1034,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_000_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_000_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_001',
@@ -1042,7 +1042,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_001_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_001_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_002',
@@ -1050,7 +1050,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_002_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_002_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_003',
@@ -1058,7 +1058,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_003_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_003_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_004',
@@ -1066,7 +1066,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_004_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_004_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_005',
@@ -1074,7 +1074,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_005_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_005_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_006',
@@ -1082,7 +1082,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_006_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_006_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_007',
@@ -1090,7 +1090,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_007_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_007_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_008',
@@ -1098,7 +1098,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_008_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_008_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_009',
@@ -1106,7 +1106,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_009_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_009_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_010',
@@ -1114,7 +1114,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_010_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_010_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_011',
@@ -1122,7 +1122,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_011_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_011_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_012',
@@ -1130,7 +1130,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_012_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_012_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_013',
@@ -1138,7 +1138,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_013_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_013_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_014',
@@ -1146,7 +1146,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_014_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_014_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_015',
@@ -1154,7 +1154,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_015_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_015_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_016',
@@ -1162,7 +1162,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_016_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_016_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_017',
@@ -1170,7 +1170,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_017_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_017_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_018',
@@ -1178,7 +1178,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_018_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_018_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_019',
@@ -1186,7 +1186,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_019_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_019_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_020',
@@ -1194,7 +1194,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_020_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_020_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_021',
@@ -1202,7 +1202,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_021_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_021_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_022',
@@ -1210,7 +1210,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_022_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_022_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_023',
@@ -1218,7 +1218,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_023_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_023_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_024',
@@ -1226,7 +1226,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_024_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_024_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_025',
@@ -1234,7 +1234,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_025_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_025_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_026',
@@ -1242,7 +1242,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_026_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_026_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_027',
@@ -1250,7 +1250,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_027_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_027_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_028',
@@ -1258,7 +1258,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_028_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_028_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H27_029',
@@ -1266,7 +1266,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2017_Tattoo_029_M',
         HashNameFemale: 'MP_Christmas2017_Tattoo_029_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_AW_000',
@@ -1274,7 +1274,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Christmas2018_Tat_000_M',
         HashNameFemale: 'MP_Christmas2018_Tat_000_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_000',
@@ -1282,7 +1282,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_000',
         HashNameFemale: 'MP_Xmas2_F_Tat_000',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_001',
@@ -1290,7 +1290,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_001',
         HashNameFemale: 'MP_Xmas2_F_Tat_001',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_002',
@@ -1298,7 +1298,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_002',
         HashNameFemale: 'MP_Xmas2_F_Tat_002',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_003',
@@ -1306,7 +1306,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_003',
         HashNameFemale: 'MP_Xmas2_F_Tat_003',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_004',
@@ -1314,7 +1314,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_004',
         HashNameFemale: 'MP_Xmas2_F_Tat_004',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_005',
@@ -1322,7 +1322,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_005',
         HashNameFemale: 'MP_Xmas2_F_Tat_005',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_006',
@@ -1330,7 +1330,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_006',
         HashNameFemale: 'MP_Xmas2_F_Tat_006',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_007',
@@ -1338,7 +1338,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_007',
         HashNameFemale: 'MP_Xmas2_F_Tat_007',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_008',
@@ -1346,7 +1346,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_008',
         HashNameFemale: 'MP_Xmas2_F_Tat_008',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_009',
@@ -1354,7 +1354,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_009',
         HashNameFemale: 'MP_Xmas2_F_Tat_009',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_010',
@@ -1362,7 +1362,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_010',
         HashNameFemale: 'MP_Xmas2_F_Tat_010',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_011',
@@ -1370,7 +1370,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_011',
         HashNameFemale: 'MP_Xmas2_F_Tat_011',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_012',
@@ -1378,7 +1378,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_012',
         HashNameFemale: 'MP_Xmas2_F_Tat_012',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_013',
@@ -1386,7 +1386,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_013',
         HashNameFemale: 'MP_Xmas2_F_Tat_013',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_014',
@@ -1394,7 +1394,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_014',
         HashNameFemale: 'MP_Xmas2_F_Tat_014',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_015',
@@ -1402,7 +1402,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_015',
         HashNameFemale: 'MP_Xmas2_F_Tat_015',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_016',
@@ -1410,7 +1410,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_016',
         HashNameFemale: 'MP_Xmas2_F_Tat_016',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_017',
@@ -1418,7 +1418,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_017',
         HashNameFemale: 'MP_Xmas2_F_Tat_017',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_018',
@@ -1426,7 +1426,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_018',
         HashNameFemale: 'MP_Xmas2_F_Tat_018',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_019',
@@ -1434,7 +1434,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_019',
         HashNameFemale: 'MP_Xmas2_F_Tat_019',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_020',
@@ -1442,7 +1442,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_020',
         HashNameFemale: 'MP_Xmas2_F_Tat_020',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_021',
@@ -1450,7 +1450,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_021',
         HashNameFemale: 'MP_Xmas2_F_Tat_021',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_022',
@@ -1458,7 +1458,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_022',
         HashNameFemale: 'MP_Xmas2_F_Tat_022',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_023',
@@ -1466,7 +1466,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_023',
         HashNameFemale: 'MP_Xmas2_F_Tat_023',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_024',
@@ -1474,7 +1474,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_024',
         HashNameFemale: 'MP_Xmas2_F_Tat_024',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_025',
@@ -1482,7 +1482,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_025',
         HashNameFemale: 'MP_Xmas2_F_Tat_025',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_026',
@@ -1490,7 +1490,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_026',
         HashNameFemale: 'MP_Xmas2_F_Tat_026',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_027',
@@ -1498,7 +1498,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_027',
         HashNameFemale: 'MP_Xmas2_F_Tat_027',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_028',
@@ -1506,7 +1506,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_028',
         HashNameFemale: 'MP_Xmas2_F_Tat_028',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_X2_029',
@@ -1514,7 +1514,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Xmas2_M_Tat_029',
         HashNameFemale: 'MP_Xmas2_F_Tat_029',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_000',
@@ -1522,7 +1522,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_000_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_000_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_001',
@@ -1530,7 +1530,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_001_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_001_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_002',
@@ -1538,7 +1538,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_002_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_002_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_003',
@@ -1546,7 +1546,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_003_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_003_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_004',
@@ -1554,7 +1554,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_004_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_004_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_005',
@@ -1562,7 +1562,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_005_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_005_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_006',
@@ -1570,7 +1570,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_006_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_006_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_007',
@@ -1578,7 +1578,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_007_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_007_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_008',
@@ -1586,7 +1586,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_008_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_008_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_009',
@@ -1594,7 +1594,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_009_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_009_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_010',
@@ -1602,7 +1602,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_010_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_010_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_011',
@@ -1610,7 +1610,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_011_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_011_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_012',
@@ -1618,7 +1618,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_012_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_012_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_013',
@@ -1626,7 +1626,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_013_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_013_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_014',
@@ -1634,7 +1634,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_014_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_014_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_015',
@@ -1642,7 +1642,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_015_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_015_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_016',
@@ -1650,7 +1650,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_016_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_016_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_017',
@@ -1658,7 +1658,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_017_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_017_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_018',
@@ -1666,7 +1666,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_018_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_018_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_019',
@@ -1674,7 +1674,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_019_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_019_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_020',
@@ -1682,7 +1682,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_020_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_020_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_021',
@@ -1690,7 +1690,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_021_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_021_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_022',
@@ -1698,7 +1698,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_022_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_022_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_023',
@@ -1706,7 +1706,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_023_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_023_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_024',
@@ -1714,7 +1714,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_024_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_024_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_025',
@@ -1722,7 +1722,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_025_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_025_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_026',
@@ -1730,7 +1730,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_026_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_026_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_027',
@@ -1738,7 +1738,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_027_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_027_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_028',
@@ -1746,7 +1746,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_028_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_028_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_029',
@@ -1754,7 +1754,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_029_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_029_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_GR_030',
@@ -1762,7 +1762,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Gunrunning_Tattoo_030_M',
         HashNameFemale: 'MP_Gunrunning_Tattoo_030_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_000',
@@ -1770,7 +1770,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_000_M',
         HashNameFemale: 'mpHeist3_Tat_000_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_001',
@@ -1778,7 +1778,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_001_M',
         HashNameFemale: 'mpHeist3_Tat_001_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_002',
@@ -1786,7 +1786,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_002_M',
         HashNameFemale: 'mpHeist3_Tat_002_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_003',
@@ -1794,7 +1794,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_003_M',
         HashNameFemale: 'mpHeist3_Tat_003_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_004',
@@ -1802,7 +1802,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_004_M',
         HashNameFemale: 'mpHeist3_Tat_004_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_005',
@@ -1810,7 +1810,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_005_M',
         HashNameFemale: 'mpHeist3_Tat_005_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_006',
@@ -1818,7 +1818,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_006_M',
         HashNameFemale: 'mpHeist3_Tat_006_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_007',
@@ -1826,7 +1826,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_007_M',
         HashNameFemale: 'mpHeist3_Tat_007_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_008',
@@ -1834,7 +1834,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_008_M',
         HashNameFemale: 'mpHeist3_Tat_008_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_009',
@@ -1842,7 +1842,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_009_M',
         HashNameFemale: 'mpHeist3_Tat_009_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_010',
@@ -1850,7 +1850,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_010_M',
         HashNameFemale: 'mpHeist3_Tat_010_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_011',
@@ -1858,7 +1858,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_011_M',
         HashNameFemale: 'mpHeist3_Tat_011_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_012',
@@ -1866,7 +1866,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_012_M',
         HashNameFemale: 'mpHeist3_Tat_012_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_013',
@@ -1874,7 +1874,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_013_M',
         HashNameFemale: 'mpHeist3_Tat_013_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_014',
@@ -1882,7 +1882,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_014_M',
         HashNameFemale: 'mpHeist3_Tat_014_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_015',
@@ -1890,7 +1890,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_015_M',
         HashNameFemale: 'mpHeist3_Tat_015_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_016',
@@ -1898,7 +1898,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_016_M',
         HashNameFemale: 'mpHeist3_Tat_016_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_017',
@@ -1906,7 +1906,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_017_M',
         HashNameFemale: 'mpHeist3_Tat_017_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_018',
@@ -1914,7 +1914,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_018_M',
         HashNameFemale: 'mpHeist3_Tat_018_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_019',
@@ -1922,7 +1922,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_019_M',
         HashNameFemale: 'mpHeist3_Tat_019_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_020',
@@ -1930,7 +1930,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_020_M',
         HashNameFemale: 'mpHeist3_Tat_020_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_021',
@@ -1938,7 +1938,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_021_M',
         HashNameFemale: 'mpHeist3_Tat_021_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_022',
@@ -1946,7 +1946,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_022_M',
         HashNameFemale: 'mpHeist3_Tat_022_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_023',
@@ -1954,7 +1954,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_023_M',
         HashNameFemale: 'mpHeist3_Tat_023_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_024',
@@ -1962,7 +1962,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_024_M',
         HashNameFemale: 'mpHeist3_Tat_024_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_025',
@@ -1970,7 +1970,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_025_M',
         HashNameFemale: 'mpHeist3_Tat_025_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_026',
@@ -1978,7 +1978,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_026_M',
         HashNameFemale: 'mpHeist3_Tat_026_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_027',
@@ -1986,7 +1986,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_027_M',
         HashNameFemale: 'mpHeist3_Tat_027_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_028',
@@ -1994,7 +1994,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_028_M',
         HashNameFemale: 'mpHeist3_Tat_028_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_029',
@@ -2002,7 +2002,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_029_M',
         HashNameFemale: 'mpHeist3_Tat_029_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_030',
@@ -2010,7 +2010,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_030_M',
         HashNameFemale: 'mpHeist3_Tat_030_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_031',
@@ -2018,7 +2018,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_031_M',
         HashNameFemale: 'mpHeist3_Tat_031_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_032',
@@ -2026,7 +2026,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_032_M',
         HashNameFemale: 'mpHeist3_Tat_032_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_033',
@@ -2034,7 +2034,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_033_M',
         HashNameFemale: 'mpHeist3_Tat_033_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_034',
@@ -2042,7 +2042,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_034_M',
         HashNameFemale: 'mpHeist3_Tat_034_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_035',
@@ -2050,7 +2050,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_035_M',
         HashNameFemale: 'mpHeist3_Tat_035_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_036',
@@ -2058,7 +2058,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_036_M',
         HashNameFemale: 'mpHeist3_Tat_036_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_037',
@@ -2066,7 +2066,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_037_M',
         HashNameFemale: 'mpHeist3_Tat_037_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_038',
@@ -2074,7 +2074,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_038_M',
         HashNameFemale: 'mpHeist3_Tat_038_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_039',
@@ -2082,7 +2082,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_039_M',
         HashNameFemale: 'mpHeist3_Tat_039_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_040',
@@ -2090,7 +2090,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_040_M',
         HashNameFemale: 'mpHeist3_Tat_040_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_041',
@@ -2098,7 +2098,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_041_M',
         HashNameFemale: 'mpHeist3_Tat_041_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_042',
@@ -2106,7 +2106,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_042_M',
         HashNameFemale: 'mpHeist3_Tat_042_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_043',
@@ -2114,7 +2114,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_043_M',
         HashNameFemale: 'mpHeist3_Tat_043_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H3_044',
@@ -2122,7 +2122,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'mpHeist3_Tat_044_M',
         HashNameFemale: 'mpHeist3_Tat_044_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_000',
@@ -2130,7 +2130,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_000_M',
         HashNameFemale: 'MP_Heist4_Tat_000_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_001',
@@ -2138,7 +2138,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_001_M',
         HashNameFemale: 'MP_Heist4_Tat_001_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_002',
@@ -2146,7 +2146,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_002_M',
         HashNameFemale: 'MP_Heist4_Tat_002_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_003',
@@ -2154,7 +2154,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_003_M',
         HashNameFemale: 'MP_Heist4_Tat_003_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_004',
@@ -2162,7 +2162,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_004_M',
         HashNameFemale: 'MP_Heist4_Tat_004_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_005',
@@ -2170,7 +2170,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_005_M',
         HashNameFemale: 'MP_Heist4_Tat_005_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_006',
@@ -2178,7 +2178,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_006_M',
         HashNameFemale: 'MP_Heist4_Tat_006_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_007',
@@ -2186,7 +2186,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_007_M',
         HashNameFemale: 'MP_Heist4_Tat_007_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_008',
@@ -2194,7 +2194,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_008_M',
         HashNameFemale: 'MP_Heist4_Tat_008_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_009',
@@ -2202,7 +2202,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_009_M',
         HashNameFemale: 'MP_Heist4_Tat_009_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_010',
@@ -2210,7 +2210,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_010_M',
         HashNameFemale: 'MP_Heist4_Tat_010_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_011',
@@ -2218,7 +2218,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_011_M',
         HashNameFemale: 'MP_Heist4_Tat_011_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_012',
@@ -2226,7 +2226,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_012_M',
         HashNameFemale: 'MP_Heist4_Tat_012_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_013',
@@ -2234,7 +2234,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_013_M',
         HashNameFemale: 'MP_Heist4_Tat_013_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_014',
@@ -2242,7 +2242,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_014_M',
         HashNameFemale: 'MP_Heist4_Tat_014_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_015',
@@ -2250,7 +2250,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_015_M',
         HashNameFemale: 'MP_Heist4_Tat_015_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_016',
@@ -2258,7 +2258,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_016_M',
         HashNameFemale: 'MP_Heist4_Tat_016_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_017',
@@ -2266,7 +2266,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_017_M',
         HashNameFemale: 'MP_Heist4_Tat_017_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_018',
@@ -2274,7 +2274,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_018_M',
         HashNameFemale: 'MP_Heist4_Tat_018_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_019',
@@ -2282,7 +2282,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_019_M',
         HashNameFemale: 'MP_Heist4_Tat_019_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_020',
@@ -2290,7 +2290,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_020_M',
         HashNameFemale: 'MP_Heist4_Tat_020_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_021',
@@ -2298,7 +2298,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_021_M',
         HashNameFemale: 'MP_Heist4_Tat_021_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_022',
@@ -2306,7 +2306,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_022_M',
         HashNameFemale: 'MP_Heist4_Tat_022_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_023',
@@ -2314,7 +2314,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_023_M',
         HashNameFemale: 'MP_Heist4_Tat_023_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_024',
@@ -2322,7 +2322,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_024_M',
         HashNameFemale: 'MP_Heist4_Tat_024_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_025',
@@ -2330,7 +2330,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_025_M',
         HashNameFemale: 'MP_Heist4_Tat_025_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_026',
@@ -2338,7 +2338,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_026_M',
         HashNameFemale: 'MP_Heist4_Tat_026_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_027',
@@ -2346,7 +2346,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_027_M',
         HashNameFemale: 'MP_Heist4_Tat_027_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_028',
@@ -2354,7 +2354,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_028_M',
         HashNameFemale: 'MP_Heist4_Tat_028_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_029',
@@ -2362,7 +2362,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_029_M',
         HashNameFemale: 'MP_Heist4_Tat_029_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_030',
@@ -2370,7 +2370,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_030_M',
         HashNameFemale: 'MP_Heist4_Tat_030_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_031',
@@ -2378,7 +2378,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_031_M',
         HashNameFemale: 'MP_Heist4_Tat_031_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_H4_032',
@@ -2386,7 +2386,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Heist4_Tat_032_M',
         HashNameFemale: 'MP_Heist4_Tat_032_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_000',
@@ -2394,7 +2394,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_000',
         HashNameFemale: 'FM_Hip_F_Tat_000',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_001',
@@ -2402,7 +2402,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_001',
         HashNameFemale: 'FM_Hip_F_Tat_001',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_002',
@@ -2410,7 +2410,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_002',
         HashNameFemale: 'FM_Hip_F_Tat_002',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_003',
@@ -2418,7 +2418,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_003',
         HashNameFemale: 'FM_Hip_F_Tat_003',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_004',
@@ -2426,7 +2426,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_004',
         HashNameFemale: 'FM_Hip_F_Tat_004',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_005',
@@ -2434,7 +2434,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_005',
         HashNameFemale: 'FM_Hip_F_Tat_005',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_006',
@@ -2442,7 +2442,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_006',
         HashNameFemale: 'FM_Hip_F_Tat_006',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_007',
@@ -2450,7 +2450,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_007',
         HashNameFemale: 'FM_Hip_F_Tat_007',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_008',
@@ -2458,7 +2458,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_008',
         HashNameFemale: 'FM_Hip_F_Tat_008',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_009',
@@ -2466,7 +2466,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_009',
         HashNameFemale: 'FM_Hip_F_Tat_009',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_010',
@@ -2474,7 +2474,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_010',
         HashNameFemale: 'FM_Hip_F_Tat_010',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_011',
@@ -2482,7 +2482,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_011',
         HashNameFemale: 'FM_Hip_F_Tat_011',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_012',
@@ -2490,7 +2490,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_012',
         HashNameFemale: 'FM_Hip_F_Tat_012',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_013',
@@ -2498,7 +2498,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_013',
         HashNameFemale: 'FM_Hip_F_Tat_013',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_014',
@@ -2506,7 +2506,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_014',
         HashNameFemale: 'FM_Hip_F_Tat_014',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_015',
@@ -2514,7 +2514,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_015',
         HashNameFemale: 'FM_Hip_F_Tat_015',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_016',
@@ -2522,7 +2522,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_016',
         HashNameFemale: 'FM_Hip_F_Tat_016',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_017',
@@ -2530,7 +2530,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_017',
         HashNameFemale: 'FM_Hip_F_Tat_017',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_018',
@@ -2538,7 +2538,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_018',
         HashNameFemale: 'FM_Hip_F_Tat_018',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_019',
@@ -2546,7 +2546,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_019',
         HashNameFemale: 'FM_Hip_F_Tat_019',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_020',
@@ -2554,7 +2554,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_020',
         HashNameFemale: 'FM_Hip_F_Tat_020',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_021',
@@ -2562,7 +2562,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_021',
         HashNameFemale: 'FM_Hip_F_Tat_021',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_022',
@@ -2570,7 +2570,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_022',
         HashNameFemale: 'FM_Hip_F_Tat_022',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_023',
@@ -2578,7 +2578,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_023',
         HashNameFemale: 'FM_Hip_F_Tat_023',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_024',
@@ -2586,7 +2586,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_024',
         HashNameFemale: 'FM_Hip_F_Tat_024',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_025',
@@ -2594,7 +2594,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_025',
         HashNameFemale: 'FM_Hip_F_Tat_025',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_026',
@@ -2602,7 +2602,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_026',
         HashNameFemale: 'FM_Hip_F_Tat_026',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_027',
@@ -2610,7 +2610,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_027',
         HashNameFemale: 'FM_Hip_F_Tat_027',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_028',
@@ -2618,7 +2618,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_028',
         HashNameFemale: 'FM_Hip_F_Tat_028',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_029',
@@ -2626,7 +2626,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_029',
         HashNameFemale: 'FM_Hip_F_Tat_029',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_030',
@@ -2634,7 +2634,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_030',
         HashNameFemale: 'FM_Hip_F_Tat_030',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_031',
@@ -2642,7 +2642,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_031',
         HashNameFemale: 'FM_Hip_F_Tat_031',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_032',
@@ -2650,7 +2650,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_032',
         HashNameFemale: 'FM_Hip_F_Tat_032',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_033',
@@ -2658,7 +2658,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_033',
         HashNameFemale: 'FM_Hip_F_Tat_033',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_034',
@@ -2666,7 +2666,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_034',
         HashNameFemale: 'FM_Hip_F_Tat_034',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_035',
@@ -2674,7 +2674,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_035',
         HashNameFemale: 'FM_Hip_F_Tat_035',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_036',
@@ -2682,7 +2682,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_036',
         HashNameFemale: 'FM_Hip_F_Tat_036',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_037',
@@ -2690,7 +2690,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_037',
         HashNameFemale: 'FM_Hip_F_Tat_037',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_038',
@@ -2698,7 +2698,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_038',
         HashNameFemale: 'FM_Hip_F_Tat_038',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_039',
@@ -2706,7 +2706,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_039',
         HashNameFemale: 'FM_Hip_F_Tat_039',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_040',
@@ -2714,7 +2714,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_040',
         HashNameFemale: 'FM_Hip_F_Tat_040',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_041',
@@ -2722,7 +2722,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_041',
         HashNameFemale: 'FM_Hip_F_Tat_041',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_042',
@@ -2730,7 +2730,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_042',
         HashNameFemale: 'FM_Hip_F_Tat_042',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_043',
@@ -2738,7 +2738,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_043',
         HashNameFemale: 'FM_Hip_F_Tat_043',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_044',
@@ -2746,7 +2746,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_044',
         HashNameFemale: 'FM_Hip_F_Tat_044',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_045',
@@ -2754,7 +2754,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_045',
         HashNameFemale: 'FM_Hip_F_Tat_045',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_046',
@@ -2762,7 +2762,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_046',
         HashNameFemale: 'FM_Hip_F_Tat_046',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_047',
@@ -2770,7 +2770,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_047',
         HashNameFemale: 'FM_Hip_F_Tat_047',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_HP_048',
@@ -2778,7 +2778,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Hip_M_Tat_048',
         HashNameFemale: 'FM_Hip_F_Tat_048',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_000',
@@ -2786,7 +2786,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_000_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_000_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_001',
@@ -2794,7 +2794,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_001_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_001_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_002',
@@ -2802,7 +2802,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_002_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_002_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_003',
@@ -2810,7 +2810,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_003_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_003_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_004',
@@ -2818,7 +2818,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_004_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_004_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_005',
@@ -2826,7 +2826,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_005_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_005_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_006',
@@ -2834,7 +2834,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_006_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_006_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_007',
@@ -2842,7 +2842,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_007_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_007_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_008',
@@ -2850,7 +2850,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_008_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_008_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_009',
@@ -2858,7 +2858,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_009_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_009_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_010',
@@ -2866,7 +2866,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_010_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_010_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_IE_011',
@@ -2874,7 +2874,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_ImportExport_Tat_011_M',
         HashNameFemale: 'MP_MP_ImportExport_Tat_011_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_000',
@@ -2882,7 +2882,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_000_M',
         HashNameFemale: 'MP_LR_Tat_000_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_003',
@@ -2890,7 +2890,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_003_M',
         HashNameFemale: 'MP_LR_Tat_003_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_006',
@@ -2898,7 +2898,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_006_M',
         HashNameFemale: 'MP_LR_Tat_006_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_008',
@@ -2906,7 +2906,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_008_M',
         HashNameFemale: 'MP_LR_Tat_008_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_011',
@@ -2914,7 +2914,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_011_M',
         HashNameFemale: 'MP_LR_Tat_011_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_012',
@@ -2922,7 +2922,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_012_M',
         HashNameFemale: 'MP_LR_Tat_012_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_016',
@@ -2930,7 +2930,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_016_M',
         HashNameFemale: 'MP_LR_Tat_016_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_018',
@@ -2938,7 +2938,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_018_M',
         HashNameFemale: 'MP_LR_Tat_018_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_019',
@@ -2946,7 +2946,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_019_M',
         HashNameFemale: 'MP_LR_Tat_019_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_022',
@@ -2954,7 +2954,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_022_M',
         HashNameFemale: 'MP_LR_Tat_022_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_028',
@@ -2962,7 +2962,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_028_M',
         HashNameFemale: 'MP_LR_Tat_028_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_029',
@@ -2970,7 +2970,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_029_M',
         HashNameFemale: 'MP_LR_Tat_029_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_030',
@@ -2978,7 +2978,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_030_M',
         HashNameFemale: 'MP_LR_Tat_030_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_031',
@@ -2986,7 +2986,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_031_M',
         HashNameFemale: 'MP_LR_Tat_031_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_032',
@@ -2994,7 +2994,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_032_M',
         HashNameFemale: 'MP_LR_Tat_032_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S2_035',
@@ -3002,7 +3002,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_035_M',
         HashNameFemale: 'MP_LR_Tat_035_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_001',
@@ -3010,7 +3010,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_001_M',
         HashNameFemale: 'MP_LR_Tat_001_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_002',
@@ -3018,7 +3018,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_002_M',
         HashNameFemale: 'MP_LR_Tat_002_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_004',
@@ -3026,7 +3026,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_004_M',
         HashNameFemale: 'MP_LR_Tat_004_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_005',
@@ -3034,7 +3034,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_005_M',
         HashNameFemale: 'MP_LR_Tat_005_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_007',
@@ -3042,7 +3042,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_007_M',
         HashNameFemale: 'MP_LR_Tat_007_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_009',
@@ -3050,7 +3050,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_009_M',
         HashNameFemale: 'MP_LR_Tat_009_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_010',
@@ -3058,7 +3058,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_010_M',
         HashNameFemale: 'MP_LR_Tat_010_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_013',
@@ -3066,7 +3066,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_013_M',
         HashNameFemale: 'MP_LR_Tat_013_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_014',
@@ -3074,7 +3074,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_014_M',
         HashNameFemale: 'MP_LR_Tat_014_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_015',
@@ -3082,7 +3082,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_015_M',
         HashNameFemale: 'MP_LR_Tat_015_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_017',
@@ -3090,7 +3090,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_017_M',
         HashNameFemale: 'MP_LR_Tat_017_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_020',
@@ -3098,7 +3098,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_020_M',
         HashNameFemale: 'MP_LR_Tat_020_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_021',
@@ -3106,7 +3106,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_021_M',
         HashNameFemale: 'MP_LR_Tat_021_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_023',
@@ -3114,7 +3114,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_023_M',
         HashNameFemale: 'MP_LR_Tat_023_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_026',
@@ -3122,7 +3122,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_026_M',
         HashNameFemale: 'MP_LR_Tat_026_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_027',
@@ -3130,7 +3130,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_027_M',
         HashNameFemale: 'MP_LR_Tat_027_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_S1_033',
@@ -3138,7 +3138,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LR_Tat_033_M',
         HashNameFemale: 'MP_LR_Tat_033_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_002',
@@ -3146,7 +3146,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_002_M',
         HashNameFemale: 'MP_LUXE_TAT_002_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_005',
@@ -3154,7 +3154,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_005_M',
         HashNameFemale: 'MP_LUXE_TAT_005_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_010',
@@ -3162,7 +3162,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_010_M',
         HashNameFemale: 'MP_LUXE_TAT_010_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_011',
@@ -3170,7 +3170,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_011_M',
         HashNameFemale: 'MP_LUXE_TAT_011_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_012',
@@ -3178,7 +3178,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_012_M',
         HashNameFemale: 'MP_LUXE_TAT_012_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_016',
@@ -3186,7 +3186,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_016_M',
         HashNameFemale: 'MP_LUXE_TAT_016_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_017',
@@ -3194,7 +3194,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_017_M',
         HashNameFemale: 'MP_LUXE_TAT_017_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_018',
@@ -3202,7 +3202,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_018_M',
         HashNameFemale: 'MP_LUXE_TAT_018_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_022',
@@ -3210,7 +3210,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_022_M',
         HashNameFemale: 'MP_LUXE_TAT_022_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_023',
@@ -3218,7 +3218,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_023_M',
         HashNameFemale: 'MP_LUXE_TAT_023_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_025',
@@ -3226,7 +3226,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_025_M',
         HashNameFemale: 'MP_LUXE_TAT_025_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_026',
@@ -3234,7 +3234,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_026_M',
         HashNameFemale: 'MP_LUXE_TAT_026_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_027',
@@ -3242,7 +3242,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_027_M',
         HashNameFemale: 'MP_LUXE_TAT_027_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_028',
@@ -3250,7 +3250,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_028_M',
         HashNameFemale: 'MP_LUXE_TAT_028_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_029',
@@ -3258,7 +3258,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_029_M',
         HashNameFemale: 'MP_LUXE_TAT_029_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_030',
@@ -3266,7 +3266,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_030_M',
         HashNameFemale: 'MP_LUXE_TAT_030_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_L2_031',
@@ -3274,7 +3274,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_031_M',
         HashNameFemale: 'MP_LUXE_TAT_031_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_000',
@@ -3282,7 +3282,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_000_M',
         HashNameFemale: 'MP_LUXE_TAT_000_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_001',
@@ -3290,7 +3290,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_001_M',
         HashNameFemale: 'MP_LUXE_TAT_001_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_003',
@@ -3298,7 +3298,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_003_M',
         HashNameFemale: 'MP_LUXE_TAT_003_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_004',
@@ -3306,7 +3306,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_004_M',
         HashNameFemale: 'MP_LUXE_TAT_004_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_006',
@@ -3314,7 +3314,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_006_M',
         HashNameFemale: 'MP_LUXE_TAT_006_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_007',
@@ -3322,7 +3322,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_007_M',
         HashNameFemale: 'MP_LUXE_TAT_007_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_008',
@@ -3330,7 +3330,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_008_M',
         HashNameFemale: 'MP_LUXE_TAT_008_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_009',
@@ -3338,7 +3338,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_009_M',
         HashNameFemale: 'MP_LUXE_TAT_009_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_013',
@@ -3346,7 +3346,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_013_M',
         HashNameFemale: 'MP_LUXE_TAT_013_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_014',
@@ -3354,7 +3354,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_014_M',
         HashNameFemale: 'MP_LUXE_TAT_014_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_015',
@@ -3362,7 +3362,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_015_M',
         HashNameFemale: 'MP_LUXE_TAT_015_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_019',
@@ -3370,7 +3370,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_019_M',
         HashNameFemale: 'MP_LUXE_TAT_019_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_020',
@@ -3378,7 +3378,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_020_M',
         HashNameFemale: 'MP_LUXE_TAT_020_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_021',
@@ -3386,7 +3386,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_021_M',
         HashNameFemale: 'MP_LUXE_TAT_021_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_LX_024',
@@ -3394,7 +3394,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_LUXE_TAT_024_M',
         HashNameFemale: 'MP_LUXE_TAT_024_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_000',
@@ -3402,7 +3402,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_000_M',
         HashNameFemale: 'MP_Security_Tat_000_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_001',
@@ -3410,7 +3410,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_001_M',
         HashNameFemale: 'MP_Security_Tat_001_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_002',
@@ -3418,7 +3418,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_002_M',
         HashNameFemale: 'MP_Security_Tat_002_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_003',
@@ -3426,7 +3426,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_003_M',
         HashNameFemale: 'MP_Security_Tat_003_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_004',
@@ -3434,7 +3434,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_004_M',
         HashNameFemale: 'MP_Security_Tat_004_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_005',
@@ -3442,7 +3442,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_005_M',
         HashNameFemale: 'MP_Security_Tat_005_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_006',
@@ -3450,7 +3450,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_006_M',
         HashNameFemale: 'MP_Security_Tat_006_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_007',
@@ -3458,7 +3458,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_007_M',
         HashNameFemale: 'MP_Security_Tat_007_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_008',
@@ -3466,7 +3466,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_008_M',
         HashNameFemale: 'MP_Security_Tat_008_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_009',
@@ -3474,7 +3474,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_009_M',
         HashNameFemale: 'MP_Security_Tat_009_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_010',
@@ -3482,7 +3482,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_010_M',
         HashNameFemale: 'MP_Security_Tat_010_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_011',
@@ -3490,7 +3490,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_011_M',
         HashNameFemale: 'MP_Security_Tat_011_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_012',
@@ -3498,7 +3498,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_012_M',
         HashNameFemale: 'MP_Security_Tat_012_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_013',
@@ -3506,7 +3506,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_013_M',
         HashNameFemale: 'MP_Security_Tat_013_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_014',
@@ -3514,7 +3514,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_014_M',
         HashNameFemale: 'MP_Security_Tat_014_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_015',
@@ -3522,7 +3522,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_015_M',
         HashNameFemale: 'MP_Security_Tat_015_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_016',
@@ -3530,7 +3530,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_016_M',
         HashNameFemale: 'MP_Security_Tat_016_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_017',
@@ -3538,7 +3538,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_017_M',
         HashNameFemale: 'MP_Security_Tat_017_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_018',
@@ -3546,7 +3546,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_018_M',
         HashNameFemale: 'MP_Security_Tat_018_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_019',
@@ -3554,7 +3554,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_019_M',
         HashNameFemale: 'MP_Security_Tat_019_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_020',
@@ -3562,7 +3562,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_020_M',
         HashNameFemale: 'MP_Security_Tat_020_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_021',
@@ -3570,7 +3570,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_021_M',
         HashNameFemale: 'MP_Security_Tat_021_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_022',
@@ -3578,7 +3578,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_022_M',
         HashNameFemale: 'MP_Security_Tat_022_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_023',
@@ -3586,7 +3586,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_023_M',
         HashNameFemale: 'MP_Security_Tat_023_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_024',
@@ -3594,7 +3594,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_024_M',
         HashNameFemale: 'MP_Security_Tat_024_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_025',
@@ -3602,7 +3602,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_025_M',
         HashNameFemale: 'MP_Security_Tat_025_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_026',
@@ -3610,7 +3610,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_026_M',
         HashNameFemale: 'MP_Security_Tat_026_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FX_027',
@@ -3618,7 +3618,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Security_Tat_027_M',
         HashNameFemale: 'MP_Security_Tat_027_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_000',
@@ -3626,7 +3626,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_000_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_000_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_001',
@@ -3634,7 +3634,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_001_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_001_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_002',
@@ -3642,7 +3642,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_002_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_002_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_003',
@@ -3650,7 +3650,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_003_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_003_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_004',
@@ -3658,7 +3658,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_004_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_004_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_005',
@@ -3666,7 +3666,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_005_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_005_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_006',
@@ -3674,7 +3674,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_006_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_006_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_007',
@@ -3682,7 +3682,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_007_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_007_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_008',
@@ -3690,7 +3690,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_008_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_008_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_009',
@@ -3698,7 +3698,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_009_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_009_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_010',
@@ -3707,7 +3707,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameFemale: 'MP_Smuggler_Tattoo_010_F',
         LocalizedName: 'On se reverra en enfer!',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_011',
@@ -3715,7 +3715,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_011_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_011_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_012',
@@ -3723,7 +3723,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_012_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_012_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_013',
@@ -3731,7 +3731,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_013_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_013_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_014',
@@ -3739,7 +3739,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_014_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_014_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_015',
@@ -3747,7 +3747,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_015_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_015_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_016',
@@ -3755,7 +3755,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_016_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_016_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_017',
@@ -3763,7 +3763,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_017_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_017_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_018',
@@ -3771,7 +3771,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_018_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_018_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_019',
@@ -3779,7 +3779,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_019_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_019_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_020',
@@ -3787,7 +3787,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_020_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_020_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_021',
@@ -3795,7 +3795,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_021_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_021_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_022',
@@ -3803,7 +3803,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_022_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_022_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_023',
@@ -3811,7 +3811,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_023_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_023_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_024',
@@ -3819,7 +3819,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_024_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_024_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_SM_025',
@@ -3827,7 +3827,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Smuggler_Tattoo_025_M',
         HashNameFemale: 'MP_Smuggler_Tattoo_025_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_000',
@@ -3835,7 +3835,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_Tat_000_M',
         HashNameFemale: 'MP_MP_Stunt_Tat_000_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_001',
@@ -3843,7 +3843,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_001_M',
         HashNameFemale: 'MP_MP_Stunt_tat_001_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_002',
@@ -3851,7 +3851,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_002_M',
         HashNameFemale: 'MP_MP_Stunt_tat_002_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_003',
@@ -3859,7 +3859,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_003_M',
         HashNameFemale: 'MP_MP_Stunt_tat_003_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_004',
@@ -3867,7 +3867,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_004_M',
         HashNameFemale: 'MP_MP_Stunt_tat_004_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_005',
@@ -3875,7 +3875,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_005_M',
         HashNameFemale: 'MP_MP_Stunt_tat_005_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_006',
@@ -3883,7 +3883,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_006_M',
         HashNameFemale: 'MP_MP_Stunt_tat_006_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_007',
@@ -3891,7 +3891,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_007_M',
         HashNameFemale: 'MP_MP_Stunt_tat_007_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_008',
@@ -3899,7 +3899,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_008_M',
         HashNameFemale: 'MP_MP_Stunt_tat_008_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_009',
@@ -3907,7 +3907,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_009_M',
         HashNameFemale: 'MP_MP_Stunt_tat_009_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_010',
@@ -3915,7 +3915,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_010_M',
         HashNameFemale: 'MP_MP_Stunt_tat_010_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_011',
@@ -3923,7 +3923,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_011_M',
         HashNameFemale: 'MP_MP_Stunt_tat_011_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_012',
@@ -3931,7 +3931,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_012_M',
         HashNameFemale: 'MP_MP_Stunt_tat_012_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_013',
@@ -3939,7 +3939,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_013_M',
         HashNameFemale: 'MP_MP_Stunt_tat_013_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_014',
@@ -3947,7 +3947,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_014_M',
         HashNameFemale: 'MP_MP_Stunt_tat_014_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_015',
@@ -3955,7 +3955,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_015_M',
         HashNameFemale: 'MP_MP_Stunt_tat_015_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_016',
@@ -3963,7 +3963,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_016_M',
         HashNameFemale: 'MP_MP_Stunt_tat_016_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_017',
@@ -3971,7 +3971,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_017_M',
         HashNameFemale: 'MP_MP_Stunt_tat_017_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_018',
@@ -3979,7 +3979,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_018_M',
         HashNameFemale: 'MP_MP_Stunt_tat_018_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_019',
@@ -3987,7 +3987,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_019_M',
         HashNameFemale: 'MP_MP_Stunt_tat_019_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_020',
@@ -3995,7 +3995,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_020_M',
         HashNameFemale: 'MP_MP_Stunt_tat_020_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_021',
@@ -4003,7 +4003,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_021_M',
         HashNameFemale: 'MP_MP_Stunt_tat_021_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_022',
@@ -4011,7 +4011,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_022_M',
         HashNameFemale: 'MP_MP_Stunt_tat_022_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_023',
@@ -4019,7 +4019,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_023_M',
         HashNameFemale: 'MP_MP_Stunt_tat_023_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_024',
@@ -4027,7 +4027,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_024_M',
         HashNameFemale: 'MP_MP_Stunt_tat_024_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_025',
@@ -4035,7 +4035,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_025_M',
         HashNameFemale: 'MP_MP_Stunt_tat_025_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_026',
@@ -4043,7 +4043,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_026_M',
         HashNameFemale: 'MP_MP_Stunt_tat_026_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_027',
@@ -4051,7 +4051,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_027_M',
         HashNameFemale: 'MP_MP_Stunt_tat_027_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_028',
@@ -4059,7 +4059,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_028_M',
         HashNameFemale: 'MP_MP_Stunt_tat_028_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_029',
@@ -4067,7 +4067,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_029_M',
         HashNameFemale: 'MP_MP_Stunt_tat_029_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_030',
@@ -4075,7 +4075,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_030_M',
         HashNameFemale: 'MP_MP_Stunt_tat_030_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_031',
@@ -4083,7 +4083,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_031_M',
         HashNameFemale: 'MP_MP_Stunt_tat_031_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_032',
@@ -4091,7 +4091,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_032_M',
         HashNameFemale: 'MP_MP_Stunt_tat_032_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_033',
@@ -4099,7 +4099,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_033_M',
         HashNameFemale: 'MP_MP_Stunt_tat_033_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_034',
@@ -4107,7 +4107,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_034_M',
         HashNameFemale: 'MP_MP_Stunt_tat_034_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_035',
@@ -4115,7 +4115,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_035_M',
         HashNameFemale: 'MP_MP_Stunt_tat_035_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_036',
@@ -4123,7 +4123,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_036_M',
         HashNameFemale: 'MP_MP_Stunt_tat_036_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_037',
@@ -4131,7 +4131,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_037_M',
         HashNameFemale: 'MP_MP_Stunt_tat_037_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_038',
@@ -4139,7 +4139,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_038_M',
         HashNameFemale: 'MP_MP_Stunt_tat_038_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_039',
@@ -4147,7 +4147,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_039_M',
         HashNameFemale: 'MP_MP_Stunt_tat_039_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_040',
@@ -4155,7 +4155,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_040_M',
         HashNameFemale: 'MP_MP_Stunt_tat_040_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_041',
@@ -4163,7 +4163,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_041_M',
         HashNameFemale: 'MP_MP_Stunt_tat_041_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_042',
@@ -4171,7 +4171,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_042_M',
         HashNameFemale: 'MP_MP_Stunt_tat_042_F',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_043',
@@ -4179,7 +4179,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_043_M',
         HashNameFemale: 'MP_MP_Stunt_tat_043_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_044',
@@ -4187,7 +4187,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_044_M',
         HashNameFemale: 'MP_MP_Stunt_tat_044_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_045',
@@ -4195,7 +4195,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_045_M',
         HashNameFemale: 'MP_MP_Stunt_tat_045_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_046',
@@ -4203,7 +4203,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_046_M',
         HashNameFemale: 'MP_MP_Stunt_tat_046_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_047',
@@ -4211,7 +4211,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_047_M',
         HashNameFemale: 'MP_MP_Stunt_tat_047_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_048',
@@ -4219,7 +4219,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_048_M',
         HashNameFemale: 'MP_MP_Stunt_tat_048_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_ST_049',
@@ -4227,7 +4227,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_MP_Stunt_tat_049_M',
         HashNameFemale: 'MP_MP_Stunt_tat_049_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_000',
@@ -4235,7 +4235,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_000_M',
         HashNameFemale: 'MP_Vinewood_Tat_000_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_001',
@@ -4243,7 +4243,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_001_M',
         HashNameFemale: 'MP_Vinewood_Tat_001_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_002',
@@ -4251,7 +4251,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_002_M',
         HashNameFemale: 'MP_Vinewood_Tat_002_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_003',
@@ -4259,7 +4259,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_003_M',
         HashNameFemale: 'MP_Vinewood_Tat_003_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_004',
@@ -4267,7 +4267,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_004_M',
         HashNameFemale: 'MP_Vinewood_Tat_004_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_005',
@@ -4275,7 +4275,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_005_M',
         HashNameFemale: 'MP_Vinewood_Tat_005_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_006',
@@ -4283,7 +4283,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_006_M',
         HashNameFemale: 'MP_Vinewood_Tat_006_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_007',
@@ -4291,7 +4291,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_007_M',
         HashNameFemale: 'MP_Vinewood_Tat_007_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_008',
@@ -4299,7 +4299,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_008_M',
         HashNameFemale: 'MP_Vinewood_Tat_008_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_009',
@@ -4307,7 +4307,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_009_M',
         HashNameFemale: 'MP_Vinewood_Tat_009_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_010',
@@ -4315,7 +4315,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_010_M',
         HashNameFemale: 'MP_Vinewood_Tat_010_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_011',
@@ -4323,7 +4323,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_011_M',
         HashNameFemale: 'MP_Vinewood_Tat_011_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_012',
@@ -4331,7 +4331,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_012_M',
         HashNameFemale: 'MP_Vinewood_Tat_012_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_013',
@@ -4339,7 +4339,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_013_M',
         HashNameFemale: 'MP_Vinewood_Tat_013_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_014',
@@ -4347,7 +4347,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_014_M',
         HashNameFemale: 'MP_Vinewood_Tat_014_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_015',
@@ -4355,7 +4355,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_015_M',
         HashNameFemale: 'MP_Vinewood_Tat_015_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_016',
@@ -4363,7 +4363,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_016_M',
         HashNameFemale: 'MP_Vinewood_Tat_016_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_017',
@@ -4371,7 +4371,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_017_M',
         HashNameFemale: 'MP_Vinewood_Tat_017_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_018',
@@ -4379,7 +4379,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_018_M',
         HashNameFemale: 'MP_Vinewood_Tat_018_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_019',
@@ -4387,7 +4387,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_019_M',
         HashNameFemale: 'MP_Vinewood_Tat_019_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_020',
@@ -4395,7 +4395,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_020_M',
         HashNameFemale: 'MP_Vinewood_Tat_020_F',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_021',
@@ -4403,7 +4403,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_021_M',
         HashNameFemale: 'MP_Vinewood_Tat_021_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_022',
@@ -4412,7 +4412,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameFemale: 'MP_Vinewood_Tat_022_F',
         LocalizedName: "T 'as pas sang balles ?",
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_023',
@@ -4420,7 +4420,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_023_M',
         HashNameFemale: 'MP_Vinewood_Tat_023_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_024',
@@ -4428,7 +4428,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_024_M',
         HashNameFemale: 'MP_Vinewood_Tat_024_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_025',
@@ -4436,7 +4436,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_025_M',
         HashNameFemale: 'MP_Vinewood_Tat_025_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_026',
@@ -4444,7 +4444,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_026_M',
         HashNameFemale: 'MP_Vinewood_Tat_026_F',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_027',
@@ -4452,7 +4452,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_027_M',
         HashNameFemale: 'MP_Vinewood_Tat_027_F',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_028',
@@ -4460,7 +4460,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_028_M',
         HashNameFemale: 'MP_Vinewood_Tat_028_F',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_029',
@@ -4468,7 +4468,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_029_M',
         HashNameFemale: 'MP_Vinewood_Tat_029_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_030',
@@ -4476,7 +4476,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_030_M',
         HashNameFemale: 'MP_Vinewood_Tat_030_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_031',
@@ -4484,7 +4484,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_031_M',
         HashNameFemale: 'MP_Vinewood_Tat_031_F',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_VW_032',
@@ -4492,7 +4492,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'MP_Vinewood_Tat_032_M',
         HashNameFemale: 'MP_Vinewood_Tat_032_F',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_008',
@@ -4501,7 +4501,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_000',
         HashNameFemale: 'FM_Tat_Award_F_000',
         Zone: 'ZONE_HEAD',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_009',
@@ -4510,7 +4510,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_001',
         HashNameFemale: 'FM_Tat_Award_F_001',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_010',
@@ -4519,7 +4519,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_002',
         HashNameFemale: 'FM_Tat_Award_F_002',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_011',
@@ -4528,7 +4528,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_003',
         HashNameFemale: 'FM_Tat_Award_F_003',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_012',
@@ -4537,7 +4537,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_004',
         HashNameFemale: 'FM_Tat_Award_F_004',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_013',
@@ -4546,7 +4546,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_005',
         HashNameFemale: 'FM_Tat_Award_F_005',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_014',
@@ -4555,7 +4555,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_006',
         HashNameFemale: 'FM_Tat_Award_F_006',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_015',
@@ -4564,7 +4564,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_007',
         HashNameFemale: 'FM_Tat_Award_F_007',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_016',
@@ -4573,7 +4573,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_008',
         HashNameFemale: 'FM_Tat_Award_F_008',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_017',
@@ -4582,7 +4582,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_009',
         HashNameFemale: 'FM_Tat_Award_F_009',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_018',
@@ -4591,7 +4591,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_010',
         HashNameFemale: 'FM_Tat_Award_F_010',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_019',
@@ -4600,7 +4600,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_011',
         HashNameFemale: 'FM_Tat_Award_F_011',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_020',
@@ -4609,7 +4609,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_012',
         HashNameFemale: 'FM_Tat_Award_F_012',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_021',
@@ -4618,7 +4618,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_013',
         HashNameFemale: 'FM_Tat_Award_F_013',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_022',
@@ -4627,7 +4627,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_014',
         HashNameFemale: 'FM_Tat_Award_F_014',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_023',
@@ -4636,7 +4636,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_015',
         HashNameFemale: 'FM_Tat_Award_F_015',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_024',
@@ -4645,7 +4645,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_016',
         HashNameFemale: 'FM_Tat_Award_F_016',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_025',
@@ -4654,7 +4654,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_017',
         HashNameFemale: 'FM_Tat_Award_F_017',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_026',
@@ -4663,7 +4663,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_018',
         HashNameFemale: 'FM_Tat_Award_F_018',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_027',
@@ -4672,7 +4672,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_Award_M_019',
         HashNameFemale: 'FM_Tat_Award_F_019',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_204',
@@ -4681,7 +4681,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_000',
         HashNameFemale: 'FM_Tat_F_000',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_205',
@@ -4690,7 +4690,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_001',
         HashNameFemale: 'FM_Tat_F_001',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_209',
@@ -4699,7 +4699,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_002',
         HashNameFemale: 'FM_Tat_F_002',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_206',
@@ -4708,7 +4708,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_003',
         HashNameFemale: 'FM_Tat_F_003',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_219',
@@ -4717,7 +4717,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_004',
         HashNameFemale: 'FM_Tat_F_004',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_201',
@@ -4726,7 +4726,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_005',
         HashNameFemale: 'FM_Tat_F_005',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_202',
@@ -4735,7 +4735,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_006',
         HashNameFemale: 'FM_Tat_F_006',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_210',
@@ -4744,7 +4744,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_007',
         HashNameFemale: 'FM_Tat_F_007',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_211',
@@ -4753,7 +4753,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_008',
         HashNameFemale: 'FM_Tat_F_008',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_213',
@@ -4762,7 +4762,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_009',
         HashNameFemale: 'FM_Tat_F_009',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_218',
@@ -4771,7 +4771,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_010',
         HashNameFemale: 'FM_Tat_F_010',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_214',
@@ -4780,7 +4780,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_011',
         HashNameFemale: 'FM_Tat_F_011',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_220',
@@ -4789,7 +4789,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_012',
         HashNameFemale: 'FM_Tat_F_012',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_215',
@@ -4798,7 +4798,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_013',
         HashNameFemale: 'FM_Tat_F_013',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_207',
@@ -4807,7 +4807,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_014',
         HashNameFemale: 'FM_Tat_F_014',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_203',
@@ -4816,7 +4816,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_015',
         HashNameFemale: 'FM_Tat_F_015',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_216',
@@ -4825,7 +4825,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_016',
         HashNameFemale: 'FM_Tat_F_016',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_212',
@@ -4834,7 +4834,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_017',
         HashNameFemale: 'FM_Tat_F_017',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_208',
@@ -4843,7 +4843,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_018',
         HashNameFemale: 'FM_Tat_F_018',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_217',
@@ -4852,7 +4852,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_019',
         HashNameFemale: 'FM_Tat_F_019',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_221',
@@ -4861,7 +4861,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_020',
         HashNameFemale: 'FM_Tat_F_020',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_222',
@@ -4870,7 +4870,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_021',
         HashNameFemale: 'FM_Tat_F_021',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_223',
@@ -4879,7 +4879,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_022',
         HashNameFemale: 'FM_Tat_F_022',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_224',
@@ -4888,7 +4888,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_023',
         HashNameFemale: 'FM_Tat_F_023',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_225',
@@ -4897,7 +4897,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_024',
         HashNameFemale: 'FM_Tat_F_024',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_226',
@@ -4906,7 +4906,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_025',
         HashNameFemale: 'FM_Tat_F_025',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_227',
@@ -4915,7 +4915,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_026',
         HashNameFemale: 'FM_Tat_F_026',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_228',
@@ -4924,7 +4924,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_027',
         HashNameFemale: 'FM_Tat_F_027',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_229',
@@ -4933,7 +4933,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_028',
         HashNameFemale: 'FM_Tat_F_028',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_230',
@@ -4942,7 +4942,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_029',
         HashNameFemale: 'FM_Tat_F_029',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_231',
@@ -4951,7 +4951,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_030',
         HashNameFemale: 'FM_Tat_F_030',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_232',
@@ -4960,7 +4960,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_031',
         HashNameFemale: 'FM_Tat_F_031',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_233',
@@ -4969,7 +4969,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_032',
         HashNameFemale: 'FM_Tat_F_032',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_234',
@@ -4978,7 +4978,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_033',
         HashNameFemale: 'FM_Tat_F_033',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_235',
@@ -4987,7 +4987,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_034',
         HashNameFemale: 'FM_Tat_F_034',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_236',
@@ -4996,7 +4996,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_035',
         HashNameFemale: 'FM_Tat_F_035',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_237',
@@ -5005,7 +5005,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_036',
         HashNameFemale: 'FM_Tat_F_036',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_238',
@@ -5014,7 +5014,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_037',
         HashNameFemale: 'FM_Tat_F_037',
         Zone: 'ZONE_LEFT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_239',
@@ -5023,7 +5023,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_038',
         HashNameFemale: 'FM_Tat_F_038',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_240',
@@ -5032,7 +5032,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_039',
         HashNameFemale: 'FM_Tat_F_039',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_241',
@@ -5041,7 +5041,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_040',
         HashNameFemale: 'FM_Tat_F_040',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_242',
@@ -5050,7 +5050,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_041',
         HashNameFemale: 'FM_Tat_F_041',
         Zone: 'ZONE_LEFT_ARM',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_243',
@@ -5059,7 +5059,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_042',
         HashNameFemale: 'FM_Tat_F_042',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_244',
@@ -5068,7 +5068,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_043',
         HashNameFemale: 'FM_Tat_F_043',
         Zone: 'ZONE_RIGHT_LEG',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_245',
@@ -5077,7 +5077,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_044',
         HashNameFemale: 'FM_Tat_F_044',
         Zone: 'ZONE_TORSO_FRONT',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_246',
@@ -5086,7 +5086,7 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_045',
         HashNameFemale: 'FM_Tat_F_045',
         Zone: 'ZONE_TORSO_BACK',
-        Price: 300,
+        Price: 270,
     },
     {
         Name: 'TAT_FM_247',
@@ -5095,6 +5095,6 @@ export const ShopTattooProducts: TattooShopItem[] = [
         HashNameMale: 'FM_Tat_M_047',
         HashNameFemale: 'FM_Tat_F_047',
         Zone: 'ZONE_RIGHT_ARM',
-        Price: 300,
+        Price: 270,
     },
 ];

@@ -12,7 +12,7 @@ export const PositionInBarberShop = {
 export const BarberShopItems: BarberShopContent = {
     [PlayerPedHash.Male]: [
         {
-            price: 30,
+            price: 27,
             category: 'Hair',
             label: 'Cheveux',
             overlay: 'Hair',
@@ -20,7 +20,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'Beard',
             label: 'Barbe',
             overlay: 'Hair',
@@ -28,7 +28,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 20,
+            price: 18,
             category: 'Makeup',
             label: 'Maquillage',
             overlay: 'Makeup',
@@ -42,7 +42,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'FaceTraits',
             label: 'Lentilles',
             overlay: 'FaceTraits',
@@ -50,7 +50,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'Eyebrow',
             label: 'Sourcils',
             overlay: 'Hair',
@@ -60,7 +60,7 @@ export const BarberShopItems: BarberShopContent = {
     ],
     [PlayerPedHash.Female]: [
         {
-            price: 30,
+            price: 27,
             category: 'Hair',
             label: 'Cheveux',
             overlay: 'Hair',
@@ -68,7 +68,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'Blush',
             label: 'Blush',
             overlay: 'Makeup',
@@ -76,7 +76,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'Lipstick',
             label: 'Rouge à lèvre',
             overlay: 'Makeup',
@@ -84,7 +84,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 20,
+            price: 18,
             category: 'Makeup',
             label: 'Maquillage',
             overlay: 'Makeup',
@@ -98,7 +98,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'FaceTraits',
             label: 'Lentilles',
             overlay: 'FaceTraits',
@@ -106,7 +106,7 @@ export const BarberShopItems: BarberShopContent = {
             items: undefined,
         },
         {
-            price: 15,
+            price: 13,
             category: 'Eyebrow',
             label: 'Sourcils',
             overlay: 'Hair',
