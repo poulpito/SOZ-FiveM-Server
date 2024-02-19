@@ -34,7 +34,11 @@ export const useHasJobPermission = (job: JobType, permission: JobPermission): bo
         return false;
     }
 
-    const playerGrade = Object.values(grades).find(grade => grade.jobId === job && grade.id === player.job.grade);
+    const playerGradeId = Number(player.job.grade);
+
+    const playerGrade = Object.values(grades).find(grade => {
+        return grade.jobId === job && grade.id === playerGradeId;
+    });
 
     if (!playerGrade) {
         return false;
