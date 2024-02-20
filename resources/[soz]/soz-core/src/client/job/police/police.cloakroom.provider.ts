@@ -91,7 +91,6 @@ export class PoliceCloakRoomProvider {
         if (RankOutfit[player.job.id]) {
             for (const outfitName of Object.keys(RankOutfit[player.job.id])) {
                 configs[model][outfitName].Components[Component.Decals] = { Drawable: 0, Texture: 0, Palette: 0 };
-                console.log(outfitName, RankOutfit[player.job.id][outfitName][player.job.grade]);
                 if (RankOutfit[player.job.id][outfitName][player.job.grade]) {
                     configs[model][outfitName].Components[Component.Decals] = {
                         Drawable:
