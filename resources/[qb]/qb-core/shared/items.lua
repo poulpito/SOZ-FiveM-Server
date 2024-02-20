@@ -835,6 +835,17 @@ QBShared.Items = {
         ['description'] = 'Fusil d\'assaut tactique.',
         ['illustrator'] = '.NariieL'
     },
+    ['weapon_battlerifle'] = {
+        ['name'] = 'weapon_battlerifle',
+        ['label'] = 'Fusil de combat',
+        ['weight'] = 4000,
+        ['type'] = 'weapon',
+        ['ammotype'] = 'AMMO_RIFLE',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['description'] = 'Fusil de combat.',
+        ['illustrator'] = '.'
+    },
 
     -- Light Machine Guns
     ['weapon_mg'] = {
@@ -1068,6 +1079,15 @@ QBShared.Items = {
         ['weight'] = 6000,
         ['type'] = 'weapon',
         ['ammotype'] = 'AMMO_FLARE',
+        ['unique'] = true,
+        ['useable'] = false,
+    },
+    ['weapon_snowlauncher'] = {
+        ['name'] = 'weapon_snowlauncher',
+        ['label'] = 'Lance boule de neige',
+        ['weight'] = 4000,
+        ['type'] = 'weapon',
+        ['ammotype'] = nil,
         ['unique'] = true,
         ['useable'] = false,
     },

@@ -137,6 +137,7 @@ export enum WeaponName {
     MILITARYRIFLE = 'WEAPON_MILITARYRIFLE',
     HEAVYRIFLE = 'WEAPON_HEAVYRIFLE',
     TACTICALRIFLE = 'WEAPON_TACTICALRIFLE',
+    BATTLERIFLE = 'WEAPON_BATTLERIFLE',
 
     // Shotguns
     PUMPSHOTGUN = 'WEAPON_PUMPSHOTGUN',
@@ -828,6 +829,15 @@ export const Weapons: Record<WeaponName, WeaponConfig> = {
             { label: 'Lampe torche', component: 'COMPONENT_AT_AR_FLSH_REH', type: WeaponComponentType.Flashlight },
             { label: 'Poignée', component: 'COMPONENT_AT_AR_AFGRIP', type: WeaponComponentType.Grip },
             { label: 'Silencieux', component: 'COMPONENT_AT_AR_SUPP_02', type: WeaponComponentType.Suppressor },
+        ],
+    },
+    [WeaponName.BATTLERIFLE]: {
+        recoil: 0.1,
+        ammo: 'ammo_07',
+        drawPosition: { model: GetHashKey('w_sl_battlerifle_m32'), ...DrawPositions['AR'] },
+        attachments: [
+            { label: 'Grand chargeur', component: 'COMPONENT_BATTLERIFLE_CLIP_02', type: WeaponComponentType.Clip },
+            { label: 'Silencieux', component: 'COMPONENT_AT_AR_SUPP', type: WeaponComponentType.Suppressor },
         ],
     },
 
