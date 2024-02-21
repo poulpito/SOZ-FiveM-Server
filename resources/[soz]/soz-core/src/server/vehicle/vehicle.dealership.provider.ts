@@ -149,7 +149,7 @@ export class VehicleDealershipProvider {
             });
         }
 
-        TriggerLatentClientEvent(ClientEvent.VEHICLE_DEALERSHIP_AUCTION_UPDATE, -1, 16 * 1024, this.auctions);
+        TriggerClientEvent(ClientEvent.VEHICLE_DEALERSHIP_AUCTION_UPDATE, -1, this.auctions);
     }
 
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_GET_AUCTIONS)
@@ -225,7 +225,7 @@ export class VehicleDealershipProvider {
                         this.notifier.notify(player.source, `Votre enchère a été dépassée.`, 'error');
                     }
                 }
-                TriggerLatentClientEvent(ClientEvent.VEHICLE_DEALERSHIP_AUCTION_UPDATE, -1, 16 * 1024, this.auctions);
+                TriggerClientEvent(ClientEvent.VEHICLE_DEALERSHIP_AUCTION_UPDATE, -1, this.auctions);
 
                 return true;
             },

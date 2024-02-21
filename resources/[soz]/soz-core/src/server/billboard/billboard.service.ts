@@ -26,7 +26,7 @@ export class BillboardService {
                         id: billboardToDelete.id,
                     },
                 });
-                TriggerLatentClientEvent(ClientEvent.BILLBOARD_DELETE, -1, 16 * 1024, billboardToDelete);
+                TriggerClientEvent(ClientEvent.BILLBOARD_DELETE, -1, billboardToDelete);
             } catch (error) {
                 return;
             }
@@ -43,6 +43,6 @@ export class BillboardService {
         const billboards = await this.billboardRepository.get();
         billboards[billboardId] = updatedBillboard;
 
-        TriggerLatentClientEvent(ClientEvent.BILLBOARD_UPDATE, -1, 16 * 1024, updatedBillboard);
+        TriggerClientEvent(ClientEvent.BILLBOARD_UPDATE, -1, updatedBillboard);
     }
 }

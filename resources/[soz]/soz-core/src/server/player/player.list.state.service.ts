@@ -40,13 +40,7 @@ export class PlayerListStateService {
         }
 
         if (updated) {
-            TriggerLatentClientEvent(
-                ClientEvent.PLAYER_UPDATE_LIST_STATE,
-                -1,
-                16 * 1024,
-                key,
-                Array.from(this.lists[key])
-            );
+            TriggerClientEvent(ClientEvent.PLAYER_UPDATE_LIST_STATE, -1, key, Array.from(this.lists[key]));
         }
     }
 

@@ -411,7 +411,7 @@ Container["metal_converter"] = InventoryContainer:new({
         end
         if table.length(inv.users) > 0 then
             for player, _ in pairs(inv.users) do
-                TriggerLatentClientEvent("inventory:client:updateTargetStoragesState", player, 16 * 1024, inv)
+                TriggerClientEvent("inventory:client:updateTargetStoragesState", player, inv)
             end
         end
 

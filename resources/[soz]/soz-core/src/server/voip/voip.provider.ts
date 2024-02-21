@@ -90,6 +90,6 @@ export class VoipProvider {
             this.playersWithMegaphone.delete(source);
         }
 
-        TriggerLatentClientEvent(ClientEvent.VOIP_SET_MEGAPHONE, -1, 16 * 1024, source, value);
+        TriggerClientEvent(ClientEvent.VOIP_SET_MEGAPHONE, -1, source, value);
     }
 }

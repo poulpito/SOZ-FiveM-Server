@@ -97,7 +97,7 @@ export class WeatherProvider {
             }
         }
 
-        TriggerLatentClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, 16 * 1024, this.currentTime);
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
     }
 
     @Tick(TickInterval.EVERY_SECOND, 'weather:next-weather')
@@ -114,7 +114,7 @@ export class WeatherProvider {
         this.store.dispatch.global.update({ weather: weather.weather });
         this.prepareForecasts(weather.weather);
 
-        TriggerLatentClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_FORECASTS, -1, 16 * 1024);
+        TriggerClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_FORECASTS, -1);
 
         const duration = weather.duration || (Math.random() * 5 + 10) * 60 * 1000;
         await wait(duration);
@@ -145,7 +145,7 @@ export class WeatherProvider {
 
     public setStormDeadline(value: number): void {
         this.stormDeadline = value;
-        TriggerLatentClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_STORM_ALERT, -1, 16 * 1024);
+        TriggerClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_STORM_ALERT, -1);
     }
 
     public setWeather(weather: Weather): void {
@@ -154,7 +154,7 @@ export class WeatherProvider {
         this.store.dispatch.global.update({ weather: weather || defaultWeather });
         this.prepareForecasts(this.store.getState().global.weather, true);
 
-        TriggerLatentClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_FORECASTS, -1, 16 * 1024);
+        TriggerClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_FORECASTS, -1);
 
         this.monitor.publish('weather_update', {}, { weather: weather || defaultWeather });
     }
@@ -174,7 +174,7 @@ export class WeatherProvider {
         }
 
         this.currentTime = { hour, minute, second: 0 };
-        TriggerLatentClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, 16 * 1024, this.currentTime);
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
     }
 
     @Command('blackout', { role: 'admin' })

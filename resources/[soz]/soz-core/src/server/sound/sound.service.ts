@@ -26,7 +26,7 @@ export class SoundService {
 
     public stopGlobal() {
         this.globalSound = null;
-        TriggerLatentClientEvent('InteractSound_CL:Stoploop', -1, 16 * 1024);
+        TriggerClientEvent('InteractSound_CL:Stoploop', -1);
     }
 
     public playGlobalForPlayer(source: number) {
@@ -43,7 +43,7 @@ export class SoundService {
     }
 
     public play(source: number, name: string, volume: number) {
-        TriggerLatentClientEvent('InteractSound_CL:PlayOnOne', source, 16 * 1024, name, volume);
+        TriggerClientEvent('InteractSound_CL:PlayOnOne', source, name, volume);
     }
 
     public playAround(source: number, name: string, distance: number, volume: number) {

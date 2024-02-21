@@ -14,7 +14,7 @@ export class StateGlobalProvider {
 
     @StateSelector(state => state.global)
     public onGlobalStateChange(global: GlobalState) {
-        TriggerLatentClientEvent(ClientEvent.STATE_UPDATE_GLOBAL, -1, 16 * 1024, global);
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_GLOBAL, -1, global);
     }
 
     @Exportable('GetGlobalState')

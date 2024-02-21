@@ -12,7 +12,6 @@ import { ApiClient } from '../api/api.client';
 import { PrismaService } from '../database/prisma.service';
 import { PlayerCleanService } from '../player/player.clean.service';
 import { QBCore } from '../qbcore';
-import { SoundService } from '../sound/sound.service';
 import { Store } from '../store/store';
 import { VehicleDealershipProvider } from '../vehicle/vehicle.dealership.provider';
 import { WeatherProvider } from '../weather/weather.provider';
@@ -38,9 +37,6 @@ export class RebootProvider {
 
     @Inject(ApiClient)
     private apiClient: ApiClient;
-
-    @Inject(SoundService)
-    private soundService: SoundService;
 
     @Inject(Logger)
     private logger: Logger;
@@ -151,37 +147,37 @@ export class RebootProvider {
 
             this.weatherProvider.setWeather('HALLOWEEN');
 
-            this.soundService.play(-1, 'halloween/wolf', 1.0);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/wolf', 1.0);
             await wait(20 * 1000);
-            this.soundService.play(-1, 'halloween/wolf', 1.0);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/wolf', 1.0);
             await wait(20 * 1000);
-            this.soundService.play(-1, 'halloween/wolf', 1.0);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/wolf', 1.0);
             await wait(20 * 1000);
 
             this.weatherProvider.setWeather('HALLOWEEN');
-            this.soundService.play(-1, 'halloween/laugh_witch', 0.8);
-            this.soundService.play(-1, 'system/reboot', 0.05);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_witch', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'system/reboot', 0.05);
             await wait(10 * 1000);
-            this.soundService.play(-1, 'halloween/laugh_evil', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_evil', 0.8);
             await wait(10 * 1000);
-            this.soundService.play(-1, 'halloween/laugh_witch', 0.8);
-            this.soundService.play(-1, 'halloween/laugh_evil', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_witch', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_evil', 0.8);
             await wait(10 * 1000);
-            this.soundService.play(-1, 'system/reboot', 0.05);
-            this.soundService.play(-1, 'halloween/laugh_evil', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'system/reboot', 0.05);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_evil', 0.8);
             await wait(10 * 1000);
-            this.soundService.play(-1, 'halloween/laugh_evil', 0.8);
-            this.soundService.play(-1, 'halloween/laugh_witch', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_evil', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_witch', 0.8);
             await wait(10 * 1000);
-            this.soundService.play(-1, 'halloween/laugh_evil', 0.8);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'halloween/laugh_evil', 0.8);
             await wait(10 * 1000);
         } else {
             await wait(2 * 60 * 1000);
 
-            this.soundService.play(-1, 'system/reboot', 0.05);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'system/reboot', 0.05);
             await wait(30 * 1000);
 
-            this.soundService.play(-1, 'system/reboot', 0.05);
+            TriggerClientEvent('InteractSound_CL:PlayOnOne', -1, 'system/reboot', 0.05);
             await wait(30 * 1000);
         }
 

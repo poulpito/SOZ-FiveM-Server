@@ -835,12 +835,12 @@ function Inventory.TransfertItem(source, invSource, invTarget, item, amount, met
 
     if invSource.type ~= "player" and table.length(invSource.users) > 1 then
         for player, _ in pairs(invSource.users) do
-            TriggerLatentClientEvent("inventory:client:updateTargetStoragesState", player, 16 * 1024, invSource)
+            TriggerClientEvent("inventory:client:updateTargetStoragesState", player, invSource)
         end
     end
     if invTarget.type ~= "player" and table.length(invTarget.users) > 1 then
         for player, _ in pairs(invTarget.users) do
-            TriggerLatentClientEvent("inventory:client:updateTargetStoragesState", player, 16 * 1024, invTarget)
+            TriggerClientEvent("inventory:client:updateTargetStoragesState", player, invTarget)
         end
     end
 
@@ -903,7 +903,7 @@ function Inventory.SortInventoryAZ(inv, cb)
 
         if inv.type ~= "player" and table.length(inv.users) > 1 then
             for player, _ in pairs(inv.users) do
-                TriggerLatentClientEvent("inventory:client:updateTargetStoragesState", player, 16 * 1024, inv)
+                TriggerClientEvent("inventory:client:updateTargetStoragesState", player, inv)
             end
         end
     else

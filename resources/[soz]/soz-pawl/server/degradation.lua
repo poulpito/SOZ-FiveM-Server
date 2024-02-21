@@ -36,7 +36,7 @@ Citizen.CreateThread(function()
             currentDegradationLevel = newDegradationLevel
 
             exports["soz-core"]:Log("INFO", "Wild degradation level updated: " .. newDegradationLevel)
-            TriggerLatentClientEvent("pawl:client:OnDegradationLevelChanged", -1, 16 * 1024, currentDegradationLevel)
+            TriggerClientEvent("pawl:client:OnDegradationLevelChanged", -1, currentDegradationLevel)
         end
 
         Citizen.Wait(Config.Degradation.Tick)
