@@ -7511,6 +7511,18 @@ QBShared.Items = {
         ['description'] = 'Ne laissez pas les accidents vous prendre de court pour 2023',
         ['illustrator'] = '.NariieL',
     },
+    ['lsmc_calendar_2024'] = {
+        ['name'] = 'lsmc_calendar_2024',
+        ['label'] = 'Calendrier LSMC 2024',
+        ['weight'] = 150,
+        ['type'] = 'item',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = `Un calendrier resplendissant et jovial, à l'image des médecins du LSMC qu'il représente !`,
+        ['illustrator'] = '.Dheyline',
+    },
     ['newcomer_ticket'] = {
         ['name'] = 'newcomer_ticket',
         ['label'] = 'Ticket nouvel arrivant',
