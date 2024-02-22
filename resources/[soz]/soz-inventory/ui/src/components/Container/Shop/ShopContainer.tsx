@@ -75,7 +75,7 @@ export const ShopContainer = () => {
         }).then(() => {
             closeNUI(() => closeMenu());
         });
-    }, [closeMenu]);
+    }, [closeMenu, taxType]);
 
     const putInCart = useCallback((event: DragEndEvent) => {
         if (!event.active.data.current) return;

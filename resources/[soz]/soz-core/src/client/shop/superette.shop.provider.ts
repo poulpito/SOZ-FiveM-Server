@@ -103,6 +103,11 @@ export class SuperetteShopProvider {
             quantity = parseInt(value);
         }
 
-        TriggerServerEvent(ServerEvent.SHOP_BUY, product, ShopBrand.Zkea, quantity);
+        TriggerServerEvent(
+            ServerEvent.SHOP_BUY,
+            product,
+            product.type === 'weapon' || product.type === 'weapon_ammo' ? ShopBrand.Ammunation : ShopBrand.Zkea,
+            quantity
+        );
     }
 }

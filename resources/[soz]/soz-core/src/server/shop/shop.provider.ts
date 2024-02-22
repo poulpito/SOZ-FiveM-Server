@@ -141,8 +141,10 @@ export class ShopProvider {
                 this.logger.error(`[ShopProvider] shopBuy: Not implemented shop ${brand}`);
                 break;
             case ShopBrand.Ammunation:
+                this.shopGeneralBuy(source, product as ShopProduct, quantity, TaxType.WEAPON);
+                break;
             case ShopBrand.Zkea:
-                this.shopGeneralBuy(source, product as ShopProduct, quantity);
+                this.shopGeneralBuy(source, product as ShopProduct, quantity, TaxType.SUPPLY);
                 break;
             case ShopBrand.Barber:
                 this.shopBarberBuy(source, product as BarberShopItem);
@@ -173,7 +175,7 @@ export class ShopProvider {
     }
 
     public async shopBarberBuy(source: number, product: BarberShopItem) {
-        if (!(await this.shopPay(source, product.price))) {
+        if (!(await this.shopPay(source, product.price, TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -223,7 +225,7 @@ export class ShopProvider {
     }
 
     public async shopJewelryBuy(source: number, product: JewelryShopItem) {
-        if (!(await this.shopPay(source, product.price))) {
+        if (!(await this.shopPay(source, product.price, TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -286,7 +288,7 @@ export class ShopProvider {
             return;
         }
 
-        if (!(await this.shopPay(source, product.price))) {
+        if (!(await this.shopPay(source, product.price, TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -380,7 +382,7 @@ export class ShopProvider {
             this.notifier.notify(source, `Une erreur s'est produite, désolé.`, 'error');
             return;
         }
-        if (!(await this.shopPay(source, product.Price))) {
+        if (!(await this.shopPay(source, product.Price, TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -428,7 +430,7 @@ export class ShopProvider {
         this.notifier.notify(source, `Vous venez de vous faire retirer tous vos tatouages`, 'success');
     }
 
-    public async shopGeneralBuy(source: number, product: ShopProduct, quantity: number) {
+    public async shopGeneralBuy(source: number, product: ShopProduct, quantity: number, taxType: TaxType) {
         if (quantity < 1) {
             return;
         }
@@ -441,7 +443,7 @@ export class ShopProvider {
             this.notifier.notify(source, `Vous n'avez pas assez de place dans votre inventaire`, 'error');
             return;
         }
-        if (!(await this.shopPay(source, product.price * quantity))) {
+        if (!(await this.shopPay(source, product.price * quantity, taxType))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -450,7 +452,7 @@ export class ShopProvider {
                 source,
                 `Vous avez acheté ~b~${quantity} ${product.item.label}~s~ pour ~g~$${await this.priceService.getPrice(
                     product.price * quantity,
-                    TaxType.SUPPLY
+                    taxType
                 )}`
             );
         } else {
@@ -458,7 +460,7 @@ export class ShopProvider {
         }
     }
 
-    public async shopPay(source: number, price: number): Promise<boolean> {
-        return this.playerMoneyService.buy(source, price, TaxType.SUPPLY);
+    public async shopPay(source: number, price: number, taxType: TaxType): Promise<boolean> {
+        return this.playerMoneyService.buy(source, price, taxType);
     }
 }
