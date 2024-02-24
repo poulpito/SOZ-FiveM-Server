@@ -844,7 +844,7 @@ QBShared.Items = {
         ['unique'] = true,
         ['useable'] = true,
         ['description'] = 'Fusil de combat.',
-        ['illustrator'] = '.'
+        ['illustrator'] = '.Laikker'
     },
 
     -- Light Machine Guns
@@ -1090,6 +1090,8 @@ QBShared.Items = {
         ['ammotype'] = nil,
         ['unique'] = true,
         ['useable'] = false,
+        ['description'] = 'Version de Noel du lance-grenades compact.',
+        ['illustrator'] = '.Laikker'
     },
 
     -- Throwables
