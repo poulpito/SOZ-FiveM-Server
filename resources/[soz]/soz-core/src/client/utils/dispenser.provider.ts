@@ -1,8 +1,10 @@
 import { Once } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { ServerEvent } from '@public/shared/event';
+import { Err, Ok } from '@public/shared/result';
 
 import { Provider } from '../../core/decorators/provider';
+import { InputService } from '../nui/input.service';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { TargetFactory } from '../target/target.factory';
@@ -26,6 +28,9 @@ export class DispenserProvider {
     @Inject(ProgressService)
     private progressService: ProgressService;
 
+    @Inject(InputService)
+    private inputService: InputService;
+
     @Once()
     public onStart() {
         this.targetFactory.createForModel(
@@ -35,7 +40,42 @@ export class DispenserProvider {
                     label: "Bouteille d'eau ($" + dispenser_drink_price + ')',
                     icon: 'c:food/bouteille.png',
                     action: () => {
-                        this.buy('Achète à boire...', 'water_bottle', dispenser_drink_price);
+                        this.buy('Achète à boire ...', 'water_bottle', dispenser_drink_price);
+                    },
+                },
+                {
+                    label: `Lot de bouteilles</br>($${dispenser_drink_price} unité)`,
+                    icon: 'c:food/bouteilles.png',
+                    action: async () => {
+                        const quantity = await this.inputService.askInput(
+                            {
+                                title: `Choisir la quantité`,
+                                defaultValue: '',
+                                maxCharacters: 4,
+                            },
+                            value => {
+                                if (!value) {
+                                    return Ok(true);
+                                }
+                                const int = parseInt(value);
+                                if (isNaN(int) || !Number.isInteger(int) || int < 0) {
+                                    return Err('Veuillez préciser un nombre entier.');
+                                }
+
+                                return Ok(true);
+                            }
+                        );
+
+                        if (!quantity) {
+                            return;
+                        }
+
+                        this.buy(
+                            'Achat de plusieurs bouteilles ...',
+                            'water_bottle',
+                            dispenser_drink_price,
+                            parseInt(quantity)
+                        );
                     },
                 },
             ],
@@ -52,6 +92,41 @@ export class DispenserProvider {
                         this.buy('Achète à manger...', 'sandwich', dispenser_eat_price);
                     },
                 },
+                {
+                    label: `Lot de sandwichs</br>($${dispenser_eat_price} unité)`,
+                    icon: 'c:food/baguettes.png',
+                    action: async () => {
+                        const quantity = await this.inputService.askInput(
+                            {
+                                title: `Choisir la quantité`,
+                                defaultValue: '',
+                                maxCharacters: 4,
+                            },
+                            value => {
+                                if (!value) {
+                                    return Ok(true);
+                                }
+                                const int = parseInt(value);
+                                if (isNaN(int) || !Number.isInteger(int) || int < 0) {
+                                    return Err('Veuillez préciser un nombre entier.');
+                                }
+
+                                return Ok(true);
+                            }
+                        );
+
+                        if (!quantity) {
+                            return;
+                        }
+
+                        this.buy(
+                            'Achat de plusieurs sandwichs ...',
+                            'sandwich',
+                            dispenser_eat_price,
+                            parseInt(quantity)
+                        );
+                    },
+                },
             ],
             1
         );
@@ -60,10 +135,40 @@ export class DispenserProvider {
             vending_machine_cafe,
             [
                 {
-                    label: 'Café ($' + dispenser_cafe_price + ')',
+                    label: `Café ($${dispenser_cafe_price})`,
                     icon: 'c:food/cafe.png',
                     action: () => {
-                        this.buy('Achète un Café...', 'coffee', dispenser_cafe_price);
+                        this.buy('Achète un Café ...', 'coffee', dispenser_cafe_price);
+                    },
+                },
+                {
+                    label: `Lot de café</br>($${dispenser_cafe_price} unité)`,
+                    icon: 'c:food/cafes.png',
+                    action: async () => {
+                        const quantity = await this.inputService.askInput(
+                            {
+                                title: `Choisir la quantité`,
+                                defaultValue: '',
+                                maxCharacters: 4,
+                            },
+                            value => {
+                                if (!value) {
+                                    return Ok(true);
+                                }
+                                const int = parseInt(value);
+                                if (isNaN(int) || !Number.isInteger(int) || int < 0) {
+                                    return Err('Veuillez préciser un nombre entier.');
+                                }
+
+                                return Ok(true);
+                            }
+                        );
+
+                        if (!quantity) {
+                            return;
+                        }
+
+                        this.buy('Achat de plusieurs Cafés ...', 'coffee', dispenser_cafe_price, parseInt(quantity));
                     },
                 },
             ],
@@ -71,7 +176,7 @@ export class DispenserProvider {
         );
     }
 
-    private async buy(action: string, item: string, price: number) {
+    private async buy(action: string, item: string, price: number, quantity?: number) {
         const { completed } = await this.progressService.progress(
             'dispenser_buy',
             action,
@@ -94,6 +199,6 @@ export class DispenserProvider {
             return;
         }
 
-        TriggerServerEvent(ServerEvent.DISPENSER_BUY, price, item);
+        TriggerServerEvent(ServerEvent.DISPENSER_BUY, price, item, quantity ?? 1);
     }
 }

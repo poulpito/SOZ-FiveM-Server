@@ -35,6 +35,17 @@ RegisterNetEvent("soz-jobs:client:baun:createCocktailBox", function()
 end)
 
 RegisterNetEvent("soz-jobs:client:baun:createIceCubes", function()
+    local iceCubeToCreate = exports["soz-core"]:Input("Quantité - Multiple de 6", 5)
+    if not iceCubeToCreate or tonumber(iceCubeToCreate, 10) == nil then
+        exports["soz-core"]:DrawNotification("Vous devez entrer un nombre entier.", "error")
+        return
+    end
+
+    if iceCubeToCreate and tonumber(iceCubeToCreate) < 6 then
+        exports["soz-core"]:DrawNotification("Vous devez entrer un nombre supérieur à ~b~6~s~.", "error")
+        return
+    end
+
     QBCore.Functions.TriggerCallback("soz-jobs:server:baun:createIceCubes", function()
-    end)
+    end, iceCubeToCreate)
 end)

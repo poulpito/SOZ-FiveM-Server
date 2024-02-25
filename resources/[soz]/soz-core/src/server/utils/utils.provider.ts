@@ -57,16 +57,15 @@ export class UtilsProvider {
     }
 
     @OnEvent(ServerEvent.DISPENSER_BUY)
-    public onDispenserBuy(source: number, price: number, item: string) {
-        if (!this.inventoryManager.canCarryItem(source, item, 1)) {
+    public onDispenserBuy(source: number, price: number, item: string, quantity: number) {
+        if (!this.inventoryManager.canCarryItem(source, item, quantity)) {
             this.notifier.notify(source, `Vous n'avez pas assez de place dans votre inventaire`, 'error');
             return;
         }
-
-        if (this.playerMoneyService.remove(source, price, 'money')) {
-            this.inventoryManager.addItemToInventory(source, item);
+        if (this.playerMoneyService.remove(source, price * quantity, 'money')) {
+            this.inventoryManager.addItemToInventory(source, item, quantity);
             const itemFull = this.itemService.getItem(item);
-            this.notifier.notify(source, `Vous avez ~g~acheté~s~ un ${itemFull.label}.`, 'success');
+            this.notifier.notify(source, `Vous avez acheté ~g~${quantity}~s~ ~b~${itemFull.label}~s~.`, 'success');
         } else {
             this.notifier.notify(source, `Vous n'avez pas assez d'argent.`, 'error');
         }
