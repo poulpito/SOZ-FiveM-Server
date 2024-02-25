@@ -201,18 +201,24 @@ export const MenuPropPlacement: FunctionComponent<MenuPropPlacementProps> = ({ d
                         ✎ Renommer la collection
                     </MenuItemButton>
                     {['staff', 'admin'].includes(player.role) && (
-                        <MenuItemCheckbox
-                            checked={collection.persistant}
-                            onChange={async value => {
-                                await fetchNui(NuiEvent.RequestPersistPropCollection, {
-                                    name: collection.name,
-                                    persist: value,
-                                });
-                            }}
-                            description="Charge la collection au démarrage du serveur."
-                        >
-                            💾 Persister la collection
-                        </MenuItemCheckbox>
+                        <>
+                            <MenuItemCheckbox
+                                checked={collection.persistant}
+                                onChange={async () => {
+                                    await fetchNui(NuiEvent.RequestPersistPropCollection, collection.name);
+                                }}
+                                description="Charge la collection au démarrage du serveur."
+                            >
+                                💾 Persister la collection
+                            </MenuItemCheckbox>
+                            <MenuItemButton
+                                onConfirm={async () => {
+                                    await fetchNui(NuiEvent.PlacementCollectionTeleport, collection.name);
+                                }}
+                            >
+                                ⛹Téléporter
+                            </MenuItemButton>
+                        </>
                     )}
                     <MenuItemButton
                         onConfirm={async () => {

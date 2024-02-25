@@ -26,6 +26,7 @@ import { Notifier } from '../notifier';
 import { InputService } from '../nui/input.service';
 import { NuiDispatch } from '../nui/nui.dispatch';
 import { NuiMenu } from '../nui/nui.menu';
+import { PlayerPositionProvider } from '../player/player.position.provider';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { ResourceLoader } from '../repository/resource.loader';
@@ -67,6 +68,9 @@ export class PropPlacementProvider {
 
     @Inject(PlayerService)
     private playerService: PlayerService;
+
+    @Inject(PlayerPositionProvider)
+    private playerPositionProvider: PlayerPositionProvider;
 
     private debugProp: DebugProp | null;
     private isEditorModeOn: boolean;
@@ -207,6 +211,16 @@ export class PropPlacementProvider {
             return;
         }
         await this.refreshPropPlacementMenuData(newCollections);
+    }
+
+    @OnNuiEvent(NuiEvent.PlacementCollectionTeleport)
+    public async onRequestTpCollection(name: string) {
+        const collectionToOpen = await emitRpc<PropCollection>(RpcServerEvent.PROP_GET_PROP_COLLECTION, name);
+        const [firstProp] = Object.values(collectionToOpen.props);
+
+        if (firstProp) {
+            this.playerPositionProvider.teleportAdminToPosition(firstProp.object.position);
+        }
     }
 
     public async refreshPropPlacementMenuData(
