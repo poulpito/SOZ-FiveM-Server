@@ -223,12 +223,12 @@ const BELL_ZONES: Zone<BellProps>[] = [
         },
     },
     {
-        center: [-555.61, -602.12, 34.68],
-        length: 0.4,
+        center: [-549.67, -611.97, 34.78],
+        length: 0.2,
         width: 0.4,
-        heading: 80,
-        minZ: 34.38,
-        maxZ: 34.68,
+        heading: 160,
+        minZ: 34.58,
+        maxZ: 34.98,
         data: {
             job: JobType.Gouv,
             number: '555-GOUV',
