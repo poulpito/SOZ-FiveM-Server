@@ -136,6 +136,9 @@ export enum NuiEvent {
     JobBossShopBuyItem = 'soz-core:nui:job:boss-shop:buy-item',
     JobPromote = 'soz-core:nui:job:promote',
     OilAskStationPrice = 'soz-core:nui:job:oil:ask-station-price',
+    OilShowOilFields = 'soz-core:nui:job:oil:show-oil-fields',
+    OilShowRefinery = 'soz-core:nui:job:oil:show-refinery',
+    OilShowReseller = 'soz-core:nui:job:oil:show-reseller',
     UpwDisplayBlips = 'soz-core:nui:job:upw:display-blips',
 
     PanelClosed = 'soz-core:nui:panel:closed',

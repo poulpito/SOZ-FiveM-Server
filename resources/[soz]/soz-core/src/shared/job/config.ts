@@ -58,7 +58,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.FBI]: {
         label: 'Federal Bureau of Investigation',
         platePrefix: 'FBI ',
-        menuCallback: 'soz-jobs:client:police:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_POLICE_OPEN_SOCIETY_MENU,
         permissions: {
             [JobPermission.SocietyDealershipVehicle]: { label: 'Accès aux concessionnaires de véhicules' },
         },
@@ -68,7 +68,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.LSPD]: {
         label: 'Los Santos Police Department',
         platePrefix: 'LSPD',
-        menuCallback: 'soz-jobs:client:police:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_POLICE_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -97,7 +97,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.BCSO]: {
         label: 'Blaine County Sheriff Office',
         platePrefix: 'BCSO',
-        menuCallback: 'soz-jobs:client:police:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_POLICE_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -155,7 +155,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.LSMC]: {
         label: 'Los Santos Medical Center',
         platePrefix: 'LSMC',
-        menuCallback: 'soz-jobs:client:lsmc:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_LSMC_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -182,7 +182,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Taxi]: {
         label: 'Carl Jr Services',
         platePrefix: 'CARL',
-        menuCallback: 'soz-jobs:client:taxi:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_TAXI_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -204,7 +204,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Food]: {
         label: 'Château Marius',
         platePrefix: 'CHAT',
-        menuCallback: 'jobs:client:food:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_FOOD_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -235,7 +235,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.News]: {
         label: 'Twitch News',
         platePrefix: 'NEWS',
-        menuCallback: 'soz-jobs:client:twitch-news:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_TWITCH_NEWS_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -259,7 +259,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.YouNews]: {
         label: 'You News',
         platePrefix: 'YOUN',
-        menuCallback: 'soz-jobs:client:you-news:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_YOU_NEWS_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -276,7 +276,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Garbage]: {
         label: 'BlueBird',
         platePrefix: 'BLUE',
-        menuCallback: 'jobs:client:garbage:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_GARBAGE_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -299,7 +299,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Oil]: {
         label: 'Michel Transport Petrol',
         platePrefix: 'MITP',
-        menuCallback: 'jobs:client:fueler:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_OIL_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -435,7 +435,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Baun]: {
         label: 'Bahama Unicorn',
         platePrefix: 'BAUN',
-        menuCallback: 'soz-jobs:client:baun:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_BAUN_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -468,7 +468,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Ffs]: {
         label: 'Fight For Style',
         platePrefix: 'FFS',
-        menuCallback: 'soz-jobs:client:ffs:OpenSocietyMenu',
+        menuCallback: ClientEvent.JOBS_FFS_OPEN_SOCIETY_MENU,
         canInvoice: true,
         permissions: {
             ...BasePermissions,
@@ -493,6 +493,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.MDR]: {
         label: 'Mandatory',
         platePrefix: 'MDR',
+        menuCallback: ClientEvent.JOBS_MDR_OPEN_SOCIETY_MENU,
         permissions: {
             ...BasePermissions,
             [JobPermission.VehicleRegistrar]: { label: 'Accès aux registre des véhicules' },
@@ -514,7 +515,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
                 maxZ: 49.66,
             },
         ],
-        menuCallback: 'soz-jobs:client:mdr:OpenSocietyMenu',
         canInvoice: true,
         phone: '555-MDR',
         canReceiveSocietyInvoice: true,
@@ -522,6 +522,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.Gouv]: {
         label: 'Gouvernement',
         platePrefix: 'GOUV',
+        menuCallback: ClientEvent.JOBS_GOUV_OPEN_SOCIETY_MENU,
         permissions: {
             ...BasePermissions,
             [JobPermission.GouvUpdateTax]: { label: 'Mettre à jour les taxes' },
@@ -538,7 +539,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
                 maxZ: 35.68,
             },
         ],
-        menuCallback: 'soz-jobs:client:gouv:OpenSocietyMenu',
         canInvoice: true,
         phone: '555-GOUV',
         canReceiveSocietyInvoice: true,
@@ -546,6 +546,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.SASP]: {
         label: 'San Andreas State Police',
         platePrefix: 'SASP',
+        menuCallback: ClientEvent.JOBS_POLICE_OPEN_SOCIETY_MENU,
         permissions: {
             ...BasePermissions,
             [JobPermission.CriminalRecord]: { label: 'Accès aux casiers judiciaires' },
@@ -566,7 +567,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
                 maxZ: 35.68,
             },
         ],
-        menuCallback: 'soz-jobs:client:police:OpenSocietyMenu',
         canInvoice: true,
         phone: '555-SASP',
         canReceiveSocietyInvoice: true,
@@ -574,6 +574,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.FDF]: {
         label: 'Ferme de Fou',
         platePrefix: 'FDF',
+        menuCallback: ClientEvent.JOBS_FDF_OPEN_SOCIETY_MENU,
         permissions: {
             ...BasePermissions,
         },
@@ -587,7 +588,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
                 maxZ: 55.39,
             },
         ],
-        menuCallback: 'soz-jobs:client:fdf:OpenSocietyMenu',
         canInvoice: true,
         phone: '555-FDF',
         canReceiveSocietyInvoice: true,
@@ -596,6 +596,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
     [JobType.DMC]: {
         label: 'DeMetal Company',
         platePrefix: 'DMC',
+        menuCallback: ClientEvent.JOBS_DMC_OPEN_SOCIETY_MENU,
         permissions: {
             ...BasePermissions,
         },
@@ -609,7 +610,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
                 maxZ: 32.97,
             },
         ],
-        menuCallback: 'soz-jobs:client:dmc:OpenSocietyMenu',
         canInvoice: true,
         phone: '555-DMC',
         canReceiveSocietyInvoice: true,

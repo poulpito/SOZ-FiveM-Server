@@ -1,9 +1,10 @@
 import { PrismaService } from '@public/server/database/prisma.service';
 import { ItemService } from '@public/server/item/item.service';
 import { Storage, StorageType } from '@public/shared/inventory';
+import { VehicleClass } from '@public/shared/vehicle/vehicle';
 
 import { Inject, Injectable } from '../../core/decorators/injectable';
-import { InventoryItem, InventoryItemMetadata } from '../../shared/item';
+import { Inventory, InventoryItem, InventoryItemMetadata } from '../../shared/item';
 import { PlayerService } from '../player/player.service';
 
 @Injectable()
@@ -84,8 +85,8 @@ export class InventoryManager {
     public getOrCreateInventory(
         trunkType: string,
         plate: string,
-        context: { model: string; class: string; entity: number }
-    ) {
+        context: { model: string | number; class: VehicleClass; entity?: number }
+    ): Inventory | null {
         return this.sozInventory.GetOrCreateInventory(trunkType, plate, context);
     }
 
@@ -218,7 +219,7 @@ export class InventoryManager {
     }
 
     public addItemToInventory(
-        source: number,
+        source: number | string,
         itemId: string,
         amount = 1,
         metadata?: InventoryItemMetadata,
@@ -251,7 +252,12 @@ export class InventoryManager {
         return { success, reason };
     }
 
-    public canCarryItem(source: number, itemId: string, amount: number, metadata?: InventoryItemMetadata): boolean {
+    public canCarryItem(
+        source: number | string,
+        itemId: string,
+        amount: number,
+        metadata?: InventoryItemMetadata
+    ): boolean {
         return this.sozInventory.CanCarryItem(source, itemId, amount, metadata);
     }
 
@@ -264,7 +270,7 @@ export class InventoryManager {
     }
 
     public canSwapItem(
-        source: number,
+        source: number | string,
         firstItemId: string,
         firstItemAmount: number,
         secondItemId: string,
@@ -274,7 +280,7 @@ export class InventoryManager {
     }
 
     public canSwapItems(
-        source: number,
+        source: number | string,
         outItems: { name: string; amount: number; metadata: InventoryItemMetadata }[],
         inItems: { name: string; amount: number; metadata: InventoryItemMetadata }[]
     ): boolean {

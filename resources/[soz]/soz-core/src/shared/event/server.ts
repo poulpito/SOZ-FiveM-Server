@@ -167,10 +167,18 @@ export enum ServerEvent {
     OBJECT_ATTACHED_REGISTER = 'soz-core:client:object:attached:register',
     OBJECT_ATTACHED_UNREGISTER = 'soz-core:client:object:attached:unregister',
 
+    OIL_CRAFT_ESSENCE = 'soz-core:server:oil:craft-essence',
+    OIL_CRAFT_ESSENCE_JERRYCAN = 'soz-core:server:oil:craft-essence-jerrycan',
+    OIL_CRAFT_KEROSENE = 'soz-core:server:oil:craft-kerosene',
+    OIL_CRAFT_KEROSENE_JERRYCAN = 'soz-core:server:oil:craft-kerosene-jerrycan',
     OIL_REFILL_ESSENCE_STATION = 'soz-core:server:oil:refill-essence-station',
     OIL_REFILL_KEROSENE_STATION = 'soz-core:server:oil:refill-kerosene-station',
     OIL_SET_STATION_PRICE = 'soz-core:server:oil:set-station-price',
     OIL_DECREMENT_STATION = 'soz-core:server:oil:decrement',
+    OIL_REFILL_TANKER = 'soz-core:server:oil:refill-tanker',
+    OIL_REFINE_TANKER = 'soz-core:server:oil:refine-tanker',
+    OIL_RESELL_TANKER = 'soz-core:server:oil:resell-tanker',
+    OIL_UNLOCK_TANKER = 'soz-core:server:oil:unlock-tanker',
 
     PLAYER_LOADED = 'soz-core:server:player:loaded',
     PLAYER_INCREASE_STRESS = 'soz-core:server:player:increase-stress',

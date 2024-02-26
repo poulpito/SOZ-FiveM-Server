@@ -83,6 +83,7 @@ export enum ClientEvent {
     JOBS_YOU_NEWS_OPEN_SOCIETY_MENU = 'soz-jobs:client:you-news:OpenSocietyMenu',
     JOBS_DMC_OPEN_SOCIETY_MENU = 'soz-jobs:client:dmc:OpenSocietyMenu',
     JOBS_POLICE_OPEN_SOCIETY_MENU = 'soz-jobs:client:police:OpenSocietyMenu',
+    JOBS_OIL_OPEN_SOCIETY_MENU = 'soz-jobs:client:oil:OpenSocietyMenu',
 
     JOBS_CHECK_CLOAKROOM_STORAGE = 'soz-jobs:client:check-cloakroom-storage',
     JOB_OPEN_MENU = 'soz-core:client:job:open-menu',
@@ -132,7 +133,6 @@ export enum ClientEvent {
 
     OIL_REFILL_ESSENCE_STATION = 'soz-core:client:oil:refill-essence-station',
     OIL_REFILL_KEROSENE_STATION = 'soz-core:client:oil:refill-kerosene-station',
-    OIL_UPDATE_STATION_PRICE = 'soz-core:client:oil:update-station-price',
 
     PHONE_APP_WEATHER_UPDATE_FORECASTS = 'phone:app:weather:updateForecasts',
     PHONE_APP_WEATHER_UPDATE_STORM_ALERT = 'phone:app:weather:updateStormAlert',

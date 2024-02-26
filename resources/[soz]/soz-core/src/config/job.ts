@@ -29,6 +29,14 @@ export const JobBlips: Partial<Record<JobType, Blip[]>> = {
             coords: { x: 5111.62, y: -4638.45, z: 1.74 },
         },
     ],
+    [JobType.Oil]: [
+        {
+            name: 'Michel Transport Petrol',
+            sprite: 436,
+            scale: 0.9,
+            coords: { x: -251.75, y: 6099.03, z: 31.39 },
+        },
+    ],
 };
 
 export const JobCloakrooms: Partial<Record<JobType, Zone<JobCloakroomZoneData>[]>> = {

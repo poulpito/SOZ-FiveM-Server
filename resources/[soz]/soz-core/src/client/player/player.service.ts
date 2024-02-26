@@ -28,7 +28,6 @@ export class PlayerService {
         isInHospital: false,
         isInShop: false,
         isInventoryBusy: false,
-        tankerEntity: null,
         disableMoneyCase: false,
         hasPrisonerClothes: false,
         isWearingPatientOutfit: false,

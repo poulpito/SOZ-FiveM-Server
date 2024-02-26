@@ -1,5 +1,6 @@
 import { ApartmentMenuData } from '@public/shared/housing/housing';
 import { JobType } from '@public/shared/job';
+import { MenuOilData } from '@public/shared/job/oil';
 import { NuiJobEmployeeOnDuty, PromoteMenuData } from '@public/shared/nui/job';
 import { PlayerPersonalMenuData } from '@public/shared/nui/player';
 import { EditorMenuData } from '@public/shared/object';
@@ -68,6 +69,7 @@ export enum MenuType {
     JobBennys = 'job_bennys',
     JobUpw = 'job_upw',
     JobNews = 'job_news',
+    JobOil = 'job_oil',
     UpwOrderMenu = 'upw_order',
     OilSetStationPrice = 'oil_set_station_price',
     SetHealthState = 'set_health_state',
@@ -133,6 +135,7 @@ export interface MenuTypeMap extends Record<MenuType, any> {
         insideUpgradeZone: boolean;
     };
     [MenuType.JobUpw]: MenuUpwData;
+    [MenuType.JobOil]: MenuOilData;
     [MenuType.UpwOrderMenu]: UpwOrderMenuData;
     [MenuType.OilSetStationPrice]: Record<FuelType, number>;
     [MenuType.SetHealthState]: number;

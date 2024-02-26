@@ -1,7 +1,8 @@
-import { Injectable } from '../../core/decorators/injectable';
+import { Injectable } from '@core/decorators/injectable';
+
 import { AbstractZone } from '../../shared/polyzone/abstract.zone';
 
-export type PlayerInOutServiceElement = {
+type PlayerInOutServiceElement = {
     id: string;
     zone: AbstractZone;
     cb: (isInside: boolean) => void;

@@ -256,6 +256,20 @@ export type InventoryItemMetadata = {
     evidenceInfos?: EvidenceMetadata;
 };
 
+export type Inventory = {
+    id: string;
+    label: string;
+    type: string;
+    slots: number;
+    weight: number;
+    maxWeight: number;
+    owner: number;
+    items: InventoryItem[];
+    changed: boolean;
+    users: number[];
+    time: number;
+};
+
 export type InventoryItem = {
     name: string;
     label: string;

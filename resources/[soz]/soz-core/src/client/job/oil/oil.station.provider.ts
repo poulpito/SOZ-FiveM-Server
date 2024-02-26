@@ -1,10 +1,11 @@
-import { OnEvent, OnNuiEvent } from '../../../core/decorators/event';
+import { Once, OnceStep, OnEvent, OnNuiEvent } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { emitRpc } from '../../../core/rpc';
 import { wait } from '../../../core/utils';
 import { ClientEvent, NuiEvent, ServerEvent } from '../../../shared/event';
 import { FuelStation, FuelType } from '../../../shared/fuel';
+import { JobPermission, JobType } from '../../../shared/job';
 import { PositiveNumberValidator } from '../../../shared/nui/input';
 import { MenuType } from '../../../shared/nui/menu';
 import { Vector3 } from '../../../shared/polyzone/vector';
@@ -14,7 +15,9 @@ import { Notifier } from '../../notifier';
 import { InputService } from '../../nui/input.service';
 import { NuiMenu } from '../../nui/nui.menu';
 import { PlayerService } from '../../player/player.service';
-import { FuelStationRepository } from '../../repository/fuel.station.repository';
+import { TargetFactory } from '../../target/target.factory';
+import { JobService } from '../job.service';
+import { OilTankerProvider } from './oil.tanker.provider';
 
 @Provider()
 export class OilStationProvider {
@@ -27,11 +30,57 @@ export class OilStationProvider {
     @Inject(InputService)
     private inputService: InputService;
 
-    @Inject(FuelStationRepository)
-    private fuelStationRepository: FuelStationRepository;
-
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
+
+    @Inject(TargetFactory)
+    private targetFactory: TargetFactory;
+
+    @Inject(JobService)
+    private jobService: JobService;
+
+    @Inject(OilTankerProvider)
+    private oilTankerProvider: OilTankerProvider;
+
+    @Once(OnceStep.PlayerLoaded)
+    public setupStation() {
+        this.targetFactory.createForBoxZone(
+            'mtp_set_price',
+            {
+                center: [-244.89, 6068.39, 40.57],
+                width: 0.55,
+                length: 1.4,
+                heading: 315,
+                minZ: 39.57,
+                maxZ: 42.57,
+            },
+            [
+                {
+                    icon: 'c:fuel/remplir.png',
+                    color: 'oil',
+                    label: 'Configurateur station',
+                    job: JobType.Oil,
+                    blackoutGlobal: true,
+                    blackoutJob: JobType.Oil,
+                    canInteract: () => {
+                        const player = this.playerService.getPlayer();
+
+                        if (!player) {
+                            return false;
+                        }
+
+                        return (
+                            player.job.onduty &&
+                            this.jobService.hasPermission(JobType.Oil, JobPermission.FuelerChangePrice)
+                        );
+                    },
+                    action: () => {
+                        this.updateStationPrice();
+                    },
+                },
+            ]
+        );
+    }
 
     @OnEvent(ClientEvent.OIL_REFILL_ESSENCE_STATION)
     public async onRefillEssenceStation(entity: number, stationId: number) {
@@ -47,7 +96,7 @@ export class OilStationProvider {
             return;
         }
 
-        const vehicle = this.playerService.getState().tankerEntity;
+        const vehicle = this.oilTankerProvider.currentTankerAttached;
         const vehicleNetworkId = NetworkGetNetworkIdFromEntity(vehicle);
 
         if (!vehicle) {
@@ -136,7 +185,6 @@ export class OilStationProvider {
         TriggerServerEvent(ServerEvent.OIL_REFILL_KEROSENE_STATION, stationId, refill);
     }
 
-    @OnEvent(ClientEvent.OIL_UPDATE_STATION_PRICE)
     public async updateStationPrice() {
         const stationPrices = await emitRpc<Record<FuelType, number>>(RpcServerEvent.OIL_GET_STATION_PRICES);
 
