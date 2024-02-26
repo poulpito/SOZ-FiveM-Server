@@ -300,8 +300,6 @@ export type PlayerMetadata = PlayerHealthBook & {
     inside: PlayerInsideState;
     injuries_count: number;
     injuries_date: number;
-    last_identified_shot: number | undefined;
-    last_weapon_used: string | undefined;
     itt: boolean;
     itt_end: number;
     hazmat: boolean;

@@ -1,4 +1,5 @@
 import { PoliceClueDBProvider } from '@private/server/police/police.cluedb.provider';
+import { PoliceScientistProvider } from '@private/server/police/police.scientist.provider';
 import { uuidv4 } from '@public/core/utils';
 import { joaat } from '@public/shared/joaat';
 import { toVector3Object, Vector3, Vector4 } from '@public/shared/polyzone/vector';
@@ -16,7 +17,6 @@ import { ItemService } from '../item/item.service';
 import { Notifier } from '../notifier';
 import { PlayerService } from '../player/player.service';
 import { PlayerStateService } from '../player/player.state.service';
-import { ServerStateService } from '../server.state.service';
 import { Store } from '../store/store';
 
 @Provider()
@@ -39,8 +39,8 @@ export class WeaponProvider {
     @Inject(PlayerService)
     private playerService: PlayerService;
 
-    @Inject(ServerStateService)
-    private serverStateService: ServerStateService;
+    @Inject(PoliceScientistProvider)
+    private policeScientistProvider: PoliceScientistProvider;
 
     @Inject('Store')
     private store: Store;
@@ -236,7 +236,7 @@ export class WeaponProvider {
             return;
         }
         if (!isWearingGloves) {
-            this.playerService.setPlayerMetaDatas(source, {
+            this.policeScientistProvider.setPlayerPowder(source, {
                 last_identified_shot: Date.now(),
                 last_weapon_used: weapon.label,
             });
