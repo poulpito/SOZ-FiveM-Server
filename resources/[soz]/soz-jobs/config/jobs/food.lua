@@ -1,6 +1,6 @@
 FoodConfig = {}
 
-FoodConfig.Blip = {Name = "Château Marius", Icon = 176, Coords = vector2(-1889.54, 2045.27), Scale = 1.0}
+--FoodConfig.Blip = {Name = "Château Marius", Icon = 176, Coords = vector2(-1889.54, 2045.27), Scale = 1.0}
 
 FoodConfig.Collect = {
     Grape = {

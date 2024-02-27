@@ -83,6 +83,7 @@ export enum ServerEvent {
     FOOD_EASTER_HARVEST = 'soz-core:server:job:food:easter-harvest',
     FOOD_HUNT = 'soz-core:client:food:hunt',
     FOOD_COLLECT = 'soz-core:server:job:food:collect',
+    FOOD_MILK_COLLECT = 'soz-core:server:job:food:milk-collect',
 
     EASTER_HUNT = 'soz-core:server:easter:hunt',
 

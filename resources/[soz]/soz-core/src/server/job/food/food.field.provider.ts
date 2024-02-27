@@ -164,4 +164,7 @@ export class FoodFieldProvider {
 
         // @TODO Hide Field health
     }
+
+    @OnEvent(ServerEvent.FOOD_MILK_COLLECT)
+    public async onMilkCollect(source: number) {}
 }

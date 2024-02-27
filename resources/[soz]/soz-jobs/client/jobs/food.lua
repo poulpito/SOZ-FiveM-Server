@@ -7,70 +7,70 @@ local currentField
 local currentFieldHealth
 local inKitchen = false
 
-local function SpawnFieldZones()
-    for zoneName, points in pairs(FoodConfig.Zones) do
-        local minZ, maxZ
-        for i = 1, #points, 1 do
-            if minZ == nil or points[i].z < minZ then
-                minZ = points[i].z
-            end
-            if maxZ == nil or points[i].z > maxZ then
-                maxZ = points[i].z
-            end
-        end
-
-        exports["qb-target"]:AddPolyZone(zoneName, points, {
-            name = zoneName,
-            debugPoly = false,
-            minZ = minZ - 2.0,
-            maxZ = maxZ + 2.0,
-            onPlayerInOut = function(isIn)
-                if isIn and PlayerData.job.id == "food" and PlayerData.job.onduty then
-                    currentField = zoneName
-                else
-                    currentField = nil
-                end
-            end,
-        }, {
-            options = {
-                {
-                    label = "Récolter",
-                    color = "food",
-                    icon = "c:food/collecter.png",
-                    event = "soz-jobs:client:food-collect-ingredients",
-                    blackoutGlobal = true,
-                    blackoutJob = "food",
-                    canInteract = function(entity)
-                        local hasPermission = exports["soz-core"]:HasJobPermission("food", "harvest")
-                        return hasPermission and PlayerData.job.onduty and currentField and not IsEntityAVehicle(entity) and not IsEntityAPed(entity)
-                    end,
-                },
-                {
-                    label = "Récolter de la Zeed",
-                    icon = "c:crimi/zeed.png",
-                    color = "crimi",
-                    event = "soz-core:client:drugs:harvest-zeed",
-                    canInteract = function(entity)
-                        if IsEntityAVehicle(entity) or IsEntityAPed(entity) then
-                            return false
-                        end
-
-                        for _, value in ipairs(PlayerData.metadata.drugs_skills) do
-                            -- 1 is Botanite
-                            if value == 1 then
-                                return true
-                            end
-                        end
-                        return false
-                    end,
-                    location = "food",
-                },
-            },
-            distance = 1.5,
-        })
-        table.insert(FoodJob.Zones, zoneName)
-    end
-end
+--local function SpawnFieldZones()
+--    for zoneName, points in pairs(FoodConfig.Zones) do
+--        local minZ, maxZ
+--        for i = 1, #points, 1 do
+--            if minZ == nil or points[i].z < minZ then
+--                minZ = points[i].z
+--            end
+--            if maxZ == nil or points[i].z > maxZ then
+--                maxZ = points[i].z
+--            end
+--        end
+--
+--        exports["qb-target"]:AddPolyZone(zoneName, points, {
+--            name = zoneName,
+--            debugPoly = false,
+--            minZ = minZ - 2.0,
+--            maxZ = maxZ + 2.0,
+--            onPlayerInOut = function(isIn)
+--                if isIn and PlayerData.job.id == "food" and PlayerData.job.onduty then
+--                    currentField = zoneName
+--                else
+--                    currentField = nil
+--                end
+--            end,
+--        }, {
+--            options = {
+--                {
+--                    label = "Récolter",
+--                    color = "food",
+--                    icon = "c:food/collecter.png",
+--                    event = "soz-jobs:client:food-collect-ingredients",
+--                    blackoutGlobal = true,
+--                    blackoutJob = "food",
+--                    canInteract = function(entity)
+--                        local hasPermission = exports["soz-core"]:HasJobPermission("food", "harvest")
+--                        return hasPermission and PlayerData.job.onduty and currentField and not IsEntityAVehicle(entity) and not IsEntityAPed(entity)
+--                    end,
+--                },
+--                {
+--                    label = "Récolter de la Zeed",
+--                    icon = "c:crimi/zeed.png",
+--                    color = "crimi",
+--                    event = "soz-core:client:drugs:harvest-zeed",
+--                    canInteract = function(entity)
+--                        if IsEntityAVehicle(entity) or IsEntityAPed(entity) then
+--                            return false
+--                        end
+--
+--                        for _, value in ipairs(PlayerData.metadata.drugs_skills) do
+--                            -- 1 is Botanite
+--                            if value == 1 then
+--                                return true
+--                            end
+--                        end
+--                        return false
+--                    end,
+--                    location = "food",
+--                },
+--            },
+--            distance = 1.5,
+--        })
+--        table.insert(FoodJob.Zones, zoneName)
+--    end
+--end
 
 local function SpawnJobZones()
     -- CRAFTING
@@ -102,61 +102,61 @@ local function SpawnJobZones()
     end)
 
     -- MILK
-    exports["qb-target"]:AddBoxZone("food:milk_harvest", vector2(2416.83, 4994.29), 1.0, 5.0, {
-        heading = 133.3,
-        minZ = 45.5,
-        maxZ = 49.5,
-    }, {
-        options = {
-            {
-                icon = "c:food/collecter.png",
-                color = "food",
-                event = "jobs:client:food-harvest-milk",
-                label = "Récupérer",
-                job = "food",
-                blackoutGlobal = true,
-                blackoutJob = "food",
-                canInteract = function()
-                    return PlayerData.job.onduty
-                end,
-            },
-        },
-    })
+    --exports["qb-target"]:AddBoxZone("food:milk_harvest", vector2(2416.83, 4994.29), 1.0, 5.0, {
+    --    heading = 133.3,
+    --    minZ = 45.5,
+    --    maxZ = 49.5,
+    --}, {
+    --    options = {
+    --        {
+    --            icon = "c:food/collecter.png",
+    --            color = "food",
+    --            event = "jobs:client:food-harvest-milk",
+    --            label = "Récupérer",
+    --            job = "food",
+    --            blackoutGlobal = true,
+    --            blackoutJob = "food",
+    --            canInteract = function()
+    --                return PlayerData.job.onduty
+    --            end,
+    --        },
+    --    },
+    --})
 end
 
-local function InitJob()
-    Citizen.CreateThread(function()
-        SpawnJobZones()
-    end)
-end
+--local function InitJob()
+--    Citizen.CreateThread(function()
+--        SpawnJobZones()
+--    end)
+--end
 
-local function DestroyJob()
-    local zoneNames = {"food:cloakroom", "food:craft", "food:milk_harvest"}
-    for _, name in ipairs(zoneNames) do
-        exports["qb-target"]:RemoveZone(name)
-    end
-end
+--local function DestroyJob()
+--    local zoneNames = {"food:cloakroom", "food:craft", "food:milk_harvest"}
+--    for _, name in ipairs(zoneNames) do
+--        exports["qb-target"]:RemoveZone(name)
+--    end
+--end
 
 -- ON STARTUP
-Citizen.CreateThread(function()
-    -- BLIP
-    QBCore.Functions.CreateBlip("food", {
-        name = FoodConfig.Blip.Name,
-        coords = FoodConfig.Blip.Coords,
-        sprite = FoodConfig.Blip.Icon,
-        scale = FoodConfig.Blip.Scale,
-    })
+--Citizen.CreateThread(function()
+--    -- BLIP
+--    QBCore.Functions.CreateBlip("food", {
+--        name = FoodConfig.Blip.Name,
+--        coords = FoodConfig.Blip.Coords,
+--        sprite = FoodConfig.Blip.Icon,
+--        scale = FoodConfig.Blip.Scale,
+--    })
+--
+--    --SpawnFieldZones()
+--end)
 
-    SpawnFieldZones()
-end)
-
-RegisterNetEvent("QBCore:Client:SetDuty", function(duty)
-    if duty then
-        InitJob()
-    else
-        DestroyJob()
-    end
-end)
+--RegisterNetEvent("QBCore:Client:SetDuty", function(duty)
+--    if duty then
+--        InitJob()
+--    else
+--        DestroyJob()
+--    end
+--end)
 
 ---
 --- FARM
@@ -271,80 +271,80 @@ FoodJob.Functions.GetItemCountFromInventory = function(itemName)
     return amount
 end
 
-FoodJob.Functions.CraftItem = function(itemId, item)
-    if not inKitchen then
-        exports["soz-core"]:DrawNotification("Vous n'êtes pas dans la cuisine", "error")
-        return
-    end
+--FoodJob.Functions.CraftItem = function(itemId, item)
+--    if not inKitchen then
+--        exports["soz-core"]:DrawNotification("Vous n'êtes pas dans la cuisine", "error")
+--        return
+--    end
+--
+--    local recipe = FoodConfig.Recipes[itemId]
+--    if recipe == nil then
+--        exports["soz-core"]:DrawNotification("Recette invalide", "error")
+--        return
+--    end
+--
+--    local ingredients = recipe.ingredients
+--    for ingId, count in pairs(ingredients) do
+--        local ingredient = QBCore.Shared.Items[ingId]
+--        if ingredient == nil then
+--            exports["soz-core"]:DrawNotification("Ingrédient invalide", "error")
+--            return
+--        end
+--        local countInInv = FoodJob.Functions.GetItemCountFromInventory(ingId) or 0
+--        if countInInv < count then
+--            exports["soz-core"]:DrawNotification("Il vous manque des ingrédients", "error")
+--            return
+--        end
+--    end
+--
+--    Citizen.CreateThread(function()
+--        QBCore.Functions.Progressbar("food-craft-item", string.format("Vous préparez %s", item.label),
+--                                     FoodConfig.CraftDuration[recipe.category] or FoodConfig.CraftDuration["default"], false, true,
+--                                     {
+--            disableMovement = true,
+--            disableCarMovement = true,
+--            disableMouse = false,
+--            disableCombat = true,
+--        }, {}, {}, {}, function(wasCancelled)
+--            if not wasCancelled then
+--                QBCore.Functions.TriggerCallback("soz-jobs:server:food-craft", function(success, reason)
+--                    if success then
+--                        exports["soz-core"]:DrawNotification(string.format("Vous avez préparé ~g~%s", item.label))
+--
+--                        TriggerServerEvent("soz-core:server:monitor:add-event", "job_cm_food_craft", {item_id = itemId},
+--                                           {
+--                            item_label = item.label,
+--                            quantity = 1,
+--                            position = GetEntityCoords(PlayerPedId()),
+--                        }, true)
+--
+--                        FoodJob.Functions.CraftItem(itemId, item)
+--                    else
+--                        if reason == nil then
+--                            return
+--                        elseif reason == "invalid_ingredient" then
+--                            exports["soz-core"]:DrawNotification("Il vous manque des ingrédients...", "error")
+--                        else
+--                            exports["soz-core"]:DrawNotification(
+--                                string.format("Vous n'avez pas terminé votre préparation. Il y a eu une erreur : %s", reason), "error")
+--                        end
+--                    end
+--                end, itemId)
+--            else
+--                exports["soz-core"]:DrawNotification("Vous n'avez pas terminé votre préparation", "error")
+--            end
+--        end)
+--    end)
+--end
 
-    local recipe = FoodConfig.Recipes[itemId]
-    if recipe == nil then
-        exports["soz-core"]:DrawNotification("Recette invalide", "error")
-        return
-    end
-
-    local ingredients = recipe.ingredients
-    for ingId, count in pairs(ingredients) do
-        local ingredient = QBCore.Shared.Items[ingId]
-        if ingredient == nil then
-            exports["soz-core"]:DrawNotification("Ingrédient invalide", "error")
-            return
-        end
-        local countInInv = FoodJob.Functions.GetItemCountFromInventory(ingId) or 0
-        if countInInv < count then
-            exports["soz-core"]:DrawNotification("Il vous manque des ingrédients", "error")
-            return
-        end
-    end
-
-    Citizen.CreateThread(function()
-        QBCore.Functions.Progressbar("food-craft-item", string.format("Vous préparez %s", item.label),
-                                     FoodConfig.CraftDuration[recipe.category] or FoodConfig.CraftDuration["default"], false, true,
-                                     {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {}, {}, {}, function(wasCancelled)
-            if not wasCancelled then
-                QBCore.Functions.TriggerCallback("soz-jobs:server:food-craft", function(success, reason)
-                    if success then
-                        exports["soz-core"]:DrawNotification(string.format("Vous avez préparé ~g~%s", item.label))
-
-                        TriggerServerEvent("soz-core:server:monitor:add-event", "job_cm_food_craft", {item_id = itemId},
-                                           {
-                            item_label = item.label,
-                            quantity = 1,
-                            position = GetEntityCoords(PlayerPedId()),
-                        }, true)
-
-                        FoodJob.Functions.CraftItem(itemId, item)
-                    else
-                        if reason == nil then
-                            return
-                        elseif reason == "invalid_ingredient" then
-                            exports["soz-core"]:DrawNotification("Il vous manque des ingrédients...", "error")
-                        else
-                            exports["soz-core"]:DrawNotification(
-                                string.format("Vous n'avez pas terminé votre préparation. Il y a eu une erreur : %s", reason), "error")
-                        end
-                    end
-                end, itemId)
-            else
-                exports["soz-core"]:DrawNotification("Vous n'avez pas terminé votre préparation", "error")
-            end
-        end)
-    end)
-end
-
-AddEventHandler("soz-jobs:client:food-craft-item", function(itemId)
-    local item = QBCore.Shared.Items[itemId]
-    if item == nil then
-        return item
-    end
-
-    FoodJob.Functions.CraftItem(itemId, item)
-end)
+--AddEventHandler("soz-jobs:client:food-craft-item", function(itemId)
+--    local item = QBCore.Shared.Items[itemId]
+--    if item == nil then
+--        return item
+--    end
+--
+--    FoodJob.Functions.CraftItem(itemId, item)
+--end)
 
 ---
 --- Hunting
