@@ -1,3 +1,4 @@
+import { PriceService } from '@public/server/bank/price.service';
 import { PlayerZombieProvider } from '@public/server/player/player.zombie.provider';
 import { TaxType } from '@public/shared/bank';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
@@ -37,6 +38,8 @@ const psyZone = new BoxZone([343.25, -1373.04, 37.98], 26.4, 20.2, {
     maxZ: 41.58,
 });
 
+const GYM_PRICE = 270;
+
 @Provider()
 export class PlayerHealthProvider {
     @Inject(PlayerService)
@@ -56,6 +59,9 @@ export class PlayerHealthProvider {
 
     @Inject(PlayerZombieProvider)
     private playerZombieProvider: PlayerZombieProvider;
+
+    @Inject(PriceService)
+    private priceService: PriceService;
 
     private yogaAndNaturalMultiplier: (source: number) => number = () => 1;
 
@@ -262,7 +268,7 @@ export class PlayerHealthProvider {
             return;
         }
 
-        if (await this.playerMoneyService.buy(source, 270, TaxType.SERVICE)) {
+        if (await this.playerMoneyService.buy(source, GYM_PRICE, TaxType.SERVICE)) {
             this.playerService.setPlayerMetadata(
                 source,
                 'gym_subscription_expire_at',
@@ -271,7 +277,10 @@ export class PlayerHealthProvider {
 
             this.notifier.notify(
                 source,
-                `Damn la team Los Santos ! Merci à toi d'avoir acheté notre abonnement de sport MUSCLE PEACH d'une semaine à 300$ ! Tu peux désormais te changer dans nos vestiaires.`,
+                `Damn la team Los Santos ! Merci à toi d'avoir acheté notre abonnement de sport MUSCLE PEACH d'une semaine à ${await this.priceService.getPrice(
+                    GYM_PRICE,
+                    TaxType.SERVICE
+                )}$ ! Tu peux désormais te changer dans nos vestiaires.`,
                 'success'
             );
         } else {

@@ -120,7 +120,7 @@ export const MenuVehicle: FunctionComponent<MenuVehicleProps> = ({ data }) => {
                             {data.insideLSCustom && !data.onDutyNg && (
                                 <MenuItemButton
                                     onConfirm={() => onPitStop(data.pitstopPrice)}
-                                    description={`Prix: ${getPrice(data.pitstopPrice, TaxType.VEHICLE)} $`}
+                                    description={`Prix: ${getPrice(data.pitstopPrice, TaxType.SERVICE)} $`}
                                 >
                                     Pit Stop
                                 </MenuItemButton>

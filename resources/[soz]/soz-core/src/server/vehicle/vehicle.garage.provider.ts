@@ -27,6 +27,7 @@ import {
 import { getDefaultVehicleConfiguration } from '../../shared/vehicle/modification';
 import { PlayerServerVehicle, PlayerVehicleState } from '../../shared/vehicle/player.vehicle';
 import { getDefaultVehicleCondition, VehicleCategory } from '../../shared/vehicle/vehicle';
+import { PriceService } from '../bank/price.service';
 import { PrismaService } from '../database/prisma.service';
 import { HousingProvider } from '../housing/housing.provider';
 import { InventoryManager } from '../inventory/inventory.manager';
@@ -107,6 +108,9 @@ export class VehicleGarageProvider {
 
     @Inject(HousingProvider)
     private housingProvider: HousingProvider;
+
+    @Inject(PriceService)
+    private priceService: PriceService;
 
     @Once(OnceStep.RepositoriesLoaded)
     public async init(): Promise<void> {
@@ -1113,7 +1117,14 @@ export class VehicleGarageProvider {
             },
         });
 
-        this.notifier.notify(source, `Vous avez transféré votre véhicule pour ${transferPrice}$.`, 'success');
+        this.notifier.notify(
+            source,
+            `Vous avez transféré votre véhicule pour ${await this.priceService.getPrice(
+                transferPrice,
+                TaxType.TRAVEL
+            )}$.`,
+            'success'
+        );
     }
 
     @Tick(TickInterval.EVERY_MINUTE, 'soft-pound-check')
