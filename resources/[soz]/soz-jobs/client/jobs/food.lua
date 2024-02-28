@@ -349,76 +349,76 @@ end
 ---
 --- Hunting
 ---
-local function PlayerHasKnifeEquiped()
-    local ped = PlayerPedId()
-    for _, v in pairs(FoodConfig.HuntingWeapon) do
-        if GetSelectedPedWeapon(ped) == v then
-            return true
-        end
-    end
-    return false
-end
+--local function PlayerHasKnifeEquiped()
+--    local ped = PlayerPedId()
+--    for _, v in pairs(FoodConfig.HuntingWeapon) do
+--        if GetSelectedPedWeapon(ped) == v then
+--            return true
+--        end
+--    end
+--    return false
+--end
 
-for animal, _ in pairs(FoodConfig.AnimalAllowedToHunt) do
-    exports["qb-target"]:AddTargetModel(animal, {
-        options = {
-            {
-                label = "Dépecer",
-                icon = "c:food/depecer.png",
-                event = "jobs:client:food:hunting",
-                blackoutGlobal = true,
-                blackoutJob = "food",
-                canInteract = function(entity)
-                    return not IsPedAPlayer(entity) and IsEntityDead(entity) and PlayerHasKnifeEquiped()
-                end,
-            },
-        },
-        distance = 2.5,
-    })
-end
+--for animal, _ in pairs(FoodConfig.AnimalAllowedToHunt) do
+--    exports["qb-target"]:AddTargetModel(animal, {
+--        options = {
+--            {
+--                label = "Dépecer",
+--                icon = "c:food/depecer.png",
+--                event = "jobs:client:food:hunting",
+--                blackoutGlobal = true,
+--                blackoutJob = "food",
+--                canInteract = function(entity)
+--                    return not IsPedAPlayer(entity) and IsEntityDead(entity) and PlayerHasKnifeEquiped()
+--                end,
+--            },
+--        },
+--        distance = 2.5,
+--    })
+--end
 
-RegisterNetEvent("jobs:client:food:hunting", function(data)
-    if not DoesEntityExist(data.entity) or not IsEntityDead(data.entity) then
-        return
-    end
-
-    if HasEntityBeenDamagedByAnyVehicle(data.entity) then
-        exports["soz-core"]:DrawNotification("L'animal est tout écrabouillé, on ne pourra rien en tirer...", "warning")
-        return
-    end
-
-    local ped = PlayerPedId()
-    local hasKnife = PlayerHasKnifeEquiped()
-
-    TaskTurnPedToFaceEntity(ped, data.entity, 500)
-
-    Citizen.CreateThread(function()
-        QBCore.Functions.RequestAnimDict("amb@medic@standing@kneel@base")
-        QBCore.Functions.RequestAnimDict("anim@gangops@facility@servers@bodysearch@")
-        Citizen.Wait(250)
-        TaskPlayAnim(ped, "amb@medic@standing@kneel@base", "base", 8.0, -8.0, -1, 1, 0, false, false, false)
-        TaskPlayAnim(ped, "anim@gangops@facility@servers@bodysearch@", "player_search", 8.0, -8.0, -1, 48, 0, false, false, false)
-    end)
-
-    QBCore.Functions.Progressbar("hunting-cutup", "Dépeçage en cours...", 5000, false, true,
-                                 {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = false,
-        disableCombat = true,
-    }, {}, {}, {}, function() -- Done
-        if hasKnife then
-            if DoesEntityExist(data.entity) then
-                local coords = GetEntityCoords(ped);
-                local zoneId = GetNameOfZone(coords);
-                TriggerServerEvent("soz-core:client:food:hunt", zoneId);
-                TriggerServerEvent("jobs:server:food:hunting", NetworkGetNetworkIdFromEntity(data.entity))
-            end
-        else
-            exports["soz-core"]:DrawNotification("L'animal ne respire plus...", "info")
-        end
-    end)
-end)
+--RegisterNetEvent("jobs:client:food:hunting", function(data)
+--    if not DoesEntityExist(data.entity) or not IsEntityDead(data.entity) then
+--        return
+--    end
+--
+--    if HasEntityBeenDamagedByAnyVehicle(data.entity) then
+--        exports["soz-core"]:DrawNotification("L'animal est tout écrabouillé, on ne pourra rien en tirer...", "warning")
+--        return
+--    end
+--
+--    local ped = PlayerPedId()
+--    local hasKnife = PlayerHasKnifeEquiped()
+--
+--    TaskTurnPedToFaceEntity(ped, data.entity, 500)
+--
+--    Citizen.CreateThread(function()
+--        QBCore.Functions.RequestAnimDict("amb@medic@standing@kneel@base")
+--        QBCore.Functions.RequestAnimDict("anim@gangops@facility@servers@bodysearch@")
+--        Citizen.Wait(250)
+--        TaskPlayAnim(ped, "amb@medic@standing@kneel@base", "base", 8.0, -8.0, -1, 1, 0, false, false, false)
+--        TaskPlayAnim(ped, "anim@gangops@facility@servers@bodysearch@", "player_search", 8.0, -8.0, -1, 48, 0, false, false, false)
+--    end)
+--
+--    QBCore.Functions.Progressbar("hunting-cutup", "Dépeçage en cours...", 5000, false, true,
+--                                 {
+--        disableMovement = true,
+--        disableCarMovement = true,
+--        disableMouse = false,
+--        disableCombat = true,
+--    }, {}, {}, {}, function() -- Done
+--        if hasKnife then
+--            if DoesEntityExist(data.entity) then
+--                local coords = GetEntityCoords(ped);
+--                local zoneId = GetNameOfZone(coords);
+--                TriggerServerEvent("soz-core:client:food:hunt", zoneId);
+--                TriggerServerEvent("jobs:server:food:hunting", NetworkGetNetworkIdFromEntity(data.entity))
+--            end
+--        else
+--            exports["soz-core"]:DrawNotification("L'animal ne respire plus...", "info")
+--        end
+--    end)
+--end)
 
 -- Resell Port of Los Santos
 Citizen.CreateThread(function()

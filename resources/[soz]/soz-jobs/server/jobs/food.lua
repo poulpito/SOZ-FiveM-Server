@@ -153,43 +153,43 @@ QBCore.Functions.CreateCallback("soz-jobs:server:food-craft", function(source, c
 end)
 
 --- Hunting
-RegisterNetEvent("jobs:server:food:hunting", function(huntId)
-    local Player = QBCore.Functions.GetPlayer(source)
-    if Player == nil then
-        return
-    end
-
-    local rewardSuccess = false
-    local position = GetEntityCoords(GetPlayerPed(Player.PlayerData.source))
-
-    if not DoesEntityExist(NetworkGetEntityFromNetworkId(huntId)) then
-        return
-    end
-
-    for item, reward in pairs(FoodConfig.HuntingReward) do
-        local amount = math.random(reward.min, reward.max)
-
-        exports["soz-inventory"]:AddItem(Player.PlayerData.source, Player.PlayerData.source, item, amount, nil, nil, function(success, reason)
-            if success then
-                exports["soz-core"]:Event("job_cm_food_hunting",
-                                          {
-                    item_id = item,
-                    player_source = Player.PlayerData.source,
-                    on_duty = Player.PlayerData.job.onduty,
-                }, {item_label = item.label, quantity = amount, position = position})
-
-                rewardSuccess = true
-            end
-        end)
-    end
-
-    if rewardSuccess then
-        DeleteEntity(NetworkGetEntityFromNetworkId(huntId))
-        TriggerClientEvent("soz-core:client:notification:draw", Player.PlayerData.source, "Vous avez ~r~terminé~s~ de dépecer.")
-    else
-        TriggerClientEvent("soz-core:client:notification:draw", Player.PlayerData.source, "Vos poches sont pleines...", "error")
-    end
-end)
+--RegisterNetEvent("jobs:server:food:hunting", function(huntId)
+--    local Player = QBCore.Functions.GetPlayer(source)
+--    if Player == nil then
+--        return
+--    end
+--
+--    local rewardSuccess = false
+--    local position = GetEntityCoords(GetPlayerPed(Player.PlayerData.source))
+--
+--    if not DoesEntityExist(NetworkGetEntityFromNetworkId(huntId)) then
+--        return
+--    end
+--
+--    for item, reward in pairs(FoodConfig.HuntingReward) do
+--        local amount = math.random(reward.min, reward.max)
+--
+--        exports["soz-inventory"]:AddItem(Player.PlayerData.source, Player.PlayerData.source, item, amount, nil, nil, function(success, reason)
+--            if success then
+--                exports["soz-core"]:Event("job_cm_food_hunting",
+--                                          {
+--                    item_id = item,
+--                    player_source = Player.PlayerData.source,
+--                    on_duty = Player.PlayerData.job.onduty,
+--                }, {item_label = item.label, quantity = amount, position = position})
+--
+--                rewardSuccess = true
+--            end
+--        end)
+--    end
+--
+--    if rewardSuccess then
+--        DeleteEntity(NetworkGetEntityFromNetworkId(huntId))
+--        TriggerClientEvent("soz-core:client:notification:draw", Player.PlayerData.source, "Vous avez ~r~terminé~s~ de dépecer.")
+--    else
+--        TriggerClientEvent("soz-core:client:notification:draw", Player.PlayerData.source, "Vos poches sont pleines...", "error")
+--    end
+--end)
 
 QBCore.Functions.CreateUseableItem("meal_box", function(source, item)
     if exports["soz-inventory"]:CanCarryItems(source, {
