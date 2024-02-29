@@ -66,6 +66,12 @@ async function bootstrap() {
     setService('MiddlewareFactory', ChainMiddlewareEventClientFactory);
     setService('MiddlewareTickFactory', ChainMiddlewareTickClientFactory);
 
+    try {
+        setMaxEventListeners(20);
+    } catch {
+        /* empty */
+    }
+
     const app = await Application.create(
         ProviderClientLoader,
         StoreModule,

@@ -1040,10 +1040,10 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@citizenfx/client@^2.0.7114-1":
-  version "2.0.7114-1"
-  resolved "https://registry.yarnpkg.com/@citizenfx/client/-/client-2.0.7114-1.tgz#4cf116eeee559eb2bd532f438974f0fa076b26e5"
-  integrity sha512-JqcUHs/IKeEQ+eXWcuxep81rqeq89UpGcURgN6Yp6EXiN/7WlWbgxxLUyjXQwn371MIdChNO6P0pxmbhluVewg==
+"@citizenfx/client@^2.0.7542-1":
+  version "2.0.7542-1"
+  resolved "https://registry.yarnpkg.com/@citizenfx/client/-/client-2.0.7542-1.tgz#c415a92afbb6d12677358aea43408bc60d080d81"
+  integrity sha512-/kmkDamxhGKZmMi88wf6pq2HukJEldWIG2XVIe8y+pUKfJ1+RGlb4uMpHJ1wIq0QHpaKhe++OxBHtshmxHC65w==
 
 "@citizenfx/server@^2.0.7114-1":
   version "2.0.7114-1"
