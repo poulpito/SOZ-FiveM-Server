@@ -307,6 +307,35 @@
             <sirenSettings value="1"/>
         </Item>
         <Item>
+            <modelName>lspd21</modelName>
+            <colors>
+                <Item>
+                    <indices content="char_array">
+                        111
+                        0
+                        0
+                        93
+                        134
+                    </indices>
+                    <liveries/>
+                </Item>
+            </colors>
+            <kits>
+                <Item>1021_lspd21_modkit</Item>
+            </kits>
+            <windowsWithExposedEdges/>
+            <plateProbabilities>
+                <Probabilities>
+                    <Item>
+                        <Name>Police guv plate</Name>
+                        <Value value="100"/>
+                    </Item>
+                </Probabilities>
+            </plateProbabilities>
+            <lightSettings value="150"/>
+            <sirenSettings value="1"/>
+        </Item>
+        <Item>
             <modelName>lspd30</modelName>
             <colors>
                 <Item>
