@@ -287,7 +287,16 @@
                         93
                         134
                     </indices>
-                    <liveries/>
+                    <liveries>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                        <Item value="false"/>
+                    </liveries>
                 </Item>
             </colors>
             <kits>
@@ -311,8 +320,8 @@
             <colors>
                 <Item>
                     <indices content="char_array">
-                        111
                         0
+                        111
                         0
                         93
                         134
