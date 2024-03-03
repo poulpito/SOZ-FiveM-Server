@@ -204,8 +204,11 @@ export const MenuPropPlacement: FunctionComponent<MenuPropPlacementProps> = ({ d
                         <>
                             <MenuItemCheckbox
                                 checked={collection.persistant}
-                                onChange={async () => {
-                                    await fetchNui(NuiEvent.RequestPersistPropCollection, collection.name);
+                                onChange={async value => {
+                                    await fetchNui(NuiEvent.RequestPersistPropCollection, {
+                                        name: collection.name,
+                                        persist: value,
+                                    });
                                 }}
                                 description="Charge la collection au démarrage du serveur."
                             >
