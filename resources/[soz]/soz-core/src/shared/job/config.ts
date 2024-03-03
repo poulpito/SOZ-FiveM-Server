@@ -168,6 +168,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-CARLJR',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['taxi', 'safe_taxi'],
     },
     [JobType.Food]: {
         label: 'Château Marius',
@@ -198,6 +199,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-MARIUS',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['food', 'safe_food'],
     },
     [JobType.News]: {
         label: 'Twitch News',
@@ -221,6 +223,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-NEWS',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['news', 'safe_news'],
     },
     [JobType.YouNews]: {
         label: 'You News',
@@ -237,6 +240,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-YOUN',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['you-news', 'safe_you-news'],
     },
     [JobType.Garbage]: {
         label: 'BlueBird',
@@ -259,6 +263,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-BLUEBIRD',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['garbage', 'safe_garbage'],
     },
     [JobType.Oil]: {
         label: 'Michel Transport Petrol',
@@ -282,6 +287,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-MTP',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['oil', 'safe_oil'],
     },
     [JobType.CashTransfer]: {
         label: 'STONK Security',
@@ -338,6 +344,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-NEWGAHRAY',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['bennys', 'safe_bennys'],
     },
     [JobType.Upw]: {
         label: 'Unexpected Power & Water',
@@ -360,6 +367,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-UPW',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['upw', 'safe_upw'],
     },
     [JobType.Pawl]: {
         label: 'Pipe And Wooden Leg',
@@ -391,6 +399,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-PAWL',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['pawl', 'safe_pawl'],
     },
     [JobType.Baun]: {
         label: 'Bahama Unicorn',
@@ -423,6 +432,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-BAUN',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['baun', 'safe_baun'],
     },
     [JobType.Ffs]: {
         label: 'Fight For Style',
@@ -447,6 +457,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-FFS',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['ffs', 'safe_ffs'],
     },
     [JobType.MDR]: {
         label: 'Mandatory',
@@ -547,6 +558,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         canInvoice: true,
         phone: '555-FDF',
         canReceiveSocietyInvoice: true,
+        taxCollectAccounts: ['fdf', 'safe_fdf'],
     },
     [JobType.DMC]: {
         label: 'DeMetal Company',
@@ -577,5 +589,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
             },
             secondary: { ZoneName: 'Resell:LSCustom', SourceAccount: 'farm_dmc', TargetAccount: 'safe_dmc' },
         },
+        taxCollectAccounts: ['dmc', 'safe_dmc'],
     },
 };

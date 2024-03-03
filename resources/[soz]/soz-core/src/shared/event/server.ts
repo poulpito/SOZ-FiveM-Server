@@ -431,4 +431,5 @@ export enum ServerEvent {
     DISPENSER_BUY = 'soz-core:server:dispenser:buy',
 
     GOUV_UPDATE_TAX = 'soz-core:server:gouv:update-tax',
+    GOUV_UPDATE_JOB_TIER_TAX = 'soz-core:server:gouv:update-job-tier-tax',
 }

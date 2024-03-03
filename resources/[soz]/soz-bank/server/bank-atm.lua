@@ -93,9 +93,10 @@ QBCore.Functions.CreateCallback("banking:server:getBankMoney", function(source, 
     cb(account.money)
 end)
 
-function GetAccountMoney(accountName)
+function GetAccountMoney(accountName, type)
     local account = GetOrCreateAccount(accountName)
-    return account.money
+
+    return Account.GetMoney(account, type or "money")
 end
 exports("GetAccountMoney", GetAccountMoney)
 

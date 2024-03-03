@@ -7,10 +7,12 @@ import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { MenuType } from '@public/shared/nui/menu';
 
 import { TaxType } from '../../../shared/bank';
+import { JobTaxTier } from '../../../shared/configuration';
 import { Err, Ok } from '../../../shared/result';
 import { BlipFactory } from '../../blip';
 import { NuiMenu } from '../../nui/nui.menu';
 import { PlayerService } from '../../player/player.service';
+import { ConfigurationRepository } from '../../repository/configuration.repository';
 
 @Provider()
 export class GouvProvider {
@@ -25,6 +27,9 @@ export class GouvProvider {
 
     @Inject(InputService)
     private inputService: InputService;
+
+    @Inject(ConfigurationRepository)
+    private configurationRepository: ConfigurationRepository;
 
     @Once(OnceStep.PlayerLoaded)
     public setupMdrJob() {
@@ -51,6 +56,37 @@ export class GouvProvider {
             scale: 1.1,
         });
     }
+
+    @OnNuiEvent(NuiEvent.GouvSetJobTaxTier)
+    public async setJobTaxTier({ tier }: { tier: keyof JobTaxTier }) {
+        const configuration = this.configurationRepository.getValue('JobTaxTier');
+
+        const value = await this.inputService.askInput(
+            {
+                title: 'Nouveau seuil des impôts',
+                maxCharacters: 20,
+                defaultValue: configuration[tier].toString(),
+            },
+            input => {
+                const inputNumber = Number(input);
+
+                if (isNaN(inputNumber) || inputNumber < 0) {
+                    return Err('Veuillez entrer un nombre positif');
+                }
+
+                return Ok(inputNumber);
+            }
+        );
+
+        if (!value) {
+            return;
+        }
+
+        const valueNumber = Number(value);
+
+        TriggerServerEvent(ServerEvent.GOUV_UPDATE_JOB_TIER_TAX, tier, valueNumber);
+    }
+
     @OnNuiEvent(NuiEvent.GouvSetTax)
     public async setTax({ type }: { type: TaxType }) {
         const value = await this.inputService.askInput(

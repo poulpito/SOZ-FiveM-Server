@@ -66,6 +66,11 @@ model concess_entreprise {
   liverytype Int
 }
 
+model configuration {
+  name  String @id
+  value Json
+}
+
 model fuel_storage {
   id       Int     @id @default(autoincrement())
   station  String  @db.VarChar(15)

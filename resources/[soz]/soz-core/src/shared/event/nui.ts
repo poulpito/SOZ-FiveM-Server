@@ -329,6 +329,7 @@ export enum NuiEvent {
 
     GouvAnnoncement = 'soz-core:client:gouv:annoncement',
     GouvSetTax = 'soz-core:nui:gouv:set-tax',
+    GouvSetJobTaxTier = 'soz-core:nui:gouv:set-job-tax-tier',
 
     SelectPlacedProp = 'soz-core:client:placement:select-placed-prop',
     SelectPropToCreate = 'soz-core:client:placement:select-prop-to-create',

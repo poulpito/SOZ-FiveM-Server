@@ -117,7 +117,7 @@ export abstract class Repository<
 
     public observe() {
         if (!this.observer) {
-            return;
+            return [];
         }
 
         return generate(this.observer);

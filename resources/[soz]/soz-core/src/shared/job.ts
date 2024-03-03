@@ -139,6 +139,7 @@ export type Job = {
     resell?: any;
     phone?: string;
     canReceiveSocietyInvoice: boolean;
+    taxCollectAccounts?: string[];
 };
 
 export type JobGrade = {

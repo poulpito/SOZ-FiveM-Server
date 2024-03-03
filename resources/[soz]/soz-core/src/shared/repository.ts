@@ -18,6 +18,7 @@ import { Vehicle } from './vehicle/vehicle';
 export enum RepositoryType {
     Billboard = 'billboard',
     ChargerUpw = 'chargerUpw',
+    Configuration = 'configuration',
     Garage = 'garage',
     Housing = 'housing',
     JobGrade = 'jobGrade',
@@ -40,6 +41,7 @@ export enum RepositoryType {
 export type RepositoryMapping = {
     [RepositoryType.Billboard]: Billboard;
     [RepositoryType.ChargerUpw]: UpwCharger;
+    [RepositoryType.Configuration]: any;
     [RepositoryType.Garage]: Garage;
     [RepositoryType.Housing]: Property;
     [RepositoryType.JobGrade]: JobGrade;

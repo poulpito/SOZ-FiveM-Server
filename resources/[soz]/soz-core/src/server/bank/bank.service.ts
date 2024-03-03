@@ -72,7 +72,7 @@ export class BankService {
         exports['soz-bank'].ClearAccount(targetAccount);
     }
 
-    public getAccountMoney(accountName: string): number {
-        return exports['soz-bank'].GetAccountMoney(accountName);
+    public getAccountMoney(accountName: string, type: 'money' | 'marked_money' = 'money'): number {
+        return exports['soz-bank'].GetAccountMoney(accountName, type);
     }
 }

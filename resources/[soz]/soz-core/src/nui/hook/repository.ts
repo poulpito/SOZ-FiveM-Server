@@ -1,6 +1,7 @@
+import { Configuration, DEFAULT_CONFIGURATION } from '@public/shared/configuration';
 import { useSelector } from 'react-redux';
 
-import { RepositoryConfig } from '../../shared/repository';
+import { RepositoryConfig, RepositoryType } from '../../shared/repository';
 import { RootState } from '../store';
 
 export const useRepository = <
@@ -17,4 +18,15 @@ export const useRepository = <
     }
 
     return data as Record<K, V>;
+};
+
+export const useConfigurationValue = <T extends keyof Configuration>(name: T): Configuration[T] => {
+    const configuration = useRepository(RepositoryType.Configuration);
+    const value = configuration[name];
+
+    if (!value) {
+        return DEFAULT_CONFIGURATION[name];
+    }
+
+    return value;
 };
