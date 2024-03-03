@@ -228,10 +228,9 @@ export class PlayerAnimationProvider {
 
     @OnNuiEvent(NuiEvent.PlayerMenuAnimationFavorite)
     public async favoriteAnimation({ animationItem }: { animationItem: AnimationConfigItem }) {
-        const input = await this.inputService.askInput(
+        const number = await this.inputService.askInput<number>(
             {
                 title: 'Entrer le numéro du raccourci voulu (entre 1 et 10), laissez vide pour annuler',
-                defaultValue: '',
                 maxCharacters: 2,
             },
             value => {
@@ -245,11 +244,6 @@ export class PlayerAnimationProvider {
             }
         );
 
-        if (!input) {
-            return;
-        }
-
-        const number = parseInt(input, 10);
         const key = `animation_shortcut_${number.toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,

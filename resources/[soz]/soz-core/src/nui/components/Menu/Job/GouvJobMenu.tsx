@@ -13,6 +13,8 @@ import {
     Menu,
     MenuContent,
     MenuItemButton,
+    MenuItemSelect,
+    MenuItemSelectOption,
     MenuItemSubMenuLink,
     MenuItemText,
     MenuTitle,
@@ -59,8 +61,9 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
                     >
                         Faire une communication
                     </MenuItemButton>
-                    {allowed && <MenuItemSubMenuLink id="tax">Gérer les taxes</MenuItemSubMenuLink>}
-                    {allowed && <MenuItemSubMenuLink id="tier">Gérer les seuils d'impôts</MenuItemSubMenuLink>}
+                    {allowed && <MenuItemSubMenuLink id="tax">Taxes</MenuItemSubMenuLink>}
+                    {allowed && <MenuItemSubMenuLink id="tier">Seuils d'impôts</MenuItemSubMenuLink>}
+                    {allowed && <MenuItemSubMenuLink id="fine">Amendes</MenuItemSubMenuLink>}
                 </MenuContent>
             </MainMenu>
             {allowed && (
@@ -129,6 +132,81 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
                     </SubMenu>
                 </>
             )}
+            <SubMenu id="fine">
+                <MenuTitle banner={banner}>Amendes</MenuTitle>
+                <MenuContent>
+                    <MenuItemSubMenuLink id="fine_1">Catégorie 1</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_2">Catégorie 2</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_3">Catégorie 3</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_4">Catégorie 4</MenuItemSubMenuLink>
+                </MenuContent>
+            </SubMenu>
+            <FineSubMenu category={1} />
+            <FineSubMenu category={2} />
+            <FineSubMenu category={3} />
+            <FineSubMenu category={3} />
         </Menu>
+    );
+};
+
+type FineSubMenuProps = {
+    category: number;
+};
+
+const FineSubMenu: FunctionComponent<FineSubMenuProps> = ({ category }) => {
+    const fines = useRepository(RepositoryType.Fine);
+    const finesForCategory = Object.values(fines).filter(fine => fine.category === category);
+
+    return (
+        <SubMenu id={`fine_${category}`}>
+            <MenuTitle banner="https://nui-img/soz/menu_job_gouv">Amendes categorie {category}</MenuTitle>
+            <MenuContent>
+                <MenuItemButton
+                    onConfirm={() => {
+                        fetchNui(NuiEvent.GouvFineAdd, {
+                            category,
+                        });
+                    }}
+                >
+                    Ajouter une amende
+                </MenuItemButton>
+                {finesForCategory.map(fine => (
+                    <MenuItemSelect
+                        key={fine.id}
+                        title={fine.label}
+                        onConfirm={(i, value) => {
+                            if (value === 'label') {
+                                fetchNui(NuiEvent.GouvFineSetLabel, {
+                                    id: fine.id,
+                                });
+                            }
+
+                            if (value === 'min') {
+                                fetchNui(NuiEvent.GouvFineSetMinPrice, {
+                                    id: fine.id,
+                                });
+                            }
+
+                            if (value === 'max') {
+                                fetchNui(NuiEvent.GouvFineSetMaxPrice, {
+                                    id: fine.id,
+                                });
+                            }
+
+                            if (value === 'delete') {
+                                fetchNui(NuiEvent.GouvFineRemove, {
+                                    id: fine.id,
+                                });
+                            }
+                        }}
+                    >
+                        <MenuItemSelectOption value="label">Changer le label</MenuItemSelectOption>
+                        <MenuItemSelectOption value="min">Prix min: ${fine.price.min}</MenuItemSelectOption>
+                        <MenuItemSelectOption value="max">Prix max: ${fine.price.max}</MenuItemSelectOption>
+                        <MenuItemSelectOption value="delete">Supprimer</MenuItemSelectOption>
+                    </MenuItemSelect>
+                ))}
+            </MenuContent>
+        </SubMenu>
     );
 };

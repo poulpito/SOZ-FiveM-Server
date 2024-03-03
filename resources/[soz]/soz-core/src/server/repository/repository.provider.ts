@@ -2,10 +2,13 @@ import { DrugSeedlingRepository } from '@private/server/resources/drug.seedling.
 import { DrugSellLocationRepository } from '@private/server/resources/drug.sell.location.repository';
 
 import { Once, OnceStep } from '../../core/decorators/event';
+import { Post } from '../../core/decorators/http';
 import { Inject, MultiInject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
 import { Tick } from '../../core/decorators/tick';
+import { Request } from '../../core/http/request';
+import { Response } from '../../core/http/response';
 import { OnceLoader } from '../../core/loader/once.loader';
 import { ClientEvent } from '../../shared/event';
 import { RpcServerEvent } from '../../shared/rpc';
@@ -150,5 +153,25 @@ export class RepositoryProvider {
         }
 
         return null;
+    }
+
+    @Post('/repository/refresh')
+    public async refreshRepository(request: Request): Promise<Response> {
+        const data = JSON.parse(await request.body);
+        const repositoryName = data.repository;
+
+        if (this.legacyRepositories[repositoryName]) {
+            await this.refreshRepository(repositoryName);
+            return Response.ok(null);
+        }
+
+        for (const repository of this.repositories) {
+            if (repository.type === repositoryName) {
+                await repository.refresh();
+                return Response.ok(null);
+            }
+        }
+
+        return Response.notFound('Repository not found');
     }
 }

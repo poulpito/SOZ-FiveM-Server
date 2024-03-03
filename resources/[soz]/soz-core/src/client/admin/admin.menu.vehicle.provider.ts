@@ -3,6 +3,7 @@ import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { emitRpc } from '../../core/rpc';
 import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
+import { PositiveNumberValidator } from '../../shared/nui/input';
 import { Err, Ok } from '../../shared/result';
 import { RpcServerEvent } from '../../shared/rpc';
 import { groupBy } from '../../shared/utils/array';
@@ -50,11 +51,10 @@ export class AdminMenuVehicleProvider {
                 {
                     title: 'Modèle du véhicule',
                     maxCharacters: 32,
-                    defaultValue: '',
                 },
                 model => {
                     if (!model || IsModelInCdimage(model) || IsModelValid(model)) {
-                        return Ok(true);
+                        return Ok(model);
                     }
                     return Err('Le modèle du véhicule est invalide');
                 }
@@ -167,16 +167,10 @@ export class AdminMenuVehicleProvider {
                 maxCharacters: 10,
                 defaultValue: '',
             },
-            value => {
-                const number = Number(value);
-                if (isNaN(number)) {
-                    return Err('Valeur incorrecte');
-                }
-                return Ok(true);
-            }
+            PositiveNumberValidator
         );
         if (newPrice !== null) {
-            TriggerServerEvent(ServerEvent.ADMIN_VEHICLE_CHANGE_CAR_PRICE, vehicleModel, Number(newPrice));
+            TriggerServerEvent(ServerEvent.ADMIN_VEHICLE_CHANGE_CAR_PRICE, vehicleModel, newPrice);
         }
         return Ok(true);
     }

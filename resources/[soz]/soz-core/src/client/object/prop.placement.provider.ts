@@ -154,7 +154,6 @@ export class PropPlacementProvider {
     public async onRequestCreatePropCollection() {
         const name = await this.inputService.askInput({
             title: 'Nom de la collection',
-            defaultValue: '',
             maxCharacters: 50,
         });
         if (!name) {
@@ -368,7 +367,6 @@ export class PropPlacementProvider {
         if (!selectedProp) {
             const propModel = await this.inputService.askInput({
                 title: 'Modèle du prop',
-                defaultValue: '',
             });
             if (!propModel || !IsModelValid(propModel)) {
                 this.notifier.notify('Modèle invalide', 'error');

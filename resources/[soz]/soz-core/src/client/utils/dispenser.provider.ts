@@ -1,9 +1,9 @@
 import { Once } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { ServerEvent } from '@public/shared/event';
-import { Err, Ok } from '@public/shared/result';
 
 import { Provider } from '../../core/decorators/provider';
+import { PositiveNumberValidator } from '../../shared/nui/input';
 import { InputService } from '../nui/input.service';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
@@ -50,32 +50,16 @@ export class DispenserProvider {
                         const quantity = await this.inputService.askInput(
                             {
                                 title: `Choisir la quantité`,
-                                defaultValue: '',
                                 maxCharacters: 4,
                             },
-                            value => {
-                                if (!value) {
-                                    return Ok(true);
-                                }
-                                const int = parseInt(value);
-                                if (isNaN(int) || !Number.isInteger(int) || int < 0) {
-                                    return Err('Veuillez préciser un nombre entier.');
-                                }
-
-                                return Ok(true);
-                            }
+                            PositiveNumberValidator
                         );
 
                         if (!quantity) {
                             return;
                         }
 
-                        this.buy(
-                            'Achat de plusieurs bouteilles ...',
-                            'water_bottle',
-                            dispenser_drink_price,
-                            parseInt(quantity)
-                        );
+                        this.buy('Achat de plusieurs bouteilles ...', 'water_bottle', dispenser_drink_price, quantity);
                     },
                 },
             ],
@@ -102,29 +86,14 @@ export class DispenserProvider {
                                 defaultValue: '',
                                 maxCharacters: 4,
                             },
-                            value => {
-                                if (!value) {
-                                    return Ok(true);
-                                }
-                                const int = parseInt(value);
-                                if (isNaN(int) || !Number.isInteger(int) || int < 0) {
-                                    return Err('Veuillez préciser un nombre entier.');
-                                }
-
-                                return Ok(true);
-                            }
+                            PositiveNumberValidator
                         );
 
                         if (!quantity) {
                             return;
                         }
 
-                        this.buy(
-                            'Achat de plusieurs sandwichs ...',
-                            'sandwich',
-                            dispenser_eat_price,
-                            parseInt(quantity)
-                        );
+                        this.buy('Achat de plusieurs sandwichs ...', 'sandwich', dispenser_eat_price, quantity);
                     },
                 },
             ],
@@ -148,27 +117,16 @@ export class DispenserProvider {
                         const quantity = await this.inputService.askInput(
                             {
                                 title: `Choisir la quantité`,
-                                defaultValue: '',
                                 maxCharacters: 4,
                             },
-                            value => {
-                                if (!value) {
-                                    return Ok(true);
-                                }
-                                const int = parseInt(value);
-                                if (isNaN(int) || !Number.isInteger(int) || int < 0) {
-                                    return Err('Veuillez préciser un nombre entier.');
-                                }
-
-                                return Ok(true);
-                            }
+                            PositiveNumberValidator
                         );
 
                         if (!quantity) {
                             return;
                         }
 
-                        this.buy('Achat de plusieurs Cafés ...', 'coffee', dispenser_cafe_price, parseInt(quantity));
+                        this.buy('Achat de plusieurs Cafés ...', 'coffee', dispenser_cafe_price, quantity);
                     },
                 },
             ],

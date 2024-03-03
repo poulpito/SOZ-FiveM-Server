@@ -1,4 +1,6 @@
 import { Tax, TaxType } from '@public/shared/bank';
+import { Configuration } from '@public/shared/configuration';
+import { Fine } from '@public/shared/job/police';
 import { ZoneTyped } from '@public/shared/polyzone/box.zone';
 import { SenateParty } from '@public/shared/senate';
 
@@ -19,6 +21,7 @@ export enum RepositoryType {
     Billboard = 'billboard',
     ChargerUpw = 'chargerUpw',
     Configuration = 'configuration',
+    Fine = 'fine',
     Garage = 'garage',
     Housing = 'housing',
     JobGrade = 'jobGrade',
@@ -42,6 +45,7 @@ export type RepositoryMapping = {
     [RepositoryType.Billboard]: Billboard;
     [RepositoryType.ChargerUpw]: UpwCharger;
     [RepositoryType.Configuration]: any;
+    [RepositoryType.Fine]: Fine;
     [RepositoryType.Garage]: Garage;
     [RepositoryType.Housing]: Property;
     [RepositoryType.JobGrade]: JobGrade;
@@ -63,6 +67,8 @@ export type RepositoryMapping = {
 
 export interface RepositoryConfig extends Record<keyof RepositoryMapping, any> {
     // Implemented
+    [RepositoryType.Configuration]: Configuration;
+    [RepositoryType.Fine]: Record<number, Fine>;
     [RepositoryType.Housing]: Record<number, Property>;
     [RepositoryType.JobGrade]: Record<number, JobGrade>;
     [RepositoryType.SenateParty]: Record<string, SenateParty>;

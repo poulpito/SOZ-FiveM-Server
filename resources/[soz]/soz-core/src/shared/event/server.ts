@@ -432,4 +432,9 @@ export enum ServerEvent {
 
     GOUV_UPDATE_TAX = 'soz-core:server:gouv:update-tax',
     GOUV_UPDATE_JOB_TIER_TAX = 'soz-core:server:gouv:update-job-tier-tax',
+    GOUV_FINE_ADD = 'soz-core:server:gouv:fine-add',
+    GOUV_FINE_SET_MIN_PRICE = 'soz-core:server:gouv:fine-set-min-price',
+    GOUV_FINE_SET_MAX_PRICE = 'soz-core:server:gouv:fine-set-max-price',
+    GOUV_FINE_SET_LABEL = 'soz-core:server:gouv:fine-set-label',
+    GOUV_FINE_REMOVE = 'soz-core:server:gouv:fine-remove',
 }

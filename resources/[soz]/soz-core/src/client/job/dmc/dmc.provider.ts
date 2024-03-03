@@ -197,7 +197,6 @@ export class DmcProvider {
                     action: async () => {
                         const newTemperatureInput = await this.inputService.askInput({
                             title: 'Modifier la température',
-                            defaultValue: '',
                             maxCharacters: 4,
                         });
                         const newTemperature = parseInt(newTemperatureInput);

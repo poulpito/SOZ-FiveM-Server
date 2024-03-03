@@ -7,7 +7,6 @@ import { wait } from '../../core/utils';
 import { AFKWordList } from '../../shared/afk';
 import { ServerEvent } from '../../shared/event';
 import { Vector3 } from '../../shared/polyzone/vector';
-import { Ok } from '../../shared/result';
 import { ItemCameraProvider } from '../item/item.camera.provider';
 import { Notifier } from '../notifier';
 import { InputService } from '../nui/input.service';
@@ -86,16 +85,10 @@ export class AfkProvider {
                 ActivateFrontendMenu(MP_PAUSE_MENU_HASH, false, -1);
             }
 
-            const word = await this.inputService.askInput(
-                {
-                    title: `Anti-AFK - Taper le mot suivant: ${afkWord}`,
-                    maxCharacters: 50,
-                    defaultValue: '',
-                },
-                () => {
-                    return Ok(true);
-                }
-            );
+            const word = await this.inputService.askInput({
+                title: `Anti-AFK - Taper le mot suivant: ${afkWord}`,
+                maxCharacters: 50,
+            });
 
             if (word?.toLowerCase() === afkWord) {
                 this.afkAttempts = 1;

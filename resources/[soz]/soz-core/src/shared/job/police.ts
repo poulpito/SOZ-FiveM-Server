@@ -1524,7 +1524,9 @@ export const PoliceCanEditLicences = {
 };
 
 export type Fine = {
+    id: number;
     label: string;
+    category: number;
     price: { min: number; max: number };
 };
 

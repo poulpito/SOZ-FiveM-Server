@@ -56,7 +56,7 @@
         "@headlessui/react": "^1.7.14",
         "@heroicons/react": "^1.0.6",
         "@prisma/client": "^5.0.0",
-        "@reach/descendants": "^0.17.0",
+        "@reach/descendants": "^0.18.0",
         "@rematch/core": "^2.2.0",
         "axios": "^1.2.1",
         "classnames": "^2.3.1",

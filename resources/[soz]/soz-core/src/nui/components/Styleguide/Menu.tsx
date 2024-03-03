@@ -147,10 +147,24 @@ export const MenuContent: FunctionComponent<PropsWithChildren> = ({ children }) 
     const [description, setDescription] = useState<string | null | ReactNode>(null);
     const [visibility, setVisibility] = useState(true);
     const [pauseMenuActive, setPauseMenuActive] = useState(true);
+    const [previousLength, setPreviousLength] = useState(0);
 
     useNuiEvent('global', 'PauseMenuActive', setPauseMenuActive);
 
     useNuiEvent('menu', 'SetMenuVisibility', setVisibility);
+
+    useEffect(() => {
+        if (previousLength === descendants.length) {
+            return;
+        }
+
+        setPreviousLength(descendants.length);
+
+        if (previousLength > 0) {
+            // reset descendants to ensure ordering is correct
+            setDescendants([]);
+        }
+    }, [descendants.length, previousLength]);
 
     return (
         <DescendantProvider context={MenuDescendantContext} items={descendants} set={setDescendants}>
@@ -279,10 +293,9 @@ const MenuItemContainer: FunctionComponent<MenuItemProps> = ({
             element,
             selectable: selectable === null ? !disabled : selectable,
         };
-    }, [element]);
+    }, [element, selectable]);
 
     const index = useDescendant(descendant, MenuDescendantContext);
-
     const isSelected = index === activeIndex;
 
     useEffect(() => {
@@ -633,6 +646,20 @@ export const MenuItemSelect: FunctionComponent<MenuItemSelectProps> = ({
     const [activeOptionIndex, setActiveOptionIndex] = useState(0);
     const [itemDescription, setItemDescription] = useState<string | null>(null);
     const [activeValue, setActiveValue] = useState(value);
+    const [previousLength, setPreviousLength] = useState(0);
+
+    useEffect(() => {
+        if (previousLength === descendants.length) {
+            return;
+        }
+
+        setPreviousLength(descendants.length);
+
+        if (previousLength > 0) {
+            // reset descendants to ensure ordering is correct
+            setDescendants([]);
+        }
+    }, [descendants.length, previousLength]);
 
     const onItemConfirm = useCallback(() => {
         onConfirm && onConfirm(activeOptionIndex, activeValue);

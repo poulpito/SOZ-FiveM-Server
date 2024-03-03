@@ -57,7 +57,6 @@ export class NewsMenuProvider {
         const message = await this.inputService.askInput({
             title,
             maxCharacters: 235,
-            defaultValue: '',
         });
 
         if (!message || message === '') {

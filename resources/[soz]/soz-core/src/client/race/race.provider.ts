@@ -3,6 +3,7 @@ import { Tick, TickInterval } from '@public/core/decorators/tick';
 import { emitRpc } from '@public/core/rpc';
 import { wait } from '@public/core/utils';
 import { Control } from '@public/shared/input';
+import { PositiveNumberValidator } from '@public/shared/nui/input';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { CylinderZone } from '@public/shared/polyzone/cylinder.zone';
 import {
@@ -250,38 +251,36 @@ export class RaceProvider {
             {
                 title: 'Nom de la course',
                 maxCharacters: 50,
-                defaultValue: '',
             },
             value => {
                 const locations = this.raceRepository.get();
 
                 if (!value) {
-                    return Ok(true);
+                    return Ok(null);
                 }
 
                 if (Object.values(locations).find(elem => elem.name.toLocaleLowerCase() == value.toLocaleLowerCase())) {
                     return Err('Une course avec ce nom existe déjà');
                 }
 
-                return Ok(true);
+                return Ok(value);
             }
         );
     }
 
     private async askModel() {
-        return this.inputService.askInput(
+        return this.inputService.askInput<string>(
             {
                 title: 'Modèle de voiture',
                 maxCharacters: 50,
-                defaultValue: '',
             },
             value => {
                 if (!value) {
-                    return Ok(true);
+                    return Ok(null);
                 }
 
                 if (value == 'ped') {
-                    return Ok(true);
+                    return Ok(null);
                 }
 
                 const hash = GetHashKey(value);
@@ -292,7 +291,7 @@ export class RaceProvider {
                     return Err("Ce modèle n'est pas un vehicule");
                 }
 
-                return Ok(true);
+                return Ok(value);
             }
         );
     }
@@ -304,16 +303,7 @@ export class RaceProvider {
                 maxCharacters: 3,
                 defaultValue: '5',
             },
-            value => {
-                if (!value) {
-                    return Ok(true);
-                }
-                const int = parseInt(value);
-                if (isNaN(int) || int < 0) {
-                    return Err('Valeur incorrecte');
-                }
-                return Ok(true);
-            }
+            PositiveNumberValidator
         );
     }
 
@@ -436,7 +426,7 @@ export class RaceProvider {
         const coords = GetEntityCoords(playerPed);
 
         const race = this.raceRepository.find(raceId);
-        race.checkpoints.splice(index, 0, [...coords, parseInt(radius)] as Vector4);
+        race.checkpoints.splice(index, 0, [...coords, radius] as Vector4);
 
         TriggerServerEvent(ServerEvent.RACE_UPDATE, race);
     }
@@ -469,7 +459,7 @@ export class RaceProvider {
                     const coords = GetEntityCoords(playerPed);
 
                     const race = this.raceRepository.find(raceId);
-                    race.checkpoints[index] = [...coords, parseInt(radius)] as Vector4;
+                    race.checkpoints[index] = [...coords, radius] as Vector4;
                 }
                 break;
             case RaceCheckpointMenuOptions.goto:

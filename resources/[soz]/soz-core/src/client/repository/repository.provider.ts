@@ -1,3 +1,5 @@
+import './fine.repository'; // Required to load the fine repository
+
 import { DrugSeedlingRepository } from '@private/client/repository/drug.seedling.repository';
 import { DrugSellLocationRepository } from '@private/client/repository/drug.sell.location.repository';
 import { Operation } from 'fast-json-patch';

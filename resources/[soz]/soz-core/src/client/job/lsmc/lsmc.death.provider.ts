@@ -31,7 +31,6 @@ import {
 } from '@public/shared/job/lsmc';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { rad, Vector3 } from '@public/shared/polyzone/vector';
-import { Ok } from '@public/shared/result';
 import { RpcServerEvent } from '@public/shared/rpc';
 import { VehicleSeat } from '@public/shared/vehicle/vehicle';
 
@@ -357,23 +356,16 @@ export class LSMCDeathProvider {
                     ? 'de ton décès'
                     : 'du coma';
 
-            this.inputService
-                .askInput(
-                    {
-                        title: `Explique la raison ${status}, celle-ci sera lue par les médecins lorsqu'ils te prendront en charge :`,
-                        maxCharacters: 200,
-                        defaultValue: '',
-                    },
-                    () => {
-                        return Ok(true);
-                    }
-                )
-                .then(reasonMort => {
-                    TriggerServerEvent(ServerEvent.LSMC_SET_DEATH_REASON, reasonMort);
-                    if (this.phoneService.isPhoneVisible()) {
-                        this.phoneService.setPhoneFocus(true);
-                    }
-                });
+            const reason = await this.inputService.askInput({
+                title: `Explique la raison ${status}, celle-ci sera lue par les médecins lorsqu'ils te prendront en charge :`,
+                maxCharacters: 200,
+            });
+
+            TriggerServerEvent(ServerEvent.LSMC_SET_DEATH_REASON, reason);
+
+            if (this.phoneService.isPhoneVisible()) {
+                this.phoneService.setPhoneFocus(true);
+            }
         }
     }
 

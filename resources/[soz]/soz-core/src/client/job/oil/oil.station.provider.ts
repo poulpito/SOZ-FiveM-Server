@@ -5,6 +5,7 @@ import { emitRpc } from '../../../core/rpc';
 import { wait } from '../../../core/utils';
 import { ClientEvent, NuiEvent, ServerEvent } from '../../../shared/event';
 import { FuelStation, FuelType } from '../../../shared/fuel';
+import { PositiveNumberValidator } from '../../../shared/nui/input';
 import { MenuType } from '../../../shared/nui/menu';
 import { Vector3 } from '../../../shared/polyzone/vector';
 import { Err, Ok } from '../../../shared/result';
@@ -65,14 +66,14 @@ export class OilStationProvider {
         TaskTurnPedToFaceEntity(ped, entity, 1000);
         await wait(500);
 
-        const refill = await this.inputService.askInput(
+        const refill = await this.inputService.askInput<number>(
             {
                 title: 'Quantité à ajouter (en litres) :',
                 maxCharacters: 4,
                 defaultValue: (3000 - station.stock).toString(),
             },
             (input: string) => {
-                const value = parseInt(input);
+                const value = Number(input);
 
                 if (isNaN(value) || value < 0 || value > 3000) {
                     return Err('Veuillez entrer un nombre entre 0 et 3000');
@@ -82,7 +83,7 @@ export class OilStationProvider {
                     return Err('La station ne peut pas contenir plus de 3000 litres');
                 }
 
-                return Ok(true);
+                return Ok(value);
             }
         );
 
@@ -90,7 +91,7 @@ export class OilStationProvider {
             return;
         }
 
-        TriggerServerEvent(ServerEvent.OIL_REFILL_ESSENCE_STATION, stationId, parseInt(refill), vehicleNetworkId);
+        TriggerServerEvent(ServerEvent.OIL_REFILL_ESSENCE_STATION, stationId, refill, vehicleNetworkId);
     }
 
     @OnEvent(ClientEvent.OIL_REFILL_KEROSENE_STATION)
@@ -111,14 +112,14 @@ export class OilStationProvider {
         TaskTurnPedToFaceEntity(ped, entity, 1000);
         await wait(500);
 
-        const refill = await this.inputService.askInput(
+        const refill = await this.inputService.askInput<number>(
             {
                 title: 'Quantité à ajouter (en litres) :',
                 maxCharacters: 4,
                 defaultValue: (3000 - station.stock).toString(),
             },
             (input: string) => {
-                const value = parseInt(input);
+                const value = Number(input);
 
                 if (isNaN(value) || value < 0 || value > 3000) {
                     return Err('Veuillez entrer un nombre entre 0 et 3000');
@@ -128,11 +129,11 @@ export class OilStationProvider {
                     return Err('La station ne peut pas contenir plus de 3000 litres');
                 }
 
-                return Ok(true);
+                return Ok(value);
             }
         );
 
-        TriggerServerEvent(ServerEvent.OIL_REFILL_KEROSENE_STATION, stationId, parseInt(refill));
+        TriggerServerEvent(ServerEvent.OIL_REFILL_KEROSENE_STATION, stationId, refill);
     }
 
     @OnEvent(ClientEvent.OIL_UPDATE_STATION_PRICE)
@@ -153,28 +154,14 @@ export class OilStationProvider {
 
     @OnNuiEvent(NuiEvent.OilAskStationPrice)
     public async onAskStationPrice({ price, type }) {
-        const priceStr = await this.inputService.askInput(
+        const newPrice = await this.inputService.askInput(
             {
                 title: 'Nouveau prix :',
                 maxCharacters: 5,
                 defaultValue: price.toFixed(2).toString(),
             },
-            (input: string) => {
-                const value = parseFloat(input);
-
-                if (isNaN(value) || value < 0) {
-                    return Err('Veuillez entrer un nombre positif');
-                }
-
-                return Ok(true);
-            }
+            PositiveNumberValidator
         );
-
-        if (!priceStr) {
-            return;
-        }
-
-        const newPrice = parseFloat(priceStr);
 
         TriggerServerEvent(ServerEvent.OIL_SET_STATION_PRICE, newPrice, type);
 

@@ -73,6 +73,12 @@ export abstract class Repository<
         return this.data;
     }
 
+    public async refresh(): Promise<Record<K, V>> {
+        this.data = await this.load();
+
+        return this.data;
+    }
+
     public delete(id: K): void {
         delete this.data[id];
     }

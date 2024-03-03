@@ -17,9 +17,9 @@ import { PlayerLicenceType } from '@public/shared/player';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
 import { MultiZone } from '@public/shared/polyzone/multi.zone';
 import { Vector3 } from '@public/shared/polyzone/vector';
-import { Err, Ok } from '@public/shared/result';
 import { RpcServerEvent } from '@public/shared/rpc';
 
+import { PositiveNumberValidator } from '../../../shared/nui/input';
 import { PlayerListStateService } from '../../player/player.list.state.service';
 import { PoliceLicenceProvider } from '../police/police.licence.provider';
 import { LSMCDeathProvider } from './lsmc.death.provider';
@@ -125,17 +125,7 @@ export class LSMCInteractionProvider {
                             title: "Durée avant que le pharmacien puisse enlever l'ITT en minutes",
                             defaultValue: '',
                         },
-                        value => {
-                            if (!value) {
-                                Ok(null);
-                            }
-
-                            if (isNaN(Number(value))) {
-                                return Err('La durée doit être un nombre');
-                            }
-
-                            return Ok(value);
-                        }
+                        PositiveNumberValidator
                     );
 
                     if (!duration) {
@@ -145,7 +135,7 @@ export class LSMCInteractionProvider {
                     TriggerServerEvent(
                         ServerEvent.LSMC_TOOGLE_ITT,
                         GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity)),
-                        Number(duration) * 60_000
+                        duration * 60_000
                     );
                 },
             },

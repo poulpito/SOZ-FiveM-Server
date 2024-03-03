@@ -59,10 +59,9 @@ export class LSMCCheckHealthProvider {
 
     @OnNuiEvent(NuiEvent.PlayerSetHealthBookField)
     async setPlayerHealthBookField({ source, field }: { source: number; field: keyof PlayerHealthBook }) {
-        const value = await this.inputService.askInput(
+        const value = await this.inputService.askInput<number>(
             {
                 title: `Carte de santé: ${HealthBookLabel[field]}`,
-                defaultValue: '',
                 maxCharacters: 3,
             },
             value => {
@@ -82,7 +81,7 @@ export class LSMCCheckHealthProvider {
                     return Err(`Valeur incorrecte, doit être supérieure à ${HealthBookMinMax[field].min}`);
                 }
 
-                return Ok(true);
+                return Ok(number);
             }
         );
 
@@ -90,7 +89,7 @@ export class LSMCCheckHealthProvider {
             return Ok(true);
         }
 
-        TriggerServerEvent(ServerEvent.LSMC_SET_HEALTH_BOOK, source, field, Number(value));
+        TriggerServerEvent(ServerEvent.LSMC_SET_HEALTH_BOOK, source, field, value);
 
         return Ok(true);
     }

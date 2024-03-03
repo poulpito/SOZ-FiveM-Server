@@ -262,7 +262,7 @@ export class VehicleDealershipProvider {
             return;
         }
 
-        const input = await this.inputService.askInput(
+        const amount = await this.inputService.askInput<number>(
             {
                 title: "Montant de l'enchère",
                 defaultValue: auction.bestBid ? auction.bestBid.price.toString() : auction.vehicle.price.toString(),
@@ -286,7 +286,10 @@ export class VehicleDealershipProvider {
             }
         );
 
-        const amount = parseInt(input);
+        if (!amount) {
+            return;
+        }
+
         const hasBid = await emitRpc<boolean>(RpcServerEvent.VEHICLE_DEALERSHIP_AUCTION_BID, name, amount);
 
         if (hasBid) {

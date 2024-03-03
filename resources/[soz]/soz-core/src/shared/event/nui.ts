@@ -330,6 +330,11 @@ export enum NuiEvent {
     GouvAnnoncement = 'soz-core:client:gouv:annoncement',
     GouvSetTax = 'soz-core:nui:gouv:set-tax',
     GouvSetJobTaxTier = 'soz-core:nui:gouv:set-job-tax-tier',
+    GouvFineAdd = 'soz-core:nui:gouv:fine-add',
+    GouvFineRemove = 'soz-core:nui:gouv:fine-remove',
+    GouvFineSetLabel = 'soz-core:nui:gouv:fine-set-label',
+    GouvFineSetMinPrice = 'soz-core:nui:gouv:fine-set-min-price',
+    GouvFineSetMaxPrice = 'soz-core:nui:gouv:fine-set-max-price',
 
     SelectPlacedProp = 'soz-core:client:placement:select-placed-prop',
     SelectPropToCreate = 'soz-core:client:placement:select-prop-to-create',
