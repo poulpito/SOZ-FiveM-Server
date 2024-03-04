@@ -711,13 +711,9 @@ model vandalism_props {
   @@id([id, kind])
 }
 
-enum ZoneType {
-  NoStress
-}
-
 model Zone {
   id   Int      @id @default(autoincrement())
-  type ZoneType @default(NoStress)
+  type String   @db.VarChar(50)
   zone String   @db.LongText
   name String   @db.VarChar(50)
 
