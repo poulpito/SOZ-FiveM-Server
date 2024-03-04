@@ -71,6 +71,7 @@ export interface RepositoryConfig extends Record<keyof RepositoryMapping, any> {
     [RepositoryType.Fine]: Record<number, Fine>;
     [RepositoryType.Housing]: Record<number, Property>;
     [RepositoryType.JobGrade]: Record<number, JobGrade>;
+    [RepositoryType.Radar]: Record<number, Radar>;
     [RepositoryType.SenateParty]: Record<string, SenateParty>;
     [RepositoryType.Tax]: Record<TaxType, Tax>;
     [RepositoryType.TowRope]: Record<string, TowRope>;
@@ -81,7 +82,6 @@ export interface RepositoryConfig extends Record<keyof RepositoryMapping, any> {
     [RepositoryType.Garage]: Record<string, Garage>;
     [RepositoryType.Object]: Record<string, WorldObject>;
     [RepositoryType.Race]: Record<number, Race>;
-    [RepositoryType.Radar]: Record<number, Radar>;
     [RepositoryType.Shop]: Record<number, ClothingShop>;
     [RepositoryType.ShopCategory]: Record<number, any>; // @TODO Fix this
     [RepositoryType.ShopUnderTypes]: Record<number, number[]>;
