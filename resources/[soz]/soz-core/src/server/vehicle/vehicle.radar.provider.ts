@@ -95,6 +95,12 @@ export class VehicleRadarProvider {
             });
 
             if (vehicleSpeed > dbRadar.speed_record) {
+                radarMessage =
+                    radarMessage +
+                    `Nouveau Record: ~b~${await this.playerService.getNameFromCitizenId(
+                        player.citizenid
+                    )}~s~ ~o~${vehicleSpeed}km/h~s~~n~`;
+
                 await this.prismaService.radar.update({
                     where: {
                         id: radarID,
@@ -104,6 +110,12 @@ export class VehicleRadarProvider {
                         speed_record: vehicleSpeed,
                     },
                 });
+            } else if (dbRadar.citizenid) {
+                radarMessage =
+                    radarMessage +
+                    `Record: ~b~${await this.playerService.getNameFromCitizenId(dbRadar.citizenid)}~s~ ~o~${
+                        dbRadar.speed_record
+                    }km/h~s~~n~`;
             }
 
             radarMessage = radarMessage + `Amende: ~r~${fine}$~s~~n~`;
