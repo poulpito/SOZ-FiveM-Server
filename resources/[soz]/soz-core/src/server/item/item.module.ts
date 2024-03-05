@@ -1,6 +1,7 @@
 import { Module } from '../../core/decorators/module';
 import { ItemBookProvider } from './item.book.provider';
 import { ItemFuelProvider } from './item.fuel.provider';
+import { ItemGouvProvider } from './item.gouv.provider';
 import { ItemHalloweenProvider } from './item.halloween.provider';
 import { ItemHealthProvider } from './item.health.provider';
 import { ItemNewsProvider } from './item.news.provider';
@@ -11,14 +12,15 @@ import { ItemVoipProvider } from './item.voip.provider';
 
 @Module({
     providers: [
+        ItemBookProvider,
         ItemFuelProvider,
+        ItemGouvProvider,
         ItemNewsProvider,
         ItemNutritionProvider,
         ItemHealthProvider,
         ItemPanelProvider,
         ItemToolsProvider,
         ItemVoipProvider,
-        ItemBookProvider,
         ItemHalloweenProvider,
     ],
 })

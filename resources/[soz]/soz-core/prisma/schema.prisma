@@ -341,6 +341,7 @@ model player {
   sozedex_rewards         player_sozedex_rewards[] @relation("sozedex_rewards")
   race_scores             race_score[]             @relation("race_scores")
   criminal_actions        criminal_action[]        @relation("criminal_actions")
+  radar_speed_records     radar[]                  @relation("radar_speed_record")
   SenatePartyMember       SenatePartyMember?
 
   @@index([id], map: "id")
@@ -680,9 +681,16 @@ model race_score {
 }
 
 model radar {
-  id               Int    @id
-  speed_record     Int
-  citizedid_record String @db.VarChar(50)
+  id           Int     @id @default(autoincrement())
+  speed        Int
+  position     Json
+  enabled      Boolean
+  destroyed    Boolean
+  speed_record Int
+  player       player? @relation(fields: [citizenid], references: [citizenid], onDelete: SetNull, map: "FK_radar_speed_record_player", name: "radar_speed_record")
+  citizenid    String? @db.VarChar(50)
+
+  @@map("radar")
 }
 
 model tetris_score {

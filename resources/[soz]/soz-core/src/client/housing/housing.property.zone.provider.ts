@@ -190,14 +190,14 @@ export class HousingPropertyZoneProvider {
     }
 
     @RepositoryDelete(RepositoryType.Housing)
-    public removePropertyZone(property: Property) {
+    public async removePropertyZone(property: Property) {
         this.targetFactory.removeBoxZone(`housing:property:${property.id}`);
         this.updateBlips();
     }
 
     @RepositoryInsert(RepositoryType.Housing)
     @RepositoryUpdate(RepositoryType.Housing)
-    public loadPropertyZone(property: Property) {
+    public async loadPropertyZone(property: Property) {
         this.targetFactory.removeBoxZone(`housing:property:${property.id}`);
         this.updateBlips();
 

@@ -92,6 +92,8 @@ export enum JobPermission {
     OnDutyView = 'view-employe-on-duty',
     BennysPitStopPrice = 'pitstop-price',
     GouvUpdateTax = 'update-tax',
+    GouvManageRadar = 'manage-radar',
+    GouvManageFine = 'manage-fine',
 }
 
 export const JobLabel: Record<JobType, string> = {

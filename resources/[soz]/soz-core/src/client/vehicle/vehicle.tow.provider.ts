@@ -223,7 +223,7 @@ export class VehicleTowProvider {
     }
 
     @RepositoryDelete(RepositoryType.TowRope)
-    public onTowRopeDelete(rope: TowRope) {
+    public async onTowRopeDelete(rope: TowRope) {
         if (rope && rope.ropeClientId) {
             DeleteRope(rope.ropeClientId);
         }

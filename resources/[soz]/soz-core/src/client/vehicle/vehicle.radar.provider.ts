@@ -1,8 +1,10 @@
-import { radarPrefix } from '@public/shared/vehicle/radar';
+import { Once, OnceStep, OnEvent } from '@core/decorators/event';
+import { Inject } from '@core/decorators/injectable';
+import { Provider } from '@core/decorators/provider';
+import { RepositoryDelete, RepositoryInsert, RepositoryUpdate } from '@core/decorators/repository';
+import { RepositoryType } from '@public/shared/repository';
+import { createRadarZone, Radar, RADAR_ID_PREFIX } from '@public/shared/vehicle/radar';
 
-import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
-import { Inject } from '../../core/decorators/injectable';
-import { Provider } from '../../core/decorators/provider';
 import { ClientEvent } from '../../shared/event';
 import { VehicleSeat } from '../../shared/vehicle/vehicle';
 import { BlipFactory } from '../blip';
@@ -33,55 +35,89 @@ export class VehicleRadarProvider {
     private globalDisableTime = 0;
     private ready = false;
 
-    @Once(OnceStep.Start)
+    private disabledRadarTime = new Map<number, number>();
+
+    @Once(OnceStep.RepositoriesLoaded)
     async onStart() {
-        for (const [radarID, radar] of Object.entries(this.radarRepository.get())) {
-            radar.objectId = await this.objectProvider.createObject({
-                model: radar_props,
-                position: radar.props,
-                id: radarPrefix + radarID,
-            });
-
-            radar.disableTime = GetResourceKvpInt('radar/disableEndTime/' + radarID);
-            this.globalDisableTime = GetResourceKvpInt('radar/disableEndTime/all');
-
-            if (radar.isOnline) {
-                this.playerInOutService.add('radar' + radarID, radar.zone, isInside => {
-                    if (this.raceProvider.isInRace()) {
-                        return;
-                    }
-
-                    if (isInside) {
-                        if (this.globalDisableTime && this.globalDisableTime > Date.now() / 1000) {
-                            return;
-                        }
-
-                        if (radar.disableTime && radar.disableTime > Date.now() / 1000) {
-                            return;
-                        }
-                        const ped = PlayerPedId();
-                        const vehicle = GetVehiclePedIsIn(ped, false);
-
-                        if (vehicle) {
-                            if (GetPedInVehicleSeat(vehicle, VehicleSeat.Driver) == ped) {
-                                const coords = GetEntityCoords(vehicle, false);
-                                const streetA = GetStreetNameAtCoord(coords[0], coords[1], coords[2])[0];
-
-                                TriggerServerEvent(
-                                    ClientEvent.VEHICLE_RADAR_TRIGGER,
-                                    Number(radarID),
-                                    VehToNet(vehicle),
-                                    GetVehicleClass(vehicle),
-                                    GetStreetNameFromHashKey(streetA)
-                                );
-                            }
-                        }
-                    }
-                });
-            }
+        for (const radar of this.radarRepository.get()) {
+            await this.createRadar(radar);
         }
 
         this.ready = true;
+    }
+
+    @RepositoryDelete(RepositoryType.Radar)
+    public async deleteRadar(radar: Radar) {
+        const objectId = RADAR_ID_PREFIX + radar.id;
+
+        this.objectProvider.deleteObject(objectId);
+        this.playerInOutService.remove(objectId);
+        this.disabledRadarTime.delete(radar.id);
+
+        DeleteResourceKvp('radar/disableEndTime/' + radar.id);
+    }
+
+    @RepositoryUpdate(RepositoryType.Radar)
+    public async updateRadar(radar: Radar) {
+        await this.deleteRadar(radar);
+        await this.createRadar(radar);
+    }
+
+    @RepositoryInsert(RepositoryType.Radar)
+    private async createRadar(radar: Radar): Promise<void> {
+        const objectId = RADAR_ID_PREFIX + radar.id;
+
+        await this.objectProvider.createObject({
+            model: radar_props,
+            position: radar.position,
+            id: objectId,
+        });
+
+        const disabledTime = GetResourceKvpInt('radar/disableEndTime/' + radar.id);
+
+        if (disabledTime) {
+            this.disabledRadarTime.set(radar.id, disabledTime);
+        }
+
+        if (radar.enabled) {
+            const radarZone = createRadarZone(radar.position);
+
+            this.playerInOutService.add(objectId, radarZone, isInside => {
+                if (this.raceProvider.isInRace()) {
+                    return;
+                }
+
+                if (isInside) {
+                    if (this.globalDisableTime && this.globalDisableTime > Date.now() / 1000) {
+                        return;
+                    }
+
+                    const disableTime = this.disabledRadarTime.get(radar.id);
+
+                    if (disableTime && disableTime > Date.now() / 1000) {
+                        return;
+                    }
+
+                    const ped = PlayerPedId();
+                    const vehicle = GetVehiclePedIsIn(ped, false);
+
+                    if (vehicle) {
+                        if (GetPedInVehicleSeat(vehicle, VehicleSeat.Driver) == ped) {
+                            const coords = GetEntityCoords(vehicle, false);
+                            const streetA = GetStreetNameAtCoord(coords[0], coords[1], coords[2])[0];
+
+                            TriggerServerEvent(
+                                ClientEvent.VEHICLE_RADAR_TRIGGER,
+                                Number(radar.id),
+                                VehToNet(vehicle),
+                                GetVehicleClass(vehicle),
+                                GetStreetNameFromHashKey(streetA)
+                            );
+                        }
+                    }
+                }
+            });
+        }
     }
 
     public isReady() {
@@ -95,18 +131,17 @@ export class VehicleRadarProvider {
 
     @OnEvent(ClientEvent.RADAR_TOGGLE_BLIP)
     public async toggleBlip(value: boolean) {
-        for (const radarID in this.radarRepository.get()) {
-            const radar = this.radarRepository.find(radarID);
-            if (!this.blipFactory.exist('police_radar_' + radarID)) {
-                this.blipFactory.create('police_radar_' + radarID, {
+        for (const radar of this.radarRepository.get()) {
+            if (!this.blipFactory.exist('police_radar_' + radar.id)) {
+                this.blipFactory.create('police_radar_' + radar.id, {
                     name: 'Radar',
-                    coords: { x: radar.props[0], y: radar.props[1], z: radar.props[2] },
+                    position: radar.position,
                     sprite: 184,
                     scale: 0.5,
                 });
             }
 
-            this.blipFactory.hide('police_radar_' + radarID, !value);
+            this.blipFactory.hide('police_radar_' + radar.id, !value);
         }
     }
 
@@ -125,5 +160,16 @@ export class VehicleRadarProvider {
         const disableEndTime = Math.round(Date.now() / 1000 + duration);
         this.globalDisableTime = disableEndTime;
         SetResourceKvpInt('radar/disableEndTime/all', disableEndTime);
+    }
+
+    public disableRadar(radarId: string, duration: number) {
+        if (radarId.startsWith(RADAR_ID_PREFIX)) {
+            radarId = radarId.replace(RADAR_ID_PREFIX, '');
+        }
+
+        const disableEndTime = Math.round(Date.now() / 1000 + duration);
+        this.disabledRadarTime.set(Number(radarId), disableEndTime);
+
+        SetResourceKvpInt('radar/disableEndTime/' + radarId, disableEndTime);
     }
 }

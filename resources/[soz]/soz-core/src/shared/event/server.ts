@@ -437,4 +437,8 @@ export enum ServerEvent {
     GOUV_FINE_SET_MAX_PRICE = 'soz-core:server:gouv:fine-set-max-price',
     GOUV_FINE_SET_LABEL = 'soz-core:server:gouv:fine-set-label',
     GOUV_FINE_REMOVE = 'soz-core:server:gouv:fine-remove',
+    GOUV_RADAR_ADD = 'soz-core:server:gouv:radar-add',
+    GOUV_RADAR_SET_SPEED = 'soz-core:server:gouv:radar-set-speed',
+    GOUV_RADAR_SET_DISABLED = 'soz-core:server:gouv:radar-set-disabled',
+    GOUV_RADAR_REMOVE = 'soz-core:server:gouv:radar-remove',
 }

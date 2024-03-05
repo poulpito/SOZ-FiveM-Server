@@ -65,6 +65,7 @@ export enum ClientEvent {
     ITEM_SCIENTIST_PHOTO_TOGGLE = 'soz-core:client:item:scientist-photo:toggle',
     ITEM_SCUBA_TOOGLE = 'soz-core:client:item:scuba:toggle',
     ITEM_DETECTIVE_BOARD_TOGGLE = 'soz-core:client:item:detective-board:toggle',
+    ITEM_RADAR_USE = 'soz-core:client:item:radar:use',
 
     HELICO_UPDATE_LIGHT = 'soz-core:client:police:update-light',
 

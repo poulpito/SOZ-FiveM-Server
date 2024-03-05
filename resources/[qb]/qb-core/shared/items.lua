@@ -7522,7 +7522,7 @@ QBShared.Items = {
         ['useable'] = true,
         ['shouldClose'] = true,
         ['combinable'] = nil,
-        ['description'] = `Un calendrier resplendissant et jovial, à l'image des médecins du LSMC qu'il représente !`,
+        ['description'] = "Un calendrier resplendissant et jovial, à l'image des médecins du LSMC qu'il représente !",
         ['illustrator'] = '.Dheyline',
     },
     ['newcomer_ticket'] = {
@@ -7681,6 +7681,15 @@ QBShared.Items = {
         ['useable'] = true,
         ['combinable'] = nil,
         ['description'] = 'L\'arme idéale contre les chauffards. ',
+    },
+    ['radar'] = {
+        ['name'] = 'radar',
+        ['label'] = 'Radar',
+        ['weight'] = 10000,
+        ['type'] = 'item',
+        ['unique'] = false,
+        ['useable'] = true,
+        ['description'] = 'Vitesse = argent',
     },
     ["breathanalyzer"] = {
         ['name'] = "breathanalyzer",

@@ -9,6 +9,7 @@ import { NuiMenu } from './nui.menu';
 type CurrentObject = {
     position: Vector4;
     model: number;
+    onDrawCallback?: (position: Vector4) => void;
 };
 
 @Provider()
@@ -104,13 +105,21 @@ export class NuiObjectProvider {
             false
         );
 
+        if (this.currentObject.onDrawCallback) {
+            this.currentObject.onDrawCallback(this.currentObject.position);
+        }
+
         if (hasCancel) {
             this.createObjectResolver(null);
             this.currentObject = null;
         }
     }
 
-    public async askObject(model: number, existingPosition?: Vector4): Promise<CurrentObject | null> {
+    public async askObject(
+        model: number,
+        existingPosition?: Vector4,
+        onDrawCallback?: (position: Vector4) => void
+    ): Promise<CurrentObject | null> {
         const promise = new Promise<CurrentObject>(resolve => {
             this.createObjectResolver = resolve;
             this.nuiMenu.setMenuVisibility(false);
@@ -130,10 +139,12 @@ export class NuiObjectProvider {
             ? {
                   position: existingPosition,
                   model,
+                  onDrawCallback,
               }
             : {
                   position: [position[0], position[1], position[2] - 1, heading],
                   model,
+                  onDrawCallback,
               };
 
         this.objectProp = CreateObject(
