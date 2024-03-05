@@ -498,6 +498,7 @@ model investigation_revision {
   citizenid       String         @db.VarChar(255)
   content         String         @db.LongText
   note            String         @default("") @db.LongText
+  prosecutor_note  String        @default("") @db.LongText
   created_at      DateTime?      @default(now()) @db.Timestamp(0)
   investigation   investigation? @relation(fields: [investigationId], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_investigation")
 
@@ -590,6 +591,7 @@ enum report_type {
   investigation
   report
   complaint
+  appeal
 }
 
 model drugs_seedling {
