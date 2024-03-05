@@ -171,6 +171,7 @@ const FineSubMenu: FunctionComponent<FineSubMenuProps> = ({ category }) => {
                     <MenuItemSelect
                         key={fine.id}
                         title={fine.label}
+                        description={fine.label}
                         onConfirm={(i, value) => {
                             if (value === 'label') {
                                 fetchNui(NuiEvent.GouvFineSetLabel, {
