@@ -44,6 +44,7 @@ export class GouvRadarProvider {
         this.targetFactory.createForModel(RADAR_MODEL, [
             {
                 label: 'Définir la vitesse',
+                icon: 'fas fa-bolt',
                 job: JobType.Gouv,
                 blackoutJob: JobType.Gouv,
                 blackoutGlobal: true,
@@ -63,6 +64,7 @@ export class GouvRadarProvider {
             },
             {
                 label: 'Désactiver le radar',
+                icon: 'fas fa-toggle-off',
                 job: JobType.Gouv,
                 blackoutJob: JobType.Gouv,
                 blackoutGlobal: true,
@@ -97,6 +99,7 @@ export class GouvRadarProvider {
             },
             {
                 label: 'Activer le radar',
+                icon: 'fas fa-toggle-on',
                 job: JobType.Gouv,
                 blackoutJob: JobType.Gouv,
                 blackoutGlobal: true,
@@ -131,6 +134,7 @@ export class GouvRadarProvider {
             },
             {
                 label: 'Supprimer',
+                icon: 'fas fa-trash',
                 job: JobType.Gouv,
                 blackoutJob: JobType.Gouv,
                 blackoutGlobal: true,
