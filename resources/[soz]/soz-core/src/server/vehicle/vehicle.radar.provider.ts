@@ -177,8 +177,7 @@ export class VehicleRadarProvider {
                 }
             );
 
-            this.bankService.transferBankMoney(player.charinfo.account, JobType.LSPD, Math.round(fine / 2));
-            this.bankService.transferBankMoney(player.charinfo.account, JobType.BCSO, fine - Math.round(fine / 2));
+            this.bankService.transferBankMoney(player.charinfo.account, JobType.Gouv, fine);
 
             this.notifier.advancedNotify(
                 source,
