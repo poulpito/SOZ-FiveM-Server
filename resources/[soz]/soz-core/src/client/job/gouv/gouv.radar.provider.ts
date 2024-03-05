@@ -3,7 +3,7 @@ import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { ClientEvent } from '../../../shared/event/client';
 import { ServerEvent } from '../../../shared/event/server';
-import { JobType } from '../../../shared/job';
+import { JobPermission, JobType } from '../../../shared/job';
 import { PositiveNumberValidator } from '../../../shared/nui/input';
 import { createRadarZone, RADAR_ID_PREFIX } from '../../../shared/vehicle/radar';
 import { InputService } from '../../nui/input.service';
@@ -12,6 +12,7 @@ import { ObjectProvider } from '../../object/object.provider';
 import { PlayerService } from '../../player/player.service';
 import { RadarRepository } from '../../repository/radar.repository';
 import { TargetFactory } from '../../target/target.factory';
+import { JobService } from '../job.service';
 
 const RADAR_MODEL = GetHashKey('soz_prop_radar_2');
 
@@ -35,6 +36,9 @@ export class GouvRadarProvider {
     @Inject(RadarRepository)
     private readonly radarRepository: RadarRepository;
 
+    @Inject(JobService)
+    private readonly jobService: JobService;
+
     @Once(OnceStep.PlayerLoaded)
     public setupGouvRadar() {
         this.targetFactory.createForModel(RADAR_MODEL, [
@@ -44,19 +48,16 @@ export class GouvRadarProvider {
                 blackoutJob: JobType.Gouv,
                 blackoutGlobal: true,
                 canInteract: entity => {
-                    const radarId = this.getRadarId(entity);
-
-                    if (radarId === null) {
-                        return false;
-                    }
-
                     const player = this.playerService.getPlayer();
 
-                    if (!player) {
+                    if (!player || !player.job.onduty) {
+                        return false;
+                    }
+                    if (!this.jobService.hasPermission(JobType.Gouv, JobPermission.GouvManageRadar)) {
                         return false;
                     }
 
-                    return player.job.onduty;
+                    return this.getRadarId(entity) !== null;
                 },
                 action: this.setRadarSpeed.bind(this),
             },
@@ -69,6 +70,10 @@ export class GouvRadarProvider {
                     const player = this.playerService.getPlayer();
 
                     if (!player || !player.job.onduty) {
+                        return false;
+                    }
+
+                    if (!this.jobService.hasPermission(JobType.Gouv, JobPermission.GouvManageRadar)) {
                         return false;
                     }
 
@@ -102,6 +107,10 @@ export class GouvRadarProvider {
                         return false;
                     }
 
+                    if (!this.jobService.hasPermission(JobType.Gouv, JobPermission.GouvManageRadar)) {
+                        return false;
+                    }
+
                     const radarId = this.getRadarId(entity);
 
                     if (radarId === null) {
@@ -126,19 +135,17 @@ export class GouvRadarProvider {
                 blackoutJob: JobType.Gouv,
                 blackoutGlobal: true,
                 canInteract: entity => {
-                    const radarId = this.getRadarId(entity);
-
-                    if (radarId === null) {
-                        return false;
-                    }
-
                     const player = this.playerService.getPlayer();
 
-                    if (!player) {
+                    if (!player || !player.job.onduty) {
                         return false;
                     }
 
-                    return player.job.onduty;
+                    if (!this.jobService.hasPermission(JobType.Gouv, JobPermission.GouvManageRadar)) {
+                        return false;
+                    }
+
+                    return this.getRadarId(entity) !== null;
                 },
                 action: this.removeRadar.bind(this),
             },

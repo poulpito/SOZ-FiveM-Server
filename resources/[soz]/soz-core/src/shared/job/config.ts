@@ -494,6 +494,8 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         permissions: {
             ...BasePermissions,
             [JobPermission.GouvUpdateTax]: { label: 'Mettre à jour les taxes' },
+            [JobPermission.GouvManageRadar]: { label: 'Permet de gérer les radars' },
+            [JobPermission.GouvManageFine]: { label: 'Ajouter, mettre à jour et supprimer les amendes' },
         },
         bossZones: [
             {

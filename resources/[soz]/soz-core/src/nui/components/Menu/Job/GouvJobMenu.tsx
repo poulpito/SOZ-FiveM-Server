@@ -33,7 +33,8 @@ type MandatoryStateProps = {
 export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) => {
     const banner = 'https://nui-img/soz/menu_job_gouv';
     const taxData = useRepository(RepositoryType.Tax);
-    const allowed = useHasJobPermission(JobType.Gouv, JobPermission.GouvUpdateTax);
+    const taxAllowed = useHasJobPermission(JobType.Gouv, JobPermission.GouvUpdateTax);
+    const fineAllowed = useHasJobPermission(JobType.Gouv, JobPermission.GouvManageFine);
     const tier = useConfigurationValue('JobTaxTier');
 
     if (!data.onDuty) {
@@ -61,77 +62,73 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
                     >
                         Faire une communication
                     </MenuItemButton>
-                    {allowed && <MenuItemSubMenuLink id="tax">Taxes</MenuItemSubMenuLink>}
-                    {allowed && <MenuItemSubMenuLink id="tier">Seuils d'impôts</MenuItemSubMenuLink>}
-                    {allowed && <MenuItemSubMenuLink id="fine">Amendes</MenuItemSubMenuLink>}
+                    {taxAllowed && <MenuItemSubMenuLink id="tax">Taxes</MenuItemSubMenuLink>}
+                    {taxAllowed && <MenuItemSubMenuLink id="tier">Seuils d'impôts</MenuItemSubMenuLink>}
+                    {fineAllowed && <MenuItemSubMenuLink id="fine">Amendes</MenuItemSubMenuLink>}
                 </MenuContent>
             </MainMenu>
-            {allowed && (
-                <>
-                    <SubMenu id="tax">
-                        <MenuTitle banner={banner}>Les taxes</MenuTitle>
-                        <MenuContent>
-                            {Object.values(TaxType).map(taxType => {
-                                const tax = taxData[taxType] ?? { id: taxType, value: 11 };
+            <SubMenu id="tax">
+                <MenuTitle banner={banner}>Les taxes</MenuTitle>
+                <MenuContent>
+                    {Object.values(TaxType).map(taxType => {
+                        const tax = taxData[taxType] ?? { id: taxType, value: 11 };
 
-                                return (
-                                    <MenuItemButton
-                                        key={tax.id}
-                                        onConfirm={() => {
-                                            fetchNui(NuiEvent.GouvSetTax, {
-                                                type: tax.id,
-                                            });
-                                        }}
-                                    >
-                                        {TaxLabel[tax.id]}: {tax.value}%
-                                    </MenuItemButton>
-                                );
-                            })}
-                        </MenuContent>
-                    </SubMenu>
-                    <SubMenu id="tier">
-                        <MenuTitle banner={banner}>Seuil des Impôts</MenuTitle>
-                        <MenuContent>
+                        return (
                             <MenuItemButton
+                                key={tax.id}
                                 onConfirm={() => {
-                                    fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                        tier: 'Tier1',
+                                    fetchNui(NuiEvent.GouvSetTax, {
+                                        type: tax.id,
                                     });
                                 }}
                             >
-                                Tier 1 : {tier.Tier1}
+                                {TaxLabel[tax.id]}: {tax.value}%
                             </MenuItemButton>
-                            <MenuItemButton
-                                onConfirm={() => {
-                                    fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                        tier: 'Tier2',
-                                    });
-                                }}
-                            >
-                                Tier 2 : {tier.Tier2}
-                            </MenuItemButton>
-                            <MenuItemButton
-                                onConfirm={() => {
-                                    fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                        tier: 'Tier3',
-                                    });
-                                }}
-                            >
-                                Tier 3 : {tier.Tier3}
-                            </MenuItemButton>
-                            <MenuItemButton
-                                onConfirm={() => {
-                                    fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                        tier: 'Tier4',
-                                    });
-                                }}
-                            >
-                                Tier 4 : {tier.Tier4}
-                            </MenuItemButton>
-                        </MenuContent>
-                    </SubMenu>
-                </>
-            )}
+                        );
+                    })}
+                </MenuContent>
+            </SubMenu>
+            <SubMenu id="tier">
+                <MenuTitle banner={banner}>Seuil des Impôts</MenuTitle>
+                <MenuContent>
+                    <MenuItemButton
+                        onConfirm={() => {
+                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                tier: 'Tier1',
+                            });
+                        }}
+                    >
+                        Tier 1 : {tier.Tier1}
+                    </MenuItemButton>
+                    <MenuItemButton
+                        onConfirm={() => {
+                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                tier: 'Tier2',
+                            });
+                        }}
+                    >
+                        Tier 2 : {tier.Tier2}
+                    </MenuItemButton>
+                    <MenuItemButton
+                        onConfirm={() => {
+                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                tier: 'Tier3',
+                            });
+                        }}
+                    >
+                        Tier 3 : {tier.Tier3}
+                    </MenuItemButton>
+                    <MenuItemButton
+                        onConfirm={() => {
+                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                tier: 'Tier4',
+                            });
+                        }}
+                    >
+                        Tier 4 : {tier.Tier4}
+                    </MenuItemButton>
+                </MenuContent>
+            </SubMenu>
             <SubMenu id="fine">
                 <MenuTitle banner={banner}>Amendes</MenuTitle>
                 <MenuContent>

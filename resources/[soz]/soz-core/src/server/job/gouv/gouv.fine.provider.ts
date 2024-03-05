@@ -30,7 +30,7 @@ export class GouvFineProvider {
             return;
         }
 
-        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
+        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvManageFine))) {
             return;
         }
 
@@ -47,7 +47,7 @@ export class GouvFineProvider {
             return;
         }
 
-        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
+        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvManageFine))) {
             return;
         }
 
@@ -64,7 +64,7 @@ export class GouvFineProvider {
             return;
         }
 
-        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
+        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvManageFine))) {
             return;
         }
 
@@ -81,7 +81,7 @@ export class GouvFineProvider {
             return;
         }
 
-        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
+        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvManageFine))) {
             return;
         }
 
@@ -98,7 +98,7 @@ export class GouvFineProvider {
             return;
         }
 
-        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
+        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvManageFine))) {
             return;
         }
 
