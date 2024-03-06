@@ -160,7 +160,7 @@ export const MenuContent: FunctionComponent<PropsWithChildren> = ({ children }) 
 
         setPreviousLength(descendants.length);
 
-        if (previousLength > 0) {
+        if (previousLength > 0 && descendants.length > 0) {
             // reset descendants to ensure ordering is correct
             setDescendants([]);
         }
@@ -655,7 +655,7 @@ export const MenuItemSelect: FunctionComponent<MenuItemSelectProps> = ({
 
         setPreviousLength(descendants.length);
 
-        if (previousLength > 0) {
+        if (previousLength > 0 && descendants.length > 0) {
             // reset descendants to ensure ordering is correct
             setDescendants([]);
         }
