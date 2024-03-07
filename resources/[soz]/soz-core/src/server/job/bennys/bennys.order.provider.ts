@@ -7,7 +7,12 @@ import { uuidv4 } from '../../../core/utils';
 import { BennysConfig, BennysOrder } from '../../../shared/job/bennys';
 import { isErr } from '../../../shared/result';
 import { RpcServerEvent } from '../../../shared/rpc';
-import { getDefaultVehicleCondition } from '../../../shared/vehicle/vehicle';
+import {
+    getDefaultVehicleCondition,
+    VehicleClass,
+    VehicleClassFuelStorageMultiplier,
+    VehicleCondition,
+} from '../../../shared/vehicle/vehicle';
 import { BankService } from '../../bank/bank.service';
 import { PrismaService } from '../../database/prisma.service';
 import { Notifier } from '../../notifier';
@@ -119,12 +124,24 @@ export class BennysOrderProvider {
         } else if (vehicle.requiredLicence === 'boat') {
             category = 'boat';
         }
+
+        const fuel =
+            100 *
+            (vehicle.requiredLicence === 'motorcycle'
+                ? VehicleClassFuelStorageMultiplier[VehicleClass.Motorcycles]
+                : 1.0);
+
+        const condition: VehicleCondition = {
+            ...getDefaultVehicleCondition(),
+            fuelLevel: fuel,
+        };
+
         await this.prismaService.playerVehicle.create({
             data: {
                 vehicle: model,
                 hash: GetHashKey(model).toString(),
                 mods: JSON.stringify(BennysConfig.UpgradeConfiguration),
-                condition: JSON.stringify(getDefaultVehicleCondition()),
+                condition: JSON.stringify(condition),
                 plate: 'ESSAI N' + (this.orderedVehicle + 1),
                 garage: 'bennys_north', //'bennys_luxury',
                 job: 'bennys',
