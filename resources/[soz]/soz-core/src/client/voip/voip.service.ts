@@ -2,6 +2,7 @@ import { emitRpc } from '@core/rpc';
 import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { VoiceRadioProvider } from '@public/client/voip/voice/voice.radio.provider';
 import { Inject, Injectable } from '@public/core/decorators/injectable';
+import { wait } from '@public/core/utils';
 import { ServerEvent } from '@public/shared/event';
 import { VoiceMode } from '@public/shared/hud';
 import { RpcServerEvent } from '@public/shared/rpc';
@@ -34,6 +35,8 @@ export class VoipService {
     private overrideInputRange: number | null = null;
 
     private isMuted = false;
+
+    private ready = false;
 
     public getVoiceClickVolume(radioType: RadioType, channelType: RadioChannelType) {
         return this.voiceRadioProvider.getVoiceClickVolume(radioType, channelType);
@@ -80,7 +83,11 @@ export class VoipService {
     }
 
     public async mutePlayer(value: boolean) {
-        const isOk = await emitRpc<boolean>(RpcServerEvent.VOIP_SET_MUTE, value);
+        while (!this.ready) {
+            await wait(100);
+        }
+
+        const isOk = await emitRpc<boolean>(RpcServerEvent.VOIP_SET_MUTE, GetPlayerServerId(PlayerId()), value);
 
         if (!isOk) {
             return;
@@ -155,5 +162,13 @@ export class VoipService {
         if (this.overrideInputRange !== null) {
             MumbleSetTalkerProximity(this.overrideInputRange);
         }
+    }
+
+    public isReady(): boolean {
+        return this.ready;
+    }
+
+    public setReady(value: boolean) {
+        this.ready = value;
     }
 }

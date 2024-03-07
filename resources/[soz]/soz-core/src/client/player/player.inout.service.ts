@@ -13,7 +13,7 @@ export class PlayerInOutService {
     private elems: Record<string, PlayerInOutServiceElement> = {};
 
     public add(id: string, zone: AbstractZone, cb: (isInside: boolean) => void): void {
-        const elem = { id: id, zone: zone, cb: cb } as PlayerInOutServiceElement;
+        const elem: PlayerInOutServiceElement = { id: id, zone: zone, cb: cb, isLastInside: false };
         this.elems[id] = elem;
     }
 

@@ -16,11 +16,11 @@ export class VoipProvider {
     private logger: Logger;
 
     @Rpc(RpcServerEvent.VOIP_IS_MUTED)
-    public async isMuted(playerId: number): Promise<boolean> {
+    public async isMuted(source: number, playerId: number): Promise<boolean> {
         const httpEndpoint = GetConvar('soz_voip_mumble_http_endpoint', 'http://127.0.0.1:8080');
         const username = GetConvar('soz_voip_mumble_http_username', 'admin');
         const password = GetConvar('soz_voip_mumble_http_password', 'changeme');
-        const mumbleUserId = `[${playerId}]%%20${GetPlayerName(playerId)}`;
+        const mumbleUserId = `[${playerId}]%20${GetPlayerName(playerId)}`;
 
         const response = await axios.get(`${httpEndpoint}/mute/${mumbleUserId}`, {
             auth: {
@@ -37,18 +37,15 @@ export class VoipProvider {
             return false;
         }
 
-        const json = response.data.toString();
-        const data = JSON.parse(json);
-
-        return data.muted;
+        return response.data.mute;
     }
 
     @Rpc(RpcServerEvent.VOIP_SET_MUTE)
-    public async mute(source: number, value: boolean): Promise<boolean> {
+    public async mute(source: number, playerId: number, value: boolean): Promise<boolean> {
         const httpEndpoint = GetConvar('soz_voip_mumble_http_endpoint', 'http://127.0.0.1:8080');
         const username = GetConvar('soz_voip_mumble_http_username', 'admin');
         const password = GetConvar('soz_voip_mumble_http_password', 'changeme');
-        const mumbleUserId = `[${source}] ${GetPlayerName(source)}`;
+        const mumbleUserId = `[${playerId}] ${GetPlayerName(playerId)}`;
 
         try {
             const response = await axios.post(
