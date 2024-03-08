@@ -469,7 +469,7 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
             [JobPermission.ManageInvestigation]: { label: 'Gérer les enquêtes' },
             [JobPermission.MdrViewCitizenData]: { label: 'Accès aux casiers judiciaires' },
             [JobPermission.InvestigationLawyer]: { label: 'Avocat dans les enquêtes' },
-            [JobPermission.InvestigationProsecutor]: { label: 'Prosecutor dans les enquètes'},
+            [JobPermission.InvestigationProsecutor]: { label: 'Prosecutor dans les enquètes' },
             [JobPermission.MdrViewOtherJobs]: { label: 'Accès aux infos des entreprises' },
             [JobPermission.MdrMarkedMoneyCleaning]: { label: 'Accès à la réhabilitation des billets' },
         },

@@ -5,6 +5,7 @@ import { ClientEvent } from '../../../shared/event/client';
 import { ServerEvent } from '../../../shared/event/server';
 import { JobPermission, JobType } from '../../../shared/job';
 import { PositiveNumberValidator } from '../../../shared/nui/input';
+import { Vector3 } from '../../../shared/polyzone/vector';
 import { createRadarZone, RADAR_ID_PREFIX } from '../../../shared/vehicle/radar';
 import { InputService } from '../../nui/input.service';
 import { NuiObjectProvider } from '../../nui/nui.object.provider';
@@ -158,7 +159,10 @@ export class GouvRadarProvider {
 
     @OnEvent(ClientEvent.ITEM_RADAR_USE)
     public async onRadarUse() {
-        const object = await this.nuiObjectProvider.askObject(RADAR_MODEL, null, position => {
+        const position = GetEntityCoords(PlayerPedId(), false) as Vector3;
+        const heading = GetEntityHeading(PlayerPedId());
+
+        const object = await this.nuiObjectProvider.askObject(RADAR_MODEL, [...position, heading], position => {
             const zone = createRadarZone(position);
             zone.draw([200, 200, 0, 100]);
         });
