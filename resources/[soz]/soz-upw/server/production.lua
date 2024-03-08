@@ -187,10 +187,8 @@ QBCore.Functions.CreateCallback("soz-upw:server:Harvest", function(source, cb, i
                          Config.Upw.Resale.EnergyCellPriceGlobal[firstItem.item.name] or 0)
         end
 
-        TriggerEvent("soz-core:server:monitor:add-event", "job_upw_energy_restock", {
-            item_id = item,
-            player_citizen_id = Player.PlayerData.citizenid,
-        }, {
+        TriggerEvent("soz-core:server:monitor:add-event", "job_upw_energy_restock",
+                     {item_id = item, player_citizen_id = Player.PlayerData.citizenid, facility_job = facility.job}, {
             item_label = item.label,
             quantity = 1,
             resale_price = Config.Upw.Resale.EnergyCellPriceGlobal[item] or 0,
