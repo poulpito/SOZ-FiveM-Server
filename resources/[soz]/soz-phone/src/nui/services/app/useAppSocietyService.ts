@@ -38,7 +38,8 @@ export const useAppSocietyService = () => {
             config.dynamicAlert === true &&
             !message.muted &&
             available &&
-            !emergency
+            !emergency &&
+            !config.planeMode
         ) {
             fetchNui(SocietyEvents.SEND_CLIENT_POLICE_NOTIFICATION, {
                 ...message,
