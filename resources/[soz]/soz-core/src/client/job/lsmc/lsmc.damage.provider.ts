@@ -114,6 +114,7 @@ export class LSMCDamageProvider {
             weapon == WeaponName.SWITCHBLADE ||
             weapon == WeaponName.BATTLEAXE ||
             weapon == WeaponName.STONE_HATCHET ||
+            weapon == ExtraWeaponName.WEAPON_COUGAR ||
             weapon == WeaponName.HATCHET
         ) {
             damageType = 907;
