@@ -33,7 +33,6 @@ export class VoiceProvider {
     @Inject(NuiDispatch)
     private readonly nuiDispatch: NuiDispatch;
 
-    private isReady = false;
     private isConnecting = false;
 
     @Once(OnceStep.PlayerLoaded)
@@ -41,12 +40,12 @@ export class VoiceProvider {
         await this.reconnect();
 
         this.voiceListeningService.createAudioSubmixes();
-        this.isReady = true;
+        this.voipService.setReady(true);
     }
 
     @Tick(1000)
     public async checkConnection(): Promise<void> {
-        if (!this.isReady || this.isConnecting) {
+        if (!this.voipService.isReady() || this.isConnecting) {
             return;
         }
 
