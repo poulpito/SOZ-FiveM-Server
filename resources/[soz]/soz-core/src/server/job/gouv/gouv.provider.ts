@@ -80,7 +80,27 @@ export class GouvProvider {
 
         await this.configurationRepository.update('JobTaxTier', jobTaxTier);
 
-        this.notifier.notify(source, `Vous avez mis à jour le palier ~g~"${tier}"~s~ à ~g~${value}~s~`);
+        this.notifier.notify(source, `Vous avez mis à jour le palier ~g~"${tier}"~s~ à ~g~${value}~s~$`);
+    }
+
+    @OnEvent(ServerEvent.GOUV_UPDATE_JOB_TIER_TAX_PERCENTAGE)
+    public async updateJobTierTaxPercentage(source: number, tier: keyof JobTaxTier, value: number) {
+        const player = this.playerService.getPlayer(source);
+
+        if (!player) {
+            return;
+        }
+
+        if (!(await this.jobService.hasPermission(player, JobType.Gouv, JobPermission.GouvUpdateTax))) {
+            return;
+        }
+
+        const jobTaxTier = await this.configurationRepository.getValue('JobTaxTier');
+        jobTaxTier[tier] = value;
+
+        await this.configurationRepository.update('JobTaxTier', jobTaxTier);
+
+        this.notifier.notify(source, `Vous avez mis à jour le pourcentage à ~g~${value}~s~%`);
     }
 
     @OnEvent(ServerEvent.GOUV_UPDATE_TAX)

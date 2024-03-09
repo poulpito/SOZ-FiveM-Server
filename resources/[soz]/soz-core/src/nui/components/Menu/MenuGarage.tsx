@@ -249,7 +249,7 @@ export const VehicleList: FunctionComponent<VehicleListProps> = ({ data, setCurr
                                         <br />
                                         {garageVehicle.price > 0 && (
                                             <span>
-                                                Prix de sortie: ${garageVehicle.price}
+                                                Prix de sortie: ${getPrice(garageVehicle.price, TaxType.VEHICLE)}
                                                 <br />
                                             </span>
                                         )}

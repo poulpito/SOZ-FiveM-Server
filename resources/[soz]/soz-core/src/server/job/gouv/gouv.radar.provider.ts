@@ -8,6 +8,7 @@ import { InventoryManager } from '../../inventory/inventory.manager';
 import { JobService } from '../../job.service';
 import { Notifier } from '../../notifier';
 import { PlayerService } from '../../player/player.service';
+import { ProgressService } from '../../player/progress.service';
 import { RadarRepository } from '../../repository/radar.repository';
 
 @Provider()
@@ -26,6 +27,9 @@ export class GouvRadarProvider {
 
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
+
+    @Inject(ProgressService)
+    private progressService: ProgressService;
 
     @OnEvent(ServerEvent.GOUV_RADAR_ADD)
     public async addRadar(source: number, position: Vector4) {
@@ -47,7 +51,7 @@ export class GouvRadarProvider {
 
         await this.radarRepository.add(position);
 
-        this.notifier.notify(source, `Le radar a été ajouté avec succès.`);
+        this.notifier.notify(source, `Le radar a été ~b~placé~s~ avec succès.`);
     }
 
     @OnEvent(ServerEvent.GOUV_RADAR_SET_DISABLED)
@@ -64,7 +68,7 @@ export class GouvRadarProvider {
 
         await this.radarRepository.setEnabled(id, !disabled);
 
-        this.notifier.notify(source, `Le radar a été ${disabled ? 'désactivé' : 'activé'} avec succès.`);
+        this.notifier.notify(source, `Le radar a été ${disabled ? '~r~désactivé~s~' : '~g~activé~s~'} avec succès.`);
     }
 
     @OnEvent(ServerEvent.GOUV_RADAR_SET_SPEED)
@@ -81,7 +85,7 @@ export class GouvRadarProvider {
 
         await this.radarRepository.setSpeed(id, speed);
 
-        this.notifier.notify(source, `La vitesse du radar a été modifiée avec succès.`);
+        this.notifier.notify(source, `La vitesse a été définit à ~g~${speed}~s~ km/h avec succès.`);
     }
 
     @OnEvent(ServerEvent.GOUV_RADAR_REMOVE)
@@ -96,8 +100,25 @@ export class GouvRadarProvider {
             return;
         }
 
+        const { completed } = await this.progressService.progress(
+            source,
+            'remove_radar',
+            'Suppression du radar en cours...',
+            60000,
+            {
+                task: 'world_human_const_drill',
+            },
+            {
+                useAnimationService: true,
+            }
+        );
+
+        if (!completed) {
+            return;
+        }
+
         await this.radarRepository.remove(id);
 
-        this.notifier.notify(source, `Le radar a été supprimé avec succès.`);
+        this.notifier.notify(source, `Le radar a été ~r~détruit~s~ avec succès.`);
     }
 }

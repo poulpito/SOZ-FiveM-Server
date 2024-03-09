@@ -87,6 +87,36 @@ export class GouvProvider {
         TriggerServerEvent(ServerEvent.GOUV_UPDATE_JOB_TIER_TAX, tier, valueNumber);
     }
 
+    @OnNuiEvent(NuiEvent.GouvSetJobTaxTierPercentage)
+    public async setJobTaxTierPercentage({ tier }: { tier: keyof JobTaxTier }) {
+        const configuration = this.configurationRepository.getValue('JobTaxTier');
+
+        const value = await this.inputService.askInput(
+            {
+                title: 'Nouveau pourcentage des impôts',
+                maxCharacters: 20,
+                defaultValue: configuration[tier].toString(),
+            },
+            input => {
+                const inputNumber = Number(input);
+
+                if (isNaN(inputNumber) || inputNumber < 0 || inputNumber > 100) {
+                    return Err('Veuillez entrer un nombre positif et inférieur à 100');
+                }
+
+                return Ok(inputNumber);
+            }
+        );
+
+        if (!value) {
+            return;
+        }
+
+        const valueNumber = Number(value);
+
+        TriggerServerEvent(ServerEvent.GOUV_UPDATE_JOB_TIER_TAX_PERCENTAGE, tier, valueNumber);
+    }
+
     @OnNuiEvent(NuiEvent.GouvSetTax)
     public async setTax({ type }: { type: TaxType }) {
         const value = await this.inputService.askInput(

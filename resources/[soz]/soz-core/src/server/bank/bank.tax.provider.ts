@@ -46,15 +46,15 @@ export class BankTaxProvider {
             const jobTaxTier = await this.configurationRepository.getValue('JobTaxTier');
 
             if (societyMoney <= jobTaxTier.Tier1) {
-                percentage = 0;
+                percentage = jobTaxTier.Tier1Percentage / 100;
             } else if (societyMoney <= jobTaxTier.Tier2) {
-                percentage = 0.04;
+                percentage = jobTaxTier.Tier2Percentage / 100;
             } else if (societyMoney <= jobTaxTier.Tier3) {
-                percentage = 0.08;
+                percentage = jobTaxTier.Tier3Percentage / 100;
             } else if (societyMoney <= jobTaxTier.Tier4) {
-                percentage = 0.12;
+                percentage = jobTaxTier.Tier4Percentage / 100;
             } else {
-                percentage = 0.16;
+                percentage = jobTaxTier.Tier5Percentage / 100;
             }
 
             for (const acc of account) {

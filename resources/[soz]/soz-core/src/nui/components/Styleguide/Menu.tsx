@@ -176,7 +176,7 @@ export const MenuContent: FunctionComponent<PropsWithChildren> = ({ children }) 
                         {children}
                     </ul>
                     {description && (
-                        <div className="mt-2 p-2 bg-black/50 rounded-b-lg max-h-[10vh] text-white">{description}</div>
+                        <div className="mt-2 p-2 bg-black/50 rounded-b-lg max-h-[15vh] text-white">{description}</div>
                     )}
                 </MenuControls>
             </MenuContext.Provider>
@@ -268,7 +268,7 @@ type MenuItemProps = PropsWithChildren<{
     onSelected?: () => void;
     disabled?: boolean;
     selectable?: boolean;
-    description?: string | ReactNode;
+    description?: ReactNode;
     className?: string;
 }>;
 
@@ -361,7 +361,7 @@ type MenuItemButtonProps = PropsWithChildren<{
     disabled?: boolean;
     selectable?: boolean;
     className?: string;
-    description?: string;
+    description?: ReactNode;
 }>;
 
 export const MenuItemButton: FunctionComponent<MenuItemButtonProps> = ({

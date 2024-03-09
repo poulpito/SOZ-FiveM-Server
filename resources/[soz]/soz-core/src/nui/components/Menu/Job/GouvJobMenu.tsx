@@ -30,6 +30,26 @@ type MandatoryStateProps = {
     };
 };
 
+export const TAX_DESCRIPTION_ITEMS: Record<TaxType, string[]> = {
+    [TaxType.HOUSING]: ["Achat d'une habitation.", "Amélioration d'une habitation.", 'Achat de meubles.'],
+    [TaxType.VEHICLE]: [
+        'Achat de véhicule aux concessionnaire classiques, luxe, bateau, hélicoptère, moto et entreprise.',
+        'Amélioration des véhicules au LS Custom.',
+        'Utilisation du lavomatique.',
+        'Passage des permis de conduire.',
+    ],
+    [TaxType.GREEN]: ['Achat de véhicule au concessionnaire électrique.'],
+    [TaxType.FOOD]: ['Achat dans les superettes.'],
+    [TaxType.WEAPON]: ["Achat à l'armurerie,", "Modification d'arme à l'armurerie."],
+    [TaxType.SUPPLY]: ['Achat de vêtements.', 'Achat au tatoueur.', 'Achat au coiffeur.'],
+    [TaxType.TRAVEL]: ["Achat d'un déplacement de véhicule entre Cayo Perico et San Andreas."],
+    [TaxType.SERVICE]: [
+        "Achat auprès du médecin d'urgence.",
+        "Achat auprès du réparateur d'urgence.",
+        "Achat d'un abonnement sportif à Muscle Peach.",
+    ],
+};
+
 export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) => {
     const banner = 'https://nui-img/soz/menu_job_gouv';
     const taxData = useRepository(RepositoryType.Tax);
@@ -81,8 +101,20 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
                                         type: tax.id,
                                     });
                                 }}
+                                description={
+                                    <div>
+                                        <h5 className="underline  decoration-solid">
+                                            Cette taxe regroupe les services suivant :{' '}
+                                        </h5>
+                                        <ul className="pl-7 list-disc">
+                                            {TAX_DESCRIPTION_ITEMS[tax.id].map((description, index) => (
+                                                <li key={index}>{description}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                }
                             >
-                                {TaxLabel[tax.id]}: {tax.value}%
+                                <span className="font-bold">{TaxLabel[tax.id]}</span>: {tax.value}%
                             </MenuItemButton>
                         );
                     })}
@@ -91,51 +123,118 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
             <SubMenu id="tier">
                 <MenuTitle banner={banner}>Seuil des Impôts</MenuTitle>
                 <MenuContent>
-                    <MenuItemButton
-                        onConfirm={() => {
-                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                tier: 'Tier1',
-                            });
+                    <MenuItemSelect
+                        onConfirm={(_, value) => {
+                            if (value === 'amount') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                    tier: 'Tier1',
+                                });
+                            }
+
+                            if (value === 'percentage') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTierPercentage, {
+                                    tier: 'Tier1Percentage',
+                                });
+                            }
                         }}
+                        description={`En dessous de ${Intl.NumberFormat('fr-FR').format(tier.Tier1)}$, ${
+                            tier.Tier1Percentage
+                        }%`}
+                        title="Tier 1"
                     >
-                        Tier 1 : {tier.Tier1}
-                    </MenuItemButton>
-                    <MenuItemButton
-                        onConfirm={() => {
-                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                tier: 'Tier2',
-                            });
+                        <MenuItemSelectOption value="amount">Modifier montant</MenuItemSelectOption>
+                        <MenuItemSelectOption value="percentage">Modifier pourcentage</MenuItemSelectOption>
+                    </MenuItemSelect>
+                    <MenuItemSelect
+                        onConfirm={(_, value) => {
+                            if (value === 'amount') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                    tier: 'Tier2',
+                                });
+                            }
+
+                            if (value === 'percentage') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTierPercentage, {
+                                    tier: 'Tier2Percentage',
+                                });
+                            }
                         }}
+                        description={`Entre ${Intl.NumberFormat('fr-FR').format(
+                            tier.Tier1 + 1
+                        )}$ et ${Intl.NumberFormat('fr-FR').format(tier.Tier2)}$, ${tier.Tier2Percentage}%`}
+                        title="Tier 2"
                     >
-                        Tier 2 : {tier.Tier2}
-                    </MenuItemButton>
-                    <MenuItemButton
-                        onConfirm={() => {
-                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                tier: 'Tier3',
-                            });
+                        <MenuItemSelectOption value="amount">Modifier montant</MenuItemSelectOption>
+                        <MenuItemSelectOption value="percentage">Modifier pourcentage</MenuItemSelectOption>
+                    </MenuItemSelect>
+                    <MenuItemSelect
+                        onConfirm={(_, value) => {
+                            if (value === 'amount') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                    tier: 'Tier3',
+                                });
+                            }
+
+                            if (value === 'percentage') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTierPercentage, {
+                                    tier: 'Tier3Percentage',
+                                });
+                            }
                         }}
+                        description={`Entre ${Intl.NumberFormat('fr-FR').format(
+                            tier.Tier2 + 1
+                        )}$ et ${Intl.NumberFormat('fr-FR').format(tier.Tier3)}$, ${tier.Tier3Percentage}%`}
+                        title="Tier 3"
                     >
-                        Tier 3 : {tier.Tier3}
-                    </MenuItemButton>
-                    <MenuItemButton
-                        onConfirm={() => {
-                            fetchNui(NuiEvent.GouvSetJobTaxTier, {
-                                tier: 'Tier4',
-                            });
+                        <MenuItemSelectOption value="amount">Modifier montant</MenuItemSelectOption>
+                        <MenuItemSelectOption value="percentage">Modifier pourcentage</MenuItemSelectOption>
+                    </MenuItemSelect>
+                    <MenuItemSelect
+                        onConfirm={(_, value) => {
+                            if (value === 'amount') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTier, {
+                                    tier: 'Tier4',
+                                });
+                            }
+
+                            if (value === 'percentage') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTierPercentage, {
+                                    tier: 'Tier4Percentage',
+                                });
+                            }
                         }}
+                        description={`Entre ${Intl.NumberFormat('fr-FR').format(
+                            tier.Tier3 + 1
+                        )}$ et ${Intl.NumberFormat('fr-FR').format(tier.Tier4)}$, ${tier.Tier4Percentage}%`}
+                        title="Tier 4"
                     >
-                        Tier 4 : {tier.Tier4}
-                    </MenuItemButton>
+                        <MenuItemSelectOption value="amount">Modifier montant</MenuItemSelectOption>
+                        <MenuItemSelectOption value="percentage">Modifier pourcentage</MenuItemSelectOption>
+                    </MenuItemSelect>
+                    <MenuItemSelect
+                        onConfirm={(_, value) => {
+                            if (value === 'percentage') {
+                                fetchNui(NuiEvent.GouvSetJobTaxTierPercentage, {
+                                    tier: 'Tier5Percentage',
+                                });
+                            }
+                        }}
+                        description={`Au dessus de ${Intl.NumberFormat('fr-FR').format(tier.Tier4)}$, ${
+                            tier.Tier5Percentage
+                        }%`}
+                        title="Tier 5"
+                    >
+                        <MenuItemSelectOption value="percentage">Modifier pourcentage</MenuItemSelectOption>
+                    </MenuItemSelect>
                 </MenuContent>
             </SubMenu>
             <SubMenu id="fine">
                 <MenuTitle banner={banner}>Amendes</MenuTitle>
                 <MenuContent>
-                    <MenuItemSubMenuLink id="fine_1">Catégorie 1</MenuItemSubMenuLink>
-                    <MenuItemSubMenuLink id="fine_2">Catégorie 2</MenuItemSubMenuLink>
-                    <MenuItemSubMenuLink id="fine_3">Catégorie 3</MenuItemSubMenuLink>
-                    <MenuItemSubMenuLink id="fine_4">Catégorie 4</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_1">🟢 Catégorie 1</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_2">🟡 Catégorie 2</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_3">🟠 Catégorie 3</MenuItemSubMenuLink>
+                    <MenuItemSubMenuLink id="fine_4">🔴 Catégorie 4</MenuItemSubMenuLink>
                 </MenuContent>
             </SubMenu>
             <FineSubMenu category={1} />

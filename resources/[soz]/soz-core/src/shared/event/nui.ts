@@ -330,6 +330,7 @@ export enum NuiEvent {
     GouvAnnoncement = 'soz-core:client:gouv:annoncement',
     GouvSetTax = 'soz-core:nui:gouv:set-tax',
     GouvSetJobTaxTier = 'soz-core:nui:gouv:set-job-tax-tier',
+    GouvSetJobTaxTierPercentage = 'soz-core:nui:gouv:set-job-tax-tier-percentage',
     GouvFineAdd = 'soz-core:nui:gouv:fine-add',
     GouvFineRemove = 'soz-core:nui:gouv:fine-remove',
     GouvFineSetLabel = 'soz-core:nui:gouv:fine-set-label',

@@ -490,7 +490,7 @@ export const BossShop: (ShopConfig & { job: JobType })[] = [
             debugPoly: false,
         },
         targets: [],
-        products: [{ id: 'radar', type: 'item', price: 10_000 }],
+        products: [{ id: 'radar', type: 'item', price: 25_000 }],
     },
     {
         name: 'fdf',

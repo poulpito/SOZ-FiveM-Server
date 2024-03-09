@@ -24,14 +24,14 @@ export enum TaxType {
 }
 
 export const TaxLabel: Record<TaxType, string> = {
-    [TaxType.HOUSING]: "Taxe d'habitation",
-    [TaxType.VEHICLE]: 'Taxe véhicule',
-    [TaxType.GREEN]: 'Taxe verte',
-    [TaxType.FOOD]: 'Taxe alimentaire',
-    [TaxType.WEAPON]: 'Taxe armement',
-    [TaxType.SUPPLY]: 'Taxe fourniture',
-    [TaxType.TRAVEL]: 'Taxe voyage',
-    [TaxType.SERVICE]: 'Taxe service urgence',
+    [TaxType.HOUSING]: "🏠 Taxe d'habitation",
+    [TaxType.VEHICLE]: '🚙 Taxe véhicule',
+    [TaxType.GREEN]: '🍃 Taxe verte',
+    [TaxType.FOOD]: '🍔 Taxe alimentaire',
+    [TaxType.WEAPON]: '🔫 Taxe armement',
+    [TaxType.SUPPLY]: '👚 Taxe fourniture',
+    [TaxType.TRAVEL]: '🛫 Taxe voyage',
+    [TaxType.SERVICE]: '🏥 Taxe service',
 };
 
 export type Tax = {
