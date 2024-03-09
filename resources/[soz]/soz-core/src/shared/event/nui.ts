@@ -253,7 +253,6 @@ export enum NuiEvent {
     HousingCloakroomRename = 'soz-core:nui:housing:cloakroom:rename',
     HousingCloakroomDelete = 'soz-core:nui:housing:cloakroom:delete',
 
-    ToggleRadarMendatory = 'soz-core:client:mendatory:radar:toggle',
     RedCallMendatory = 'soz-core:client:mendatory:red-call',
     ToggleRadar = 'soz-core:client:police:radar:toggle',
     RedCall = 'soz-core:client:police:red-call',

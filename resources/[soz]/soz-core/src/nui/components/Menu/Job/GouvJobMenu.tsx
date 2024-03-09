@@ -13,6 +13,7 @@ import {
     Menu,
     MenuContent,
     MenuItemButton,
+    MenuItemCheckbox,
     MenuItemSelect,
     MenuItemSelectOption,
     MenuItemSubMenuLink,
@@ -21,12 +22,10 @@ import {
     SubMenu,
 } from '../../Styleguide/Menu';
 
-type MandatoryStateProps = {
+type GouvJobMenuProps = {
     data: {
         onDuty: boolean;
-        state: {
-            radar: boolean;
-        };
+        displayRadar: boolean;
     };
 };
 
@@ -50,7 +49,7 @@ export const TAX_DESCRIPTION_ITEMS: Record<TaxType, string[]> = {
     ],
 };
 
-export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) => {
+export const GouvJobMenu: FunctionComponent<GouvJobMenuProps> = ({ data }) => {
     const banner = 'https://nui-img/soz/menu_job_gouv';
     const taxData = useRepository(RepositoryType.Tax);
     const taxAllowed = useHasJobPermission(JobType.Gouv, JobPermission.GouvUpdateTax);
@@ -85,6 +84,14 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
                     {taxAllowed && <MenuItemSubMenuLink id="tax">Taxes</MenuItemSubMenuLink>}
                     {taxAllowed && <MenuItemSubMenuLink id="tier">Seuils d'impôts</MenuItemSubMenuLink>}
                     {fineAllowed && <MenuItemSubMenuLink id="fine">Amendes</MenuItemSubMenuLink>}
+                    <MenuItemCheckbox
+                        checked={data.displayRadar}
+                        onChange={async value => {
+                            await fetchNui(NuiEvent.ToggleRadar, value);
+                        }}
+                    >
+                        Afficher les radars sur le GPS
+                    </MenuItemCheckbox>
                 </MenuContent>
             </MainMenu>
             <SubMenu id="tax">

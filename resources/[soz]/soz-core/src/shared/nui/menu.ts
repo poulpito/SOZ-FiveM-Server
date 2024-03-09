@@ -141,7 +141,7 @@ export interface MenuTypeMap extends Record<MenuType, any> {
     [MenuType.Wardrobe]: WardrobeMenuData;
     [MenuType.GunSmith]: WeaponsMenuData;
     [MenuType.LsmcPharmacy]: any;
-    [MenuType.MandatoryJobMenu]: any;
+    [MenuType.MandatoryJobMenu]: { onDuty: boolean; displayRadar: boolean };
     [MenuType.IllegalShop]: Map<string, ShopProduct[]>;
     [MenuType.EasterShop]: ShopProduct[];
     [MenuType.TaxiJobMenu]: any;
@@ -154,7 +154,7 @@ export interface MenuTypeMap extends Record<MenuType, any> {
     [MenuType.RentBoat]: any;
     [MenuType.RaceAdmin]: Race[];
     [MenuType.RaceRank]: { id: number; name: string };
-    [MenuType.GouvJobMenu]: { onDuty: boolean };
+    [MenuType.GouvJobMenu]: { onDuty: boolean; displayRadar: boolean };
     [MenuType.PropPlacementMenu]: PropPlacementMenuData;
     [MenuType.FDFJobMenu]: any;
     [MenuType.JobNews]: { job: JobType };

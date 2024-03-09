@@ -1,11 +1,11 @@
-import { Once, OnceStep, OnEvent } from '@core/decorators/event';
+import { Once, OnceStep, OnEvent, OnNuiEvent } from '@core/decorators/event';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { RepositoryDelete, RepositoryInsert, RepositoryUpdate } from '@core/decorators/repository';
 import { RepositoryType } from '@public/shared/repository';
 import { createRadarZone, Radar, RADAR_ID_PREFIX } from '@public/shared/vehicle/radar';
 
-import { ClientEvent } from '../../shared/event';
+import { ClientEvent, NuiEvent } from '../../shared/event';
 import { VehicleSeat } from '../../shared/vehicle/vehicle';
 import { BlipFactory } from '../blip';
 import { ObjectProvider } from '../object/object.provider';
@@ -32,6 +32,8 @@ export class VehicleRadarProvider {
     @Inject(RaceProvider)
     private raceProvider: RaceProvider;
 
+    public displayRadar = false;
+
     private globalDisableTime = 0;
     private ready = false;
 
@@ -55,6 +57,10 @@ export class VehicleRadarProvider {
         this.disabledRadarTime.delete(radar.id);
 
         DeleteResourceKvp('radar/disableEndTime/' + radar.id);
+
+        if (this.blipFactory.exist('police_radar_' + radar.id)) {
+            this.blipFactory.remove('police_radar_' + radar.id);
+        }
     }
 
     @RepositoryUpdate(RepositoryType.Radar)
@@ -66,6 +72,17 @@ export class VehicleRadarProvider {
     @RepositoryInsert(RepositoryType.Radar)
     private async createRadar(radar: Radar): Promise<void> {
         const objectId = RADAR_ID_PREFIX + radar.id;
+
+        if (!this.blipFactory.exist('police_radar_' + radar.id)) {
+            this.blipFactory.create('police_radar_' + radar.id, {
+                name: 'Radar',
+                position: radar.position,
+                sprite: 184,
+                scale: 0.5,
+            });
+
+            this.blipFactory.hide('police_radar_' + radar.id, !this.displayRadar);
+        }
 
         await this.objectProvider.createObject({
             model: radar_props,
@@ -171,5 +188,12 @@ export class VehicleRadarProvider {
         this.disabledRadarTime.set(Number(radarId), disableEndTime);
 
         SetResourceKvpInt('radar/disableEndTime/' + radarId, disableEndTime);
+    }
+
+    @OnNuiEvent(NuiEvent.ToggleRadar)
+    public async toggleRadar(value: boolean) {
+        this.displayRadar = value;
+
+        await this.toggleBlip(value);
     }
 }

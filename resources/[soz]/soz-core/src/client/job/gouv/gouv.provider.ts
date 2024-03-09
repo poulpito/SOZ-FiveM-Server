@@ -13,6 +13,7 @@ import { BlipFactory } from '../../blip';
 import { NuiMenu } from '../../nui/nui.menu';
 import { PlayerService } from '../../player/player.service';
 import { ConfigurationRepository } from '../../repository/configuration.repository';
+import { VehicleRadarProvider } from '../../vehicle/vehicle.radar.provider';
 
 @Provider()
 export class GouvProvider {
@@ -31,6 +32,9 @@ export class GouvProvider {
     @Inject(ConfigurationRepository)
     private configurationRepository: ConfigurationRepository;
 
+    @Inject(VehicleRadarProvider)
+    private vehicleRadarProvider: VehicleRadarProvider;
+
     @Once(OnceStep.PlayerLoaded)
     public setupMdrJob() {
         this.createBlips();
@@ -44,6 +48,7 @@ export class GouvProvider {
         }
 
         this.nuiMenu.openMenu(MenuType.GouvJobMenu, {
+            displayRadar: this.vehicleRadarProvider.displayRadar,
             onDuty: this.playerService.isOnDuty(),
         });
     }

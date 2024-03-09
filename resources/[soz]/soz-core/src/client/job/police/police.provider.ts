@@ -6,11 +6,11 @@ import { NuiMenu } from '@public/client/nui/nui.menu';
 import { PlayerService } from '@public/client/player/player.service';
 import { ResourceLoader } from '@public/client/repository/resource.loader';
 import { VehicleRadarProvider } from '@public/client/vehicle/vehicle.radar.provider';
-import { Once, OnceStep, OnEvent, OnNuiEvent } from '@public/core/decorators/event';
+import { Once, OnceStep, OnEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
 import { wait } from '@public/core/utils';
-import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
+import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { FDO } from '@public/shared/job';
 import { MenuType } from '@public/shared/nui/menu';
 import { BoxZone } from '@public/shared/polyzone/box.zone';
@@ -60,7 +60,6 @@ export class PoliceProvider {
     private pedFactory: PedFactory;
 
     private radarEnabled = false;
-    private displayRadar = false;
 
     private inTakeDown = false;
 
@@ -360,14 +359,7 @@ export class PoliceProvider {
         this.nuiMenu.openMenu(MenuType.PoliceJobMenu, {
             onDuty: this.playerService.isOnDuty(),
             job: this.playerService.getPlayer().job.id,
-            displayRadar: this.displayRadar,
+            displayRadar: this.vehicleRadarProvider.displayRadar,
         });
-    }
-
-    @OnNuiEvent(NuiEvent.ToggleRadar)
-    public toogleRadar(value: boolean): Promise<void> {
-        this.displayRadar = value;
-        this.vehicleRadarProvider.toggleBlip(value);
-        return;
     }
 }
