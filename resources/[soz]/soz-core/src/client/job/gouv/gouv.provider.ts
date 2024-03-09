@@ -141,7 +141,7 @@ export class GouvProvider {
             }
         );
 
-        if (!value) {
+        if (value === null) {
             return;
         }
 
