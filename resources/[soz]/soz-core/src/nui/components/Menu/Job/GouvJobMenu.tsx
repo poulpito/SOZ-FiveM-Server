@@ -141,7 +141,7 @@ export const GouvJobMenu: FunctionComponent<MandatoryStateProps> = ({ data }) =>
             <FineSubMenu category={1} />
             <FineSubMenu category={2} />
             <FineSubMenu category={3} />
-            <FineSubMenu category={3} />
+            <FineSubMenu category={4} />
         </Menu>
     );
 };
