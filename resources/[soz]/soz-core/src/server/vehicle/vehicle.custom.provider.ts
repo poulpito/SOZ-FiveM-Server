@@ -48,6 +48,7 @@ export class VehicleCustomProvider {
     ) {
         // @TODO Price client side
         const state = this.vehicleStateService.getVehicleState(vehicleNetworkId);
+        const taxedPrice = await this.priceService.getPrice(price ?? 0, TaxType.VEHICLE);
 
         const playerVehicle = state.volatile.id
             ? await this.prismaService.playerVehicle.findUnique({
@@ -57,13 +58,13 @@ export class VehicleCustomProvider {
               })
             : null;
 
-        if (price && this.playerMoneyService.get(source) < price) {
+        if (taxedPrice && this.playerMoneyService.get(source) < taxedPrice) {
             this.notifier.notify(source, "Vous n'avez pas assez d'argent", 'error');
 
             return originalConfiguration;
         }
 
-        if (price) {
+        if (taxedPrice) {
             // LS Custom upgrade parts
             const upgradedParts = this.getLSCustomUpgradedPart(originalConfiguration, mods);
 
@@ -98,13 +99,8 @@ export class VehicleCustomProvider {
             });
         }
 
-        if (price) {
-            this.notifier.notify(
-                source,
-                `Vous avez payé $${(await this.priceService.getPrice(price, TaxType.VEHICLE)).toFixed(
-                    0
-                )} pour modifier votre véhicule.`
-            );
+        if (taxedPrice) {
+            this.notifier.notify(source, `Vous avez payé $${taxedPrice.toFixed(0)} pour modifier votre véhicule.`);
         } else if (notify) {
             this.notifier.notify(source, 'Le véhicule a été modifié');
         }
