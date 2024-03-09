@@ -45,6 +45,9 @@ export class ConfigurationRepository extends Repository<
             return DEFAULT_CONFIGURATION[name];
         }
 
-        return value;
+        return {
+            ...DEFAULT_CONFIGURATION[name],
+            ...value,
+        };
     }
 }

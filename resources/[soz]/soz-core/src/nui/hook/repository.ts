@@ -28,5 +28,8 @@ export const useConfigurationValue = <T extends keyof Configuration>(name: T): C
         return DEFAULT_CONFIGURATION[name];
     }
 
-    return value;
+    return {
+        ...DEFAULT_CONFIGURATION[name],
+        ...value,
+    };
 };
