@@ -44,7 +44,7 @@ export class FineRepository extends Repository<RepositoryType.Fine> {
             category: fine.category,
             id: fine.id,
             label: fine.label,
-            price: { max: fine.price_min, min: fine.price_max },
+            price: { min: fine.price_min, max: fine.price_max },
         };
     }
 
