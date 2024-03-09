@@ -176,7 +176,7 @@ export const MenuContent: FunctionComponent<PropsWithChildren> = ({ children }) 
                         {children}
                     </ul>
                     {description && (
-                        <div className="mt-2 p-2 bg-black/50 rounded-b-lg max-h-[15vh] text-white">{description}</div>
+                        <div className="mt-2 p-2 bg-black/50 rounded-b-lg max-h-[20vh] text-white">{description}</div>
                     )}
                 </MenuControls>
             </MenuContext.Provider>

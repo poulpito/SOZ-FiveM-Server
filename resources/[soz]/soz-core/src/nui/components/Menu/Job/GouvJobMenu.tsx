@@ -32,15 +32,15 @@ type GouvJobMenuProps = {
 export const TAX_DESCRIPTION_ITEMS: Record<TaxType, string[]> = {
     [TaxType.HOUSING]: ["Achat d'une habitation.", "Amélioration d'une habitation.", 'Achat de meubles.'],
     [TaxType.VEHICLE]: [
-        'Achat de véhicule aux concessionnaire classiques, luxe, bateau, hélicoptère, moto et entreprise.',
+        'Achat de véhicule aux concessionnaires classique, luxe, bateau, hélicoptère, moto et entreprise.',
         'Amélioration des véhicules au LS Custom.',
         'Utilisation du lavomatique.',
         'Passage des permis de conduire.',
     ],
     [TaxType.GREEN]: ['Achat de véhicule au concessionnaire électrique.'],
     [TaxType.FOOD]: ['Achat dans les superettes.'],
-    [TaxType.WEAPON]: ["Achat à l'armurerie,", "Modification d'arme à l'armurerie."],
-    [TaxType.SUPPLY]: ['Achat de vêtements.', 'Achat au tatoueur.', 'Achat au coiffeur.'],
+    [TaxType.WEAPON]: ["Achat à l'armurerie.", "Modification d'arme à l'armurerie."],
+    [TaxType.SUPPLY]: ['Achat de vêtements.', 'Achat chez le tatoueur.', 'Achat chez le coiffeur.'],
     [TaxType.TRAVEL]: ["Achat d'un déplacement de véhicule entre Cayo Perico et San Andreas."],
     [TaxType.SERVICE]: [
         "Achat auprès du médecin d'urgence.",
@@ -109,7 +109,7 @@ export const GouvJobMenu: FunctionComponent<GouvJobMenuProps> = ({ data }) => {
                                     });
                                 }}
                                 description={
-                                    <div>
+                                    <div className="text-sm">
                                         <h5 className="underline  decoration-solid">
                                             Cette taxe regroupe les services suivant :{' '}
                                         </h5>
