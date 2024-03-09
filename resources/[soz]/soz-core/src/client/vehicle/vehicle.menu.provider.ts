@@ -125,7 +125,7 @@ export class VehicleMenuProvider {
         }
         // -2 is for custom speed
         else if (speedLimit === -2) {
-            const speedLimit = await this.inputService.askInput(
+            speedLimit = await this.inputService.askInput(
                 {
                     title: 'Limiter la vitesse à :',
                     maxCharacters: 4,
