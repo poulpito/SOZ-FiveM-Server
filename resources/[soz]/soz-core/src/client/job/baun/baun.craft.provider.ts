@@ -1,10 +1,12 @@
 import { CraftService } from '@public/client/craft/craft.service';
 import { InventoryManager } from '@public/client/inventory/inventory.manager';
+import { ItemService } from '@public/client/item/item.service';
+import { Notifier } from '@public/client/notifier';
 import { InputService } from '@public/client/nui/input.service';
 import { ProgressService } from '@public/client/progress.service';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
-import { Err, Ok } from '@public/shared/result';
+import { PositiveNumberValidator } from '@public/shared/nui/input';
 
 import { Once, OnceStep, OnEvent } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
@@ -25,6 +27,12 @@ export class BaunCraftProvider {
     @Inject(ProgressService)
     private progressService: ProgressService;
 
+    @Inject(ItemService)
+    private itemService: ItemService;
+
+    @Inject(Notifier)
+    private notifier: Notifier;
+
     @Once(OnceStep.PlayerLoaded)
     public setupBaunCraftZone() {
         this.craftService.createBtargetZoneCraft(baunCraftZones, 'c:/baun/craft.png', 'Confectionner', JobType.Baun);
@@ -34,27 +42,22 @@ export class BaunCraftProvider {
     public async onIceCube() {
         const max = this.inventoryManager.getItemCount('water_bottle', true);
 
-        const valStr = await this.inputService.askInput(
+        const val = await this.inputService.askInput(
             {
                 title: 'Quantité de bouteilles à transformer',
                 defaultValue: max.toString(),
                 maxCharacters: 5,
             },
-            value => {
-                if (!value) {
-                    return Ok(true);
-                }
-                if (isNaN(Number(value)) || Math.round(Number(value)) != Number(value)) {
-                    return Err('La quantité doit être un nombre entier.');
-                }
-                if (Number(value) < 1 || Number(value) > max) {
-                    return Err(`La quantité doit être comprise entre 1 et ${max}.`);
-                }
-                return Ok(true);
-            }
+            PositiveNumberValidator
         );
 
-        if (!valStr) {
+        if (!val) {
+            return;
+        }
+
+        if (val > max) {
+            const secItem = this.itemService.getItem('water_bottle');
+            this.notifier.notify(`Vous n'avez pas assez de ${secItem.label}.`, 'error');
             return;
         }
 
@@ -78,6 +81,6 @@ export class BaunCraftProvider {
             return;
         }
 
-        TriggerServerEvent(ServerEvent.BAUN_ICE_CUBE, Number(valStr));
+        TriggerServerEvent(ServerEvent.BAUN_ICE_CUBE, val);
     }
 }
