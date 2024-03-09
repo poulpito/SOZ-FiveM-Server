@@ -50,7 +50,11 @@ export class SuperetteShopProvider {
                 superetteContent.push(sharedItem);
             }
 
-            this.inventoryManager.openShopInventory(superetteContent, 'menu_shop_supermarket', TaxType.FOOD);
+            this.inventoryManager.openShopInventory(
+                superetteContent,
+                'menu_shop_supermarket',
+                brand === ShopBrand.Supermarket247Cayo ? null : TaxType.FOOD
+            );
         } else {
             // Zkea and Ammunation are handled by soz-core here
             const licences = this.playerService.getPlayer().metadata.licences;
