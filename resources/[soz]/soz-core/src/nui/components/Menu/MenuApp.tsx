@@ -58,6 +58,7 @@ import { MenuUpw } from './Job/MenuUpw';
 import { MenuAlbum } from './MenuAlbum';
 import { MenuBennysUpgradeVehicle } from './MenuBennysUpgradeVehicle';
 import { MenuDemo } from './MenuDemo';
+import { MenuEditorObject } from './MenuEditorObject';
 import { MenuGarage } from './MenuGarage';
 import { MenuOilSetPrice } from './MenuOilSetPrice';
 import { UpwOrderMenu } from './MenuOrderUpw';
@@ -259,6 +260,7 @@ const MenuRouter: FunctionComponent = () => {
             <Route path={`/${MenuType.HousingSellMenu}/*`} element={<HousingSellMenu data={menuData} />} />
             <Route path={`/${MenuType.HousingVisitMenu}/*`} element={<HousingVisitMenu data={menuData} />} />
             <Route path={`/${MenuType.LsmcPlaster}/*`} element={<LsmcPlasterMenu data={menuData} />} />
+            <Route path={`/${MenuType.ObjectEditor}/*`} element={<MenuEditorObject data={menuData} />} />
         </Routes>
     );
 };

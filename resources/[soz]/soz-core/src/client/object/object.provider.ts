@@ -3,40 +3,26 @@ import { Exportable } from '@core/decorators/exports';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { emitRpc } from '@core/rpc';
-import { ResourceLoader } from '@public/client/repository/resource.loader';
+import { ObjectService } from '@public/client/object/object.service';
 import { Command } from '@public/core/decorators/command';
 import { Tick } from '@public/core/decorators/tick';
 import { wait } from '@public/core/utils';
-import { Feature, isFeatureEnabled } from '@public/shared/features';
 import { getChunkId, getGridChunks } from '@public/shared/grid';
-import { joaat } from '@public/shared/joaat';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { WorldObject } from '../../shared/object';
-import { Notifier } from '../notifier';
 
 type SpawnedObject = {
     entity: number;
     object: WorldObject;
 };
 
-const OBJECT_MODELS_NO_FREEZE = [joaat('prop_cardbordbox_03a')];
-
-const HalloweenMapping: Record<number, number> = {
-    [GetHashKey('soz_prop_bb_bin')]: GetHashKey('soz_hw_bin_1'),
-    [GetHashKey('soz_prop_bb_bin_hs2')]: GetHashKey('soz_hw_bin_2'),
-    [GetHashKey('soz_prop_bb_bin_hs3')]: GetHashKey('soz_hw_bin_3'),
-};
-
 @Provider()
 export class ObjectProvider {
-    @Inject(ResourceLoader)
-    private resourceLoader: ResourceLoader;
-
-    @Inject(Notifier)
-    private notifier: Notifier;
+    @Inject(ObjectService)
+    private objectService: ObjectService;
 
     private loadedObjects: Record<string, SpawnedObject> = {};
 
@@ -206,77 +192,11 @@ export class ObjectProvider {
             return;
         }
 
-        let model = object.model;
-        if (isFeatureEnabled(Feature.Halloween)) {
-            model = HalloweenMapping[model] || model;
-        }
+        const entity = await this.objectService.createObject(object);
 
-        if (IsModelValid(model)) {
-            if (!(await this.resourceLoader.loadModel(object.model))) {
-                return;
-            }
-        } else {
-            console.log(`Model ${model} is not valid for ${object.id}`);
+        if (!entity) {
             return;
         }
-
-        let entity = CreateObjectNoOffset(
-            model,
-            object.position[0],
-            object.position[1],
-            object.position[2],
-            false,
-            false,
-            false
-        );
-
-        if (!DoesEntityExist(entity)) {
-            console.log('Failed to create prop, retrying', object.id);
-            await wait(10);
-            entity = CreateObjectNoOffset(
-                model,
-                object.position[0],
-                object.position[1],
-                object.position[2],
-                false,
-                false,
-                false
-            );
-
-            if (!DoesEntityExist(entity)) {
-                console.log('Failed to create prop even after retry', object.id);
-                this.resourceLoader.unloadModel(model);
-
-                return;
-            }
-        }
-
-        this.resourceLoader.unloadModel(model);
-
-        SetEntityHeading(entity, object.position[3]);
-
-        if (!OBJECT_MODELS_NO_FREEZE.includes(model)) {
-            FreezeEntityPosition(entity, true);
-        }
-
-        if (object.placeOnGround) {
-            PlaceObjectOnGroundProperly_2(entity);
-        }
-
-        if (object.matrix) {
-            this.applyEntityMatrix(entity, object.matrix);
-        }
-
-        if (object.rotation) {
-            SetEntityRotation(entity, object.rotation[0], object.rotation[1], object.rotation[2], 0, false);
-        }
-
-        if (object.invisible) {
-            SetEntityVisible(entity, false, false);
-        }
-
-        SetEntityCollision(entity, !object.noCollision, false);
-        SetEntityInvincible(entity, true);
 
         this.loadedObjects[object.id] = {
             entity,
@@ -289,26 +209,15 @@ export class ObjectProvider {
     private unspawnObject(id: string): void {
         const object = this.loadedObjects[id];
 
-        if (object) {
-            if (DoesEntityExist(object.entity)) {
-                let model = object.object.model;
-                if (isFeatureEnabled(Feature.Halloween)) {
-                    model = HalloweenMapping[model] || model;
-                }
-
-                if (GetEntityModel(object.entity) == model) {
-                    DeleteEntity(object.entity);
-                } else {
-                    this.notifier.error(
-                        `Attemp to delete an entity of wrong model ${GetEntityModel(object.entity)} expected ${model}`
-                    );
-                }
-            } else {
-                this.notifier.error('Attemp to delete an non existing entity');
-            }
-
-            delete this.loadedObjects[id];
+        if (!object) {
+            return;
         }
+
+        if (!this.objectService.deleteObject(object.entity, object.object)) {
+            return;
+        }
+
+        delete this.loadedObjects[id];
     }
 
     public disable(): void {
