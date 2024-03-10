@@ -8883,6 +8883,17 @@ QBShared.Items = {
         ['description'] = "Prix du gagnant du festival thématisé autour des courses gyrophares allumés en 2023. Désigné ainsi meilleur pilote de véhicules d'intervention.",
         ['illustrator'] = '.Poulpito',
     },
+    ['trophee_mariuskart_2024'] = {
+        ['name'] = 'trophee_mariuskart_2024',
+        ['label'] = 'Trophée MariusKart 2024',
+        ['weight'] = 5000,
+        ['useable'] = false,
+        ['type'] = 'item',
+        ['unique'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'Grand gagnant du championnat de Kart réalisé par Atkins Event & Château Marius.',
+        ['illustrator'] = '.Zedhekya'
+    },
     ['summer_race_2023_gold_medal'] = {
         ['name'] = 'summer_race_2023_gold_medal',
         ['label'] = 'Médaille d\'or "Summer Races 2023"',
