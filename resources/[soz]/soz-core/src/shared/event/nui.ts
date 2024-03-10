@@ -112,6 +112,13 @@ export enum NuiEvent {
     NewsCreateAnnounce = 'soz-core:nui:news:create-announce',
     NewsPlaceObject = 'soz-core:client:news:place-object',
 
+    ObjectEditorReset = 'soz-core:nui:object-editor:reset',
+    ObjectEditorCancel = 'soz-core:nui:object-editor:cancel',
+    ObjectEditorSave = 'soz-core:nui:object-editor:save',
+    ObjectEditorDelete = 'soz-core:nui:object-editor:delete',
+    ObjectEditorToggleCollision = 'soz-core:nui:object-editor:toggle-collision',
+    ObjectEditorToggleSnap = 'soz-core:nui:object-editor:toggle-snap',
+
     BennysCancelOrder = 'soz-core:client:job:bennys:cancel-order',
     BennysOrder = 'soz-core:client:job:bennys:order',
     BennysGetOrders = 'soz-core:client:job:bennys:get-orders',

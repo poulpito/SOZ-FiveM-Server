@@ -2,6 +2,7 @@ import { ApartmentMenuData } from '@public/shared/housing/housing';
 import { JobType } from '@public/shared/job';
 import { NuiJobEmployeeOnDuty, PromoteMenuData } from '@public/shared/nui/job';
 import { PlayerPersonalMenuData } from '@public/shared/nui/player';
+import { EditorMenuData } from '@public/shared/object';
 
 import { AdminMenuStateProps } from '../../nui/components/Admin/AdminMenu';
 import { PlayerCloakroomItem, WardrobeMenuData } from '../cloth';
@@ -97,6 +98,7 @@ export enum MenuType {
     GouvJobMenu = 'gouv_job',
     FDFJobMenu = 'fdf_job',
     DmcJobMenu = 'dmc_job',
+    ObjectEditor = 'object_editor',
     PoliceJobMenu = 'police_job_menu',
     PoliceJobLicences = 'police_job_licences',
     PoliceJobMoneychecker = 'police_job_moneychecker',
@@ -176,4 +178,5 @@ export interface MenuTypeMap extends Record<MenuType, any> {
         items: PlayerCloakroomItem[];
     };
     [MenuType.LsmcPlaster]: PlasterMenuData;
+    [MenuType.ObjectEditor]: EditorMenuData;
 }

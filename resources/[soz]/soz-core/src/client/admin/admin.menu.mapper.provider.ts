@@ -20,8 +20,8 @@ import { DrawService } from '../draw.service';
 import { Notifier } from '../notifier';
 import { InputService } from '../nui/input.service';
 import { NuiMenu } from '../nui/nui.menu';
-import { NuiObjectProvider } from '../nui/nui.object.provider';
 import { NuiZoneProvider } from '../nui/nui.zone.provider';
+import { ObjectEditorProvider } from '../object/object.editor.provider';
 import { HousingRepository } from '../repository/housing.repository';
 import { SenateRepository } from '../repository/senate.repository';
 import { ZoneRepository } from '../repository/zone.repository';
@@ -61,8 +61,8 @@ export class AdminMenuMapperProvider {
     @Inject(NuiZoneProvider)
     private nuiZoneProvider: NuiZoneProvider;
 
-    @Inject(NuiObjectProvider)
-    private nuiObjectProvider: NuiObjectProvider;
+    @Inject(ObjectEditorProvider)
+    private readonly objectEditorProvider: ObjectEditorProvider;
 
     @Inject(DrawService)
     private drawService: DrawService;
@@ -490,7 +490,9 @@ export class AdminMenuMapperProvider {
         event: string | null;
     }): Promise<void> {
         const model = GetHashKey(object);
-        const createdObject = await this.nuiObjectProvider.askObject(model);
+        const createdObject = await this.objectEditorProvider.createOrUpdateObject(model, {
+            context: 'admin',
+        });
 
         if (null === createdObject) {
             return;
