@@ -9,6 +9,10 @@ export const useGetPrice = () => {
 
     return useCallback(
         (price: number, taxType: TaxType) => {
+            if (!taxType) {
+                return price;
+            }
+
             const tax = taxRepository[taxType];
             const taxPercentage = (tax ? tax.value : 11) / 100;
 

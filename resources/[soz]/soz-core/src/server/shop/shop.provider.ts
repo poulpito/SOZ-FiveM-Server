@@ -16,7 +16,9 @@ import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Logger } from '../../core/logger';
 import { TaxType } from '../../shared/bank';
+import { CAYO } from '../../shared/cayo';
 import { ClientEvent, ServerEvent } from '../../shared/event';
+import { Vector3 } from '../../shared/polyzone/vector';
 import { PriceService } from '../bank/price.service';
 import { PrismaService } from '../database/prisma.service';
 import { InventoryManager } from '../inventory/inventory.manager';
@@ -121,15 +123,17 @@ export class ShopProvider {
         brand: string,
         quantity = 1
     ) {
+        const isInCayo = CAYO.isPointInside(GetEntityCoords(GetPlayerPed(source)) as Vector3);
+
         switch (brand) {
             case ShopBrand.Binco:
             case ShopBrand.Ponsonbys:
             case ShopBrand.Suburban:
             case ShopBrand.Mask:
-                this.shopClothingBuy(source, product as ClothingShopItem, brand);
+                this.shopClothingBuy(source, product as ClothingShopItem, brand, isInCayo);
                 break;
             case ShopBrand.Tattoo:
-                this.shopTattooBuy(source, product as TattooShopItem);
+                this.shopTattooBuy(source, product as TattooShopItem, isInCayo);
                 break;
             case ShopBrand.Supermarket247North:
             case ShopBrand.Supermarket247South:
@@ -141,16 +145,16 @@ export class ShopProvider {
                 this.logger.error(`[ShopProvider] shopBuy: Not implemented shop ${brand}`);
                 break;
             case ShopBrand.Ammunation:
-                this.shopGeneralBuy(source, product as ShopProduct, quantity, TaxType.WEAPON);
+                this.shopGeneralBuy(source, product as ShopProduct, quantity, isInCayo ? null : TaxType.WEAPON);
                 break;
             case ShopBrand.Zkea:
-                this.shopGeneralBuy(source, product as ShopProduct, quantity, TaxType.SUPPLY);
+                this.shopGeneralBuy(source, product as ShopProduct, quantity, isInCayo ? null : TaxType.SUPPLY);
                 break;
             case ShopBrand.Barber:
-                this.shopBarberBuy(source, product as BarberShopItem);
+                this.shopBarberBuy(source, product as BarberShopItem, isInCayo);
                 break;
             case ShopBrand.Jewelry:
-                this.shopJewelryBuy(source, product as JewelryShopItem);
+                this.shopJewelryBuy(source, product as JewelryShopItem, isInCayo);
                 break;
             default:
                 this.logger.warn(`[ShopProvider] shopBuy: Unknown brand ${brand}`);
@@ -174,8 +178,8 @@ export class ShopProvider {
         );
     }
 
-    public async shopBarberBuy(source: number, product: BarberShopItem) {
-        if (!(await this.shopPay(source, product.price, TaxType.SUPPLY))) {
+    public async shopBarberBuy(source: number, product: BarberShopItem, isInCayo = false) {
+        if (!(await this.shopPay(source, product.price, isInCayo ? null : TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -218,14 +222,14 @@ export class ShopProvider {
 
         const notif = `Vous avez changé de ~b~${label}~s~ pour ~g~$${await this.priceService.getPrice(
             product.price,
-            TaxType.SUPPLY
+            isInCayo ? null : TaxType.SUPPLY
         )}.`;
 
         this.notifier.notify(source, notif, 'success');
     }
 
-    public async shopJewelryBuy(source: number, product: JewelryShopItem) {
-        if (!(await this.shopPay(source, product.price, TaxType.SUPPLY))) {
+    public async shopJewelryBuy(source: number, product: JewelryShopItem, isInCayo: boolean) {
+        if (!(await this.shopPay(source, product.price, isInCayo ? null : TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -270,13 +274,13 @@ export class ShopProvider {
             source,
             `Vous avez acheté un.e ~b~${product.label}~s~ pour ~g~$${await this.priceService.getPrice(
                 product.price,
-                TaxType.SUPPLY
+                isInCayo ? null : TaxType.SUPPLY
             )}.`,
             'success'
         );
     }
 
-    public async shopClothingBuy(source: number, product: ClothingShopItem, brand: string) {
+    public async shopClothingBuy(source: number, product: ClothingShopItem, brand: string, isInCayo = false) {
         const repo = await this.clothingShopRepository.get();
         const shopCategories = repo.categories[this.playerService.getPlayer(source).skin.Model.Hash][product.shopId];
         const shopItem = shopCategories[product.categoryId].content[product.modelLabel].find(
@@ -288,7 +292,7 @@ export class ShopProvider {
             return;
         }
 
-        if (!(await this.shopPay(source, product.price, TaxType.SUPPLY))) {
+        if (!(await this.shopPay(source, product.price, isInCayo ? null : TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -369,20 +373,20 @@ export class ShopProvider {
             source,
             `Vous avez acheté un.e ~b~${product.label}~s~ pour ~g~$${await this.priceService.getPrice(
                 product.price,
-                TaxType.SUPPLY
+                isInCayo ? null : TaxType.SUPPLY
             )}.`,
             'success'
         );
     }
 
-    public async shopTattooBuy(source: number, product: TattooShopItem) {
+    public async shopTattooBuy(source: number, product: TattooShopItem, isInCayo = false) {
         const modelHash = this.playerService.getPlayer(source).skin.Model.Hash;
         const overlayField = modelHash === GetHashKey('mp_m_freemode_01') ? 'HashNameMale' : 'HashNameFemale';
         if (!product || !product.Collection || !product[overlayField] || !product[overlayField].length) {
             this.notifier.notify(source, `Une erreur s'est produite, désolé.`, 'error');
             return;
         }
-        if (!(await this.shopPay(source, product.Price, TaxType.SUPPLY))) {
+        if (!(await this.shopPay(source, product.Price, isInCayo ? null : TaxType.SUPPLY))) {
             this.notifier.notify(source, `Ah mais t'es pauvre en fait ! Reviens quand t'auras de quoi payer.`, 'error');
             return;
         }
@@ -406,7 +410,7 @@ export class ShopProvider {
             source,
             `Vous venez de vous faire tatouer pour ~g~$${await this.priceService.getPrice(
                 product.Price,
-                TaxType.SUPPLY
+                isInCayo ? null : TaxType.SUPPLY
             )}`,
             'success'
         );
@@ -460,7 +464,7 @@ export class ShopProvider {
         }
     }
 
-    public async shopPay(source: number, price: number, taxType: TaxType): Promise<boolean> {
+    public async shopPay(source: number, price: number, taxType: TaxType | null): Promise<boolean> {
         return this.playerMoneyService.buy(source, price, taxType);
     }
 }

@@ -33,6 +33,10 @@ export class PlayerMoneyService {
             return false;
         }
 
+        if (tax === null) {
+            return this.QBCore.getPlayer(source).Functions.RemoveMoney(type, money);
+        }
+
         const taxValue = (await this.taxRepository.getTaxValue(tax)) / 100;
         const taxMoney = Math.round(money * taxValue);
         const realMoney = money + taxMoney;

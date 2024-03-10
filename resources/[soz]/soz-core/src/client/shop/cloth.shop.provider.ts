@@ -7,6 +7,7 @@ import { On, OnEvent, OnNuiEvent } from '@public/core/decorators/event';
 import { Exportable } from '@public/core/decorators/exports';
 import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
+import { CAYO } from '@public/shared/cayo';
 import { Component, GlovesItem } from '@public/shared/cloth';
 import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { MenuType } from '@public/shared/nui/menu';
@@ -86,11 +87,19 @@ export class ClothingShopProvider {
 
             return;
         }
+        const isInCayo = CAYO.isPointInside(GetEntityCoords(PlayerPedId(), false) as Vector3);
         const player_data = this.playerService.getPlayer();
         const under_types = this.underTypesShopRepository.getAllUnderTypes();
         this.currentShop = shop;
         await this.setupShop();
-        this.nuiMenu.openMenu(MenuType.ClothShop, { brand, shop_content, shop_categories, player_data, under_types });
+        this.nuiMenu.openMenu(MenuType.ClothShop, {
+            brand,
+            shop_content,
+            shop_categories,
+            player_data,
+            under_types,
+            isInCayo,
+        });
     }
 
     public async setupShop(skipIntro = false) {
@@ -224,6 +233,7 @@ export class ClothingShopProvider {
         const shopName = Object.entries(ClothingShopID)
             .find(([, value]) => value == product.shopId)[0]
             .toLowerCase();
+
         TriggerServerEvent(ServerEvent.SHOP_BUY, product, shopName);
     }
 

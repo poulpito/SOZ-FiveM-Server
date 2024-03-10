@@ -30,11 +30,12 @@ type MenuClothShopStateProps = {
         shop_categories: Record<number, ClothingShopCategory>;
         player_data: PlayerData;
         under_types: Record<number, number[]>;
+        isInCayo: boolean;
     };
 };
 
 export const ClothShopMenu: FunctionComponent<MenuClothShopStateProps> = ({
-    catalog: { brand, shop_content, shop_categories, player_data, under_types },
+    catalog: { brand, shop_content, shop_categories, player_data, under_types, isInCayo },
 }: MenuClothShopStateProps) => {
     const getPrice = useGetPrice();
     const [shopCategories, setShopCategories] = useState<Record<number, ClothingShopCategory>>(shop_categories);
@@ -194,9 +195,10 @@ export const ClothShopMenu: FunctionComponent<MenuClothShopStateProps> = ({
                                             await fetchNui(NuiEvent.ClothingShopPreview, item)
                                         }
                                         descriptionValue={item =>
-                                            `💸 Prix : $${getPrice(item.price, TaxType.SUPPLY)} - 📦 Stock : ${
-                                                item.stock
-                                            }`
+                                            `💸 Prix : $${getPrice(
+                                                item.price,
+                                                isInCayo ? null : TaxType.SUPPLY
+                                            )} - 📦 Stock : ${item.stock}`
                                         }
                                     >
                                         {items.map(item => (
@@ -205,7 +207,7 @@ export const ClothShopMenu: FunctionComponent<MenuClothShopStateProps> = ({
                                                 value={item}
                                                 description={`💸 Prix : $${getPrice(
                                                     item.price,
-                                                    TaxType.SUPPLY
+                                                    isInCayo ? null : TaxType.SUPPLY
                                                 )} - 📦 Stock : ${item.stock}`}
                                                 disabled={item.stock == 0}
                                                 onSelected={async () =>
