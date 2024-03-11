@@ -356,12 +356,12 @@ export class LSMCDeathProvider {
                     ? 'de ton décès'
                     : 'du coma';
 
-            const reason = await this.inputService.askInput({
-                title: `Explique la raison ${status}, celle-ci sera lue par les médecins lorsqu'ils te prendront en charge :`,
-                maxCharacters: 200,
-            });
-
-            TriggerServerEvent(ServerEvent.LSMC_SET_DEATH_REASON, reason);
+            this.inputService
+                .askInput({
+                    title: `Explique la raison ${status}, celle-ci sera lue par les médecins lorsqu'ils te prendront en charge :`,
+                    maxCharacters: 200,
+                })
+                .then(reason => TriggerServerEvent(ServerEvent.LSMC_SET_DEATH_REASON, reason));
 
             if (this.phoneService.isPhoneVisible()) {
                 this.phoneService.setPhoneFocus(true);
