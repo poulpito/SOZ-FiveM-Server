@@ -62,52 +62,55 @@ export class VoiceProvider {
             return;
         }
 
-        this.isConnecting = true;
+        try {
+            this.isConnecting = true;
 
-        MumbleSetActive(false);
+            MumbleSetActive(false);
 
-        while (MumbleIsConnected() === true) {
-            await wait(0);
+            while (MumbleIsConnected() === true) {
+                await wait(0);
+            }
+
+            this.nuiDispatch.dispatch('hud', 'UpdateVoiceActive', false);
+
+            if (notify) {
+                this.monitor.publish(
+                    'voip_restart',
+                    {},
+                    {
+                        reason,
+                    },
+                    true
+                );
+
+                this.notifier.notify('Arret de la voip...');
+            }
+
+            const serverAddress = GetConvar('soz_voip_mumble_address', '');
+            const serverPort = GetConvarInt('soz_voip_mumble_port', 64738);
+
+            if (serverAddress.length !== 0) {
+                MumbleSetServerAddress(serverAddress, serverPort);
+            }
+
+            MumbleSetActive(true);
+
+            while (MumbleIsConnected() === false) {
+                await wait(0);
+            }
+
+            MumbleSetVoiceTarget(VOICE_TARGET);
+
+            if (notify) {
+                this.notifier.notify('Voip réactivée.');
+            }
+
+            this.nuiDispatch.dispatch('hud', 'UpdateVoiceActive', true);
+
+            this.voiceTargetService.refresh();
+            this.voipService.resetVoiceMode();
+        } finally {
+            this.isConnecting = false;
         }
-
-        this.nuiDispatch.dispatch('hud', 'UpdateVoiceActive', false);
-
-        if (notify) {
-            this.monitor.publish(
-                'voip_restart',
-                {},
-                {
-                    reason,
-                },
-                true
-            );
-
-            this.notifier.notify('Arret de la voip...');
-        }
-
-        const serverAddress = GetConvar('soz_voip_mumble_address', '');
-        const serverPort = GetConvarInt('soz_voip_mumble_port', 64738);
-
-        if (serverAddress.length !== 0) {
-            MumbleSetServerAddress(serverAddress, serverPort);
-        }
-
-        MumbleSetActive(true);
-
-        while (MumbleIsConnected() === false) {
-            await wait(0);
-        }
-
-        MumbleSetVoiceTarget(VOICE_TARGET);
-
-        if (notify) {
-            this.notifier.notify('Voip réactivée.');
-        }
-
-        this.nuiDispatch.dispatch('hud', 'UpdateVoiceActive', true);
-        this.isConnecting = false;
-
-        this.voiceTargetService.refresh();
-        this.voipService.resetVoiceMode();
     }
 }
