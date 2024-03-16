@@ -7621,7 +7621,7 @@
           </OverrideForces>
           <ForceMaxStrengthMult value="1.000000" />
           <ForceFalloffRangeStart value="0.000000" />
-          <ForceFalloffRangeEnd value="50.000000" />
+          <ForceFalloffRangeEnd value="20.000000" />
           <ForceFalloffMin value="1.000000" />
           <ProjectileForce value="0.000000" />
           <FragImpulse value="500.000000" />
@@ -7694,13 +7694,13 @@
           <NetworkPlayerDamageModifier value="1.000000" />
           <NetworkPedDamageModifier value="1.000000" />
           <NetworkHeadShotPlayerDamageModifier value="1.000000" />
-          <LockOnRange value="35.000000" />
-          <WeaponRange value="40.000000" />
+          <LockOnRange value="20.000000" />
+          <WeaponRange value="20.000000" />
           <BulletDirectionOffsetInDegrees value="0.000000" />
           <AiSoundRange value="-1.000000" />
           <AiPotentialBlastEventRange value="-1.000000" />
-          <DamageFallOffRangeMin value="10.000000" />
-          <DamageFallOffRangeMax value="40.000000" />
+          <DamageFallOffRangeMin value="0.000000" />
+          <DamageFallOffRangeMax value="20.000000" />
           <DamageFallOffModifier value="0.300000" />
           <VehicleWeaponHash />
           <DefaultCameraHash>SHOTGUN_AIM_CAMERA</DefaultCameraHash>
