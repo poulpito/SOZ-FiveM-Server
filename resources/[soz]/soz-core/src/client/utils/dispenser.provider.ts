@@ -1,12 +1,14 @@
-import { Once } from '@public/core/decorators/event';
+import { Once, OnceStep } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { ServerEvent } from '@public/shared/event';
 
 import { Provider } from '../../core/decorators/provider';
+import { TaxType } from '../../shared/bank';
 import { PositiveNumberValidator } from '../../shared/nui/input';
 import { InputService } from '../nui/input.service';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
+import { TaxRepository } from '../repository/tax.repository';
 import { TargetFactory } from '../target/target.factory';
 
 const dispenser_eat_price = 9;
@@ -31,20 +33,27 @@ export class DispenserProvider {
     @Inject(InputService)
     private inputService: InputService;
 
-    @Once()
+    @Inject(TaxRepository)
+    private taxRepository: TaxRepository;
+
+    @Once(OnceStep.RepositoriesLoaded)
     public onStart() {
+        const drinkPrice = this.taxRepository.getPriceWithTax(dispenser_drink_price, TaxType.FOOD);
+        const eatPrice = this.taxRepository.getPriceWithTax(dispenser_eat_price, TaxType.FOOD);
+        const cafePrice = this.taxRepository.getPriceWithTax(dispenser_cafe_price, TaxType.FOOD);
+
         this.targetFactory.createForModel(
             vending_machine_drink,
             [
                 {
-                    label: "Bouteille d'eau ($" + dispenser_drink_price + ')',
+                    label: "Bouteille d'eau ($" + drinkPrice + ')',
                     icon: 'c:food/bouteille.png',
                     action: () => {
                         this.buy('Achète à boire ...', 'water_bottle', dispenser_drink_price);
                     },
                 },
                 {
-                    label: `Lot de bouteilles</br>($${dispenser_drink_price} unité)`,
+                    label: `Lot de bouteilles</br>($${drinkPrice} unité)`,
                     icon: 'c:food/bouteilles.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
@@ -70,14 +79,14 @@ export class DispenserProvider {
             vending_machine_food,
             [
                 {
-                    label: 'Sandwich ($' + dispenser_eat_price + ')',
+                    label: 'Sandwich ($' + eatPrice + ')',
                     icon: 'c:food/baguette.png',
                     action: () => {
                         this.buy('Achète à manger...', 'sandwich', dispenser_eat_price);
                     },
                 },
                 {
-                    label: `Lot de sandwichs</br>($${dispenser_eat_price} unité)`,
+                    label: `Lot de sandwichs</br>($${eatPrice} unité)`,
                     icon: 'c:food/baguettes.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
@@ -104,14 +113,14 @@ export class DispenserProvider {
             vending_machine_cafe,
             [
                 {
-                    label: `Café ($${dispenser_cafe_price})`,
+                    label: `Café ($${cafePrice})`,
                     icon: 'c:food/cafe.png',
                     action: () => {
                         this.buy('Achète un Café ...', 'coffee', dispenser_cafe_price);
                     },
                 },
                 {
-                    label: `Lot de café</br>($${dispenser_cafe_price} unité)`,
+                    label: `Lot de café</br>($${cafePrice} unité)`,
                     icon: 'c:food/cafes.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(

@@ -84,7 +84,7 @@ export const UpwOrderMenu: FunctionComponent<UpwOrderMenuProps> = ({ data }) => 
                         >
                             <div className="pr-2 flex items-center justify-between">
                                 <span> {vehicle.name} </span>
-                                <span>💸 ${getPrice(vehicle.price * 0.01, TaxType.VEHICLE)} </span>
+                                <span>💸 ${getPrice(vehicle.price * 0.01)} </span>
                             </div>
                         </MenuItemButton>
                     ))}

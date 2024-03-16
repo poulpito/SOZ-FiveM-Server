@@ -16,4 +16,8 @@ export class TaxRepository extends Repository<RepositoryType.Tax> {
 
         return tax.value;
     }
+
+    public getPriceWithTax(price: number, taxType: TaxType): number {
+        return Math.round(price * (1 + this.getTaxValue(taxType) / 100));
+    }
 }

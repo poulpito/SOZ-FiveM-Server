@@ -63,7 +63,7 @@ export class WeaponGunsmithProvider {
             health = GlobalWeaponConfig.MaxHealth;
         }
 
-        const price = WEAPON_CUSTOM_PRICE.repair * Math.floor(100 - (health / maxHealth) * WEAPON_CUSTOM_PRICE.repair);
+        const price = WEAPON_CUSTOM_PRICE.repair * Math.floor(100 - (health / maxHealth) * 100);
 
         if (await this.playerMoneyService.buy(source, price, TaxType.WEAPON)) {
             const heal = maxHealth * REPAIR_HEALTH_REDUCER;

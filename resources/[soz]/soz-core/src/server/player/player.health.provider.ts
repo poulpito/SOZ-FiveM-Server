@@ -268,6 +268,8 @@ export class PlayerHealthProvider {
             return;
         }
 
+        const displayPrice = await this.priceService.getPrice(GYM_PRICE, TaxType.SERVICE);
+
         if (await this.playerMoneyService.buy(source, GYM_PRICE, TaxType.SERVICE)) {
             this.playerService.setPlayerMetadata(
                 source,
@@ -277,16 +279,13 @@ export class PlayerHealthProvider {
 
             this.notifier.notify(
                 source,
-                `Damn la team Los Santos ! Merci à toi d'avoir acheté notre abonnement de sport MUSCLE PEACH d'une semaine à ${await this.priceService.getPrice(
-                    GYM_PRICE,
-                    TaxType.SERVICE
-                )}$ ! Tu peux désormais te changer dans nos vestiaires.`,
+                `Damn la team Los Santos ! Merci à toi d'avoir acheté notre abonnement de sport MUSCLE PEACH d'une semaine à ${displayPrice}$ ! Tu peux désormais te changer dans nos vestiaires.`,
                 'success'
             );
         } else {
             this.notifier.notify(
                 source,
-                `Tu ne possèdes pas 300$ ! Si tu souhaites profiter de nos installations et de notre vestiaire, reviens avec de l'argent.`,
+                `Tu ne possèdes pas ${displayPrice}$ ! Si tu souhaites profiter de nos installations et de notre vestiaire, reviens avec de l'argent.`,
                 'error'
             );
         }

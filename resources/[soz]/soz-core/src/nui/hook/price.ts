@@ -8,7 +8,7 @@ export const useGetPrice = () => {
     const taxRepository = useRepository(RepositoryType.Tax);
 
     return useCallback(
-        (price: number, taxType: TaxType) => {
+        (price: number, taxType: TaxType = null) => {
             if (!taxType) {
                 return price;
             }
