@@ -15,8 +15,8 @@ import { Forecast, ForecastWithTemperature, TemperatureRange, Time, Weather } fr
 import { Monitor } from '../monitor/monitor';
 import { Pollution } from '../pollution';
 import { Store } from '../store/store';
-import { Halloween, Polluted, Winter } from './forecast';
-import { DayWinterTemperature, ForecastAdderTemperatures, NightWinterTemperature } from './temperature';
+import { Halloween, Polluted, SpringAutumn, Winter } from './forecast';
+import { DaySpringTemperature, ForecastAdderTemperatures, NightSpringTemperature } from './temperature';
 
 const INCREMENT_SECOND = (3600 * 24) / (60 * 48);
 const MAX_FORECASTS = 5;
@@ -42,11 +42,11 @@ export class WeatherProvider {
     private pollutionManagerReady = false;
 
     // See forecast.ts for the list of available forecasts
-    private forecast: Forecast = isFeatureEnabled(Feature.Halloween) ? Halloween : Winter;
+    private forecast: Forecast = isFeatureEnabled(Feature.Halloween) ? Halloween : SpringAutumn;
     // See temperature.ts for the list of available temperature ranges,
     // please ensure that the day and night temperature ranges are using the same season
-    private dayTemperatureRange: TemperatureRange = DayWinterTemperature;
-    private nightTemperatureRange: TemperatureRange = NightWinterTemperature;
+    private dayTemperatureRange: TemperatureRange = DaySpringTemperature;
+    private nightTemperatureRange: TemperatureRange = NightSpringTemperature;
 
     private defaultWeather: Weather = isFeatureEnabled(Feature.Halloween) ? 'CLOUDS' : 'OVERCAST';
 
