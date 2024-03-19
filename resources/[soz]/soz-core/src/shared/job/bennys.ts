@@ -3,7 +3,6 @@ import { joaat } from '../joaat';
 import { NamedZone } from '../polyzone/box.zone';
 import { getDefaultVehicleConfiguration, VehicleConfiguration } from '../vehicle/modification';
 
-/*
 const orderZone: NamedZone = {
     name: 'bennys_order',
     center: [-203.94, -1337.64, 34.89],
@@ -14,9 +13,8 @@ const orderZone: NamedZone = {
     heading: 0,
     debugPoly: false,
 };
-*/
 
-const orderNorthZone: NamedZone = {
+export const orderNorthZone: NamedZone = {
     name: 'bennys_order',
     center: [1908.29, 3090.14, 45.98],
     length: 0.4,
@@ -72,7 +70,7 @@ export const BennysConfig = {
     },
     UpgradeConfiguration: defaultUpgradeConfiguration,
     Order: {
-        zone: orderNorthZone,
+        zone: orderZone,
         waitingTime: 60, // In minutes
     },
     Resell: [
