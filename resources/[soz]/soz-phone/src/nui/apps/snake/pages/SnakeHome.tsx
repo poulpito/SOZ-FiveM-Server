@@ -4,7 +4,7 @@ import { LeaderBoardIcon } from '@ui/components/games/LeaderBoardIcon';
 import { ActionButton } from '@ui/old_components/ActionButton';
 import { fetchNui } from '@utils/fetchNui';
 import cn from 'classnames';
-import React, { FunctionComponent, memo, useMemo, useState } from 'react';
+import { FunctionComponent, memo, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +29,8 @@ import UpRight from '../ui/upright.png';
 import Wall from '../ui/wall.png';
 import { useInterval } from '../utils/interval';
 
+const SNAKE_MOVE_WAIT_TIME_MS = 150;
+
 type DataContainerProps = {
     title: string;
     value: string | number;
@@ -42,6 +44,8 @@ const DataContainer: FunctionComponent<DataContainerProps> = ({ title, value }) 
         </div>
     );
 };
+
+let lastSnakeUpdateTime = 0;
 
 export const SnakeHome = memo(() => {
     const verticalSize = 20;
@@ -102,7 +106,6 @@ export const SnakeHome = memo(() => {
         { x: verticalSize / 2, y: 1 },
     ]);
     const [direction, setDirection] = useState('right');
-    const [nextDirection, setNextDirection] = useState('right'); // buffer to avoid some problems with half-turn
     const [food, setFood] = useState(randomPosition);
     const [isMoving, setMoving] = useState(true);
 
@@ -125,21 +128,23 @@ export const SnakeHome = memo(() => {
 
     const changeDirectionWithKeys = (e: KeyboardEvent) => {
         e.preventDefault();
-        if (e.repeat) {
+
+        if (e.repeat || !['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
             return;
         }
+
         switch (e.key) {
             case 'ArrowLeft':
-                setNextDirection('left');
+                setDirection(oldDirection => (oldDirection !== 'right' ? 'left' : 'right'));
                 break;
             case 'ArrowUp':
-                setNextDirection('up');
+                setDirection(oldDirection => (oldDirection !== 'down' ? 'up' : 'down'));
                 break;
             case 'ArrowRight':
-                setNextDirection('right');
+                setDirection(oldDirection => (oldDirection !== 'left' ? 'right' : 'left'));
                 break;
             case 'ArrowDown':
-                setNextDirection('down');
+                setDirection(oldDirection => (oldDirection !== 'up' ? 'down' : 'up'));
                 break;
             default:
                 break;
@@ -151,6 +156,7 @@ export const SnakeHome = memo(() => {
     const displaySnake = () => {
         const newRows = initialRows;
         newRows[food.x][food.y] = 'food';
+
         if (snake[0].y < snake[1].y) {
             newRows[snake[0].x][snake[0].y] = 'snakeheadleft';
         } else if (snake[0].x > snake[1].x) {
@@ -160,6 +166,7 @@ export const SnakeHome = memo(() => {
         } else if (snake[0].x < snake[1].x) {
             newRows[snake[0].x][snake[0].y] = 'snakeheadup';
         }
+
         for (let i = 1; i < snake.length - 1; i++) {
             const prev = snake[i - 1];
             const next = snake[i + 1];
@@ -185,8 +192,10 @@ export const SnakeHome = memo(() => {
                 newRows[snake[i].x][snake[i].y] = 'snakedownright';
             }
         }
+
         const prev = snake[snake.length - 2];
         const tail = snake[snake.length - 1];
+
         if (prev.y < tail.y) {
             newRows[snake[snake.length - 1].x][snake[snake.length - 1].y] = 'snaketailright';
         } else if (prev.x > tail.x) {
@@ -196,35 +205,25 @@ export const SnakeHome = memo(() => {
         } else if (prev.x < tail.x) {
             newRows[snake[snake.length - 1].x][snake[snake.length - 1].y] = 'snaketaildown';
         }
+
         setRows(newRows);
     };
 
-    const moveSnake = () => {
+    useEffect(() => {
+        displaySnake();
+    }, [snake]);
+
+    const moveSnake = (forceUpdate = false) => {
+        const currentTime = Date.now();
+
+        if (forceUpdate || currentTime - lastSnakeUpdateTime < SNAKE_MOVE_WAIT_TIME_MS) {
+            return;
+        }
+
+        lastSnakeUpdateTime = currentTime;
         const newSnake = [];
 
         if (isMoving) {
-            switch (nextDirection) {
-                case 'right':
-                    if (direction !== 'left') {
-                        setDirection('right');
-                    }
-                    break;
-                case 'left':
-                    if (direction !== 'right') {
-                        setDirection('left');
-                    }
-                    break;
-                case 'up':
-                    if (direction !== 'down') {
-                        setDirection('up');
-                    }
-                    break;
-                case 'down':
-                    if (direction !== 'up') {
-                        setDirection('down');
-                    }
-                    break;
-            }
             switch (direction) {
                 case 'right':
                     newSnake.push({ x: snake[0].x, y: (snake[0].y + 1) % verticalSize });
@@ -239,21 +238,25 @@ export const SnakeHome = memo(() => {
                     newSnake.push({ x: (snake[0].x + 1) % horizontalSize, y: snake[0].y });
                     break;
             }
+
             snake.forEach(cell => {
                 newSnake.push(cell); //we add the entire old snake to the new snake's head. that increase the snake length, but we will remove one cell if his head wasn't on the fruit
             });
+
             // if snake's head was on fruit, create a new fruit. else, remove the last cell of the new snake
             if (snake[0].x === food.x && snake[0].y === food.y) {
                 setFood(randomPosition);
             } else {
                 newSnake.pop();
             }
+
             for (let i = 1; i < newSnake.length; i++) {
                 // defeat if the head is on a body cell
                 if (newSnake[0].x == newSnake[i].x && newSnake[0].y == newSnake[i].y) {
                     handleDefeat((newSnake.length - 3) * 100);
                 }
             }
+
             if (
                 newSnake[0].x == 0 ||
                 newSnake[0].x == horizontalSize - 1 ||
@@ -264,10 +267,14 @@ export const SnakeHome = memo(() => {
                 handleDefeat((newSnake.length - 3) * 100);
             }
             setSnake(newSnake);
-            displaySnake();
         }
     };
-    useInterval(moveSnake, 170);
+
+    useEffect(() => {
+        moveSnake(true);
+    }, [direction]);
+
+    useInterval(moveSnake, 10);
 
     const displayRows = rows.map(row => (
         <>
@@ -378,7 +385,6 @@ export const SnakeHome = memo(() => {
 
     const handleStart = () => {
         setDirection('right');
-        setNextDirection('right');
         setMoving(true);
         setSnake([
             { x: verticalSize / 2, y: 3 },
