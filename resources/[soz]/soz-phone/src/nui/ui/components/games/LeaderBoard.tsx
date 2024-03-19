@@ -56,7 +56,7 @@ export const Leaderboard = ({ leaderboard }: { leaderboard: LeaderboardInterface
                                 <div className="flex flex-col justify-between h-full">
                                     <p className="items-start p-1.5">{player.player_name}</p>
                                     <p className="p-2 text-lg font-semibold">{player.score}</p>
-                                    <p>{`${player.game_played} partie(s) jouée(s)`}</p>
+                                    <p>{`${player.game_played} partie${player.game_played > 1 ? 's' : ''} jouée${player.game_played > 1 ? 's' : ''}`}</p>
                                 </div>
                             </div>
                         ))}
@@ -79,7 +79,7 @@ export const Leaderboard = ({ leaderboard }: { leaderboard: LeaderboardInterface
                                     <div className="flex-grow p-4">
                                         {player.player_name}
                                         <br />
-                                        {`${player.game_played} partie(s) jouée(s)`}
+                                        {`${player.game_played} partie${player.game_played > 1 ? 's' : ''} jouée${player.game_played > 1 ? 's' : ''}`}
                                     </div>
                                     <div className="flex-shrink font-semibold text-xl p-4">{player.score}</div>
                                 </div>
