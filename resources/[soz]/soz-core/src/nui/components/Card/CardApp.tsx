@@ -45,15 +45,17 @@ export const CardItem: FunctionComponent<CardItemProps> = ({ card }) => {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
         >
-            {card.type === 'identity' && <IdentityCard player={card.player} />}
-            {card.type === 'license' && <LicenseCard player={card.player} />}
-            {card.type === 'health' && <HealthCard player={card.player} />}
-            {card.type === 'bank' && (
-                <BankCard
-                    account={card.iban}
-                    name={`${card.player.charinfo.firstname} ${card.player.charinfo.lastname}`}
-                />
-            )}
+            <div className="flex justify-end">
+                {card.type === 'identity' && <IdentityCard player={card.player} />}
+                {card.type === 'license' && <LicenseCard player={card.player} />}
+                {card.type === 'health' && <HealthCard player={card.player} />}
+                {card.type === 'bank' && (
+                    <BankCard
+                        account={card.iban}
+                        name={`${card.player.charinfo.firstname} ${card.player.charinfo.lastname}`}
+                    />
+                )}
+            </div>
         </Transition>
     );
 };
@@ -86,7 +88,7 @@ export const CardApp: FunctionComponent = () => {
     return (
         <div className="absolute w-full h-full">
             <div className="flex flex-column justify-end h-full">
-                <div className="h-full overflow-hidden p-6">
+                <div className="right-0 top-0 absolute overflow-hidden">
                     {cardQueue.map(item => {
                         return <CardItem key={item.id} card={item.card} />;
                     })}
