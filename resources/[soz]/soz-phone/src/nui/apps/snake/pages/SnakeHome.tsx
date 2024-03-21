@@ -8,7 +8,7 @@ import { FunctionComponent, memo, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { useCitizenID } from '../../../hooks/usePhone';
+import { useCitizenID, useVisibility } from '../../../hooks/usePhone';
 import { RootState } from '../../../store';
 import { store } from '../../../store';
 import DownLeft from '../ui/downleft.png';
@@ -50,6 +50,7 @@ let lastSnakeUpdateTime = 0;
 export const SnakeHome = memo(() => {
     const verticalSize = 20;
     const horizontalSize = 30;
+    const visibility = useVisibility();
     const initialRows = [];
     for (let i = 0; i < horizontalSize; i++) {
         initialRows.push([]);
@@ -154,8 +155,8 @@ export const SnakeHome = memo(() => {
     useEffect(() => {
         document.addEventListener('keydown', changeDirectionWithKeys, false);
 
-        return () => window.removeEventListener("keydown", changeDirectionWithKeys);
-    }, []);
+        return () => document.removeEventListener('keydown', changeDirectionWithKeys);
+    }, [visibility.visibility, isMoving]);
 
     const displaySnake = () => {
         const newRows = initialRows;
