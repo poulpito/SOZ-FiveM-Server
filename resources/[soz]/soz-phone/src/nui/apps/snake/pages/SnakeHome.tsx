@@ -151,7 +151,11 @@ export const SnakeHome = memo(() => {
         }
     };
 
-    document.addEventListener('keydown', changeDirectionWithKeys, false);
+    useEffect(() => {
+        document.addEventListener('keydown', changeDirectionWithKeys, false);
+
+        return () => window.removeEventListener("keydown", changeDirectionWithKeys);
+    }, []);
 
     const displaySnake = () => {
         const newRows = initialRows;
