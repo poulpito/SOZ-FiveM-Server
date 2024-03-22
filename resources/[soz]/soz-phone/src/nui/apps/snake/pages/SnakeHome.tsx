@@ -94,6 +94,7 @@ export const SnakeHome = memo(() => {
     const inputDirectionRef = useRef<string>(null);
     const currentDirectionRef = useRef<string>('right');
     const isGameOngoingRef = useRef<boolean>(true);
+    const [lostReason, setLostReason] = useState<string>('');
     const [displayedRows, setDisplayedRows] = useState<string[][]>(getInitialRows());
 
     const getRandomFoodPosition = () => {
@@ -146,8 +147,9 @@ export const SnakeHome = memo(() => {
         ellapsedTimeSinceSnakeMove = 0;
     };
 
-    const handleDefeat = (score: number) => {
+    const handleDefeat = (score: number, reason: string) => {
         isGameOngoingRef.current = false;
+        setLostReason(reason);
         fetchNui(SnakeEvents.SEND_SCORE, { score });
     };
 
@@ -236,7 +238,7 @@ export const SnakeHome = memo(() => {
         for (let i = 1; i < newSnake.length; i++) {
             // defeat if the head is on a body cell
             if (newSnake[0].x == newSnake[i].x && newSnake[0].y == newSnake[i].y) {
-                handleDefeat((newSnake.length - 3) * 100);
+                handleDefeat((newSnake.length - 3) * 100, 'Vous vous êtes mordu ...');
 
                 return;
             }
@@ -249,7 +251,7 @@ export const SnakeHome = memo(() => {
             newSnake[0].y == verticalSize - 1
         ) {
             // defeat if next move put snake on wall
-            handleDefeat((newSnake.length - 3) * 100);
+            handleDefeat((newSnake.length - 3) * 100, 'Vous vous êtes pris le mur !');
 
             return;
         }
@@ -481,18 +483,19 @@ export const SnakeHome = memo(() => {
                     {!isGameOngoingRef.current && (
                         <div className="fixed inset-0 flex items-center justify-around m-4">
                             <div className="bg-black/70 p-4 w-full rounded-lg">
-                                <div className="text-red-400 text-4xl text-center py-4 font-bold">
-                                    Vous avez perdu !
-                                </div>
+                                <div className="text-red-400 text-4xl text-center py-4 font-bold">Game Over</div>
+                                <div className="text-white text-2xl text-center py-1 font-bold">{lostReason}</div>
                                 <p className="text-white py-4">
-                                    Vous avez atteint la taille {(snakePositionRef.current.length - 3) * 100}.
+                                    Vous avez atteint le score de{' '}
+                                    <strong>{(snakePositionRef.current.length - 3) * 100} !</strong>
                                 </p>
-                                <p className="text-white pt-4 pb-8">
+                                <p className="text-white pb-8">
                                     Votre meilleur score est de{' '}
-                                    {(snakePositionRef.current.length - 3) * 100 > highScore
-                                        ? (snakePositionRef.current.length - 3) * 100
-                                        : highScore}
-                                    .
+                                    <strong>
+                                        {(snakePositionRef.current.length - 3) * 100 > highScore
+                                            ? ((snakePositionRef.current.length - 3) * 100).toLocaleString('fr-FR')
+                                            : highScore.toLocaleString('fr-FR')}
+                                    </strong>
                                 </p>
                                 <ActionButton onClick={resetGameState}>Recommencer</ActionButton>
                             </div>
