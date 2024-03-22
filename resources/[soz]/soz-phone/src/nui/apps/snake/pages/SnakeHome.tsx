@@ -4,7 +4,7 @@ import { LeaderBoardIcon } from '@ui/components/games/LeaderBoardIcon';
 import { ActionButton } from '@ui/old_components/ActionButton';
 import { fetchNui } from '@utils/fetchNui';
 import cn from 'classnames';
-import { FunctionComponent, memo, useEffect, useMemo, useState } from 'react';
+import { FunctionComponent, memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,31 +27,27 @@ import UpDown from '../ui/updown.png';
 import UpLeft from '../ui/upleft.png';
 import UpRight from '../ui/upright.png';
 import Wall from '../ui/wall.png';
-import { useInterval } from '../utils/interval';
+
+type Position = {
+    x: number;
+    y: number;
+};
 
 const SNAKE_MOVE_WAIT_TIME_MS = 150;
 
-type DataContainerProps = {
-    title: string;
-    value: string | number;
-};
+let ellapsedTimeSinceSnakeMove = 0;
 
-const DataContainer: FunctionComponent<DataContainerProps> = ({ title, value }) => {
-    return (
-        <div id="arcade" className="h-fit w-3/12 ml-2 rounded">
-            <div className="text-center">{title}</div>
-            <p className={cn('p-1 text-center text-2xl')}>{value}</p>
-        </div>
-    );
-};
+const verticalSize = 20;
+const horizontalSize = 30;
 
-let lastSnakeUpdateTime = 0;
+const initialSnakePositions: Position[] = [
+    { x: verticalSize / 2, y: 3 },
+    { x: verticalSize / 2, y: 2 },
+    { x: verticalSize / 2, y: 1 },
+];
 
-export const SnakeHome = memo(() => {
-    const verticalSize = 20;
-    const horizontalSize = 30;
-    const visibility = useVisibility();
-    const initialRows = [];
+const getInitialRows = () => {
+    const initialRows: string[][] = [];
     for (let i = 0; i < horizontalSize; i++) {
         initialRows.push([]);
         for (let k = 0; k < verticalSize; k++) {
@@ -69,49 +65,69 @@ export const SnakeHome = memo(() => {
         initialRows[horizontalSize - 1][i] = 'wall';
     }
 
+    return initialRows;
+};
+
+type DataContainerProps = {
+    title: string;
+    value: string | number;
+};
+
+const DataContainer: FunctionComponent<DataContainerProps> = ({ title, value }) => {
+    return (
+        <div id="arcade" className="h-fit w-3/12 ml-2 rounded">
+            <div className="text-center">{title}</div>
+            <p className={cn('p-1 text-center text-2xl')}>{value}</p>
+        </div>
+    );
+};
+
+export const SnakeHome = memo(() => {
+    const visibility = useVisibility();
     const navigate = useNavigate();
+    const playerCitizenID = useCitizenID();
+    const snakeLeaderboard = useSelector((state: RootState) => state.appSnakeLeaderboard);
 
-    const onClickLeaderboard = () => {
-        store.dispatch.appSnakeLeaderboard.loadLeaderboard();
-        navigate('/snake/leaderboard');
-    };
+    const snakePositionRef = useRef<Position[]>(initialSnakePositions);
+    const animationRequestRef = useRef<number>();
+    const previousTimeRef = useRef<number>();
+    const inputDirectionRef = useRef<string>(null);
+    const currentDirectionRef = useRef<string>('right');
+    const isGameOngoingRef = useRef<boolean>(true);
+    const [displayedRows, setDisplayedRows] = useState<string[][]>(getInitialRows());
 
-    const randomPosition = () => {
-        let position = {
+    const getRandomFoodPosition = () => {
+        let position: Position = {
             x: -1,
             y: -1,
         };
-        if (snake.length != (horizontalSize - 1) * (verticalSize - 1)) {
-            // food spawnable
+
+        if (snakePositionRef.current.length != (horizontalSize - 1) * (verticalSize - 1)) {
             let foodOnSnake = false;
+
             do {
                 foodOnSnake = false;
                 position = {
                     x: Math.floor(Math.random() * (horizontalSize - 2)) + 1,
                     y: Math.floor(Math.random() * (verticalSize - 2)) + 1,
                 };
-                for (let i = 0; i < snake.length; i++) {
-                    if (position.x == snake[i].x && position.y == snake[i].y) {
+                for (let i = 0; i < snakePositionRef.current.length; i++) {
+                    if (position.x == snakePositionRef.current[i].x && position.y == snakePositionRef.current[i].y) {
                         foodOnSnake = true;
                     }
                 }
             } while (foodOnSnake);
         }
+
         return position;
     };
 
-    const [rows, setRows] = useState(initialRows);
-    const [snake, setSnake] = useState([
-        { x: verticalSize / 2, y: 3 },
-        { x: verticalSize / 2, y: 2 },
-        { x: verticalSize / 2, y: 1 },
-    ]);
-    const [direction, setDirection] = useState('right');
-    const [food, setFood] = useState(randomPosition);
-    const [isMoving, setMoving] = useState(true);
+    const foodPositionRef = useRef<Position>(getRandomFoodPosition());
 
-    const playerCitizenID = useCitizenID();
-    const snakeLeaderboard = useSelector((state: RootState) => state.appSnakeLeaderboard);
+    const onClickLeaderboard = () => {
+        store.dispatch.appSnakeLeaderboard.loadLeaderboard();
+        navigate('/snake/leaderboard');
+    };
 
     const highScore = useMemo(() => {
         if (!snakeLeaderboard) return null;
@@ -122,10 +138,18 @@ export const SnakeHome = memo(() => {
         return player.score;
     }, [playerCitizenID, snakeLeaderboard]);
 
-    function handleDefeat(score: number) {
-        setMoving(false);
+    const resetGameState = () => {
+        isGameOngoingRef.current = true;
+        currentDirectionRef.current = 'right';
+        snakePositionRef.current = initialSnakePositions;
+        foodPositionRef.current = getRandomFoodPosition();
+        ellapsedTimeSinceSnakeMove = 0;
+    };
+
+    const handleDefeat = (score: number) => {
+        isGameOngoingRef.current = false;
         fetchNui(SnakeEvents.SEND_SCORE, { score });
-    }
+    };
 
     const changeDirectionWithKeys = (e: KeyboardEvent) => {
         e.preventDefault();
@@ -136,16 +160,16 @@ export const SnakeHome = memo(() => {
 
         switch (e.key) {
             case 'ArrowLeft':
-                setDirection(oldDirection => (oldDirection !== 'right' ? 'left' : 'right'));
+                inputDirectionRef.current = currentDirectionRef.current !== 'right' ? 'left' : 'right';
                 break;
             case 'ArrowUp':
-                setDirection(oldDirection => (oldDirection !== 'down' ? 'up' : 'down'));
+                inputDirectionRef.current = currentDirectionRef.current !== 'down' ? 'up' : 'down';
                 break;
             case 'ArrowRight':
-                setDirection(oldDirection => (oldDirection !== 'left' ? 'right' : 'left'));
+                inputDirectionRef.current = currentDirectionRef.current !== 'left' ? 'right' : 'left';
                 break;
             case 'ArrowDown':
-                setDirection(oldDirection => (oldDirection !== 'up' ? 'down' : 'up'));
+                inputDirectionRef.current = currentDirectionRef.current !== 'up' ? 'down' : 'up';
                 break;
             default:
                 break;
@@ -156,286 +180,319 @@ export const SnakeHome = memo(() => {
         document.addEventListener('keydown', changeDirectionWithKeys, false);
 
         return () => document.removeEventListener('keydown', changeDirectionWithKeys);
-    }, [visibility.visibility, isMoving]);
+    }, [visibility.visibility, isGameOngoingRef.current]);
 
-    const displaySnake = () => {
-        const newRows = initialRows;
-        newRows[food.x][food.y] = 'food';
+    const moveSnake = () => {
+        const newSnake: Position[] = [];
 
-        if (snake[0].y < snake[1].y) {
-            newRows[snake[0].x][snake[0].y] = 'snakeheadleft';
-        } else if (snake[0].x > snake[1].x) {
-            newRows[snake[0].x][snake[0].y] = 'snakeheaddown';
-        } else if (snake[0].y > snake[1].y) {
-            newRows[snake[0].x][snake[0].y] = 'snakeheadright';
-        } else if (snake[0].x < snake[1].x) {
-            newRows[snake[0].x][snake[0].y] = 'snakeheadup';
+        if (inputDirectionRef.current) {
+            currentDirectionRef.current = inputDirectionRef.current;
+            inputDirectionRef.current = null;
         }
 
-        for (let i = 1; i < snake.length - 1; i++) {
-            const prev = snake[i - 1];
-            const next = snake[i + 1];
-            const current = snake[i];
+        switch (currentDirectionRef.current) {
+            case 'right':
+                newSnake.push({
+                    x: snakePositionRef.current[0].x,
+                    y: (snakePositionRef.current[0].y + 1) % verticalSize,
+                });
+                break;
+            case 'left':
+                newSnake.push({
+                    x: snakePositionRef.current[0].x,
+                    y: (snakePositionRef.current[0].y - 1 + verticalSize) % verticalSize,
+                });
+                break;
+            case 'up':
+                newSnake.push({
+                    x: (snakePositionRef.current[0].x - 1 + horizontalSize) % horizontalSize,
+                    y: snakePositionRef.current[0].y,
+                });
+                break;
+            case 'down':
+                newSnake.push({
+                    x: (snakePositionRef.current[0].x + 1) % horizontalSize,
+                    y: snakePositionRef.current[0].y,
+                });
+                break;
+        }
 
-            if ((prev.x < current.x && next.x > current.x) || (next.x < current.x && prev.x > current.x)) {
-                // Up-Down
-                newRows[snake[i].x][snake[i].y] = 'snakeupdown';
-            } else if ((prev.x < current.x && next.y > current.y) || (next.x < current.x && prev.y > current.y)) {
-                // Angle Up-Right
-                newRows[snake[i].x][snake[i].y] = 'snakeupright';
-            } else if ((prev.y < current.y && next.y > current.y) || (next.y < current.y && prev.y > current.y)) {
-                // Left-Right
-                newRows[snake[i].x][snake[i].y] = 'snakeleftright';
-            } else if ((prev.y < current.y && next.x < current.x) || (next.y < current.y && prev.x < current.x)) {
-                // Angle Up-Left
-                newRows[snake[i].x][snake[i].y] = 'snakeupleft';
-            } else if ((prev.x > current.x && next.y < current.y) || (next.x > current.x && prev.y < current.y)) {
-                // Angle Down-Left
-                newRows[snake[i].x][snake[i].y] = 'snakedownleft';
-            } else if ((prev.y > current.y && next.x > current.x) || (next.y > current.y && prev.x > current.x)) {
-                // Angle Down-Right
-                newRows[snake[i].x][snake[i].y] = 'snakedownright';
+        snakePositionRef.current.forEach(cell => {
+            newSnake.push(cell); //we add the entire old snake to the new snake's head. that increase the snake length, but we will remove one cell if his head wasn't on the fruit
+        });
+
+        // if snake's head was on fruit, create a new fruit. else, remove the last cell of the new snake
+        if (
+            snakePositionRef.current[0].x === foodPositionRef.current.x &&
+            snakePositionRef.current[0].y === foodPositionRef.current.y
+        ) {
+            foodPositionRef.current = getRandomFoodPosition();
+        } else {
+            newSnake.pop();
+        }
+
+        for (let i = 1; i < newSnake.length; i++) {
+            // defeat if the head is on a body cell
+            if (newSnake[0].x == newSnake[i].x && newSnake[0].y == newSnake[i].y) {
+                handleDefeat((newSnake.length - 3) * 100);
+
+                return;
             }
         }
 
-        const prev = snake[snake.length - 2];
-        const tail = snake[snake.length - 1];
+        if (
+            newSnake[0].x == 0 ||
+            newSnake[0].x == horizontalSize - 1 ||
+            newSnake[0].y == 0 ||
+            newSnake[0].y == verticalSize - 1
+        ) {
+            // defeat if next move put snake on wall
+            handleDefeat((newSnake.length - 3) * 100);
 
-        if (prev.y < tail.y) {
-            newRows[snake[snake.length - 1].x][snake[snake.length - 1].y] = 'snaketailright';
-        } else if (prev.x > tail.x) {
-            newRows[snake[snake.length - 1].x][snake[snake.length - 1].y] = 'snaketailup';
-        } else if (prev.y > tail.y) {
-            newRows[snake[snake.length - 1].x][snake[snake.length - 1].y] = 'snaketailleft';
-        } else if (prev.x < tail.x) {
-            newRows[snake[snake.length - 1].x][snake[snake.length - 1].y] = 'snaketaildown';
-        }
-
-        setRows(newRows);
-    };
-
-    useEffect(() => {
-        displaySnake();
-    }, [snake]);
-
-    const moveSnake = (forceUpdate = false) => {
-        const currentTime = Date.now();
-
-        if (forceUpdate || currentTime - lastSnakeUpdateTime < SNAKE_MOVE_WAIT_TIME_MS) {
             return;
         }
 
-        lastSnakeUpdateTime = currentTime;
-        const newSnake = [];
+        snakePositionRef.current = newSnake;
+    };
 
-        if (isMoving) {
-            switch (direction) {
-                case 'right':
-                    newSnake.push({ x: snake[0].x, y: (snake[0].y + 1) % verticalSize });
-                    break;
-                case 'left':
-                    newSnake.push({ x: snake[0].x, y: (snake[0].y - 1 + verticalSize) % verticalSize });
-                    break;
-                case 'up':
-                    newSnake.push({ x: (snake[0].x - 1 + horizontalSize) % horizontalSize, y: snake[0].y });
-                    break;
-                case 'down':
-                    newSnake.push({ x: (snake[0].x + 1) % horizontalSize, y: snake[0].y });
-                    break;
-            }
+    const storeSnakePosition = () => {
+        const newRows = getInitialRows();
+        newRows[foodPositionRef.current.x][foodPositionRef.current.y] = 'food';
 
-            snake.forEach(cell => {
-                newSnake.push(cell); //we add the entire old snake to the new snake's head. that increase the snake length, but we will remove one cell if his head wasn't on the fruit
-            });
-
-            // if snake's head was on fruit, create a new fruit. else, remove the last cell of the new snake
-            if (snake[0].x === food.x && snake[0].y === food.y) {
-                setFood(randomPosition);
-            } else {
-                newSnake.pop();
-            }
-
-            for (let i = 1; i < newSnake.length; i++) {
-                // defeat if the head is on a body cell
-                if (newSnake[0].x == newSnake[i].x && newSnake[0].y == newSnake[i].y) {
-                    handleDefeat((newSnake.length - 3) * 100);
-                }
-            }
-
-            if (
-                newSnake[0].x == 0 ||
-                newSnake[0].x == horizontalSize - 1 ||
-                newSnake[0].y == 0 ||
-                newSnake[0].y == verticalSize - 1
-            ) {
-                // defeat if next move put snake on wall
-                handleDefeat((newSnake.length - 3) * 100);
-            }
-            setSnake(newSnake);
+        if (snakePositionRef.current[0].y < snakePositionRef.current[1].y) {
+            newRows[snakePositionRef.current[0].x][snakePositionRef.current[0].y] = 'snakeheadleft';
+        } else if (snakePositionRef.current[0].x > snakePositionRef.current[1].x) {
+            newRows[snakePositionRef.current[0].x][snakePositionRef.current[0].y] = 'snakeheaddown';
+        } else if (snakePositionRef.current[0].y > snakePositionRef.current[1].y) {
+            newRows[snakePositionRef.current[0].x][snakePositionRef.current[0].y] = 'snakeheadright';
+        } else if (snakePositionRef.current[0].x < snakePositionRef.current[1].x) {
+            newRows[snakePositionRef.current[0].x][snakePositionRef.current[0].y] = 'snakeheadup';
         }
+
+        for (let i = 1; i < snakePositionRef.current.length - 1; i++) {
+            const prev = snakePositionRef.current[i - 1];
+            const next = snakePositionRef.current[i + 1];
+            const current = snakePositionRef.current[i];
+
+            if ((prev.x < current.x && next.x > current.x) || (next.x < current.x && prev.x > current.x)) {
+                // Up-Down
+                newRows[snakePositionRef.current[i].x][snakePositionRef.current[i].y] = 'snakeupdown';
+            } else if ((prev.x < current.x && next.y > current.y) || (next.x < current.x && prev.y > current.y)) {
+                // Angle Up-Right
+                newRows[snakePositionRef.current[i].x][snakePositionRef.current[i].y] = 'snakeupright';
+            } else if ((prev.y < current.y && next.y > current.y) || (next.y < current.y && prev.y > current.y)) {
+                // Left-Right
+                newRows[snakePositionRef.current[i].x][snakePositionRef.current[i].y] = 'snakeleftright';
+            } else if ((prev.y < current.y && next.x < current.x) || (next.y < current.y && prev.x < current.x)) {
+                // Angle Up-Left
+                newRows[snakePositionRef.current[i].x][snakePositionRef.current[i].y] = 'snakeupleft';
+            } else if ((prev.x > current.x && next.y < current.y) || (next.x > current.x && prev.y < current.y)) {
+                // Angle Down-Left
+                newRows[snakePositionRef.current[i].x][snakePositionRef.current[i].y] = 'snakedownleft';
+            } else if ((prev.y > current.y && next.x > current.x) || (next.y > current.y && prev.x > current.x)) {
+                // Angle Down-Right
+                newRows[snakePositionRef.current[i].x][snakePositionRef.current[i].y] = 'snakedownright';
+            }
+        }
+
+        const prev = snakePositionRef.current[snakePositionRef.current.length - 2];
+        const tail = snakePositionRef.current[snakePositionRef.current.length - 1];
+
+        if (prev.y < tail.y) {
+            newRows[snakePositionRef.current[snakePositionRef.current.length - 1].x][
+                snakePositionRef.current[snakePositionRef.current.length - 1].y
+            ] = 'snaketailright';
+        } else if (prev.x > tail.x) {
+            newRows[snakePositionRef.current[snakePositionRef.current.length - 1].x][
+                snakePositionRef.current[snakePositionRef.current.length - 1].y
+            ] = 'snaketailup';
+        } else if (prev.y > tail.y) {
+            newRows[snakePositionRef.current[snakePositionRef.current.length - 1].x][
+                snakePositionRef.current[snakePositionRef.current.length - 1].y
+            ] = 'snaketailleft';
+        } else if (prev.x < tail.x) {
+            newRows[snakePositionRef.current[snakePositionRef.current.length - 1].x][
+                snakePositionRef.current[snakePositionRef.current.length - 1].y
+            ] = 'snaketaildown';
+        }
+
+        setDisplayedRows(newRows);
+    };
+
+    const draw = (time: number) => {
+        if (previousTimeRef.current != undefined) {
+            const deltaTime = time - previousTimeRef.current;
+            ellapsedTimeSinceSnakeMove += deltaTime;
+
+            if (ellapsedTimeSinceSnakeMove >= SNAKE_MOVE_WAIT_TIME_MS && isGameOngoingRef.current) {
+                moveSnake();
+                storeSnakePosition();
+
+                ellapsedTimeSinceSnakeMove = 0;
+            }
+        }
+
+        previousTimeRef.current = time;
+        animationRequestRef.current = requestAnimationFrame(draw);
     };
 
     useEffect(() => {
-        moveSnake(true);
-    }, [direction]);
-
-    useInterval(moveSnake, 10);
-
-    const displayRows = rows.map(row => (
-        <>
-            {row.map(e => {
-                switch (e) {
-                    case 'blank':
-                        return <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}></div>;
-                    case 'snakeleftright':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={LeftRight}></img>
-                            </div>
-                        );
-                    case 'snakeupdown':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={UpDown}></img>
-                            </div>
-                        );
-                    case 'snakeheadup':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={HeadUp}></img>
-                            </div>
-                        );
-                    case 'snakedownleft':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={DownLeft}></img>
-                            </div>
-                        );
-                    case 'snakedownright':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={DownRight}></img>
-                            </div>
-                        );
-                    case 'snakeupleft':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={UpLeft}></img>
-                            </div>
-                        );
-                    case 'snakeupright':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={UpRight}></img>
-                            </div>
-                        );
-                    case 'snakeheaddown':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={HeadDown}></img>
-                            </div>
-                        );
-                    case 'snakeheadleft':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={HeadLeft}></img>
-                            </div>
-                        );
-                    case 'snakeheadright':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={HeadRight}></img>
-                            </div>
-                        );
-                    case 'snaketailup':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={TailUp}></img>
-                            </div>
-                        );
-                    case 'snaketaildown':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={TailDown}></img>
-                            </div>
-                        );
-                    case 'snaketailleft':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={TailLeft}></img>
-                            </div>
-                        );
-                    case 'snaketailright':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={TailRight}></img>
-                            </div>
-                        );
-                    case 'food':
-                        return (
-                            <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
-                                <img src={Food}></img>
-                            </div>
-                        );
-                    case 'wall':
-                        return (
-                            <div className="w-1/10">
-                                <img src={Wall}></img>
-                            </div>
-                        );
-                }
-            })}
-        </>
-    ));
-
-    const handleStart = () => {
-        setDirection('right');
-        setMoving(true);
-        setSnake([
-            { x: verticalSize / 2, y: 3 },
-            { x: verticalSize / 2, y: 2 },
-            { x: verticalSize / 2, y: 1 },
-        ]);
-        setFood(randomPosition);
-    };
+        animationRequestRef.current = requestAnimationFrame(draw);
+        return () => cancelAnimationFrame(animationRequestRef.current);
+    }, []);
 
     return (
         <AppContent scrollable={false}>
             <>
                 <div
                     className={cn({
-                        'opacity-80': isMoving === false,
+                        'opacity-80': !isGameOngoingRef.current,
                     })}
                 >
-                    {(snake.length - 3) * 100 > highScore && (
+                    {(snakePositionRef.current.length - 3) * 100 > highScore && (
                         <div className="absolute -rotate-12 -top-6 left-1/3 bg-yellow-500 text-sm text-white font-bold px-2 py-1 rounded">
                             Nouveau record !
                         </div>
                     )}
                     <header className="flex justify-around items-center text-white font-semibold px-2 mt-6">
-                        <DataContainer title="Taille" value={snake.length} />
-                        <DataContainer title="Score" value={(snake.length - 3) * 100} />
+                        <DataContainer title="Taille" value={snakePositionRef.current.length} />
+                        <DataContainer title="Score" value={(snakePositionRef.current.length - 3) * 100} />
                     </header>
-                    <div className="grid grid-cols-[repeat(20,_minmax(0,_1fr))] pt-6 p-3">{displayRows}</div>
+                    <div className="grid grid-cols-[repeat(20,_minmax(0,_1fr))] pt-6 p-2">
+                        {displayedRows &&
+                            displayedRows.map(row => (
+                                <>
+                                    {row.map(e => {
+                                        switch (e) {
+                                            case 'blank':
+                                                return (
+                                                    <div
+                                                        className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}
+                                                    ></div>
+                                                );
+                                            case 'snakeleftright':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={LeftRight}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeupdown':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={UpDown}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeheadup':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={HeadUp}></img>
+                                                    </div>
+                                                );
+                                            case 'snakedownleft':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={DownLeft}></img>
+                                                    </div>
+                                                );
+                                            case 'snakedownright':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={DownRight}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeupleft':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={UpLeft}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeupright':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={UpRight}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeheaddown':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={HeadDown}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeheadleft':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={HeadLeft}></img>
+                                                    </div>
+                                                );
+                                            case 'snakeheadright':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={HeadRight}></img>
+                                                    </div>
+                                                );
+                                            case 'snaketailup':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={TailUp}></img>
+                                                    </div>
+                                                );
+                                            case 'snaketaildown':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={TailDown}></img>
+                                                    </div>
+                                                );
+                                            case 'snaketailleft':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={TailLeft}></img>
+                                                    </div>
+                                                );
+                                            case 'snaketailright':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={TailRight}></img>
+                                                    </div>
+                                                );
+                                            case 'food':
+                                                return (
+                                                    <div className={cn('w-1/10 aspect-square bg-ios-700 opacity-75')}>
+                                                        <img src={Food}></img>
+                                                    </div>
+                                                );
+                                            case 'wall':
+                                                return (
+                                                    <div className="w-1/10">
+                                                        <img src={Wall}></img>
+                                                    </div>
+                                                );
+                                        }
+                                    })}
+                                </>
+                            ))}
+                    </div>
 
                     <ActionButton className="mt-6 bg-opacity-80" onClick={onClickLeaderboard}>
                         <LeaderBoardIcon /> Voir le classement
                     </ActionButton>
 
-                    {isMoving === false && (
+                    {!isGameOngoingRef.current && (
                         <div className="fixed inset-0 flex items-center justify-around m-4">
                             <div className="bg-black/70 p-4 w-full rounded-lg">
                                 <div className="text-red-400 text-4xl text-center py-4 font-bold">
                                     Vous avez perdu !
                                 </div>
                                 <p className="text-white py-4">
-                                    Vous avez atteint la taille {(snake.length - 3) * 100}.
+                                    Vous avez atteint la taille {(snakePositionRef.current.length - 3) * 100}.
                                 </p>
                                 <p className="text-white pt-4 pb-8">
                                     Votre meilleur score est de{' '}
-                                    {(snake.length - 3) * 100 > highScore ? (snake.length - 3) * 100 : highScore}.
+                                    {(snakePositionRef.current.length - 3) * 100 > highScore
+                                        ? (snakePositionRef.current.length - 3) * 100
+                                        : highScore}
+                                    .
                                 </p>
-                                <ActionButton onClick={handleStart}>Recommencer</ActionButton>
+                                <ActionButton onClick={resetGameState}>Recommencer</ActionButton>
                             </div>
                         </div>
                     )}
