@@ -174,6 +174,8 @@ export const SnakeHome = memo(() => {
             default:
                 break;
         }
+
+        ellapsedTimeSinceSnakeMove = SNAKE_MOVE_WAIT_TIME_MS;
     };
 
     useEffect(() => {
