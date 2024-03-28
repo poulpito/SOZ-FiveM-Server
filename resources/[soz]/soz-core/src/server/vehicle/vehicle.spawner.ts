@@ -114,7 +114,10 @@ const VEHICLE_HAS_RADIO = [
     'coach2',
 ];
 
-const DISALLOWED_VEHICLE_MODELS = { [GetHashKey('dune2')]: true };
+const DISALLOWED_VEHICLE_MODELS = {
+    [GetHashKey('dune2')]: true,
+    [GetHashKey('besra')]: true,
+};
 
 const frontBCSO = new BoxZone([1844.67, 3688.55, 33.75], 44.4, 93.2, {
     heading: 210.06,
