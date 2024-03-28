@@ -10,7 +10,7 @@ const SnakeIcon: React.FC = () => {
             y="0px"
             width="100%"
             viewBox="0 0 300 300"
-            enable-background="new 0 0 300 300"
+            enableBackground="new 0 0 300 300"
             xmlSpace="preserve"
         >
             <path
