@@ -104,7 +104,7 @@ export class NoClipProvider {
             SetLocalPlayerVisibleLocally(true);
             SetEveryoneIgnorePlayer(playerPed, false);
             SetPoliceIgnorePlayer(playerPed, false);
-            await this.voipService.mutePlayer(false);
+            this.voipService.mutePlayer(false);
             await wait(5000);
             if (this.isClippedVeh) {
                 while (!IsVehicleOnAllWheels(this.noClippingEntity) && !this.isNoClipping) {
@@ -140,7 +140,7 @@ export class NoClipProvider {
 
             this.weaponDrawingProvider.undrawAdminWeapons();
             SetEntityAlpha(this.noClippingEntity, 51, false);
-            await this.voipService.mutePlayer(true);
+            this.voipService.mutePlayer(true);
 
             this.SetInvincible(true, this.noClippingEntity);
             if (!this.isClippedVeh) {
