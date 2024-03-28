@@ -12,6 +12,7 @@ import { joaat } from '@public/shared/joaat';
 import { ClientEvent, ServerEvent } from '../../shared/event';
 import { WorldObject } from '../../shared/object';
 import { RpcServerEvent } from '../../shared/rpc';
+import { ItemService } from '../item/item.service';
 
 const OBJETS_COLLECT_TO_ITEM_ID: Record<number, string> = {
     [joaat('prop_ld_greenscreen_01')]: 'n_fix_greenscreen',
@@ -31,6 +32,9 @@ export class ObjectProvider {
     @Inject(Notifier)
     private notifier: Notifier;
 
+    @Inject(ItemService)
+    private itemService: ItemService;
+
     private objects: Record<string, WorldObject> = {};
 
     public addObjects(objects: WorldObject[]): void {
@@ -43,12 +47,6 @@ export class ObjectProvider {
 
     @OnEvent(ServerEvent.OBJECT_COLLECT)
     public async onObjectCollect(source: number, id: string) {
-        const object = this.getObject(id);
-
-        if (!object) {
-            return;
-        }
-
         const { completed } = await this.progressService.progress(
             source,
             'object:collect',
@@ -67,6 +65,12 @@ export class ObjectProvider {
             return;
         }
 
+        const object = this.getObject(id);
+
+        if (!object) {
+            return;
+        }
+
         const item = OBJETS_COLLECT_TO_ITEM_ID[object.model];
 
         if (!item) {
@@ -79,8 +83,10 @@ export class ObjectProvider {
             return;
         }
 
-        this.inventoryManager.addItemToInventory(source, item, 1);
         this.deleteObject(id);
+        this.inventoryManager.addItemToInventory(source, item, 1);
+        const itemDef = this.itemService.getItem(item);
+        this.notifier.notify(source, `Vous avez récupéré ~g~${itemDef.label}~s~.`);
     }
 
     @Rpc(RpcServerEvent.OBJECT_GET_LIST)
