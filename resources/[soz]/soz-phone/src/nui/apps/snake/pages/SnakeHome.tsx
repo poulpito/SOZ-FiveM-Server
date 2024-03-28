@@ -131,10 +131,10 @@ export const SnakeHome = memo(() => {
     };
 
     const highScore = useMemo(() => {
-        if (!snakeLeaderboard) return null;
+        if (!snakeLeaderboard) return 0;
 
         const player = snakeLeaderboard.sort((a, b) => b.score - a.score).find(p => p.citizenid === playerCitizenID);
-        if (!player) return null;
+        if (!player) return 0;
 
         return player.score;
     }, [playerCitizenID, snakeLeaderboard]);
