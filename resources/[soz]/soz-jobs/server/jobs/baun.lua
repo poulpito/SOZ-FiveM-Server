@@ -120,6 +120,17 @@ QBCore.Functions.CreateCallback("soz-jobs:server:baun:restock", function(source,
         return
     end
 
+    local itemsToAdd = {}
+    for _, item in pairs(BaunConfig.Restock[itemId]) do
+        table.insert(itemsToAdd, {name = item.itemId, amount = item.quantity})
+    end
+
+    if not exports["soz-inventory"]:CanCarryItems(storage, itemsToAdd) then
+        cbCalled = true
+        cb(false, "invalid_weight")
+        return
+    end
+
     for _, item in pairs(BaunConfig.Restock[itemId]) do
         if not cbCalled then
             exports["soz-inventory"]:AddItem(source, storage, item.itemId, item.quantity, nil, nil, function(success, reason)
