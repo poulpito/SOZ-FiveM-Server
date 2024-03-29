@@ -141,7 +141,7 @@ const doAnimation = async (
     await waitUntil(async () => IsEntityPlayingAnim(ped, animation.dictionary, animation.name, 3), 1000);
 
     const waitUntilPromise = waitUntil(async () => {
-        return !IsEntityPlayingAnim(ped, animation.dictionary, animation.name, 3);
+        return !IsEntityPlayingAnim(ped, animation.dictionary, animation.name, 3) || IsPedRagdoll(ped);
     });
 
     return new Promise<AnimationStopReason>(resolve => {
@@ -183,6 +183,10 @@ export class AnimationFactory {
 
     public createAnimation(animation: Animation, options: Partial<PlayOptions> = {}): AnimationRunner {
         return this.createFromCallback(async (animationCanceller, ped) => {
+            if (IsPedRagdoll(ped)) {
+                return AnimationStopReason.Aborted;
+            }
+
             if (animation.enter?.dictionary) {
                 await this.resourceLoader.loadAnimationDictionary(animation.enter.dictionary);
             }
