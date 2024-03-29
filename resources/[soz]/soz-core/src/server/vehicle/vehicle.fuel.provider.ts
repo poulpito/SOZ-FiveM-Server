@@ -1,4 +1,8 @@
-import { VehicleClass, VehicleClassFuelStorageMultiplier } from '@public/shared/vehicle/vehicle';
+import {
+    getDefaultVehicleCondition,
+    VehicleClass,
+    VehicleClassFuelStorageMultiplier,
+} from '@public/shared/vehicle/vehicle';
 
 import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
@@ -55,7 +59,9 @@ export class VehicleFuelProvider {
         try {
             const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
             const vehicleState = this.vehicleStateService.getVehicleState(vehicleNetworkId);
-            const fuelToFill = Math.floor(100 * storageMultiplier - vehicleState.condition.fuelLevel);
+            const fuelToFill = Math.floor(
+                getDefaultVehicleCondition().fuelLevel * storageMultiplier - vehicleState.condition.fuelLevel
+            );
 
             const [reservedFuel, station, maxFuelMoney] = await this.lockService.lock(
                 `fuel_station_${stationId}`,

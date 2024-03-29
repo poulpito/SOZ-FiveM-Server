@@ -1,3 +1,9 @@
+import {
+    getDefaultVehicleCondition,
+    VehicleClass,
+    VehicleClassFuelStorageMultiplier,
+} from '@public/shared/vehicle/vehicle';
+
 import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
@@ -36,7 +42,7 @@ export class VehicleElectricProvider {
     private currentCharging = new Set<number>();
 
     @OnEvent(ServerEvent.VEHICLE_CHARGE_START)
-    public async startCharge(source: number, vehicleNetworkId: number, stationId: number) {
+    public async startCharge(source: number, vehicleNetworkId: number, stationId: number, vehClass: VehicleClass) {
         const player = this.playerService.getPlayer(source);
 
         if (!player) {
@@ -44,7 +50,11 @@ export class VehicleElectricProvider {
         }
 
         const vehicleState = this.vehicleStateService.getVehicleState(vehicleNetworkId);
-        const energyToFill = Math.floor((100 - vehicleState.condition.fuelLevel) * 0.6); // 100L <=> 60kWh
+
+        const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
+        const energyToFill = Math.floor(
+            (getDefaultVehicleCondition().fuelLevel * storageMultiplier - vehicleState.condition.fuelLevel) * 0.6
+        ); // 100L <=> 60kWh
 
         if (this.currentCharging.has(vehicleNetworkId)) {
             this.notifier.notify(source, 'Le véhicule est déjà en train de charger.', 'error');
