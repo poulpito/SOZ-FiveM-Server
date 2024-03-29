@@ -13,7 +13,7 @@ import {
     NPCTakeLocations,
     TaxiStatus,
 } from '@public/shared/job/cjr';
-import { Vector4 } from '@public/shared/polyzone/vector';
+import { Vector3, Vector4 } from '@public/shared/polyzone/vector';
 import { getRandomItem } from '@public/shared/random';
 
 import { VehicleSeat } from '../../../shared/vehicle/vehicle';
@@ -36,7 +36,7 @@ export class TaxiMissionService {
         busMissionInProgress: false,
     };
 
-    private lastLocation = null;
+    private lastLocation: Vector3 = null;
     private totalDistance = 0;
     private taxiGroupHash = AddRelationshipGroup('TAXI');
 
@@ -45,6 +45,7 @@ export class TaxiMissionService {
     private DeliveryBlip = 0;
     private NpcTaken = false;
     private savedNpcPosition: Vector4 = null;
+    private inClear = false;
 
     private updateState(newState: Partial<TaxiStatus>) {
         this.state = { ...this.state, ...newState };
@@ -63,6 +64,11 @@ export class TaxiMissionService {
     }
 
     public async clearMission() {
+        while (this.inClear) {
+            await wait(0);
+        }
+        this.inClear = true;
+
         if (this.NpcBlip) {
             RemoveBlip(this.NpcBlip);
             this.NpcBlip = 0;
@@ -70,10 +76,6 @@ export class TaxiMissionService {
         if (this.DeliveryBlip) {
             RemoveBlip(this.DeliveryBlip);
             this.DeliveryBlip = 0;
-        }
-
-        if (!this.NpcTaken && this.Npc) {
-            this.savedNpcPosition = [...GetEntityCoords(this.Npc), GetEntityHeading(this.Npc)] as Vector4;
         }
 
         if (this.NpcTaken && this.Npc) {
@@ -103,6 +105,8 @@ export class TaxiMissionService {
         this.updateState({
             taxiMissionInProgress: false,
         });
+
+        this.inClear = false;
     }
 
     private validVehicle() {
@@ -123,7 +127,7 @@ export class TaxiMissionService {
 
         if (this.state.horodateurStarted && this.validVehicle()) {
             const start = this.lastLocation;
-            this.lastLocation = GetEntityCoords(PlayerPedId());
+            this.lastLocation = GetEntityCoords(PlayerPedId()) as Vector3;
 
             if (start) {
                 const distance = Vdist(
@@ -151,7 +155,7 @@ export class TaxiMissionService {
             return;
         }
 
-        this.lastLocation = GetEntityCoords(PlayerPedId());
+        this.lastLocation = GetEntityCoords(PlayerPedId()) as Vector3;
         this.updateState({
             horodateurStarted: status,
         });
@@ -211,6 +215,7 @@ export class TaxiMissionService {
         });
 
         const targetNPCLocation = this.savedNpcPosition ? this.savedNpcPosition : getRandomItem(NPCTakeLocations);
+        this.savedNpcPosition = targetNPCLocation;
 
         const model = GetHashKey(getRandomItem(NpcSkins));
         this.Npc = await this.pedFactory.createPed({
