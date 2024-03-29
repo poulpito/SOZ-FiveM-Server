@@ -165,9 +165,9 @@ export class VehicleRadarProvider {
     @OnEvent(ClientEvent.JOB_DUTY_CHANGE)
     public async removeBlip(duty: boolean) {
         if (!duty) {
-            for (const radarID in this.radarRepository.get()) {
-                if (this.blipFactory.exist('police_radar_' + radarID)) {
-                    this.blipFactory.remove('police_radar_' + radarID);
+            for (const radar of this.radarRepository.get()) {
+                if (this.blipFactory.exist('police_radar_' + radar.id)) {
+                    this.blipFactory.remove('police_radar_' + radar.id);
                 }
             }
         }
