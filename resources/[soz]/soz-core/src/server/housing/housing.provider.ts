@@ -566,18 +566,19 @@ export class HousingProvider {
             return;
         }
 
+        if (this.inventoryManager.getItemCount('cabinet_storage', 'cabinet_zkea') < zkeaAmount) {
+            this.notifier.error(player.source, "Amélioration de palier impossible car Zkea n'a pas assez de stock.");
+
+            return;
+        }
+
         if (!(await this.playerMoneyService.buy(player.source, price, TaxType.HOUSING))) {
             this.notifier.error(player.source, "Vous n'avez pas assez d'argent.");
 
             return;
         }
 
-        if (!this.inventoryManager.removeItemFromInventory('cabinet_storage', 'cabinet_zkea', zkeaAmount)) {
-            this.notifier.error(player.source, "Amélioration de palier impossible car Zkea n'a pas assez de stock.");
-            this.playerMoneyService.add(player.source, price);
-
-            return;
-        }
+        this.inventoryManager.removeItemFromInventory('cabinet_storage', 'cabinet_zkea', zkeaAmount);
 
         this.inventoryManager.setHouseStashMaxWeightFromTier(apartment.identifier, tier);
         this.playerService.setPlayerApartmentTier(player.source, tier);
