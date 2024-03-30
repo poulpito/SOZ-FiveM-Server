@@ -19,13 +19,20 @@ import { AuctionVehicle } from '../../shared/vehicle/auction';
 import { DealershipId } from '../../shared/vehicle/dealership';
 import { getDefaultVehicleConfiguration, VehicleConfiguration } from '../../shared/vehicle/modification';
 import { PlayerVehicleState } from '../../shared/vehicle/player.vehicle';
-import { getDefaultVehicleCondition, isVehicleModelElectric, Vehicle } from '../../shared/vehicle/vehicle';
+import {
+    getDefaultVehicleCondition,
+    isVehicleModelElectric,
+    Vehicle,
+    VehicleClass,
+    VehicleClassFuelStorageMultiplier,
+} from '../../shared/vehicle/vehicle';
 import { PrismaService } from '../database/prisma.service';
 import { LockService } from '../lock.service';
 import { Monitor } from '../monitor/monitor';
 import { Notifier } from '../notifier';
 import { PlayerMoneyService } from '../player/player.money.service';
 import { PlayerService } from '../player/player.service';
+import { VehicleRepository } from '../repository/vehicle.repository';
 import { VehicleService } from './vehicle.service';
 import { VehicleSpawner } from './vehicle.spawner';
 
@@ -48,6 +55,9 @@ export class VehicleDealershipProvider {
 
     @Inject(VehicleSpawner)
     private vehicleSpawner: VehicleSpawner;
+
+    @Inject(VehicleRepository)
+    private vehicleRepository: VehicleRepository;
 
     @Inject(LockService)
     private lockService: LockService;
@@ -119,6 +129,13 @@ export class VehicleDealershipProvider {
                 turbo: true,
             };
 
+            const condition = getDefaultVehicleCondition();
+            condition.fuelLevel =
+                condition.fuelLevel *
+                (vehicle.requiredLicence === 'motorcycle'
+                    ? VehicleClassFuelStorageMultiplier[VehicleClass.Motorcycles]
+                    : 1.0);
+
             await this.prismaService.playerVehicle.upsert({
                 create: {
                     plate,
@@ -132,7 +149,7 @@ export class VehicleDealershipProvider {
                     engine: 1000,
                     body: 1000,
                     mods: JSON.stringify(configuration),
-                    condition: JSON.stringify(getDefaultVehicleCondition()),
+                    condition: JSON.stringify(condition),
                     label: null,
                 },
                 update: {
@@ -253,6 +270,14 @@ export class VehicleDealershipProvider {
             const plate = await this.vehicleService.generatePlate();
             const nowInSeconds = Math.round(Date.now() / 1000);
 
+            const condition = getDefaultVehicleCondition();
+            const vehicle = await this.vehicleRepository.findByModel(auction.vehicle.model);
+            condition.fuelLevel =
+                condition.fuelLevel *
+                (vehicle.requiredLicence === 'motorcycle'
+                    ? VehicleClassFuelStorageMultiplier[VehicleClass.Motorcycles]
+                    : 1.0);
+
             await this.prismaService.playerVehicle.create({
                 data: {
                     license: player.license,
@@ -260,7 +285,7 @@ export class VehicleDealershipProvider {
                     vehicle: auction.vehicle.model,
                     hash: auction.vehicle.hash.toString(),
                     mods: JSON.stringify(getDefaultVehicleConfiguration()),
-                    condition: JSON.stringify(getDefaultVehicleCondition()),
+                    condition: JSON.stringify(condition),
                     garage: 'airport_public',
                     plate,
                     category: auction.vehicle.category,
