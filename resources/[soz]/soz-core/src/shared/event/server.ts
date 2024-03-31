@@ -79,6 +79,8 @@ export enum ServerEvent {
     FOOD_EASTER_HARVEST = 'soz-core:server:job:food:easter-harvest',
     FOOD_HUNT = 'soz-core:client:food:hunt',
 
+    EASTER_HUNT = 'soz-core:server:easter:hunt',
+
     FFS_HARVEST = 'soz-core:server:job:ffs:harvest',
     FFS_RESTOCK = 'soz-core:server:job:ffs:restock',
     FFS_TRANSFORM = 'soz-core:server:job:ffs:transform',
@@ -222,7 +224,6 @@ export enum ServerEvent {
     AFK_KICK = 'soz-core:server:afk:kick',
 
     // not core
-
     BANKING_TRANSFER_MONEY = 'banking:server:TransferMoney',
     CHARACTER_SET_JOB_CLOTHES = 'soz-character:server:SetPlayerJobClothes',
     CHARACTER_SET_CLOTHES = 'soz-character:server:SetPlayerClothes',

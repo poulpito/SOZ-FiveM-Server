@@ -59,7 +59,7 @@ export class FoodProvider {
 
         this.blipFactory.hide('displayMilkBlip', true);
 
-        if (isFeatureEnabled(Feature.Easter)) {
+        if (isFeatureEnabled(Feature.EasterFood)) {
             this.state.easterEnabled = true;
 
             this.blipFactory.create('displayEasterEggBlip', {
