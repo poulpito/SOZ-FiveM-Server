@@ -31,7 +31,7 @@ export class ObjectService {
         }
 
         if (!IsModelValid(model)) {
-            this.logger.error(`Model ${model} is not valid for ${object.id}`);
+            this.logger.warn(`Model ${model} is not valid for ${object.id}`);
 
             return null;
         }
