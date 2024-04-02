@@ -4232,6 +4232,7 @@ QBShared.Items = {
         ['useable'] = true,
         ['shouldClose'] = true,
         ['combinable'] = nil,
+        ['canShow'] = true,
         ['description'] = 'Photo prise avec un appareil photo scientifique.',
         ['illustrator'] = '.Sniteur'
     },

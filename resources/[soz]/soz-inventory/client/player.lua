@@ -268,3 +268,14 @@ RegisterNUICallback("player/openItemStorage", function(data, cb)
 
     TriggerServerEvent("inventory:server:openItemStorage", data.slot)
 end)
+
+RegisterNUICallback("player/showItem", function(data, cb)
+    cb(true)
+
+    local player, distance = QBCore.Functions.GetClosestPlayer()
+    if player ~= -1 and distance < 2.0 then
+        TriggerServerEvent("soz-core:server:inventory:item-show", GetPlayerServerId(player), data.slot)
+    else
+        exports["soz-core"]:DrawNotification("Personne n'est à portée de vous", "error")
+    end
+end)

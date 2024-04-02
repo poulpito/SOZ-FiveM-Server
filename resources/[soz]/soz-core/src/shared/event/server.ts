@@ -298,6 +298,7 @@ export enum ServerEvent {
 
     INVENTORY_USE_ITEM = 'inventory:server:UseItemSlot',
     INVENTORY_SET_ITEM_SHORTCUT = 'soz-core:server:inventory:set-item-usage',
+    INVENTORY_ITEM_SHOW = 'soz-core:server:inventory:item-show',
 
     WEAPON_SHOOTING = 'soz-core:server:weapon:shooting',
     WEAPON_SHOOTING_ALERT = 'soz-core:server:weapon:shooting-alert',
