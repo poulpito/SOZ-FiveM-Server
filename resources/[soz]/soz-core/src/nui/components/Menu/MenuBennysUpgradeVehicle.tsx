@@ -757,6 +757,13 @@ export const MenuBennysUpgradeVehicle: FunctionComponent<MenuBennysUpgradeVehicl
                         config={config}
                         set={setConfig}
                     />
+                    <MenuItemVehicleModification
+                        initialConfig={data?.originalConfiguration}
+                        modKey="windowsSecondary"
+                        options={options}
+                        config={config}
+                        set={setConfig}
+                    />
                     <MenuItemGoBack />
                 </MenuContent>
             </SubMenu>
