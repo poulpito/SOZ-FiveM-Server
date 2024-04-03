@@ -298,7 +298,7 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
             )
         }
     }
-
+    
     return (
         <div ref={itemRef} className={clsx({
             [style.Money]: !!money,
@@ -386,6 +386,10 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
                             {item.type === 'weapon' ? 'Équiper' : item.usableLabel || 'Utiliser'}
 
                         </li>}
+                        {item && item.canShow && <li className={style.OptionListItem} onClick={createInteractAction('showItem')}>
+                            Montrer
+                        </li>
+                        }
                         {item && item.type !== 'card' && <li className={style.OptionListItem} onClick={createInteractAction('giveItem')}>
                             {item.giveLabel || 'Donner'}
                         </li>}

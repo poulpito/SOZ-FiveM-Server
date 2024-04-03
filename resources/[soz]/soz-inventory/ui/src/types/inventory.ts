@@ -37,6 +37,7 @@ export type InventoryItem = {
     shortcut?: string | null; // added by inventory on the fly
     storageItemType?: string | null;
     openStorageLabel?: string | null;
+    canShow?: boolean;
 };
 
 export type ItemType =

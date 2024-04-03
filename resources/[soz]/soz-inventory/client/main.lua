@@ -54,6 +54,7 @@ function HydrateInventory(inventory)
         local itemDef = QBCore.Shared.Items[value.name]
         value.storageItemType = itemDef.storageItemType
         value.openStorageLabel = itemDef.openStorageLabel
+        value.canShow = itemDef.canShow
     end
 
     return inventory
