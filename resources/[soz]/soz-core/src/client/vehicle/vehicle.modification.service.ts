@@ -492,6 +492,7 @@ const VehicleModificationHelpers: VehicleModificationHelperType<keyof VehicleMod
     trim: createModificationHelperList(VehicleModType.Trim),
     tank: createModificationHelperList(VehicleModType.Tank),
     windows: createModificationHelperList(VehicleModType.Windows),
+    windowsSecondary: createModificationHelperList(VehicleModType.WindowsSecondary),
 };
 
 @Injectable()
