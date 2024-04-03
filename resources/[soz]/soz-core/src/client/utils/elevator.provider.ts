@@ -175,7 +175,14 @@ const Elevators: Record<ElevatorFloorName, ElevatorFloor> = {
         upTo: [ElevatorFloorName.admin0],
         downTo: [],
         spawnPoint: [2154.62, 2920.95, -81.08, 272.4],
-        job: { [JobType.FBI]: 0, [JobType.LSPD]: 0, [JobType.BCSO]: 0, [JobType.SASP]: 0, [JobType.Gouv]: 0 },
+        job: {
+            [JobType.FBI]: 0,
+            [JobType.LSPD]: 0,
+            [JobType.BCSO]: 0,
+            [JobType.SASP]: 0,
+            [JobType.Gouv]: 0,
+            [JobType.LSCS]: 0,
+        },
     },
     //MTP
     [ElevatorFloorName.mtp0]: {

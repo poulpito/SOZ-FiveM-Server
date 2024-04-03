@@ -192,6 +192,15 @@ Config.SafeStorages = {
         size = vec2(1.00, 2.00),
         heading = 143.57,
     },
+    ["safe_lscs"] = {
+        label = "Coffre LSCS",
+        owner = "lscs",
+        position = vector3(450.15, -972.49, 30.44),
+        size = vec2(1.00, 1.20),
+        heading = 181.33,
+        minZ = 29.44,
+        maxZ = 31.04,
+    },
 }
 
 Config.ATMModels = {

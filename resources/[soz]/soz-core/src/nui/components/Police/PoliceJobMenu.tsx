@@ -24,7 +24,7 @@ type PoliceJobStateProps = {
 };
 
 export const PoliceJobMenu: FunctionComponent<PoliceJobStateProps> = ({ data }) => {
-    const banner = `https://nui-img/soz/menu_job_${data.job}`;
+    const banner = `https://cfx-nui-soz-core/public/images/banner/menu_job_${data.job}.webp`;
     const propsList = [
         { label: 'Cône de circulation', item: 'cone', props: 'prop_air_conelight', offset: -0.15 },
         { label: 'Barrière', item: 'police_barrier', props: 'prop_barrier_work05' },

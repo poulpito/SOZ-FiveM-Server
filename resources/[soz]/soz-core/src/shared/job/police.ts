@@ -983,6 +983,80 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
             },
         },
     },
+    [JobType.LSCS]: {
+        [joaat('mp_m_freemode_01')]: {
+            [DUTY_OUTFIT_NAME]: {
+                Components: {
+                    [Component.Torso]: { Drawable: 0, Texture: 0, Palette: 0 },
+                    [Component.Legs]: {
+                        Drawable: 35,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                    [Component.Bag]: {
+                        Drawable: 0,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                    [Component.Shoes]: { Drawable: 60, Texture: 0, Palette: 0 },
+                    [Component.Undershirt]: {
+                        Drawable: 58,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                    [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
+                    [Component.Tops]: {
+                        Drawable: 55,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                },
+                Props: {
+                    [Prop.Hat]: {
+                        Drawable: 46,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                },
+            },
+        },
+        [joaat('mp_f_freemode_01')]: {
+            [DUTY_OUTFIT_NAME]: {
+                Components: {
+                    [Component.Torso]: { Drawable: 14, Texture: 0, Palette: 0 },
+                    [Component.Legs]: {
+                        Drawable: 34,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                    [Component.Bag]: {
+                        Drawable: 0,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                    [Component.Shoes]: { Drawable: 25, Texture: 0, Palette: 0 },
+                    [Component.Undershirt]: {
+                        Drawable: 35,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                    [Component.Decals]: { Drawable: 0, Texture: 0, Palette: 0 },
+                    [Component.Tops]: {
+                        Drawable: 48,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                },
+                Props: {
+                    [Prop.Hat]: {
+                        Drawable: 45,
+                        Texture: 0,
+                        Palette: 0,
+                    },
+                },
+            },
+        },
+    },
 };
 
 export const RankOutfit: Partial<Record<JobType, Record<string, Record<number, [number, number]>>>> = {

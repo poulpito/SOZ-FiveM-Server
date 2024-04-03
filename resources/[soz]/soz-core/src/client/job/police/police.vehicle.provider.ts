@@ -14,7 +14,7 @@ import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 import { VehicleType, VehicleTypeFromClass, VehicleVolatileState } from '@public/shared/vehicle/vehicle';
 
-const jobsAllowed = [JobType.LSPD, JobType.BCSO, JobType.SASP, JobType.FBI];
+const jobsAllowed = [JobType.LSPD, JobType.BCSO, JobType.SASP, JobType.FBI, JobType.LSCS];
 
 const PlateTypeOverride: Record<number, number> = {
     [GetHashKey('rebel')]: 1,

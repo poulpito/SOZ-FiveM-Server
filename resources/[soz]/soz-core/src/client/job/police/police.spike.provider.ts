@@ -10,7 +10,7 @@ import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { JobType } from '@public/shared/job';
 import { getDistance, Vector3, Vector4 } from '@public/shared/polyzone/vector';
 
-const jobsTarget = { [JobType.BCSO]: 0, [JobType.FBI]: 0, [JobType.SASP]: 0, [JobType.LSPD]: 0 };
+const jobsTarget = { [JobType.BCSO]: 0, [JobType.FBI]: 0, [JobType.SASP]: 0, [JobType.LSPD]: 0, [JobType.LSCS]: 0 };
 const spikeModel = GetHashKey('p_ld_stinger_s');
 
 @Provider()

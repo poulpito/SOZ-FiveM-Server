@@ -28,10 +28,18 @@ import { JobInteractionService } from '../job.interaction.service';
 import { StonkCloakRoomProvider } from '../stonk/stonk.cloakroom.provider';
 import { PoliceAnimationProvider } from './police.animation.provider';
 
-const jobsCanFine = [JobType.LSPD, JobType.BCSO, JobType.SASP, JobType.FBI];
-const jobsCanFouille = [JobType.LSPD, JobType.BCSO, JobType.CashTransfer, JobType.SASP];
-const jobsCanEscort = [JobType.LSPD, JobType.BCSO, JobType.CashTransfer, JobType.SASP, JobType.LSMC, JobType.FBI];
-const jobsCanBreathAnalyze = [JobType.LSPD, JobType.BCSO, JobType.LSMC, JobType.SASP, JobType.FBI];
+const jobsCanFine = [JobType.LSPD, JobType.BCSO, JobType.SASP, JobType.FBI, JobType.LSCS];
+const jobsCanFouille = [JobType.LSPD, JobType.BCSO, JobType.CashTransfer, JobType.SASP, JobType.LSCS];
+const jobsCanEscort = [
+    JobType.LSPD,
+    JobType.BCSO,
+    JobType.CashTransfer,
+    JobType.SASP,
+    JobType.LSMC,
+    JobType.FBI,
+    JobType.LSCS,
+];
+const jobsCanBreathAnalyze = [JobType.LSPD, JobType.BCSO, JobType.LSMC, JobType.SASP, JobType.FBI, JobType.LSCS];
 
 @Provider()
 export class PolicePlayerProvider {

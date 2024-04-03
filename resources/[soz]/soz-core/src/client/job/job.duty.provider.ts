@@ -213,6 +213,15 @@ const DutyZoneConfig: Zone<JobType>[] = [
         maxZ: 76.77,
         heading: 340,
     },
+    {
+        data: JobType.LSCS,
+        center: [441.04, -980.12, 30.79],
+        length: 0.35,
+        width: 0.6,
+        minZ: 30.59,
+        maxZ: 30.99,
+        heading: 159.31,
+    },
 ];
 
 const DutyPedConfig: Partial<Record<JobType, number>> = {

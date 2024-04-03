@@ -18,7 +18,7 @@ const excludeWeapon = [
     966099553 /*WEAPON_OBJECT*/,
 ];
 
-const AllowedJob = [JobType.FBI, JobType.BCSO, JobType.LSPD, JobType.SASP];
+const AllowedJob = [JobType.FBI, JobType.BCSO, JobType.LSPD, JobType.SASP, JobType.LSCS];
 
 const hosterDrawable = {
     [GetHashKey('mp_m_freemode_01')]: 130,

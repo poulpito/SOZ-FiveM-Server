@@ -167,6 +167,7 @@ export class LSMCProvider {
                         [JobType.LSMC]: 0,
                         [JobType.LSPD]: 0,
                         [JobType.BCSO]: 0,
+                        [JobType.LSCS]: 0,
                         [JobType.SASP]: 0,
                         [JobType.FBI]: 0,
                     },

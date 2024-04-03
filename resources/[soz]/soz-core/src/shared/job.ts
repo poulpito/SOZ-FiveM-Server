@@ -29,10 +29,11 @@ export enum JobType {
     FDF = 'fdf',
     SASP = 'sasp',
     DMC = 'dmc',
+    LSCS = 'lscs',
 }
 
 export const BASE_FDO = [JobType.LSPD, JobType.BCSO];
-export const FDO = [JobType.FBI, JobType.LSPD, JobType.BCSO, JobType.SASP];
+export const FDO = [JobType.FBI, JobType.LSPD, JobType.BCSO, JobType.SASP, JobType.LSCS];
 export const FDO_NO_FBI = [JobType.LSPD, JobType.BCSO, JobType.SASP];
 
 export enum JobPermission {
@@ -123,6 +124,7 @@ export const JobLabel: Record<JobType, string> = {
     [JobType.FDF]: 'Ferme de Fou',
     [JobType.SASP]: 'San Andreas State Police',
     [JobType.DMC]: 'DeMetal Company',
+    [JobType.LSCS]: 'Los Santos County Sheriff',
 };
 
 export type JobPermissionData = {
