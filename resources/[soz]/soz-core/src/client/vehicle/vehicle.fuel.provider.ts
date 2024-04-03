@@ -1,3 +1,5 @@
+import { OilTankerProvider } from '@public/client/job/oil/oil.tanker.provider';
+
 import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
@@ -84,6 +86,9 @@ export class VehicleFuelProvider {
     @Inject(RopeService)
     private ropeService: RopeService;
 
+    @Inject(OilTankerProvider)
+    private oilTankerProvider: OilTankerProvider;
+
     private currentStationPistol: CurrentStationPistol | null = null;
 
     private publicOilStationPrice = 0;
@@ -148,7 +153,7 @@ export class VehicleFuelProvider {
                         return false;
                     }
 
-                    if (!this.playerService.getState().tankerEntity || !player.job.onduty) {
+                    if (!this.oilTankerProvider.currentTankerAttached || !player.job.onduty) {
                         return false;
                     }
 

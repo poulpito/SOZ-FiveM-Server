@@ -17,6 +17,10 @@ export const StateApp: FunctionComponent = () => {
         dispatch.player.update(data);
     });
 
+    useNuiEvent('player', 'UpdatePosition', data => {
+        dispatch.playerPosition.update(data);
+    });
+
     useNuiEvent('item', 'SetItems', items => {
         dispatch.item.set(items);
     });

@@ -81,10 +81,6 @@ export class OilTankerProvider {
             const field = OIL_FIELDS[fieldKey];
 
             this.fieldZone.addZone(new PolygonZone(field.zone, { data: fieldKey }));
-
-            this.playerInOutService.add(`oil_field_${fieldKey}`, this.fieldZone, isInside => {
-                // @TODO display field health
-            });
         }
 
         this.targetFactory.createForModel(
@@ -134,8 +130,8 @@ export class OilTankerProvider {
                 width: 10.4,
                 length: 10.4,
                 heading: 45,
-                minZ: 31.28,
-                maxZ: 33.28,
+                minZ: 3.31,
+                maxZ: 15.31,
             },
             [
                 {
@@ -306,7 +302,7 @@ export class OilTankerProvider {
         const entityClass = GetVehicleClass(entityModel) as VehicleClass;
         const vehicleNetId = NetworkGetNetworkIdFromEntity(this.currentTankerAttached);
 
-        TriggerServerEvent(ServerEvent.OIL_REFILL_TANKER, vehicleNetId, entityModel, entityClass);
+        TriggerServerEvent(ServerEvent.OIL_REFINE_TANKER, vehicleNetId, entityModel, entityClass);
     }
 
     public tankerResell() {

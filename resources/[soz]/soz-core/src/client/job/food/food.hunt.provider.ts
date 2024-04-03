@@ -8,7 +8,6 @@ import { Inject } from '../../../core/decorators/injectable';
 import { JobType } from '../../../shared/job';
 import { Vector3 } from '../../../shared/polyzone/vector';
 import { Notifier } from '../../notifier';
-import { PlayerService } from '../../player/player.service';
 import { TargetFactory } from '../../target/target.factory';
 
 const Animals = [

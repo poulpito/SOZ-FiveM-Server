@@ -1,7 +1,9 @@
+import { Tick } from '@core/decorators/tick';
+import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { OnEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { emitRpc } from '@public/core/rpc';
-import { Vector4 } from '@public/shared/polyzone/vector';
+import { Vector3, Vector4 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
 import { Provider } from '../../core/decorators/provider';
@@ -23,6 +25,16 @@ export class PlayerPositionProvider {
 
     @Inject(LSMCStretcherProvider)
     private LSMCStretcherProvider: LSMCStretcherProvider;
+
+    @Inject(NuiDispatch)
+    private nuiDispatch: NuiDispatch;
+
+    @Tick(1000)
+    updatePosition() {
+        const position = GetEntityCoords(PlayerPedId()) as Vector3;
+
+        this.nuiDispatch.dispatch('player', 'UpdatePosition', position);
+    }
 
     @OnEvent(ClientEvent.PLAYER_TELEPORT)
     async onPlayerTeleport(zone: string) {

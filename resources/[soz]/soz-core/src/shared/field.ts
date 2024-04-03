@@ -1,3 +1,5 @@
+import { Zone } from '@public/shared/polyzone/box.zone';
+
 export type FieldOptions = {
     delay: number;
     amount: FieldAmount;
@@ -16,6 +18,10 @@ export type FieldAmount =
           max: number;
       };
 
+export enum FieldType {
+    Oil = 'oil',
+}
+
 export type Field = {
     identifier: string;
     owner: string;
@@ -24,6 +30,8 @@ export type Field = {
     maxCapacity: number;
     refill: FieldOptions;
     harvest: FieldOptions;
+    type?: FieldType;
+    zone?: Zone;
 };
 
 export const getAmount = (amount: FieldAmount): number => {

@@ -136,5 +136,11 @@ export class FoodFieldProvider {
         TriggerEvent(ClientEvent.DRUGS_HARVEST_ZEED, { location: 'food' });
     }
 
-    public harvestMilk() {}
+    public harvestMilk() {
+        if (IsPedInAnyVehicle(PlayerPedId(), false)) {
+            return;
+        }
+
+        TriggerServerEvent(ServerEvent.FOOD_MILK_COLLECT, GetClockHours());
+    }
 }

@@ -1,8 +1,10 @@
+import { joaat } from '@public/shared/joaat';
+
 import { WardrobeConfig } from '../cloth';
 import { Vector3 } from '../polyzone/vector';
 
 export const OilCloakroom: WardrobeConfig = {
-    [GetHashKey('mp_m_freemode_01')]: {
+    [joaat('mp_m_freemode_01')]: {
         ["Tenue de pompiste d'été"]: {
             Components: {
                 [3]: { Drawable: 21, Texture: 0, Palette: 0 },
@@ -56,7 +58,7 @@ export const OilCloakroom: WardrobeConfig = {
             Props: {},
         },
     },
-    [GetHashKey('mp_f_freemode_01')]: {
+    [joaat('mp_f_freemode_01')]: {
         ["Tenue de pompiste d'été"]: {
             Components: {
                 [3]: { Drawable: 24, Texture: 0, Palette: 0 },
