@@ -54,6 +54,18 @@ export class VehicleStateProvider {
                     continue;
                 }
 
+                let anotherExist = false;
+                for (const others of this.vehicleStateService.getStates().values()) {
+                    if (others.volatile.id == state.volatile.id) {
+                        anotherExist = true;
+                        break;
+                    }
+                }
+
+                if (anotherExist) {
+                    continue;
+                }
+
                 await this.prismaService.playerVehicle.updateMany({
                     where: {
                         id: state.volatile.id,
