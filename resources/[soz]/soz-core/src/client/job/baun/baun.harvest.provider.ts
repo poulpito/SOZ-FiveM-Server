@@ -43,7 +43,7 @@ const HARVEST_ZONES: HarvestZone[] = [
         ped: 'a_f_y_business_02',
         zones: [
             {
-                center: [45.3, -1750.68, 28.64],
+                center: [45.3, -1750.68, 28.62],
                 heading: 26.92,
             },
         ],
@@ -53,7 +53,7 @@ const HARVEST_ZONES: HarvestZone[] = [
         ped: 'a_f_y_business_01',
         zones: [
             {
-                center: [-753.6, -2571.93, 12.9],
+                center: [-753.6, -2571.93, 12.83],
                 heading: 236.79,
             },
         ],

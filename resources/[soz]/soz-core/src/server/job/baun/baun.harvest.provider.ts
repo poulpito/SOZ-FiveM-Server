@@ -27,10 +27,12 @@ export class BaunHarvestProvider {
 
     @OnEvent(ServerEvent.BAUN_HARVEST)
     public async onHarvest(source: number, item: string) {
+        const itemData = this.itemService.getItem(item);
+
         // eslint-disable-next-line no-constant-condition
         while (true) {
             if (!this.inventoryManager.canCarryItem(source, item, 1)) {
-                this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${item}.`, 'error');
+                this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${itemData.label}.`, 'error');
 
                 return;
             }
@@ -58,12 +60,14 @@ export class BaunHarvestProvider {
             const add = this.inventoryManager.addItemToInventory(source, item, 1);
 
             if (!add.success) {
-                this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${item} : ${add.reason}.`, 'error');
+                this.notifier.notify(
+                    source,
+                    `Vous ne pouvez pas porter plus de ${itemData.label} : ${add.reason}.`,
+                    'error'
+                );
 
                 return;
             }
-
-            const itemData = this.itemService.getItem(item);
 
             this.notifier.notify(source, `Vous avez récolté ${itemData.label}.`, 'success');
 

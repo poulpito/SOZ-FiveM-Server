@@ -17,7 +17,7 @@ export class FoodResellProvider {
     public setupFoodResell() {
         this.pedFactory.createPedOnGrid({
             model: 's_m_y_dockwork_01',
-            coords: { x: -57.01, y: -2448.4, z: 7.24, w: 145.77 },
+            coords: { x: -57.01, y: -2448.4, z: 6.24, w: 145.77 },
             freeze: true,
             invincible: true,
             blockevents: true,

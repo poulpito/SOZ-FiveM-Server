@@ -8,6 +8,7 @@ import { OIL_FIELDS } from '../../../shared/job/oil';
 import { toVector3Object, Vector3 } from '../../../shared/polyzone/vector';
 import { RpcServerEvent } from '../../../shared/rpc';
 import { VehicleClass } from '../../../shared/vehicle/vehicle';
+import { BankService } from '../../bank/bank.service';
 import { FieldProvider } from '../../farm/field.provider';
 import { InventoryManager } from '../../inventory/inventory.manager';
 import { Monitor } from '../../monitor/monitor';
@@ -34,6 +35,9 @@ export class OilTankerProvider {
 
     @Inject(FieldProvider)
     private fieldProvider: FieldProvider;
+
+    @Inject(BankService)
+    private bankService: BankService;
 
     @Inject(Monitor)
     private monitor: Monitor;
@@ -365,6 +369,8 @@ export class OilTankerProvider {
             }
 
             if (this.inventoryManager.removeItemFromInventory(inventory.id, 'essence', 10)) {
+                await this.bankService.transferBankMoney('farm_mtp', 'safe_oil', 500);
+
                 this.monitor.publish(
                     'job_mtp_sell_oil',
                     {
@@ -378,9 +384,9 @@ export class OilTankerProvider {
                 );
 
                 this.notifier.notify(source, "Vous avez ~g~revendu~s~ 100L d'essence.");
-
-                return;
             } else if (this.inventoryManager.removeItemFromInventory(inventory.id, 'kerosene', 10)) {
+                await this.bankService.transferBankMoney('farm_mtp', 'safe_oil', 500);
+
                 this.monitor.publish(
                     'job_mtp_sell_oil',
                     {
