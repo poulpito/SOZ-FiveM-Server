@@ -72,8 +72,6 @@ export class FoodFieldProvider {
                         label: 'Récolter de la Zeed',
                         color: 'crimi',
                         icon: 'c:crimi/zeed.png',
-                        blackoutGlobal: true,
-                        blackoutJob: JobType.Food,
                         canInteract: entity => {
                             if (IsEntityAVehicle(entity)) {
                                 return false;

@@ -331,49 +331,70 @@ export class OilTankerProvider {
             return;
         }
 
-        const essenceItemAmount = this.inventoryManager.getItemCount(inventory.id, 'essence');
-        const keroseneItemAmount = this.inventoryManager.getItemCount(inventory.id, 'kerosene');
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+            const essenceItemAmount = this.inventoryManager.getItemCount(inventory.id, 'essence');
+            const keroseneItemAmount = this.inventoryManager.getItemCount(inventory.id, 'kerosene');
 
-        if (essenceItemAmount > 10 && this.inventoryManager.removeItemFromInventory(inventory.id, 'essence', 10)) {
-            this.monitor.publish(
-                'job_mtp_sell_oil',
+            if (essenceItemAmount <= 10 && keroseneItemAmount <= 10) {
+                this.notifier.error(source, "Vous n'avez pas de carburant à vendre.");
+
+                return;
+            }
+
+            const { completed } = await this.progressService.progress(
+                source,
+                'resell_tanker',
+                'Vous remplissez...',
+                3_000,
                 {
-                    player_source: source,
-                    type: 'essence',
+                    dictionary: 'timetable@gardener@filling_can',
+                    name: 'gar_ig_5_filling_can',
+                    options: {
+                        repeat: true,
+                    },
                 },
                 {
-                    quantity: 10,
-                    position: toVector3Object(GetEntityCoords(GetPlayerPed(source)) as Vector3),
+                    disableMovement: true,
+                    disableCombat: true,
                 }
             );
 
-            this.notifier.notify(source, "Vous avez ~g~revendu~s~ 100L d'essence.");
+            if (!completed) {
+                return;
+            }
 
-            return;
-        }
+            if (this.inventoryManager.removeItemFromInventory(inventory.id, 'essence', 10)) {
+                this.monitor.publish(
+                    'job_mtp_sell_oil',
+                    {
+                        player_source: source,
+                        type: 'essence',
+                    },
+                    {
+                        quantity: 10,
+                        position: toVector3Object(GetEntityCoords(GetPlayerPed(source)) as Vector3),
+                    }
+                );
 
-        if (keroseneItemAmount > 10 && this.inventoryManager.removeItemFromInventory(inventory.id, 'kerosene', 10)) {
-            this.monitor.publish(
-                'job_mtp_sell_oil',
-                {
-                    player_source: source,
-                    type: 'kerosene',
-                },
-                {
-                    quantity: 10,
-                    position: toVector3Object(GetEntityCoords(GetPlayerPed(source)) as Vector3),
-                }
-            );
+                this.notifier.notify(source, "Vous avez ~g~revendu~s~ 100L d'essence.");
 
-            this.notifier.notify(source, 'Vous avez ~g~revendu~s~ 100L de kérosène.');
+                return;
+            } else if (this.inventoryManager.removeItemFromInventory(inventory.id, 'kerosene', 10)) {
+                this.monitor.publish(
+                    'job_mtp_sell_oil',
+                    {
+                        player_source: source,
+                        type: 'kerosene',
+                    },
+                    {
+                        quantity: 10,
+                        position: toVector3Object(GetEntityCoords(GetPlayerPed(source)) as Vector3),
+                    }
+                );
 
-            return;
-        }
-
-        if (essenceItemAmount <= 10 && keroseneItemAmount <= 10) {
-            this.notifier.error(source, "Vous n'avez pas de carburant à vendre.");
-
-            return;
+                this.notifier.notify(source, 'Vous avez ~g~revendu~s~ 100L de kérosène.');
+            }
         }
     }
 }
