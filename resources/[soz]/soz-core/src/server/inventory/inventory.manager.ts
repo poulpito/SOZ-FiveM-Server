@@ -4,8 +4,14 @@ import { Storage, StorageType } from '@public/shared/inventory';
 import { VehicleClass } from '@public/shared/vehicle/vehicle';
 
 import { Inject, Injectable } from '../../core/decorators/injectable';
-import { Inventory, InventoryItem, InventoryItemMetadata } from '../../shared/item';
+import { Inventory, InventoryItem, InventoryItemMetadata, Item } from '../../shared/item';
 import { PlayerService } from '../player/player.service';
+
+type AllItemItem = {
+    amount: number;
+    metadata: InventoryItemMetadata;
+    item: Item;
+};
 
 @Injectable()
 export class InventoryManager {
@@ -128,7 +134,7 @@ export class InventoryManager {
         return this.sozInventory.GetItem(inventory, itemId, metadata);
     }
 
-    public getAllItems(inventory: string): InventoryItem[] {
+    public getAllItems(inventory: string): AllItemItem[] {
         return this.sozInventory.GetAllItems(inventory);
     }
 

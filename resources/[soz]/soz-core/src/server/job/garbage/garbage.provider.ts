@@ -33,10 +33,10 @@ export class GarbageProvider {
     private monitor: Monitor;
 
     @Tick(TickInterval.EVERY_MINUTE)
-    public cleanGarbage() {
+    public async cleanGarbage() {
         const state = this.store.getState();
 
-        if (state.global.blackoutLevel >= 4 || state.global.blackout) {
+        if (state.global.blackoutLevel > 3 || state.global.blackout || state.global.jobEnergy.garbage < 1) {
             return;
         }
 
@@ -51,16 +51,16 @@ export class GarbageProvider {
         for (const item of processingItems) {
             const amountToProcess = Math.min(itemLeftToProcess, item.amount);
 
-            if (this.inventoryManager.removeItemFromInventory(PROCESSING_STORAGE, item.name, amountToProcess)) {
-                const sellPrice = SELL_PRICE[item.name] || DEFAULT_SELL_PRICE;
+            if (this.inventoryManager.removeItemFromInventory(PROCESSING_STORAGE, item.item.name, amountToProcess)) {
+                const sellPrice = SELL_PRICE[item.item.name] || DEFAULT_SELL_PRICE;
                 const totalMoney = amountToProcess * sellPrice;
 
-                this.bankService.transferBankMoney('farm_garbage', 'safe_garbage', totalMoney);
+                await this.bankService.transferBankMoney('farm_garbage', 'safe_garbage', totalMoney);
 
                 this.monitor.publish(
                     'job_bluebird_recycling_garbage_bag',
                     {
-                        item: item.name,
+                        item: item.item.name,
                     },
                     {
                         quantity: amountToProcess,

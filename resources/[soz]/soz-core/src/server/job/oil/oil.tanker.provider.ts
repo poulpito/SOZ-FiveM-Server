@@ -219,6 +219,12 @@ export class OilTankerProvider {
             return;
         }
 
+        if (this.inventoryManager.getItemCount(inventory.id, 'petroleum') < HARVEST_AMOUNT) {
+            this.notifier.notify(source, 'Votre remorque ~r~ne contient pas~s~ assez de pétrole.');
+
+            return;
+        }
+
         try {
             this.tankerUsed.set(source, entityNetId);
 
@@ -226,33 +232,10 @@ export class OilTankerProvider {
 
             // eslint-disable-next-line no-constant-condition
             while (true) {
-                if (
-                    !this.inventoryManager.canSwapItems(
-                        inventory.id,
-                        [
-                            {
-                                name: 'petroleum',
-                                amount: HARVEST_AMOUNT,
-                                metadata: {},
-                            },
-                        ],
-                        [
-                            {
-                                name: 'petroleum_refined',
-                                amount: 3 * HARVEST_AMOUNT,
-                                metadata: {},
-                            },
-                            {
-                                name: 'petroleum_residue',
-                                amount: HARVEST_AMOUNT,
-                                metadata: {},
-                            },
-                        ]
-                    )
-                ) {
-                    this.notifier.notify(source, 'Le tanker est trop rempli pour effectuer le raffinage.');
+                if (this.inventoryManager.getItemCount(inventory.id, 'petroleum') < HARVEST_AMOUNT) {
+                    this.notifier.notify(source, 'Votre remorque ~r~ne contient pas~s~ assez de pétrole.');
 
-                    break;
+                    return;
                 }
 
                 const { completed } = await this.progressService.progress(
@@ -306,11 +289,16 @@ export class OilTankerProvider {
                     return;
                 }
 
-                this.notifier.notify(source, `Vous avez ~g~raffiné~s~ ${HARVEST_AMOUNT}L de pétrole.`);
+                if (!this.inventoryManager.removeItemFromInventory(inventory.id, 'petroleum', HARVEST_AMOUNT)) {
+                    this.notifier.notify(source, 'Votre remorque ~r~ne peut plus~s~ recevoir de pétrole raffiné.');
 
-                this.inventoryManager.removeItemFromInventory(inventory.id, 'petroleum', HARVEST_AMOUNT);
+                    return;
+                }
+
                 this.inventoryManager.addItemToInventory(inventory.id, 'petroleum_refined', 3 * HARVEST_AMOUNT);
                 this.inventoryManager.addItemToInventory(inventory.id, 'petroleum_residue', HARVEST_AMOUNT);
+
+                this.notifier.notify(source, `Vous avez ~g~raffiné~s~ ${HARVEST_AMOUNT}L de pétrole.`);
 
                 this.monitor.publish(
                     'job_mtp_refining_oil',

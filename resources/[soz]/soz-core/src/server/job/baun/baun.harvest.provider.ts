@@ -3,6 +3,7 @@ import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { ServerEvent } from '../../../shared/event/server';
 import { InventoryManager } from '../../inventory/inventory.manager';
+import { ItemService } from '../../item/item.service';
 import { Monitor } from '../../monitor/monitor';
 import { Notifier } from '../../notifier';
 import { ProgressService } from '../../player/progress.service';
@@ -21,54 +22,62 @@ export class BaunHarvestProvider {
     @Inject(Monitor)
     private monitor: Monitor;
 
+    @Inject(ItemService)
+    private itemService: ItemService;
+
     @OnEvent(ServerEvent.BAUN_HARVEST)
     public async onHarvest(source: number, item: string) {
-        if (!this.inventoryManager.canCarryItem(source, item, 1)) {
-            this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${item}.`, 'error');
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+            if (!this.inventoryManager.canCarryItem(source, item, 1)) {
+                this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${item}.`, 'error');
 
-            return;
-        }
-
-        const { completed } = await this.progressService.progress(
-            source,
-            'harvest-crate',
-            'Récolte en cours...',
-            2000,
-            {
-                task: 'WORLD_HUMAN_GARDENER_PLANT',
-            },
-            {
-                disableMovement: true,
-                disableCarMovement: true,
-                disableMouse: false,
-                disableCombat: true,
+                return;
             }
-        );
 
-        if (!completed) {
-            return;
-        }
+            const { completed } = await this.progressService.progress(
+                source,
+                'harvest-crate',
+                'Récolte en cours...',
+                2000,
+                {
+                    task: 'WORLD_HUMAN_GARDENER_PLANT',
+                },
+                {
+                    disableMovement: true,
+                    disableCarMovement: true,
+                    disableMouse: false,
+                    disableCombat: true,
+                }
+            );
 
-        const add = this.inventoryManager.addItemToInventory(source, item, 1);
-
-        if (!add) {
-            this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${item} : ${add.reason}.`, 'error');
-
-            return;
-        }
-
-        this.notifier.notify(source, `Vous avez récolté ${item}.`, 'success');
-
-        this.monitor.publish(
-            'job_baun_harvest',
-            {
-                itemId: item,
-                player_source: source,
-            },
-            {
-                amount: 1,
-                position: GetEntityCoords(GetPlayerPed(source)),
+            if (!completed) {
+                return;
             }
-        );
+
+            const add = this.inventoryManager.addItemToInventory(source, item, 1);
+
+            if (!add.success) {
+                this.notifier.notify(source, `Vous ne pouvez pas porter plus de ${item} : ${add.reason}.`, 'error');
+
+                return;
+            }
+
+            const itemData = this.itemService.getItem(item);
+
+            this.notifier.notify(source, `Vous avez récolté ${itemData.label}.`, 'success');
+
+            this.monitor.publish(
+                'job_baun_harvest',
+                {
+                    itemId: item,
+                    player_source: source,
+                },
+                {
+                    amount: 1,
+                    position: GetEntityCoords(GetPlayerPed(source)),
+                }
+            );
+        }
     }
 }

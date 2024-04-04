@@ -1,4 +1,4 @@
-import { OnEvent, OnNuiEvent } from '../../../core/decorators/event';
+import { Once, OnceStep, OnEvent, OnNuiEvent } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { Tick } from '../../../core/decorators/tick';
@@ -39,6 +39,16 @@ export class GarbageProvider {
 
     private garbageAnimationProgress: AnimationRunner | null = null;
 
+    @Once(OnceStep.PlayerLoaded)
+    public async onPlayerLoaded() {
+        this.blipFactory.create('jobs:garbage:truck', {
+            name: 'BlueBird',
+            position: [-621.98, -1640.79, 25.97],
+            sprite: 318,
+            scale: 0.9,
+        });
+    }
+
     @OnNuiEvent(NuiEvent.GarbageDisplayBlip)
     public async onDisplayBlip({ value }: { value: boolean }) {
         this.displayBinBlip = value;
@@ -72,13 +82,6 @@ export class GarbageProvider {
                 this.blipFactory.remove(bin.id);
             }
         }
-
-        this.blipFactory.create('jobs:garbage:truck', {
-            name: 'BlueBird',
-            position: [-621.98, -1640.79, 25.97],
-            sprite: 318,
-            color: 0.9,
-        });
     }
 
     @Tick()

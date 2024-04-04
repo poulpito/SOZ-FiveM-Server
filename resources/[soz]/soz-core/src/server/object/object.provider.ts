@@ -142,7 +142,6 @@ export class ObjectProvider {
         }
 
         this.deleteObject(id);
-        this.inventoryManager.addItemToInventory(source, item, 1);
         const itemDef = this.itemService.getItem(item);
         this.notifier.notify(source, `Vous avez récupéré ~g~${itemDef.label}~s~.`);
     }

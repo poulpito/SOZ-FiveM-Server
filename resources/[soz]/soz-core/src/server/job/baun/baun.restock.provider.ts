@@ -3,6 +3,7 @@ import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { ServerEvent } from '../../../shared/event/server';
 import { InventoryManager } from '../../inventory/inventory.manager';
+import { ItemService } from '../../item/item.service';
 import { Notifier } from '../../notifier';
 import { ProgressService } from '../../player/progress.service';
 
@@ -47,6 +48,9 @@ export class BaunRestockProvider {
     @Inject(ProgressService)
     private progressService: ProgressService;
 
+    @Inject(ItemService)
+    private itemService: ItemService;
+
     @OnEvent(ServerEvent.BAUN_RESTOCK)
     public async onRestock(source: number, { storage, item }: { storage: string; item: string }) {
         const config = RESTOCK_CONFIG[item];
@@ -55,8 +59,10 @@ export class BaunRestockProvider {
             return;
         }
 
+        const itemData = this.itemService.getItem(item);
+
         if (!this.inventoryManager.hasEnoughItem(source, item, 1)) {
-            this.notifier.notify(source, `Vous n'avez pas de ${item}.`, 'error');
+            this.notifier.notify(source, `Vous n'avez pas de ${itemData.label}.`, 'error');
 
             return;
         }
@@ -91,7 +97,7 @@ export class BaunRestockProvider {
             }
 
             if (!this.inventoryManager.canCarryItems(storage, config)) {
-                this.notifier.notify(source, `Il n'y a pas assez de place pour stocker ${item}.`, 'error');
+                this.notifier.notify(source, `Il n'y a pas assez de place pour stocker ${itemData.label}.`, 'error');
 
                 break;
             }
@@ -105,6 +111,6 @@ export class BaunRestockProvider {
             }
         }
 
-        this.notifier.notify(source, `Vous avez fini de restocker ${item}.`, 'success');
+        this.notifier.notify(source, `Vous avez arrêté de restocker ${itemData.label}.`, 'success');
     }
 }

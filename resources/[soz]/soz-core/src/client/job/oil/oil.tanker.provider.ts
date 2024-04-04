@@ -15,7 +15,6 @@ import { RpcServerEvent } from '../../../shared/rpc';
 import { VehicleClass } from '../../../shared/vehicle/vehicle';
 import { AnimationService } from '../../animation/animation.service';
 import { Notifier } from '../../notifier';
-import { PlayerInOutService } from '../../player/player.inout.service';
 import { PlayerService } from '../../player/player.service';
 import { RopeService } from '../../rope.service';
 import { SoundService } from '../../sound.service';
@@ -24,24 +23,24 @@ import { TargetFactory } from '../../target/target.factory';
 const REFINERY_ZONES: Zone[] = [
     {
         center: [2772.16, 1496.61, 24.49],
-        width: 5.25,
-        length: 12.2,
+        width: 14.2,
+        length: 7.25,
         heading: 75,
         minZ: 23.49,
         maxZ: 28.49,
     },
     {
         center: [2780.79, 1528.84, 24.52],
-        width: 5.25,
-        length: 12.2,
+        width: 14.2,
+        length: 7.25,
         heading: 75,
         minZ: 23.49,
         maxZ: 28.49,
     },
     {
         center: [2790.07, 1561.52, 24.58],
-        width: 5.25,
-        length: 12.2,
+        width: 14.2,
+        length: 7.25,
         heading: 75,
         minZ: 23.49,
         maxZ: 28.49,
@@ -58,9 +57,6 @@ export class OilTankerProvider {
 
     @Inject(RopeService)
     private ropeService: RopeService;
-
-    @Inject(PlayerInOutService)
-    private playerInOutService: PlayerInOutService;
 
     @Inject(AnimationService)
     private animationService: AnimationService;
@@ -156,7 +152,7 @@ export class OilTankerProvider {
         );
 
         for (const zone of REFINERY_ZONES) {
-            this.targetFactory.createForBoxZone('mtp_fuel_refinery', zone, [
+            this.targetFactory.createForBoxZone(`mtp_fuel_refinery_${zone.center[0]}`, zone, [
                 {
                     icon: 'c:fuel/remplir.png',
                     color: 'oil',

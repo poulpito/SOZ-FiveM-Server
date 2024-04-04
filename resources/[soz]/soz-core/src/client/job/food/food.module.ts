@@ -4,8 +4,16 @@ import { FoodFieldProvider } from './food.field.provider';
 import { FoodHuntProvider } from './food.hunt.provider';
 import { FoodMealsProvider } from './food.meals.provider';
 import { FoodProvider } from './food.provider';
+import { FoodResellProvider } from './food.resell.provider';
 
 @Module({
-    providers: [FoodProvider, FoodFieldProvider, FoodCraftProvider, FoodMealsProvider, FoodHuntProvider],
+    providers: [
+        FoodCraftProvider,
+        FoodFieldProvider,
+        FoodHuntProvider,
+        FoodMealsProvider,
+        FoodProvider,
+        FoodResellProvider,
+    ],
 })
 export class FoodModule {}
