@@ -232,7 +232,7 @@ export class DmcProvider {
         // Resell zone
         this.pedFactory.createPedOnGrid({
             model: 's_m_y_dockwork_01',
-            coords: { x: -132.7, y: -2383.92, z: 6.0, w: 174.18 },
+            coords: { x: -132.7, y: -2383.92, z: 5.0, w: 174.18 },
             freeze: true,
             invincible: true,
             blockevents: true,
@@ -241,7 +241,7 @@ export class DmcProvider {
 
         this.playerInOutService.add(
             'Resell:LSPort:Dmc',
-            new BoxZone([-132.7, -2383.92, 6.0], 3.0, 3.0, {
+            new BoxZone([-132.7, -2383.92, 5.0], 3.0, 3.0, {
                 minZ: 4.0,
                 maxZ: 8.0,
             }),

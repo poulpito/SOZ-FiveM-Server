@@ -43,7 +43,11 @@ export class BaunHarvestProvider {
                 'Récolte en cours...',
                 2000,
                 {
-                    task: 'WORLD_HUMAN_GARDENER_PLANT',
+                    dictionary: 'amb@prop_human_bum_bin@base',
+                    name: 'base',
+                    options: {
+                        repeat: true,
+                    },
                 },
                 {
                     disableMovement: true,

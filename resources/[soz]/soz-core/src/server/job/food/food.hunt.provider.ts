@@ -49,7 +49,7 @@ export class FoodHuntProvider {
     private zonesDespawnTime: Record<string, number> = {};
 
     @OnEvent(ServerEvent.FOOD_HUNT)
-    public async onHunt(source: number, entityNetId: number, zoneId: string) {
+    public async onHunt(source: number, zoneId: string, entityNetId: number) {
         const player = this.playerService.getPlayer(source);
 
         if (!player) {
@@ -120,6 +120,11 @@ export class FoodHuntProvider {
 
         DeleteEntity(entity);
 
+        this.handleZoneRespawn(source, zoneId);
+    }
+
+    @OnEvent(ServerEvent.FOOD_HUNT_RESPAWN)
+    public handleZoneRespawn(source: number, zoneId: string) {
         const prevTime = this.zonesDespawnTime[zoneId];
 
         if (prevTime && Date.now() < prevTime) {

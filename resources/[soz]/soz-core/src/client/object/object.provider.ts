@@ -327,8 +327,18 @@ export class ObjectProvider {
     }
 
     @OnNuiEvent(NuiEvent.ObjectPlace)
-    public async onPlaceObject({ item, props, rotation }: { item: string; props: string; rotation?: number }) {
-        const groundPosition = this.getGroundPosition(props, 0.0, rotation || 0);
+    public async onPlaceObject({
+        item,
+        props,
+        rotation,
+        offset,
+    }: {
+        item: string;
+        props: string;
+        rotation?: number;
+        offset?: number;
+    }) {
+        const groundPosition = this.getGroundPosition(props, offset || 0.0, rotation || 0);
 
         TriggerServerEvent(ServerEvent.OBJECT_PLACE, item, props, groundPosition);
     }

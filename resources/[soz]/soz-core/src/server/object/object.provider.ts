@@ -131,17 +131,20 @@ export class ObjectProvider {
 
         const item = OBJETS_COLLECT_TO_ITEM_ID[object.model];
 
-        if (item && !this.inventoryManager.canCarryItem(source, item, 1)) {
+        if (!item) {
+            this.deleteObject(id);
+
+            return;
+        }
+
+        if (!this.inventoryManager.addItemToInventory(source, item, 1)) {
             this.notifier.error(source, 'Vous ne pouvez pas récupérer cet objet');
 
             return;
         }
 
-        if (item) {
-            this.inventoryManager.addItemToInventory(source, item, 1);
-        }
-
         this.deleteObject(id);
+
         const itemDef = this.itemService.getItem(item);
         this.notifier.notify(source, `Vous avez récupéré ~g~${itemDef.label}~s~.`);
     }
