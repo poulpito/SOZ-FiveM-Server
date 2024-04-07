@@ -103,14 +103,13 @@ export enum NuiEvent {
     CraftingCancel = 'soz-core:nui:crafting:cancel',
     StonkDisplayBlip = 'soz-core:client:job:stonk:display-blip',
 
-    JobPlaceProps = 'soz-core:client:job:place-props',
-
     LsmcPharmacyBuyItem = 'soz-core:nui:job:lsmc:pharmacy:buy-item',
     LsmcPlaster = 'soz-core:nui:job:lsmc:plaster',
     LsmcMedicalDiagExit = 'soz-core:nui:job:lsmc:exit-medical-diag',
 
     NewsCreateAnnounce = 'soz-core:nui:news:create-announce',
-    NewsPlaceObject = 'soz-core:client:news:place-object',
+
+    ObjectPlace = 'soz-core:nui:object:place',
 
     ObjectEditorReset = 'soz-core:nui:object-editor:reset',
     ObjectEditorCancel = 'soz-core:nui:object-editor:cancel',
@@ -137,6 +136,9 @@ export enum NuiEvent {
     JobBossShopBuyItem = 'soz-core:nui:job:boss-shop:buy-item',
     JobPromote = 'soz-core:nui:job:promote',
     OilAskStationPrice = 'soz-core:nui:job:oil:ask-station-price',
+    OilShowOilFields = 'soz-core:nui:job:oil:show-oil-fields',
+    OilShowRefinery = 'soz-core:nui:job:oil:show-refinery',
+    OilShowReseller = 'soz-core:nui:job:oil:show-reseller',
     UpwDisplayBlips = 'soz-core:nui:job:upw:display-blips',
 
     PanelClosed = 'soz-core:nui:panel:closed',
@@ -193,9 +195,6 @@ export enum NuiEvent {
     JewelryShopToggleCamera = 'soz-core:client:shop:jewelry:toggle-camera',
     BarberShopPreview = 'soz-core:client:shop:barber:preview',
     BarberShopBuy = 'soz-core:client:shop:barber:buy',
-
-    TriggerServerEvent = 'soz-core:nui:trigger-server-event',
-    TriggerClientEvent = 'soz-core:nui:trigger-client-event',
 
     VehicleAuctionBid = 'soz-core:client:vehicle:auction:bid',
 
@@ -273,6 +272,7 @@ export enum NuiEvent {
     PoliceDeleteWantedPlayer = 'soz-core:client:police:delete-wantedPlayer',
     PoliceGatherMoneyMarked = 'soz-core:client:police:gather-money-marked',
     PoliceSaveDetectiveBoard = 'soz-core:client:police:save-detective-board',
+    PolicePlaceSpike = 'soz-core:nui:police:place-spike',
 
     IllegalShopBuyItem = 'soz-core:client:hubshop:buy',
 

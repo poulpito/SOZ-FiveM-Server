@@ -18,7 +18,7 @@ export class BlipFactory {
 
     private blips = new Map<string, GameBlip>();
 
-    public create(id: string, blipCreated: Blip): number {
+    public create(id: string, blipCreated: Blip, show = true): number {
         const blip = {
             range: true,
             scale: 0.8,
@@ -37,6 +37,10 @@ export class BlipFactory {
 
         this.updateGameBlip(id, gameId, blip);
         this.blips.set(id, { blip, id, gameId });
+
+        if (!show) {
+            this.hide(id, true);
+        }
 
         return gameId;
     }

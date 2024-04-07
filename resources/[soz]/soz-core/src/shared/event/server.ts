@@ -44,8 +44,12 @@ export enum ServerEvent {
     BASE_LEFT_VEHICLE = 'baseevents:leftVehicle',
     BASE_CHANGE_VEHICLE_SEAT = 'baseevents:changeVehicleSeat',
 
+    BAUN_CREATE_COCKTAIL_BOX = 'soz-core:server:job:baun:create-cocktail-box',
+    BAUN_CREATE_ICE_CUBES = 'soz-core:server:job:baun:create-ice-cubes',
+    BAUN_HARVEST = 'soz-core:server:job:baun:harvest',
     BAUN_RESELL = 'soz-core:server:job:baun:resell',
     BAUN_ICE_CUBE = 'soz-core:server:job:baun:ice-cube',
+    BAUN_RESTOCK = 'soz-core:server:job:baun:restock',
 
     BENNYS_ESTIMATE_VEHICLE = 'soz-core:server:job:bennys:estimate-vehicle',
     BENNYS_SELL_VEHICLE = 'soz-core:server:job:bennys:sell-vehicle',
@@ -78,6 +82,9 @@ export enum ServerEvent {
     FOOD_RETRIEVE_STATE = 'soz-core:server:job:food:retrieve-state',
     FOOD_EASTER_HARVEST = 'soz-core:server:job:food:easter-harvest',
     FOOD_HUNT = 'soz-core:client:food:hunt',
+    FOOD_HUNT_RESPAWN = 'soz-core:server:food:hunt-respawn',
+    FOOD_COLLECT = 'soz-core:server:job:food:collect',
+    FOOD_MILK_COLLECT = 'soz-core:server:job:food:milk-collect',
 
     EASTER_HUNT = 'soz-core:server:easter:hunt',
 
@@ -156,16 +163,24 @@ export enum ServerEvent {
     NEWS_ADD_FLASH = 'soz-core:server:news:add-flash',
     NEWS_NEWSPAPER_SOLD = 'soz-core:server:job:news:newspaper-sold',
     NEWS_NEWSPAPER_FARM = 'soz-core:server:job:news:newspaper-farm',
-    NEWS_PLACE_OBJECT = 'soz-core:server:job:news:place-object',
 
+    OBJECT_PLACE = 'soz-core:server:object:place',
     OBJECT_COLLECT = 'soz-core:server:object:collect',
     OBJECT_ATTACHED_REGISTER = 'soz-core:client:object:attached:register',
     OBJECT_ATTACHED_UNREGISTER = 'soz-core:client:object:attached:unregister',
 
+    OIL_CRAFT_ESSENCE = 'soz-core:server:oil:craft-essence',
+    OIL_CRAFT_ESSENCE_JERRYCAN = 'soz-core:server:oil:craft-essence-jerrycan',
+    OIL_CRAFT_KEROSENE = 'soz-core:server:oil:craft-kerosene',
+    OIL_CRAFT_KEROSENE_JERRYCAN = 'soz-core:server:oil:craft-kerosene-jerrycan',
     OIL_REFILL_ESSENCE_STATION = 'soz-core:server:oil:refill-essence-station',
     OIL_REFILL_KEROSENE_STATION = 'soz-core:server:oil:refill-kerosene-station',
     OIL_SET_STATION_PRICE = 'soz-core:server:oil:set-station-price',
     OIL_DECREMENT_STATION = 'soz-core:server:oil:decrement',
+    OIL_REFILL_TANKER = 'soz-core:server:oil:refill-tanker',
+    OIL_REFINE_TANKER = 'soz-core:server:oil:refine-tanker',
+    OIL_RESELL_TANKER = 'soz-core:server:oil:resell-tanker',
+    OIL_UNLOCK_TANKER = 'soz-core:server:oil:unlock-tanker',
 
     PLAYER_LOADED = 'soz-core:server:player:loaded',
     PLAYER_INCREASE_STRESS = 'soz-core:server:player:increase-stress',

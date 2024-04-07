@@ -4,15 +4,17 @@ import { OnEvent } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { ServerEvent } from '../../../shared/event';
+import { InventoryItem } from '../../../shared/item';
 import { InventoryManager } from '../../inventory/inventory.manager';
-import { Monitor } from '../../monitor/monitor';
 import { Notifier } from '../../notifier';
-import { ProgressService } from '../../player/progress.service';
 
 @Provider()
 export class BaunCraftProvider {
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
+
+    @Inject(ItemService)
+    private item: ItemService;
 
     @Inject(Notifier)
     private notifier: Notifier;
@@ -20,11 +22,76 @@ export class BaunCraftProvider {
     @Inject(ItemService)
     private itemService: ItemService;
 
-    @Inject(ProgressService)
-    private progressService: ProgressService;
+    @OnEvent(ServerEvent.BAUN_CREATE_COCKTAIL_BOX)
+    public craftCocktailBox(source: number) {
+        let remaining = 10;
 
-    @Inject(Monitor)
-    private monitor: Monitor;
+        const toRemove: { item: InventoryItem; amount: number }[] = [];
+
+        for (const inventoryItem of this.inventoryManager.getItems(source)) {
+            if (inventoryItem.type !== 'cocktail') {
+                continue;
+            }
+
+            if (inventoryItem.amount <= 0) {
+                continue;
+            }
+
+            if (this.item.isItemExpired(inventoryItem)) {
+                continue;
+            }
+
+            const removeAmount = Math.min(inventoryItem.amount, remaining);
+            remaining -= removeAmount;
+
+            toRemove.push({
+                item: inventoryItem,
+                amount: removeAmount,
+            });
+
+            if (remaining <= 0) {
+                break;
+            }
+        }
+
+        if (remaining > 0) {
+            this.notifier.notify(source, `Vous devez avoir au moins 10 cocktails pour créer une caisse.`, 'error');
+
+            return;
+        }
+
+        if (
+            !this.inventoryManager.canSwapItems(
+                source,
+                toRemove.map(remove => {
+                    return {
+                        name: remove.item.name,
+                        amount: remove.amount,
+                        metadata: remove.item.metadata,
+                    };
+                }),
+                [
+                    {
+                        name: 'cocktail_box',
+                        amount: 1,
+                        metadata: {},
+                    },
+                ]
+            )
+        ) {
+            this.notifier.notify(source, `Vous n'avez pas assez de place dans votre inventaire.`, 'error');
+
+            return;
+        }
+
+        for (const remove of toRemove) {
+            this.inventoryManager.removeInventoryItem(source, remove.item, remove.amount);
+        }
+
+        this.inventoryManager.addItemToInventory(source, 'cocktail_box', 1);
+
+        this.notifier.notify(source, `Vous avez créé un assortiment de cocktails.`, 'success');
+    }
 
     @OnEvent(ServerEvent.BAUN_ICE_CUBE)
     public onIceCube(source: number, count: number) {

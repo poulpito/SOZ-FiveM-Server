@@ -45,6 +45,7 @@ export enum RpcServerEvent {
 
     OIL_GET_STATION = 'soz-core:job:oil:get-station',
     OIL_GET_STATION_PRICES = 'soz-core:job:oil:get-station-prices',
+    OIL_LOCK_TANKER = 'soz-core:job:oil:lock-tanker',
 
     PLAYER_GET_CLIENT_STATE = 'soz-core:player:get-client-state',
     PLAYER_GET_LIST_STATE = 'soz-core:player:get-list-state',
@@ -214,4 +215,5 @@ export enum RpcClientEvent {
     DRUG_CHECK_ZONE = 'soz-core:rpc:client:drug:check-zone',
     FDF_CHECK_ZONE = 'soz-core:rpc:client:fdf:check-zone',
     CHECK_WEARING_GLOVES = 'soz-core:rpc:client:check-wearing-gloves',
+    OBJECT_GET_GROUND_POSITION = 'soz-core:rpc:client:object:get-ground-position',
 }

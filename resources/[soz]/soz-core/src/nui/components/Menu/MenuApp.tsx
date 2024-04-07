@@ -53,6 +53,7 @@ import { DmcJobMenu } from './Job/DmcJobMenu';
 import { GouvJobMenu } from './Job/GouvJobMenu';
 import { MenuBennys } from './Job/MenuBennys';
 import { MenuNews } from './Job/MenuNews';
+import { MenuOil } from './Job/MenuOil';
 import { MenuPromote } from './Job/MenuPromote';
 import { MenuUpw } from './Job/MenuUpw';
 import { MenuAlbum } from './MenuAlbum';
@@ -223,6 +224,7 @@ const MenuRouter: FunctionComponent = () => {
 
             <Route path={`/${MenuType.JobBennys}/*`} element={<MenuBennys data={menuData} />} />
             <Route path={`/${MenuType.JobUpw}/*`} element={<MenuUpw data={menuData} />} />
+            <Route path={`/${MenuType.JobOil}/*`} element={<MenuOil data={menuData} />} />
             <Route path={`/${MenuType.UpwOrderMenu}/*`} element={<UpwOrderMenu data={menuData} />} />
             <Route path={`/${MenuType.GarbageJobMenu}/*`} element={<GarbageJobMenu data={menuData} />} />
             <Route

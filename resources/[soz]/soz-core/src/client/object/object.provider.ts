@@ -1,17 +1,20 @@
-import { Once, OnceStep, OnEvent } from '@core/decorators/event';
+import { Once, OnceStep, OnEvent, OnNuiEvent } from '@core/decorators/event';
 import { Exportable } from '@core/decorators/exports';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
+import { Rpc } from '@core/decorators/rpc';
 import { emitRpc } from '@core/rpc';
 import { ObjectService } from '@public/client/object/object.service';
+import { getProperGroundPositionForObject } from '@public/client/object/object.utils';
+import { TargetFactory } from '@public/client/target/target.factory';
 import { Command } from '@public/core/decorators/command';
 import { Tick } from '@public/core/decorators/tick';
 import { wait } from '@public/core/utils';
 import { getChunkId, getGridChunks } from '@public/shared/grid';
-import { Vector3 } from '@public/shared/polyzone/vector';
-import { RpcServerEvent } from '@public/shared/rpc';
+import { Vector3, Vector4 } from '@public/shared/polyzone/vector';
+import { RpcClientEvent, RpcServerEvent } from '@public/shared/rpc';
 
-import { ClientEvent, ServerEvent } from '../../shared/event';
+import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
 import { WorldObject } from '../../shared/object';
 
 type SpawnedObject = {
@@ -23,6 +26,9 @@ type SpawnedObject = {
 export class ObjectProvider {
     @Inject(ObjectService)
     private objectService: ObjectService;
+
+    @Inject(TargetFactory)
+    private targetFactory: TargetFactory;
 
     private loadedObjects: Record<string, SpawnedObject> = {};
 
@@ -76,6 +82,32 @@ export class ObjectProvider {
         for (const object of objects) {
             await this.createObject(object);
         }
+
+        this.targetFactory.createForModel(
+            ['prop_cardbordbox_03a', 'prop_roadcone02a'],
+            [
+                {
+                    label: 'Démonter',
+                    icon: 'c:jobs/demonter.png',
+                    canInteract: entity => {
+                        const id = this.getIdFromEntity(entity);
+
+                        return id !== null;
+                    },
+                    action: async (entity: number) => {
+                        const id = this.getIdFromEntity(entity);
+
+                        if (!id) {
+                            return;
+                        }
+
+                        TriggerServerEvent(ServerEvent.OBJECT_COLLECT, id);
+                    },
+                },
+            ],
+            2.5
+        );
+
         this.ready = true;
     }
 
@@ -236,6 +268,16 @@ export class ObjectProvider {
         await this.updateSpawnObjectOnGridChange(newChunks);
     }
 
+    @Rpc(RpcClientEvent.OBJECT_GET_GROUND_POSITION)
+    public getGroundPosition(props: string, offset = 0.0, rotation = 0): Vector4 {
+        const ped = PlayerPedId();
+        const position = GetOffsetFromEntityInWorldCoords(ped, 0.0, 1.0, 0.0) as Vector3;
+        const heading = GetEntityHeading(ped) + rotation;
+        const groundPosition = getProperGroundPositionForObject(GetHashKey(props), position, heading);
+
+        return [groundPosition[0], groundPosition[1], groundPosition[2] + offset, heading];
+    }
+
     @Once(OnceStep.Stop)
     public unloadAllObjects(): void {
         for (const object of Object.values(this.loadedObjects)) {
@@ -282,5 +324,22 @@ export class ObjectProvider {
         const propsIds = Object.keys(this.loadedObjects).filter(id => isAllowed || !id.includes('drug_seedling'));
 
         console.log(propsIds);
+    }
+
+    @OnNuiEvent(NuiEvent.ObjectPlace)
+    public async onPlaceObject({
+        item,
+        props,
+        rotation,
+        offset,
+    }: {
+        item: string;
+        props: string;
+        rotation?: number;
+        offset?: number;
+    }) {
+        const groundPosition = this.getGroundPosition(props, offset || 0.0, rotation || 0);
+
+        TriggerServerEvent(ServerEvent.OBJECT_PLACE, item, props, groundPosition);
     }
 }

@@ -209,7 +209,6 @@ export type PlayerClientState = {
     isInHospital: boolean;
     isInHub: boolean;
     disableMoneyCase: boolean;
-    tankerEntity: number | null;
     hasPrisonerClothes: boolean;
     isWearingPatientOutfit: boolean;
     isLooted: boolean;

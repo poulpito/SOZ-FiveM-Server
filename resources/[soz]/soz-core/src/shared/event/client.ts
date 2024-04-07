@@ -12,7 +12,7 @@ export enum ClientEvent {
     BASE_LEFT_VEHICLE = 'baseevents:leftVehicle',
     BASE_CHANGE_VEHICLE_SEAT = 'baseevents:changedVehicleSeat',
 
-    BAUN_ICE_CUBE = 'soz-jobs:client:baun:createIceCubes',
+    BAUN_ICE_CUBE = 'soz-core:client:baun:create-ice-cubes',
 
     BENNYS_OPEN_CLOAKROOM = 'soz-core:client:job:bennys:open-cloakroom',
     BENNYS_FLATBED_DETACH_VEHICLE = 'soz-core:client:job:bennys:flatbed:detach-vehicle',
@@ -72,7 +72,7 @@ export enum ClientEvent {
     JOBS_FFS_OPEN_SOCIETY_MENU = 'soz-jobs:client:ffs:OpenSocietyMenu',
     JOBS_BAUN_OPEN_SOCIETY_MENU = 'soz-jobs:client:baun:OpenSocietyMenu',
     JOBS_FOOD_OPEN_SOCIETY_MENU = 'jobs:client:food:OpenSocietyMenu',
-    JOBS_STONK_OPEN_SOCIETY_MENU = 'stonk:client:OpenSocietyMenu',
+    JOBS_STONK_OPEN_SOCIETY_MENU = 'soz-jobs:client:stonk:OpenSocietyMenu',
     JOBS_MDR_OPEN_SOCIETY_MENU = 'soz-jobs:client:mdr:OpenSocietyMenu',
     JOBS_TAXI_OPEN_SOCIETY_MENU = 'soz-jobs:client:taxi:OpenSocietyMenu',
     JOBS_LSMC_OPEN_SOCIETY_MENU = 'soz-jobs:client:lsmc:OpenSocietyMenu',
@@ -83,6 +83,7 @@ export enum ClientEvent {
     JOBS_YOU_NEWS_OPEN_SOCIETY_MENU = 'soz-jobs:client:you-news:OpenSocietyMenu',
     JOBS_DMC_OPEN_SOCIETY_MENU = 'soz-jobs:client:dmc:OpenSocietyMenu',
     JOBS_POLICE_OPEN_SOCIETY_MENU = 'soz-jobs:client:police:OpenSocietyMenu',
+    JOBS_OIL_OPEN_SOCIETY_MENU = 'soz-jobs:client:oil:OpenSocietyMenu',
 
     JOBS_CHECK_CLOAKROOM_STORAGE = 'soz-jobs:client:check-cloakroom-storage',
     JOB_OPEN_MENU = 'soz-core:client:job:open-menu',
@@ -132,7 +133,6 @@ export enum ClientEvent {
 
     OIL_REFILL_ESSENCE_STATION = 'soz-core:client:oil:refill-essence-station',
     OIL_REFILL_KEROSENE_STATION = 'soz-core:client:oil:refill-kerosene-station',
-    OIL_UPDATE_STATION_PRICE = 'soz-core:client:oil:update-station-price',
 
     PHONE_APP_WEATHER_UPDATE_FORECASTS = 'phone:app:weather:updateForecasts',
     PHONE_APP_WEATHER_UPDATE_STORM_ALERT = 'phone:app:weather:updateStormAlert',

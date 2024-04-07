@@ -1,8 +1,14 @@
-import { On, Once, OnEvent } from '@core/decorators/event';
+import { On, Once, OnceStep, OnEvent } from '@core/decorators/event';
 import { Provider } from '@core/decorators/provider';
 import { emitRpc } from '@public/core/rpc';
-import { ClientEvent } from '@public/shared/event';
+import { ClientEvent, ServerEvent } from '@public/shared/event';
 import { RpcServerEvent } from '@public/shared/rpc';
+
+import { Inject } from '../../../core/decorators/injectable';
+import { JobType } from '../../../shared/job';
+import { Vector3 } from '../../../shared/polyzone/vector';
+import { Notifier } from '../../notifier';
+import { TargetFactory } from '../../target/target.factory';
 
 const Animals = [
     3462393972, // A_C_Boar
@@ -48,13 +54,66 @@ const Animals = [
     2910340283, // A_C_Westy
 ];
 
+const ANIMAL_ALLOWED_TO_HUNTS: number[] = [
+    GetHashKey('a_c_boar'),
+    GetHashKey('a_c_chickenhawk'),
+    GetHashKey('a_c_cormorant'),
+    GetHashKey('a_c_cow'),
+    GetHashKey('a_c_coyote'),
+    GetHashKey('a_c_crow'),
+    GetHashKey('a_c_deer'),
+    GetHashKey('a_c_hen'),
+    GetHashKey('a_c_mtlion'),
+    GetHashKey('a_c_pig'),
+    GetHashKey('a_c_pigeon'),
+    GetHashKey('a_c_rabbit_01'),
+    GetHashKey('a_c_seagull'),
+    GetHashKey('a_c_boar_02'),
+    GetHashKey('a_c_coyote_02'),
+    GetHashKey('a_c_deer_02'),
+    GetHashKey('a_c_mtlion_02'),
+];
+
+const FOOD_HUNTING_WEAPON: number[] = [
+    GetHashKey('weapon_knife'),
+    GetHashKey('weapon_machete'),
+    GetHashKey('weapon_switchblade'),
+];
+
 @Provider()
 export class FoodHuntProvider {
+    @Inject(TargetFactory)
+    private targetFactory: TargetFactory;
+
+    @Inject(Notifier)
+    private notifier: Notifier;
+
     private zonesDespawnTime: Record<string, number> = {};
 
-    @Once()
+    @Once(OnceStep.PlayerLoaded)
     public async onStart() {
         this.zonesDespawnTime = await emitRpc<Record<string, number>>(RpcServerEvent.FOOD_HUNT_INIT);
+
+        this.targetFactory.createForModel(ANIMAL_ALLOWED_TO_HUNTS, [
+            {
+                label: 'Dépecer',
+                icon: 'c:food/depecer.png',
+                blackoutGlobal: true,
+                blackoutJob: JobType.Food,
+                canInteract: entity => {
+                    if (IsPedAPlayer(entity)) {
+                        return false;
+                    }
+
+                    if (!IsEntityDead(entity)) {
+                        return false;
+                    }
+
+                    return this.hasKnifeEquipped();
+                },
+                action: this.chopAnimal.bind(this),
+            },
+        ]);
     }
 
     @OnEvent(ClientEvent.FOOD_HUNT_SYNC)
@@ -73,5 +132,30 @@ export class FoodHuntProvider {
         if (despawnTime && despawnTime > Date.now()) {
             CancelEvent();
         }
+    }
+
+    public chopAnimal(entity: number) {
+        if (!DoesEntityExist(entity) || !IsEntityDead(entity) || IsPedAPlayer(entity)) {
+            return;
+        }
+
+        if (HasEntityBeenDamagedByAnyVehicle(entity)) {
+            this.notifier.notify("L'animal est tout écrabouillé, on ne pourra rien en tirer...", 'warning');
+
+            return;
+        }
+
+        TaskTurnPedToFaceEntity(PlayerPedId(), entity, 500);
+
+        const position = GetEntityCoords(entity) as Vector3;
+        const zoneId = GetNameOfZone(...position);
+
+        TriggerServerEvent(ServerEvent.FOOD_HUNT, zoneId, NetworkGetNetworkIdFromEntity(entity));
+    }
+
+    private hasKnifeEquipped() {
+        const equippedWeapon = GetSelectedPedWeapon(PlayerPedId());
+
+        return FOOD_HUNTING_WEAPON.includes(equippedWeapon);
     }
 }

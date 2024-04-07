@@ -27,6 +27,7 @@ import { BookApp } from './Book/BookApp';
 import { CardApp } from './Card/CardApp';
 import { CraftApp } from './Craft/CraftApp';
 import { FieldHealthApp } from './Field/FieldHealthApp';
+import { FieldZoneHealthApp } from './Field/FieldZoneHealthApp';
 import { HudApp } from './Hud/HudApp';
 import { InputApp } from './Input/InputApp';
 import { MedicalApp } from './LSMC/DiagnosticPad/MedicalApp';
@@ -105,6 +106,7 @@ export const App: FunctionComponent = () => {
                 <RaceApp />
                 <BookApp />
                 <FieldHealthApp />
+                <FieldZoneHealthApp />
                 <CraftApp />
                 <InputApp />
                 <MedicalApp />
