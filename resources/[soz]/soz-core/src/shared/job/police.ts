@@ -999,6 +999,12 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                         Palette: 0,
                     },
                     [Component.Shoes]: { Drawable: 60, Texture: 0, Palette: 0 },
+                    [Component.Accessories]: {
+                        Drawable:
+                            VanillaComponentDrawableIndexMaxValue[joaat('mp_m_freemode_01')][Component.Accessories] + 4,
+                        Texture: 0,
+                        Palette: 0,
+                    },
                     [Component.Undershirt]: {
                         Drawable: 58,
                         Texture: 0,
@@ -1035,6 +1041,12 @@ export const POLICE_CLOAKROOM: Partial<Record<JobType, WardrobeConfig>> = {
                         Palette: 0,
                     },
                     [Component.Shoes]: { Drawable: 25, Texture: 0, Palette: 0 },
+                    [Component.Accessories]: {
+                        Drawable:
+                            VanillaComponentDrawableIndexMaxValue[joaat('mp_f_freemode_01')][Component.Accessories] + 4,
+                        Texture: 0,
+                        Palette: 0,
+                    },
                     [Component.Undershirt]: {
                         Drawable: 35,
                         Texture: 0,
