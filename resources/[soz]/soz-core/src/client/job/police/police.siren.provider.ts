@@ -13,6 +13,7 @@ export const VehicleWithSirens = {
     [GetHashKey('ambulance')]: true,
     [GetHashKey('ambulance2')]: true,
     [GetHashKey('ambcar')]: true,
+    [GetHashKey('lguard')]: true,
     [GetHashKey('firetruk')]: true,
     // LSPD
     [GetHashKey('police')]: true,

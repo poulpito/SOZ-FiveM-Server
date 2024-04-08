@@ -3,6 +3,9 @@ export const RadarAllowedVehicle: number[] = [
     GetHashKey('ambulance'),
     GetHashKey('ambulance2'),
     GetHashKey('ambcar'),
+    GetHashKey('lguard'),
+    GetHashKey('seashark2'),
+    GetHashKey('blazer2'),
     GetHashKey('firetruk'),
     // LSPD
     GetHashKey('police'),
