@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@core/decorators/injectable';
 import { DrugSkill } from '@private/shared/drugs';
+import { PatientClothes } from '@public/shared/job/lsmc';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 
 import { Outfit } from '../../shared/cloth';
@@ -93,6 +94,23 @@ export class PlayerService {
     }
 
     public setTempClothes(clothes: Outfit | null) {
+        const player = this.getPlayer();
+        const state = this.getState();
+        if (state.isWearingPatientOutfit) {
+            clothes = {
+                Components: {
+                    ...PatientClothes[player.skin.Model.Hash]['Patient'].Components,
+                    ...clothes?.Components,
+                },
+                Props: {
+                    ...PatientClothes[player.skin.Model.Hash]['Patient'].Props,
+                    ...clothes?.Props,
+                },
+                GlovesID: clothes?.GlovesID,
+                TopID: clothes?.TopID,
+            };
+        }
+
         TriggerEvent(ClientEvent.CHARACTER_SET_TEMPORARY_CLOTH, clothes || {});
     }
 
