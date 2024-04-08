@@ -959,6 +959,12 @@ export class VehicleGarageProvider {
                 const timestamp = Math.floor(Date.now() / 1000);
 
                 if (garage.type === GarageType.Depot) {
+                    if (vehicle.requiredLicence && !player.metadata.licences[vehicle.requiredLicence]) {
+                        this.notifier.notify(source, `Vous n'avez pas le permis nécessaire.`, 'error');
+
+                        return;
+                    }
+
                     if (playerVehicle.state == PlayerVehicleState.InSoftPound) {
                         const hours = (timestamp - playerVehicle.parkingtime) / 3600;
                         if (hours > 1) {
