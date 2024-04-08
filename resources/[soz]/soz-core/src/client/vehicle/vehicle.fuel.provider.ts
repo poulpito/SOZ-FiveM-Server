@@ -680,6 +680,9 @@ export class VehicleFuelProvider {
         const newOil = Math.max(0, oilLevel - consumedOil);
         const newFuel = Math.max(0, fuelLevel - consumedFuel);
 
+        SetVehicleFuelLevel(vehicleEntityId, newFuel);
+        SetVehicleOilLevel(vehicleEntityId, newOil);
+
         if (newFuel <= 0.1) {
             SetVehicleEngineOn(vehicleEntityId, false, true, true);
         }

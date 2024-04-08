@@ -112,6 +112,7 @@ export class WeatherProvider {
         const weather = this.incomingForecasts.shift();
         this.currentForecast = weather;
         this.store.dispatch.global.update({ weather: weather.weather });
+        this.monitor.publish('weather_update', {}, { weather: weather });
         this.prepareForecasts(weather.weather);
 
         TriggerClientEvent(ClientEvent.PHONE_APP_WEATHER_UPDATE_FORECASTS, -1);
