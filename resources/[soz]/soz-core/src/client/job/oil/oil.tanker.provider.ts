@@ -222,23 +222,6 @@ export class OilTankerProvider {
         TaskTurnPedToFaceEntity(PlayerPedId(), vehicle, 1000);
         await wait(500);
 
-        const stopReason = await this.animationService.playAnimation({
-            base: {
-                dictionary: 'anim@mp_atm@enter',
-                name: 'enter',
-                blendInSpeed: 8.0,
-                blendOutSpeed: -8.0,
-                duration: 3000,
-                lockX: true,
-                lockY: true,
-                lockZ: true,
-            },
-        });
-
-        if (stopReason !== AnimationStopReason.Finished) {
-            return;
-        }
-
         const attachPosition = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, -5.9, -1.0) as Vector3;
 
         if (!this.ropeService.createNewRope(attachPosition, vehicle, 3, 25.0, 'hei_prop_hei_hose_nozzle')) {

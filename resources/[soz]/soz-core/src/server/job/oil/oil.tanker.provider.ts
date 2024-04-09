@@ -340,7 +340,7 @@ export class OilTankerProvider {
             const essenceItemAmount = this.inventoryManager.getItemCount(inventory.id, 'essence');
             const keroseneItemAmount = this.inventoryManager.getItemCount(inventory.id, 'kerosene');
 
-            if (essenceItemAmount <= 10 && keroseneItemAmount <= 10) {
+            if (essenceItemAmount < 10 && keroseneItemAmount < 10) {
                 this.notifier.error(source, "Vous n'avez pas de carburant à vendre.");
 
                 return;

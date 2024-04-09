@@ -32,7 +32,7 @@ export class OilCraftProvider {
 
     @OnEvent(ServerEvent.OIL_CRAFT_ESSENCE_JERRYCAN)
     public async onCraftEssenceJerrycan(source: number) {
-        await this.craft(source, 'essence', 'essence_jerrycan', 3, 10000);
+        await this.craft(source, 'essence', 'essence_jerrycan', 1, 60000, true);
     }
 
     @OnEvent(ServerEvent.OIL_CRAFT_KEROSENE)
@@ -42,7 +42,7 @@ export class OilCraftProvider {
 
     @OnEvent(ServerEvent.OIL_CRAFT_KEROSENE_JERRYCAN)
     public async onCraftKeroseneJerrycan(source: number) {
-        await this.craft(source, 'kerosene', 'kerosene_jerrycan', 1, 30000);
+        await this.craft(source, 'kerosene', 'kerosene_jerrycan', 1, 60000, true);
     }
 
     private async craft(
@@ -50,7 +50,8 @@ export class OilCraftProvider {
         itemIdToRemove: string,
         itemIdToAdd: string,
         multiplier: number,
-        baseDuration: number
+        baseDuration: number,
+        fixedDuration = false
     ) {
         const player = this.playerService.getPlayer(source);
 
@@ -75,7 +76,7 @@ export class OilCraftProvider {
 
         const addAmount = Math.floor(baseRemoveAmount / multiplier);
         const removeAmount = addAmount * multiplier;
-        const duration = baseDuration * removeAmount;
+        const duration = fixedDuration ? baseDuration : baseDuration * removeAmount;
 
         const { completed } = await this.progressService.progress(
             source,
