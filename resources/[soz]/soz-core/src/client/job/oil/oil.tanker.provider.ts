@@ -263,7 +263,7 @@ export class OilTankerProvider {
 
         const field = zone.data;
         const entityModel = GetEntityModel(this.currentTankerAttached);
-        const entityClass = GetVehicleClass(entityModel) as VehicleClass;
+        const entityClass = GetVehicleClass(this.currentTankerAttached) as VehicleClass;
         const vehicleNetId = NetworkGetNetworkIdFromEntity(this.currentTankerAttached);
 
         TaskTurnPedToFaceEntity(PlayerPedId(), entity, 500);
@@ -278,7 +278,7 @@ export class OilTankerProvider {
         }
 
         const entityModel = GetEntityModel(this.currentTankerAttached);
-        const entityClass = GetVehicleClass(entityModel) as VehicleClass;
+        const entityClass = GetVehicleClass(this.currentTankerAttached) as VehicleClass;
         const vehicleNetId = NetworkGetNetworkIdFromEntity(this.currentTankerAttached);
 
         TriggerServerEvent(ServerEvent.OIL_REFINE_TANKER, vehicleNetId, entityModel, entityClass);
@@ -290,7 +290,7 @@ export class OilTankerProvider {
         }
 
         const entityModel = GetEntityModel(this.currentTankerAttached);
-        const entityClass = GetVehicleClass(entityModel) as VehicleClass;
+        const entityClass = GetVehicleClass(this.currentTankerAttached) as VehicleClass;
         const vehicleNetId = NetworkGetNetworkIdFromEntity(this.currentTankerAttached);
 
         TriggerServerEvent(ServerEvent.OIL_RESELL_TANKER, vehicleNetId, entityModel, entityClass);

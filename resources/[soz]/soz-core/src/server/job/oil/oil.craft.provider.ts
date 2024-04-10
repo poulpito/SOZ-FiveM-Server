@@ -32,7 +32,7 @@ export class OilCraftProvider {
 
     @OnEvent(ServerEvent.OIL_CRAFT_ESSENCE_JERRYCAN)
     public async onCraftEssenceJerrycan(source: number) {
-        await this.craft(source, 'essence', 'essence_jerrycan', 1, 60000, true);
+        await this.craft(source, 'essence', 'essence_jerrycan', 3, 60000, true);
     }
 
     @OnEvent(ServerEvent.OIL_CRAFT_KEROSENE)
