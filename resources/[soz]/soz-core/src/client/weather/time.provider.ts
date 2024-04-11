@@ -12,6 +12,6 @@ export class TimeProvider {
 
     @Once()
     onStart(): void {
-        SetMillisecondsPerGameMinute(2000);
+        SetMillisecondsPerGameMinute(60_000);
     }
 }

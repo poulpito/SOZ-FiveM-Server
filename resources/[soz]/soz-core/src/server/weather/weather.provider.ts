@@ -1,4 +1,6 @@
 import { On, Once } from '@public/core/decorators/event';
+import axios from 'axios';
+import { addSeconds } from 'date-fns';
 
 import { Command } from '../../core/decorators/command';
 import { Exportable } from '../../core/decorators/exports';
@@ -18,7 +20,6 @@ import { Store } from '../store/store';
 import { Halloween, Polluted, SpringAutumn, Winter } from './forecast';
 import { DaySpringTemperature, ForecastAdderTemperatures, NightSpringTemperature } from './temperature';
 
-const INCREMENT_SECOND = (3600 * 24) / (60 * 48);
 const MAX_FORECASTS = 5;
 const UPDATE_TIME_INTERVAL = 5;
 
@@ -36,8 +37,6 @@ export class WeatherProvider {
     @Inject(Monitor)
     private monitor: Monitor;
 
-    private currentTime: Time = { hour: 2, minute: 0, second: 0 };
-
     private shouldUpdateWeather = true;
     private pollutionManagerReady = false;
 
@@ -52,52 +51,54 @@ export class WeatherProvider {
 
     private currentForecast: ForecastWithTemperature = {
         weather: this.defaultWeather,
-        temperature: this.getTemperature(this.defaultWeather, this.currentTime),
+        temperature: this.getTemperature(this.defaultWeather, this.currentTime()),
         duration: 1000 * 10,
     };
 
     private incomingForecasts: ForecastWithTemperature[] = [this.currentForecast];
 
     private stormDeadline = 0; // timestamp
+    private timeDelta = 0;
+    private timeAdminDelta = 0;
 
     @Once()
-    public init() {
+    public async init() {
         if (this.forecast == Winter) {
             this.store.dispatch.global.update({ snow: true });
         }
+
+        try {
+            const res = await axios.get('http://worldtimeapi.org/api/timezone/America/Los_Angeles');
+            const offset = res.data.utc_offset as string;
+            const offsetDate = offset.split(':');
+            this.timeDelta = parseInt(offsetDate[0]) * 3600 + parseInt(offsetDate[1]) * 60;
+        } catch (e) {
+            this.logger.error(e);
+        }
+    }
+
+    private currentTime(): Time {
+        const localDate = addSeconds(Date.now(), this.timeDelta);
+        const localDateCorrected = addSeconds(localDate, this.timeAdminDelta);
+
+        return {
+            hour: localDateCorrected.getHours(),
+            minute: localDateCorrected.getMinutes(),
+            second: localDateCorrected.getSeconds(),
+        };
     }
 
     @Tick(TickInterval.EVERY_SECOND * UPDATE_TIME_INTERVAL, 'weather:time:advance', true)
     async advanceTime() {
-        this.currentTime.second += INCREMENT_SECOND * UPDATE_TIME_INTERVAL;
-
-        if (this.currentTime.second >= 60) {
-            const incrementMinutes = Math.floor(this.currentTime.second / 60);
-
-            this.currentTime.minute += incrementMinutes;
-            this.currentTime.second %= 60;
-
-            if (this.currentTime.minute >= 60) {
-                const incrementHours = Math.floor(this.currentTime.minute / 60);
-
-                this.currentTime.hour += incrementHours;
-                this.currentTime.minute %= 60;
-
-                if (this.currentTime.hour >= 24) {
-                    this.currentTime.hour %= 24;
-                }
-            }
-        }
+        const time = this.currentTime();
 
         if (isFeatureEnabled(Feature.Halloween)) {
-            if (this.currentTime.hour >= 2 || this.currentTime.hour < 1) {
-                this.currentTime.hour = 1;
-                this.currentTime.minute = 0;
-                this.currentTime.second = 0;
+            if (time.hour >= 2 || time.hour < 1) {
+                time.hour = 1;
             }
         }
 
-        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, time);
     }
 
     @Tick(TickInterval.EVERY_SECOND, 'weather:next-weather')
@@ -170,12 +171,17 @@ export class WeatherProvider {
         const hour = hourString ? parseInt(hourString, 10) : null;
         const minute = minuteString ? parseInt(minuteString, 10) : 0;
 
-        if (!hour || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
             return;
         }
 
-        this.currentTime = { hour, minute, second: 0 };
-        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
+        this.timeAdminDelta = 0;
+        if (hour != null) {
+            const current = this.currentTime();
+            this.timeAdminDelta = (hour - current.hour) * 3_600 + (minute - current.minute) * 60;
+        }
+
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime());
     }
 
     @Command('blackout', { role: 'admin' })
@@ -235,13 +241,13 @@ export class WeatherProvider {
                     }
                 }
                 return acc;
-            }, this.currentTime);
+            }, this.currentTime());
 
             const randomDuration = (Math.random() * 5 + 10) * 60 * 1000;
             if (this.shouldUpdateWeather) {
                 const forecast = this.incomingForecasts.slice(-1);
                 const nextWeather = this.getNextWeather(forecast.length ? forecast[0].weather : initialWeather);
-                const futureTime = this.currentTime;
+                const futureTime = this.currentTime();
 
                 this.incomingForecasts.push({
                     weather: nextWeather,
