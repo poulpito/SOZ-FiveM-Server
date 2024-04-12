@@ -62,7 +62,8 @@ export class WeatherProvider {
             const res = await axios.get('http://worldtimeapi.org/api/timezone/America/Los_Angeles');
             const offset = res.data.utc_offset as string;
             const offsetDate = offset.split(':');
-            this.timeDelta = parseInt(offsetDate[0]) * 3600 + parseInt(offsetDate[1]) * 60;
+            const localOffset = new Date().getTimezoneOffset() * 60;
+            this.timeDelta = parseInt(offsetDate[0]) * 3600 + parseInt(offsetDate[1]) * 60 + localOffset;
         } catch (e) {
             this.logger.error(e);
         }
