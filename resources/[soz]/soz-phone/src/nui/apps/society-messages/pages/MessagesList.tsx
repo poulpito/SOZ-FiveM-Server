@@ -189,7 +189,7 @@ export const MessageItem: FunctionComponent<MessageItemProps> = ({
                                 )}
                             </p>
                             <p
-                                className={cn('text-left text-sm font-medium break-words', {
+                                className={cn('text-left text-sm font-medium break-words whitespace-pre-wrap', {
                                     'text-gray-100': config.theme.value === 'dark',
                                     'text-gray-700': config.theme.value === 'light',
                                 })}
