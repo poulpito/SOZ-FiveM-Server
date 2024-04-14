@@ -111,7 +111,7 @@ export class WeatherProvider {
 
         const url =
             `https://api.open-meteo.com/v1/forecast?` +
-            `latitude=34.03&longitude=-118.08&minutely_15=weather_code,apparent_temperature&timezone=auto&` +
+            `latitude=34.05&longitude=-118.24&minutely_15=weather_code,apparent_temperature&timezone=auto&` +
             `start_minutely_15=${this.formatDate(localDate)}&end_minutely_15=${this.formatDate(endDate)}`;
 
         try {
