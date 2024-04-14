@@ -21,6 +21,7 @@ export const RadarAllowedVehicle: number[] = [
     GetHashKey('lspd21'),
     GetHashKey('lspd30'),
     GetHashKey('lspd40'),
+    GetHashKey('lspd41'),
     GetHashKey('lspd50'),
     GetHashKey('lspd51'),
     // BCSO
@@ -36,6 +37,7 @@ export const RadarAllowedVehicle: number[] = [
     GetHashKey('bcso21'),
     GetHashKey('bcso30'),
     GetHashKey('bcso40'),
+    GetHashKey('bcso41'),
     GetHashKey('bcso50'),
     GetHashKey('bcso51'),
     // LSPD / BCSO
@@ -68,6 +70,7 @@ export const RadarInformedVehicle: number[] = [
     GetHashKey('lspd21'),
     GetHashKey('lspd30'),
     GetHashKey('lspd40'),
+    GetHashKey('lspd41'),
     GetHashKey('lspd50'),
     GetHashKey('lspd51'),
     // BCSO
@@ -83,6 +86,7 @@ export const RadarInformedVehicle: number[] = [
     GetHashKey('bcso21'),
     GetHashKey('bcso30'),
     GetHashKey('bcso40'),
+    GetHashKey('bcso41'),
     GetHashKey('bcso50'),
     GetHashKey('bcso51'),
     // Both
