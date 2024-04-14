@@ -820,8 +820,8 @@
         </Item>
         <Item type="CHandlingData">
             <handlingName>LSPD41</handlingName>
-            <fMass value="1500.000000" />
-            <fInitialDragCoeff value="3.1" />
+            <fMass value="1500.0" />
+            <fInitialDragCoeff value="7.0" />
             <fDownforceModifier value="0.0" />
             <fPercentSubmerged value="85.0" />
             <vecCentreOfMassOffset x="0.0" y="0.0" z="-0.10000000149012" />
@@ -829,7 +829,7 @@
             <fDriveBiasFront value="0.0" />
             <nInitialDriveGears value="6" />
             <fInitialDriveForce value="0.351" />
-            <fDriveInertia value="1.1" />
+            <fDriveInertia value="1.0" />
             <fClutchChangeRateScaleUpShift value="3.4" />
             <fClutchChangeRateScaleDownShift value="3.4" />
             <fInitialDriveMaxFlatVel value="180.1" />
