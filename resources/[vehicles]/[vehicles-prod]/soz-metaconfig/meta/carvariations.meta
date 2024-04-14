@@ -415,6 +415,46 @@
             <sirenSettings value="2"/>
         </Item>
         <Item>
+            <modelName>lspd41</modelName>
+            <colors>
+                <Item>
+                    <indices content="char_array">
+                        0
+                        111
+                        0
+                        1
+                        156
+                        0
+                        0
+                    </indices>
+                    <liveries>
+                        <Item value="false" />
+                        <Item value="false" />
+                        <Item value="false" />
+                        <Item value="false" />
+                        <Item value="false" />
+                        <Item value="false" />
+                        <Item value="false" />
+                        <Item value="false" />
+                    </liveries>
+                </Item>
+            </colors>
+            <kits>
+                <Item>1023_lspd41_modkit</Item>
+            </kits>
+            <windowsWithExposedEdges />
+            <plateProbabilities>
+                <Probabilities>
+                    <Item>
+                        <Name>hash_69E137FC</Name>
+                        <Value value="100" />
+                    </Item>
+                </Probabilities>
+            </plateProbabilities>
+            <lightSettings value="128" />
+            <sirenSettings value="1"/>
+        </Item>
+        <Item>
             <modelName>lspd50</modelName>
             <colors>
                 <Item>

@@ -28,6 +28,7 @@ export const VehicleWithSirens = {
     [GetHashKey('lspd21')]: true,
     [GetHashKey('lspd30')]: true,
     [GetHashKey('lspd40')]: true,
+    [GetHashKey('lspd41')]: true,
     [GetHashKey('lspd50')]: true,
     [GetHashKey('lspd51')]: true,
     // BCSO
@@ -43,6 +44,7 @@ export const VehicleWithSirens = {
     [GetHashKey('bcso21')]: true,
     [GetHashKey('bcso30')]: true,
     [GetHashKey('bcso40')]: true,
+    [GetHashKey('bcso41')]: true,
     [GetHashKey('bcso50')]: true,
     [GetHashKey('bcso51')]: true,
     // LSPD + BCSO
