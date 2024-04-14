@@ -161,14 +161,14 @@ export class RepositoryProvider {
         const repositoryName = data.repository;
 
         if (this.legacyRepositories[repositoryName]) {
-            await this.refreshRepository(repositoryName);
-            return Response.ok(null);
+            await this.refresh(repositoryName);
+            return Response.ok();
         }
 
         for (const repository of this.repositories) {
             if (repository.type === repositoryName) {
                 await repository.refresh();
-                return Response.ok(null);
+                return Response.ok();
             }
         }
 

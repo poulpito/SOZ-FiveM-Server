@@ -1,5 +1,5 @@
 import { RepositoryConfig, RepositoryType } from '@public/shared/repository';
-import { applyPatch, generate, observe, Observer } from 'fast-json-patch';
+import { applyPatch, compare, generate, observe, Observer } from 'fast-json-patch';
 
 export abstract class RepositoryLegacy<T> {
     private data: T | null;
@@ -74,7 +74,10 @@ export abstract class Repository<
     }
 
     public async refresh(): Promise<Record<K, V>> {
-        this.data = await this.load();
+        const data = await this.load();
+
+        const patch = compare(this.data, data);
+        applyPatch(this.data, patch);
 
         return this.data;
     }
