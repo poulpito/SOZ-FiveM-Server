@@ -30,7 +30,6 @@ import { PlayerPositionProvider } from '../player/player.position.provider';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { ResourceLoader } from '../repository/resource.loader';
-import { StateSelector } from '../store/store';
 import { CircularCameraProvider } from './circular.camera.provider';
 import { ObjectProvider } from './object.provider';
 import { PropHighlightProvider } from './prop.highlight.provider';
@@ -126,12 +125,21 @@ export class PropPlacementProvider {
         await this.doCloseEditor();
     }
 
-    @StateSelector(state => state.grid)
+    @Tick(TickInterval.EVERY_SECOND)
     public async onGridChange() {
-        if (this.menu.getOpened() === MenuType.PropPlacementMenu) {
-            this.notifier.notify('Changement de zone, fermeture du menu...', 'warning');
-            await this.doCloseEditor();
-            this.menu.closeMenu();
+        if (this.menu.getOpened() === MenuType.PropPlacementMenu && this.currentCollection) {
+            const playerData = this.playerService.getPlayer();
+            if (!['admin', 'staff'].includes(playerData.role)) {
+                const [firstProp] = Object.values(this.currentCollection.props);
+                if (
+                    firstProp &&
+                    getDistance(firstProp.object.position, GetEntityCoords(PlayerPedId()) as Vector3) > 100.0
+                ) {
+                    this.notifier.notify('Trop loin, fermeture du menu...', 'warning');
+                    await this.doCloseEditor();
+                    this.menu.closeMenu();
+                }
+            }
         }
     }
 
