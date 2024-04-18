@@ -9,15 +9,26 @@ export class BankService {
     @Inject(PrismaService)
     private prismaService: PrismaService;
 
-    public transferBankMoney(source: string, target: string, amount: number): Promise<Result<boolean, string>> {
+    public transferBankMoney(
+        source: string,
+        target: string,
+        amount: number,
+        allowOverflow = false
+    ): Promise<Result<boolean, string>> {
         return new Promise(resolve => {
-            exports['soz-bank'].TransferMoney(source, target, amount, (success, reason) => {
-                if (success) {
-                    resolve(Ok(true));
-                } else {
-                    resolve(Err(reason));
-                }
-            });
+            exports['soz-bank'].TransferMoney(
+                source,
+                target,
+                amount,
+                (success, reason) => {
+                    if (success) {
+                        resolve(Ok(true));
+                    } else {
+                        resolve(Err(reason));
+                    }
+                },
+                allowOverflow
+            );
         });
     }
 
