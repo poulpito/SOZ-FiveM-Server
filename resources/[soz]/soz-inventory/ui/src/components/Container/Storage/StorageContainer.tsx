@@ -327,6 +327,7 @@ export const StorageContainer = () => {
                     <ContainerWrapper
                         display={true}
                         banner={playerBanner}
+                        bannerType='thin'
                         weight={playerInventory.weight}
                         maxWeight={playerInventory.maxWeight}
                     >
@@ -345,6 +346,7 @@ export const StorageContainer = () => {
                     <ContainerWrapper
                         display={true}
                         banner={targetInventoryBanner}
+                        bannerType='thin'
                         weight={targetInventory.weight}
                         maxWeight={targetInventory.maxWeight}
                         sortCallback={() => handleSortInventory(targetInventory.id, setTargetInventory)}

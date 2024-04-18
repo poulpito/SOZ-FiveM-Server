@@ -216,6 +216,7 @@ export const PlayerContainer = () => {
                 <ContainerWrapper
                     display={true}
                     banner={inventoryBanner}
+                    bannerType='thick'
                     weight={playerInventory.weight}
                     maxWeight={playerInventory.maxWeight}
                     sortCallback={() => handleSortInventory(playerInventory.id, setPlayerInventory)}

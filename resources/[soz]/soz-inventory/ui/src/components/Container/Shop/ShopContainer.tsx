@@ -202,6 +202,7 @@ export const ShopContainer = () => {
                         <ContainerWrapper
                             display={true}
                             banner={`https://nui-img/soz/${shopHeaderTexture}`}
+                            bannerType='thick'
                             maxWeight={-1}
                         >
                             <ShopContainerSlots
