@@ -4,9 +4,17 @@ import { Provider } from '../../../core/decorators/provider';
 import { ServerEvent } from '../../../shared/event/server';
 import { InventoryManager } from '../../inventory/inventory.manager';
 import { ItemService } from '../../item/item.service';
+import { Monitor } from '../../monitor/monitor';
 import { Notifier } from '../../notifier';
 import { PlayerService } from '../../player/player.service';
 import { ProgressService } from '../../player/progress.service';
+
+const oilCraftingMonitorEventsMap = {
+    essence: 'job_mtp_create_gasoline',
+    kerosene: 'job_mtp_create_gasoline',
+    essence_jerrycan: 'job_mtp_create_jerrycan',
+    kerosene_jerrycan: 'job_mtp_create_jerrycan',
+};
 
 @Provider()
 export class OilCraftProvider {
@@ -24,6 +32,9 @@ export class OilCraftProvider {
 
     @Inject(Notifier)
     private notifier: Notifier;
+
+    @Inject(Monitor)
+    private monitor: Monitor;
 
     @OnEvent(ServerEvent.OIL_CRAFT_ESSENCE)
     public async onCraftEssence(source: number) {
@@ -110,5 +121,17 @@ export class OilCraftProvider {
             `Vous avez transformé ${removeAmount} x ${itemToRemove.label} en ${addAmount} x ${itemToAdd.label}.`,
             'success'
         );
+
+        if (oilCraftingMonitorEventsMap[itemIdToAdd]) {
+            this.monitor.publish(
+                oilCraftingMonitorEventsMap[itemIdToAdd],
+                {
+                    player_source: source,
+                },
+                {
+                    quantity: addAmount,
+                }
+            );
+        }
     }
 }
