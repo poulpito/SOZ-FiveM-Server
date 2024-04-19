@@ -11,7 +11,14 @@ import { Logger } from '../../core/logger';
 import { wait } from '../../core/utils';
 import { ClientEvent } from '../../shared/event';
 import { Feature, isFeatureEnabled } from '../../shared/features';
-import { Forecast, ForecastWithTemperature, Time, Weather } from '../../shared/weather';
+import {
+    DayDurationInMinutes,
+    Forecast,
+    ForecastWithTemperature,
+    IRLDayDurationInMinutes,
+    Time,
+    Weather,
+} from '../../shared/weather';
 import { Monitor } from '../monitor/monitor';
 import { Pollution } from '../pollution';
 import { Store } from '../store/store';
@@ -37,6 +44,7 @@ export class WeatherProvider {
     private shouldUpdateWeather = true;
     private pollutionManagerReady = false;
 
+    private currentTime: Time = { hour: 2, minute: 0, second: 0 };
     // See forecast.ts for the list of available forecasts
     private forecast: Forecast = isFeatureEnabled(Feature.Halloween) ? Halloween : SpringAutumn;
     // See temperature.ts for the list of available temperature ranges,
@@ -50,7 +58,6 @@ export class WeatherProvider {
 
     private stormDeadline = 0; // timestamp
     private timeDelta = 0;
-    private timeAdminDelta = 0;
 
     @Once()
     public async init() {
@@ -69,28 +76,37 @@ export class WeatherProvider {
         }
     }
 
-    private currentTime(): Time {
-        const localDate = addSeconds(Date.now(), this.timeDelta);
-        const localDateCorrected = addSeconds(localDate, this.timeAdminDelta);
-
-        return {
-            hour: localDateCorrected.getHours(),
-            minute: localDateCorrected.getMinutes(),
-            second: localDateCorrected.getSeconds(),
-        };
-    }
-
     @Tick(TickInterval.EVERY_SECOND * UPDATE_TIME_INTERVAL, 'weather:time:advance', true)
     async advanceTime() {
-        const time = this.currentTime();
+        this.currentTime.second += (IRLDayDurationInMinutes / DayDurationInMinutes) * UPDATE_TIME_INTERVAL;
 
-        if (isFeatureEnabled(Feature.Halloween)) {
-            if (time.hour >= 2 || time.hour < 1) {
-                time.hour = 1;
+        if (this.currentTime.second >= 60) {
+            const incrementMinutes = Math.floor(this.currentTime.second / 60);
+
+            this.currentTime.minute += incrementMinutes;
+            this.currentTime.second %= 60;
+
+            if (this.currentTime.minute >= 60) {
+                const incrementHours = Math.floor(this.currentTime.minute / 60);
+
+                this.currentTime.hour += incrementHours;
+                this.currentTime.minute %= 60;
+
+                if (this.currentTime.hour >= 24) {
+                    this.currentTime.hour %= 24;
+                }
             }
         }
 
-        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, time);
+        if (isFeatureEnabled(Feature.Halloween)) {
+            if (this.currentTime.hour >= 2 || this.currentTime.hour < 1) {
+                this.currentTime.hour = 1;
+                this.currentTime.minute = 0;
+                this.currentTime.second = 0;
+            }
+        }
+
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
     }
 
     private formatDate(date: Date) {
@@ -107,17 +123,20 @@ export class WeatherProvider {
         }
 
         const localDate = addSeconds(Date.now(), this.timeDelta);
-        const endDate = addMinutes(localDate, 15 * MAX_FORECASTS);
+        localDate.setHours(this.currentTime.hour);
+        localDate.setMinutes(this.currentTime.minute);
+        localDate.setSeconds(this.currentTime.second);
+        const endDate = addMinutes(localDate, 60 * MAX_FORECASTS);
 
         const url =
             `https://api.open-meteo.com/v1/forecast?` +
-            `latitude=34.05&longitude=-118.24&minutely_15=weather_code,apparent_temperature&timezone=auto&` +
-            `start_minutely_15=${this.formatDate(localDate)}&end_minutely_15=${this.formatDate(endDate)}`;
+            `latitude=34.05&longitude=-118.24&hourly=weather_code,apparent_temperature&timezone=auto&` +
+            `start_hour=${this.formatDate(localDate)}&end_hour=${this.formatDate(endDate)}`;
 
         try {
             const res = await axios.get(url);
 
-            this.manageForecasts(res.data.minutely_15);
+            this.manageForecasts(res.data.hourly);
             const currentForecast = this.incomingForecasts[0];
 
             this.store.dispatch.global.update({ weather: currentForecast.weather });
@@ -178,17 +197,12 @@ export class WeatherProvider {
         const hour = hourString ? parseInt(hourString, 10) : null;
         const minute = minuteString ? parseInt(minuteString, 10) : 0;
 
-        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+        if (hour == null || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
             return;
         }
 
-        this.timeAdminDelta = 0;
-        if (hour != null) {
-            const current = this.currentTime();
-            this.timeAdminDelta = (hour - current.hour) * 3_600 + (minute - current.minute) * 60;
-        }
-
-        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime());
+        this.currentTime = { hour, minute, second: 0 };
+        TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
     }
 
     @Command('blackout', { role: 'admin' })
