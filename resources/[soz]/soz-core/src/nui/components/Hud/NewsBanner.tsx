@@ -120,7 +120,7 @@ const Banner: FunctionComponent<BannerProps> = ({ index, news, onDelete }) => {
                     <>
                         {!news.type.includes('reboot') && (
                             <div className="flex flex-col justify-between p-1 h-full">
-                                <p className="max-h-40 overflow-hidden break-words text-[1.2vh]">{news.message}</p>
+                                <p className="max-h-40 overflow-hidden break-words text-[1.35vh]">{news.message}</p>
                                 <p className="text-right pr-4 text-lg">
                                     {authorType} <strong>{news.reporter}</strong>
                                 </p>

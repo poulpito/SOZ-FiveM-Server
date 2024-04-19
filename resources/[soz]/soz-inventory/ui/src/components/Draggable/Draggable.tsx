@@ -380,7 +380,7 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
 
             {interactAction && (
                 <div ref={contextRef} className={style.ContextMenu}
-                     style={{display: `${contextData.visible ? 'block' : 'none'}`, left: contextData.posX, top: contextData.posY}}>
+                     style={{display: `${contextData.visible ? 'block' : 'none'}`, left: contextData.posX, top: contextData.posY, position:'fixed'}}>
                     <div className={style.OptionsList}>
                         {item && (item.useable || item.type === 'weapon') && <li className={style.OptionListItem} onClick={createInteractAction('useItem')}>
                             {item.type === 'weapon' ? 'Équiper' : item.usableLabel || 'Utiliser'}
