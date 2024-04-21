@@ -23,9 +23,17 @@ export const TaxiHorodateurApp: FunctionComponent = () => {
         return null;
     }
 
+    let rightOffset = 'right-5';
+    if (
+        (window.innerWidth > 5000 && window.innerHeight < 1500) ||
+        (window.innerWidth > 3079 && window.innerHeight < 1200)
+    ) {
+        rightOffset = 'right-[94vh]';
+    }
+
     return (
         <div
-            className="absolute bottom-[8vh] right-5 font-lato"
+            className={`${rightOffset} absolute bottom-[8vh] right-5 font-lato`}
             style={{
                 backgroundImage: `url(/public/images/taxi/Brouznouf_Z7_.webp)`,
                 backgroundRepeat: 'no-repeat',

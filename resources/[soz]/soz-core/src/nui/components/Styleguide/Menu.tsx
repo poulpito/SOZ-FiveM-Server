@@ -115,7 +115,14 @@ export const MainMenu: FunctionComponent<PropsWithChildren> = ({ children }) => 
 };
 
 export const MenuContainer: FunctionComponent<PropsWithChildren> = ({ children }) => {
-    return <div className="absolute left-8 top-8 w-[36vh] min-w-[36vh] select-none">{children}</div>;
+    let leftOffset = 'left-8';
+    if (
+        (window.innerWidth > 5000 && window.innerHeight < 1500) ||
+        (window.innerWidth > 3079 && window.innerHeight < 1200)
+    ) {
+        leftOffset = 'left-[94vh]';
+    }
+    return <div className={`absolute ${leftOffset} top-8 w-[36vh] min-w-[36vh] select-none`}>{children}</div>;
 };
 
 export type MenuTitleProps = {

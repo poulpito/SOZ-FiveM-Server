@@ -7,7 +7,7 @@
     left: 30%;
     right: 30%;
     transition: transform 0.15s, opacity 0.15s;
-    width: 38vh;
+    width: 36vh;
 }
 
 .PlayerContainer{
@@ -18,3 +18,15 @@
 .StorageContainer{
     grid-column: 3/3;
 }
+
+@media (min-width: 5000px) and (max-height: 1500px){
+    .Wrapper {
+        left: 140vh
+    }
+ }
+
+ @media (min-width: 3079px) and (max-height: 1200px){
+    .Wrapper {
+        left: 140vh
+    }
+ }
