@@ -383,6 +383,10 @@ export const createModificationHelperList = (
                     continue;
                 }
 
+                if (IsVehicleModHswExclusive(vehicleEntityId, type, i)) {
+                    continue;
+                }
+
                 choices.push({
                     label: getModName(vehicleEntityId, type, i, modCount),
                     value: i,
