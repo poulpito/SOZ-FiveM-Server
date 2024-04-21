@@ -192,6 +192,10 @@ const VehicleConditionHelpers: Partial<VehicleConditionHelper<keyof VehicleCondi
             const windowNumber = 8;
             const result: { [key: number]: boolean } = {};
 
+            if (AreAllVehicleWindowsIntact(vehicle)) {
+                return result;
+            }
+
             for (let i = 0; i < windowNumber; i++) {
                 if (state.openWindows && (i === 0 || i === 1)) {
                     continue;

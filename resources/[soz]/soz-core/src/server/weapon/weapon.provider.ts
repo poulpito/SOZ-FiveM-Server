@@ -59,7 +59,6 @@ export class WeaponProvider {
             return;
         }
         const positionVictim = GetEntityCoords(target) as Vector4;
-        positionVictim[2] -= 0.95;
         this.policeClueDBProvider.addClues([
             {
                 id: uuidv4(),
@@ -132,7 +131,6 @@ export class WeaponProvider {
         }
         const bulletId = uuidv4();
         const position = GetEntityCoords(GetPlayerPed(source)) as Vector4;
-        position[2] -= 0.97;
         const possibilities = [
             {
                 '0': -0.08464948832988739,

@@ -89,10 +89,21 @@ export class ObjectService {
         }
 
         if (object.placeOnGround) {
-            PlaceObjectOnGroundProperly_2(entity);
+            PlaceObjectOnGroundProperly(entity);
         }
 
         if (object.matrix) {
+            if (object.placeOnGround) {
+                const [success, z] = GetGroundZFor_3dCoord_2(
+                    object.position[0],
+                    object.position[1],
+                    object.position[2],
+                    false
+                );
+                if (success) {
+                    object.matrix[14] = z + 0.01;
+                }
+            }
             this.applyEntityMatrix(entity, object.matrix);
         }
 
