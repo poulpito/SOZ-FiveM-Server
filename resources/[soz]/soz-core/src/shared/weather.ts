@@ -23,6 +23,10 @@ export type Time = {
 
 export const DayDurationInMinutes = 4 * 60;
 export const IRLDayDurationInMinutes = 24 * 60;
+export const TimeSynchro = {
+    IG: 6,
+    IRL: 20,
+};
 
 export type Forecast = Record<Weather, { [key in Weather]?: number }>;
 

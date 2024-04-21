@@ -1,6 +1,6 @@
 import { On, Once } from '@public/core/decorators/event';
 import axios from 'axios';
-import { addMinutes, addSeconds, format } from 'date-fns';
+import { addMinutes, addSeconds, differenceInSeconds, format } from 'date-fns';
 
 import { Command } from '../../core/decorators/command';
 import { Exportable } from '../../core/decorators/exports';
@@ -17,6 +17,7 @@ import {
     ForecastWithTemperature,
     IRLDayDurationInMinutes,
     Time,
+    TimeSynchro,
     Weather,
 } from '../../shared/weather';
 import { Monitor } from '../monitor/monitor';
@@ -57,7 +58,7 @@ export class WeatherProvider {
     private incomingForecasts: ForecastWithTemperature[] = [];
 
     private stormDeadline = 0; // timestamp
-    private timeDelta = 0;
+    private timeWeatherDelta = 0;
 
     @Once()
     public async init() {
@@ -70,10 +71,26 @@ export class WeatherProvider {
             const offset = res.data.utc_offset as string;
             const offsetDate = offset.split(':');
             const localOffset = new Date().getTimezoneOffset() * 60;
-            this.timeDelta = parseInt(offsetDate[0]) * 3600 + parseInt(offsetDate[1]) * 60 + localOffset;
+            this.timeWeatherDelta = parseInt(offsetDate[0]) * 3600 + parseInt(offsetDate[1]) * 60 + localOffset;
         } catch (e) {
             this.logger.error(e);
         }
+
+        this.syncTime();
+    }
+
+    private syncTime() {
+        const cur = new Date();
+        const IRLTimeSynchro = new Date().setHours(TimeSynchro.IRL, 0, 0, 0);
+        const diff = differenceInSeconds(cur, IRLTimeSynchro);
+
+        const IGTimeSynchro = new Date().setHours(TimeSynchro.IG, 0, 0, 0);
+        const ig = addSeconds(IGTimeSynchro, (diff * IRLDayDurationInMinutes) / DayDurationInMinutes);
+        this.currentTime = {
+            hour: ig.getHours(),
+            minute: ig.getMinutes(),
+            second: ig.getSeconds(),
+        };
     }
 
     @Tick(TickInterval.EVERY_SECOND * UPDATE_TIME_INTERVAL, 'weather:time:advance', true)
@@ -122,7 +139,7 @@ export class WeatherProvider {
             return;
         }
 
-        const localDate = addSeconds(Date.now(), this.timeDelta);
+        const localDate = addSeconds(Date.now(), this.timeWeatherDelta);
         localDate.setHours(this.currentTime.hour);
         localDate.setMinutes(this.currentTime.minute);
         localDate.setSeconds(this.currentTime.second);
@@ -197,11 +214,16 @@ export class WeatherProvider {
         const hour = hourString ? parseInt(hourString, 10) : null;
         const minute = minuteString ? parseInt(minuteString, 10) : 0;
 
-        if (hour == null || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
-            return;
+        if (hour == null) {
+            this.syncTime();
+        } else {
+            if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+                return;
+            }
+
+            this.currentTime = { hour, minute, second: 0 };
         }
 
-        this.currentTime = { hour, minute, second: 0 };
         TriggerClientEvent(ClientEvent.STATE_UPDATE_TIME, -1, this.currentTime);
     }
 
