@@ -3,8 +3,8 @@ import { OnEvent, OnNuiEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Logger } from '../../core/logger';
-import { AnimationConfigItem, MoodConfigItem, WalkConfigItem } from '../../shared/animation';
-import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
+import { AnimationConfigItem, MoodConfigItem, WalkConfigItem, Walking } from '../../shared/animation';
+import { ClientEvent, NuiEvent } from '../../shared/event';
 import { Shortcut } from '../../shared/nui/player';
 import { getRandomItem } from '../../shared/random';
 import { Err, Ok } from '../../shared/result';
@@ -218,7 +218,13 @@ export class PlayerAnimationProvider {
             return;
         }
 
-        TriggerServerEvent(ServerEvent.PLAYER_SET_CURRENT_WALKSTYLE, walkItem.walk);
+        const player = this.playerService.getPlayer();
+        const walking: Walking = {
+            walk: walkItem.walk,
+            previous: player.metadata.walk,
+        };
+
+        this.animationService.toggleWalking(walking);
     }
 
     @OnNuiEvent(NuiEvent.PlayerMenuAnimationSetMood)
@@ -336,6 +342,18 @@ export class PlayerAnimationProvider {
 
         if (animationItem.type === 'event') {
             TriggerEvent(animationItem.event);
+
+            return true;
+        }
+
+        if (animationItem.type === 'walk') {
+            const walkItem: WalkConfigItem = {
+                walk: animationItem.walk,
+                icon: animationItem.icon,
+                name: animationItem.name,
+                type: animationItem.type,
+            };
+            this.setWalkAnimation({ walkItem });
 
             return true;
         }
