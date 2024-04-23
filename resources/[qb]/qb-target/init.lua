@@ -188,7 +188,7 @@ CreateThread(function()
 		end
 
 		GlobalCheck = function()
-			if PlayerData.metadata["isdead"] or PlayerData.metadata["inlaststand"] or PlayerData.metadata["ishandcuffed"] then
+			if PlayerData.metadata["isdead"] or PlayerData.metadata["inlaststand"] or PlayerData.metadata["ishandcuffed"]  or exports["soz-core"]:IsPlayerProne() then
 				return false
 			end
 

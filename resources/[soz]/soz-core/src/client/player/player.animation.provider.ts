@@ -3,7 +3,7 @@ import { OnEvent, OnNuiEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Logger } from '../../core/logger';
-import { AnimationConfigItem, MoodConfigItem, WalkConfigItem, Walking } from '../../shared/animation';
+import { AnimationConfigItem, MoodConfigItem, WalkConfigBase, WalkConfigItem, Walking } from '../../shared/animation';
 import { ClientEvent, NuiEvent } from '../../shared/event';
 import { Shortcut } from '../../shared/nui/player';
 import { getRandomItem } from '../../shared/random';
@@ -217,10 +217,14 @@ export class PlayerAnimationProvider {
         if (walkItem.type === 'category') {
             return;
         }
+        if (walkItem.type === 'event') {
+            TriggerEvent(walkItem.event);
+        }
 
         const player = this.playerService.getPlayer();
+        const walkingBase = walkItem as WalkConfigBase;
         const walking: Walking = {
-            walk: walkItem.walk,
+            walk: walkingBase.walk,
             previous: player.metadata.walk,
         };
 

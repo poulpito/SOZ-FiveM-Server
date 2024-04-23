@@ -55,7 +55,7 @@ export enum AnimationStopReason {
     Finished, // Normal finish, animation is finished
 }
 
-export type WalkConfigItem = WalkConfigBase | WalkConfigCategory;
+export type WalkConfigItem = WalkConfigBase | WalkConfigCategory | AnimationConfigEvent;
 
 export type WalkConfigList = WalkConfigItem[];
 

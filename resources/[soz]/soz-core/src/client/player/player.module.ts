@@ -8,6 +8,7 @@ import { PlayerInjuryProvider } from './player.injury.provider';
 import { PlayerInOutProvider } from './player.inout.provider';
 import { PlayerMenuProvider } from './player.menu.provider';
 import { PlayerPositionProvider } from './player.position.provider';
+import { PlayerProneProvider } from './player.prone.provider';
 import { PlayerQbcoreProvider } from './player.qbcore.provider';
 import { PlayerSnowProvider } from './player.snow.provider';
 import { PlayerStateProvider } from './player.state.provider';
@@ -38,6 +39,7 @@ import { ProgressProvider } from './progress.provider';
         PlayerZombieProvider,
         ProgressProvider,
         PlayerSnowProvider,
+        PlayerProneProvider,
     ],
 })
 export class PlayerModule {}
