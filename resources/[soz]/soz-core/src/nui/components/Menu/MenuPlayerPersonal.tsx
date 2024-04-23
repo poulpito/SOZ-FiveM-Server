@@ -433,13 +433,27 @@ const createWalkLeafItem = (item: WalkConfigItem): ReactElement => {
     }
 
     return (
-        <MenuItemButton
-            onConfirm={() => {
-                fetchNui(NuiEvent.PlayerMenuAnimationSetWalk, { walkItem: item });
+        <MenuItemSelect
+            onConfirm={(i, value) => {
+                if (value === 'play') {
+                    fetchNui(NuiEvent.PlayerMenuAnimationSetWalk, { walkItem: item });
+                } else if (value === 'favorite') {
+                    fetchNui(NuiEvent.PlayerMenuAnimationFavorite, {
+                        animationItem: item,
+                    });
+                }
             }}
+            title={
+                <div className="flex items-center">
+                    {item.icon && <div className="mr-2">{item.icon}</div>}
+                    <div>{item.name}</div>
+                </div>
+            }
+            titleWidth={60}
         >
-            {item.name}
-        </MenuItemButton>
+            <MenuItemSelectOption value="play">Jouer</MenuItemSelectOption>
+            <MenuItemSelectOption value="favorite">Raccourci</MenuItemSelectOption>
+        </MenuItemSelect>
     );
 };
 
