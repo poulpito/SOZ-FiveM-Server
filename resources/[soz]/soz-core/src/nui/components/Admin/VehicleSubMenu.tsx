@@ -136,6 +136,16 @@ export const VehicleSubMenu: FunctionComponent<VehicleSubMenuProps> = ({ banner,
                     >
                         ⛍ Calage désactivé
                     </MenuItemCheckbox>
+                    <MenuItemCheckbox
+                        disabled={!isStaffOrAdmin}
+                        checked={state.noSurfaceCalc}
+                        onChange={async value => {
+                            state.noSurfaceCalc = value;
+                            await fetchNui(NuiEvent.AdminToggleNoSurfaceCalc, value);
+                        }}
+                    >
+                        ⛍ Surface désactivée
+                    </MenuItemCheckbox>
                     <MenuItemButton
                         disabled={!isStaffOrAdmin}
                         onConfirm={async () => {

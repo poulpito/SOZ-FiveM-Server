@@ -150,9 +150,9 @@ export class NoClipProvider {
         }
     }
 
-    public ToggleNoClipMode() {
+    public async ToggleNoClipMode() {
         //return exports['soz-core'].isNoClipping();
-        return this.SetNoClip(!this.isNoClipping);
+        return await this.SetNoClip(!this.isNoClipping);
     }
 
     public IsNoClipMode() {

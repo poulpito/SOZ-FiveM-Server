@@ -74,6 +74,7 @@ end, 'helper')
 QBCore.Commands.Add('tpm', 'TP To Marker (Admin Only)', {}, false, function(source)
     local src = source
     TriggerClientEvent('QBCore:Command:GoToMarker', src)
+    TriggerClientEvent('soz-core:client:offroad:setTpm', src)
 end, 'helper')
 
 

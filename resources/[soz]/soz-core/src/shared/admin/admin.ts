@@ -45,6 +45,7 @@ export type GameMasterSubMenuState = {
 
 export type InteractiveSubMenuState = {
     displayOwners: boolean;
+    displayDebugSurface: boolean;
     displayPlayerNames: boolean;
     displayPlayersOnMap: boolean;
 };
@@ -67,6 +68,7 @@ export type DeveloperSubMenuState = {
 export type VehicleSubMenuState = {
     noStall: boolean;
     noBurstTyres: boolean;
+    noSurfaceCalc: boolean;
 };
 
 export type AdminMenuData = {

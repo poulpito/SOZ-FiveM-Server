@@ -201,6 +201,8 @@ export enum ClientEvent {
     VEHICLE_LOCKPICK = 'soz-core:client:vehicle:lockpick',
     VEHICLE_SET_OPEN_LIST = 'soz-core:client:vehicle:set-open-list',
     VEHICLE_DAMAGE_BLUR = 'soz-core:client:vehicle:damage-blur',
+    VEH_FEATURE_SURFACE_RESET = 'reset-feature-surface',
+    VEH_HAS_BEEN_TPM = 'soz-core:client:offroad:setTpm',
 
     VOIP_DEBUG = 'soz-core:client:voip:debug',
     VOIP_SET_MEGAPHONE = 'soz-core:client:voip:set-megaphone',
