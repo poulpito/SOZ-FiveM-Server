@@ -101,6 +101,7 @@ export class FoodHuntProvider {
                         {
                             player_source: source,
                             item_id: itemId,
+                            on_duty: player.job.onduty,
                         },
                         {
                             quantity: quantity,
