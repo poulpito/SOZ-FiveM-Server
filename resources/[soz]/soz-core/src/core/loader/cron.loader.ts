@@ -1,3 +1,5 @@
+import { differenceInMinutes } from 'date-fns';
+
 import { CronMetadata, CronMetadataKey } from '../decorators/cron';
 import { Inject, Injectable } from '../decorators/injectable';
 import { getMethodMetadata } from '../decorators/reflect';
@@ -60,10 +62,18 @@ export class CronLoader {
                 continue;
             }
 
-            if (job.metadata.hour === now.getHours() && job.metadata.minute === now.getMinutes()) {
-                await job.method();
+            const runDate = new Date();
+            runDate.setFullYear(now.getFullYear(), now.getMonth(), now.getDate());
+            runDate.setHours(job.metadata.hour);
+            runDate.setMinutes(job.metadata.minute);
+            const delta = differenceInMinutes(now, runDate);
 
-                job.lastRun = now;
+            if (0 <= delta && delta < 5) {
+                if (!job.lastRun || differenceInMinutes(now, job.lastRun) > 5) {
+                    await job.method();
+
+                    job.lastRun = now;
+                }
             }
         }
     }

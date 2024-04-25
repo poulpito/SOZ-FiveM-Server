@@ -1,3 +1,5 @@
+import { Command } from '@public/core/decorators/command';
+
 import { Cron } from '../../core/decorators/cron';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
@@ -24,6 +26,11 @@ export class BankTaxProvider {
 
     @Inject(Monitor)
     private monitor: Monitor;
+
+    @Command('paySocietyTaxes', { role: 'admin' })
+    public manualTaxe() {
+        this.paySocietyTaxes();
+    }
 
     @Cron(5, 0, 3)
     public async paySocietyTaxes() {
