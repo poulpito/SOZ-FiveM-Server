@@ -319,7 +319,7 @@ export class FDFFieldProvider {
         for (let k = 0; k < 100; k++) {
             await wait(100);
             const veh = GetVehiclePedIsIn(ped, false);
-            if (veh && GetEntityModel(GRAIN_TRAILER)) {
+            if (veh && GetEntityModel(veh) == TRACTOR2) {
                 break;
             }
         }
@@ -422,7 +422,7 @@ export class FDFFieldProvider {
         for (let k = 0; k < 100; k++) {
             await wait(100);
             const veh = GetVehiclePedIsIn(ped, false);
-            if (veh && GetEntityModel(RAKE_TRAILER)) {
+            if (veh && GetEntityModel(veh) == TRACTOR2) {
                 break;
             }
         }
