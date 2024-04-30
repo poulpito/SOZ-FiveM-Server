@@ -250,7 +250,11 @@ export class VehicleLockProvider {
 
             if (useSeat) {
                 let entryPosition: Vector3;
-                if (seat.type === DoorType.Door && !VEHICLE_FORCE_USE_BONES[GetEntityModel(vehicle)]) {
+                if (
+                    seat.type === DoorType.Door &&
+                    !VEHICLE_FORCE_USE_BONES[GetEntityModel(vehicle)] &&
+                    !IsThisModelABoat(GetEntityModel(vehicle))
+                ) {
                     entryPosition = GetEntryPositionOfDoor(vehicle, seat.doorIndex) as Vector3;
                 } else {
                     const bone = seat.seatBone;
