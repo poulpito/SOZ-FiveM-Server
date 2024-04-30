@@ -16,6 +16,7 @@ import { SoundService } from '../../sound.service';
 import { TargetFactory } from '../../target/target.factory';
 import { VehicleService } from '../../vehicle/vehicle.service';
 import { VehicleStateService } from '../../vehicle/vehicle.state.service';
+import { VehicleOffroadProvider } from '../../vehicle/vehicule.offroad.provider';
 
 const FLATBED_OFFSET = [0.0, -2.2, 1.1] as Vector3;
 
@@ -50,6 +51,9 @@ export class BennysFlatbedProvider {
 
     @Inject(RopeService)
     private ropeService: RopeService;
+
+    @Inject(VehicleOffroadProvider)
+    public vehicleOffroadProvider: VehicleOffroadProvider;
 
     private currentFlatbedAttach: FlatbedAttach = null;
 
@@ -420,6 +424,7 @@ export class BennysFlatbedProvider {
             return;
         }
 
+        await this.vehicleOffroadProvider.resetVehSurfaceEffect(vehicle);
         const attached = await this.attachVehicleToFlatbed(this.currentFlatbedAttach.entity, vehicle, height);
 
         if (!attached) {
