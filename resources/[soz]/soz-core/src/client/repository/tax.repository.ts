@@ -20,4 +20,8 @@ export class TaxRepository extends Repository<RepositoryType.Tax> {
     public getPriceWithTax(price: number, taxType: TaxType): number {
         return Math.round(price * (1 + this.getTaxValue(taxType) / 100));
     }
+
+    public getNotRoundedPriceWithTax(price: number, taxType: TaxType): string {
+        return (price * (1 + this.getTaxValue(taxType) / 100)).toFixed(2);
+    }
 }

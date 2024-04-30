@@ -1969,7 +1969,7 @@ QBShared.Items = {
             bone = 28422,
             coords = { x = 0.01, y = -0.01, z = 0.01 },
         },
-        ['illustrator'] = '.Crash',
+        ['illustrator'] = '.Gaunt',
     },
     ['tea'] = {
         ['name'] = 'tea',

@@ -64,7 +64,7 @@ export class UtilsProvider {
             return;
         }
 
-        if (await this.playerMoneyService.buy(source, price * quantity, TaxType.SUPPLY)) {
+        if (await this.playerMoneyService.buy(source, price * quantity, TaxType.FOOD)) {
             this.inventoryManager.addItemToInventory(source, item, quantity);
 
             const itemFull = this.itemService.getItem(item);

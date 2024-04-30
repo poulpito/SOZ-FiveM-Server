@@ -41,6 +41,9 @@ export class DispenserProvider {
         const drinkPrice = this.taxRepository.getPriceWithTax(dispenser_drink_price, TaxType.FOOD);
         const eatPrice = this.taxRepository.getPriceWithTax(dispenser_eat_price, TaxType.FOOD);
         const cafePrice = this.taxRepository.getPriceWithTax(dispenser_cafe_price, TaxType.FOOD);
+        const drinkBatchPrice = this.taxRepository.getNotRoundedPriceWithTax(dispenser_drink_price, TaxType.FOOD);
+        const eatBatchPrice = this.taxRepository.getNotRoundedPriceWithTax(dispenser_eat_price, TaxType.FOOD);
+        const cafeBatchPrice = this.taxRepository.getNotRoundedPriceWithTax(dispenser_cafe_price, TaxType.FOOD);
 
         this.targetFactory.createForModel(
             vending_machine_drink,
@@ -53,7 +56,7 @@ export class DispenserProvider {
                     },
                 },
                 {
-                    label: `Lot de bouteilles</br>($${drinkPrice} unité)`,
+                    label: `Lot de bouteilles</br>($${drinkBatchPrice} unité)`,
                     icon: 'c:food/bouteilles.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
@@ -86,7 +89,7 @@ export class DispenserProvider {
                     },
                 },
                 {
-                    label: `Lot de sandwichs</br>($${eatPrice} unité)`,
+                    label: `Lot de sandwichs</br>($${eatBatchPrice} unité)`,
                     icon: 'c:food/baguettes.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
@@ -148,7 +151,7 @@ export class DispenserProvider {
                     },
                 },
                 {
-                    label: `Lot de café</br>($${cafePrice} unité)`,
+                    label: `Cafés par lot</br>($${cafeBatchPrice} unité)`,
                     icon: 'c:food/cafes.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
@@ -174,7 +177,7 @@ export class DispenserProvider {
                     },
                 },
                 {
-                    label: `Lot de Chocolats chauds</br>($${cafePrice} unité)`,
+                    label: `Chocolats chauds par lot</br>($${cafeBatchPrice} unité)`,
                     icon: 'c:food/chocolates.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
@@ -205,7 +208,7 @@ export class DispenserProvider {
                     },
                 },
                 {
-                    label: `Lot de Thés</br>($${cafePrice} unité)`,
+                    label: `Thés par lot</br>($${cafeBatchPrice} unité)`,
                     icon: 'c:food/teas.png',
                     action: async () => {
                         const quantity = await this.inputService.askInput(
