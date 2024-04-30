@@ -90,29 +90,27 @@ export class GarbageProvider {
             return;
         }
 
-        while (this.hasGarbageBag) {
-            this.garbageAnimationProgress = this.animationService.playAnimation({
-                base: {
-                    dictionary: 'missfbi4prepp1',
-                    name: '_idle_garbage_man',
-                    options: {
-                        onlyUpperBody: true,
-                        enablePlayerControl: true,
-                        repeat: true,
-                    },
+        this.garbageAnimationProgress = this.animationService.playAnimation({
+            base: {
+                dictionary: 'missfbi4prepp1',
+                name: '_idle_garbage_man',
+                options: {
+                    onlyUpperBody: true,
+                    enablePlayerControl: true,
+                    repeat: true,
                 },
-                props: [
-                    {
-                        model: 'prop_cs_rub_binbag_01',
-                        bone: 57005,
-                        position: [0.12, 0.0, -0.05],
-                        rotation: [220.0, 120.0, 0.0],
-                    },
-                ],
-            });
+            },
+            props: [
+                {
+                    model: 'prop_cs_rub_binbag_01',
+                    bone: 57005,
+                    position: [0.12, 0.0, -0.05],
+                    rotation: [220.0, 120.0, 0.0],
+                },
+            ],
+        });
 
-            await this.garbageAnimationProgress;
-        }
+        await this.garbageAnimationProgress;
 
         this.garbageAnimationProgress = null;
     }

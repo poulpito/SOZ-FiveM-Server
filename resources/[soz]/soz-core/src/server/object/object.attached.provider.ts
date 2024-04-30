@@ -1,5 +1,6 @@
 import { On, OnEvent } from '@core/decorators/event';
 import { Provider } from '@core/decorators/provider';
+import { wait } from '@public/core/utils';
 import { ServerEvent } from '@public/shared/event';
 
 @Provider()
@@ -18,7 +19,16 @@ export class ObjectAttachedProvider {
             return;
         }
 
-        playerObjects.set(netId, GetEntityModel(NetworkGetEntityFromNetworkId(netId)));
+        let entity = 0;
+        for (let i = 0; i < 10; i++) {
+            entity = NetworkGetEntityFromNetworkId(netId);
+            if (entity != 0) {
+                break;
+            }
+            await wait(100);
+        }
+
+        playerObjects.set(netId, GetEntityModel(entity));
     }
 
     @OnEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER)
