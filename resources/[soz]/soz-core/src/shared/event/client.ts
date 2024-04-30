@@ -244,6 +244,8 @@ export enum ClientEvent {
     TAKE_DOWN = 'soz-core:client:player:animation:takedown',
     TAKE_DOWN_TARGET = 'soz-core:client:player:animation:takedown-target',
 
+    TOGGLE_CRAWLING = 'soz-core:client:player:animation:crawling',
+
     POLICE_OPEN_CLOAKROOM = 'soz-core:client:police:OpenCloakroomMenu',
     POLICE_APPLY_OUTFIT = 'soz-core:client:police:ApplyDutyClothing',
     POLICE_SET_PRISONER_CLOTHES = 'soz-core:client:police:SetPrisonerClothes',

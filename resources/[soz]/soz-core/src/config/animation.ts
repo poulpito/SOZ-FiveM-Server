@@ -68,6 +68,13 @@ export const Walks: WalkConfigList = [
     { type: 'walk', name: 'Pressé', walk: 'move_f@hurry@a' },
     { type: 'walk', name: 'Trottiner', walk: 'move_m@quick' },
     { type: 'walk', name: 'Accroupi', walk: 'move_ped_crouched' },
+    {
+        type: 'event',
+        name: 'Ramper',
+        rightLabel: null,
+        icon: null,
+        event: ClientEvent.TOGGLE_CRAWLING,
+    },
 ];
 
 export const Moods: MoodConfigList = [
@@ -9869,7 +9876,7 @@ export const Animations: AnimationConfigList = [
                 name: 'Plaquage',
                 rightLabel: null,
                 icon: null,
-                event: 'soz-core:client:player:animation:takedown',
+                event: ClientEvent.TAKE_DOWN,
             },
             {
                 type: 'category',
