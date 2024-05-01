@@ -33,6 +33,7 @@ import {
 import { VehicleSeat } from '../../shared/vehicle/vehicle';
 import { DrawService } from '../draw.service';
 import { NoClipProvider } from '../utils/noclip.provider';
+import { VehicleStateService } from './vehicle.state.service';
 
 @Provider()
 export class VehicleOffroadProvider {
@@ -86,6 +87,9 @@ export class VehicleOffroadProvider {
 
     @Inject(NoClipProvider)
     private noClipProvider: NoClipProvider;
+
+    @Inject(VehicleStateService)
+    private vehicleStateService: VehicleStateService;
 
     @OnNuiEvent(NuiEvent.AdminToggleNoSurfaceCalc)
     public async setNoSurfaceCalc(value: boolean): Promise<void> {
@@ -176,9 +180,9 @@ export class VehicleOffroadProvider {
         for (let wheelIdx = 0; wheelIdx < wheelCount; wheelIdx++) {
             const [, surfaceData] = this.getVehicleWheelSurfaceIdAndData(playerVeh, wheelIdx);
 
-            const vehWheelSize = await this.getRealVehicleWheelTireColliderSize(playerVeh, wheelIdx);
+            const vehRealWheelSize = await this.getRealVehicleWheelTireColliderSize(playerVeh, wheelIdx);
 
-            if (vehWheelSize >= 0.75) {
+            if (vehRealWheelSize >= 0.75) {
                 if (this.currentDepth > 0) {
                     this.currentDepth = 0;
                     this.currentWheelsize = 0;
@@ -224,9 +228,9 @@ export class VehicleOffroadProvider {
                 this.sinkDepth[playerVeh][wheelIdx] = realDepth;
             }
 
-            const wheelDepth = Math.max(vehWheelSize - this.sinkDepth[playerVeh][wheelIdx], 0.12);
-            averageWheelSizes += vehWheelSize;
-            averageDepth += vehWheelSize - wheelDepth;
+            const wheelDepth = Math.max(vehRealWheelSize - this.sinkDepth[playerVeh][wheelIdx], 0.12);
+            averageWheelSizes += vehRealWheelSize;
+            averageDepth += vehRealWheelSize - wheelDepth;
             averageSoftness += surfaceData.softness;
 
             const traction = 100 - Math.floor((100 - surfaceData.traction) * (zoneData?.tractionMultiplier || 1));
@@ -234,7 +238,7 @@ export class VehicleOffroadProvider {
 
             this.wheelDepth[playerVeh] ??= [];
             this.wheelDepth[playerVeh][wheelIdx] ??= 0;
-            const realWheelDepth = this.isVehOnRoad ? 0 : wheelDepth;
+            const realWheelDepth = this.isVehOnRoad ? vehRealWheelSize : wheelDepth;
 
             if (this.wheelDepth[playerVeh][wheelIdx].toFixed(3) != realWheelDepth.toFixed(3)) {
                 anyChanges = true;
@@ -417,7 +421,7 @@ export class VehicleOffroadProvider {
 
         if (this.tractionWithUpgrade > 95) {
             this.debugMaxSpeed = 0;
-            SetVehicleMaxSpeed(playerVeh, 0);
+            await this.tryUpdateSpeedLimit(playerVeh, 0);
             await wait(500);
             return;
         }
@@ -443,10 +447,10 @@ export class VehicleOffroadProvider {
 
                 SetVehicleHandbrake(playerVeh, false);
             }
-            SetVehicleMaxSpeed(playerVeh, maxSpeed);
+            await this.tryUpdateSpeedLimit(playerVeh, maxSpeed);
         } else {
             this.debugMaxSpeed = 0;
-            SetVehicleMaxSpeed(playerVeh, 0);
+            await this.tryUpdateSpeedLimit(playerVeh, 0);
             await wait(500);
         }
     }
@@ -490,13 +494,28 @@ export class VehicleOffroadProvider {
 
             const [surfaceId, surfaceData] = this.getVehicleWheelSurfaceIdAndData(playerVeh, wheelData.wheelIdx);
             if (!surfaceData) {
-                this.draw.drawText3d([wheelCoord[0], wheelCoord[1], wheelCoord[2]], `~r~${surfaceId}`);
+                this.draw.drawText3d(
+                    [wheelCoord[0], wheelCoord[1], wheelCoord[2] + 0.1],
+                    `~g~[~w~${surfaceId}~g~]\nWheel Type: ${GetVehicleWheelType(
+                        playerVeh
+                    )}\n~r~Wheel: ${await this.getRealVehicleWheelTireColliderSize(
+                        playerVeh,
+                        1
+                    )}\n~r~Colider: ${GetVehicleWheelTireColliderSize(playerVeh, 1)}`
+                );
             } else {
                 this.draw.drawText3d(
-                    [wheelCoord[0], wheelCoord[1], wheelCoord[2]],
+                    [wheelCoord[0], wheelCoord[1], wheelCoord[2] + 0.25],
                     `~g~[~w~${surfaceId}~g~]\n~w~${surfaceData.name}~g~\nTraction ${surfaceData.traction}\nDepth ${
                         surfaceData.depth
                     }\nSoftness ${surfaceData.softness}\nWheel Type: ${GetVehicleWheelType(playerVeh)}`
+                );
+                this.draw.drawText3d(
+                    [wheelCoord[0], wheelCoord[1], wheelCoord[2] + 0.5],
+                    `~r~Wheel: ${await this.getRealVehicleWheelTireColliderSize(
+                        playerVeh,
+                        wheelData.wheelIdx
+                    )}\n~r~Colider: ${GetVehicleWheelTireColliderSize(playerVeh, wheelData.wheelIdx)}`
                 );
             }
         }
@@ -508,13 +527,6 @@ export class VehicleOffroadProvider {
         this.draw.drawText3d(
             [playerVehCoords[0], playerVehCoords[1], playerVehCoords[2] + 1.6],
             `~w~controlLossTimeDebug: ${this.controlLossTimeDebug}\n~w~TractionWithUpgrade: ${this.tractionWithUpgrade}\n~w~debugMaxSpeed: ${this.debugMaxSpeed}`
-        );
-        this.draw.drawText3d(
-            [playerVehCoords[0], playerVehCoords[1], playerVehCoords[2] + 2.4],
-            `~r~Wheel: ${await this.getRealVehicleWheelTireColliderSize(
-                playerVeh,
-                1
-            )}\n~r~Colider: ${GetVehicleWheelTireColliderSize(playerVeh, 1)}`
         );
     }
 
@@ -558,6 +570,10 @@ export class VehicleOffroadProvider {
             state = Entity(playerVeh).state;
         }
 
+        if (!state) {
+            return didAnything;
+        }
+
         for (let wheelIdx = 0; wheelIdx < wheelCount; wheelIdx++) {
             let wheelDepth = 0;
             if (isCurrentVeh) {
@@ -567,7 +583,7 @@ export class VehicleOffroadProvider {
             }
 
             if (wheelDepth && wheelDepth > 0.01 && wheelDepth <= 1.5) {
-                if (wheelDepth.toFixed(3) != GetVehicleWheelTireColliderSize(playerVeh, wheelIdx).toFixed(3)) {
+                if (wheelDepth.toFixed(3) !== GetVehicleWheelTireColliderSize(playerVeh, wheelIdx).toFixed(3)) {
                     didAnything = true;
                     await this.setTireColliderSize(playerVeh, wheelIdx, wheelDepth);
                 }
@@ -579,8 +595,12 @@ export class VehicleOffroadProvider {
 
     @Tick(500)
     public async applyDepthToFilteredVehicle() {
+        const [, currentPlayerVeh] = this.getPlayerPedAndPlayerVeh();
         let shoudSleep = false;
         for (const playerVeh of GetGamePool('CVehicle')) {
+            if (currentPlayerVeh === playerVeh) {
+                continue;
+            }
             const didSomething = this.handleVehicleDepth(playerVeh, false);
             if (didSomething) {
                 shoudSleep = true;
@@ -621,9 +641,6 @@ export class VehicleOffroadProvider {
             if (flag > 0) {
                 SetVehicleWheelFlags(playerVeh, wheelIdx, flag + 2048);
                 await wait(1);
-                if (!DoesEntityExist(playerVeh)) {
-                    return false;
-                }
                 SetVehicleWheelFlags(playerVeh, wheelIdx, flag);
             }
         }
@@ -852,7 +869,7 @@ export class VehicleOffroadProvider {
         }
 
         SetVehicleBurnout(playerVeh, false);
-        SetVehicleMaxSpeed(playerVeh, 0);
+        await this.tryUpdateSpeedLimit(playerVeh, 0);
     }
 
     private resetCurrentAndDebugValue() {
@@ -903,5 +920,20 @@ export class VehicleOffroadProvider {
 
     private featureDisableForAdmin() {
         return this.getNoSurfaceCalc() || this.noClipProvider.IsNoClipMode();
+    }
+
+    private async tryUpdateSpeedLimit(playerVeh: number, speedLimitToSet: number) {
+        const state = await this.vehicleStateService.getVehicleState(playerVeh).then(data => {
+            return data;
+        });
+
+        const speedLimiterLimit = state.speedLimit ? state.speedLimit / 3.6 - 0.25 : 0;
+        if (speedLimitToSet === 0) {
+            speedLimitToSet = speedLimiterLimit || 0;
+        } else if (speedLimiterLimit && speedLimiterLimit > 0) {
+            speedLimitToSet = Math.min(speedLimiterLimit, speedLimitToSet);
+        }
+
+        SetVehicleMaxSpeed(playerVeh, speedLimitToSet);
     }
 }

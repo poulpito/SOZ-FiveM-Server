@@ -59,7 +59,7 @@ export class VehiclePitStopProvider {
         const vehicleModel = GetEntityModel(vehicle);
         const vehicleDB = await this.vehicleRepository.findByHash(vehicleModel);
 
-        return this.getCategoryPrice(vehicleDB.category);
+        return this.getCategoryPrice(vehicleDB?.category);
     }
 
     private getCategoryPrice(category: string) {
