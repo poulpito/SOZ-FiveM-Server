@@ -229,8 +229,10 @@ export class VehicleOffroadProvider {
             }
 
             const wheelDepth = Math.max(vehRealWheelSize - this.sinkDepth[playerVeh][wheelIdx], 0.12);
+            const realWheelDepth = this.isVehOnRoad ? vehRealWheelSize : wheelDepth;
+
             averageWheelSizes += vehRealWheelSize;
-            averageDepth += vehRealWheelSize - wheelDepth;
+            averageDepth += vehRealWheelSize - realWheelDepth;
             averageSoftness += surfaceData.softness;
 
             const traction = 100 - Math.floor((100 - surfaceData.traction) * (zoneData?.tractionMultiplier || 1));
@@ -238,7 +240,6 @@ export class VehicleOffroadProvider {
 
             this.wheelDepth[playerVeh] ??= [];
             this.wheelDepth[playerVeh][wheelIdx] ??= 0;
-            const realWheelDepth = this.isVehOnRoad ? vehRealWheelSize : wheelDepth;
 
             if (this.wheelDepth[playerVeh][wheelIdx].toFixed(3) != realWheelDepth.toFixed(3)) {
                 anyChanges = true;
@@ -559,7 +560,7 @@ export class VehicleOffroadProvider {
         }
 
         const wheelCount = GetVehicleNumberOfWheels(playerVeh);
-        if (wheelCount < 2) {
+        if (wheelCount < 3) {
             return didAnything;
         }
 
@@ -643,6 +644,7 @@ export class VehicleOffroadProvider {
                 await wait(1);
                 SetVehicleWheelFlags(playerVeh, wheelIdx, flag);
             }
+            ActivatePhysics(playerVeh);
         }
     }
 
