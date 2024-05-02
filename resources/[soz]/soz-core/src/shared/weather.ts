@@ -1,3 +1,5 @@
+import { getWeek } from 'date-fns';
+
 export type Weather =
     | 'BLIZZARD'
     | 'CLEAR'
@@ -21,11 +23,11 @@ export type Time = {
     second: number;
 };
 
-export const DayDurationInMinutes = 4 * 60;
+export const DayDurationInMinutes = 6 * 60;
 export const IRLDayDurationInMinutes = 24 * 60;
 export const TimeSynchro = {
     IG: 6,
-    IRL: 20,
+    IRL: 19 + (getWeek(new Date()) % 2 == 1 ? 3 : 0),
 };
 
 export type Forecast = Record<Weather, { [key in Weather]?: number }>;
