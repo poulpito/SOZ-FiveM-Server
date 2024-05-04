@@ -68,8 +68,6 @@ export class WeaponService {
         this.currentWeapon = weapon;
 
         GiveWeaponToPed(player, weaponHash, ammo, false, true);
-        SetPedAmmo(player, weaponHash, ammo);
-        SetCurrentPedWeapon(player, weaponHash, true);
 
         if (weapon.metadata.tint) {
             SetPedWeaponTintIndex(player, weaponHash, weapon.metadata.tint);
@@ -80,6 +78,9 @@ export class WeaponService {
                 GiveWeaponComponentToPed(player, weaponHash, GetHashKey(attachment));
             });
         }
+
+        SetPedAmmo(player, weaponHash, ammo);
+        SetCurrentPedWeapon(player, weaponHash, true);
     }
 
     async clear() {
