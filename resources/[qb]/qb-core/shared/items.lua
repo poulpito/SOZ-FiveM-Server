@@ -1817,6 +1817,7 @@ QBShared.Items = {
         ['unique'] = false,
         ['useable'] = true,
         ['shouldClose'] = true,
+        ['durability'] = 2,
         ['combinable'] = nil,
         ['description'] = 'Lequel mangeriez-vous en premier ?',
         ['nutrition'] = {
