@@ -4576,10 +4576,6 @@
             <child>tropic3</child>
         </Item>
         <Item>
-            <parent>vehicles_poltax_interior</parent>
-            <child>bcso11</child>
-        </Item>
-        <Item>
             <parent>vehicles_jet_interior</parent>
             <child>lsmcheli_higher</child>
         </Item>

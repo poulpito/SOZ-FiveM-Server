@@ -114,7 +114,7 @@
         <Item>
             <modelName>bcso11</modelName>
             <txdName>bcso11</txdName>
-            <handlingId>BUFFALO2</handlingId>
+            <handlingId>bcso11</handlingId>
             <gameName>BUFFALO2</gameName>
             <vehicleMakeName>BRAVADO</vehicleMakeName>
             <expressionDictName>null</expressionDictName>
@@ -480,7 +480,7 @@
         <Item>
             <modelName>bcso21</modelName>
             <txdName>bcso21</txdName>
-            <handlingId>ALEUTIAN</handlingId>
+            <handlingId>bcso21</handlingId>
             <gameName>ALEUTIAN</gameName>
             <vehicleMakeName>VAPID</vehicleMakeName>
             <expressionDictName>null</expressionDictName>
