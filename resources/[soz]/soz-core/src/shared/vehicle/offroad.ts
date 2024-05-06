@@ -557,6 +557,23 @@ export const VehData = {
             tractionSpeedLostOnHard: 100,
         },
 
+        // Bicycle
+        bmx: {
+            rating: 10,
+            tractionSpeedLostOnSoft: 100,
+            tractionSpeedLostOnHard: 100,
+        },
+        inductor: {
+            rating: 40,
+            tractionSpeedLostOnSoft: 100,
+            tractionSpeedLostOnHard: 100,
+        },
+        scorcher: {
+            rating: 40,
+            tractionSpeedLostOnSoft: 100,
+            tractionSpeedLostOnHard: 100,
+        },
+
         // dirt bikes
         avarus: {
             rating: 0,
