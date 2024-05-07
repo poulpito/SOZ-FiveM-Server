@@ -448,6 +448,7 @@ export const VehicleElectricModels: Record<number, string> = {
     [joaat('powersurge')]: 'Power Surge',
     [joaat('coureur')]: 'La Coureuse',
     [joaat('buffalo5')]: 'Buffalo EVX',
+    [joaat('vivanite')]: 'Vivanite',
 };
 
 export const VehicleTrailerModels: Record<number, string> = {
