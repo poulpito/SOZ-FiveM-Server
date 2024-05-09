@@ -5,7 +5,6 @@ import { DealershipConfigItem, DealershipType } from '../../config/dealership';
 import { JobType } from '../job';
 import { Vector3, Vector4 } from '../polyzone/vector';
 import { AuctionVehicle } from './auction';
-import { DealershipId } from './dealership';
 import { VehicleConfiguration } from './modification';
 
 export type Vehicle = {
@@ -14,7 +13,7 @@ export type Vehicle = {
     name: string;
     price: number;
     category: string;
-    dealershipId?: DealershipId | string;
+    dealershipId?: DealershipType | string;
     requiredLicence?: string;
     size: number;
     jobName?: { [key in JobType]: string };

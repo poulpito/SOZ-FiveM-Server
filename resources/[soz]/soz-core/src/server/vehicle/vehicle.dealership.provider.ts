@@ -1,4 +1,5 @@
 import { Logger } from '@public/core/logger';
+import { PlayerData } from '@public/shared/player';
 import { formatDuration } from '@public/shared/utils/timeformat';
 import { add } from 'date-fns';
 
@@ -16,7 +17,6 @@ import { Vector4 } from '../../shared/polyzone/vector';
 import { getRandomItems } from '../../shared/random';
 import { RpcServerEvent } from '../../shared/rpc';
 import { AuctionVehicle } from '../../shared/vehicle/auction';
-import { DealershipId } from '../../shared/vehicle/dealership';
 import { getDefaultVehicleConfiguration, VehicleConfiguration } from '../../shared/vehicle/modification';
 import { PlayerVehicleState } from '../../shared/vehicle/player.vehicle';
 import {
@@ -191,6 +191,20 @@ export class VehicleDealershipProvider {
             return;
         }
 
+        if (!(await this.vehicleCountCheck(player))) {
+            return false;
+        }
+
+        if (
+            auction.vehicle.requiredLicence &&
+            (!player.metadata.licences[auction.vehicle.requiredLicence] ||
+                player.metadata.licences[auction.vehicle.requiredLicence] <= 0)
+        ) {
+            this.notifier.notify(source, "Vous n'avez pas le permis nécessaire !", 'error');
+
+            return false;
+        }
+
         return await this.lockService.lock(
             `auction_${name}`,
             async () => {
@@ -357,6 +371,37 @@ export class VehicleDealershipProvider {
         });
     }
 
+    private async vehicleCountCheck(player: PlayerData) {
+        const playerVehicles = await this.prismaService.playerVehicle.findMany({
+            where: {
+                citizenid: player.citizenid,
+                job: null,
+                state: {
+                    not: PlayerVehicleState.Destroyed,
+                },
+            },
+        });
+
+        let playerVehicleCount = 0;
+        for (const veh of playerVehicles) {
+            const vehDef = await this.vehicleRepository.findByModel(veh.vehicle);
+            if (vehDef.dealershipId && vehDef.dealershipId !== DealershipType.Cycle) {
+                playerVehicleCount++;
+            }
+        }
+
+        if (playerVehicleCount >= player.metadata.vehiclelimit) {
+            let errorMsg = `Limite de véhicule atteinte (${playerVehicleCount}/${player.metadata.vehiclelimit})`;
+            if (player.metadata.vehiclelimit < 10) errorMsg += ". Améliorez votre carte grise à l'auto-école.";
+
+            this.notifier.notify(player.source, errorMsg, 'error');
+
+            return false;
+        }
+
+        return true;
+    }
+
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_BUY)
     public async buyVehicle(
         source: number,
@@ -371,44 +416,9 @@ export class VehicleDealershipProvider {
             return false;
         }
 
-        if (dealershipId !== DealershipType.Job) {
-            const vehicleModels = (
-                await this.prismaService.vehicle.findMany({
-                    select: {
-                        model: true,
-                    },
-                    where: {
-                        dealershipId: {
-                            not: null,
-                        },
-                        AND: {
-                            dealershipId: {
-                                not: 'cycle',
-                            },
-                        },
-                    },
-                })
-            ).map(v => v.model);
-            const playerVehicleCount = await this.prismaService.playerVehicle.count({
-                where: {
-                    citizenid: player.citizenid,
-                    job: null,
-                    state: {
-                        not: PlayerVehicleState.Destroyed,
-                    },
-                    vehicle: {
-                        in: vehicleModels,
-                    },
-                },
-            });
-
-            if (vehicle.dealershipId !== DealershipId.Cycle && playerVehicleCount >= player.metadata.vehiclelimit) {
-                let errorMsg = `Limite de véhicule atteinte (${playerVehicleCount}/${player.metadata.vehiclelimit})`;
-                if (player.metadata.vehiclelimit < 10) errorMsg += ". Améliorez votre carte grise à l'auto-école.";
-
-                this.notifier.notify(source, errorMsg, 'error');
-
-                return false;
+        if (dealershipId !== DealershipType.Job && dealershipId !== DealershipType.Cycle) {
+            if (!(await this.vehicleCountCheck(player))) {
+                return;
             }
         }
 
