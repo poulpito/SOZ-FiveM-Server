@@ -582,6 +582,7 @@ export class LSMCDeathProvider {
             playerData.metadata.drug >= 100
         ) {
             if (GetEntityHealth(ped) > 0) {
+                this.hungerThristDeath = playerData.metadata.hunger <= 0 || playerData.metadata.thirst <= 0;
                 ClearPedTasksImmediately(ped);
                 await this.animationService.playAnimation({
                     base: {
@@ -593,7 +594,6 @@ export class LSMCDeathProvider {
                     },
                 });
 
-                this.hungerThristDeath = playerData.metadata.hunger <= 0 || playerData.metadata.thirst <= 0;
                 SetEntityHealth(ped, 0);
             }
         }
