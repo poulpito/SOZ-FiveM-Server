@@ -1,6 +1,6 @@
 import { Logger } from '@public/core/logger';
 import { formatDuration } from '@public/shared/utils/timeformat';
-import { add } from 'date-fns';
+import { add, addSeconds } from 'date-fns';
 
 import { AuctionZones, DealershipConfigItem, DealershipType } from '../../config/dealership';
 import { GarageList } from '../../config/garage';
@@ -9,7 +9,6 @@ import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
 import { TaxType } from '../../shared/bank';
-import { ClientEvent } from '../../shared/event';
 import { JobType } from '../../shared/job';
 import { Zone } from '../../shared/polyzone/box.zone';
 import { Vector4 } from '../../shared/polyzone/vector';
@@ -70,6 +69,9 @@ export class VehicleDealershipProvider {
 
     private auctions: Record<string, AuctionVehicle> = {};
 
+    private auctionTimeStart: Date;
+    private auctionTimeStop: Date;
+
     @Once(OnceStep.DatabaseConnected)
     public async initAuction() {
         const vehicles = await this.prismaService.vehicle.findMany({
@@ -115,6 +117,7 @@ export class VehicleDealershipProvider {
                 position: auctionZone.position as Vector4,
                 windows: auctionZone.window,
                 bestBid: null,
+                nextMinBid: this.nextMinBid(vehicle.price, null),
             };
 
             const configuration = getDefaultVehicleConfiguration();
@@ -167,12 +170,28 @@ export class VehicleDealershipProvider {
             });
         }
 
-        TriggerClientEvent(ClientEvent.VEHICLE_DEALERSHIP_AUCTION_UPDATE, -1, this.auctions);
+        const auctionTimeStop = new Date();
+        auctionTimeStop.setHours(22, 0, 0, 0);
+        this.auctionTimeStop = addSeconds(auctionTimeStop, Math.round(Math.random() * 7200));
+
+        const auctionTimeStart = new Date();
+        auctionTimeStart.setHours(12, 0, 0, 0);
+        this.auctionTimeStart = auctionTimeStart;
+    }
+
+    public IsAuctionDisable(): boolean {
+        const now = new Date();
+        return (
+            !this.auctionTimeStop ||
+            !this.auctionTimeStart ||
+            now >= this.auctionTimeStop ||
+            now <= this.auctionTimeStart
+        );
     }
 
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_GET_AUCTIONS)
-    public getAuctions(): Record<string, AuctionVehicle> {
-        return this.auctions;
+    public getAuctions(): [Record<string, AuctionVehicle>, boolean] {
+        return [this.auctions, this.IsAuctionDisable()];
     }
 
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_AUCTION_BID)
@@ -181,6 +200,12 @@ export class VehicleDealershipProvider {
 
         if (!player) {
             return false;
+        }
+
+        if (this.IsAuctionDisable()) {
+            this.notifier.notify(source, 'Les enchères sont déjà terminées.', 'error');
+
+            return;
         }
 
         const auction = this.auctions[name];
@@ -194,14 +219,8 @@ export class VehicleDealershipProvider {
         return await this.lockService.lock(
             `auction_${name}`,
             async () => {
-                if (auction.bestBid && auction.bestBid.price >= price) {
-                    this.notifier.notify(source, 'Votre enchère est inférieure à la meilleure enchère.', 'error');
-
-                    return false;
-                }
-
-                if (!auction.bestBid && auction.vehicle.price > price) {
-                    this.notifier.notify(source, 'Votre enchère est inférieure au prix de départ.', 'error');
+                if (auction.nextMinBid > price) {
+                    this.notifier.notify(source, "Votre enchère est inférieure à l'enchère minimum.", 'error');
 
                     return false;
                 }
@@ -233,8 +252,9 @@ export class VehicleDealershipProvider {
                     price,
                     name: player.charinfo.firstname + ' ' + player.charinfo.lastname,
                 };
+                this.auctions[name].nextMinBid = this.nextMinBid(this.auctions[name].vehicle.price, price);
 
-                this.notifier.notify(source, `Vous avez fait une enchère à hauteur de $${price}.`, 'error');
+                this.notifier.notify(source, `Vous avez émis une enchère d'une valeur de $${price}.`, 'success');
 
                 if (previousCitizenId) {
                     const player = this.playerService.getPlayerByCitizenId(previousCitizenId);
@@ -243,7 +263,6 @@ export class VehicleDealershipProvider {
                         this.notifier.notify(player.source, `Votre enchère a été dépassée.`, 'error');
                     }
                 }
-                TriggerClientEvent(ClientEvent.VEHICLE_DEALERSHIP_AUCTION_UPDATE, -1, this.auctions);
 
                 return true;
             },
@@ -590,5 +609,10 @@ export class VehicleDealershipProvider {
             },
             5000
         );
+    }
+
+    nextMinBid(vehiclePrice: number, bestBid?: number) {
+        const currentPrice = bestBid ? bestBid : vehiclePrice;
+        return Math.round(currentPrice + Math.max(10_000, Math.min(50_000, currentPrice * 0.1)));
     }
 }

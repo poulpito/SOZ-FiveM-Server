@@ -385,6 +385,7 @@ export type VehicleMenuData = {
 export type VehicleAuctionMenuData = {
     name: string;
     auction: AuctionVehicle;
+    isAuctionDisable: boolean;
 };
 
 export type VehicleDealershipMenuData = {

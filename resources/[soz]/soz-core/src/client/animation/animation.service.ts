@@ -71,6 +71,10 @@ export class AnimationService {
     }
     public async walkToCoordsAvoidObstacles(coords: Vector3 | Vector4, maxDuration = 5000) {
         const ped = PlayerPedId();
+        await this.walkToCoordsAvoidObstaclesForPed(ped, coords, maxDuration);
+    }
+
+    public async walkToCoordsAvoidObstaclesForPed(ped: number, coords: Vector3 | Vector4, maxDuration = 5000) {
         TaskGoToCoordAnyMeans(ped, coords[0], coords[1], coords[2], 1.0, 0, false, 786603, 0xbf800000);
         const zone: BoxZone = new BoxZone([coords[0], coords[1], coords[2]], 1.5, 1.5);
         const interval = 500;
