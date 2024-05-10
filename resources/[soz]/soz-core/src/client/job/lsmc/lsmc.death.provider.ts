@@ -583,7 +583,7 @@ export class LSMCDeathProvider {
         ) {
             if (GetEntityHealth(ped) > 0) {
                 this.hungerThristDeath = playerData.metadata.hunger <= 0 || playerData.metadata.thirst <= 0;
-                ClearPedTasksImmediately(ped);
+                ClearPedTasks(ped);
                 await this.animationService.playAnimation({
                     base: {
                         dictionary: 'move_m@_idles@out_of_breath',
@@ -591,6 +591,9 @@ export class LSMCDeathProvider {
                         blendInSpeed: 8.0,
                         blendOutSpeed: -8.0,
                         duration: 8000,
+                        options: {
+                            onlyUpperBody: true,
+                        },
                     },
                 });
 
