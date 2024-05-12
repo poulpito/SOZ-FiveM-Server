@@ -182,7 +182,6 @@ export enum ClientEvent {
     VEHICLE_CONDITION_APPLY = 'soz-core:client:vehicle:condition:apply',
     VEHICLE_CONDITION_SYNC = 'soz-core:client:vehicle:condition:sync',
     VEHICLE_CLOSE_TRUNK = 'soz-core:client:vehicle:close-trunk',
-    VEHICLE_DEALERSHIP_AUCTION_UPDATE = 'soz-core:client:vehicle:dealership:auction:update',
     VEHICLE_DELETE = 'soz-core:client:vehicle:delete',
     VEHICLE_FUEL_START = 'soz-core:client:vehicle:fuel:start',
     VEHICLE_CHARGE_START = 'soz-core:client:vehicle:charge:start',
