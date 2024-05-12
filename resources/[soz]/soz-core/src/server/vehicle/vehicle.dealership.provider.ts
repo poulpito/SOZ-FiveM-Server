@@ -1,11 +1,12 @@
 import { Logger } from '@public/core/logger';
+import { ServerEvent } from '@public/shared/event';
 import { PlayerData } from '@public/shared/player';
 import { formatDuration } from '@public/shared/utils/timeformat';
 import { add, addSeconds } from 'date-fns';
 
 import { AuctionZones, DealershipConfigItem, DealershipType } from '../../config/dealership';
 import { GarageList } from '../../config/garage';
-import { Once, OnceStep } from '../../core/decorators/event';
+import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
@@ -179,14 +180,10 @@ export class VehicleDealershipProvider {
         this.auctionTimeStart = auctionTimeStart;
     }
 
-    public IsAuctionDisable(): boolean {
-        const now = new Date();
-        return (
-            !this.auctionTimeStop ||
-            !this.auctionTimeStart ||
-            now >= this.auctionTimeStop ||
-            now <= this.auctionTimeStart
-        );
+    @OnEvent(ServerEvent.LUXURY_DELETE_GUARD)
+    public async onLuxuryDeleteGuard(source: number, pedNetId: number) {
+        const ped = NetworkGetEntityFromNetworkId(pedNetId);
+        DeleteEntity(ped);
     }
 
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_GET_AUCTIONS)
@@ -621,8 +618,17 @@ export class VehicleDealershipProvider {
         );
     }
 
+    public IsAuctionDisable(): boolean {
+        const now = new Date();
+        return (
+            !this.auctionTimeStop ||
+            !this.auctionTimeStart ||
+            now >= this.auctionTimeStop ||
+            now <= this.auctionTimeStart
+        );
+    }
+
     nextMinBid(vehiclePrice: number, bestBid?: number) {
-        const currentPrice = bestBid ? bestBid : vehiclePrice;
-        return Math.round(currentPrice + Math.max(10_000, Math.min(50_000, currentPrice * 0.1)));
+        return bestBid ? Math.round(bestBid + Math.max(10_000, Math.min(50_000, bestBid * 0.05))) : vehiclePrice;
     }
 }

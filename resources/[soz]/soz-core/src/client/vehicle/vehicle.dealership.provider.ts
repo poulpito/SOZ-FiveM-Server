@@ -1,6 +1,8 @@
 import { AnimationService } from '@public/client/animation/animation.service';
+import { Monitor } from '@public/client/monitor/monitor';
 import { Tick, TickInterval } from '@public/core/decorators/tick';
 import { wait } from '@public/core/utils';
+import { ServerEvent } from '@public/shared/event';
 import { PUBLIC_SERVICES } from '@public/shared/job';
 
 import { getRandomInt } from '../../../src/shared/random';
@@ -72,11 +74,16 @@ export class VehicleDealershipProvider {
     @Inject(AnimationService)
     private animationService: AnimationService;
 
+    @Inject(Monitor)
+    public monitor: Monitor;
+
     private lastVehicleShowroom: number | null = null;
 
     private killedLuxuryGuard = 0;
 
     private secondPastInZone = -1;
+
+    private currentGuards: Set<number> = new Set();
 
     private electricShowVehicles: Record<number, ShowVehicle> = {
         [1]: {
@@ -604,15 +611,14 @@ export class VehicleDealershipProvider {
         }
 
         for (let nGuard = 0; nGuard < nGuardToSpawn; nGuard++) {
-            const spawnCoord =
-                luxuryFightingGuard.possibleSpawnPosition[
-                    getRandomInt(0, luxuryFightingGuard.possibleSpawnPosition.length - 1)
-                ];
             const guardNPC = await this.pedFactory.createPed({
                 model: luxuryFightingGuard.possiblePedModel[
                     getRandomInt(0, luxuryFightingGuard.possiblePedModel.length - 1)
                 ],
-                coords: spawnCoord,
+                coords: luxuryFightingGuard.possibleSpawnPosition[
+                    getRandomInt(0, luxuryFightingGuard.possibleSpawnPosition.length - 1)
+                ],
+                blockevents: true,
                 network: true,
             });
             SetPedArmour(guardNPC, 100);
@@ -625,41 +631,13 @@ export class VehicleDealershipProvider {
                 true
             );
 
-            SetCanAttackFriendly(guardNPC, false, false);
             SetPedDropsWeaponsWhenDead(guardNPC, false);
             SetPedCombatAttributes(guardNPC, 46, true);
             SetPedCombatAttributes(guardNPC, 5, true);
 
             TaskCombatPed(guardNPC, playerPed, 0, 16);
-            SetNetworkIdCanMigrate(NetworkGetNetworkIdFromEntity(guardNPC), true);
 
-            const npcCheck = setInterval(async () => {
-                const gCoords = GetEntityCoords(guardNPC);
-                const pCoords = GetEntityCoords(playerPed);
-                const dist = Vdist2(gCoords[0], gCoords[1], gCoords[2], pCoords[0], pCoords[1], pCoords[2]);
-                const playerState = this.playerService.getState();
-
-                if (IsPedDeadOrDying(guardNPC, true)) {
-                    if (GetPedSourceOfDeath(guardNPC) == playerPed) {
-                        this.killedLuxuryGuard++;
-                        this.spawnFightingGuard();
-                    }
-                    SetEntityAsNoLongerNeeded(guardNPC);
-                    clearInterval(npcCheck);
-                    return;
-                }
-
-                if (dist > 1000 || playerState.isDead) {
-                    await this.animationService.walkToCoordsAvoidObstaclesForPed(
-                        guardNPC,
-                        [spawnCoord.x, spawnCoord.y, spawnCoord.z] as Vector3,
-                        10000
-                    );
-                    SetEntityAsNoLongerNeeded(guardNPC);
-                    DeleteEntity(guardNPC);
-                    clearInterval(npcCheck);
-                }
-            }, 10000);
+            this.currentGuards.add(guardNPC);
         }
     }
 
@@ -676,8 +654,10 @@ export class VehicleDealershipProvider {
             if (IsPedArmed(playerPed, 1 | 2 | 4)) {
                 const player = this.playerService.getPlayer();
                 if (player && !(PUBLIC_SERVICES.includes(player.job.id) && this.playerService.isOnDuty())) {
-                    resetTimer = false;
-                    this.secondPastInZone++;
+                    if (this.currentGuards.size === 0) {
+                        resetTimer = false;
+                        this.secondPastInZone++;
+                    }
                 }
             }
         }
@@ -688,6 +668,50 @@ export class VehicleDealershipProvider {
 
         if (this.secondPastInZone === luxuryFightingGuard.triggerTime) {
             this.spawnFightingGuard();
+            this.monitor.publish('luxury_guard_first_spawn', {}, {});
         }
+    }
+
+    @Tick(5 * TickInterval.EVERY_SECOND)
+    public async shouldRemmoveGuard() {
+        const playerPed = PlayerPedId();
+        const pCoords = GetEntityCoords(playerPed);
+        const playerState = this.playerService.getState();
+
+        for (const guardNPC of this.currentGuards.values()) {
+            const gCoords = GetEntityCoords(guardNPC);
+            const dist = getDistance(gCoords as Vector3, pCoords as Vector3);
+
+            if (dist > 1000 || playerState.isDead) {
+                this.currentGuards.delete(guardNPC);
+                this.moveAndDeleteGuard(guardNPC);
+                continue;
+            }
+
+            if (IsPedDeadOrDying(guardNPC, true)) {
+                this.currentGuards.delete(guardNPC);
+                SetPedAsNoLongerNeeded(guardNPC);
+
+                this.killedLuxuryGuard++;
+                this.spawnFightingGuard();
+                continue;
+            }
+        }
+    }
+
+    async moveAndDeleteGuard(guardNPC: number) {
+        const spawnCoord =
+            luxuryFightingGuard.possibleSpawnPosition[
+                getRandomInt(0, luxuryFightingGuard.possibleSpawnPosition.length - 1)
+            ];
+        await this.animationService.goToCoordsAvoidObstaclesForPed(
+            guardNPC,
+            [spawnCoord.x, spawnCoord.y, spawnCoord.z] as Vector3,
+            10000,
+            2.0
+        );
+
+        SetEntityAsMissionEntity(guardNPC, true, true);
+        TriggerServerEvent(ServerEvent.LUXURY_DELETE_GUARD, PedToNet(guardNPC));
     }
 }
