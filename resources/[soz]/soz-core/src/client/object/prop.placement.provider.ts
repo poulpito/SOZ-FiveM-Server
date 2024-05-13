@@ -10,6 +10,7 @@ import { getChunkId } from '@public/shared/grid';
 import { MenuType } from '@public/shared/nui/menu';
 import { PLACEMENT_PROP_LIST, PlacementProp } from '@public/shared/nui/prop_placement';
 import {
+    CollectionRadius,
     DebugProp,
     PropCollection,
     PropCollectionData,
@@ -133,7 +134,7 @@ export class PropPlacementProvider {
                 const [firstProp] = Object.values(this.currentCollection.props);
                 if (
                     firstProp &&
-                    getDistance(firstProp.object.position, GetEntityCoords(PlayerPedId()) as Vector3) > 100.0
+                    getDistance(firstProp.object.position, GetEntityCoords(PlayerPedId()) as Vector3) > CollectionRadius
                 ) {
                     this.notifier.notify('Trop loin, fermeture du menu...', 'warning');
                     await this.doCloseEditor();
@@ -300,7 +301,7 @@ export class PropPlacementProvider {
             const [firstProp] = Object.values(collectionToOpen.props);
             if (
                 firstProp &&
-                getDistance(firstProp.object.position, GetEntityCoords(PlayerPedId()) as Vector3) > 100.0
+                getDistance(firstProp.object.position, GetEntityCoords(PlayerPedId()) as Vector3) > CollectionRadius
             ) {
                 this.notifier.notify('Tu es trop loin de la collection', 'error');
                 return null;
