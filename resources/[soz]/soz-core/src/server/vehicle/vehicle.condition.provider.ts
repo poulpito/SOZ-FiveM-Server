@@ -310,10 +310,11 @@ export class VehicleConditionProvider {
         vehicleId: number,
         strength: number,
         velocity: Vector3,
-        players: number[]
+        players: number[],
+        damaged: boolean
     ) {
         for (const player of players) {
-            TriggerClientEvent(ClientEvent.VEHICLE_ROUTE_EJECTION, player, vehicleId, strength, velocity);
+            TriggerClientEvent(ClientEvent.VEHICLE_ROUTE_EJECTION, player, vehicleId, strength, velocity, damaged);
         }
     }
 
