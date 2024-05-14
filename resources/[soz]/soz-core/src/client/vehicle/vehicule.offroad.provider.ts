@@ -1,10 +1,11 @@
+import { VehicleLockProvider } from '@public/client/vehicle/vehicle.lock.provider';
 import { wait } from '@public/core/utils';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 
 import { OnEvent, OnNuiEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
-import { Tick } from '../../core/decorators/tick';
+import { Tick, TickInterval } from '../../core/decorators/tick';
 import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
 import {
     AwdRatingBonus,
@@ -17,6 +18,7 @@ import {
     RefreshProcessSurfaceCalculation,
     ResetVehicleTireColiderSideStep,
     RoadSideHandling,
+    sinkDepthStateKey,
     SuspensionRefresh,
     UnknownVehData,
     UnknowVehicleSurfaceData,
@@ -27,7 +29,7 @@ import {
     VehicleZoneDefinition,
     VehicleZoneModifier,
     VehWheelTypeData,
-    WheelDepthStateKey,
+    WheelColliderSizeStateKey,
     WheelSizeStateKey,
 } from '../../shared/vehicle/offroad';
 import { VehicleSeat } from '../../shared/vehicle/vehicle';
@@ -65,22 +67,22 @@ export class VehicleOffroadProvider {
     private filteredWheelData = {};
 
     private noSurfaceCalc = false;
+    private isEnteringVehicleOrChangingSeat = false;
 
     private sinkDepth: Record<number, Array<number>> = {};
     private wheelDepth: Record<number, Array<number>> = {};
-    private sent_states: Record<number, Array<boolean>> = {};
 
-    private currentDepth = 0;
-    private currentTraction = 100;
+    private averageDepth = 0;
+    private averageTraction = 100;
     private tractionWithUpgrade = 100;
-    private currentSoftness = 0;
-    private currentWheelsize = 0;
+    private averageSoftness = 0;
+    private averageWheelsize = 0;
     private isVehOnRoad = true;
 
     private currentVehAttachedToCargobob: number;
     public hasBeenThroughNoClip = false;
     private hasBeenTpm = false;
-    private hasBeenReseted = true;
+    private vehBeenReseted: number;
 
     @Inject(DrawService)
     private draw: DrawService;
@@ -91,19 +93,31 @@ export class VehicleOffroadProvider {
     @Inject(VehicleStateService)
     private vehicleStateService: VehicleStateService;
 
+    @Inject(VehicleLockProvider)
+    private vehicleLockProvider: VehicleLockProvider;
+
     @OnNuiEvent(NuiEvent.AdminToggleNoSurfaceCalc)
     public async setNoSurfaceCalc(value: boolean): Promise<void> {
         this.noSurfaceCalc = value;
-        this.hasBeenReseted = false;
+
+        if (this.getNoSurfaceCalc()) {
+            const playerPed = PlayerPedId();
+            if (IsPedInAnyVehicle(playerPed, false)) {
+                const playerVeh = GetVehiclePedIsIn(playerPed, false);
+                if (this.vehBeenReseted) {
+                    this.vehBeenReseted = playerVeh;
+                }
+                return;
+            }
+        }
+
+        this.vehBeenReseted = undefined;
     }
 
     @OnEvent(ClientEvent.VEH_FEATURE_SURFACE_RESET)
-    public async onResetVehSurfaceEffectIfSurfaceHard(vehNetId1: number, vehNetId2: number) {
-        const playerVeh1 = NetworkGetEntityFromNetworkId(vehNetId1);
-        const playerVeh2 = NetworkGetEntityFromNetworkId(vehNetId2);
-
-        await this.resetVehSurfaceEffectIfSurfaceHard(playerVeh1);
-        await this.resetVehSurfaceEffectIfSurfaceHard(playerVeh2);
+    public async onResetVehSurfaceEffectIfSurfaceHard(vehNetId: number) {
+        const playerVeh = NetworkGetEntityFromNetworkId(vehNetId);
+        await this.resetVehSurfaceEffectIfSurfaceHard(playerVeh);
     }
 
     @OnEvent(ClientEvent.VEH_HAS_BEEN_TPM)
@@ -117,7 +131,12 @@ export class VehicleOffroadProvider {
     }
 
     @Tick(RefreshProcessSurfaceCalculation)
-    public async processSurfaceCalculation() {
+    public async processSurfaceCalculationTick() {
+        if (this.isEnteringVehicleOrChangingSeat) {
+            await wait(1000);
+            return;
+        }
+
         const [playerPed, playerVeh] = this.getPlayerPedAndPlayerVeh();
         if (!playerPed || !playerVeh || this.isVehBlacklisted(playerVeh)) {
             this.resetCurrentAndDebugValue();
@@ -130,6 +149,10 @@ export class VehicleOffroadProvider {
             return;
         }
 
+        await this.processSurfaceCalculation(playerVeh);
+    }
+
+    public async processSurfaceCalculation(playerVeh: number) {
         if (this.hasBeenThroughNoClip) {
             if (!IsVehicleStopped(playerVeh)) {
                 await wait(100);
@@ -151,15 +174,15 @@ export class VehicleOffroadProvider {
         }
 
         if (this.getNoSurfaceCalc()) {
-            if (!this.hasBeenReseted) {
-                this.hasBeenReseted = true;
+            if (this.vehBeenReseted !== playerVeh) {
+                this.vehBeenReseted = playerVeh;
                 await this.resetVehSurfaceEffect(playerVeh);
             }
             await wait(1000);
             return;
         }
 
-        const shouldAddSleepTime = this.currentDepth === 0;
+        const shouldAddSleepTime = this.averageDepth === 0;
 
         const playerVehCoords = GetEntityCoords(playerVeh);
         this.isVehOnRoad = IsPointOnRoad(playerVehCoords[0], playerVehCoords[1], playerVehCoords[2], playerVeh);
@@ -183,9 +206,9 @@ export class VehicleOffroadProvider {
             const vehRealWheelSize = await this.getRealVehicleWheelTireColliderSize(playerVeh, wheelIdx);
 
             if (vehRealWheelSize >= 0.75) {
-                if (this.currentDepth > 0) {
-                    this.currentDepth = 0;
-                    this.currentWheelsize = 0;
+                if (this.averageDepth > 0) {
+                    this.averageDepth = 0;
+                    this.averageWheelsize = 0;
                 }
                 continue;
             }
@@ -197,7 +220,7 @@ export class VehicleOffroadProvider {
             }
 
             if (RoadSideHandling.enable) {
-                if (this.getNearestRoadDistance(playerVeh) <= RoadSideHandling.dsitanceThreshold) {
+                if (this.getNearestRoadDistance(playerVeh) <= RoadSideHandling.distanceThreshold) {
                     realDepth *= RoadSideHandling.depthMultiplier;
                 }
             }
@@ -206,7 +229,9 @@ export class VehicleOffroadProvider {
             realDepth *= zoneData?.depthMultiplier || 1;
 
             this.sinkDepth[playerVeh] ??= [];
-            this.sinkDepth[playerVeh][wheelIdx] ??= Entity(playerVeh).state[`${WheelDepthStateKey}${wheelIdx}`] || 0;
+            let currentSinkDepth =
+                this.sinkDepth[playerVeh][wheelIdx] || Entity(playerVeh).state[`${sinkDepthStateKey}${wheelIdx}`] || 0;
+            this.sinkDepth[playerVeh][wheelIdx] ??= 0;
 
             const sinkageSpeed = this.calcSinkageSpeed(
                 playerVeh,
@@ -217,16 +242,19 @@ export class VehicleOffroadProvider {
                 wheelType,
                 surfaceData
             );
-            if (realDepth > this.sinkDepth[playerVeh][wheelIdx] || sinkageSpeed < 0) {
-                this.sinkDepth[playerVeh][wheelIdx] = Math.max(
-                    0,
-                    this.sinkDepth[playerVeh][wheelIdx] + realDepth * sinkageSpeed
-                );
+
+            if (realDepth > currentSinkDepth || sinkageSpeed < 0) {
+                currentSinkDepth = Math.max(0, currentSinkDepth + realDepth * sinkageSpeed);
             }
 
-            if (this.sinkDepth[playerVeh][wheelIdx] > realDepth) {
-                this.sinkDepth[playerVeh][wheelIdx] = realDepth;
+            if (currentSinkDepth > realDepth) {
+                currentSinkDepth = realDepth;
             }
+
+            if (Math.abs(this.sinkDepth[playerVeh][wheelIdx] - currentSinkDepth) > 0.001) {
+                Entity(playerVeh).state.set(`${sinkDepthStateKey}${wheelIdx}`, currentSinkDepth, true);
+            }
+            this.sinkDepth[playerVeh][wheelIdx] = currentSinkDepth;
 
             const wheelDepth = Math.max(vehRealWheelSize - this.sinkDepth[playerVeh][wheelIdx], 0.12);
             const realWheelDepth = this.isVehOnRoad ? vehRealWheelSize : wheelDepth;
@@ -241,21 +269,10 @@ export class VehicleOffroadProvider {
             this.wheelDepth[playerVeh] ??= [];
             this.wheelDepth[playerVeh][wheelIdx] ??= 0;
 
-            if (this.wheelDepth[playerVeh][wheelIdx].toFixed(3) != realWheelDepth.toFixed(3)) {
+            if (Math.abs(this.wheelDepth[playerVeh][wheelIdx] - realWheelDepth) > 0.001) {
                 anyChanges = true;
 
-                this.sent_states[playerVeh] ??= [];
-                if (!this.sent_states[playerVeh][wheelIdx]) {
-                    this.sent_states[playerVeh][wheelIdx] = true;
-                    TriggerServerEvent(
-                        ServerEvent.VEHICLE_CREATE_STATE,
-                        NetworkGetNetworkIdFromEntity(playerVeh),
-                        `${WheelDepthStateKey}${wheelIdx}`,
-                        realWheelDepth
-                    );
-                } else {
-                    Entity(playerVeh).state.set(`${WheelDepthStateKey}${wheelIdx}`, realWheelDepth, true);
-                }
+                Entity(playerVeh).state.set(`${WheelColliderSizeStateKey}${wheelIdx}`, realWheelDepth, true);
             }
 
             this.wheelDepth[playerVeh][wheelIdx] = realWheelDepth;
@@ -271,10 +288,10 @@ export class VehicleOffroadProvider {
             averageTraction /= wheelCount;
             averageSoftness /= wheelCount;
         }
-        this.currentDepth = averageDepth;
-        this.currentWheelsize = averageWheelSizes;
-        this.currentTraction = averageTraction;
-        this.currentSoftness = averageSoftness;
+        this.averageDepth = averageDepth;
+        this.averageWheelsize = averageWheelSizes;
+        this.averageTraction = averageTraction;
+        this.averageSoftness = averageSoftness;
 
         if (shouldAddSleepTime) {
             await wait(RefreshProcessSurfaceCalculation);
@@ -282,7 +299,7 @@ export class VehicleOffroadProvider {
     }
 
     @Tick(RefreshHandleLossVehControl)
-    public async handleLossVehControl() {
+    public async handleLossVehControlTick() {
         const [playerPed, playerVeh] = this.getPlayerPedAndPlayerVeh();
 
         if (!playerPed || !playerVeh || this.featureDisableForAdmin()) {
@@ -290,12 +307,16 @@ export class VehicleOffroadProvider {
             return;
         }
 
-        if (this.isVehBlacklisted(playerVeh) || this.currentDepth <= 0.05) {
+        if (this.isVehBlacklisted(playerVeh) || this.averageDepth <= 0.05) {
             this.controlLossTimeDebug = 0;
             await wait(500);
             return;
         }
 
+        await this.handleLossVehControl(playerVeh);
+    }
+
+    public async handleLossVehControl(playerVeh: number) {
         let upgradeRating =
             this.getVehicleUpgradesRating(playerVeh) +
             this.getTurningRating(playerVeh) +
@@ -307,8 +328,8 @@ export class VehicleOffroadProvider {
         let controlLossTime = Math.floor(
             Math.max(
                 0,
-                Math.floor(this.currentDepth * 820 * GeneralControleDifficulty) *
-                    Math.max(0.9, this.currentSoftness / 70) -
+                Math.floor(this.averageDepth * 820 * GeneralControleDifficulty) *
+                    Math.max(0.9, this.averageSoftness / 70) -
                     upgradeRating
             )
         );
@@ -338,7 +359,7 @@ export class VehicleOffroadProvider {
     }
 
     @Tick(RefreshCalcTractionWithUpgrade)
-    public async calcTractionWithUpgrade() {
+    public async calcTractionWithUpgradeTick() {
         const [playerPed, playerVeh] = this.getPlayerPedAndPlayerVeh();
 
         if (!playerPed || !playerVeh || this.featureDisableForAdmin()) {
@@ -351,30 +372,35 @@ export class VehicleOffroadProvider {
             return;
         }
 
-        let vehTraction = this.currentTraction;
+        await this.calcTractionWithUpgrade(playerVeh);
+
+        if (this.tractionWithUpgrade > 95) {
+            await wait(500);
+            return;
+        }
+    }
+
+    public async calcTractionWithUpgrade(playerVeh: number) {
+        let vehTraction = this.averageTraction;
 
         const wheelData = this.getWheelData(GetVehicleWheelType(playerVeh));
-        if (!this.isSurfaceSoft(this.currentSoftness)) {
+        if (!this.isSurfaceSoft(this.averageSoftness)) {
             vehTraction += wheelData.tractionOnHard;
         } else {
             vehTraction += wheelData.tractionOnSoft;
         }
 
         if (RoadSideHandling.enable) {
-            if (this.getNearestRoadDistance(playerVeh) <= RoadSideHandling.dsitanceThreshold) {
+            if (this.getNearestRoadDistance(playerVeh) <= RoadSideHandling.distanceThreshold) {
                 vehTraction = 100 - Math.floor((100 - vehTraction) * RoadSideHandling.tractionMultiplier);
             }
         }
 
         this.tractionWithUpgrade = vehTraction;
-        if (vehTraction > 95) {
-            await wait(500);
-            return;
-        }
     }
 
     @Tick(RefreshCalcTractionWithUpgrade)
-    public async handleTractionVehLoss() {
+    public async handleTractionVehLossTick() {
         const [playerPed, playerVeh] = this.getPlayerPedAndPlayerVeh();
 
         if (!playerPed || !playerVeh) {
@@ -382,7 +408,7 @@ export class VehicleOffroadProvider {
             return;
         }
 
-        if (this.noSurfaceCalc || this.tractionWithUpgrade > 95) {
+        if (this.getNoSurfaceCalc() || this.tractionWithUpgrade > 95) {
             await wait(500);
             return;
         }
@@ -398,7 +424,7 @@ export class VehicleOffroadProvider {
             }
             SetVehicleReduceTraction(playerVeh, 1);
             SetVehicleReduceGrip(playerVeh, true);
-            await wait(200 - this.currentTraction * GeneralTractionLoss);
+            await wait(200 - this.averageTraction * GeneralTractionLoss);
             SetVehicleReduceTraction(playerVeh, 0);
             SetVehicleReduceGrip(playerVeh, false);
         } else {
@@ -407,7 +433,7 @@ export class VehicleOffroadProvider {
     }
 
     @Tick(RefreshCalcTractionWithUpgrade)
-    public async handleTractionVehMax() {
+    public async handleTractionVehMaxTick() {
         const [playerPed, playerVeh] = this.getPlayerPedAndPlayerVeh();
 
         if (!playerPed || !playerVeh) {
@@ -415,7 +441,11 @@ export class VehicleOffroadProvider {
             return;
         }
 
-        if (this.noSurfaceCalc) {
+        await this.handleTractionVehMax(playerVeh);
+    }
+
+    public async handleTractionVehMax(playerVeh: number) {
+        if (this.getNoSurfaceCalc()) {
             await wait(500);
             return;
         }
@@ -428,7 +458,7 @@ export class VehicleOffroadProvider {
         }
 
         const vehData = this.getVehData(playerVeh);
-        const tractionSpeedLoss = this.isSurfaceSoft(this.currentSoftness)
+        const tractionSpeedLoss = this.isSurfaceSoft(this.averageSoftness)
             ? vehData.tractionSpeedLostOnSoft
             : vehData.tractionSpeedLostOnHard;
         if (tractionSpeedLoss < 100) {
@@ -456,7 +486,29 @@ export class VehicleOffroadProvider {
         }
     }
 
-    @Tick()
+    @OnEvent(ClientEvent.BASE_ENTERED_VEHICLE)
+    @OnEvent(ClientEvent.BASE_CHANGE_VEHICLE_SEAT)
+    async applyCurrentPhysicsIfPlayerEnteringMainSeat(playerVeh: number, playerSeat: VehicleSeat) {
+        if (playerVeh && VehicleSeat.Driver === playerSeat) {
+            this.isEnteringVehicleOrChangingSeat = true;
+            await wait(1);
+
+            this.sinkDepth[playerVeh] = [];
+            await this.calculateVehEffect(playerVeh);
+            this.isEnteringVehicleOrChangingSeat = false;
+        }
+    }
+
+    async calculateVehEffect(playerVeh: number) {
+        await this.processSurfaceCalculation(playerVeh);
+        await this.calcTractionWithUpgrade(playerVeh);
+
+        await this.handleLossVehControl(playerVeh);
+        // No need to call handleTractionVehLoss there, has it has no real effect on a stopped car
+        await this.handleTractionVehMax(playerVeh);
+    }
+
+    @Tick(TickInterval.EVERY_FRAME)
     public async displayDebugSurfaceValue() {
         if (!this.displayDebugSurface) {
             await wait(3000);
@@ -523,7 +575,7 @@ export class VehicleOffroadProvider {
 
         this.draw.drawText3d(
             [playerVehCoords[0], playerVehCoords[1], playerVehCoords[2] + 2],
-            `~r~AverageDepth: ${this.currentDepth}\nIsOnRoad: ${this.isVehOnRoad}`
+            `~r~AverageDepth: ${this.averageDepth}\nIsOnRoad: ${this.isVehOnRoad}`
         );
         this.draw.drawText3d(
             [playerVehCoords[0], playerVehCoords[1], playerVehCoords[2] + 1.6],
@@ -548,7 +600,7 @@ export class VehicleOffroadProvider {
             return;
         }
 
-        await this.resetVehSurfaceEffect(vehToReset);
+        TriggerServerEvent(ServerEvent.VEHICLE_RESET_SURFACE_STATE_TO_OWNER, NetworkGetNetworkIdFromEntity(playerVeh));
         this.currentVehAttachedToCargobob = vehToReset;
     }
 
@@ -575,22 +627,44 @@ export class VehicleOffroadProvider {
             return didAnything;
         }
 
-        for (let wheelIdx = 0; wheelIdx < wheelCount; wheelIdx++) {
-            let wheelDepth = 0;
-            if (isCurrentVeh) {
-                wheelDepth = state[wheelIdx];
-            } else {
-                wheelDepth = state[`${WheelDepthStateKey}${wheelIdx}`];
-            }
+        const wheelTireTargetedSize = Array(wheelCount).fill(false);
+        do {
+            for (let wheelIdx = 0; wheelIdx < wheelCount; wheelIdx++) {
+                if (wheelTireTargetedSize[wheelIdx]) {
+                    continue;
+                }
 
-            if (wheelDepth && wheelDepth > 0.01 && wheelDepth <= 1.5) {
-                if (wheelDepth.toFixed(3) !== GetVehicleWheelTireColliderSize(playerVeh, wheelIdx).toFixed(3)) {
-                    didAnything = true;
-                    await this.setTireColliderSize(playerVeh, wheelIdx, wheelDepth);
+                let wheelDepth = 0;
+                if (isCurrentVeh) {
+                    wheelDepth = state[wheelIdx];
+                } else {
+                    wheelDepth = state[`${WheelColliderSizeStateKey}${wheelIdx}`];
+                }
+
+                if (!wheelDepth) {
+                    wheelTireTargetedSize[wheelIdx] = true;
+                    continue;
+                }
+
+                const currentVehicleWheelTireColliderSize = GetVehicleWheelTireColliderSize(playerVeh, wheelIdx);
+                const newWheelDepth = Math.min(
+                    currentVehicleWheelTireColliderSize + ResetVehicleTireColiderSideStep,
+                    wheelDepth
+                );
+
+                if (newWheelDepth && newWheelDepth > 0.01 && newWheelDepth <= 1.5) {
+                    if (Math.abs(currentVehicleWheelTireColliderSize - newWheelDepth) > 0.001) {
+                        didAnything = true;
+                        await this.setTireColliderSize(playerVeh, wheelIdx, newWheelDepth);
+                    }
+                }
+
+                if (wheelDepth === newWheelDepth) {
+                    wheelTireTargetedSize[wheelIdx] = true;
                 }
             }
-        }
-
+            await wait(1);
+        } while (wheelTireTargetedSize.some(v => !v));
         return didAnything;
     }
 
@@ -653,12 +727,7 @@ export class VehicleOffroadProvider {
 
         if (!realWheelSize) {
             realWheelSize = GetVehicleWheelTireColliderSize(playerVeh, wheelIdx);
-            TriggerServerEvent(
-                ServerEvent.VEHICLE_CREATE_STATE,
-                NetworkGetNetworkIdFromEntity(playerVeh),
-                `${WheelSizeStateKey}${wheelIdx}`,
-                realWheelSize
-            );
+            Entity(playerVeh).state.set(`${WheelSizeStateKey}${wheelIdx}`, realWheelSize, true);
         }
 
         return realWheelSize;
@@ -732,7 +801,7 @@ export class VehicleOffroadProvider {
     }
 
     private wheelSizeRating() {
-        return Math.max(1, Math.floor(Math.max(-0.05, this.currentWheelsize - 0.35) * 250));
+        return Math.max(1, Math.floor(Math.max(-0.05, this.averageWheelsize - 0.35) * 250));
     }
 
     private suspensionHeightRating(playerVeh: number) {
@@ -831,55 +900,33 @@ export class VehicleOffroadProvider {
         }
 
         const wheelCount = GetVehicleNumberOfWheels(playerVeh);
-        if (wheelCount !== 0) {
-            const wheelTireFullSize = Array(wheelCount).fill(false);
-            this.sinkDepth[playerVeh] = [];
-            do {
-                this.wheelDepth[playerVeh] = [];
-                for (let wheelIdx = 0; wheelIdx < wheelCount; wheelIdx++) {
-                    const RealVehicleWheelTireColliderSize = await this.getRealVehicleWheelTireColliderSize(
-                        playerVeh,
-                        wheelIdx
-                    );
-                    const newColliderSize = Math.min(
-                        GetVehicleWheelTireColliderSize(playerVeh, wheelIdx) + ResetVehicleTireColiderSideStep,
-                        RealVehicleWheelTireColliderSize
-                    );
+        this.sinkDepth[playerVeh] = [];
+        this.wheelDepth[playerVeh] = [];
+        for (let wheelIdx = 0; wheelIdx < wheelCount; wheelIdx++) {
+            const realVehicleWheelTireColliderSize = await this.getRealVehicleWheelTireColliderSize(
+                playerVeh,
+                wheelIdx
+            );
 
-                    if (!this.sent_states[playerVeh] || this.sent_states[playerVeh][wheelIdx]) {
-                        this.sent_states[playerVeh] ??= [];
-                        this.sent_states[playerVeh][wheelIdx] = true;
-                        TriggerServerEvent(
-                            ServerEvent.VEHICLE_CREATE_STATE,
-                            NetworkGetNetworkIdFromEntity(playerVeh),
-                            `${WheelDepthStateKey}${wheelIdx}`,
-                            newColliderSize
-                        );
-                    } else {
-                        Entity(playerVeh).state.set(`${WheelDepthStateKey}${wheelIdx}`, newColliderSize, true);
-                    }
-                    this.wheelDepth[playerVeh][wheelIdx] = newColliderSize;
-
-                    if (RealVehicleWheelTireColliderSize == newColliderSize) {
-                        wheelTireFullSize[wheelIdx] = true;
-                    }
-                }
-
-                await this.handleVehicleDepth(playerVeh, playerVeh == currentPlayerVeh);
-                await wait(100);
-            } while (wheelTireFullSize.some(v => !v));
+            Entity(playerVeh).state.set(
+                `${WheelColliderSizeStateKey}${wheelIdx}`,
+                realVehicleWheelTireColliderSize,
+                true
+            );
+            this.wheelDepth[playerVeh][wheelIdx] = realVehicleWheelTireColliderSize;
         }
+        await this.handleVehicleDepth(playerVeh, playerVeh == currentPlayerVeh);
 
         SetVehicleBurnout(playerVeh, false);
         await this.tryUpdateSpeedLimit(playerVeh, 0);
     }
 
     private resetCurrentAndDebugValue() {
-        this.currentDepth = 0;
-        this.currentTraction = 100;
+        this.averageDepth = 0;
+        this.averageTraction = 100;
         this.tractionWithUpgrade = 100;
-        this.currentWheelsize = 0;
-        this.currentSoftness = 0;
+        this.averageWheelsize = 0;
+        this.averageSoftness = 0;
 
         this.debugMaxSpeed = 0;
         this.controlLossTimeDebug = 0;
@@ -895,7 +942,12 @@ export class VehicleOffroadProvider {
         if (wheelCount !== 0) {
             averageSoftness /= wheelCount;
         }
-        if (!this.isSurfaceSoft(averageSoftness)) {
+
+        const playerVehCoords = GetEntityCoords(playerVeh);
+        if (
+            !this.isSurfaceSoft(averageSoftness) ||
+            IsPointOnRoad(playerVehCoords[0], playerVehCoords[1], playerVehCoords[2], playerVeh)
+        ) {
             await this.resetVehSurfaceEffect(playerVeh);
         }
     }
@@ -925,9 +977,7 @@ export class VehicleOffroadProvider {
     }
 
     private async tryUpdateSpeedLimit(playerVeh: number, speedLimitToSet: number) {
-        const state = await this.vehicleStateService.getVehicleState(playerVeh).then(data => {
-            return data;
-        });
+        const state = await this.vehicleStateService.getVehicleState(playerVeh);
 
         const speedLimiterLimit = state.speedLimit ? state.speedLimit / 3.6 - 0.25 : 0;
         if (speedLimitToSet === 0) {

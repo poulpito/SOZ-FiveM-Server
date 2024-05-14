@@ -13,12 +13,13 @@ export const AwdRatingBonus = 25;
 
 export const ResetVehicleTireColiderSideStep = 0.075;
 
-export const WheelDepthStateKey = 'offroad_wheel_depth_';
+export const sinkDepthStateKey = 'offroad_sink_depth_';
+export const WheelColliderSizeStateKey = 'offroad_wheel_collider_';
 export const WheelSizeStateKey = 'offroad_wheelsize_';
 
 export const RoadSideHandling = {
     enable: true,
-    dsitanceThreshold: 10,
+    distanceThreshold: 10,
     depthMultiplier: 0.5,
     tractionMultiplier: 0.75,
 };
@@ -576,177 +577,177 @@ export const VehData = {
 
         // dirt bikes
         avarus: {
-            rating: 0,
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         bcso30: {
-            rating: 30,
+            rating: 70,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         bf400: {
-            rating: 30,
+            rating: 70,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         blazer: {
-            rating: 25,
+            rating: 65,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         blazer2: {
-            rating: 25,
+            rating: 65,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         blazer3: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         blazer4: {
-            rating: 0,
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         blazer5: {
-            rating: 0,
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         cliffhanger: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         deamon: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         deamon2: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         enduro: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         esskey: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         gargoyle: {
-            rating: 30,
+            rating: 70,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         hexer: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         innovation: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         manchez: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         manchez3: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         manchez2: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         nemesis: {
-            rating: 0,
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
-        nighblade: {
-            rating: 0,
+        nightblade: {
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         pcj: {
-            rating: 0,
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         powersurge: {
-            rating: 0,
+            rating: 40,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         ratbike: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         rrocket: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         sanchez: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         sanchez2: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         sanctus: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         sovereign: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         stryder: {
-            rating: 20,
+            rating: 60,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         vader: {
-            rating: 30,
+            rating: 70,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         verus: {
-            rating: 30,
+            rating: 70,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         wolfsbane: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         zombiea: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         zombie2: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
