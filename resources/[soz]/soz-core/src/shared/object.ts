@@ -72,3 +72,4 @@ export type ObjectEditorOptions = {
 };
 
 export type EditorMenuData = Omit<ObjectEditorOptions, 'onDrawCallback'>;
+export const CollectionRadius = 400.0;
