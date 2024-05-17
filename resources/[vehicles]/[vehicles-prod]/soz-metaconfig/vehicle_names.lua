@@ -4,17 +4,11 @@ Citizen.CreateThread(function()
 
     AddTextEntryByHash(GetHashKey("ambcar"), "Granger du LSMC")
     AddTextEntryByHash(GetHashKey("lspd10"), "Buffalo STX Police")
-    AddTextEntryByHash(GetHashKey("lspd11"), "toto")
-    AddTextEntryByHash(GetHashKey("lspd20"), "Vapid Scout Police")
-    AddTextEntryByHash(GetHashKey("lspd30"), "Moto de Police")
     AddTextEntryByHash(GetHashKey("paragonfbi"), "Paragon FBI")
     AddTextEntryByHash(GetHashKey("cogfbi"), "Cognoscenti FBI")
-    AddTextEntryByHash(GetHashKey("lspd50"), "Felon Banalisée - LSPD")
-    AddTextEntryByHash(GetHashKey("lspd51"), "Sultan Banalisée - LSPD")
-    AddTextEntryByHash(GetHashKey("bcso50"), "Gresley Banalisée - BCSO")
-    AddTextEntryByHash(GetHashKey("bcso51"), "Fugitive Banalisée - BCSO")
 
-    -- enterprises
+    -- Enterprises
+
     AddTextEntryByHash(GetHashKey("baller9"), "Baller ST Blindé")
     AddTextEntryByHash(GetHashKey("brickade1"), "Brickade UPW")
     AddTextEntryByHash(GetHashKey("burrito6"), "Burrito")
@@ -40,10 +34,20 @@ Citizen.CreateThread(function()
     AddTextEntryByHash(GetHashKey("mixer"), "Bétonnière Rouillé")
 
     -- Liveries
+
     AddTextEntry(GetHashKey('deity_livery13'),'Sticker MDR') -- Sticker MDR
     AddTextEntry(GetHashKey('polgaunt_liv23'),'FIB Black Edition') -- Sticker PolGauntlet
     AddTextEntry(GetHashKey('polgaunt_liv24'),'FIB White Edition') -- Sticker PolGauntlet
 
+    -- SASP
+
+    AddTextEntryByHash(GetHashKey('SASP1'), "Dominator GTX")
+    AddTextEntryByHash(GetHashKey('SASP1_LIV_1'), "SASP Livery")
+
+    AddTextEntryByHash(GetHashKey('POLICE_ANTENNA'), "Antenna")
+    AddTextEntryByHash(GetHashKey('POLICE_DIVIDER'), "Divider")
+
+    -- LSPD10 Customisation
 
     AddTextEntry("0xA4849CEF", "Numéro - 0") -- LSPD10_A0
     AddTextEntry("0xD083F4ED", "Numéro - 1") -- LSPD10_A1
@@ -78,14 +82,8 @@ Citizen.CreateThread(function()
     AddTextEntry('0x71312BA1','Numéro - 8')   -- LSPD10_C8
     AddTextEntry('0x5CC802CF','Numéro - 9')   -- LSPD10_C9
 
-    -- SASP 1
-    AddTextEntryByHash(GetHashKey('SASP1'), "Dominator GTX")
-    AddTextEntryByHash(GetHashKey('SASP1_LIV_1'), "SASP Livery")
+    --Call Signs
 
-    AddTextEntryByHash(GetHashKey('POLICE_ANTENNA'), "Antenna")
-    AddTextEntryByHash(GetHashKey('POLICE_DIVIDER'), "Divider")
-
-    	--Call Signs
     AddTextEntryByHash(GetHashKey('CALLSIGN_L'), "Left Call Sign")
     AddTextEntryByHash(GetHashKey('CALLSIGN_C'), "Center Call Sign")
     AddTextEntryByHash(GetHashKey('CALLSIGN_R'), "Right Call Sign")
@@ -119,4 +117,8 @@ Citizen.CreateThread(function()
     AddTextEntryByHash(GetHashKey('CALLSIGN_C7'), "7")
     AddTextEntryByHash(GetHashKey('CALLSIGN_C8'), "8")
     AddTextEntryByHash(GetHashKey('CALLSIGN_C9'), "9")
+
+
+
+
 end)
