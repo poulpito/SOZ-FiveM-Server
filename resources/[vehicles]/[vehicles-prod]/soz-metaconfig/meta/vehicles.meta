@@ -4433,7 +4433,7 @@
     <txdRelationships>
         <Item>
             <parent>vehicles_van_interior</parent>
-            <child>ambulance</child>
+            <child>ambulance2</child>
         </Item>
         <Item>
             <parent>vehicles_cav_interior</parent>
