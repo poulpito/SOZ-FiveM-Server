@@ -14,7 +14,7 @@ import { TowRopeRepository } from '../repository/tow.rope.repository';
 import { RopeService } from '../rope.service';
 import { TargetFactory } from '../target/target.factory';
 
-const MAX_LENGTH_ROPE = 30;
+const MAX_LENGTH_ROPE = 3;
 
 @Provider()
 export class VehicleTowProvider {
