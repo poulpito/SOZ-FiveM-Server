@@ -560,17 +560,17 @@ export const VehData = {
 
         // Bicycle
         bmx: {
-            rating: 10,
+            rating: 50,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         inductor: {
-            rating: 40,
+            rating: 80,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
         scorcher: {
-            rating: 40,
+            rating: 80,
             tractionSpeedLostOnSoft: 100,
             tractionSpeedLostOnHard: 100,
         },
