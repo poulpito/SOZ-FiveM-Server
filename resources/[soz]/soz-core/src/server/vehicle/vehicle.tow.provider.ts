@@ -66,7 +66,12 @@ export class VehicleTowProvider {
         this.towRopeRepository.delete(id);
 
         this.notifier.notify(source, 'Le cable de remorquage a été ~r~enlevé~s~');
-        TriggerClientEvent(ClientEvent.VEH_FEATURE_SURFACE_RESET, source, towRope.netId1, towRope.netId2);
+
+        const owner1 = NetworkGetEntityOwner(NetworkGetEntityFromNetworkId(towRope.netId1));
+        TriggerClientEvent(ClientEvent.VEH_FEATURE_SURFACE_RESET, owner1, towRope.netId1);
+
+        const owner2 = NetworkGetEntityOwner(NetworkGetEntityFromNetworkId(towRope.netId2));
+        TriggerClientEvent(ClientEvent.VEH_FEATURE_SURFACE_RESET, owner2, towRope.netId2);
 
         this.monitor.publish(
             'tow_rope_remove',
