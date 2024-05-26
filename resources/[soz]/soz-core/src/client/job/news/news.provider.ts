@@ -85,7 +85,8 @@ export class NewsProvider {
                     },
                     job: JobType.News,
                     canInteract: () => {
-                        return this.playerService.isOnDuty();
+                        return false;
+                        //return this.playerService.isOnDuty();
                     },
                 },
             ]
@@ -111,7 +112,8 @@ export class NewsProvider {
                     },
                     job: JobType.YouNews,
                     canInteract: () => {
-                        return this.playerService.isOnDuty();
+                        return false;
+                        //return this.playerService.isOnDuty();
                     },
                 },
             ]
