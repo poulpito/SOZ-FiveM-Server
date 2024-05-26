@@ -244,7 +244,7 @@ export class VehicleSeatbeltProvider {
             this.lastEjectionTimeOrDamage = Date.now();
             if (!this.isSeatbeltOn) {
                 await this.ejectPlayer(ped, vehicleEjection, velocity);
-            } else if (damaged && THRESHOLD_G_STRENGTH_DAMAGE) {
+            } else if (damaged && gStrength > THRESHOLD_G_STRENGTH_DAMAGE) {
                 const damage = ((gStrength - THRESHOLD_G_STRENGTH_DAMAGE) * toVectorNorm(velocity)) / 30;
                 SetEntityHealth(ped, Math.round(GetEntityHealth(ped) - damage));
 
