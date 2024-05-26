@@ -67,12 +67,37 @@ export class BankTaxProvider {
             for (const acc of account) {
                 const tax = Math.round(this.bankService.getAccountMoney(acc) * percentage);
 
-                const result = await this.bankService.transferBankMoney(acc, 'gouv', tax);
+                const newsIncome = Math.round((6 * tax) / 100);
+
+                for (const jobAccount of ['news', 'you-news']) {
+                    const result = await this.bankService.transferBankMoney(acc, jobAccount, newsIncome);
+
+                    if (isErr(result)) {
+                        this.logger.error(`Paiement impossible du ${jobAccount} pour le compte ${acc}: ${result.err}`);
+                    } else {
+                        this.logger.info(`Paiement du ${jobAccount} pour le compte ${acc} de ${newsIncome}`);
+                    }
+
+                    this.monitor.publish(
+                        'news_tax',
+                        {
+                            source_account: acc,
+                            target_account: jobAccount,
+                        },
+                        {
+                            amount: newsIncome,
+                            percentage,
+                        }
+                    );
+                }
+
+                const gouvIncome = tax - 2 * newsIncome;
+                const result = await this.bankService.transferBankMoney(acc, 'gouv', gouvIncome);
 
                 if (isErr(result)) {
                     this.logger.error(`Paiement impossible du gouvernement pour le compte ${acc}: ${result.err}`);
                 } else {
-                    this.logger.info(`Paiement du gouvernement pour le compte ${acc} de ${tax}`);
+                    this.logger.info(`Paiement du gouvernement pour le compte ${acc} de ${gouvIncome}`);
                 }
 
                 this.monitor.publish(
@@ -82,7 +107,7 @@ export class BankTaxProvider {
                         target_account: 'gouv',
                     },
                     {
-                        amount: tax,
+                        amount: gouvIncome,
                         percentage,
                     }
                 );

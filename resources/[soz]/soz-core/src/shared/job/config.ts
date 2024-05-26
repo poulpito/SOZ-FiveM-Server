@@ -254,7 +254,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-NEWS',
         canReceiveSocietyInvoice: true,
-        taxCollectAccounts: ['news', 'safe_news'],
     },
     [JobType.YouNews]: {
         label: 'You News',
@@ -271,7 +270,6 @@ export const JobRegistry: Record<JobType, Omit<Job, 'id'>> = {
         ],
         phone: '555-YOUN',
         canReceiveSocietyInvoice: true,
-        taxCollectAccounts: ['you-news', 'safe_you-news'],
     },
     [JobType.Garbage]: {
         label: 'BlueBird',
