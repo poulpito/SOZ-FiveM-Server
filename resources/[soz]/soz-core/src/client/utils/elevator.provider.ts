@@ -51,6 +51,8 @@ enum ElevatorFloorName {
     younews0,
     younews1,
     younews2,
+    baun0,
+    baun1,
 }
 
 const Elevators: Record<ElevatorFloorName, ElevatorFloor> = {
@@ -227,6 +229,21 @@ const Elevators: Record<ElevatorFloorName, ElevatorFloor> = {
         upTo: [],
         downTo: [ElevatorFloorName.younews1, ElevatorFloorName.younews0],
         spawnPoint: [-1072.38, -246.64, 53.21, 302.0],
+    },
+    //BAHAMA
+    [ElevatorFloorName.baun0]: {
+        label: 'Rez-de-chaussée',
+        button: new BoxZone([-1383.44, -589.6, 30.32], 0.2, 0.4, { heading: 215.27, minZ: 30.12, maxZ: 30.92 }),
+        upTo: [ElevatorFloorName.baun1],
+        downTo: [],
+        spawnPoint: [-1382.07, -589.92, 30.32, 30.76],
+    },
+    [ElevatorFloorName.baun1]: {
+        label: 'Roof Top',
+        button: new BoxZone([-1379.51, -600.05, 43.8], 0.2, 0.4, { heading: 307.24, minZ: 43.8, maxZ: 44.4 }),
+        upTo: [],
+        downTo: [ElevatorFloorName.baun0],
+        spawnPoint: [-1379.1, -598.67, 43.8, 109.24],
     },
 };
 
