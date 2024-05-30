@@ -346,6 +346,10 @@ export class InventoryManager {
         this.sozInventory.SetHouseStashMaxWeightFromTier(apartmentIdentifier, tier);
     }
 
+    public clear(id: string): void {
+        this.sozInventory.Clear(id);
+    }
+
     // TODO: Implement the following method in soz core directly
     // public canSwapItem(source: number, { id: string; amount: number; }[], { id: string; amount: number;}[]): boolean {
 }
