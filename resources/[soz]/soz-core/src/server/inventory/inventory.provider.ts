@@ -1,7 +1,4 @@
-import { Command } from '@public/core/decorators/command';
-import { Cron } from '@public/core/decorators/cron';
 import { OnEvent } from '@public/core/decorators/event';
-import { Logger } from '@public/core/logger';
 import { ServerEvent } from '@public/shared/event';
 
 import { Inject } from '../../core/decorators/injectable';
@@ -26,9 +23,6 @@ export class InventoryProvider {
     @Inject(ItemService)
     private itemService: ItemService;
 
-    @Inject(Logger)
-    private logger: Logger;
-
     @Rpc(RpcServerEvent.BIN_IS_NOT_LOCKED)
     public isBinLock(source: number, id: string) {
         return !this.lockBinService.isLock(id);
@@ -45,18 +39,5 @@ export class InventoryProvider {
         if (invItem) {
             this.itemService.executeShowCallback(source, target, invItem);
         }
-    }
-
-    @Command('clearFdoSeizure', { role: 'admin' })
-    public purgeSeizureCommand(): void {
-        this.purgeSeizure();
-    }
-
-    @Cron(4, 0, 3)
-    public purgeSeizure() {
-        this.inventoryManager.clear('lspd_seizure');
-        this.inventoryManager.clear('bcso_seizure');
-
-        this.logger.info('Sizure purged');
     }
 }
