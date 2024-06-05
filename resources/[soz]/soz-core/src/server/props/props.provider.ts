@@ -432,20 +432,24 @@ export class PropsProvider {
     public loadCollection(collection: PropCollection) {
         collection.loaded_size = Object.keys(collection.props).length;
         this.createPropsToAllClients(
-            Object.values(collection.props).map(item => {
-                item.loaded = true;
-                return item.object;
-            })
+            Object.values(collection.props)
+                .filter(item => !item.loaded)
+                .map(item => {
+                    item.loaded = true;
+                    return item.object;
+                })
         );
     }
 
     public unloadCollection(collection: PropCollection) {
         collection.loaded_size = 0;
         this.deletePropsToAllClients(
-            Object.values(collection.props).map(item => {
-                item.loaded = false;
-                return item.object.id;
-            })
+            Object.values(collection.props)
+                .filter(item => item.loaded)
+                .map(item => {
+                    item.loaded = false;
+                    return item.object.id;
+                })
         );
     }
 
@@ -531,11 +535,11 @@ export class PropsProvider {
     public createPropsToAllClients(props: WorldObject[]) {
         this.objectProvider.addObjects(props);
     }
+
     public deletePropsToAllClients(propIds: string[]) {
-        for (const propId of propIds) {
-            this.objectProvider.deleteObject(propId);
-        }
+        this.objectProvider.deleteObjects(propIds);
     }
+
     public async editPropToAllClients(prop: WorldObject) {
         this.objectProvider.updateObject(prop);
     }
