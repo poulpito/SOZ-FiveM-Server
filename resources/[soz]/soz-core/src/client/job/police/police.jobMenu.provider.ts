@@ -8,12 +8,17 @@ import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
+import { PositiveNumberValidator } from '../../../shared/nui/input';
 import { Ok } from '../../../shared/result';
+import { InputService } from '../../nui/input.service';
 
 @Provider()
 export class PoliceJobMenuProvider {
     @Inject(AnimationService)
     private animationService: AnimationService;
+
+    @Inject(InputService)
+    private inputService: InputService;
 
     @Inject(Notifier)
     private notifier: Notifier;
@@ -21,6 +26,34 @@ export class PoliceJobMenuProvider {
     @OnNuiEvent(NuiEvent.PolicePlaceSpike)
     public async onPlaceSpike() {
         TriggerServerEvent(ServerEvent.POLICE_PLACE_SPIKE, 'spike');
+
+        return Ok(true);
+    }
+
+    @OnNuiEvent(NuiEvent.PolicePlaceSpeedZone)
+    public async onNuiPlaceSpeedZone() {
+        const lanes = await this.inputService.askInput(
+            {
+                title: 'Nombre de voies',
+            },
+            PositiveNumberValidator
+        );
+
+        if (!lanes) {
+            return;
+        }
+
+        const speed = await this.inputService.askInput(
+            {
+                title: 'Vitesse',
+            },
+            PositiveNumberValidator
+        );
+
+        if (speed !== 0 && !speed) {
+            return;
+        }
+        TriggerServerEvent(ServerEvent.POLICE_PLACE_SPEEDZONE, lanes, speed);
 
         return Ok(true);
     }
