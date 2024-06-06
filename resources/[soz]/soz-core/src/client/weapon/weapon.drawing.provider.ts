@@ -1,3 +1,5 @@
+import { PlayerUpdate } from '@public/core/decorators/player';
+
 import { On, Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
@@ -107,7 +109,7 @@ export class WeaponDrawingProvider {
         await this.updateWeaponDrawList(player.items);
     }
 
-    @OnEvent(ClientEvent.PLAYER_UPDATE)
+    @PlayerUpdate()
     async onPlayerUpdate(player: PlayerData) {
         if (!this.playerLoaded) {
             return;

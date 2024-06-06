@@ -1,3 +1,5 @@
+import { PlayerUpdate } from '@public/core/decorators/player';
+
 import { Once, OnceStep, OnEvent, OnNuiEvent } from '../../../core/decorators/event';
 import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
@@ -115,7 +117,7 @@ export class GarbageProvider {
         this.garbageAnimationProgress = null;
     }
 
-    @OnEvent(ClientEvent.PLAYER_UPDATE)
+    @PlayerUpdate()
     public onPlayerUpdate() {
         this.hasGarbageBag = this.inventoryManager.hasEnoughItem('garbagebag', 1);
 

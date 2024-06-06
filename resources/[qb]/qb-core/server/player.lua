@@ -263,6 +263,18 @@ function QBCore.Player.Logout(source)
     QBCore.Players[src] = nil
 end
 
+local playersToSync = {}
+CreateThread(function()
+    while true do
+        for player, _ in pairs(playersToSync) do
+            TriggerClientEvent('QBCore:Player:SetPlayerData', player, QBCore.Players[player].PlayerData)
+        end
+        playersToSync = {}
+
+        Wait(0)
+    end
+end)
+
 -- Create a new character
 -- Don't touch any of this unless you know what you are doing
 -- Will cause major issues!
@@ -277,7 +289,7 @@ function QBCore.Player.CreatePlayer(PlayerData)
     end
 
     self.Functions.UpdatePlayerData = function(dontUpdateChat)
-        TriggerClientEvent('QBCore:Player:SetPlayerData', self.PlayerData.source, self.PlayerData)
+        playersToSync[self.PlayerData.source] = true
         TriggerEvent('QBCore:Server:PlayerUpdate', self.PlayerData)
 
         if dontUpdateChat == nil then
@@ -431,9 +443,9 @@ function QBCore.Player.CreatePlayer(PlayerData)
         return exports['soz-inventory']:RemoveItem(self.PlayerData.source, item, amount, false, slot)
     end
 
-    self.Functions.SetInventory = function(items, dontUpdateChat)
+    self.Functions.SetInventory = function(items)
         self.PlayerData.items = items
-        self.Functions.UpdatePlayerData(dontUpdateChat)
+        self.Functions.UpdatePlayerData(true)
 
         exports['soz-core']:Log('DEBUG', 'Inventory movement - Set ! items set: ' .. json.encode(items))
     end

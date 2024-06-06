@@ -48,12 +48,18 @@ function InventoryContainer:CompactInventory(inv)
     if inv ~= nil then
         for k, v in pairs(inv) do
             if v.name and v.amount > 0 then
+                local metadata = v.metadata
+                if metadata and metadata.storageElements then
+                    metadata = table.deepclone(metadata)
+                    metadata.storageElements = InventoryContainer:CompactInventory(metadata.storageElements)
+                end
+
                 inventory[#inventory + 1] = {
                     name = v.name,
                     type = v.type,
                     slot = k,
                     amount = v.amount,
-                    metadata = next(v.metadata) and v.metadata or nil,
+                    metadata = next(metadata) and metadata or nil,
                 }
             end
         end

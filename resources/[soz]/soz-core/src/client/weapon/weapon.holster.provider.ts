@@ -8,7 +8,6 @@ import { JobType } from '@public/shared/job';
 
 import { AnimationService } from '../animation/animation.service';
 import { PlayerService } from '../player/player.service';
-import { ResourceLoader } from '../repository/resource.loader';
 
 const holsterableWeaponGroups = [GetHashKey('GROUP_PISTOL'), GetHashKey('GROUP_STUNGUN')];
 const excludeWeapon = [
@@ -27,9 +26,6 @@ const hosterDrawable = {
 
 @Provider()
 export class WeaponHolsterProvider {
-    @Inject(ResourceLoader)
-    private resourceLoader: ResourceLoader;
-
     @Inject(AnimationService)
     private animationService: AnimationService;
 
@@ -53,7 +49,7 @@ export class WeaponHolsterProvider {
         if (
             DoesEntityExist(ped) &&
             player &&
-            !player.metadata.isdead &&
+            !player.metadata?.isdead &&
             !IsPedInParachuteFreeFall(ped) &&
             !IsPedFalling(ped) &&
             (GetPedParachuteState(ped) == -1 || GetPedParachuteState(ped) == 0)

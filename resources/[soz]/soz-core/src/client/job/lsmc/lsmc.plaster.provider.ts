@@ -1,4 +1,4 @@
-import { Once, OnceStep, OnEvent, OnNuiEvent } from '@core/decorators/event';
+import { Once, OnceStep, OnNuiEvent } from '@core/decorators/event';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { NuiMenu } from '@public/client/nui/nui.menu';
@@ -6,10 +6,10 @@ import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
 import { ResourceLoader } from '@public/client/repository/resource.loader';
 import { Command } from '@public/core/decorators/command';
+import { PlayerUpdate } from '@public/core/decorators/player';
 import { Tick } from '@public/core/decorators/tick';
 import { emitRpc } from '@public/core/rpc';
-import { wait } from '@public/core/utils';
-import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
+import { NuiEvent, ServerEvent } from '@public/shared/event';
 import { PlasterConfigs, PlasterLocation } from '@public/shared/job/lsmc';
 import { MenuType } from '@public/shared/nui/menu';
 import { PlayerData } from '@public/shared/player';
@@ -41,7 +41,7 @@ export class LSMCPlasterProvider {
         }
     }
 
-    @OnEvent(ClientEvent.PLAYER_UPDATE)
+    @PlayerUpdate()
     public async onPlasterPlayerUpdate(player: PlayerData) {
         if (!this.plasters) {
             return;

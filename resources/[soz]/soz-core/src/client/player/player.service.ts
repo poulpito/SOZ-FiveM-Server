@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@core/decorators/injectable';
 import { DrugSkill } from '@private/shared/drugs';
+import { PlayerLoader } from '@public/core/loader/player.loader';
 import { PatientClothes } from '@public/shared/job/lsmc';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 
@@ -44,9 +45,13 @@ export class PlayerService {
     @Inject(NuiDispatch)
     private nuiDispatch: NuiDispatch;
 
+    @Inject(PlayerLoader)
+    private playerLoader: PlayerLoader;
+
     public setPlayer(player: PlayerData) {
         this.player = player;
-        TriggerEvent(ClientEvent.PLAYER_UPDATE.toString(), player);
+
+        this.playerLoader.trigger(player);
         this.nuiDispatch.dispatch('player', 'Update', player);
     }
 

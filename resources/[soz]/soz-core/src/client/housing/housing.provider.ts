@@ -32,7 +32,7 @@ export class HousingProvider {
             return;
         }
 
-        if (!player.metadata.inside || !player.metadata.inside.property) {
+        if (!player.metadata?.inside || !player.metadata.inside.property) {
             return;
         }
 

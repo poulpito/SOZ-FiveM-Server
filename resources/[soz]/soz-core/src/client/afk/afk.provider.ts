@@ -58,7 +58,7 @@ export class AfkProvider {
     async verificationLoop() {
         const player = this.playerService.getPlayer();
 
-        if (!player || player.metadata.godmode || this.store.getState().global.disableAFK) {
+        if (!player || player.metadata?.godmode || this.store.getState().global.disableAFK) {
             return;
         }
 

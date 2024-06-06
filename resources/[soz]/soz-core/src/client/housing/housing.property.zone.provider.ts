@@ -1,3 +1,5 @@
+import { PlayerUpdate } from '@public/core/decorators/player';
+
 import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Exportable } from '../../core/decorators/exports';
 import { Inject } from '../../core/decorators/injectable';
@@ -125,7 +127,7 @@ export class HousingPropertyZoneProvider {
         this.updateBlips();
     }
 
-    @OnEvent(ClientEvent.PLAYER_UPDATE)
+    @PlayerUpdate()
     public updateBlips() {
         const player = this.playerService.getPlayer();
 
