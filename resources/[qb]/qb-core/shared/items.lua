@@ -4081,7 +4081,8 @@ QBShared.Items = {
         ['useable'] = false,
         ['shouldClose'] = true,
         ['combinable'] = nil,
-        ['description'] = '???',
+        ['description'] = 'You shall not pass !',
+        ['illustrator'] = '.Sniteur'
     },
 
     -- Firework Tools

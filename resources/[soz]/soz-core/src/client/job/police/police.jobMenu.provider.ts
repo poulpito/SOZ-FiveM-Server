@@ -32,14 +32,11 @@ export class PoliceJobMenuProvider {
 
     @OnNuiEvent(NuiEvent.PolicePlaceSpeedZone)
     public async onNuiPlaceSpeedZone() {
-        const lanes = await this.inputService.askInput(
-            {
-                title: 'Nombre de voies',
-            },
-            PositiveNumberValidator
+        const lanes = Math.floor(
+            await this.inputService.askInput({ title: 'Distances (entre 1 et 5 mètre)' }, PositiveNumberValidator)
         );
 
-        if (!lanes) {
+        if (!lanes || lanes < 1 || lanes > 5) {
             return;
         }
 

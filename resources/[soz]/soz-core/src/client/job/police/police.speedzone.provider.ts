@@ -38,7 +38,7 @@ export class PoliceSpeedZoneProvider {
                 action: async (entity: number) => {
                     const { completed } = await this.progressService.progress(
                         'remove_object',
-                        'Récupération du panneau',
+                        'Démontage du panneau',
                         2500,
                         {
                             dictionary: 'weapons@first_person@aim_rng@generic@projectile@thermal_charge@',

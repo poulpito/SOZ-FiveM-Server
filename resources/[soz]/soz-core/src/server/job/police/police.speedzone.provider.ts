@@ -31,6 +31,15 @@ export class PoliceSpeedZoneProvider {
         if (!allowedJobInteraction.includes(player.job.id)) {
             return;
         }
+        if (lanes < 1 || lanes > 5) {
+            TriggerClientEvent(
+                ClientEvent.NOTIFICATION_DRAW,
+                player.source,
+                'La distance doit être entre 1 et 5.',
+                'error'
+            );
+            return;
+        }
 
         if (this.inventoryManager.getItemCount(player.source, speedzoneItemName) >= 1) {
             this.inventoryManager.removeItemFromInventory(player.source, speedzoneItemName, 1);
