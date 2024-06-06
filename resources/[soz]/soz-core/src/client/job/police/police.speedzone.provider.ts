@@ -10,7 +10,7 @@ import { JobType } from '@public/shared/job';
 import { Vector3, Vector4 } from '@public/shared/polyzone/vector';
 
 const jobsTarget = { [JobType.BCSO]: 0, [JobType.FBI]: 0, [JobType.SASP]: 0, [JobType.LSPD]: 0, [JobType.LSCS]: 0 };
-const roadSignModel = GetHashKey('prop_sign_road_06f');
+const roadSignModel = GetHashKey('prop_sign_road_03z');
 
 @Provider()
 export class PoliceSpeedZoneProvider {

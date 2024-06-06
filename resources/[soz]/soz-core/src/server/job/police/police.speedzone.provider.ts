@@ -8,7 +8,7 @@ import { JobType } from '@public/shared/job';
 import { Vector4 } from '@public/shared/polyzone/vector';
 
 const allowedJobInteraction = [JobType.BCSO, JobType.FBI, JobType.SASP, JobType.LSPD, JobType.LSCS];
-const roadSignModel = GetHashKey('prop_sign_road_06f');
+const roadSignModel = GetHashKey('prop_sign_road_03z');
 const speedzoneItemName = 'speed_speed_sign';
 const LANE_RADIUS = 5.0;
 
