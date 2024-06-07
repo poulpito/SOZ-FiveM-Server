@@ -3,10 +3,18 @@ import { BarberShopContent } from '@public/shared/shop';
 
 export const PositionInBarberShop = {
     PLAYER_HEADING: 199.156,
-    CAMERA_OFFSET_X: 0.0,
-    CAMERA_OFFSET_Y: -0.5,
-    CAMERA_OFFSET_Z: 0.7,
-    CAMERA_TARGET_Z: 0.7,
+    Other: {
+        CAMERA_OFFSET_X: 0.0,
+        CAMERA_OFFSET_Y: -0.5,
+        CAMERA_OFFSET_Z: 0.7,
+        CAMERA_TARGET_Z: 0.7,
+    },
+    ChestHair: {
+        CAMERA_OFFSET_X: 0.0,
+        CAMERA_OFFSET_Y: -0.7,
+        CAMERA_OFFSET_Z: 0.2,
+        CAMERA_TARGET_Z: 0.2,
+    },
 };
 
 export const BarberShopItems: BarberShopContent = {
@@ -55,6 +63,14 @@ export const BarberShopItems: BarberShopContent = {
             label: 'Sourcils',
             overlay: 'Hair',
             components: { ['EyebrowType']: true, ['EyebrowColor']: true, ['EyebrowOpacity']: true },
+            items: undefined,
+        },
+        {
+            price: 13,
+            category: 'ChestHair',
+            label: 'Torse',
+            overlay: 'Hair',
+            components: { ['ChestHairType']: true, ['ChestHairOpacity']: true, ['ChestHairColor']: true },
             items: undefined,
         },
     ],
@@ -111,6 +127,14 @@ export const BarberShopItems: BarberShopContent = {
             label: 'Sourcils',
             overlay: 'Hair',
             components: { ['EyebrowType']: true, ['EyebrowColor']: true, ['EyebrowOpacity']: true },
+            items: undefined,
+        },
+        {
+            price: 13,
+            category: 'ChestHair',
+            label: 'Torse',
+            overlay: 'Hair',
+            components: { ['ChestHairType']: true, ['ChestHairOpacity']: true, ['ChestHairColor']: true },
             items: undefined,
         },
     ],
