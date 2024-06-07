@@ -169,7 +169,7 @@ export class BarberShopProvider {
         FreezeEntityPosition(PlayerPedId(), false);
     }
 
-    @OnNuiEvent(NuiEvent.TattooShopSelectCategory)
+    @OnNuiEvent(NuiEvent.BarberShopThroughCategory)
     public async onSelectCategory(category: string) {
         const ped = PlayerPedId();
 

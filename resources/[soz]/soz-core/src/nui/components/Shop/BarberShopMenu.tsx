@@ -50,13 +50,13 @@ export const BarberShopMenu: FunctionComponent<MenuBarberShopStateProps> = ({ da
     const onSelectCam = async (category: string) => {
         if (currentCat !== category) {
             if (currentCat === 'ChestHair') {
-                await fetchNui(NuiEvent.TattooShopSelectCategory, 'Other');
+                await fetchNui(NuiEvent.BarberShopThroughCategory, 'Other');
                 setCurrentCat(category);
                 return;
             }
 
             if (category === 'ChestHair') {
-                await fetchNui(NuiEvent.TattooShopSelectCategory, 'ChestHair');
+                await fetchNui(NuiEvent.BarberShopThroughCategory, 'ChestHair');
                 setCurrentCat(category);
                 return;
             }
