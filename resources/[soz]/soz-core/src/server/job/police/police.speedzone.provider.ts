@@ -2,12 +2,15 @@ import { OnEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
 import { InventoryManager } from '@public/server/inventory/inventory.manager';
+import { ObjectProvider } from '@public/server/object/object.provider';
 import { PlayerService } from '@public/server/player/player.service';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
-import { JobType } from '@public/shared/job';
+import { FDO } from '@public/shared/job';
+import { getLocationHash } from '@public/shared/locationhash';
 import { Vector4 } from '@public/shared/polyzone/vector';
 
-const allowedJobInteraction = [JobType.BCSO, JobType.FBI, JobType.SASP, JobType.LSPD, JobType.LSCS];
+import { Notifier } from '../../notifier';
+
 const roadSignModel = GetHashKey('prop_sign_road_03z');
 const speedzoneItemName = 'speed_speed_sign';
 const LANE_RADIUS = 5.0;
@@ -20,61 +23,70 @@ export class PoliceSpeedZoneProvider {
     @Inject(InventoryManager)
     private inventoryManager: InventoryManager;
 
+    @Inject(ObjectProvider)
+    private objectProvider: ObjectProvider;
+
+    @Inject(Notifier)
+    private notifier: Notifier;
+
     private zones: { [id: string]: { position: Vector4; radius: number; speed: number } } = {};
 
     @OnEvent(ServerEvent.POLICE_PLACE_SPEEDZONE)
-    public async onPlaceSpeedZone(source: number, lanes: number, speed: number) {
+    public async onPlaceSpeedZone(source: number, distance: number, speed: number) {
         const player = this.playerService.getPlayer(source);
         if (!player) {
             return;
         }
-        if (!allowedJobInteraction.includes(player.job.id)) {
+        if (!FDO.includes(player.job.id)) {
             return;
         }
-        if (lanes < 1 || lanes > 5) {
-            TriggerClientEvent(
-                ClientEvent.NOTIFICATION_DRAW,
-                player.source,
-                'La distance doit être entre 1 et 5.',
-                'error'
-            );
+        if (distance < 1 || distance > 5) {
+            this.notifier.notify(source, `La distance doit être entre 1 et 5.`, 'error');
             return;
         }
 
         if (this.inventoryManager.getItemCount(player.source, speedzoneItemName) >= 1) {
             this.inventoryManager.removeItemFromInventory(player.source, speedzoneItemName, 1);
-            TriggerClientEvent(ClientEvent.POLICE_REQUEST_ADD_SPEEDZONE, player.source, LANE_RADIUS * lanes, speed);
+            TriggerClientEvent(ClientEvent.POLICE_REQUEST_ADD_SPEEDZONE, player.source, LANE_RADIUS * distance, speed);
         } else {
-            TriggerClientEvent(
-                ClientEvent.NOTIFICATION_DRAW,
-                player.source,
-                'Vous ne possédez pas cet objet.',
-                'error'
-            );
+            this.notifier.notify(source, `Vous ne possédez pas cet objet.`, 'error');
         }
     }
 
     @OnEvent(ServerEvent.POLICE_ADD_SPEEDZONE)
     public async addSpeedZone(source: number, position: Vector4, radius: number, speed: number) {
-        const roadSign = CreateObjectNoOffset(roadSignModel, position[0], position[1], position[2], true, true, false);
-        SetEntityHeading(roadSign, position[3]);
-        FreezeEntityPosition(roadSign, true);
+        const id = `speedzone_${getLocationHash(position)}`;
 
-        this.zones[NetworkGetNetworkIdFromEntity(roadSign)] = { position, radius, speed };
-        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones);
+        this.objectProvider.createObject({
+            id: id,
+            model: roadSignModel,
+            position: position,
+        });
+
+        this.zones[id] = { position, radius, speed };
+        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones, this.shouldDisplayBlip(source));
     }
 
     @OnEvent(ServerEvent.POLICE_REMOVE_SPEEDZONE)
-    public async removeSpeedZone(source: number, id: number) {
+    public async removeSpeedZone(source: number, id: string) {
         if (this.zones[id]) {
-            DeleteEntity(NetworkGetEntityFromNetworkId(id));
+            this.objectProvider.deleteObject(id);
             delete this.zones[id];
-            TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones);
+            TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones, this.shouldDisplayBlip(source));
         }
     }
 
     @OnEvent(ServerEvent.POLICE_INIT_SPEEDZONE)
     public async loadSpeedZone(source: number) {
-        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, source, this.zones);
+        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, source, this.zones, this.shouldDisplayBlip(source));
+    }
+
+    shouldDisplayBlip(source: number) {
+        const player = this.playerService.getPlayer(source);
+        if (!player) {
+            return false;
+        }
+
+        return FDO.includes(player.job?.id) && player.job?.onduty;
     }
 }

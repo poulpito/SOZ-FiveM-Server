@@ -32,11 +32,12 @@ export class PoliceJobMenuProvider {
 
     @OnNuiEvent(NuiEvent.PolicePlaceSpeedZone)
     public async onNuiPlaceSpeedZone() {
-        const lanes = Math.floor(
+        const distances = Math.floor(
             await this.inputService.askInput({ title: 'Distances (entre 1 et 5 mètre)' }, PositiveNumberValidator)
         );
 
-        if (!lanes || lanes < 1 || lanes > 5) {
+        if (!distances || distances < 1 || distances > 5) {
+            this.notifier.notify(`La distance doit être entre 1 et 5.`, 'error');
             return;
         }
 
@@ -48,9 +49,10 @@ export class PoliceJobMenuProvider {
         );
 
         if (speed !== 0 && !speed) {
+            this.notifier.notify(`La vitesse n'est pas valide.`, 'error');
             return;
         }
-        TriggerServerEvent(ServerEvent.POLICE_PLACE_SPEEDZONE, lanes, speed);
+        TriggerServerEvent(ServerEvent.POLICE_PLACE_SPEEDZONE, distances, speed);
 
         return Ok(true);
     }

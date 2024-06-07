@@ -1,3 +1,4 @@
+import { ObjectProvider } from '@public/client/object/object.provider';
 import { getProperGroundPositionForObject } from '@public/client/object/object.utils';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
@@ -6,8 +7,10 @@ import { Once, OnceStep, OnEvent } from '@public/core/decorators/event';
 import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
 import { ClientEvent, ServerEvent } from '@public/shared/event';
-import { JobType } from '@public/shared/job';
+import { FDO, JobType } from '@public/shared/job';
 import { Vector3, Vector4 } from '@public/shared/polyzone/vector';
+
+import { BlipFactory } from '../../blip';
 
 const jobsTarget = { [JobType.BCSO]: 0, [JobType.FBI]: 0, [JobType.SASP]: 0, [JobType.LSPD]: 0, [JobType.LSCS]: 0 };
 const roadSignModel = GetHashKey('prop_sign_road_03z');
@@ -23,7 +26,13 @@ export class PoliceSpeedZoneProvider {
     @Inject(PlayerService)
     private playerService: PlayerService;
 
-    private zones: { [id: string]: { speedzone: number; blip: number } } = {};
+    @Inject(ObjectProvider)
+    private objectProvider: ObjectProvider;
+
+    @Inject(BlipFactory)
+    private blipFactory: BlipFactory;
+
+    private speedZone: { [id: string]: { position: Vector4; radius: number; speed: number; zoneId: number } } = {};
 
     @Once(OnceStep.Start)
     public async onStart() {
@@ -36,6 +45,7 @@ export class PoliceSpeedZoneProvider {
                     return this.playerService.isOnDuty();
                 },
                 action: async (entity: number) => {
+                    const id = this.objectProvider.getIdFromEntity(entity);
                     const { completed } = await this.progressService.progress(
                         'remove_object',
                         'Démontage du panneau',
@@ -60,7 +70,7 @@ export class PoliceSpeedZoneProvider {
                         return;
                     }
 
-                    TriggerServerEvent(ServerEvent.POLICE_REMOVE_SPEEDZONE, ObjToNet(entity));
+                    TriggerServerEvent(ServerEvent.POLICE_REMOVE_SPEEDZONE, id);
                 },
             },
         ]);
@@ -106,39 +116,60 @@ export class PoliceSpeedZoneProvider {
     }
 
     @OnEvent(ClientEvent.POLICE_SYNC_SPEEDZONE)
-    public async syncSpeedZone(zones: { [id: string]: { position: Vector4; radius: number; speed: number } }) {
+    public async syncSpeedZone(
+        zones: { [id: string]: { position: Vector4; radius: number; speed: number } },
+        shouldDisplayBlip: boolean
+    ) {
         Object.keys(zones).map(k => {
-            if (!this.zones[k]) {
-                const zone = {
-                    speedzone: AddSpeedZoneForCoord(
-                        zones[k].position[0],
-                        zones[k].position[1],
-                        zones[k].position[2],
-                        zones[k].radius,
-                        zones[k].speed / 3.6,
-                        false
-                    ),
-                    blip: AddBlipForRadius(
-                        zones[k].position[0],
-                        zones[k].position[1],
-                        zones[k].position[2],
-                        zones[k].radius
-                    ),
+            if (!this.speedZone[k]) {
+                const zoneId = AddSpeedZoneForCoord(
+                    zones[k].position[0],
+                    zones[k].position[1],
+                    zones[k].position[2],
+                    zones[k].radius,
+                    zones[k].speed / 3.6,
+                    false
+                );
+                this.speedZone[k] = {
+                    ...zones[k],
+                    zoneId,
                 };
-                SetBlipColour(zone.blip, 1);
-                SetBlipAlpha(zone.blip, 255);
-                SetBlipSprite(zone.blip, 4);
-
-                this.zones[k] = zone;
+                this.blipFactory.createAreaBlip(
+                    k,
+                    {
+                        name: k,
+                        coords: {
+                            x: zones[k].position[0],
+                            y: zones[k].position[1],
+                            z: zones[k].position[2],
+                        },
+                        radius: zones[k].radius,
+                    },
+                    1,
+                    4,
+                    shouldDisplayBlip
+                );
             }
         });
 
-        Object.keys(this.zones).map(k => {
+        Object.keys(this.speedZone).map(k => {
             if (!zones[k]) {
-                RemoveBlip(this.zones[k].blip);
-                RemoveSpeedZone(this.zones[k].speedzone);
-                delete this.zones[k];
+                RemoveSpeedZone(this.speedZone[k].zoneId);
+                this.blipFactory.remove(k);
+                delete this.speedZone[k];
             }
+        });
+    }
+
+    @OnEvent(ClientEvent.JOB_DUTY_CHANGE)
+    public onDutyChange(duty: boolean) {
+        const job = this.playerService.getPlayer().job.id;
+        if (!FDO.includes(job)) {
+            return;
+        }
+
+        Object.keys(this.speedZone).map(k => {
+            this.blipFactory.hide(k, !duty);
         });
     }
 }
