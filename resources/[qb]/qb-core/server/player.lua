@@ -527,6 +527,7 @@ function QBCore.Player.CreatePlayer(PlayerData)
         self.Functions.UpdateArmour()
 
         if not skipApply then
+            Wait(0) -- As UpdatePlayerData is async need to wait one tick so the client received the new ClothConfig
             TriggerClientEvent("soz-character:Client:ApplyCurrentClothConfig", self.PlayerData.source)
         end
 
