@@ -154,6 +154,8 @@ export class BarberShopProvider {
         const animDict = 'anim@heists@heist_corona@team_idles@male_c';
         this.resourceLoader.loadAnimationDictionary(animDict);
 
+        TriggerEvent('soz-character:Client:SetTemporaryNaked', true);
+
         ClearPedTasksImmediately(ped);
         TaskPlayAnim(ped, animDict, 'idle', 1.0, 1.0, -1, 1, 1, false, false, false);
     }
@@ -163,6 +165,7 @@ export class BarberShopProvider {
         if (menuType !== MenuType.BarberShop) {
             return;
         }
+        TriggerEvent('soz-character:Client:ApplyCurrentClothConfig');
         TriggerEvent('soz-character:Client:ApplyCurrentSkin');
         await this.cameraService.deleteCamera();
         await this.animationService.clearShopAnimations(PlayerPedId());
