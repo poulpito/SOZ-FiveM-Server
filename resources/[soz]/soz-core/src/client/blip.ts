@@ -45,6 +45,38 @@ export class BlipFactory {
         return gameId;
     }
 
+    public createAreaBlip(id: string, blipCreated: Blip, colour?: number, sprite?: number, show = true) {
+        const blip = {
+            radius: 5,
+            ...blipCreated,
+        };
+
+        if (blip.coords) {
+            blip.position = [blip.coords.x, blip.coords.y, blip.coords.z];
+        }
+
+        const gameId = AddBlipForRadius(blip.position[0], blip.position[1], blip.position[2], blip.radius);
+        if (colour) {
+            SetBlipColour(gameId, colour);
+        }
+        if (sprite) {
+            SetBlipSprite(gameId, sprite);
+        }
+
+        if (!gameId) {
+            throw new Error(`Failed to create blip ${id}`);
+        }
+
+        this.updateGameBlip(id, gameId, blip);
+        this.blips.set(id, { blip, id, gameId });
+
+        if (!show) {
+            this.hide(id, true);
+        }
+
+        return gameId;
+    }
+
     public hide(id: string, value: boolean): void {
         const gameBlip = this.blips.get(id);
 

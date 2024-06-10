@@ -8,12 +8,17 @@ import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
 import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
+import { PositiveNumberValidator } from '../../../shared/nui/input';
 import { Ok } from '../../../shared/result';
+import { InputService } from '../../nui/input.service';
 
 @Provider()
 export class PoliceJobMenuProvider {
     @Inject(AnimationService)
     private animationService: AnimationService;
+
+    @Inject(InputService)
+    private inputService: InputService;
 
     @Inject(Notifier)
     private notifier: Notifier;
@@ -21,6 +26,33 @@ export class PoliceJobMenuProvider {
     @OnNuiEvent(NuiEvent.PolicePlaceSpike)
     public async onPlaceSpike() {
         TriggerServerEvent(ServerEvent.POLICE_PLACE_SPIKE, 'spike');
+
+        return Ok(true);
+    }
+
+    @OnNuiEvent(NuiEvent.PolicePlaceSpeedZone)
+    public async onNuiPlaceSpeedZone() {
+        const distances = Math.floor(
+            await this.inputService.askInput({ title: 'Distances (entre 1 et 5 mètre)' }, PositiveNumberValidator)
+        );
+
+        if (!distances || distances < 1 || distances > 5) {
+            this.notifier.notify(`La distance doit être entre 1 et 5.`, 'error');
+            return;
+        }
+
+        const speed = await this.inputService.askInput(
+            {
+                title: 'Vitesse',
+            },
+            PositiveNumberValidator
+        );
+
+        if (speed !== 0 && !speed) {
+            this.notifier.notify(`La vitesse n'est pas valide.`, 'error');
+            return;
+        }
+        TriggerServerEvent(ServerEvent.POLICE_PLACE_SPEEDZONE, distances, speed);
 
         return Ok(true);
     }

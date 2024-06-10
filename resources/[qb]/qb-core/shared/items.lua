@@ -4072,6 +4072,18 @@ QBShared.Items = {
         ['description'] = 'VOUS NE PASSEREZ PAAAAAAAAAS !',
         ['illustrator'] = '.Sniteur'
     },
+    ['speed_speed_sign'] = {
+        ['name'] = 'speed_speed_sign',
+        ['label'] = 'Panneau de vitesse',
+        ['weight'] = 2400,
+        ['type'] = 'item',
+        ['unique'] = false,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'You shall not pass !',
+        ['illustrator'] = '.Sniteur'
+    },
 
     -- Firework Tools
     ['firework1'] = {

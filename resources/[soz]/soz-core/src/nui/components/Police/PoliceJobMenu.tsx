@@ -29,6 +29,7 @@ export const PoliceJobMenu: FunctionComponent<PoliceJobStateProps> = ({ data }) 
         { label: 'Cône de circulation', item: 'cone', props: 'prop_air_conelight', offset: -0.15 },
         { label: 'Barrière', item: 'police_barrier', props: 'prop_barrier_work05' },
         { label: 'Herse', item: 'spike' },
+        { label: 'Panneau de vitesse', item: 'speed_speed_sign' },
     ];
 
     const [wantedPlayers, setWantedPlayers] = useState(null);
@@ -101,6 +102,8 @@ export const PoliceJobMenu: FunctionComponent<PoliceJobStateProps> = ({ data }) 
 
                             if (item.item == 'spike') {
                                 await fetchNui(NuiEvent.PolicePlaceSpike, item);
+                            } else if (item.item == 'speed_speed_sign') {
+                                await fetchNui(NuiEvent.PolicePlaceSpeedZone);
                             } else {
                                 await fetchNui(NuiEvent.ObjectPlace, item);
                             }

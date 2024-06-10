@@ -119,7 +119,7 @@ export class PoliceSpikeProvider {
 
         const { completed } = await this.progressService.progress(
             'spawn_object',
-            'Lancement de la herse en course',
+            'Lancement de la herse en cours',
             2500,
             {
                 dictionary: 'anim@narcotics@trash',
