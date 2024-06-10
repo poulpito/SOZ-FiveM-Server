@@ -81,6 +81,9 @@ export type Skin = {
         EyebrowType?: number;
         EyebrowOpacity?: number;
         EyebrowColor?: number;
+        ChestHairType?: number;
+        ChestHairOpacity?: number;
+        ChestHairColor?: number;
     };
     Makeup: {
         BeardType?: number;

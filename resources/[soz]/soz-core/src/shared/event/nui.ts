@@ -196,6 +196,7 @@ export enum NuiEvent {
     JewelryShopBackspace = 'soz-core:client:shop:jewelry:backspace',
     JewelryShopToggleCamera = 'soz-core:client:shop:jewelry:toggle-camera',
     BarberShopPreview = 'soz-core:client:shop:barber:preview',
+    BarberShopThroughCategory = 'soz-core:client:shop:tattoo:through-category',
     BarberShopBuy = 'soz-core:client:shop:barber:buy',
 
     VehicleAuctionBid = 'soz-core:client:vehicle:auction:bid',
