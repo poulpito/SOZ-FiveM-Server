@@ -1,6 +1,6 @@
 import { Vector2, Vector3 } from '@public/shared/polyzone/vector';
 
-import { WardrobeConfig } from '../cloth';
+import { Prop, WardrobeConfig } from '../cloth';
 import { CraftCategory } from '../craft/craft';
 import { Feature } from '../features';
 import { joaat } from '../joaat';
@@ -282,7 +282,7 @@ export const FoodCloakroom: WardrobeConfig = {
             Components: {
                 [3]: { Drawable: 6, Texture: 0, Palette: 0 },
                 [4]: { Drawable: 24, Texture: 0, Palette: 0 },
-                [6]: { Drawable: 104, Texture: 4, Palette: 0 },
+                [6]: { Drawable: 10, Texture: 0, Palette: 0 },
                 [7]: { Drawable: 117, Texture: 4, Palette: 0 },
                 [8]: { Drawable: 31, Texture: 0, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
@@ -300,22 +300,29 @@ export const FoodCloakroom: WardrobeConfig = {
                 [8]: { Drawable: 15, Texture: 0, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 0, Texture: 2, Palette: 0 },
+                [11]: { Drawable: 1, Texture: 4, Palette: 0 },
             },
             Props: {},
         },
         ['Tenue de prestation']: {
             Components: {
-                [3]: { Drawable: 14, Texture: 0, Palette: 0 },
-                [4]: { Drawable: 35, Texture: 0, Palette: 0 },
-                [6]: { Drawable: 20, Texture: 3, Palette: 0 },
-                [7]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [8]: { Drawable: 25, Texture: 3, Palette: 0 },
+                [3]: { Drawable: 33, Texture: 0, Palette: 0 },
+                [4]: { Drawable: 24, Texture: 4, Palette: 0 },
+                [5]: { Drawable: 86, Texture: 0, Palette: 9 },
+                [6]: { Drawable: 10, Texture: 0, Palette: 0 },
+                [7]: { Drawable: 31, Texture: 2, Palette: 0 },
+                [8]: { Drawable: 147, Texture: 10, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 4, Texture: 0, Palette: 0 },
+                [11]: { Drawable: 32, Texture: 4, Palette: 0 },
             },
-            Props: {},
+            Props: {
+                [Prop.Hat]: {
+                    Drawable: 7,
+                    Texture: 2,
+                    Palette: 0,
+                },
+            },
         },
         ["Tenue d'hiver"]: {
             Components: {
@@ -332,30 +339,35 @@ export const FoodCloakroom: WardrobeConfig = {
         },
         ['Tenue de Chasse']: {
             Components: {
-                [3]: { Drawable: 12, Texture: 0, Palette: 0 },
-                [4]: { Drawable: 86, Texture: 6, Palette: 0 },
-                [6]: { Drawable: 63, Texture: 4, Palette: 0 },
+                [3]: { Drawable: 208, Texture: 5, Palette: 0 },
+                [4]: { Drawable: 97, Texture: 5, Palette: 0 },
+                [6]: { Drawable: 72, Texture: 23, Palette: 0 },
                 [7]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [8]: { Drawable: 0, Texture: 20, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 220, Texture: 6, Palette: 0 },
+                [11]: { Drawable: 248, Texture: 3, Palette: 0 },
             },
-            Props: {},
+            Props: {
+                [Prop.Hat]: {
+                    Drawable: 142,
+                    Texture: 16,
+                    Palette: 0,
+                },
+            },
         },
     },
 
     [joaat('mp_f_freemode_01')]: {
         ['Tenue de Direction']: {
             Components: {
-                [3]: { Drawable: 3, Texture: 0, Palette: 0 },
-                [4]: { Drawable: 37, Texture: 0, Palette: 0 },
-                [6]: { Drawable: 42, Texture: 2, Palette: 0 },
-                [7]: { Drawable: 87, Texture: 4, Palette: 0 },
-                [8]: { Drawable: 38, Texture: 0, Palette: 0 },
+                [3]: { Drawable: 6, Texture: 0, Palette: 0 },
+                [4]: { Drawable: 12, Texture: 7, Palette: 0 },
+                [6]: { Drawable: 11, Texture: 2, Palette: 0 },
+                [8]: { Drawable: 151, Texture: 0, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 7, Texture: 0, Palette: 0 },
+                [11]: { Drawable: 25, Texture: 7, Palette: 0 },
             },
             Props: {},
         },
@@ -368,22 +380,29 @@ export const FoodCloakroom: WardrobeConfig = {
                 [8]: { Drawable: 1, Texture: 0, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 73, Texture: 1, Palette: 0 },
+                [11]: { Drawable: 0, Texture: 4, Palette: 0 },
             },
             Props: {},
         },
         ['Tenue de prestation']: {
             Components: {
-                [3]: { Drawable: 3, Texture: 0, Palette: 0 },
-                [4]: { Drawable: 34, Texture: 0, Palette: 0 },
-                [6]: { Drawable: 29, Texture: 1, Palette: 0 },
-                [7]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [8]: { Drawable: 40, Texture: 7, Palette: 0 },
+                [3]: { Drawable: 36, Texture: 0, Palette: 0 },
+                [4]: { Drawable: 133, Texture: 21, Palette: 0 },
+                [5]: { Drawable: 86, Texture: 9, Palette: 0 },
+                [6]: { Drawable: 13, Texture: 0, Palette: 0 },
+                [7]: { Drawable: 31, Texture: 2, Palette: 0 },
+                [8]: { Drawable: 38, Texture: 2, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 7, Texture: 0, Palette: 0 },
+                [11]: { Drawable: 92, Texture: 0, Palette: 0 },
             },
-            Props: {},
+            Props: {
+                [Prop.Hat]: {
+                    Drawable: 168,
+                    Texture: 2,
+                    Palette: 0,
+                },
+            },
         },
         ["Tenue d'hiver"]: {
             Components: {
@@ -400,16 +419,22 @@ export const FoodCloakroom: WardrobeConfig = {
         },
         ['Tenue de Chasse']: {
             Components: {
-                [3]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [4]: { Drawable: 89, Texture: 6, Palette: 0 },
-                [6]: { Drawable: 66, Texture: 4, Palette: 0 },
+                [3]: { Drawable: 227, Texture: 5, Palette: 0 },
+                [4]: { Drawable: 4, Texture: 15, Palette: 0 },
+                [6]: { Drawable: 73, Texture: 4, Palette: 0 },
                 [7]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [8]: { Drawable: 229, Texture: 19, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 230, Texture: 6, Palette: 0 },
+                [11]: { Drawable: 256, Texture: 3, Palette: 0 },
             },
-            Props: {},
+            Props: {
+                [Prop.Hat]: {
+                    Drawable: 141,
+                    Texture: 16,
+                    Palette: 0,
+                },
+            },
         },
     },
 };
