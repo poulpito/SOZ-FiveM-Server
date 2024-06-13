@@ -592,6 +592,7 @@ export class VehicleDealershipProvider {
     }
 
     async spawnFightingGuard() {
+        return;
         const playerPed = PlayerPedId();
 
         if (!playerPed) {
@@ -639,6 +640,7 @@ export class VehicleDealershipProvider {
 
             this.currentGuards.add(guardNPC);
         }
+        this.monitor.publish('luxury_guard_spawn', {}, { current: this.currentGuards.size, created: nGuardToSpawn });
     }
 
     @Tick(TickInterval.EVERY_SECOND)
@@ -668,7 +670,6 @@ export class VehicleDealershipProvider {
 
         if (this.secondPastInZone === luxuryFightingGuard.triggerTime) {
             this.spawnFightingGuard();
-            this.monitor.publish('luxury_guard_first_spawn', {}, {});
         }
     }
 
