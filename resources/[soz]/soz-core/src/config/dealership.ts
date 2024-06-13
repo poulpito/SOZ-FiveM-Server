@@ -264,8 +264,6 @@ export const luxuryFightingGuard = {
         },
     ],
     possibleWeapon: [WeaponName.SMG_MK2],
-    minSpawnPerPlayer: 1,
-    maxSpawnPerPlayer: 3,
     detectionZoneCenter: [-789.22, -244.73, 37.0] as Vector3,
     triggerDistance: 30,
     triggerTime: 4, //seconds
