@@ -219,10 +219,10 @@ export class VoipRadioProvider {
             },
             props: [
                 {
-                    model: 'prop_cs_hand_radio',
+                    model: 'soz_hand_radio',
                     bone: 57005,
                     position: [0.14, 0.03, -0.04],
-                    rotation: [110.0, -15.0, 120.0],
+                    rotation: [90.0, -15.0, 120.0],
                 },
             ],
         });
