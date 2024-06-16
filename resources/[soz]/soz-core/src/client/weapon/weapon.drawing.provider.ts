@@ -8,7 +8,7 @@ import { ClientEvent, ServerEvent } from '../../shared/event';
 import { InventoryItem } from '../../shared/item';
 import { PlayerData } from '../../shared/player';
 import { WeaponDrawPosition, Weapons } from '../../shared/weapons/weapon';
-import { ResourceLoader } from '../repository/resource.loader';
+import { AttachedObjectService } from '../object/attached.object.service';
 import { WeaponService } from './weapon.service';
 
 @Provider()
@@ -19,8 +19,8 @@ export class WeaponDrawingProvider {
     private weaponAttached: Record<string, number> = {};
     private playerLoaded = false;
 
-    @Inject(ResourceLoader)
-    private resourceLoader: ResourceLoader;
+    @Inject(AttachedObjectService)
+    private attachedObjectService: AttachedObjectService;
 
     @Inject(WeaponService)
     private weaponService: WeaponService;
@@ -51,36 +51,15 @@ export class WeaponDrawingProvider {
             if (this.weaponAttached[weapon.model]) continue;
             this.weaponAttached[weapon.model] = -1;
 
-            if (!(await this.resourceLoader.loadModel(weapon.model))) {
-                continue;
-            }
+            const object = await this.attachedObjectService.attachObjectToPlayer({
+                bone: 57005,
+                model: weapon.model,
+                position: weapon.position,
+                rotation: weapon.rotation,
+                rotationOrder: 2,
+            });
 
-            const object = CreateObject(weapon.model, 1, 1, 1, true, true, false);
             this.weaponAttached[weapon.model] = object;
-            this.resourceLoader.unloadModel(weapon.model);
-
-            const netId = ObjToNet(object);
-            SetEntityAsMissionEntity(object, true, true);
-            SetEntityCollision(object, false, true);
-            SetNetworkIdCanMigrate(netId, false);
-            TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-            AttachEntityToEntity(
-                object,
-                PlayerPedId(),
-                GetPedBoneIndex(PlayerPedId(), 24816),
-                weapon.position[0],
-                weapon.position[1],
-                weapon.position[2],
-                weapon.rotation[0],
-                weapon.rotation[1],
-                weapon.rotation[2],
-                true,
-                true,
-                false,
-                false,
-                2,
-                true
-            );
 
             const playerWeapon = this.weaponService.getCurrentWeapon();
             if (playerWeapon) {

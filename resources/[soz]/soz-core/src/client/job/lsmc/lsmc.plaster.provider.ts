@@ -2,6 +2,7 @@ import { Once, OnceStep, OnNuiEvent } from '@core/decorators/event';
 import { Inject } from '@core/decorators/injectable';
 import { Provider } from '@core/decorators/provider';
 import { NuiMenu } from '@public/client/nui/nui.menu';
+import { AttachedObjectService } from '@public/client/object/attached.object.service';
 import { PlayerService } from '@public/client/player/player.service';
 import { ProgressService } from '@public/client/progress.service';
 import { ResourceLoader } from '@public/client/repository/resource.loader';
@@ -28,6 +29,9 @@ export class LSMCPlasterProvider {
 
     @Inject(NuiMenu)
     private nuiMenu: NuiMenu;
+
+    @Inject(AttachedObjectService)
+    private attachedObjectService: AttachedObjectService;
 
     private plasters: Map<PlasterLocation, number> = null;
 
@@ -62,7 +66,7 @@ export class LSMCPlasterProvider {
     }
 
     @OnNuiEvent(NuiEvent.LsmcPlaster)
-    public async onPlaster({ location, playerServerId }: { location: PlasterLocation; playerServerId: number }) {
+    public async onNuiPlaster({ location, playerServerId }: { location: PlasterLocation; playerServerId: number }) {
         const { completed } = await this.progressService.progress(
             'plaster',
             'Gestion de platre...',
@@ -88,51 +92,46 @@ export class LSMCPlasterProvider {
     }
 
     private async addPlaster(newplaster: PlasterLocation, model: number) {
-        this.plasters.set(newplaster, 0);
-        const plasterConfig = PlasterConfigs[newplaster];
-        if (!(await this.resourceLoader.loadModel(plasterConfig.prop[model]))) {
+        if (!this.plasters) {
             return;
         }
 
-        const playerPed = PlayerPedId();
-        const coords = GetEntityCoords(playerPed);
-        const mainprop = CreateObject(plasterConfig.prop[model], coords[0], coords[1], coords[2], true, true, false);
-        const netId = ObjToNet(mainprop);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-        SetEntityCollision(mainprop, false, true);
-        SetEntityAsMissionEntity(mainprop, true, true);
-        SetNetworkIdCanMigrate(netId, false);
-        AttachEntityToEntity(
-            mainprop,
-            playerPed,
-            GetPedBoneIndex(playerPed, plasterConfig.bone),
-            plasterConfig.position[0],
-            plasterConfig.position[1],
-            plasterConfig.position[2],
-            plasterConfig.rotation[0],
-            plasterConfig.rotation[1],
-            plasterConfig.rotation[2],
-            true,
-            true,
-            false,
-            true,
-            0,
-            true
-        );
-        this.plasters.set(newplaster, mainprop);
+        this.plasters.set(newplaster, 0);
+        const plasterConfig = PlasterConfigs[newplaster];
 
-        this.resourceLoader.unloadModel(plasterConfig.prop[model]);
+        const mainprop = await this.attachedObjectService.attachObjectToPlayer({
+            bone: plasterConfig.bone,
+            model: plasterConfig.prop[model],
+            position: plasterConfig.position,
+            rotation: plasterConfig.rotation,
+        });
+
+        this.plasters.set(newplaster, mainprop);
     }
 
     private async removePlaster(plaster: PlasterLocation) {
         const object = this.plasters.get(plaster);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER, ObjToNet(object));
-        DeleteEntity(object);
+        this.attachedObjectService.detachObjectToPlayer(object);
         this.plasters.delete(plaster);
     }
 
+    public disablePlaster() {
+        if (!this.plasters) {
+            return;
+        }
+        for (const plaster of this.plasters.keys()) {
+            this.removePlaster(plaster);
+        }
+        this.plasters = null;
+    }
+
+    public enablePlaster() {
+        const player = this.playerService.getPlayer();
+        this.playerPlasterLoaded(player);
+    }
+
     @Command('plaster')
-    public async onPLaster() {
+    public async onPlaster() {
         const [isAllowed] = await emitRpc<[boolean, string]>(RpcServerEvent.ADMIN_IS_ALLOWED);
         if (!isAllowed) {
             return;

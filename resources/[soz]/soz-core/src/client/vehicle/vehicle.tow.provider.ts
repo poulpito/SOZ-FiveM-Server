@@ -37,7 +37,7 @@ export class VehicleTowProvider {
                 label: 'Attacher cable de remorquage',
                 icon: 'c:mechanic/Attacher.png',
                 canInteract: entity => entity != this.from,
-                action: entity => {
+                action: async entity => {
                     if (!this.from) {
                         if (GetVehicleClass(entity) == VehicleClass.Helicopters) {
                             this.fromOffset = 0.0;
@@ -51,16 +51,15 @@ export class VehicleTowProvider {
                             this.fromOffset,
                             0.0
                         ) as Vector3;
-                        if (
-                            !this.ropeService.createNewRope(
-                                ropePosition,
-                                entity,
-                                6,
-                                MAX_LENGTH_ROPE,
-                                'prop_v_hook_s',
-                                'ropeFamily3'
-                            )
-                        ) {
+                        const hook = await this.ropeService.createNewRope(
+                            ropePosition,
+                            entity,
+                            6,
+                            MAX_LENGTH_ROPE,
+                            'prop_v_hook_s',
+                            'ropeFamily3'
+                        );
+                        if (!hook) {
                             return;
                         }
                         this.from = entity;
