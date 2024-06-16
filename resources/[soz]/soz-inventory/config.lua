@@ -63,6 +63,7 @@ Config.ErrorMessage = {
     ["put_not_allowed"] = "Ce stockage ne peut pas accepter votre objet !",
     ["invalid_alreadyhaveone"] = "Vous avez déjà un tel object sur vous !",
     ["remove_failed"] = "L'objet n'a pas été trouvé !",
+    ["invalid_weight"] = "Vos poches sont pleines...",
 }
 
 Config.crateMaxWeight = 12000

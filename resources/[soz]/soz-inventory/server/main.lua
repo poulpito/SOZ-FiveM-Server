@@ -1246,3 +1246,8 @@ local function clearByOwner(owner)
     end
 end
 exports("ClearByOwner", clearByOwner)
+
+local function ErrorMessage(reason)
+    return Config.ErrorMessage[reason] or reason
+end
+exports("ErrorMessage", ErrorMessage)

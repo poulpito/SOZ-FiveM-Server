@@ -350,6 +350,10 @@ export class InventoryManager {
         this.sozInventory.Clear(id);
     }
 
+    public errorMessage(reason: string) {
+        return this.sozInventory.ErrorMessage(reason);
+    }
+
     // TODO: Implement the following method in soz core directly
     // public canSwapItem(source: number, { id: string; amount: number; }[], { id: string; amount: number;}[]): boolean {
 }
