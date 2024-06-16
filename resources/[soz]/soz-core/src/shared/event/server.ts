@@ -406,6 +406,7 @@ export enum ServerEvent {
     ALERT_MESSAGE = 'phone:createSocietyMessagesBroadcast',
 
     FISHING_SUCCESS = 'soz-core:server:fishing:success',
+    FISHING_ROTTEN = 'soz-core:server:fishing:rotten',
     FISHING_GARBAGE = 'soz-core:server:fishing:garbage',
     FISHING_RESELL = 'soz-core:server:fishing:resell',
     FISHING_RENT_BOAT = 'soz-core:server:fishing:rent-boat',

@@ -14131,6 +14131,22 @@ QBShared.Items = {
         ['sozedex_id'] = 190,
         ['price'] = 75,
      },
+    ['rotten_fish'] = {
+        ['name'] = "rotten_fish",
+        ['label'] = "Poisson pourri",
+        ['useable'] = false,
+        ['weight'] = 100,
+        ['type'] = 'fish',
+        ['fish_generation'] = 'classic',
+        ['description'] = "Vestige oublié du frigo, un teint verdâtre et une odeur enivrante de marécage et de fromage oublié. Ses dents jaunies et ses yeux vitreux ajoutent au charme. Idéal pour faire fuir les invités indésirables !",
+        ['illustrator'] = ".Sniteur",
+        ['min_weight'] = 200,
+        ['max_weight'] = 200,
+        ['min_length'] = 100,
+        ['max_length'] = 100,
+        ['sozedex_id'] = 191,
+        ['price'] = 0,
+     },
 
 
     --- Halloween
