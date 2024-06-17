@@ -9,8 +9,10 @@ import { RpcServerEvent } from '@public/shared/rpc';
 import { Provider } from '../../core/decorators/provider';
 import { wait } from '../../core/utils';
 import { ClientEvent } from '../../shared/event';
+import { LSMCPlasterProvider } from '../job/lsmc/lsmc.plaster.provider';
 import { LSMCStretcherProvider } from '../job/lsmc/lsmc.stretcher.provider';
 import { LSMCWheelChairProvider } from '../job/lsmc/lsmc.wheelchair.provider';
+import { AttachedObjectService } from '../object/attached.object.service';
 import { WeaponDrawingProvider } from '../weapon/weapon.drawing.provider';
 
 @Provider()
@@ -28,6 +30,12 @@ export class PlayerPositionProvider {
 
     @Inject(NuiDispatch)
     private nuiDispatch: NuiDispatch;
+
+    @Inject(AttachedObjectService)
+    private attachedObjectService: AttachedObjectService;
+
+    @Inject(LSMCPlasterProvider)
+    private LSMCPlasterProvider: LSMCPlasterProvider;
 
     @Tick(1000)
     updatePosition() {
@@ -66,7 +74,10 @@ export class PlayerPositionProvider {
         FreezeEntityPosition(playerPed, true);
         DoScreenFadeOut(this.fadeDelay);
         await wait(this.fadeDelay);
-        await this.weaponDrawingProvider.undrawWeapons();
+
+        this.weaponDrawingProvider.undrawWeapons();
+        this.LSMCPlasterProvider.disablePlaster();
+        this.attachedObjectService.detachAll();
 
         await this.LSMCStretcherProvider.startTp();
         await this.LSMCWheelChairProvider.startTp();
@@ -89,6 +100,8 @@ export class PlayerPositionProvider {
         await this.LSMCWheelChairProvider.endTp();
 
         this.weaponDrawingProvider.drawWeapons();
+        this.LSMCPlasterProvider.enablePlaster();
+
         DoScreenFadeIn(this.fadeDelay);
         await wait(this.fadeDelay);
     }

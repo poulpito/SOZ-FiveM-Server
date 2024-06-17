@@ -13,6 +13,7 @@ import {
 } from '../../shared/animation';
 import { transformForwardPoint2D, Vector2, Vector3 } from '../../shared/polyzone/vector';
 import { WeaponName } from '../../shared/weapons/weapon';
+import { AttachedObjectService } from '../object/attached.object.service';
 import { PlayerService } from '../player/player.service';
 import { ResourceLoader } from '../repository/resource.loader';
 
@@ -181,6 +182,9 @@ export class AnimationFactory {
     @Inject(PlayerService)
     private playerService: PlayerService;
 
+    @Inject(AttachedObjectService)
+    private attachedObjectService: AttachedObjectService;
+
     public createAnimation(animation: Animation, options: Partial<PlayOptions> = {}): AnimationRunner {
         return this.createFromCallback(async (animationCanceller, ped) => {
             if (IsPedRagdoll(ped)) {
@@ -203,46 +207,12 @@ export class AnimationFactory {
 
             if (animation.props) {
                 for (const prop of animation.props) {
-                    if (!(await this.resourceLoader.loadModel(prop.model))) {
-                        continue;
-                    }
-
-                    const playerOffset = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0) as Vector3;
-                    const propId = CreateObject(
-                        GetHashKey(prop.model),
-                        playerOffset[0],
-                        playerOffset[1],
-                        playerOffset[2],
-                        true,
-                        true,
-                        false
-                    );
-
-                    this.resourceLoader.unloadModel(prop.model);
-
-                    SetEntityCollision(propId, false, true);
-                    SetEntityAsMissionEntity(propId, true, true);
-                    const netId = ObjToNet(propId);
-                    SetNetworkIdCanMigrate(netId, false);
-                    TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-
-                    AttachEntityToEntity(
-                        propId,
-                        ped,
-                        GetPedBoneIndex(ped, prop.bone),
-                        prop.position[0],
-                        prop.position[1],
-                        prop.position[2],
-                        prop.rotation[0],
-                        prop.rotation[1],
-                        prop.rotation[2],
-                        true,
-                        true,
-                        false,
-                        true,
-                        0,
-                        true
-                    );
+                    const propId = await this.attachedObjectService.attachObjectToPlayer({
+                        bone: prop.bone,
+                        model: prop.model,
+                        position: prop.position,
+                        rotation: prop.rotation,
+                    });
 
                     if (prop.fx) {
                         this.fxLoop(propId, prop);
@@ -289,9 +259,7 @@ export class AnimationFactory {
                     }
 
                     RemoveParticleFxFromEntity(prop);
-                    DetachEntity(prop, false, false);
-                    TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER, ObjToNet(prop));
-                    DeleteEntity(prop);
+                    this.attachedObjectService.detachObjectToPlayer(prop);
                 }
             }
         }, options);

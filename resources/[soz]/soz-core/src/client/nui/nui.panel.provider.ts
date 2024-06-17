@@ -1,8 +1,7 @@
 import { OnEvent, OnNuiEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
-import { ClientEvent, NuiEvent, ServerEvent } from '../../shared/event';
-import { Vector3 } from '../../shared/polyzone/vector';
+import { ClientEvent, NuiEvent } from '../../shared/event';
 import { AnimationService } from '../animation/animation.service';
 import { NuiDispatch } from './nui.dispatch';
 
@@ -29,43 +28,15 @@ export class NuiPanelProvider {
                     onlyUpperBody: true,
                 },
             },
+            props: [
+                {
+                    bone: 28422,
+                    model: 'prop_cs_tablet',
+                    position: [-0.05, 0.0, 0.0],
+                    rotation: [0.0, 0.0, 0.0],
+                },
+            ],
         });
-
-        const ped = PlayerPedId();
-        const playerPosition = GetEntityCoords(ped, true) as Vector3;
-
-        this.tablet = CreateObject(
-            GetHashKey('prop_cs_tablet'),
-            playerPosition[0],
-            playerPosition[1],
-            playerPosition[2],
-            true,
-            true,
-            true
-        );
-
-        const netId = ObjToNet(this.tablet);
-        SetNetworkIdCanMigrate(netId, false);
-        SetEntityCollision(this.tablet, false, true);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-
-        AttachEntityToEntity(
-            this.tablet,
-            ped,
-            GetPedBoneIndex(PlayerPedId(), 28422),
-            -0.05,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            true,
-            true,
-            false,
-            true,
-            0,
-            true
-        );
     }
 
     @OnNuiEvent(NuiEvent.PanelClosed)
@@ -73,9 +44,6 @@ export class NuiPanelProvider {
         if (!this.tablet) {
             return;
         }
-
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER, ObjToNet(this.tablet));
-        DeleteEntity(this.tablet);
         this.tablet = null;
         this.animationService.stop();
     }

@@ -21,6 +21,7 @@ import { AnimationService } from '../animation/animation.service';
 import { InventoryManager } from '../inventory/inventory.manager';
 import { Notifier } from '../notifier';
 import { NuiDispatch } from '../nui/nui.dispatch';
+import { AttachedObjectService } from '../object/attached.object.service';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { UpwChargerRepository } from '../repository/upw.station.repository';
@@ -71,6 +72,9 @@ export class VehicleElectricProvider {
 
     @Inject(NuiDispatch)
     private nuiDispatch: NuiDispatch;
+
+    @Inject(AttachedObjectService)
+    private attachedObjectService: AttachedObjectService;
 
     private currentStationPlug: CurrentStationPlug | null = null;
 
@@ -456,8 +460,7 @@ export class VehicleElectricProvider {
 
         RopeUnloadTextures();
         DeleteRope(this.currentStationPlug.rope);
-        SetEntityAsMissionEntity(this.currentStationPlug.object, true, true);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER, ObjToNet(this.currentStationPlug.object));
+        this.attachedObjectService.detachObjectToPlayer(this.currentStationPlug.object);
         DeleteEntity(this.currentStationPlug.object);
 
         this.currentStationPlug = null;
@@ -495,38 +498,15 @@ export class VehicleElectricProvider {
 
         this.soundService.playAround('fuel/start_fuel', 5, 0.3);
 
+        const object = await this.attachedObjectService.attachObjectToPlayer({
+            bone: 26610,
+            model: 'car_charger_plug',
+            position: [0.07, 0, 0],
+            rotation: [-30.0, 0.0, 0.0],
+        });
+
         const position = GetEntityCoords(PlayerPedId(), true) as Vector3;
-        const object = CreateObject(
-            GetHashKey('car_charger_plug'),
-            position[0],
-            position[1],
-            position[2] - 1.0,
-            true,
-            true,
-            true
-        );
 
-        const netId = ObjToNet(object);
-        SetNetworkIdCanMigrate(netId, false);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-
-        AttachEntityToEntity(
-            object,
-            PlayerPedId(),
-            GetPedBoneIndex(PlayerPedId(), 26610),
-            0.07,
-            0,
-            0,
-            -30.0,
-            0.0,
-            0.0,
-            true,
-            true,
-            false,
-            true,
-            0,
-            true
-        );
         RopeLoadTextures();
 
         const [rope] = AddRope(

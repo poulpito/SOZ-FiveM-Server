@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@public/core/decorators/injectable';
 import { Logger } from '@public/core/logger';
 import { wait } from '@public/core/utils';
-import { ServerEvent } from '@public/shared/event';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 
 import { Notifier } from './notifier';
+import { AttachedObjectService } from './object/attached.object.service';
 
 interface RopeState {
     rope: number;
@@ -23,17 +23,20 @@ export class RopeService {
     @Inject(Logger)
     private logger: Logger;
 
+    @Inject(AttachedObjectService)
+    private attachedObjectService: AttachedObjectService;
+
     private ropeState: RopeState | null = null;
 
-    public createNewRope(
+    public async createNewRope(
         attachPosition: Vector3,
         baseEntity: number,
         ropeType: number,
         maxLength: number,
         holdingObjectPropName: string,
         ropeData?: string
-    ): number | null {
-        const position = GetEntityCoords(PlayerPedId(), true) as Vector3;
+    ): Promise<number | null> {
+        const position = GetEntityCoords(PlayerPedId()) as Vector3;
         if (this.ropeState) {
             this.notifier.notify("Vous vous surestimez. Vous n'êtes pas assez musclé pour tirer deux cordes.", 'error');
             return null;
@@ -63,36 +66,12 @@ export class RopeService {
             LoadRopeData(rope, ropeData);
         }
 
-        const object = CreateObject(
-            GetHashKey(holdingObjectPropName),
-            position[0],
-            position[1],
-            position[2] - 1.0,
-            true,
-            true,
-            true
-        );
-        const netId = ObjToNet(object);
-        SetNetworkIdCanMigrate(netId, false);
-        SetEntityCollision(object, false, true);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-        AttachEntityToEntity(
-            object,
-            PlayerPedId(),
-            GetPedBoneIndex(PlayerPedId(), 26610),
-            0.04,
-            -0.04,
-            0.02,
-            305.0,
-            270.0,
-            -40.0,
-            true,
-            true,
-            false,
-            true,
-            0,
-            true
-        );
+        const object = await this.attachedObjectService.attachObjectToPlayer({
+            bone: 26610,
+            model: holdingObjectPropName,
+            position: [0.04, -0.04, 0.02],
+            rotation: [305.0, 270.0, -40.0],
+        });
 
         this.ropeState = {
             rope,
@@ -192,9 +171,7 @@ export class RopeService {
     public deleteRope() {
         RopeUnloadTextures();
         DeleteRope(this.ropeState.rope);
-        SetEntityAsMissionEntity(this.ropeState.holdingObjectProp, true, true);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER, ObjToNet(this.ropeState.holdingObjectProp));
-        DeleteEntity(this.ropeState.holdingObjectProp);
+        this.attachedObjectService.detachObjectToPlayer(this.ropeState.holdingObjectProp);
         this.ropeState = null;
     }
 }

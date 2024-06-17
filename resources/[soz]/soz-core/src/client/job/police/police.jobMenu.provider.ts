@@ -5,7 +5,6 @@ import { Inject } from '@public/core/decorators/injectable';
 import { Provider } from '@public/core/decorators/provider';
 import { emitRpc } from '@public/core/rpc';
 import { ClientEvent, NuiEvent, ServerEvent } from '@public/shared/event';
-import { Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
 
 import { PositiveNumberValidator } from '../../../shared/nui/input';
@@ -82,41 +81,6 @@ export class PoliceJobMenuProvider {
 
     @OnNuiEvent(NuiEvent.PoliceShowBadge)
     public async showBadge(): Promise<void> {
-        const ped = PlayerPedId();
-        const coords = GetEntityCoords(ped) as Vector3;
-        const badgeProp = CreateObject(
-            GetHashKey('prop_fib_badge'),
-            coords[0],
-            coords[1],
-            coords[2] + 0.2,
-            true,
-            true,
-            true
-        );
-        //TODO: change to include props in anim
-        const boneIndex = GetPedBoneIndex(ped, 28422);
-
-        const netId = ObjToNet(badgeProp);
-        SetNetworkIdCanMigrate(netId, false);
-        SetEntityCollision(badgeProp, false, true);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_REGISTER, netId);
-        AttachEntityToEntity(
-            badgeProp,
-            ped,
-            boneIndex,
-            0.065,
-            0.029,
-            -0.035,
-            80.0,
-            -1.9,
-            75.0,
-            true,
-            true,
-            false,
-            true,
-            1,
-            true
-        );
         const anim = this.animationService.playAnimation({
             base: {
                 dictionary: 'paper_1_rcm_alt1-9',
@@ -134,6 +98,14 @@ export class PoliceJobMenuProvider {
                     repeat: true,
                 },
             },
+            props: [
+                {
+                    bone: 28422,
+                    model: 'prop_fib_badge',
+                    position: [0.065, 0.029, -0.035],
+                    rotation: [80.0, -1.9, 75.0],
+                },
+            ],
         });
         // CreateThread(function()
         const vehicle = this.getVehicleInDirection();
@@ -158,10 +130,6 @@ export class PoliceJobMenuProvider {
             }
         }
         await anim;
-        //TODO: change to include props in anim
-        ClearPedSecondaryTask(ped);
-        TriggerServerEvent(ServerEvent.OBJECT_ATTACHED_UNREGISTER, netId);
-        DeleteObject(badgeProp);
     }
 
     private getVehicleInDirection(): number | null {

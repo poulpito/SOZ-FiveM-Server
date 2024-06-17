@@ -582,7 +582,14 @@ export class VehicleFuelProvider {
         this.soundService.playAround('fuel/start_fuel', 5, 0.3);
 
         const ropePosition = GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.0, 1.0) as Vector3;
-        if (!this.ropeService.createNewRope(ropePosition, entity, 1, MAX_LENGTH_ROPE, 'prop_cs_fuel_nozle')) {
+        const nozle = await this.ropeService.createNewRope(
+            ropePosition,
+            entity,
+            1,
+            MAX_LENGTH_ROPE,
+            'prop_cs_fuel_nozle'
+        );
+        if (!nozle) {
             return;
         }
 

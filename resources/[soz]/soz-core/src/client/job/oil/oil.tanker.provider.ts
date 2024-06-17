@@ -3,7 +3,6 @@ import { Inject } from '../../../core/decorators/injectable';
 import { Provider } from '../../../core/decorators/provider';
 import { emitRpc } from '../../../core/rpc';
 import { wait } from '../../../core/utils';
-import { AnimationStopReason } from '../../../shared/animation';
 import { ServerEvent } from '../../../shared/event/server';
 import { JobType } from '../../../shared/job';
 import { OIL_FIELDS } from '../../../shared/job/oil';
@@ -223,8 +222,14 @@ export class OilTankerProvider {
         await wait(500);
 
         const attachPosition = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, -5.9, -1.0) as Vector3;
-
-        if (!this.ropeService.createNewRope(attachPosition, vehicle, 3, 25.0, 'hei_prop_hei_hose_nozzle')) {
+        const nozzle = await this.ropeService.createNewRope(
+            attachPosition,
+            vehicle,
+            3,
+            25.0,
+            'hei_prop_hei_hose_nozzle'
+        );
+        if (!nozzle) {
             return;
         }
 

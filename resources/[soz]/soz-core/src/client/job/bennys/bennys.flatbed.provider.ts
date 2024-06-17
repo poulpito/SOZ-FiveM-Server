@@ -225,7 +225,15 @@ export class BennysFlatbedProvider {
         }
 
         const ropePosition = GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.0, 1.0) as Vector3;
-        if (!this.ropeService.createNewRope(ropePosition, entity, 6, MAX_LENGTH_ROPE, 'prop_v_hook_s', 'ropeFamily3')) {
+        const hook = await this.ropeService.createNewRope(
+            ropePosition,
+            entity,
+            6,
+            MAX_LENGTH_ROPE,
+            'prop_v_hook_s',
+            'ropeFamily3'
+        );
+        if (!hook) {
             return;
         }
 
