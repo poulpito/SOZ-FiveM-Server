@@ -52,7 +52,7 @@ export class WeaponDrawingProvider {
             this.weaponAttached[weapon.model] = -1;
 
             const object = await this.attachedObjectService.attachObjectToPlayer({
-                bone: 57005,
+                bone: 24816,
                 model: weapon.model,
                 position: weapon.position,
                 rotation: weapon.rotation,
