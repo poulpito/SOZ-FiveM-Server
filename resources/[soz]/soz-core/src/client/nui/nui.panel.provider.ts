@@ -3,6 +3,7 @@ import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { ClientEvent, NuiEvent } from '../../shared/event';
 import { AnimationService } from '../animation/animation.service';
+import { AnimationRunner } from '@public/client/animation/animation.factory';
 import { NuiDispatch } from './nui.dispatch';
 
 @Provider()
@@ -13,13 +14,13 @@ export class NuiPanelProvider {
     @Inject(AnimationService)
     private animationService: AnimationService;
 
-    private tablet = null;
+    private anim: AnimationRunner = null;
 
     @OnEvent(ClientEvent.NUI_SHOW_PANEL)
     public showPanel(url: string) {
         this.nuiDispatch.dispatch('panel', 'ShowPanel', url);
 
-        this.animationService.playAnimation({
+        this.anim = this.animationService.playAnimation({
             base: {
                 name: 'idle_a',
                 dictionary: 'amb@code_human_in_bus_passenger_idles@female@tablet@idle_a',
@@ -41,11 +42,11 @@ export class NuiPanelProvider {
 
     @OnNuiEvent(NuiEvent.PanelClosed)
     public async onPanelClosed() {
-        if (!this.tablet) {
+        if (!this.anim) {
             return;
         }
-        this.tablet = null;
-        this.animationService.stop();
+        this.anim.cancel();
+        this.anim = null;
     }
 
     @OnEvent(ClientEvent.NUI_HIDE_PANEL)
