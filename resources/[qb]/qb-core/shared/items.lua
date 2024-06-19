@@ -4731,7 +4731,8 @@ QBShared.Items = {
         ['combinable'] = nil,
         ['description'] = '',
         ['carrybox'] = 'prop_log_01',
-        ['illustrator'] = '.Omega'
+        ['illustrator'] = '.Omega',
+        ['throwable'] = true
     },
     ['wood_plank'] = {
         ['name'] = 'wood_plank',

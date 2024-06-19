@@ -393,6 +393,9 @@ const Draggable: FunctionComponent<Props> = ({ id, containerName, item, money, i
                         {item && item.type !== 'card' && <li className={style.OptionListItem} onClick={createInteractAction('giveItem')}>
                             {item.giveLabel || 'Donner'}
                         </li>}
+                        {item && (item.throwable) && <li className={style.OptionListItem} onClick={createInteractAction('throwItem')}>
+                            Jeter
+                        </li>}
                         {(item && item.type === 'weapon') && (
                             <>
                                 <li className={style.OptionListItem} onClick={createInteractAction('setItemUsage', 1)}>

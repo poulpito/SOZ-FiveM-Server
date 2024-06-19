@@ -114,6 +114,7 @@ function Inventory.Load(id, invType, owner)
                     slot = v.slot,
                     combinable = item.combinable,
                     illustrator = item.illustrator,
+                    throwable = item.throwable,
                 }
             end
         end
@@ -1025,6 +1026,7 @@ function Inventory.SetSlot(inv, item, amount, metadata, slot)
             slot = slot,
             combinable = item.combinable,
             illustrator = item.illustrator,
+            throwable = item.throwable,
         }
     end
     inv.changed = true
