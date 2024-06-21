@@ -196,7 +196,9 @@ export class VehicleDealershipProvider {
 
     @On('playerDropped')
     public onDropped(source: number) {
-        this.onLuxuryDeleteGuard(source, this.activeGuard[source]);
+        if (this.activeGuard[source]) {
+            this.onLuxuryDeleteGuard(source, this.activeGuard[source]);
+        }
     }
 
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_GET_AUCTIONS)
