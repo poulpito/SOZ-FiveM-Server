@@ -1,4 +1,4 @@
-import { Tick, TickInterval } from '@public/core/decorators/tick';
+import { On, Once, OnceStep, OnEvent } from '@public/core/decorators/event';
 import { Logger } from '@public/core/logger';
 import { ServerEvent } from '@public/shared/event';
 import { PlayerData } from '@public/shared/player';
@@ -7,7 +7,6 @@ import { add, addSeconds } from 'date-fns';
 
 import { AuctionZones, DealershipConfigItem, DealershipType } from '../../config/dealership';
 import { GarageList } from '../../config/garage';
-import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
 import { Provider } from '../../core/decorators/provider';
 import { Rpc } from '../../core/decorators/rpc';
@@ -74,7 +73,7 @@ export class VehicleDealershipProvider {
     private auctionTimeStart: Date;
     private auctionTimeStop: Date;
 
-    private activeGuard: Set<{ source: number; guardNetId: number }> = new Set();
+    private activeGuard: Record<number, number> = {};
 
     @Once(OnceStep.DatabaseConnected)
     public async initAuction() {
@@ -187,21 +186,17 @@ export class VehicleDealershipProvider {
     public async onLuxuryDeleteGuard(source: number, guardNetId: number) {
         const ped = NetworkGetEntityFromNetworkId(guardNetId);
         DeleteEntity(ped);
-        this.activeGuard.delete({ source: source, guardNetId: guardNetId });
+        delete this.activeGuard[source];
     }
 
     @OnEvent(ServerEvent.LUXURY_CREATED_GUARD)
     public async onLuxuryCreatedGuard(source: number, guardNetId: number) {
-        this.activeGuard.add({ source: source, guardNetId: guardNetId });
+        this.activeGuard[source] = guardNetId;
     }
 
-    @Tick(TickInterval.EVERY_MINUTE)
-    public async onTick() {
-        for (const guardObject of this.activeGuard) {
-            if (!this.playerService.getPlayer(guardObject.source)) {
-                this.onLuxuryDeleteGuard(guardObject.source, guardObject.guardNetId);
-            }
-        }
+    @On('playerDropped')
+    public onDropped(source: number) {
+        this.onLuxuryDeleteGuard(source, this.activeGuard[source]);
     }
 
     @Rpc(RpcServerEvent.VEHICLE_DEALERSHIP_GET_AUCTIONS)
