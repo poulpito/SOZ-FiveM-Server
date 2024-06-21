@@ -628,6 +628,7 @@ export class VehicleDealershipProvider {
 
         this.currentGuardNet = PedToNet(guardNPC);
         this.monitor.publish('luxury_guard_spawn', {}, {});
+        TriggerServerEvent(ServerEvent.LUXURY_CREATED_GUARD, this.currentGuardNet);
     }
 
     @Tick(TickInterval.EVERY_SECOND)
@@ -659,24 +660,24 @@ export class VehicleDealershipProvider {
     }
 
     @Tick(5 * TickInterval.EVERY_SECOND)
-    public async shouldRemmoveGuard() {
+    public async shouldRemoveGuard() {
         if (!this.currentGuardNet) {
             return;
         }
 
         const guardNPC = NetToPed(this.currentGuardNet);
-        if (!DoesEntityExist(guardNPC) || !IsEntityAPed(guardNPC)) {
+        if (!guardNPC || !DoesEntityExist(guardNPC) || !IsEntityAPed(guardNPC)) {
+            this.deleteGuard(this.currentGuardNet);
             this.currentGuardNet = undefined;
             return;
         }
 
         const playerPed = PlayerPedId();
         const pCoords = GetEntityCoords(playerPed);
-        const gCoords = GetEntityCoords(guardNPC);
-        const dist = getDistance(gCoords as Vector3, pCoords as Vector3);
+        const dist = getDistance(luxuryFightingGuard.detectionZoneCenter, pCoords as Vector3);
 
         const playerState = this.playerService.getState();
-        if (dist > 1000 || playerState.isDead) {
+        if (dist > luxuryFightingGuard.triggerDistance * 5 || playerState.isDead) {
             this.moveAndDeleteGuard(guardNPC, this.currentGuardNet);
             this.currentGuardNet = undefined;
             return;
@@ -697,11 +698,15 @@ export class VehicleDealershipProvider {
         await this.animationService.goToCoordsAvoidObstaclesForPed(
             guardNPC,
             [spawnCoord.x, spawnCoord.y, spawnCoord.z] as Vector3,
-            10000,
+            30000,
             2.0
         );
 
         SetEntityAsMissionEntity(guardNPC, true, true);
+        this.deleteGuard(guardNPCNet);
+    }
+
+    async deleteGuard(guardNPCNet: number) {
         TriggerServerEvent(ServerEvent.LUXURY_DELETE_GUARD, guardNPCNet);
     }
 }
