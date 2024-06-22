@@ -87,6 +87,18 @@ RegisterNUICallback("player/giveItem", function(data, cb)
     cb(true)
 end)
 
+RegisterNUICallback("player/throwItem", function(data, cb)
+    local playerState = exports["soz-core"]:GetPlayerState()
+
+    if playerState.isInHub then
+        exports["soz-core"]:DrawNotification("Pas d'échange dans le Hub", "error")
+    else
+        TriggerServerEvent("inventory:server:ThrowItem", data)
+    end
+
+    cb(true)
+end)
+
 RegisterNUICallback("player/giveMoney", function(data, cb)
     SetNuiFocus(false, false)
 
