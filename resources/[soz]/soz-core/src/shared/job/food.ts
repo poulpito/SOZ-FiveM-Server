@@ -308,10 +308,10 @@ export const FoodCloakroom: WardrobeConfig = {
             Components: {
                 [3]: { Drawable: 33, Texture: 0, Palette: 0 },
                 [4]: { Drawable: 24, Texture: 4, Palette: 0 },
-                [5]: { Drawable: 86, Texture: 0, Palette: 9 },
+                [5]: { Drawable: 86, Texture: 9, Palette: 0 },
                 [6]: { Drawable: 10, Texture: 0, Palette: 0 },
                 [7]: { Drawable: 31, Texture: 2, Palette: 0 },
-                [8]: { Drawable: 147, Texture: 10, Palette: 0 },
+                [8]: { Drawable: 148, Texture: 10, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [11]: { Drawable: 32, Texture: 4, Palette: 0 },
@@ -386,15 +386,15 @@ export const FoodCloakroom: WardrobeConfig = {
         },
         ['Tenue de prestation']: {
             Components: {
-                [3]: { Drawable: 36, Texture: 0, Palette: 0 },
-                [4]: { Drawable: 133, Texture: 21, Palette: 0 },
+                [3]: { Drawable: 7, Texture: 0, Palette: 0 },
+                [4]: { Drawable: 133, Texture: 14, Palette: 0 },
                 [5]: { Drawable: 86, Texture: 9, Palette: 0 },
                 [6]: { Drawable: 13, Texture: 0, Palette: 0 },
                 [7]: { Drawable: 31, Texture: 2, Palette: 0 },
                 [8]: { Drawable: 38, Texture: 2, Palette: 0 },
                 [9]: { Drawable: 0, Texture: 0, Palette: 0 },
                 [10]: { Drawable: 0, Texture: 0, Palette: 0 },
-                [11]: { Drawable: 92, Texture: 0, Palette: 0 },
+                [11]: { Drawable: 25, Texture: 7, Palette: 0 },
             },
             Props: {
                 [Prop.Hat]: {
