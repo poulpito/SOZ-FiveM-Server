@@ -54,7 +54,7 @@
         "@citizenfx/server": "^2.0.7114-1",
         "@egoist/router": "^1.2.3",
         "@headlessui/react": "^1.7.19",
-        "@heroicons/react": "^2.1.4",
+        "@heroicons/react": "^1.0.6",
         "@prisma/client": "^5.15.1",
         "@reach/descendants": "^0.18.0",
         "@rematch/core": "^2.2.0",
