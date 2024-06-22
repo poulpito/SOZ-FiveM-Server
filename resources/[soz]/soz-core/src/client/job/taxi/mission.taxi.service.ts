@@ -5,7 +5,7 @@ import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { wait } from '@public/core/utils';
 import { ServerEvent } from '@public/shared/event';
 import {
-    AllowedVehicleModel,
+    AllowedTaxiModel,
     HoradateurData,
     HorodateurTarif,
     NPCDeliverLocations,
@@ -114,7 +114,7 @@ export class TaxiMissionService {
         const veh = GetVehiclePedIsIn(ped, false);
         const model = GetEntityModel(veh);
 
-        return AllowedVehicleModel.includes(model) && GetPedInVehicleSeat(veh, VehicleSeat.Driver) == ped;
+        return AllowedTaxiModel.includes(model) && GetPedInVehicleSeat(veh, VehicleSeat.Driver) == ped;
     }
 
     public update() {

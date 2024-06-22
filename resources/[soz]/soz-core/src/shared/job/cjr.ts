@@ -103,13 +103,9 @@ export const CjrCloakroom: WardrobeConfig = {
     },
 };
 
-export const AllowedVehicleModel = [
-    joaat('taxi'),
-    joaat('dynasty'),
-    joaat('dynasty2'),
-    joaat('coach'),
-    joaat('coach2'),
-];
+export const AllowedTaxiModel = [joaat('taxi'), joaat('dynasty'), joaat('dynasty2')];
+
+export const AllowedBusModel = [joaat('coach'), joaat('coach2')];
 
 export const NPCTakeLocations: Vector4[] = [
     // Elgin

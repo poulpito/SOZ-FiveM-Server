@@ -5,14 +5,7 @@ import { Notifier } from '@public/client/notifier';
 import { NuiDispatch } from '@public/client/nui/nui.dispatch';
 import { wait } from '@public/core/utils';
 import { ServerEvent } from '@public/shared/event';
-import {
-    AllowedVehicleModel,
-    busLines,
-    busLinesConfig,
-    BusStopTarif,
-    NpcSkins,
-    TaxiStatus,
-} from '@public/shared/job/cjr';
+import { AllowedBusModel, busLines, busLinesConfig, BusStopTarif, NpcSkins, TaxiStatus } from '@public/shared/job/cjr';
 import { getDistance, Vector4 } from '@public/shared/polyzone/vector';
 import { getRandomInt, getRandomItem } from '@public/shared/random';
 
@@ -98,7 +91,7 @@ export class BusMissionService {
         this.busVehicle = GetVehiclePedIsIn(ped, false);
         const model = GetEntityModel(this.busVehicle);
 
-        return AllowedVehicleModel.includes(model) && GetPedInVehicleSeat(this.busVehicle, VehicleSeat.Driver) == ped;
+        return AllowedBusModel.includes(model) && GetPedInVehicleSeat(this.busVehicle, VehicleSeat.Driver) == ped;
     }
 
     private endMission() {
