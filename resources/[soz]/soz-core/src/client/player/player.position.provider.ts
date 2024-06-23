@@ -9,6 +9,7 @@ import { RpcServerEvent } from '@public/shared/rpc';
 import { Provider } from '../../core/decorators/provider';
 import { wait } from '../../core/utils';
 import { ClientEvent } from '../../shared/event';
+import { ItemProvider } from '../item/item.provider';
 import { LSMCPlasterProvider } from '../job/lsmc/lsmc.plaster.provider';
 import { LSMCStretcherProvider } from '../job/lsmc/lsmc.stretcher.provider';
 import { LSMCWheelChairProvider } from '../job/lsmc/lsmc.wheelchair.provider';
@@ -36,6 +37,9 @@ export class PlayerPositionProvider {
 
     @Inject(LSMCPlasterProvider)
     private LSMCPlasterProvider: LSMCPlasterProvider;
+
+    @Inject(ItemProvider)
+    private itemProvider: ItemProvider;
 
     @Tick(1000)
     updatePosition() {
@@ -101,6 +105,7 @@ export class PlayerPositionProvider {
 
         this.weaponDrawingProvider.drawWeapons();
         this.LSMCPlasterProvider.enablePlaster();
+        this.itemProvider.onWalkStickRefresh();
 
         DoScreenFadeIn(this.fadeDelay);
         await wait(this.fadeDelay);
