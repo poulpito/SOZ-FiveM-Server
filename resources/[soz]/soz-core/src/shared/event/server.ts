@@ -466,4 +466,5 @@ export enum ServerEvent {
     GOUV_RADAR_REMOVE = 'soz-core:server:gouv:radar-remove',
 
     LUXURY_DELETE_GUARD = 'soz-core:server:luxury:delete-guard',
+    LUXURY_CREATED_GUARD = 'soz-core:server:luxury:created-guard',
 }

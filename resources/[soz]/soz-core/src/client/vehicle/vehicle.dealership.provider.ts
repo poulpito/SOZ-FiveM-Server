@@ -79,11 +79,9 @@ export class VehicleDealershipProvider {
 
     private lastVehicleShowroom: number | null = null;
 
-    private killedLuxuryGuard = 0;
-
     private secondPastInZone = -1;
 
-    private currentGuards: Set<number> = new Set();
+    private currentGuardNet: number;
 
     private electricShowVehicles: Record<number, ShowVehicle> = {
         [1]: {
@@ -592,55 +590,45 @@ export class VehicleDealershipProvider {
     }
 
     async spawnFightingGuard() {
-        return;
         const playerPed = PlayerPedId();
 
         if (!playerPed) {
             return;
         }
 
-        const nGuardToSpawn = getRandomInt(
-            1,
-            Math.min(
-                Math.max(this.killedLuxuryGuard + 1, luxuryFightingGuard.minSpawnPerPlayer),
-                luxuryFightingGuard.maxSpawnPerPlayer
-            )
-        );
-
-        if (nGuardToSpawn === 0) {
+        if (this.currentGuardNet !== undefined) {
             return;
         }
 
-        for (let nGuard = 0; nGuard < nGuardToSpawn; nGuard++) {
-            const guardNPC = await this.pedFactory.createPed({
-                model: luxuryFightingGuard.possiblePedModel[
-                    getRandomInt(0, luxuryFightingGuard.possiblePedModel.length - 1)
-                ],
-                coords: luxuryFightingGuard.possibleSpawnPosition[
-                    getRandomInt(0, luxuryFightingGuard.possibleSpawnPosition.length - 1)
-                ],
-                blockevents: true,
-                network: true,
-            });
-            SetPedArmour(guardNPC, 100);
-            SetPedRelationshipGroupHash(guardNPC, GetHashKey('GUARD'));
-            GiveWeaponToPed(
-                guardNPC,
-                luxuryFightingGuard.possibleWeapon[getRandomInt(0, luxuryFightingGuard.possibleWeapon.length - 1)],
-                0,
-                false,
-                true
-            );
+        const guardNPC = await this.pedFactory.createPed({
+            model: luxuryFightingGuard.possiblePedModel[
+                getRandomInt(0, luxuryFightingGuard.possiblePedModel.length - 1)
+            ],
+            coords: luxuryFightingGuard.possibleSpawnPosition[
+                getRandomInt(0, luxuryFightingGuard.possibleSpawnPosition.length - 1)
+            ],
+            blockevents: true,
+            network: true,
+        });
+        SetPedArmour(guardNPC, 100);
+        SetPedRelationshipGroupHash(guardNPC, GetHashKey('GUARD'));
+        GiveWeaponToPed(
+            guardNPC,
+            luxuryFightingGuard.possibleWeapon[getRandomInt(0, luxuryFightingGuard.possibleWeapon.length - 1)],
+            0,
+            false,
+            true
+        );
 
-            SetPedDropsWeaponsWhenDead(guardNPC, false);
-            SetPedCombatAttributes(guardNPC, 46, true);
-            SetPedCombatAttributes(guardNPC, 5, true);
+        SetPedDropsWeaponsWhenDead(guardNPC, false);
+        SetPedCombatAttributes(guardNPC, 46, true);
+        SetPedCombatAttributes(guardNPC, 5, true);
 
-            TaskCombatPed(guardNPC, playerPed, 0, 16);
+        TaskCombatPed(guardNPC, playerPed, 0, 16);
 
-            this.currentGuards.add(guardNPC);
-        }
-        this.monitor.publish('luxury_guard_spawn', {}, { current: this.currentGuards.size, created: nGuardToSpawn });
+        this.currentGuardNet = PedToNet(guardNPC);
+        this.monitor.publish('luxury_guard_spawn', {}, {});
+        TriggerServerEvent(ServerEvent.LUXURY_CREATED_GUARD, this.currentGuardNet);
     }
 
     @Tick(TickInterval.EVERY_SECOND)
@@ -656,10 +644,8 @@ export class VehicleDealershipProvider {
             if (IsPedArmed(playerPed, 1 | 2 | 4)) {
                 const player = this.playerService.getPlayer();
                 if (player && !(PUBLIC_SERVICES.includes(player.job.id) && this.playerService.isOnDuty())) {
-                    if (this.currentGuards.size === 0) {
-                        resetTimer = false;
-                        this.secondPastInZone++;
-                    }
+                    this.secondPastInZone++;
+                    resetTimer = false;
                 }
             }
         }
@@ -674,33 +660,37 @@ export class VehicleDealershipProvider {
     }
 
     @Tick(5 * TickInterval.EVERY_SECOND)
-    public async shouldRemmoveGuard() {
+    public async shouldRemoveGuard() {
+        if (!this.currentGuardNet) {
+            return;
+        }
+
+        const guardNPC = NetToPed(this.currentGuardNet);
+        if (!guardNPC || !DoesEntityExist(guardNPC) || !IsEntityAPed(guardNPC)) {
+            this.deleteGuard(this.currentGuardNet);
+            this.currentGuardNet = undefined;
+            return;
+        }
+
         const playerPed = PlayerPedId();
         const pCoords = GetEntityCoords(playerPed);
+        const dist = getDistance(luxuryFightingGuard.detectionZoneCenter, pCoords as Vector3);
+
         const playerState = this.playerService.getState();
+        if (dist > luxuryFightingGuard.triggerDistance * 5 || playerState.isDead) {
+            this.moveAndDeleteGuard(guardNPC, this.currentGuardNet);
+            this.currentGuardNet = undefined;
+            return;
+        }
 
-        for (const guardNPC of this.currentGuards.values()) {
-            const gCoords = GetEntityCoords(guardNPC);
-            const dist = getDistance(gCoords as Vector3, pCoords as Vector3);
-
-            if (dist > 1000 || playerState.isDead) {
-                this.currentGuards.delete(guardNPC);
-                this.moveAndDeleteGuard(guardNPC);
-                continue;
-            }
-
-            if (IsPedDeadOrDying(guardNPC, true)) {
-                this.currentGuards.delete(guardNPC);
-                SetPedAsNoLongerNeeded(guardNPC);
-
-                this.killedLuxuryGuard++;
-                this.spawnFightingGuard();
-                continue;
-            }
+        if (IsPedDeadOrDying(guardNPC, true)) {
+            SetPedAsNoLongerNeeded(guardNPC);
+            this.currentGuardNet = undefined;
+            return;
         }
     }
 
-    async moveAndDeleteGuard(guardNPC: number) {
+    async moveAndDeleteGuard(guardNPC: number, guardNPCNet: number) {
         const spawnCoord =
             luxuryFightingGuard.possibleSpawnPosition[
                 getRandomInt(0, luxuryFightingGuard.possibleSpawnPosition.length - 1)
@@ -708,11 +698,15 @@ export class VehicleDealershipProvider {
         await this.animationService.goToCoordsAvoidObstaclesForPed(
             guardNPC,
             [spawnCoord.x, spawnCoord.y, spawnCoord.z] as Vector3,
-            10000,
+            30000,
             2.0
         );
 
         SetEntityAsMissionEntity(guardNPC, true, true);
-        TriggerServerEvent(ServerEvent.LUXURY_DELETE_GUARD, PedToNet(guardNPC));
+        this.deleteGuard(guardNPCNet);
+    }
+
+    async deleteGuard(guardNPCNet: number) {
+        TriggerServerEvent(ServerEvent.LUXURY_DELETE_GUARD, guardNPCNet);
     }
 }
