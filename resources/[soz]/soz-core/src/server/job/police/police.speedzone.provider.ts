@@ -11,7 +11,7 @@ import { Vector4 } from '@public/shared/polyzone/vector';
 
 import { Notifier } from '../../notifier';
 
-const roadSignModel = GetHashKey('prop_sign_road_03z');
+const roadSignModel = GetHashKey('prop_trafficdiv_02');
 const speedzoneItemName = 'speed_speed_sign';
 const LANE_RADIUS = 5.0;
 
@@ -64,7 +64,7 @@ export class PoliceSpeedZoneProvider {
         });
 
         this.zones[id] = { position, radius, speed };
-        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones, this.shouldDisplayBlip(source));
+        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones);
     }
 
     @OnEvent(ServerEvent.POLICE_REMOVE_SPEEDZONE)
@@ -72,21 +72,12 @@ export class PoliceSpeedZoneProvider {
         if (this.zones[id]) {
             this.objectProvider.deleteObject(id);
             delete this.zones[id];
-            TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones, this.shouldDisplayBlip(source));
+            TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, -1, this.zones);
         }
     }
 
     @OnEvent(ServerEvent.POLICE_INIT_SPEEDZONE)
     public async loadSpeedZone(source: number) {
-        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, source, this.zones, this.shouldDisplayBlip(source));
-    }
-
-    shouldDisplayBlip(source: number) {
-        const player = this.playerService.getPlayer(source);
-        if (!player) {
-            return false;
-        }
-
-        return FDO.includes(player.job?.id) && player.job?.onduty;
+        TriggerClientEvent(ClientEvent.POLICE_SYNC_SPEEDZONE, source, this.zones);
     }
 }

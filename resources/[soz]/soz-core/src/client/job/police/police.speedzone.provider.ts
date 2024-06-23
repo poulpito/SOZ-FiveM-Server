@@ -13,7 +13,7 @@ import { Vector3, Vector4 } from '@public/shared/polyzone/vector';
 import { BlipFactory } from '../../blip';
 
 const jobsTarget = { [JobType.BCSO]: 0, [JobType.FBI]: 0, [JobType.SASP]: 0, [JobType.LSPD]: 0, [JobType.LSCS]: 0 };
-const roadSignModel = GetHashKey('prop_sign_road_03z');
+const roadSignModel = GetHashKey('prop_trafficdiv_02');
 
 @Provider()
 export class PoliceSpeedZoneProvider {
@@ -82,7 +82,7 @@ export class PoliceSpeedZoneProvider {
     public async onAddSpeedZone(radius: number, speed: number) {
         const ped = PlayerPedId();
         const entityCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.5, 0.0) as Vector3;
-        const entityHeading = GetEntityHeading(ped) + 180.0;
+        const entityHeading = GetEntityHeading(ped);
 
         const { completed } = await this.progressService.progress(
             'spawn_object',
@@ -116,10 +116,8 @@ export class PoliceSpeedZoneProvider {
     }
 
     @OnEvent(ClientEvent.POLICE_SYNC_SPEEDZONE)
-    public async syncSpeedZone(
-        zones: { [id: string]: { position: Vector4; radius: number; speed: number } },
-        shouldDisplayBlip: boolean
-    ) {
+    public async syncSpeedZone(zones: { [id: string]: { position: Vector4; radius: number; speed: number } }) {
+        const shouldDisplayBlip = this.shouldDisplayBlip();
         Object.keys(zones).map(k => {
             if (!this.speedZone[k]) {
                 const zoneId = AddSpeedZoneForCoord(
@@ -159,6 +157,15 @@ export class PoliceSpeedZoneProvider {
                 delete this.speedZone[k];
             }
         });
+    }
+
+    shouldDisplayBlip() {
+        const player = this.playerService.getPlayer();
+        if (!player) {
+            return false;
+        }
+
+        return FDO.includes(player.job?.id) && player.job?.onduty;
     }
 
     @OnEvent(ClientEvent.JOB_DUTY_CHANGE)
