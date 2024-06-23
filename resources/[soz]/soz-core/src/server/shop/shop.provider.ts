@@ -1,4 +1,4 @@
-import { ShopBrand, UndershirtCategoryNeedingReplacementTorso } from '@public/config/shops';
+import { ProperTorsos, ShopBrand, UndershirtCategoryNeedingReplacementTorso } from '@public/config/shops';
 import { Component, OutfitItem, Prop } from '@public/shared/cloth';
 import { TenueIdToHide } from '@public/shared/player';
 import {
@@ -348,10 +348,11 @@ export class ShopProvider {
         // Adapt torso to undershirt
         const playerModel = this.playerService.getPlayer(source).skin.Model.Hash;
         if (product.undershirtType && UndershirtCategoryNeedingReplacementTorso[playerModel][product.undershirtType]) {
-            const baseTorsoDrawable = clothConfig.BaseClothSet.Components[Component.Torso].Drawable;
+            const baseTorsoDrawable =
+                ProperTorsos[playerModel][clothConfig.BaseClothSet.Components[Component.Tops].Drawable];
             const replacementTorsoDrawable =
                 UndershirtCategoryNeedingReplacementTorso[playerModel][product.undershirtType][baseTorsoDrawable];
-            if (replacementTorsoDrawable) {
+            if (replacementTorsoDrawable != null) {
                 clothConfig.BaseClothSet.Components[Component.Torso] = {
                     Drawable: replacementTorsoDrawable,
                     Texture: 0,
