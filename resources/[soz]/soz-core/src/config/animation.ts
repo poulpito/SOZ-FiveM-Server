@@ -9043,9 +9043,17 @@ export const Animations: AnimationConfigList = [
                 rightLabel: null,
                 icon: null,
                 animation: {
-                    base: {
+                    enter: {
                         dictionary: 'mp_player_int_uppergang_sign_a',
                         name: 'mp_player_int_gang_sign_a_enter',
+                        duration: 500,
+                    },
+                    base: {
+                        dictionary: 'mp_player_int_uppergang_sign_a',
+                        name: 'mp_player_int_gang_sign_a',
+                        options: {
+                            repeat: true,
+                        },
                     },
                     exit: {
                         dictionary: 'mp_player_int_uppergang_sign_a',
