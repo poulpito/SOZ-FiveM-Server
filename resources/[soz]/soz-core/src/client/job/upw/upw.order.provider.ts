@@ -123,6 +123,10 @@ export class UpwOrderProvider {
             PositiveNumberValidator
         );
 
+        if (newPrice == null) {
+            return;
+        }
+
         TriggerServerEvent(ServerEvent.UPW_SET_CHARGER_PRICE, newPrice);
 
         return;
