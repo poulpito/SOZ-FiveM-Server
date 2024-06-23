@@ -23,7 +23,6 @@ import {
     getDefaultVehicleCondition,
     isVehicleModelElectric,
     Vehicle,
-    VehicleClass,
     VehicleClassFuelStorageMultiplier,
 } from '../../shared/vehicle/vehicle';
 import { PrismaService } from '../database/prisma.service';
@@ -137,10 +136,7 @@ export class VehicleDealershipProvider {
 
             const condition = getDefaultVehicleCondition();
             condition.fuelLevel =
-                condition.fuelLevel *
-                (vehicle.requiredLicence === 'motorcycle'
-                    ? VehicleClassFuelStorageMultiplier[VehicleClass.Motorcycles]
-                    : 1.0);
+                condition.fuelLevel * (VehicleClassFuelStorageMultiplier[vehicle?.requiredLicence] || 1.0);
 
             await this.prismaService.playerVehicle.upsert({
                 create: {
@@ -318,10 +314,7 @@ export class VehicleDealershipProvider {
             const condition = getDefaultVehicleCondition();
             const vehicle = await this.vehicleRepository.findByModel(auction.vehicle.model);
             condition.fuelLevel =
-                condition.fuelLevel *
-                (vehicle.requiredLicence === 'motorcycle'
-                    ? VehicleClassFuelStorageMultiplier[VehicleClass.Motorcycles]
-                    : 1.0);
+                condition.fuelLevel * (VehicleClassFuelStorageMultiplier[vehicle?.requiredLicence] || 1.0);
 
             await this.prismaService.playerVehicle.create({
                 data: {
@@ -554,6 +547,10 @@ export class VehicleDealershipProvider {
                     configuration.color = null;
                 }
 
+                const condition = getDefaultVehicleCondition();
+                condition.fuelLevel =
+                    condition.fuelLevel * (VehicleClassFuelStorageMultiplier[vehicle?.requiredLicence] || 1.0);
+
                 const playerVehicle = await this.prismaService.playerVehicle.create({
                     data: {
                         license: player.license,
@@ -561,7 +558,7 @@ export class VehicleDealershipProvider {
                         vehicle: vehicle.model,
                         hash: vehicle.hash.toString(),
                         mods: JSON.stringify(configuration),
-                        condition: JSON.stringify(getDefaultVehicleCondition()),
+                        condition: JSON.stringify(condition),
                         garage: garage,
                         plate,
                         category: vehicle.category,

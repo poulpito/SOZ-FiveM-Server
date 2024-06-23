@@ -1,4 +1,5 @@
 import { joaat } from '@public/shared/joaat';
+import { PlayerLicenceType } from '@public/shared/player';
 import { RadioChannel } from '@public/shared/voip';
 
 import { DealershipConfigItem, DealershipType } from '../../config/dealership';
@@ -30,7 +31,7 @@ export type VehicleHud = {
     lightState: number;
     fuelType: 'essence' | 'electric' | 'none';
     fuelLevel: number;
-    vehClass: VehicleClass;
+    vehCategory: string;
     useRpm: boolean;
 };
 
@@ -526,6 +527,6 @@ export const ALLOWED_AIR_CONTROL: Partial<Record<VehicleClass, true>> = {
 //update MissiveVehicleModelList when toggle
 export const DisableNPCBike = false;
 
-export const VehicleClassFuelStorageMultiplier: Partial<Record<VehicleClass, number>> = {
-    [VehicleClass.Motorcycles]: 0.5,
+export const VehicleClassFuelStorageMultiplier: Record<string, number> = {
+    [PlayerLicenceType.Moto]: 0.5,
 };

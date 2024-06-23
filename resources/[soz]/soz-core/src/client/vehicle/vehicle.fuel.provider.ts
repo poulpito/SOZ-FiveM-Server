@@ -27,6 +27,7 @@ import { ObjectProvider } from '../object/object.provider';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { FuelStationRepository } from '../repository/fuel.station.repository';
+import { VehicleRepository } from '../repository/vehicle.repository';
 import { RopeService } from '../rope.service';
 import { SoundService } from '../sound.service';
 import { TargetFactory } from '../target/target.factory';
@@ -88,6 +89,9 @@ export class VehicleFuelProvider {
 
     @Inject(OilTankerProvider)
     private oilTankerProvider: OilTankerProvider;
+
+    @Inject(VehicleRepository)
+    private vehicleRepository: VehicleRepository;
 
     private currentStationPistol: CurrentStationPistol | null = null;
 
@@ -479,8 +483,8 @@ export class VehicleFuelProvider {
             return;
         }
 
-        const vehClass = GetVehicleClass(vehicle) as VehicleClass;
-        const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
+        const vehDef = this.vehicleRepository.getByModelHash(GetEntityModel(vehicle));
+        const storageMultiplier = VehicleClassFuelStorageMultiplier[vehDef?.requiredLicence] || 1.0;
         const condition = await this.vehicleStateService.getVehicleCondition(vehicle);
 
         if (condition.fuelLevel > 99.0 * storageMultiplier) {
@@ -493,7 +497,7 @@ export class VehicleFuelProvider {
         const vehicleNetworkId = NetworkGetNetworkIdFromEntity(vehicle);
 
         this.currentStationPistol.filling = true;
-        TriggerServerEvent(ServerEvent.VEHICLE_FUEL_START, vehicleNetworkId, station.id, vehClass);
+        TriggerServerEvent(ServerEvent.VEHICLE_FUEL_START, vehicleNetworkId, station.id);
     }
 
     @OnEvent(ClientEvent.VEHICLE_FUEL_START)
