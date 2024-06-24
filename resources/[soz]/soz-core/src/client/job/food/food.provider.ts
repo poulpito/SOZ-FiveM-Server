@@ -49,13 +49,6 @@ export class FoodProvider {
             scale: 0.9,
         });
 
-        this.blipFactory.create('food', {
-            name: 'Château Marius',
-            sprite: 176,
-            position: [-1889.54, 2045.27, 0],
-            scale: 0.9,
-        });
-
         this.blipFactory.hide('displayMilkBlip', true);
 
         if (isFeatureEnabled(Feature.EasterFood)) {
