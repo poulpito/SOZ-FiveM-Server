@@ -1,8 +1,4 @@
-import {
-    getDefaultVehicleCondition,
-    VehicleClass,
-    VehicleClassFuelStorageMultiplier,
-} from '@public/shared/vehicle/vehicle';
+import { getDefaultVehicleCondition, VehicleClassFuelStorageMultiplier } from '@public/shared/vehicle/vehicle';
 
 import { OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
@@ -14,6 +10,7 @@ import { Notifier } from '../notifier';
 import { PlayerMoneyService } from '../player/player.money.service';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../player/progress.service';
+import { VehicleRepository } from '../repository/vehicle.repository';
 import { VehicleStateService } from './vehicle.state.service';
 
 @Provider()
@@ -39,10 +36,13 @@ export class VehicleFuelProvider {
     @Inject(PlayerMoneyService)
     private playerMoneyService: PlayerMoneyService;
 
+    @Inject(VehicleRepository)
+    private vehicleRepository: VehicleRepository;
+
     private currentFilling = new Set<number>();
 
     @OnEvent(ServerEvent.VEHICLE_FUEL_START)
-    public async startFuel(source: number, vehicleNetworkId: number, stationId: number, vehClass: VehicleClass) {
+    public async startFuel(source: number, vehicleNetworkId: number, stationId: number) {
         const player = this.playerService.getPlayer(source);
 
         if (!player) {
@@ -57,7 +57,9 @@ export class VehicleFuelProvider {
 
         this.currentFilling.add(vehicleNetworkId);
         try {
-            const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
+            const vehicle = NetworkGetEntityFromNetworkId(vehicleNetworkId);
+            const vehDef = await this.vehicleRepository.findByHash(GetEntityModel(vehicle));
+            const storageMultiplier = VehicleClassFuelStorageMultiplier[vehDef?.requiredLicence] || 1.0;
             const vehicleState = this.vehicleStateService.getVehicleState(vehicleNetworkId);
             const fuelToFill = Math.floor(
                 getDefaultVehicleCondition().fuelLevel * storageMultiplier - vehicleState.condition.fuelLevel

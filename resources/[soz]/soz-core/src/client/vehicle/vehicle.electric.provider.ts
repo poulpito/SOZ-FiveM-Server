@@ -5,12 +5,7 @@ import { UpwStation } from '@public/shared/fuel';
 import { JobType } from '@public/shared/job';
 import { getDistance, Vector3 } from '@public/shared/polyzone/vector';
 import { RpcServerEvent } from '@public/shared/rpc';
-import {
-    isVehicleModelElectric,
-    VehicleClass,
-    VehicleClassFuelStorageMultiplier,
-    VehicleSeat,
-} from '@public/shared/vehicle/vehicle';
+import { isVehicleModelElectric, VehicleClassFuelStorageMultiplier, VehicleSeat } from '@public/shared/vehicle/vehicle';
 
 import { Once, OnceStep, OnEvent } from '../../core/decorators/event';
 import { Inject } from '../../core/decorators/injectable';
@@ -25,6 +20,7 @@ import { AttachedObjectService } from '../object/attached.object.service';
 import { PlayerService } from '../player/player.service';
 import { ProgressService } from '../progress.service';
 import { UpwChargerRepository } from '../repository/upw.station.repository';
+import { VehicleRepository } from '../repository/vehicle.repository';
 import { SoundService } from '../sound.service';
 import { TargetFactory } from '../target/target.factory';
 import { VehicleService } from './vehicle.service';
@@ -75,6 +71,9 @@ export class VehicleElectricProvider {
 
     @Inject(AttachedObjectService)
     private attachedObjectService: AttachedObjectService;
+
+    @Inject(VehicleRepository)
+    private vehicleRepository: VehicleRepository;
 
     private currentStationPlug: CurrentStationPlug | null = null;
 
@@ -419,8 +418,8 @@ export class VehicleElectricProvider {
             return;
         }
 
-        const vehClass = GetVehicleClass(vehicle) as VehicleClass;
-        const storageMultiplier = VehicleClassFuelStorageMultiplier[vehClass] || 1.0;
+        const vehDef = this.vehicleRepository.getByModelHash(GetEntityModel(vehicle));
+        const storageMultiplier = VehicleClassFuelStorageMultiplier[vehDef?.requiredLicence] || 1.0;
         const condition = await this.vehicleStateService.getVehicleCondition(vehicle);
 
         if (condition.fuelLevel > 97.0 * storageMultiplier) {
@@ -436,7 +435,7 @@ export class VehicleElectricProvider {
         await wait(500);
         this.soundService.playAround('fuel/blip_in', 5, 0.3);
 
-        TriggerServerEvent(ServerEvent.VEHICLE_CHARGE_START, vehicleNetworkId, refreshStation.id, vehClass);
+        TriggerServerEvent(ServerEvent.VEHICLE_CHARGE_START, vehicleNetworkId, refreshStation.id);
     }
 
     private async toggleStationPlug(entity: number) {

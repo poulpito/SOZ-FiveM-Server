@@ -1,6 +1,6 @@
 import { createModel } from '@rematch/core';
 
-import { VehicleClass, VehicleHud, VehicleHudSpeed } from '../../shared/vehicle/vehicle';
+import { VehicleHud, VehicleHudSpeed } from '../../shared/vehicle/vehicle';
 import type { RootModel } from './';
 
 export const vehicle = createModel<RootModel>()({
@@ -15,7 +15,7 @@ export const vehicle = createModel<RootModel>()({
         fuelType: 'essence',
         fuelLevel: 0,
         rpm: 0,
-        vehClass: VehicleClass.Compacts,
+        vehCategory: null,
         useRpm: true,
     } as VehicleHud,
     reducers: {

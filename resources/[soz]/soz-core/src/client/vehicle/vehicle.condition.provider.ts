@@ -14,8 +14,7 @@ import {
     VehicleCondition,
     VehicleVolatileState,
 } from '../../shared/vehicle/vehicle';
-import { NuiMenu } from '../nui/nui.menu';
-import { TargetFactory } from '../target/target.factory';
+import { VehicleRepository } from '../repository/vehicle.repository';
 import { VehicleFuelProvider } from './vehicle.fuel.provider';
 import { VehicleService } from './vehicle.service';
 import { VehicleStateService } from './vehicle.state.service';
@@ -35,14 +34,11 @@ export class VehicleConditionProvider {
     @Inject(VehicleStateService)
     private vehicleStateService: VehicleStateService;
 
-    @Inject(TargetFactory)
-    private targetFactory: TargetFactory;
+    @Inject(VehicleRepository)
+    private vehicleRepository: VehicleRepository;
 
     @Inject(VehicleFuelProvider)
     private vehicleFuelProvider: VehicleFuelProvider;
-
-    @Inject(NuiMenu)
-    private nuiMenu: NuiMenu;
 
     private currentVehiclePositionForMileage: CurrentVehiclePosition | null = null;
 
@@ -80,12 +76,16 @@ export class VehicleConditionProvider {
         } else {
             // This is trigger when a new vehicle is registered without a spawn, like the vehicle was forced by a player
             const state = await this.vehicleStateService.getVehicleState(entityId);
-            const vehClass = GetVehicleClass(entityId);
+            const vehDef = this.vehicleRepository.getByModelHash(GetEntityModel(entityId));
             const currentVehicleCondition: VehicleCondition = {
                 ...getDefaultVehicleCondition(),
                 ...this.vehicleService.getClientVehicleCondition(entityId, state),
-                oilLevel: getRandomFloat(30, 100),
-                fuelLevel: getRandomFloat(10, 100 * (VehicleClassFuelStorageMultiplier[vehClass] || 1.0)),
+                oilLevel: getRandomFloat(30, getDefaultVehicleCondition().oilLevel),
+                fuelLevel: getRandomFloat(
+                    10,
+                    getDefaultVehicleCondition().fuelLevel *
+                        (VehicleClassFuelStorageMultiplier[vehDef?.requiredLicence] || 1.0)
+                ),
                 mileage: getRandomFloat(1000000, 25000000),
             };
             const currentVehicleConfiguration = this.vehicleService.getClientVehicleConfiguration(entityId);

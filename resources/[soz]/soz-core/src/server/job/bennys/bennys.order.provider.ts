@@ -9,7 +9,6 @@ import { isErr } from '../../../shared/result';
 import { RpcServerEvent } from '../../../shared/rpc';
 import {
     getDefaultVehicleCondition,
-    VehicleClass,
     VehicleClassFuelStorageMultiplier,
     VehicleCondition,
 } from '../../../shared/vehicle/vehicle';
@@ -126,11 +125,8 @@ export class BennysOrderProvider {
         }
 
         const fuel =
-            100 *
-            (vehicle.requiredLicence === 'motorcycle'
-                ? VehicleClassFuelStorageMultiplier[VehicleClass.Motorcycles]
-                : 1.0);
-
+            getDefaultVehicleCondition().fuelLevel *
+            (VehicleClassFuelStorageMultiplier[vehicle?.requiredLicence] || 1.0);
         const condition: VehicleCondition = {
             ...getDefaultVehicleCondition(),
             fuelLevel: fuel,
