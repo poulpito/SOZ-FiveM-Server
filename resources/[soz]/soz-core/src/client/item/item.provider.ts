@@ -117,19 +117,29 @@ export class ItemProvider {
         }
 
         if (this.hasWalkStick.enable) {
-            const object = await this.attachedObjectService.attachObjectToPlayer({
-                bone: 57005,
-                model: 'prop_cs_walking_stick',
-                position: [0.16, 0.06, 0.0],
-                rotation: [335.0, 300.0, 120.0],
-                rotationOrder: 5,
-            });
-
-            this.hasWalkStick.object = object;
+            await this.createWalkStick();
 
             await this.playerWalkstyleProvider.updateWalkStyle('item', 'move_heist_lester');
         } else {
             await this.playerWalkstyleProvider.updateWalkStyle('item', null);
+        }
+    }
+
+    private async createWalkStick() {
+        const object = await this.attachedObjectService.attachObjectToPlayer({
+            bone: 57005,
+            model: 'prop_cs_walking_stick',
+            position: [0.16, 0.06, 0.0],
+            rotation: [335.0, 300.0, 120.0],
+            rotationOrder: 5,
+        });
+
+        this.hasWalkStick.object = object;
+    }
+
+    async onWalkStickRefresh(): Promise<void> {
+        if (this.hasWalkStick.enable && !DoesEntityExist(this.hasWalkStick.object)) {
+            await this.createWalkStick();
         }
     }
 
