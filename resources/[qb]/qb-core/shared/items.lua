@@ -14145,7 +14145,7 @@ QBShared.Items = {
         ['min_length'] = 100,
         ['max_length'] = 100,
         ['sozedex_id'] = 191,
-        ['price'] = 0,
+        ['price'] = 1,
      },
 
 
