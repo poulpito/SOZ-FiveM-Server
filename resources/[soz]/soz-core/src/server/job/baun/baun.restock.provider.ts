@@ -61,13 +61,13 @@ export class BaunRestockProvider {
 
         const itemData = this.itemService.getItem(item);
 
-        if (!this.inventoryManager.hasEnoughItem(source, item, 1)) {
+        if (!this.inventoryManager.hasEnoughItem(source, item, 1, true)) {
             this.notifier.notify(source, `Vous n'avez pas de ${itemData.label}.`, 'error');
 
             return;
         }
 
-        while (this.inventoryManager.hasEnoughItem(source, item, 1)) {
+        while (this.inventoryManager.hasEnoughItem(source, item, 1, true)) {
             const { completed } = await this.progressService.progress(
                 source,
                 'restock',
@@ -92,7 +92,7 @@ export class BaunRestockProvider {
                 break;
             }
 
-            if (!this.inventoryManager.hasEnoughItem(source, item, 1)) {
+            if (!this.inventoryManager.hasEnoughItem(source, item, 1, true)) {
                 break;
             }
 
@@ -102,7 +102,7 @@ export class BaunRestockProvider {
                 break;
             }
 
-            if (!this.inventoryManager.removeItemFromInventory(source, item, 1)) {
+            if (!this.inventoryManager.removeNotExpiredItem(source, item, 1)) {
                 break;
             }
 
