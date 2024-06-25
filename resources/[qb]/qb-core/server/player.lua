@@ -7,6 +7,17 @@ QBCore.Player = {}
 
 function QBCore.Player.Login(source, citizenid, newData)
     local src = source
+
+    local allowDuplicateCharacter = GetConvar("soz_allow_duplicate_character", "false") == "true"
+    if not allowDuplicateCharacter and citizenid then
+        for _, player in pairs(QBCore.Players) do
+            if player.PlayerData.citizenid == citizenid then
+                DropPlayer(src, "Un joueur est déjà connecté sur ce personnage, si vous venez d'être déconnecté, veuillez attendre un peu.")
+                return false
+            end
+        end
+    end
+
     if src then
         if citizenid then
             local license = QBCore.Functions.GetSozIdentifier(src)
