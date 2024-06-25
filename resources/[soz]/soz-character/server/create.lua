@@ -24,6 +24,8 @@ QBCore.Functions.CreateCallback("soz-character:server:CreatePlayer", function(so
             exports["soz-inventory"]:AddItem(source, source, item.name, item.quantity, false, false)
         end
 
+        Wait(1)
+
         cb(true)
     else
         cb(false)
