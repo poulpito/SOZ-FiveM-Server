@@ -66,7 +66,7 @@
         "inversify": "^6.0.2",
         "p-cancelable": "^4.0.1",
         "postcss": "^8.4.38",
-        "prom-client": "^14.2.0",
+        "prom-client": "^15.1.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-draggable": "^4.4.6",
